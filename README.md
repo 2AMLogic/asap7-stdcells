@@ -12,7 +12,8 @@ FinFET node for research and teaching; no fab manufactures it. This block is
 this repo is a tool result against a predictive model — there is no silicon,
 no shuttle and no measurement at the end of the ladder.
 
-**Status: just opened, specification phase.** Nothing is designed yet.
+**Status: specification ratified, ASAP7 brought up under `klt`.** No cell is
+drawn yet.
 
 **Built agent-native.** Every specification, decision record, testbench, and
 line of documentation here is produced by AI agents working from a ratified
@@ -44,30 +45,28 @@ The shipped `asap7sc7p5t` library is the reference and the comparison: same
 track height, same grid. Where it is useful, use it and cite it. This repo
 is not trying to replace it.
 
-klt also has no fin- or gate-grid-aware generators for ASAP7 yet. Whether
-cells here are drawn by hand-scripted geometry or drive that generator work
-is a spec decision.
+klt also has no fin- or gate-grid-aware generators for ASAP7 yet, so cells
+here are drawn by scripted geometry (decision 0003).
 
-ASAP7 is not in the fleet's `open_pdks` store, so bringing it up under `klt`
-is part of the work. If a sibling ASAP7 canary has already done that
-bring-up, take its pinned setup rather than building a second one.
+ASAP7 is not in the fleet's `open_pdks` store. The bring-up under `klt` and
+its pin are recorded in `spec/bringup.md`; sibling ASAP7 canaries adopt that
+pin rather than building a second one.
 
-## Target specification (DRAFT — engineering to ratify, see issue #1)
+## Target specification
 
-| Parameter | Target | Fallback | Stretch |
-|---|---|---|---|
-| Architecture | 7.5-track, matching the shipped library's grid | — | a second track height |
-| Cell set | core combinational set + D flip-flop + latch + tie + fill + tap/boundary | combinational set + fill | scan flip-flop, multiple drive strengths per function |
-| Threshold flavors | one (RVT) | — | additional VT flavors via the PDK's VT markers |
-| DRC | clean against every rule id klt's ASAP7 deck implements, per cell and abutted | — | — |
-| LVS | every cell matches its netlist through klt's FinFET extraction | — | — |
-| Views | GDS, LEF, CDL | — | Liberty, if characterization is possible (see issue #1) |
-| Integration | a small design placed and routed with OpenROAD using only these cells | cells placed in rows, DRC-clean when abutted | — |
+The ratified specification is [`spec/stdcells.md`](spec/stdcells.md): the
+7.5-track architecture read from the pinned PDK, the fixed cell list, the DRC
+and LVS acceptance definitions (per cell, per abutment case, with negative
+controls), the views, and the integration design. Decisions are in
+[`spec/decisions/`](spec/decisions/), and the ASAP7 bring-up evidence (PDK
+pin, klt commands, smoke runs, deck coverage gaps) is in
+[`spec/bringup.md`](spec/bringup.md). Every row is a layout, DRC, LVS or
+timing target against a predictive model.
 
 Maturity ladder: ASAP7 brought up under `klt` → spec ratified → first cell
 DRC/LVS-clean → full set DRC/LVS-clean → abutment regression clean → LEF
-views checked → integration design routed. **Current position: pre-spec.**
-There is no silicon rung.
+views checked → integration design routed. **Current position: spec ratified,
+ASAP7 brought up, no cell drawn.** There is no silicon rung.
 
 ## Repo layout
 
