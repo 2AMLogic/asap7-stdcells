@@ -79,6 +79,24 @@ verification/  DRC/LVS regression harness across the cell set
 layout/        cell GDS, LEF views, DRC/LVS reports
 ```
 
+## How to reproduce
+
+The signoff verdict of record is graded by `klt signoff`, pinned to
+`klayout-tools==0.7.0`. Regenerate it with:
+
+```
+klt signoff --manifest manifests/asap7-stdcells.json \
+    --tiers-doc manifests/design-evidence-tiers.md \
+    --format json > manifests/asap7-stdcells.signoff.json
+```
+
+CI (`.github/workflows/signoff.yml`) re-runs this and byte-compares it with the
+committed record. The evidence map in the manifest is empty, so every tier item
+grades unmet (the grader exits 3, which CI accepts); that is the honest state
+today. `kind: digital` is pending confirmation in #2. The checklist in
+`manifests/design-evidence-tiers.md` is vendored byte-identical from the
+`klayout-tools` commit named in `manifests/design-evidence-tiers.UPSTREAM`.
+
 ## License
 
 Apache License 2.0 — see [LICENSE](LICENSE).
