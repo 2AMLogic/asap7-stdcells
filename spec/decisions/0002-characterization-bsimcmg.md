@@ -42,3 +42,18 @@ unreachable.
   netlisting, if ever needed, goes through `klt netlist`.
 - Multi-corner grids are `klt sim` requests (TT/FF/SS cards exist), submitted
   through the batch backend, not hand-launched `ngspice` loops.
+
+## Clarification 2026-10-18 (issue #9)
+
+Decision 2 above ("Liberty stays **stretch**, not target") refers to **timing**
+Liberty only: the Liberty view that carries NLDM delay and power tables and
+therefore depends on the characterization runs this record is about.
+
+**Structural** Liberty (pins, directions, functions and areas; no timing
+numbers) is **target**, as `spec/stdcells.md` states in the "Views" row of its scope
+table and in its "Views" section, because Yosys needs a library view for the integration
+design. Timing Liberty is stretch there too.
+
+This section is a clarification of wording only. It does not relax or tighten
+any ratified requirement, and decision 2's text is left as written because
+decision records are append-only.
