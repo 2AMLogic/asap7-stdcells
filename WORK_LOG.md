@@ -3,6 +3,11 @@
 Chronological record of merged PRs and closed issues, maintained by the Guide
 triage role. Newest first.
 
+### 2026-10-20
+
+- **PR #6**: ci: grade block with klt signoff and byte-compare committed verdict
+- **Issue #4** (closed): Add a klt signoff manifest and CI that keeps it and the evidence formats valid (T1 item 10)
+
 ### 2026-10-18
 
 - **PR #10**: docs(spec): clarify decision 0002 Liberty-stretch means timing Liberty
