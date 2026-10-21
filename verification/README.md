@@ -51,6 +51,13 @@ needed: `python3 verification/test_run_regression.py`.
   - `lvs-wrong-nfin`: INVx1 against a CDL copy with the NMOS fin count +1. Must
     report `mismatch`.
   A control that is not flagged fails the run.
+- klt echoes the layout it ran as an absolute path. The harness rewrites any
+  string under the checkout to a repo-relative path before saving an envelope
+  (no other field is touched), so records lint clean on another checkout. The
+  tool's own deck install path is emitted absolute; the signoff workflow
+  allows that one prefix (`--allow-prefix`) and never the checkout prefix.
+- Records replaced by a later run are listed in `records/SUPERSEDED.txt`. They
+  stay byte-for-byte in the tree and are skipped only by the evidence lint.
 - Writes the klt request and JSON envelope for each step, `manifest.json` and
   `summary.md`. The summary quotes `power_connectivity.status` and the DRC
   `coverage` fields `layers_in_stream_without_rules`, `rules_skipped` and
