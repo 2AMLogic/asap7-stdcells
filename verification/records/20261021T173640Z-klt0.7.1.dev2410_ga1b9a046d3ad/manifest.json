@@ -1,0 +1,95 @@
+{
+  "cells": [
+    {
+      "cell": "INVx1_ASAP7_75t_R",
+      "drc": "PASS",
+      "lvs": "PASS",
+      "source": "shipped"
+    },
+    {
+      "cell": "NAND2x1_ASAP7_75t_R",
+      "drc": "PASS",
+      "lvs": "PASS",
+      "source": "shipped"
+    },
+    {
+      "cell": "NOR2x1_ASAP7_75t_R",
+      "drc": "PASS",
+      "lvs": "PASS",
+      "source": "shipped"
+    },
+    {
+      "cell": "DFFHQNx1_ASAP7_75t_R",
+      "drc": "PASS",
+      "lvs": "PASS",
+      "source": "shipped"
+    },
+    {
+      "cell": "TAPCELL_ASAP7_75t_R",
+      "drc": "KNOWN-GAP",
+      "known_drc_gap": "klt drc asap7 deck aborts on a layout with LIG but no gate/active geometry (2AMLogic/klayout-tools#3811)",
+      "lvs": "n/a",
+      "lvs_na": "draws no devices; docs/cli/lvs.md: inline extraction yields no circuit and klt lvs exits 1",
+      "source": "shipped"
+    },
+    {
+      "cell": "FILLERxp5_ASAP7_75t_R",
+      "drc": "UNEXPECTED-FAIL",
+      "known_drc_gap": "klt drc asap7 deck aborts on a layout with LIG but no gate/active geometry (2AMLogic/klayout-tools#3811)",
+      "lvs": "n/a",
+      "lvs_na": "the pinned CDL has no FILLER entry (docs/cli/lvs.md)",
+      "source": "shipped"
+    }
+  ],
+  "controls": [
+    {
+      "base_cell": "INVx1_ASAP7_75t_R",
+      "id": "drc-m1-spacing",
+      "kind": "drc_inject_box",
+      "observed": {
+        "rule_counts": {
+          "M1.S.2": 7,
+          "M1.W.1": 1
+        },
+        "status": "violations"
+      },
+      "result": "CAUGHT"
+    },
+    {
+      "base_cell": "INVx1_ASAP7_75t_R",
+      "id": "lvs-wrong-nfin",
+      "kind": "lvs_nfin",
+      "observed": {
+        "category_counts": {
+          "device.finfet_bulk_tied": 2,
+          "device.property": 1,
+          "net.supply_fragmented": 1,
+          "topology": 1
+        },
+        "status": "mismatch"
+      },
+      "result": "CAUGHT"
+    }
+  ],
+  "deck": {
+    "path": "/home/ubuntu/.local/share/uv/tools/klayout-tools/lib/python3.13/site-packages/klayout_tools/decks/asap7.drc",
+    "rule_categories": 263
+  },
+  "klayout_version": "0.30.12",
+  "klt_version": "0.7.1.dev2410+ga1b9a046d3ad",
+  "overall": "FAIL",
+  "pdk": {
+    "asap7_release": "ASAP7 PDK Release 1p7 (DRM asap7_drm_201207a.pdf), as shipped by lambdapdk v0.2.17",
+    "name": "lambdapdk",
+    "provisional": true,
+    "tarball_sha256": "ac7e950c4d0394a829658b6e219fea4a4b0c61a998183d5520f8b9e38c6efff2",
+    "version": "0.2.17"
+  },
+  "pdk_files_sha256": {
+    "cdl": "3e3e2548fb8f571c2e373dcbf565ecb0288e6433e803fbf06561cb16b70caf53",
+    "gds": "75a7f40e6fa06fcb3d38c4e4a14db2ab715dc6bf382c58e9252ed5f4526777a6"
+  },
+  "record_id": "20261021T173640Z-klt0.7.1.dev2410_ga1b9a046d3ad",
+  "statement": "Predictive-PDK layout/DRC/LVS tool results only. Not fabricated, not measured.",
+  "utc": "20261021T173640Z"
+}

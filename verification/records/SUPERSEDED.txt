@@ -1,0 +1,10 @@
+# Records superseded by a later record. One record directory name per line,
+# followed by the superseding record; '#' lines are comments. A superseded
+# record stays in the tree byte-for-byte (records are append-only) but is not
+# linted by the signoff workflow's evidence-lint step.
+#
+# 20261017T215608Z-klt0.7.1.dev1765_gb61f753d0369 carries absolute host paths
+# (klt's deck install path and the issue-5 worktree .work/ layout paths) that
+# fail `klt env-provenance lint-envelope`. Re-recorded with repo-relative
+# layout paths per the operator ruling on issue #14 (option a, 2026-10-21).
+20261017T215608Z-klt0.7.1.dev1765_gb61f753d0369 20261021T173640Z-klt0.7.1.dev2410_ga1b9a046d3ad
