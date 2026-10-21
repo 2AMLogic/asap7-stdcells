@@ -93,6 +93,19 @@ class RunRegressionTest(unittest.TestCase):
         self.assertTrue((rec / "INVx1_X" / "lvs.json").is_file())
         self.assertTrue((rec / "summary.md").is_file())
 
+    def test_envelope_paths_under_checkout_are_repo_relative(self):
+        class Abs(FakeKlt):
+            def run(self, cmd, request):
+                env, err = super().run(cmd, request)
+                env["file"] = str(rr.REPO / "verification" / ".work" / "x.gds")
+                env["deck"] = "/deck/asap7.drc"
+                return env, err
+
+        self.assertEqual(self.go(Abs()), 0)
+        env = json.loads((rr.HERE / "records" / "r1" / "INVx1_X" / "drc.json").read_text())
+        self.assertEqual(env["file"], "verification/.work/x.gds")
+        self.assertEqual(env["deck"], "/deck/asap7.drc")
+
     def test_missed_drc_control_fails_run(self):
         self.assertEqual(self.go(FakeKlt(control_drc="clean")), 1)
 

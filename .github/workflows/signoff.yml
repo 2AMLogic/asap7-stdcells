@@ -37,11 +37,30 @@ jobs:
           set -uo pipefail
           # No evidence is committed yet; an empty set must pass.
           mapfile -t files < <(find layout verification sim -name '*.json' -type f 2>/dev/null | sort)
+          # Skip records listed in verification/records/SUPERSEDED.txt (kept
+          # byte-for-byte, replaced by a later record; see that file).
+          if [ -f verification/records/SUPERSEDED.txt ]; then
+            while read -r old _; do
+              case "$old" in ''|'#'*) continue;; esac
+              kept=()
+              for f in "${files[@]}"; do
+                case "$f" in verification/records/"$old"/*) ;; *) kept+=("$f");; esac
+              done
+              files=("${kept[@]}")
+            done < verification/records/SUPERSEDED.txt
+          fi
           if [ "${#files[@]}" -eq 0 ]; then
             echo "No committed evidence JSON under layout/ verification/ sim/ - nothing to lint."
             exit 0
           fi
-          klt env-provenance lint-envelope "${files[@]}"
+          # --allow-prefix: klt writes its own packaged ASAP7 deck path into
+          # every DRC envelope as an absolute path. That tool-install prefix
+          # (the uv tool venv the records were run in) is the only prefix
+          # allowed; the checkout/worktree prefix is never allowed, so layout
+          # paths stay repo-relative (operator ruling, issue #14).
+          klt env-provenance lint-envelope \
+              --allow-prefix /home/ubuntu/.local/share/uv/tools/klayout-tools \
+              "${files[@]}"
 
       - name: Re-run klt signoff and compare against the committed record
         run: |

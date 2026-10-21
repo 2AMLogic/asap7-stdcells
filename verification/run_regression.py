@@ -214,10 +214,29 @@ def save(path: Path, obj):
     path.write_text(json.dumps(obj, indent=2, sort_keys=True) + "\n")
 
 
+def repo_relative(obj):
+    """Rewrite strings under this checkout to repo-relative paths.
+
+    klt echoes the layout it was given as an absolute path (the checkout that
+    ran it), which fails `klt env-provenance lint-envelope` on any other
+    checkout. Only the checkout prefix is rewritten; the tool's own deck install
+    path is left as emitted. Hashes and every other field pass through unchanged.
+    """
+    prefix = str(REPO) + os.sep
+    if isinstance(obj, str):
+        return os.path.relpath(obj, REPO) if obj.startswith(prefix) else obj
+    if isinstance(obj, list):
+        return [repo_relative(v) for v in obj]
+    if isinstance(obj, dict):
+        return {k: repo_relative(v) for k, v in obj.items()}
+    return obj
+
+
 def run_one(klt, cmd, request, outdir: Path, stem):
     save(outdir / f"{stem}.request.json", request)
     env, err = klt.run(cmd, request)
     if env is not None:
+        env = repo_relative(env)
         save(outdir / f"{stem}.json", env)
     else:
         (outdir / f"{stem}.error.txt").write_text(err + "\n")
