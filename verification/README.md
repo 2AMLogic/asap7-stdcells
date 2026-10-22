@@ -74,10 +74,9 @@ needed: `python3 verification/test_run_regression.py`.
 | `klt` | the version each record states (`manifest.json`, `klt_version`); the committed record was run with `0.7.1.dev1765+gb61f753d0369`, KLayout (pip) `0.30.12` |
 | DRC deck | klt's packaged `asap7.drc`; its content hash is in each DRC envelope (`provenance.deck.content_hash`) |
 
-**The PDK pin is provisional.** `spec/` has no ratified PDK pin yet (#2 is
-open). This is the pin klayout-tools gates its ASAP7 deck and LVS corpus on.
-Reconcile it, and bump the SHA-256 values above, when #2 lands; older records
-keep the pin they were run with.
+The pin is ratified by `spec/decisions/0001-pdk-pin.md` (issue #2). It is the
+pin klayout-tools gates its ASAP7 deck and LVS corpus on. Older records keep
+the pin they were run with.
 
 ## Adding a cell
 

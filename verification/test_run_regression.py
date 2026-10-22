@@ -60,7 +60,7 @@ class RunRegressionTest(unittest.TestCase):
             (rr.HERE / ".pdk" / "lambdapdk-1" / name).write_bytes(data)
             files[key] = {"member": f"top/{name}", "sha256": hashlib.sha256(data).hexdigest()}
         self.cfg = {
-            "pdk": {"name": "t", "version": "1", "asap7_release": "r", "provisional": True,
+            "pdk": {"name": "t", "version": "1", "asap7_release": "r",
                     "tarball_sha256": "x", "files": files},
             "lvs_options": {},
             "cells": [

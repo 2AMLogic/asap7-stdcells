@@ -4,8 +4,6 @@
     "name": "lambdapdk",
     "version": "0.2.17",
     "asap7_release": "ASAP7 PDK Release 1p7 (DRM asap7_drm_201207a.pdf), as shipped by lambdapdk v0.2.17",
-    "provisional": true,
-    "provisional_note": "Provisional pin: spec/ has no ratified PDK pin yet (#2 open). The pin is the one klayout-tools gates its ASAP7 deck on (scripts/fetch-pdks.sh LAMBDAPDK_VERSION). Reconcile when #2 lands.",
     "tarball_url": "https://github.com/siliconcompiler/lambdapdk/archive/refs/tags/v0.2.17.tar.gz",
     "tarball_sha256": "ac7e950c4d0394a829658b6e219fea4a4b0c61a998183d5520f8b9e38c6efff2",
     "files": {
