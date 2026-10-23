@@ -7,7 +7,9 @@ model. Nothing is fabricated, measured or manufacturable.
 
 The harness is proven on a handful of shipped `asap7sc7p5t` RVT cells (the
 reference and comparison set; their geometry is not copied into this repo) plus
-two deliberately broken negative controls.
+deliberately broken negative controls. Cells drawn in this repo (`source:
+drawn`) get more: abutment cases, scripted grid checks and a reproducibility
+check (see "Drawn cells").
 
 ## Cold start
 
@@ -63,6 +65,40 @@ needed: `python3 verification/test_run_regression.py`.
   `coverage` fields `layers_in_stream_without_rules`, `rules_skipped` and
   `deck_scope` verbatim from the envelopes. It does not paraphrase them.
 
+## Drawn cells
+
+A `cells.json` entry with `"source": "drawn"` names repo-relative `gds`, `cdl`
+and `script` paths (the script is `design/draw_<CELL>.py`). For each one the run:
+
+- checks the committed GDS in place (no copy) with `klt drc` and `klt lvs`;
+- re-runs the script to a scratch file and compares `sha256` with the committed
+  GDS (`reproducible`); a mismatch fails the run;
+- records the `sha256` of GDS, CDL and script in the manifest;
+- runs the abutment cases of `spec/stdcells.md` "DRC acceptance" that need only
+  this cell and its own `INVx1` as neighbour, each with its own klt envelope under
+  `<record>/<cell>/cases/<case-id>/drc.json`: `case1-row` (cell between two
+  `INVx1`), and `case3-<R0|MX|MY|R180>-<inv|self>-<above|below>`, two stacked
+  rows sharing a rail with the cell in each orientation, the other row holding
+  `INVx1` in the mirrored orientation (`inv`) or the same cell mirrored
+  (`self`), above or below. Cases 2 and 4 need other cells and TAP and are not
+  built yet;
+- runs the scripted grid and boundary checks (case 5, `case5-grid/checks.json`,
+  klt does not check absolute grid origin on this path, klayout-tools#4082):
+  boundary is one rectangle at the origin, 270 nm tall, width a multiple of
+  54 nm; fins 7 nm tall with centres on y = 13.5 + 27k; gates 20 nm wide with
+  centres on x = 27 + 54k; labelled M1 pins 18 nm wide on the 36 nm track grid,
+  rails 18 nm centred on a cell edge.
+
+Control kinds: `drc_inject_box` (a box added on a layer; the named
+`expect_rule` must fire and must not fire on the clean cell), `lvs_nfin` (CDL
+copy with the NMOS fin count changed), `grid_offset` (every shape of one layer
+moved; the named scripted check must fail). The summary lists every deck rule id
+no control on a drawn cell fires as **unexercised**: a clean result says nothing
+about those.
+
+Re-draw a cell by hand: `"$(head -1 "$(command -v klt)" | cut -c3-)" -I
+design/draw_INVx1_A7S_75t_R.py`.
+
 ## Pins
 
 | What | Value |
@@ -81,8 +117,8 @@ the pin they were run with.
 ## Adding a cell
 
 1. Add an entry to `cells.json` `cells`: `name` (the GDS and CDL cell name),
-   `source` (`shipped` or `drawn`), `gds` and `cdl` (keys under `pdk.files`;
-   for a drawn cell, add its own file entries with their SHA-256).
+   `source` (`shipped` or `drawn`), `gds` and `cdl` (keys under `pdk.files` for
+   a shipped cell; repo-relative paths for a drawn cell, plus its `script`).
 2. A cell with no devices or no CDL entry sets `"cdl": null` and `lvs_na` with
    the reason.
 3. Run the harness. A new cell that fails is a failure, not something to wave

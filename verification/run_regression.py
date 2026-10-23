@@ -4,8 +4,11 @@
 For each cell in cells.json this runs `klt drc` (ASAP7 deck) and `klt lvs`
 (inline FinFET extraction against the reference CDL), stores the klt JSON
 envelopes under verification/records/<record-id>/ and prints a summary table.
-It also runs the negative controls: a seeded DRC violation and a wrong-fin-count
-CDL, each of which must be reported as a failure.
+Cells with `source: drawn` live in this repo (`layout/`, `design/`); they are
+also checked in abutment cases (in a row, flipped row stacks, grid and boundary
+checks) and re-drawn from their script to prove the GDS reproduces byte for
+byte. It also runs the negative controls: seeded DRC violations, a wrong-fin-
+count CDL and a grid offset, each of which must be reported as a failure.
 
 Everything here is a tool result against the predictive ASAP7 PDK. Nothing is
 fabricated or measured.
@@ -45,7 +48,7 @@ import klayout.db as db
 if a[0] == "info":
     from klayout_tools.decks import asap7_rules as r
     print(json.dumps({"deck_path": str(r.DECK_PATH), "rule_count": len(r.RULES),
-                      "klayout": db.__version__}))
+                      "rules": sorted(x.id for x in r.RULES), "klayout": db.__version__}))
 elif a[0] == "extract":
     src, cell, out = a[1:4]
     inject = json.loads(a[4]) if len(a) > 4 else None
@@ -61,6 +64,125 @@ elif a[0] == "extract":
     if inject:
         n.shapes(o.layer(*inject["layer"])).insert(db.Box(*inject["box"]))
     o.write(out)
+elif a[0] == "place":
+    # Build a top cell of abutted rows: spec = {top, libs: {cell: gds}, rows: [[[cell, orient], ...], ...]}
+    spec, out = json.loads(a[1]), a[2]
+    o = db.Layout()
+    o.dbu = 0.00025
+    top = o.create_cell(spec["top"])
+    streams, copies, dims = {}, {}, {}
+
+    def get(name):
+        if name not in copies:
+            path = spec["libs"][name]
+            if path not in streams:
+                streams[path] = db.Layout()
+                streams[path].read(path)
+            lay = streams[path]
+            c = lay.cell(name)
+            if c is None:
+                sys.exit("cell not found in stream: " + name)
+            if lay.dbu != o.dbu:
+                sys.exit("stream dbu is not 0.00025 um: " + path)
+            bb = db.Region(c.begin_shapes_rec(lay.layer(100, 0))).bbox()
+            if (bb.left, bb.bottom) != (0, 0):
+                sys.exit("cell boundary (100/0) does not start at the origin: " + name)
+            dims[name] = (bb.width(), bb.height())
+            copies[name] = o.create_cell(name)
+            copies[name].copy_tree(c)
+        return copies[name], dims[name]
+
+    codes = {"R0": db.Trans.R0, "MX": db.Trans.M0, "MY": db.Trans.M90, "R180": db.Trans.R180}
+    row_h = None
+    for r, row in enumerate(spec["rows"]):
+        x = 0
+        for name, orient in row:
+            c, (w, h) = get(name)
+            row_h = row_h or h
+            if h != row_h:
+                sys.exit("cells in a stack must share one height: " + name)
+            y = r * row_h
+            dx = w if orient in ("MY", "R180") else 0
+            dy = h if orient in ("MX", "R180") else 0
+            top.insert(db.CellInstArray(c.cell_index(), db.Trans(codes[orient], x + dx, y + dy)))
+            x += w
+    o.write(out)
+elif a[0] == "grid":
+    # Scripted grid and boundary checks (spec/stdcells.md DRC acceptance case 5).
+    src, cell = a[1:3]
+    mut = json.loads(a[3]) if len(a) > 3 else None
+    lay = db.Layout()
+    lay.read(src)
+    top = lay.cell(cell)
+    if top is None:
+        sys.exit("cell not found in stream: " + cell)
+    nm = int(round(0.001 / lay.dbu))
+
+    def region(layer, dt=0):
+        r = db.Region(top.begin_shapes_rec(lay.layer(layer, dt)))
+        if mut and list(mut["layer"]) == [layer, dt]:
+            r.move(mut["dx_nm"] * nm, mut["dy_nm"] * nm)
+        return r.merged()
+
+    def at(p):
+        b = p.bbox()
+        return [b.left / nm, b.bottom / nm, b.right / nm, b.top / nm]
+
+    checks = []
+
+    def check(cid, what, findings):
+        checks.append({"id": cid, "what": what, "status": "fail" if findings else "pass", "findings": findings})
+
+    bnd = region(100)
+    polys = list(bnd.each())
+    ok = len(polys) == 1 and polys[0].is_box()
+    bb = bnd.bbox()
+    f = []
+    if not ok:
+        f.append("boundary is not a single rectangle")
+    else:
+        if (bb.left, bb.bottom) != (0, 0):
+            f.append("boundary does not start at the origin: " + str(at(polys[0])))
+        if bb.height() != 270 * nm:
+            f.append("boundary height %s nm, expected 270" % (bb.height() / nm))
+        if bb.width() == 0 or bb.width() % (54 * nm):
+            f.append("boundary width %s nm is not a multiple of 54" % (bb.width() / nm))
+    check("BOUNDARY", "100/0 is one rectangle at the origin, 270 nm tall, width a multiple of 54 nm", f)
+    w, h = bb.width(), bb.height()
+
+    check("FIN.Y", "every FIN is 7 nm tall with its centre on y = 13.5 + 27k nm",
+          [at(p) for p in region(2).each() if p.bbox().height() != 7 * nm or (p.bbox().bottom - 10 * nm) % (27 * nm)])
+    check("GATE.X", "every GATE is 20 nm wide with its centre on x = 27 + 54k nm",
+          [at(p) for p in region(7).each() if p.bbox().width() != 20 * nm or (p.bbox().left - 17 * nm) % (54 * nm)])
+
+    m1 = [p for p in region(19).each()]
+    f, seen = [], 0
+    for sh in top.begin_shapes_rec(lay.layer(19, 251)):
+        if not sh.shape().is_text():
+            continue
+        txt = sh.shape().text
+        pos = sh.trans().trans(db.Point(txt.x, txt.y))
+        hit = [p for p in m1 if p.bbox().contains(pos)]
+        seen += 1
+        if len(hit) != 1:
+            f.append("label %s at %s,%s sits on %d M1 shapes, expected 1" % (txt.string, pos.x / nm, pos.y / nm, len(hit)))
+            continue
+        p = hit[0]
+        if txt.string in ("VDD", "VSS"):
+            rail = [e for e in (0, h) if (db.Region(p) & db.Region(db.Box(0, e - 9 * nm, w, e + 9 * nm))).area() == w * 18 * nm]
+            if not rail:
+                f.append("%s is not an 18 nm rail centred on the boundary edge across the full width: %s" % (txt.string, at(p)))
+        else:
+            b = p.bbox()
+            if not p.is_box() or b.width() != 18 * nm or b.left % (36 * nm):
+                f.append("pin %s is not an 18 nm M1 stripe on the 36 nm track grid (x = 9 + 36k centre): %s" % (txt.string, at(p)))
+    if seen == 0:
+        f.append("no M1 pin labels (19/251) found")
+    check("M1.PIN", "labelled M1 pins are 18 nm stripes on the 36 nm track grid; rails are 18 nm centred on the cell edges", f)
+
+    failed = [c["id"] for c in checks if c["status"] == "fail"]
+    print(json.dumps({"schema": "asap7-stdcells.grid-check/1", "cell": cell, "status": "fail" if failed else "pass",
+                      "failed": failed, "checks": checks}, indent=2, sort_keys=True))
 """
 
 
@@ -116,6 +238,20 @@ class Klt:
         if inject:
             args.append(json.dumps(inject))
         self._helper(*args)
+
+    def place(self, libs, rows, out, top="CASE_TOP"):
+        """Abut rows of (cell, orientation) pairs into one top cell `top`."""
+        self._helper("place", json.dumps({"top": top, "libs": {k: str(v) for k, v in libs.items()}, "rows": rows}), str(out))
+
+    def grid(self, src, cell, mutate=None):
+        args = ["grid", str(src), cell] + ([json.dumps(mutate)] if mutate else [])
+        return json.loads(self._helper(*args))
+
+    def redraw(self, script, out):
+        """Run a drawing script under klt's interpreter, writing the GDS to `out`."""
+        r = subprocess.run([self.python, "-I", str(script), str(out)], capture_output=True, text=True)
+        if r.returncode != 0:
+            raise SetupError(f"drawing script {rel(Path(script))} failed: {r.stderr.strip()}")
 
     def run(self, cmd, request):
         """Run `klt <cmd> - --format json` with the request on stdin.
@@ -247,6 +383,36 @@ def q(v):
     return json.dumps(v, separators=(",", ":"))
 
 
+ORIENTS = ("R0", "MX", "MY", "R180")
+FLIPPED = {"R0": "MX", "MX": "R0", "MY": "R180", "R180": "MY"}  # the same orientation mirrored in y
+
+
+def abutment_cases(cell, neighbour):
+    """DRC acceptance cases 1 and 3 of spec/stdcells.md for one cell.
+
+    Each case is (id, rows); a row is a list of (cell, orientation) placed left
+    to right, row r at y = r * height. Rows 0 and 1 share the rail at y = height,
+    so the upper row is always the vertical mirror family of the lower one.
+    """
+    cases = [("case1-row", [[(neighbour, "R0"), (cell, "R0"), (neighbour, "R0")]])]
+    for o in ORIENTS:
+        mine = "MX" if o in ("MX", "R180") else "R0"  # orientation of the INVx1 flanking the cell
+        other = FLIPPED[mine]
+        for var, other_row in (("inv", [(neighbour, other)] * 3),
+                               ("self", [(neighbour, other), (cell, FLIPPED[o]), (neighbour, other)])):
+            row = [(neighbour, mine), (cell, o), (neighbour, mine)]
+            cases.append((f"case3-{o}-{var}-above", [row, other_row]))
+            cases.append((f"case3-{o}-{var}-below", [other_row, row]))
+    return cases
+
+
+def cell_files(cell, paths):
+    """(gds, cdl) of a cell: pinned PDK files if shipped, repo files if drawn."""
+    if cell["source"] == "drawn":
+        return REPO / cell["gds"], (REPO / cell["cdl"] if cell["cdl"] else None)
+    return paths[cell["gds"]], (paths[cell["cdl"]] if cell["cdl"] else None)
+
+
 def run(args, klt=None):
     cfg = load_cells(Path(args.cells))
     pdk_dir = HERE / ".pdk"
@@ -257,6 +423,12 @@ def run(args, klt=None):
     klt = klt or Klt(args.klt)
     info = klt.info()
     klt_version = klt.version()
+    by_name = {c["name"]: c for c in cfg["cells"]}
+    for c in cfg["cells"]:
+        if c["source"] == "drawn":
+            for key in ("gds", "cdl", "script"):
+                if not c.get(key) or not (REPO / c[key]).is_file():
+                    raise SetupError(f"drawn cell {c['name']}: `{key}` is missing or not a file in the repo")
 
     stamp = datetime.datetime.now(datetime.timezone.utc).strftime("%Y%m%dT%H%M%SZ")
     record_id = args.record_id or f"{stamp}-klt{re.sub(r'[^0-9A-Za-z.]', '_', klt_version)}"
@@ -275,13 +447,26 @@ def run(args, klt=None):
         name, out = cell["name"], record / cell["name"]
         row = {"cell": name, "source": cell["source"], "drc": "ERROR", "lvs": "ERROR"}
         rows.append(row)
-        gds = work / f"{name}.gds"
-        try:
-            klt.extract(paths[cell["gds"]], name, gds)
-        except SetupError as e:
-            row["error"] = str(e)
-            ok = False
-            continue
+        src_gds, src_cdl = cell_files(cell, paths)
+        if cell["source"] == "drawn":
+            gds = src_gds  # a drawn cell is a stream of its own: check the committed file itself
+            row["files_sha256"] = {k: sha256_file(REPO / cell[k]) for k in ("gds", "cdl", "script")}
+            try:
+                again = work / f"{name}.redrawn.gds"
+                klt.redraw(REPO / cell["script"], again)
+                row["reproducible"] = "PASS" if sha256_file(again) == row["files_sha256"]["gds"] else "FAIL"
+            except SetupError as e:
+                row["reproducible"] = "ERROR"
+                row["error"] = str(e)
+            ok &= row["reproducible"] == "PASS"
+        else:
+            gds = work / f"{name}.gds"
+            try:
+                klt.extract(src_gds, name, gds)
+            except SetupError as e:
+                row["error"] = str(e)
+                ok = False
+                continue
         env, err = run_one(klt, "drc", drc_request(gds, info), out, "drc")
         row["drc"] = verdict_drc(env)
         row["drc_envelope"] = env
@@ -297,32 +482,75 @@ def run(args, klt=None):
             row["lvs"] = "n/a"
             row["lvs_na"] = cell["lvs_na"]
         else:
-            env, err = run_one(klt, "lvs", lvs_request(gds, paths[cell["cdl"]], name, cfg["lvs_options"]), out, "lvs")
+            env, err = run_one(klt, "lvs", lvs_request(gds, src_cdl, name, cfg["lvs_options"]), out, "lvs")
             row["lvs"] = verdict_lvs(env)
             row["lvs_envelope"] = env
             if env is None:
                 row["error"] = f"klt lvs: {err}"
         ok &= row["drc"] in ("PASS", "KNOWN-GAP") and row["lvs"] in ("PASS", "n/a")
 
+        if cell["source"] == "drawn":
+            row["cases"] = []
+            neighbour = cell.get("neighbour", name)
+            libs = {name: gds, neighbour: cell_files(by_name[neighbour], paths)[0]}
+            for cid, grid_rows in abutment_cases(name, neighbour):
+                res = {"id": cid, "kind": "drc_abutment", "result": "ERROR"}
+                row["cases"].append(res)
+                cgds = work / f"{name}.{cid}.gds"
+                try:
+                    klt.place(libs, grid_rows, cgds)
+                    env, err = run_one(klt, "drc", drc_request(cgds, info), out / "cases" / cid, "drc")
+                    res["result"] = verdict_drc(env)
+                    res["observed"] = {"status": (env or {}).get("status"), "rule_counts": (env or {}).get("rule_counts")}
+                    if env is None:
+                        res["error"] = f"klt drc: {err}"
+                except SetupError as e:
+                    res["error"] = str(e)
+                ok &= res["result"] == "PASS"
+            res = {"id": "case5-grid", "kind": "grid_check", "result": "ERROR"}
+            row["cases"].append(res)
+            try:
+                chk = klt.grid(gds, name)
+                save(out / "cases" / "case5-grid" / "checks.json", chk)
+                res["result"] = "PASS" if chk["status"] == "pass" else "FAIL"
+                res["observed"] = {"status": chk["status"], "failed": chk["failed"]}
+            except SetupError as e:
+                res["error"] = str(e)
+            ok &= res["result"] == "PASS"
+
     controls = []
+    fired_by_controls = set()
     for ctl in cfg["controls"]:
         if args.only and ctl["base_cell"] not in args.only:
             continue
+        base = by_name[ctl["base_cell"]]
+        base_gds, base_cdl = cell_files(base, paths)
         out = record / "controls" / ctl["id"]
         res = {"id": ctl["id"], "kind": ctl["kind"], "base_cell": ctl["base_cell"], "result": "ERROR"}
         controls.append(res)
         gds = work / f"{ctl['base_cell']}.{ctl['id']}.gds"
         try:
             if ctl["kind"] == "drc_inject_box":
-                klt.extract(paths["gds"], ctl["base_cell"], gds, {"layer": ctl["layer"], "box": ctl["box_dbu"]})
+                klt.extract(base_gds, ctl["base_cell"], gds, {"layer": ctl["layer"], "box": ctl["box_dbu"]})
                 env, err = run_one(klt, "drc", drc_request(gds, info), out, "drc")
                 rules = (env or {}).get("rule_counts", {})
                 res["observed"] = {"status": (env or {}).get("status"), "rule_counts": rules}
-                res["result"] = "CAUGHT" if verdict_drc(env) == "FAIL" and ctl["expect_rule"] in rules else "MISSED"
+                fired_by_controls |= set(rules)
+                clean = next((r for r in rows if r["cell"] == ctl["base_cell"]), {}).get("drc_envelope") or {}
+                res["expect_rule"] = ctl["expect_rule"]
+                res["fires_on_clean_cell"] = ctl["expect_rule"] in clean.get("rule_counts", {})
+                res["result"] = ("CAUGHT" if verdict_drc(env) == "FAIL" and ctl["expect_rule"] in rules
+                                 and not res["fires_on_clean_cell"] else "MISSED")
+            elif ctl["kind"] == "grid_offset":
+                chk = klt.grid(base_gds, ctl["base_cell"], {"layer": ctl["layer"], "dx_nm": ctl["dx_nm"], "dy_nm": ctl["dy_nm"]})
+                save(out / "checks.json", chk)
+                res["observed"] = {"status": chk["status"], "failed": chk["failed"]}
+                res["expect_check"] = ctl["expect_check"]
+                res["result"] = "CAUGHT" if ctl["expect_check"] in chk["failed"] else "MISSED"
             else:
-                klt.extract(paths["gds"], ctl["base_cell"], gds)
+                klt.extract(base_gds, ctl["base_cell"], gds)
                 cdl = work / f"{ctl['id']}.cdl"
-                cdl.write_text(wrong_nfin_cdl(paths["cdl"], ctl["base_cell"], ctl["nfin_delta"]))
+                cdl.write_text(wrong_nfin_cdl(base_cdl, ctl["base_cell"], ctl["nfin_delta"]))
                 env, err = run_one(klt, "lvs", lvs_request(gds, cdl, ctl["base_cell"], cfg["lvs_options"]), out, "lvs")
                 res["observed"] = {"status": (env or {}).get("status"), "category_counts": (env or {}).get("category_counts")}
                 res["result"] = "CAUGHT" if verdict_lvs(env) == "FAIL" else "MISSED"
@@ -330,6 +558,8 @@ def run(args, klt=None):
             res["error"] = str(e)
         ok &= res["result"] == "CAUGHT"
 
+    drawn = {c["name"] for c in cfg["cells"] if c["source"] == "drawn"}
+    fired = sorted({r for c in controls if c["base_cell"] in drawn for r in (c.get("observed") or {}).get("rule_counts", {})})
     manifest = {
         "record_id": record_id,
         "utc": stamp,
@@ -342,6 +572,8 @@ def run(args, klt=None):
         "overall": "PASS" if ok else "FAIL",
         "cells": [{k: v for k, v in r.items() if not k.endswith("_envelope")} for r in rows],
         "controls": controls,
+        "drawn_rules_fired_by_controls": fired,
+        "drawn_rules_unexercised": sorted(set(info.get("rules", [])) - set(fired)) if drawn else [],
     }
     save(record / "manifest.json", manifest)
     (record / "summary.md").write_text(summary(manifest, rows))
@@ -380,9 +612,30 @@ def summary(m, rows):
         pc = q((lvs.get("power_connectivity") or {}).get("status")) if lvs else "n/a"
         cc = q(lvs.get("category_counts")) if lvs else "n/a"
         lines.append(f"| {r['cell']} | {r['drc']} | {r['lvs']} | {pc} | {cc} | " + " | ".join(drc_cols(r)) + " |")
+    drawn = [r for r in rows if r.get("cases")]
+    if drawn:
+        lines += ["", "## Drawn cells", "", "| cell | reproducible (script re-run, sha256 of GDS) | gds sha256 | cdl sha256 | script sha256 |", "|---|---|---|---|---|"]
+        for r in drawn:
+            h = r["files_sha256"]
+            lines.append(f"| {r['cell']} | {r.get('reproducible')} | `{h['gds']}` | `{h['cdl']}` | `{h['script']}` |")
+        lines += ["", "### Abutment and grid cases (spec/stdcells.md, DRC acceptance 1, 3, 5)", "",
+                  "| cell | case | kind | result | observed |", "|---|---|---|---|---|"]
+        for r in drawn:
+            for c in r["cases"]:
+                lines.append(f"| {r['cell']} | {c['id']} | {c['kind']} | {c['result']} | {q(c.get('observed') or c.get('error'))} |")
     lines += ["", "## Negative controls (must be CAUGHT)", "", "| control | base cell | result | observed |", "|---|---|---|---|"]
     for c in m["controls"]:
         lines.append(f"| {c['id']} | {c['base_cell']} | {c['result']} | {q(c.get('observed') or c.get('error'))} |")
+    if drawn:
+        lines += ["", f"Rules fired by a control on a drawn cell ({len(m['drawn_rules_fired_by_controls'])}): "
+                  + ", ".join(f"`{r}`" for r in m["drawn_rules_fired_by_controls"]) + ".", "",
+                  f"Rules with no control that fires them on a drawn cell, **unexercised** ({len(m['drawn_rules_unexercised'])} of "
+                  f"{m['deck']['rule_categories']}); a clean result says nothing about these until a control makes them fire:", ""]
+        fam = {}
+        for r in m["drawn_rules_unexercised"]:
+            fam.setdefault(r.split(".")[0], []).append(r)
+        for f in sorted(fam):
+            lines.append(f"- {f} ({len(fam[f])}): " + ", ".join(f"`{r}`" for r in fam[f]))
     for r in rows:
         if r.get("known_drc_gap"):
             lines.append(f"\nKNOWN-GAP {r['cell']}: {r['known_drc_gap']}. The klt error is kept in the cell's drc.error.txt.")
