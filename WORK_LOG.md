@@ -3,6 +3,11 @@
 Chronological record of merged PRs and closed issues, maintained by the Guide
 triage role. Newest first.
 
+### 2026-10-23
+
+- **PR #24**: build: back package.json test/check scripts with the harness self-test
+- **Issue #22** (closed): Replace vacuous package.json check/test stubs with the harness self-test
+
 ### 2026-10-22
 
 - **PR #20**: chore(verification): drop stale pdk.provisional flag
