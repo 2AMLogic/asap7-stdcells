@@ -137,7 +137,9 @@ Filed or found by this harness (tool gaps, not design findings):
   closed, and FILLERxp5 no longer aborts on current klt: it reports five
   width and gate-spacing rules when checked standalone, and is clean when
   abutted (`spec/decisions/0005-filler-drc-classification.md`;
-  2AMLogic/klayout-tools#4029).
+  2AMLogic/klayout-tools#4029). Its harness verdict is its abutment cases,
+  with the standalone result kept beside it
+  (`spec/decisions/0007-filler-abutment-verdict.md`).
 - 2AMLogic/klayout-tools#3812: the DRC `coverage` block is empty
   (`unchecked_rules`, `rules_skipped`, `deck_scope` are `[]`) although the deck
   documents unimplemented rules, so a clean cell reads as full coverage. The
