@@ -265,6 +265,65 @@ class RunRegressionTest(unittest.TestCase):
         self.assertEqual(cases["case3-MX-self-above"], "FAIL")
         self.assertEqual(cases["case1-row"], "PASS")
 
+    def filler_cfg(self, control=True):
+        cfg = copy.deepcopy(self.cfg)
+        cfg["cells"][1]["name"] = "FILL_X"
+        cfg["cells"][1]["abutment_verdict"] = {"decision": "0007", "neighbour": "INVx1_X"}
+        if control:
+            cfg["controls"].append({"id": "ctl-fill", "kind": "drc_abutted", "base_cell": "FILL_X", "layer": [2, 0],
+                                    "box_dbu": [0, 0, 1, 1], "expect_rule": "M1.S.2"})
+        return cfg
+
+    def filler_row(self):
+        return next(c for c in self.manifest()["cells"] if c["cell"] == "FILL_X")
+
+    class StandaloneFail(FakeKlt):
+        """Fails `drc` of the standalone filler only; placed cases and others use the base statuses."""
+
+        def run(self, cmd, request):
+            if cmd == "drc" and request["file"].endswith("FILL_X.gds"):
+                env, err = super().run(cmd, request)
+                return dict(env, status="violations", rule_counts={"FIN.W.2": 10, "GATE.S.3": 2}), err
+            return super().run(cmd, request)
+
+    def test_abutment_verdict_overrides_standalone_fail_but_keeps_it(self):
+        self.assertEqual(self.go(self.StandaloneFail(), self.filler_cfg()), 0)
+        row = self.filler_row()
+        self.assertEqual(row["drc_standalone"], "FAIL")
+        self.assertEqual(row["drc"], "FAIL standalone / PASS abutted")
+        self.assertEqual(row["abutment_verdict"], "0007")
+        self.assertEqual(len(row["cases"]), 1 + 1 + 16)
+        self.assertEqual(row["cases"][1]["id"], "case1-self-row")
+        rec = rr.HERE / "records" / "r1" / "FILL_X"
+        standalone = json.loads((rec / "drc.json").read_text())
+        self.assertEqual(standalone["rule_counts"], {"FIN.W.2": 10, "GATE.S.3": 2})
+        self.assertTrue((rec / "cases" / "case1-self-row" / "drc.json").is_file())
+        summary = (rr.HERE / "records" / "r1" / "summary.md").read_text()
+        self.assertIn("FAIL standalone / PASS abutted", summary)
+        self.assertIn('"FIN.W.2":10', summary)
+
+    def test_failing_filler_abutment_case_fails_run(self):
+        klt = self.StandaloneFail(bad_case="case1-self-row")
+        self.assertEqual(self.go(klt, self.filler_cfg()), 1)
+        self.assertEqual(self.filler_row()["drc"], "FAIL standalone / FAIL abutted")
+
+    def test_other_shipped_cells_keep_their_verdicts(self):
+        self.assertEqual(self.go(self.StandaloneFail(), self.filler_cfg()), 0)
+        inv = next(c for c in self.manifest()["cells"] if c["cell"] == "INVx1_X")
+        self.assertEqual(inv["drc"], "PASS")
+        self.assertNotIn("cases", inv)
+
+    def test_filler_without_abutment_verdict_still_fails_standalone(self):
+        cfg = self.filler_cfg()
+        del cfg["cells"][1]["abutment_verdict"]
+        self.assertEqual(self.go(self.StandaloneFail(), cfg), 1)
+
+    def test_abutted_control_caught_and_missed(self):
+        self.assertEqual(self.go(self.StandaloneFail(), self.filler_cfg()), 0)
+        self.assertEqual({c["id"]: c["result"] for c in self.manifest()["controls"]}["ctl-fill"], "CAUGHT")
+        self.assertEqual(self.go(self.StandaloneFail(control_drc="clean"), self.filler_cfg(), "r2"), 1)
+        self.assertEqual({c["id"]: c["result"] for c in self.manifest("r2")["controls"]}["ctl-fill"], "MISSED")
+
     def test_grid_check_failure_fails_run(self):
         self.assertEqual(self.go(FakeKlt(grid="fail"), self.drawn_cfg()), 1)
         self.assertEqual({c["id"]: c["result"] for c in self.drawn_row()["cases"]}["case5-grid"], "FAIL")

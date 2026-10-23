@@ -7,7 +7,7 @@ envelopes under verification/records/<record-id>/ and prints a summary table.
 Cells with `source: drawn` live in this repo (`layout/`, `design/`); they are
 also checked in abutment cases (in a row, flipped row stacks, grid and boundary
 checks) and re-drawn from their script to prove the GDS reproduces byte for
-byte. It also runs the negative controls: seeded DRC violations, a wrong-fin-
+byte. It also runs the negative controls: seeded DRC violations (standalone and in an abutted row), a wrong-fin-
 count CDL and a grid offset, each of which must be reported as a failure.
 
 Everything here is a tool result against the predictive ASAP7 PDK. Nothing is
@@ -413,6 +413,32 @@ def cell_files(cell, paths):
     return paths[cell["gds"]], (paths[cell["cdl"]] if cell["cdl"] else None)
 
 
+def run_abutment_cases(klt, info, work, out, name, gds, libs, neighbour, with_self_row=False):
+    """Run the abutment DRC cases of one cell; returns their result dicts.
+
+    `libs` maps every cell name used in a case to its stream. With
+    `with_self_row` a row of the cell with itself (3x, the 0005 probe) is added.
+    """
+    cases = abutment_cases(name, neighbour)
+    if with_self_row:
+        cases.insert(1, ("case1-self-row", [[(name, "R0")] * 3]))
+    results = []
+    for cid, grid_rows in cases:
+        res = {"id": cid, "kind": "drc_abutment", "result": "ERROR"}
+        results.append(res)
+        cgds = work / f"{name}.{cid}.gds"
+        try:
+            klt.place(libs, grid_rows, cgds)
+            env, err = run_one(klt, "drc", drc_request(cgds, info), out / "cases" / cid, "drc")
+            res["result"] = verdict_drc(env)
+            res["observed"] = {"status": (env or {}).get("status"), "rule_counts": (env or {}).get("rule_counts")}
+            if env is None:
+                res["error"] = f"klt drc: {err}"
+        except SetupError as e:
+            res["error"] = str(e)
+    return results
+
+
 def run(args, klt=None):
     cfg = load_cells(Path(args.cells))
     pdk_dir = HERE / ".pdk"
@@ -487,26 +513,29 @@ def run(args, klt=None):
             row["lvs_envelope"] = env
             if env is None:
                 row["error"] = f"klt lvs: {err}"
-        ok &= row["drc"] in ("PASS", "KNOWN-GAP") and row["lvs"] in ("PASS", "n/a")
+        verdict = cell.get("abutment_verdict")
+        if verdict:
+            # Decision 0007: the standalone result stays recorded (row["drc"]); the cell's
+            # DRC verdict is its abutment cases, because a one-pitch cell cannot meet the
+            # width rules alone. Nothing is skipped or waived.
+            row["abutment_verdict"] = verdict["decision"]
+            neighbour = verdict["neighbour"]
+            libs = {name: gds, neighbour: cell_files(by_name[neighbour], paths)[0]}
+            row["cases"] = run_abutment_cases(klt, info, work, out, name, gds, libs, neighbour, with_self_row=True)
+            passed = all(c["result"] == "PASS" for c in row["cases"])
+            row["drc_standalone"] = row["drc"]
+            row["drc"] = f"{row['drc_standalone']} standalone / {'PASS' if passed else 'FAIL'} abutted"
+            ok &= passed and row["drc_standalone"] in ("PASS", "FAIL")
+            ok &= row["lvs"] in ("PASS", "n/a")
+        else:
+            ok &= row["drc"] in ("PASS", "KNOWN-GAP") and row["lvs"] in ("PASS", "n/a")
 
         if cell["source"] == "drawn":
             row["cases"] = []
             neighbour = cell.get("neighbour", name)
             libs = {name: gds, neighbour: cell_files(by_name[neighbour], paths)[0]}
-            for cid, grid_rows in abutment_cases(name, neighbour):
-                res = {"id": cid, "kind": "drc_abutment", "result": "ERROR"}
-                row["cases"].append(res)
-                cgds = work / f"{name}.{cid}.gds"
-                try:
-                    klt.place(libs, grid_rows, cgds)
-                    env, err = run_one(klt, "drc", drc_request(cgds, info), out / "cases" / cid, "drc")
-                    res["result"] = verdict_drc(env)
-                    res["observed"] = {"status": (env or {}).get("status"), "rule_counts": (env or {}).get("rule_counts")}
-                    if env is None:
-                        res["error"] = f"klt drc: {err}"
-                except SetupError as e:
-                    res["error"] = str(e)
-                ok &= res["result"] == "PASS"
+            row["cases"] += run_abutment_cases(klt, info, work, out, name, gds, libs, neighbour)
+            ok &= all(c["result"] == "PASS" for c in row["cases"])
             res = {"id": "case5-grid", "kind": "grid_check", "result": "ERROR"}
             row["cases"].append(res)
             try:
@@ -539,6 +568,21 @@ def run(args, klt=None):
                 clean = next((r for r in rows if r["cell"] == ctl["base_cell"]), {}).get("drc_envelope") or {}
                 res["expect_rule"] = ctl["expect_rule"]
                 res["fires_on_clean_cell"] = ctl["expect_rule"] in clean.get("rule_counts", {})
+                res["result"] = ("CAUGHT" if verdict_drc(env) == "FAIL" and ctl["expect_rule"] in rules
+                                 and not res["fires_on_clean_cell"] else "MISSED")
+            elif ctl["kind"] == "drc_abutted":
+                # A broken copy of an abutment-verdict cell, placed in the 3x self row: the cell's
+                # own verdict path must be able to fail.
+                klt.extract(base_gds, ctl["base_cell"], gds, {"layer": ctl["layer"], "box": ctl["box_dbu"]})
+                placed = work / f"{ctl['base_cell']}.{ctl['id']}.placed.gds"
+                klt.place({ctl["base_cell"]: gds}, [[(ctl["base_cell"], "R0")] * 3], placed)
+                env, err = run_one(klt, "drc", drc_request(placed, info), out, "drc")
+                rules = (env or {}).get("rule_counts", {})
+                res["observed"] = {"status": (env or {}).get("status"), "rule_counts": rules}
+                clean_row = next((r for r in rows if r["cell"] == ctl["base_cell"]), {})
+                clean_case = next((c for c in clean_row.get("cases", []) if c["id"] == "case1-self-row"), {})
+                res["expect_rule"] = ctl["expect_rule"]
+                res["fires_on_clean_cell"] = clean_case.get("result") != "PASS"
                 res["result"] = ("CAUGHT" if verdict_drc(env) == "FAIL" and ctl["expect_rule"] in rules
                                  and not res["fires_on_clean_cell"] else "MISSED")
             elif ctl["kind"] == "grid_offset":
@@ -612,17 +656,24 @@ def summary(m, rows):
         pc = q((lvs.get("power_connectivity") or {}).get("status")) if lvs else "n/a"
         cc = q(lvs.get("category_counts")) if lvs else "n/a"
         lines.append(f"| {r['cell']} | {r['drc']} | {r['lvs']} | {pc} | {cc} | " + " | ".join(drc_cols(r)) + " |")
-    drawn = [r for r in rows if r.get("cases")]
+    drawn = [r for r in rows if r.get("files_sha256")]
+    abutted = [r for r in rows if r.get("cases")]
     if drawn:
         lines += ["", "## Drawn cells", "", "| cell | reproducible (script re-run, sha256 of GDS) | gds sha256 | cdl sha256 | script sha256 |", "|---|---|---|---|---|"]
         for r in drawn:
             h = r["files_sha256"]
             lines.append(f"| {r['cell']} | {r.get('reproducible')} | `{h['gds']}` | `{h['cdl']}` | `{h['script']}` |")
+    if abutted:
         lines += ["", "### Abutment and grid cases (spec/stdcells.md, DRC acceptance 1, 3, 5)", "",
                   "| cell | case | kind | result | observed |", "|---|---|---|---|---|"]
-        for r in drawn:
+        for r in abutted:
             for c in r["cases"]:
                 lines.append(f"| {r['cell']} | {c['id']} | {c['kind']} | {c['result']} | {q(c.get('observed') or c.get('error'))} |")
+    for r in rows:
+        if r.get("abutment_verdict"):
+            sa = (r.get("drc_envelope") or {}).get("rule_counts")
+            lines.append(f"\nABUTMENT VERDICT {r['cell']} (decision {r['abutment_verdict']}): the DRC verdict is its abutment "
+                         f"cases; the standalone result is `{r['drc_standalone']}` with rule counts `{q(sa)}`, recorded in its drc.json.")
     lines += ["", "## Negative controls (must be CAUGHT)", "", "| control | base cell | result | observed |", "|---|---|---|---|"]
     for c in m["controls"]:
         lines.append(f"| {c['id']} | {c['base_cell']} | {c['result']} | {q(c.get('observed') or c.get('error'))} |")
