@@ -27,7 +27,9 @@
      "lvs_na": "draws no devices; docs/cli/lvs.md: inline extraction yields no circuit and klt lvs exits 1",
      "known_drc_gap": "klt drc asap7 deck aborts on a layout with LIG but no gate/active geometry (2AMLogic/klayout-tools#3811)"},
     {"name": "FILLERxp5_ASAP7_75t_R", "source": "shipped", "gds": "gds", "cdl": null,
-     "lvs_na": "the pinned CDL has no FILLER entry (docs/cli/lvs.md)"}
+     "lvs_na": "the pinned CDL has no FILLER entry (docs/cli/lvs.md)"},
+    {"name": "INVx1_A7S_75t_R", "source": "drawn", "gds": "layout/INVx1_A7S_75t_R.gds",
+     "cdl": "design/INVx1_A7S_75t_R.cdl", "script": "design/draw_INVx1_A7S_75t_R.py"}
   ],
   "controls": [
     {
@@ -45,6 +47,21 @@
       "base_cell": "INVx1_ASAP7_75t_R",
       "note": "Reference CDL copy with the NMOS fin count changed by +1. Must mismatch.",
       "nfin_delta": 1
-    }
+    },
+    {"id": "drawn-m1-spacing", "kind": "drc_inject_box", "base_cell": "INVx1_A7S_75t_R", "layer": [19, 0], "box_dbu": [508, 240, 580, 800], "expect_rule": "M1.S.1", "note": "M1 bar 1 nm from the Y stripe, both edges long."},
+    {"id": "drawn-fin-width", "kind": "drc_inject_box", "base_cell": "INVx1_A7S_75t_R", "layer": [2, 0], "box_dbu": [0, 472, 648, 504], "expect_rule": "FIN.W.1", "note": "An 8 nm tall fin between the fin tracks."},
+    {"id": "drawn-gate-width", "kind": "drc_inject_box", "base_cell": "INVx1_A7S_75t_R", "layer": [7, 0], "box_dbu": [400, 504, 484, 576], "expect_rule": "GATE.W.1", "note": "A 21 nm wide gate stub."},
+    {"id": "drawn-gcut-width", "kind": "drc_inject_box", "base_cell": "INVx1_A7S_75t_R", "layer": [10, 0], "box_dbu": [240, 240, 280, 280], "expect_rule": "GCUT.W.1", "note": "A 10 nm tall gate cut."},
+    {"id": "drawn-active-width", "kind": "drc_inject_box", "base_cell": "INVx1_A7S_75t_R", "layer": [11, 0], "box_dbu": [20, 108, 60, 432], "expect_rule": "ACTIVE.W.3", "note": "A 10 nm wide ACTIVE strip."},
+    {"id": "drawn-sdt-width", "kind": "drc_inject_box", "base_cell": "INVx1_A7S_75t_R", "layer": [88, 0], "box_dbu": [520, 108, 560, 432], "expect_rule": "SDT.W.1", "note": "A 10 nm wide SDT strip."},
+    {"id": "drawn-lisd-width", "kind": "drc_inject_box", "base_cell": "INVx1_A7S_75t_R", "layer": [17, 0], "box_dbu": [560, 108, 600, 432], "expect_rule": "LISD.W.1", "note": "A 10 nm wide LISD strip."},
+    {"id": "drawn-lig-width", "kind": "drc_inject_box", "base_cell": "INVx1_A7S_75t_R", "layer": [16, 0], "box_dbu": [560, 504, 620, 576], "expect_rule": "LIG.W.1", "note": "A 15 nm wide LIG strip."},
+    {"id": "drawn-v0-width", "kind": "drc_inject_box", "base_cell": "INVx1_A7S_75t_R", "layer": [18, 0], "box_dbu": [560, 400, 628, 468], "expect_rule": "V0.W.1", "note": "A 17 nm V0."},
+    {"id": "drawn-m1-width", "kind": "drc_inject_box", "base_cell": "INVx1_A7S_75t_R", "layer": [19, 0], "box_dbu": [544, 240, 612, 800], "expect_rule": "M1.W.1", "note": "A 17 nm wide M1 stripe."},
+    {"id": "drawn-m1-area", "kind": "drc_inject_box", "base_cell": "INVx1_A7S_75t_R", "layer": [19, 0], "box_dbu": [540, 400, 612, 480], "expect_rule": "M1.A.1", "note": "An 18 x 20 nm M1 island, below the minimum M1 area."},
+    {"id": "drawn-active-height", "kind": "drc_inject_box", "base_cell": "INVx1_A7S_75t_R", "layer": [11, 0], "box_dbu": [520, 480, 640, 584], "expect_rule": "ACTIVE.W.1", "note": "A 26 nm tall ACTIVE strip."},
+    {"id": "drawn-fin-length", "kind": "drc_inject_box", "base_cell": "INVx1_A7S_75t_R", "layer": [2, 0], "box_dbu": [40, 472, 160, 500], "expect_rule": "FIN.W.2", "note": "A 30 nm long fin."},
+    {"id": "drawn-lvs-wrong-nfin", "kind": "lvs_nfin", "base_cell": "INVx1_A7S_75t_R", "nfin_delta": 1, "note": "Reference CDL copy with the NMOS fin count changed by +1. Must mismatch."},
+    {"id": "drawn-gate-off-grid", "kind": "grid_offset", "base_cell": "INVx1_A7S_75t_R", "layer": [7, 0], "dx_nm": 1, "dy_nm": 0, "expect_check": "GATE.X", "note": "Every GATE moved 1 nm in x: off the 54 nm gate grid. The scripted grid check must fail."}
   ]
 }
