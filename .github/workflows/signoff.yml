@@ -33,6 +33,17 @@ jobs:
       - name: Install pinned klt
         run: pip install klayout-tools==0.8.0
 
+      - name: Install KLayout (klt DRC runs the system klayout binary)
+        run: |
+          set -uo pipefail
+          # klt drc shells out to `klayout -b`; the pip install of klt does
+          # not provide it. The committed envelopes were produced with the
+          # Ubuntu 24.04 package, which is what ubuntu-latest installs.
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq klayout
+          command -v -a klayout
+          klayout -v
+
       - name: Lint committed evidence JSON
         run: |
           set -uo pipefail
