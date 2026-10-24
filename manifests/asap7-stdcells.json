@@ -1,5 +1,14 @@
 {
   "block": "asap7-stdcells",
   "kind": "digital",
-  "evidence": {}
+  "evidence": {
+    "9": {
+      "file": "manifests/t1-item9.envelope.json",
+      "content_hash": "sha256:58d2dca220f742e923dcde0a3e7addc47a43e11fcb46603b66287b94badcdeab"
+    },
+    "10": {
+      "file": "manifests/t1-item10.envelope.json",
+      "content_hash": "sha256:4a0d8ca1ea90bf38483450577e0d627a4258b76806c308ea6f475abc2e3bf0d7"
+    }
+  }
 }

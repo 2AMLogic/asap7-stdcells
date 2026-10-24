@@ -81,7 +81,7 @@ layout/        cell GDS, LEF views, DRC/LVS reports
 ## How to reproduce
 
 The signoff verdict of record is graded by `klt signoff`, pinned to
-`klayout-tools==0.7.0`. Regenerate it with:
+`klayout-tools==0.8.0`. Regenerate it with:
 
 ```
 klt signoff --manifest manifests/asap7-stdcells.json \
@@ -90,9 +90,22 @@ klt signoff --manifest manifests/asap7-stdcells.json \
 ```
 
 CI (`.github/workflows/signoff.yml`) re-runs this and byte-compares it with the
-committed record. The evidence map in the manifest is empty, so every tier item
-grades unmet (the grader exits 3, which CI accepts); that is the honest state
-today. `kind: digital` is pending confirmation in #2. The checklist in
+committed record. T1 items 9 (testbenches shipped) and 10 (repo hygiene) are
+met; the other nine grade unmet (the grader exits 3, which CI accepts), because
+they need drawn cells. Items 9 and 10 cite tool-produced attestation envelopes,
+not hand-written ones. Refresh them after changing any inventoried file, then
+regenerate the record above in the same PR:
+
+```
+klt signoff --attest 9  --inventory manifests/t1-item9-inventory.json  -o manifests/t1-item9.envelope.json
+klt signoff --attest 10 --inventory manifests/t1-item10-inventory.json -o manifests/t1-item10.envelope.json
+```
+
+`klt signoff --attest N --inventory ... --check manifests/t1-itemN.envelope.json`
+re-attests and fails on drift; CI runs it. Item 9's cold start fetches the
+pinned PDK, so it needs network. If an inventory itself changes, update the
+`content_hash` the manifest pins for that item. These are tool results against
+the predictive ASAP7 model. `kind: digital` is pending confirmation in #2. The checklist in
 `manifests/design-evidence-tiers.md` is vendored byte-identical from the
 `klayout-tools` commit named in `manifests/design-evidence-tiers.UPSTREAM`.
 

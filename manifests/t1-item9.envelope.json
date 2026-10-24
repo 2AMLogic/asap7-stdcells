@@ -1,0 +1,94 @@
+{
+  "schema_version": 1,
+  "kind": "generic",
+  "status": "pass",
+  "t1_item": 9,
+  "summary": "T1 item 9 (Testbenches shipped): 8/8 attestation checks passed (klt signoff --attest)",
+  "source": "manifests/t1-item9-inventory.json",
+  "attestation": {
+    "producer": "klt signoff --attest",
+    "inventory_schema_version": 1,
+    "hash_algorithm": "sha256-raw-bytes",
+    "check_count": 8,
+    "passed_count": 8,
+    "checks": [
+      {
+        "check": "present",
+        "role": "testbench",
+        "path": "verification/README.md",
+        "passed": true,
+        "content_hash": "sha256:3de9574c833c30a930343a6a3e6bc9a20193071d8058c50de79529d9df2786df"
+      },
+      {
+        "check": "present",
+        "role": "testbench",
+        "path": "verification/cells.json",
+        "passed": true,
+        "content_hash": "sha256:73d9e29d8910edbfee48f68346bf03ea48efe24fbaa858334d1cba4eda6e97fc"
+      },
+      {
+        "check": "present",
+        "role": "testbench",
+        "path": "verification/records/SUPERSEDED.txt",
+        "passed": true,
+        "content_hash": "sha256:1ce48f4e032643d02b88c552f8c8b5c02b865e8053c4a41e8560c17b057df9ad"
+      },
+      {
+        "check": "present",
+        "role": "testbench",
+        "path": "verification/run_regression.py",
+        "passed": true,
+        "content_hash": "sha256:b6f9470dd4c47070a296777ceb90f1c6178ebe52b294899ba1f675128890ab62"
+      },
+      {
+        "check": "present",
+        "role": "testbench",
+        "path": "verification/test_run_regression.py",
+        "passed": true,
+        "content_hash": "sha256:7145cd5b283a50988515c1988bc6ef8f874e840d2cc43121a176f71355f85fed"
+      },
+      {
+        "check": "command",
+        "role": "cold_start",
+        "argv": [
+          "sh",
+          "-c",
+          "rm -rf verification/records/.attest-coldstart; python3 verification/run_regression.py --fetch-pdk --only INVx1_ASAP7_75t_R --record-id .attest-coldstart; rc=$?; rm -rf verification/records/.attest-coldstart verification/.work; exit $rc"
+        ],
+        "cwd": ".",
+        "exit_status": 0,
+        "passed": true
+      },
+      {
+        "check": "pin",
+        "role": "pdk",
+        "passed": true,
+        "value": {
+          "name": "lambdapdk",
+          "revision": "v0.2.17"
+        }
+      },
+      {
+        "check": "pin",
+        "role": "tools",
+        "passed": true,
+        "value": {
+          "klayout-tools": "0.8.0"
+        }
+      }
+    ]
+  },
+  "provenance": {
+    "klt_version": "0.8.0",
+    "klayout_version": null,
+    "pdk": null,
+    "deck": null,
+    "input": {
+      "path": {
+        "path": "manifests/t1-item9-inventory.json",
+        "scope": "repo"
+      },
+      "content_hash": "sha256:58d2dca220f742e923dcde0a3e7addc47a43e11fcb46603b66287b94badcdeab"
+    }
+  }
+}
