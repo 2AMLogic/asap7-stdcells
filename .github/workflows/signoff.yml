@@ -38,10 +38,10 @@ jobs:
           set -uo pipefail
           # klt drc shells out to `klayout -b`; the pip install of klt does
           # not provide it. The committed envelopes were produced with the
-          # Ubuntu 24.04 package, which is what ubuntu-latest installs.
+          # Ubuntu 24.04 package, the package version ubuntu-latest installs may differ (logged below).
           sudo apt-get update -qq
           sudo apt-get install -y -qq klayout
-          command -v -a klayout
+          type -a klayout
           klayout -v
 
       - name: Lint committed evidence JSON
