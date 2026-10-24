@@ -5,6 +5,10 @@ triage role. Newest first.
 
 ### 2026-10-23
 
+- **PR #30**: feat(verification): judge shipped filler by abutment cases, keep standalone result
+- **Issue #29** (closed): Give shipped FILLERxp5 a passing regression verdict via an abutment case (decision 0005 follow-up)
+- **PR #28**: feat(layout): draw INVx1_A7S_75t_R, drawn-cell regression and cell-edge decision 0006
+- **Issue #26** (closed): Draw INVx1_A7S_75t_R with its CDL and the cell-edge decision record, and pass the regression harness
 - **PR #24**: build: back package.json test/check scripts with the harness self-test
 - **Issue #22** (closed): Replace vacuous package.json check/test stubs with the harness self-test
 
