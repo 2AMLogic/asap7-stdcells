@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "kind": "t1-attestation-inventory",
+  "t1_item": 10,
+  "description": "Repo hygiene: README, license, the ratified spec and decision records, and the signoff workflow, with the harness self-check as the audit command.",
+  "hygiene": [
+    "README.md",
+    "LICENSE",
+    "spec/README.md",
+    "spec/stdcells.md",
+    "spec/bringup.md",
+    "spec/decisions/0001-pdk-pin.md",
+    ".github/workflows/signoff.yml"
+  ],
+  "checks": [
+    {
+      "name": "harness-self-check",
+      "argv": ["python3", "verification/test_run_regression.py"]
+    }
+  ]
+}

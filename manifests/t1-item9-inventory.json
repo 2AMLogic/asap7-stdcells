@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "kind": "t1-attestation-inventory",
+  "t1_item": 9,
+  "description": "Testbenches shipped: the DRC/LVS regression harness, its self-check, its pinned inputs and the committed run records. Every result is a klt tool result against the predictive ASAP7 model.",
+  "testbenches": [
+    "verification/run_regression.py",
+    "verification/test_run_regression.py",
+    "verification/cells.json",
+    "verification/README.md",
+    "verification/records/SUPERSEDED.txt"
+  ],
+  "cold_start": {
+    "argv": [
+      "sh",
+      "-c",
+      "rm -rf verification/records/.attest-coldstart; python3 verification/run_regression.py --fetch-pdk --only INVx1_ASAP7_75t_R --record-id .attest-coldstart; rc=$?; rm -rf verification/records/.attest-coldstart verification/.work; exit $rc"
+    ]
+  },
+  "pins": {
+    "pdk": {
+      "name": "lambdapdk",
+      "revision": "v0.2.17"
+    },
+    "tools": {
+      "klayout-tools": "0.8.0"
+    }
+  }
+}

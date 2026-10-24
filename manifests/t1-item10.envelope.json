@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "kind": "generic",
+  "status": "pass",
+  "t1_item": 10,
+  "summary": "T1 item 10 (Repo hygiene): 8/8 attestation checks passed (klt signoff --attest)",
+  "source": "manifests/t1-item10-inventory.json",
+  "attestation": {
+    "producer": "klt signoff --attest",
+    "inventory_schema_version": 1,
+    "hash_algorithm": "sha256-raw-bytes",
+    "check_count": 8,
+    "passed_count": 8,
+    "checks": [
+      {
+        "check": "present",
+        "role": "hygiene",
+        "path": ".github/workflows/signoff.yml",
+        "passed": true,
+        "content_hash": "sha256:90039e19b65675ee8c2af3d077964e2c19b602b222ac797b5198082ed9e01da3"
+      },
+      {
+        "check": "present",
+        "role": "hygiene",
+        "path": "LICENSE",
+        "passed": true,
+        "content_hash": "sha256:cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+      },
+      {
+        "check": "present",
+        "role": "hygiene",
+        "path": "README.md",
+        "passed": true,
+        "content_hash": "sha256:b81852c601e6877655ca2665efe21c7cf5033557a3615d0b72c55a59531f0396"
+      },
+      {
+        "check": "present",
+        "role": "hygiene",
+        "path": "spec/README.md",
+        "passed": true,
+        "content_hash": "sha256:66adeebff03b096e7f0f3c45845e9cf15f577a77339af05c94a631716b915691"
+      },
+      {
+        "check": "present",
+        "role": "hygiene",
+        "path": "spec/bringup.md",
+        "passed": true,
+        "content_hash": "sha256:2b5117b59f65b0ba290f7861a6ff307e294cd47ed538475687308cd81cb018a5"
+      },
+      {
+        "check": "present",
+        "role": "hygiene",
+        "path": "spec/decisions/0001-pdk-pin.md",
+        "passed": true,
+        "content_hash": "sha256:e394dfb8622c46367b0cd15cf4bd9c74ec40f26d605de2573c3a98b341bc2be5"
+      },
+      {
+        "check": "present",
+        "role": "hygiene",
+        "path": "spec/stdcells.md",
+        "passed": true,
+        "content_hash": "sha256:84d7bcc9b7bc3823566a987fe48b339db1a20efc8cafeff16119a43c50bdb9ba"
+      },
+      {
+        "check": "command",
+        "role": "audit",
+        "name": "harness-self-check",
+        "argv": [
+          "python3",
+          "verification/test_run_regression.py"
+        ],
+        "cwd": ".",
+        "exit_status": 0,
+        "passed": true
+      }
+    ]
+  },
+  "provenance": {
+    "klt_version": "0.8.0",
+    "klayout_version": null,
+    "pdk": null,
+    "deck": null,
+    "input": {
+      "path": {
+        "path": "manifests/t1-item10-inventory.json",
+        "scope": "repo"
+      },
+      "content_hash": "sha256:4a0d8ca1ea90bf38483450577e0d627a4258b76806c308ea6f475abc2e3bf0d7"
+    }
+  }
+}
