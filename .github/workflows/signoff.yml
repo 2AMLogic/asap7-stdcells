@@ -63,6 +63,20 @@ jobs:
               --allow-prefix /home/ubuntu/.local/share/uv/tools/klayout-tools \
               "${files[@]}"
 
+      - name: Item 9 cold start, output visible (diagnostic)
+        run: |
+          set -uo pipefail
+          # klt --attest records only a check's exit status, so a failing
+          # cold start shows no stderr. Run the same command here so a runner
+          # failure is diagnosable. Same command as the attested cold_start
+          # check; it is not a substitute for it.
+          rm -rf verification/records/.attest-coldstart
+          python3 verification/run_regression.py --fetch-pdk \
+              --only INVx1_ASAP7_75t_R --record-id .attest-coldstart
+          rc=$?
+          rm -rf verification/records/.attest-coldstart verification/.work
+          exit $rc
+
       - name: Re-attest T1 items 9 and 10 against the committed envelopes
         run: |
           set -uo pipefail
