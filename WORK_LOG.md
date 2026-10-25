@@ -3,6 +3,11 @@
 Chronological record of merged PRs and closed issues, maintained by the Guide
 triage role. Newest first.
 
+### 2026-10-24
+
+- **PR #32**: ci: attest T1 items 9 and 10 with klt --attest envelopes (pin 0.8.0)
+- **Issue #27** (closed): Bind T1 items 9 and 10 to artifact-anchored evidence in the signoff manifest
+
 ### 2026-10-23
 
 - **PR #30**: feat(verification): judge shipped filler by abutment cases, keep standalone result
