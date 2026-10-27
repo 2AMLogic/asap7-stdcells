@@ -1,0 +1,443 @@
+{
+  "schema_version": 1,
+  "kind": "generic",
+  "status": "pass",
+  "t1_item": 1,
+  "summary": "T1 item 1 (Design sources): 41/41 attestation checks passed (klt signoff --attest)",
+  "source": "manifests/t1-item1-inventory.json",
+  "attestation": {
+    "producer": "klt signoff --attest",
+    "inventory_schema_version": 1,
+    "hash_algorithm": "sha256-raw-bytes",
+    "check_count": 41,
+    "passed_count": 41,
+    "checks": [
+      {
+        "check": "present",
+        "role": "source",
+        "path": "design/cdl-freshness.json",
+        "passed": true,
+        "content_hash": "sha256:06991b4bb483d67a610cfa18a2ca959efcad4a8e3dcb96ce49f766649cd7ba4b"
+      },
+      {
+        "check": "present",
+        "role": "source",
+        "path": "design/check_cdl_fresh.py",
+        "passed": true,
+        "content_hash": "sha256:abe125b048b71c4e6187fb16a24fb4fdbef6b2ebb53d9544736dc8d672f19b91"
+      },
+      {
+        "check": "present",
+        "role": "source",
+        "path": "design/check_cdl_function.py",
+        "passed": true,
+        "content_hash": "sha256:115d0e04e558db840f572c51a12787a6993d5be2b133a40ec796994eb3094874"
+      },
+      {
+        "check": "present",
+        "role": "source",
+        "path": "design/draw_INVx1_A7S_75t_R.py",
+        "passed": true,
+        "content_hash": "sha256:d628e083d412964bce7f1e7113ab3d9ed99f57ef24c2a15fa9836d3e4403b2bf"
+      },
+      {
+        "check": "present",
+        "role": "source",
+        "path": "spec/stdcells.md",
+        "passed": true,
+        "content_hash": "sha256:84d7bcc9b7bc3823566a987fe48b339db1a20efc8cafeff16119a43c50bdb9ba"
+      },
+      {
+        "check": "present",
+        "role": "derived",
+        "path": "design/AND2x1_A7S_75t_R.cdl",
+        "passed": true,
+        "content_hash": "sha256:4763a32d9abaf82b6d209210d5a6d0c94a3e9bef866913a13f42e71469e4c659"
+      },
+      {
+        "check": "present",
+        "role": "derived",
+        "path": "design/AOI21x1_A7S_75t_R.cdl",
+        "passed": true,
+        "content_hash": "sha256:4cbfdb9e45cfb54f167b80cd5ebeaf8de1ec696c97ff39d2dde5c834b2864d46"
+      },
+      {
+        "check": "present",
+        "role": "derived",
+        "path": "design/AOI22x1_A7S_75t_R.cdl",
+        "passed": true,
+        "content_hash": "sha256:00078a7f7e91045b748902202138adfc59c28c9c674ba186e910901a44aa66f4"
+      },
+      {
+        "check": "present",
+        "role": "derived",
+        "path": "design/BUFx1_A7S_75t_R.cdl",
+        "passed": true,
+        "content_hash": "sha256:2101a87bd75e614045adfa3515dfd3e67bf58955b743fc70dfac2cb60e247fb6"
+      },
+      {
+        "check": "present",
+        "role": "derived",
+        "path": "design/DFFHQNx1_A7S_75t_R.cdl",
+        "passed": true,
+        "content_hash": "sha256:a9d8421bf25cb074303a90cb46e9a530f2ccde4df0ee410ca7597b8c6079ddb7"
+      },
+      {
+        "check": "present",
+        "role": "derived",
+        "path": "design/DHLx1_A7S_75t_R.cdl",
+        "passed": true,
+        "content_hash": "sha256:7916f18b28164978f3714e731a6bf609c83ce1faedff454cd1ea7038221f1364"
+      },
+      {
+        "check": "present",
+        "role": "derived",
+        "path": "design/INVx1_A7S_75t_R.cdl",
+        "passed": true,
+        "content_hash": "sha256:7f04577a450b9197cf2f1a639f5b480a23130693d7704ddc47f171f1a1a00fa7"
+      },
+      {
+        "check": "present",
+        "role": "derived",
+        "path": "design/NAND2x1_A7S_75t_R.cdl",
+        "passed": true,
+        "content_hash": "sha256:d74bc7895e06b593e4362d1903c28c37eda09a286dd0f1258fe1d22304bc5012"
+      },
+      {
+        "check": "present",
+        "role": "derived",
+        "path": "design/NAND3x1_A7S_75t_R.cdl",
+        "passed": true,
+        "content_hash": "sha256:252eb323cf45942e76a021861da5773c9a9bb8e06bc58f0c40bc2740794b5814"
+      },
+      {
+        "check": "present",
+        "role": "derived",
+        "path": "design/NOR2x1_A7S_75t_R.cdl",
+        "passed": true,
+        "content_hash": "sha256:d4501d662ed224ae8afa8bd0edfba870f54ad79e03d963929391966b74455b02"
+      },
+      {
+        "check": "present",
+        "role": "derived",
+        "path": "design/NOR3x1_A7S_75t_R.cdl",
+        "passed": true,
+        "content_hash": "sha256:887521358d2dbfce1b48e6c856e5bf65468be72a4b2cfe8351e3da752db0f660"
+      },
+      {
+        "check": "present",
+        "role": "derived",
+        "path": "design/OAI21x1_A7S_75t_R.cdl",
+        "passed": true,
+        "content_hash": "sha256:56fc4687f0917256922178aa77de335bee81fdaa5836a9a8a9c162469cb9f2a6"
+      },
+      {
+        "check": "present",
+        "role": "derived",
+        "path": "design/OAI22x1_A7S_75t_R.cdl",
+        "passed": true,
+        "content_hash": "sha256:ea77fb56ae7ccb1f334e72c0e3703f44d233f3d14536e4c5d1ba4b7fc20e38fb"
+      },
+      {
+        "check": "present",
+        "role": "derived",
+        "path": "design/OR2x1_A7S_75t_R.cdl",
+        "passed": true,
+        "content_hash": "sha256:0cd551a85f21539acab03158c83501e3669da79b079eabc86137ec77cf5def7b"
+      },
+      {
+        "check": "present",
+        "role": "derived",
+        "path": "design/TIEHIx1_A7S_75t_R.cdl",
+        "passed": true,
+        "content_hash": "sha256:bbefc3cb943d5e928d3e6c2655d5d0c8ec78bec6523d958572ef463fd69bfc45"
+      },
+      {
+        "check": "present",
+        "role": "derived",
+        "path": "design/TIELOx1_A7S_75t_R.cdl",
+        "passed": true,
+        "content_hash": "sha256:b31af09267fe55917755444d61589f78144ebd0794fc0f2ed0f4ab7d384e4f9f"
+      },
+      {
+        "check": "present",
+        "role": "derived",
+        "path": "design/XNOR2x1_A7S_75t_R.cdl",
+        "passed": true,
+        "content_hash": "sha256:8af9e840597cd051650f58035415414a875f1df35fe1cc4feed25c8b6b099218"
+      },
+      {
+        "check": "present",
+        "role": "derived",
+        "path": "design/XOR2x1_A7S_75t_R.cdl",
+        "passed": true,
+        "content_hash": "sha256:d8189dec20f0bf7baa0cbafacae2ce121d6ca1c721d6cf927660ae64745faa46"
+      },
+      {
+        "check": "command",
+        "role": "freshness",
+        "target": "design/AND2x1_A7S_75t_R.cdl",
+        "generator": "hand-written CDL, hash-bound to draw script",
+        "argv": [
+          "sh",
+          "-c",
+          "python3 -I design/check_cdl_fresh.py && python3 -I design/check_cdl_function.py"
+        ],
+        "cwd": ".",
+        "exit_status": 0,
+        "passed": true
+      },
+      {
+        "check": "command",
+        "role": "freshness",
+        "target": "design/AOI21x1_A7S_75t_R.cdl",
+        "generator": "hand-written CDL, hash-bound to draw script",
+        "argv": [
+          "sh",
+          "-c",
+          "python3 -I design/check_cdl_fresh.py && python3 -I design/check_cdl_function.py"
+        ],
+        "cwd": ".",
+        "exit_status": 0,
+        "passed": true
+      },
+      {
+        "check": "command",
+        "role": "freshness",
+        "target": "design/AOI22x1_A7S_75t_R.cdl",
+        "generator": "hand-written CDL, hash-bound to draw script",
+        "argv": [
+          "sh",
+          "-c",
+          "python3 -I design/check_cdl_fresh.py && python3 -I design/check_cdl_function.py"
+        ],
+        "cwd": ".",
+        "exit_status": 0,
+        "passed": true
+      },
+      {
+        "check": "command",
+        "role": "freshness",
+        "target": "design/BUFx1_A7S_75t_R.cdl",
+        "generator": "hand-written CDL, hash-bound to draw script",
+        "argv": [
+          "sh",
+          "-c",
+          "python3 -I design/check_cdl_fresh.py && python3 -I design/check_cdl_function.py"
+        ],
+        "cwd": ".",
+        "exit_status": 0,
+        "passed": true
+      },
+      {
+        "check": "command",
+        "role": "freshness",
+        "target": "design/DFFHQNx1_A7S_75t_R.cdl",
+        "generator": "hand-written CDL, hash-bound to draw script",
+        "argv": [
+          "sh",
+          "-c",
+          "python3 -I design/check_cdl_fresh.py && python3 -I design/check_cdl_function.py"
+        ],
+        "cwd": ".",
+        "exit_status": 0,
+        "passed": true
+      },
+      {
+        "check": "command",
+        "role": "freshness",
+        "target": "design/DHLx1_A7S_75t_R.cdl",
+        "generator": "hand-written CDL, hash-bound to draw script",
+        "argv": [
+          "sh",
+          "-c",
+          "python3 -I design/check_cdl_fresh.py && python3 -I design/check_cdl_function.py"
+        ],
+        "cwd": ".",
+        "exit_status": 0,
+        "passed": true
+      },
+      {
+        "check": "command",
+        "role": "freshness",
+        "target": "design/INVx1_A7S_75t_R.cdl",
+        "generator": "hand-written CDL, hash-bound to draw script",
+        "argv": [
+          "sh",
+          "-c",
+          "python3 -I design/check_cdl_fresh.py && python3 -I design/check_cdl_function.py"
+        ],
+        "cwd": ".",
+        "exit_status": 0,
+        "passed": true
+      },
+      {
+        "check": "command",
+        "role": "freshness",
+        "target": "design/NAND2x1_A7S_75t_R.cdl",
+        "generator": "hand-written CDL, hash-bound to draw script",
+        "argv": [
+          "sh",
+          "-c",
+          "python3 -I design/check_cdl_fresh.py && python3 -I design/check_cdl_function.py"
+        ],
+        "cwd": ".",
+        "exit_status": 0,
+        "passed": true
+      },
+      {
+        "check": "command",
+        "role": "freshness",
+        "target": "design/NAND3x1_A7S_75t_R.cdl",
+        "generator": "hand-written CDL, hash-bound to draw script",
+        "argv": [
+          "sh",
+          "-c",
+          "python3 -I design/check_cdl_fresh.py && python3 -I design/check_cdl_function.py"
+        ],
+        "cwd": ".",
+        "exit_status": 0,
+        "passed": true
+      },
+      {
+        "check": "command",
+        "role": "freshness",
+        "target": "design/NOR2x1_A7S_75t_R.cdl",
+        "generator": "hand-written CDL, hash-bound to draw script",
+        "argv": [
+          "sh",
+          "-c",
+          "python3 -I design/check_cdl_fresh.py && python3 -I design/check_cdl_function.py"
+        ],
+        "cwd": ".",
+        "exit_status": 0,
+        "passed": true
+      },
+      {
+        "check": "command",
+        "role": "freshness",
+        "target": "design/NOR3x1_A7S_75t_R.cdl",
+        "generator": "hand-written CDL, hash-bound to draw script",
+        "argv": [
+          "sh",
+          "-c",
+          "python3 -I design/check_cdl_fresh.py && python3 -I design/check_cdl_function.py"
+        ],
+        "cwd": ".",
+        "exit_status": 0,
+        "passed": true
+      },
+      {
+        "check": "command",
+        "role": "freshness",
+        "target": "design/OAI21x1_A7S_75t_R.cdl",
+        "generator": "hand-written CDL, hash-bound to draw script",
+        "argv": [
+          "sh",
+          "-c",
+          "python3 -I design/check_cdl_fresh.py && python3 -I design/check_cdl_function.py"
+        ],
+        "cwd": ".",
+        "exit_status": 0,
+        "passed": true
+      },
+      {
+        "check": "command",
+        "role": "freshness",
+        "target": "design/OAI22x1_A7S_75t_R.cdl",
+        "generator": "hand-written CDL, hash-bound to draw script",
+        "argv": [
+          "sh",
+          "-c",
+          "python3 -I design/check_cdl_fresh.py && python3 -I design/check_cdl_function.py"
+        ],
+        "cwd": ".",
+        "exit_status": 0,
+        "passed": true
+      },
+      {
+        "check": "command",
+        "role": "freshness",
+        "target": "design/OR2x1_A7S_75t_R.cdl",
+        "generator": "hand-written CDL, hash-bound to draw script",
+        "argv": [
+          "sh",
+          "-c",
+          "python3 -I design/check_cdl_fresh.py && python3 -I design/check_cdl_function.py"
+        ],
+        "cwd": ".",
+        "exit_status": 0,
+        "passed": true
+      },
+      {
+        "check": "command",
+        "role": "freshness",
+        "target": "design/TIEHIx1_A7S_75t_R.cdl",
+        "generator": "hand-written CDL, hash-bound to draw script",
+        "argv": [
+          "sh",
+          "-c",
+          "python3 -I design/check_cdl_fresh.py && python3 -I design/check_cdl_function.py"
+        ],
+        "cwd": ".",
+        "exit_status": 0,
+        "passed": true
+      },
+      {
+        "check": "command",
+        "role": "freshness",
+        "target": "design/TIELOx1_A7S_75t_R.cdl",
+        "generator": "hand-written CDL, hash-bound to draw script",
+        "argv": [
+          "sh",
+          "-c",
+          "python3 -I design/check_cdl_fresh.py && python3 -I design/check_cdl_function.py"
+        ],
+        "cwd": ".",
+        "exit_status": 0,
+        "passed": true
+      },
+      {
+        "check": "command",
+        "role": "freshness",
+        "target": "design/XNOR2x1_A7S_75t_R.cdl",
+        "generator": "hand-written CDL, hash-bound to draw script",
+        "argv": [
+          "sh",
+          "-c",
+          "python3 -I design/check_cdl_fresh.py && python3 -I design/check_cdl_function.py"
+        ],
+        "cwd": ".",
+        "exit_status": 0,
+        "passed": true
+      },
+      {
+        "check": "command",
+        "role": "freshness",
+        "target": "design/XOR2x1_A7S_75t_R.cdl",
+        "generator": "hand-written CDL, hash-bound to draw script",
+        "argv": [
+          "sh",
+          "-c",
+          "python3 -I design/check_cdl_fresh.py && python3 -I design/check_cdl_function.py"
+        ],
+        "cwd": ".",
+        "exit_status": 0,
+        "passed": true
+      }
+    ]
+  },
+  "provenance": {
+    "klt_version": "0.8.0",
+    "klayout_version": null,
+    "pdk": null,
+    "deck": null,
+    "input": {
+      "path": {
+        "path": "manifests/t1-item1-inventory.json",
+        "scope": "repo"
+      },
+      "content_hash": "sha256:4d4d73f75e6077891361af46ccb4f5b7dd12f5b04af35ffd9cd9e1e3de69bc87"
+    }
+  }
+}

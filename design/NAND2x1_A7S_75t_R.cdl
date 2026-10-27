@@ -1,0 +1,12 @@
+* NAND2x1_A7S_75t_R: Y = !(A & B). Hand-written; topology as it will be drawn (static CMOS,
+* series NMOS A over B, parallel PMOS).
+* NFIN=3 per device (unit-drive rule of spec/stdcells.md, w=81.0n as in the
+* INVx1 CDL); fin counts are revisited in the cell's layout PR, which edits
+* this file and re-pairs it in design/cdl-freshness.json. Predictive-PDK
+* netlist; nothing here is a measured part.
+.SUBCKT NAND2x1_A7S_75t_R A B VDD VSS Y
+MM0 Y A Y_n1 VSS nmos_rvt w=81.0n l=20n nfin=3
+MM1 Y_n1 B VSS VSS nmos_rvt w=81.0n l=20n nfin=3
+MM2 Y A VDD VDD pmos_rvt w=81.0n l=20n nfin=3
+MM3 Y B VDD VDD pmos_rvt w=81.0n l=20n nfin=3
+.ENDS
