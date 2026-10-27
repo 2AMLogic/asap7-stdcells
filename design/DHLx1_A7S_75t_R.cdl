@@ -1,0 +1,18 @@
+* DHLx1_A7S_75t_R: latch transparent while CLK high, Q = D. Hand-written; topology as it will be drawn (static CMOS,
+* transmission-gate latch; n1->n2->Q loop with feedback gate).
+* NFIN=3 per device (unit-drive rule of spec/stdcells.md, w=81.0n as in the
+* INVx1 CDL); fin counts are revisited in the cell's layout PR, which edits
+* this file and re-pairs it in design/cdl-freshness.json. Predictive-PDK
+* netlist; nothing here is a measured part.
+.SUBCKT DHLx1_A7S_75t_R CLK D VDD VSS Q
+MM0 CLKb CLK VSS VSS nmos_rvt w=81.0n l=20n nfin=3
+MM1 CLKb CLK VDD VDD pmos_rvt w=81.0n l=20n nfin=3
+MM2 D CLK n1 VSS nmos_rvt w=81.0n l=20n nfin=3
+MM3 D CLKb n1 VDD pmos_rvt w=81.0n l=20n nfin=3
+MM4 n2 n1 VSS VSS nmos_rvt w=81.0n l=20n nfin=3
+MM5 n2 n1 VDD VDD pmos_rvt w=81.0n l=20n nfin=3
+MM6 Q n2 VSS VSS nmos_rvt w=81.0n l=20n nfin=3
+MM7 Q n2 VDD VDD pmos_rvt w=81.0n l=20n nfin=3
+MM8 Q CLKb n1 VSS nmos_rvt w=81.0n l=20n nfin=3
+MM9 Q CLK n1 VDD pmos_rvt w=81.0n l=20n nfin=3
+.ENDS

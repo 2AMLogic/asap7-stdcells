@@ -1,0 +1,74 @@
+{
+  "AND2x1_A7S_75t_R": {
+    "cdl_sha256": "4763a32d9abaf82b6d209210d5a6d0c94a3e9bef866913a13f42e71469e4c659",
+    "script_sha256": null
+  },
+  "AOI21x1_A7S_75t_R": {
+    "cdl_sha256": "4cbfdb9e45cfb54f167b80cd5ebeaf8de1ec696c97ff39d2dde5c834b2864d46",
+    "script_sha256": null
+  },
+  "AOI22x1_A7S_75t_R": {
+    "cdl_sha256": "00078a7f7e91045b748902202138adfc59c28c9c674ba186e910901a44aa66f4",
+    "script_sha256": null
+  },
+  "BUFx1_A7S_75t_R": {
+    "cdl_sha256": "2101a87bd75e614045adfa3515dfd3e67bf58955b743fc70dfac2cb60e247fb6",
+    "script_sha256": null
+  },
+  "DFFHQNx1_A7S_75t_R": {
+    "cdl_sha256": "a9d8421bf25cb074303a90cb46e9a530f2ccde4df0ee410ca7597b8c6079ddb7",
+    "script_sha256": null
+  },
+  "DHLx1_A7S_75t_R": {
+    "cdl_sha256": "7916f18b28164978f3714e731a6bf609c83ce1faedff454cd1ea7038221f1364",
+    "script_sha256": null
+  },
+  "INVx1_A7S_75t_R": {
+    "cdl_sha256": "7f04577a450b9197cf2f1a639f5b480a23130693d7704ddc47f171f1a1a00fa7",
+    "script_sha256": "d628e083d412964bce7f1e7113ab3d9ed99f57ef24c2a15fa9836d3e4403b2bf"
+  },
+  "NAND2x1_A7S_75t_R": {
+    "cdl_sha256": "d74bc7895e06b593e4362d1903c28c37eda09a286dd0f1258fe1d22304bc5012",
+    "script_sha256": null
+  },
+  "NAND3x1_A7S_75t_R": {
+    "cdl_sha256": "252eb323cf45942e76a021861da5773c9a9bb8e06bc58f0c40bc2740794b5814",
+    "script_sha256": null
+  },
+  "NOR2x1_A7S_75t_R": {
+    "cdl_sha256": "d4501d662ed224ae8afa8bd0edfba870f54ad79e03d963929391966b74455b02",
+    "script_sha256": null
+  },
+  "NOR3x1_A7S_75t_R": {
+    "cdl_sha256": "887521358d2dbfce1b48e6c856e5bf65468be72a4b2cfe8351e3da752db0f660",
+    "script_sha256": null
+  },
+  "OAI21x1_A7S_75t_R": {
+    "cdl_sha256": "56fc4687f0917256922178aa77de335bee81fdaa5836a9a8a9c162469cb9f2a6",
+    "script_sha256": null
+  },
+  "OAI22x1_A7S_75t_R": {
+    "cdl_sha256": "ea77fb56ae7ccb1f334e72c0e3703f44d233f3d14536e4c5d1ba4b7fc20e38fb",
+    "script_sha256": null
+  },
+  "OR2x1_A7S_75t_R": {
+    "cdl_sha256": "0cd551a85f21539acab03158c83501e3669da79b079eabc86137ec77cf5def7b",
+    "script_sha256": null
+  },
+  "TIEHIx1_A7S_75t_R": {
+    "cdl_sha256": "bbefc3cb943d5e928d3e6c2655d5d0c8ec78bec6523d958572ef463fd69bfc45",
+    "script_sha256": null
+  },
+  "TIELOx1_A7S_75t_R": {
+    "cdl_sha256": "b31af09267fe55917755444d61589f78144ebd0794fc0f2ed0f4ab7d384e4f9f",
+    "script_sha256": null
+  },
+  "XNOR2x1_A7S_75t_R": {
+    "cdl_sha256": "8af9e840597cd051650f58035415414a875f1df35fe1cc4feed25c8b6b099218",
+    "script_sha256": null
+  },
+  "XOR2x1_A7S_75t_R": {
+    "cdl_sha256": "d8189dec20f0bf7baa0cbafacae2ce121d6ca1c721d6cf927660ae64745faa46",
+    "script_sha256": null
+  }
+}

@@ -1,0 +1,213 @@
+{
+  "schema_version": 1,
+  "kind": "t1-attestation-inventory",
+  "t1_item": 1,
+  "description": "Design sources for a hand-captured full-custom cell library: the hand-written CDL of every device-bearing cell (the netlist), the scripted draw sources, and the spec they implement. Each CDL is hash-bound to its draw script (design/cdl-freshness.json) and checked switch-level against the spec function. Cells without a draw script yet are recorded as such; their layouts are tracked separately.",
+  "sources": [
+    "design/cdl-freshness.json",
+    "design/check_cdl_fresh.py",
+    "design/check_cdl_function.py",
+    "design/draw_INVx1_A7S_75t_R.py",
+    "spec/stdcells.md"
+  ],
+  "derived": [
+    {
+      "path": "design/AND2x1_A7S_75t_R.cdl",
+      "generator": "hand-written CDL, hash-bound to draw script",
+      "check": {
+        "argv": [
+          "sh",
+          "-c",
+          "python3 -I design/check_cdl_fresh.py && python3 -I design/check_cdl_function.py"
+        ]
+      }
+    },
+    {
+      "path": "design/AOI21x1_A7S_75t_R.cdl",
+      "generator": "hand-written CDL, hash-bound to draw script",
+      "check": {
+        "argv": [
+          "sh",
+          "-c",
+          "python3 -I design/check_cdl_fresh.py && python3 -I design/check_cdl_function.py"
+        ]
+      }
+    },
+    {
+      "path": "design/AOI22x1_A7S_75t_R.cdl",
+      "generator": "hand-written CDL, hash-bound to draw script",
+      "check": {
+        "argv": [
+          "sh",
+          "-c",
+          "python3 -I design/check_cdl_fresh.py && python3 -I design/check_cdl_function.py"
+        ]
+      }
+    },
+    {
+      "path": "design/BUFx1_A7S_75t_R.cdl",
+      "generator": "hand-written CDL, hash-bound to draw script",
+      "check": {
+        "argv": [
+          "sh",
+          "-c",
+          "python3 -I design/check_cdl_fresh.py && python3 -I design/check_cdl_function.py"
+        ]
+      }
+    },
+    {
+      "path": "design/DFFHQNx1_A7S_75t_R.cdl",
+      "generator": "hand-written CDL, hash-bound to draw script",
+      "check": {
+        "argv": [
+          "sh",
+          "-c",
+          "python3 -I design/check_cdl_fresh.py && python3 -I design/check_cdl_function.py"
+        ]
+      }
+    },
+    {
+      "path": "design/DHLx1_A7S_75t_R.cdl",
+      "generator": "hand-written CDL, hash-bound to draw script",
+      "check": {
+        "argv": [
+          "sh",
+          "-c",
+          "python3 -I design/check_cdl_fresh.py && python3 -I design/check_cdl_function.py"
+        ]
+      }
+    },
+    {
+      "path": "design/INVx1_A7S_75t_R.cdl",
+      "generator": "hand-written CDL, hash-bound to draw script",
+      "check": {
+        "argv": [
+          "sh",
+          "-c",
+          "python3 -I design/check_cdl_fresh.py && python3 -I design/check_cdl_function.py"
+        ]
+      }
+    },
+    {
+      "path": "design/NAND2x1_A7S_75t_R.cdl",
+      "generator": "hand-written CDL, hash-bound to draw script",
+      "check": {
+        "argv": [
+          "sh",
+          "-c",
+          "python3 -I design/check_cdl_fresh.py && python3 -I design/check_cdl_function.py"
+        ]
+      }
+    },
+    {
+      "path": "design/NAND3x1_A7S_75t_R.cdl",
+      "generator": "hand-written CDL, hash-bound to draw script",
+      "check": {
+        "argv": [
+          "sh",
+          "-c",
+          "python3 -I design/check_cdl_fresh.py && python3 -I design/check_cdl_function.py"
+        ]
+      }
+    },
+    {
+      "path": "design/NOR2x1_A7S_75t_R.cdl",
+      "generator": "hand-written CDL, hash-bound to draw script",
+      "check": {
+        "argv": [
+          "sh",
+          "-c",
+          "python3 -I design/check_cdl_fresh.py && python3 -I design/check_cdl_function.py"
+        ]
+      }
+    },
+    {
+      "path": "design/NOR3x1_A7S_75t_R.cdl",
+      "generator": "hand-written CDL, hash-bound to draw script",
+      "check": {
+        "argv": [
+          "sh",
+          "-c",
+          "python3 -I design/check_cdl_fresh.py && python3 -I design/check_cdl_function.py"
+        ]
+      }
+    },
+    {
+      "path": "design/OAI21x1_A7S_75t_R.cdl",
+      "generator": "hand-written CDL, hash-bound to draw script",
+      "check": {
+        "argv": [
+          "sh",
+          "-c",
+          "python3 -I design/check_cdl_fresh.py && python3 -I design/check_cdl_function.py"
+        ]
+      }
+    },
+    {
+      "path": "design/OAI22x1_A7S_75t_R.cdl",
+      "generator": "hand-written CDL, hash-bound to draw script",
+      "check": {
+        "argv": [
+          "sh",
+          "-c",
+          "python3 -I design/check_cdl_fresh.py && python3 -I design/check_cdl_function.py"
+        ]
+      }
+    },
+    {
+      "path": "design/OR2x1_A7S_75t_R.cdl",
+      "generator": "hand-written CDL, hash-bound to draw script",
+      "check": {
+        "argv": [
+          "sh",
+          "-c",
+          "python3 -I design/check_cdl_fresh.py && python3 -I design/check_cdl_function.py"
+        ]
+      }
+    },
+    {
+      "path": "design/TIEHIx1_A7S_75t_R.cdl",
+      "generator": "hand-written CDL, hash-bound to draw script",
+      "check": {
+        "argv": [
+          "sh",
+          "-c",
+          "python3 -I design/check_cdl_fresh.py && python3 -I design/check_cdl_function.py"
+        ]
+      }
+    },
+    {
+      "path": "design/TIELOx1_A7S_75t_R.cdl",
+      "generator": "hand-written CDL, hash-bound to draw script",
+      "check": {
+        "argv": [
+          "sh",
+          "-c",
+          "python3 -I design/check_cdl_fresh.py && python3 -I design/check_cdl_function.py"
+        ]
+      }
+    },
+    {
+      "path": "design/XNOR2x1_A7S_75t_R.cdl",
+      "generator": "hand-written CDL, hash-bound to draw script",
+      "check": {
+        "argv": [
+          "sh",
+          "-c",
+          "python3 -I design/check_cdl_fresh.py && python3 -I design/check_cdl_function.py"
+        ]
+      }
+    },
+    {
+      "path": "design/XOR2x1_A7S_75t_R.cdl",
+      "generator": "hand-written CDL, hash-bound to draw script",
+      "check": {
+        "argv": [
+          "sh",
+          "-c",
+          "python3 -I design/check_cdl_fresh.py && python3 -I design/check_cdl_function.py"
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+* DFFHQNx1_A7S_75t_R: positive-edge D flip-flop, QN = !(captured D). Hand-written; topology as it will be drawn (static CMOS,
+* transmission-gate master/slave; master m1->m2->m3 loop, slave s1->s2->QN loop).
+* NFIN=3 per device (unit-drive rule of spec/stdcells.md, w=81.0n as in the
+* INVx1 CDL); fin counts are revisited in the cell's layout PR, which edits
+* this file and re-pairs it in design/cdl-freshness.json. Predictive-PDK
+* netlist; nothing here is a measured part.
+.SUBCKT DFFHQNx1_A7S_75t_R CLK D VDD VSS QN
+MM0 CLKb CLK VSS VSS nmos_rvt w=81.0n l=20n nfin=3
+MM1 CLKb CLK VDD VDD pmos_rvt w=81.0n l=20n nfin=3
+MM2 D CLKb m1 VSS nmos_rvt w=81.0n l=20n nfin=3
+MM3 D CLK m1 VDD pmos_rvt w=81.0n l=20n nfin=3
+MM4 m2 m1 VSS VSS nmos_rvt w=81.0n l=20n nfin=3
+MM5 m2 m1 VDD VDD pmos_rvt w=81.0n l=20n nfin=3
+MM6 m3 m2 VSS VSS nmos_rvt w=81.0n l=20n nfin=3
+MM7 m3 m2 VDD VDD pmos_rvt w=81.0n l=20n nfin=3
+MM8 m3 CLK m1 VSS nmos_rvt w=81.0n l=20n nfin=3
+MM9 m3 CLKb m1 VDD pmos_rvt w=81.0n l=20n nfin=3
+MM10 m2 CLK s1 VSS nmos_rvt w=81.0n l=20n nfin=3
+MM11 m2 CLKb s1 VDD pmos_rvt w=81.0n l=20n nfin=3
+MM12 s2 s1 VSS VSS nmos_rvt w=81.0n l=20n nfin=3
+MM13 s2 s1 VDD VDD pmos_rvt w=81.0n l=20n nfin=3
+MM14 QN s2 VSS VSS nmos_rvt w=81.0n l=20n nfin=3
+MM15 QN s2 VDD VDD pmos_rvt w=81.0n l=20n nfin=3
+MM16 QN CLKb s1 VSS nmos_rvt w=81.0n l=20n nfin=3
+MM17 QN CLK s1 VDD pmos_rvt w=81.0n l=20n nfin=3
+.ENDS

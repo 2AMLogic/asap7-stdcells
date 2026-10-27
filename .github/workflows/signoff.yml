@@ -6,7 +6,7 @@ name: klt signoff
 # (manifests/asap7-stdcells.signoff.json). Whoever changes cited evidence, the
 # manifest or the vendored checklist must regenerate the record in the same PR.
 #
-# Items 9 and 10 cite tool-produced attestation envelopes (klt signoff
+# Items 1, 9 and 10 cite tool-produced attestation envelopes (klt signoff
 # --attest); the remaining items have no evidence yet and grade unmet, so the
 # grader exits 3. That is the honest steady state, not a failure.
 
@@ -88,13 +88,14 @@ jobs:
           rm -rf verification/records/.attest-coldstart verification/.work
           exit $rc
 
-      - name: Re-attest T1 items 9 and 10 against the committed envelopes
+      - name: Re-attest T1 items 1, 9 and 10 against the committed envelopes
         run: |
           set -uo pipefail
           # --check re-attests and exits 0 only if the inventory, every
           # inventoried file and every check outcome still reproduce the
-          # committed envelope. Item 9's cold start fetches the pinned PDK.
-          for item in 9 10; do
+          # committed envelope. Item 1 runs the CDL freshness and switch-level
+          # function checks; item 9's cold start fetches the pinned PDK.
+          for item in 1 9 10; do
             klt signoff --attest "$item" \
                 --inventory "manifests/t1-item${item}-inventory.json" \
                 --check "manifests/t1-item${item}.envelope.json" || {

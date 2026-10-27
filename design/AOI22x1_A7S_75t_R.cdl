@@ -1,0 +1,16 @@
+* AOI22x1_A7S_75t_R: Y = !((A1 & A2) | (B1 & B2)). Hand-written; topology as it will be drawn (static CMOS,
+* two NMOS series pairs in parallel; PMOS (A1||A2) in series with (B1||B2)).
+* NFIN=3 per device (unit-drive rule of spec/stdcells.md, w=81.0n as in the
+* INVx1 CDL); fin counts are revisited in the cell's layout PR, which edits
+* this file and re-pairs it in design/cdl-freshness.json. Predictive-PDK
+* netlist; nothing here is a measured part.
+.SUBCKT AOI22x1_A7S_75t_R A1 A2 B1 B2 VDD VSS Y
+MM0 Y A1 x_n1 VSS nmos_rvt w=81.0n l=20n nfin=3
+MM1 x_n1 A2 VSS VSS nmos_rvt w=81.0n l=20n nfin=3
+MM2 Y B1 x_n2 VSS nmos_rvt w=81.0n l=20n nfin=3
+MM3 x_n2 B2 VSS VSS nmos_rvt w=81.0n l=20n nfin=3
+MM4 VDD A1 x_p1 VDD pmos_rvt w=81.0n l=20n nfin=3
+MM5 VDD A2 x_p1 VDD pmos_rvt w=81.0n l=20n nfin=3
+MM6 x_p1 B1 Y VDD pmos_rvt w=81.0n l=20n nfin=3
+MM7 x_p1 B2 Y VDD pmos_rvt w=81.0n l=20n nfin=3
+.ENDS
