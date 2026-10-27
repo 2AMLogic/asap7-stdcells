@@ -1,0 +1,11 @@
+* BUFx1_A7S_75t_R: Y = A. Hand-written; the topology drawn in
+* design/draw_BUFx1_A7S_75t_R.py (two inverters, shared supply diffusion between the gates).
+* NFIN=3 per device is the unit-drive rule of spec/stdcells.md; w follows the
+* shipped CDL convention for the same fin count (27 nm fin pitch + 7 nm fin
+* width, 3 fins). Predictive-PDK netlist; nothing here is a measured part.
+.SUBCKT BUFx1_A7S_75t_R A VDD VSS Y
+MM0 n1 A VSS VSS nmos_rvt w=81.0n l=20n nfin=3
+MM1 n1 A VDD VDD pmos_rvt w=81.0n l=20n nfin=3
+MM2 Y n1 VSS VSS nmos_rvt w=81.0n l=20n nfin=3
+MM3 Y n1 VDD VDD pmos_rvt w=81.0n l=20n nfin=3
+.ENDS

@@ -23,32 +23,17 @@ Grid, all relative to the cell origin (lower left of the boundary):
 import sys
 from pathlib import Path
 
-import klayout.db as db
+sys.path.insert(0, str(Path(__file__).resolve().parent))  # -I does not add the script dir
+from a7s_common import FIN_PITCH, CellDraw, H, main
 
 CELL = "INVx1_A7S_75t_R"
-OUT = Path(__file__).resolve().parent.parent / "layout" / f"{CELL}.gds"
-DBU = 0.00025
-NM = 4  # dbu per nm
-
-W, H = 162, 270
-FIN_PITCH, GATE_PITCH = 27, 54
-
-# GDS layer numbers (asap7.lyp, DRM Tables 2.1.1-2.4.1; the deck reads the same)
-L = {
-    "WELL": (1, 0), "FIN": (2, 0), "GATE": (7, 0), "GCUT": (10, 0), "ACTIVE": (11, 0),
-    "NSELECT": (12, 0), "PSELECT": (13, 0), "LIG": (16, 0), "LISD": (17, 0),
-    "V0": (18, 0), "M1": (19, 0), "SDT": (88, 0), "BOUNDARY": (100, 0),
-}
+W = 162
 
 
-def build(layout=None, name=CELL):
-    """Return (layout, cell) with the cell drawn. `layout` lets tests reuse it."""
-    lay = layout or db.Layout()
-    lay.dbu = DBU
-    cell = lay.create_cell(name)
-
-    def box(layer, x0, y0, x1, y1):
-        cell.shapes(lay.layer(*L[layer])).insert(db.Box(x0 * NM, y0 * NM, x1 * NM, y1 * NM))
+def build(name=CELL):
+    """Return the drawn CellDraw."""
+    d = CellDraw(name, W)
+    box = d.box
 
     # Fins: 3 per device on tracks k=1..3 (NMOS) and k=6..8 (PMOS). One long fin
     # per track across the whole cell (FIN.W.2 needs >= 108 nm horizontally);
@@ -111,25 +96,12 @@ def build(layout=None, name=CELL):
 
     # Net labels on the M1 label datatype (19/251), the layer the extraction
     # deck reads; each sits inside the M1 shape of its net.
-    label = lay.layer(19, 251)
     for text, x, y in (("VSS", 18, 0), ("VDD", 18, H), ("A", 81, 135), ("Y", 117, 135)):
-        cell.shapes(label).insert(db.Text(text, x * NM, y * NM))
+        d.label(text, x, y)
 
-    box("BOUNDARY", 0, 0, W, H)
-    return lay, cell
-
-
-def write(path=OUT):
-    lay, cell = build()
-    opt = db.SaveLayoutOptions()
-    opt.format = "GDS2"
-    opt.gds2_write_timestamps = False
-    opt.gds2_libname = CELL
-    path.parent.mkdir(parents=True, exist_ok=True)
-    lay.write(str(path), opt)
-    return path
+    d.boundary()
+    return d
 
 
 if __name__ == "__main__":
-    # optional argument: output path (the regression harness re-draws to scratch)
-    print(write(Path(sys.argv[1]) if len(sys.argv) > 1 else OUT))
+    main(CELL, build)

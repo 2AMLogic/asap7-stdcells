@@ -5,4 +5,7 @@ Generated GDS, one file per cell (`<CELL>.gds`), written by the matching
 run `python3 verification/run_regression.py` so a new record covers the change.
 The harness checks that re-running the script gives the same bytes.
 
-Cells so far: `INVx1_A7S_75t_R`. Predictive-PDK layout only; never fabricated.
+Cells so far: `INVx1`, `BUFx1`, `NAND2x1`, `NOR2x1`, `AND2x1`, `OR2x1`,
+`AOI21x1`, `OAI21x1`, `FILLER1`, `FILLER2`, `FILLER4`, `TAP` (all
+`_A7S_75t_R`), the 12-cell fallback set. Predictive-PDK layout only; never
+fabricated.

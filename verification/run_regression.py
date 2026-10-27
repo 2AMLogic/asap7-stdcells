@@ -453,6 +453,8 @@ def run(args, klt=None):
     for c in cfg["cells"]:
         if c["source"] == "drawn":
             for key in ("gds", "cdl", "script"):
+                if key == "cdl" and c.get("cdl") is None and c.get("lvs_na"):
+                    continue  # a device-free drawn cell (fill, tap) has no CDL, with the reason recorded
                 if not c.get(key) or not (REPO / c[key]).is_file():
                     raise SetupError(f"drawn cell {c['name']}: `{key}` is missing or not a file in the repo")
 
@@ -476,7 +478,7 @@ def run(args, klt=None):
         src_gds, src_cdl = cell_files(cell, paths)
         if cell["source"] == "drawn":
             gds = src_gds  # a drawn cell is a stream of its own: check the committed file itself
-            row["files_sha256"] = {k: sha256_file(REPO / cell[k]) for k in ("gds", "cdl", "script")}
+            row["files_sha256"] = {k: sha256_file(REPO / cell[k]) for k in ("gds", "cdl", "script") if cell.get(k)}
             try:
                 again = work / f"{name}.redrawn.gds"
                 klt.redraw(REPO / cell["script"], again)
@@ -531,11 +533,12 @@ def run(args, klt=None):
             ok &= row["drc"] in ("PASS", "KNOWN-GAP") and row["lvs"] in ("PASS", "n/a")
 
         if cell["source"] == "drawn":
-            row["cases"] = []
-            neighbour = cell.get("neighbour", name)
-            libs = {name: gds, neighbour: cell_files(by_name[neighbour], paths)[0]}
-            row["cases"] += run_abutment_cases(klt, info, work, out, name, gds, libs, neighbour)
-            ok &= all(c["result"] == "PASS" for c in row["cases"])
+            if not verdict:  # a cell with an abutment verdict (decision 0007) has just run its cases
+                row["cases"] = []
+                neighbour = cell.get("neighbour", name)
+                libs = {name: gds, neighbour: cell_files(by_name[neighbour], paths)[0]}
+                row["cases"] += run_abutment_cases(klt, info, work, out, name, gds, libs, neighbour)
+                ok &= all(c["result"] == "PASS" for c in row["cases"])
             res = {"id": "case5-grid", "kind": "grid_check", "result": "ERROR"}
             row["cases"].append(res)
             try:
@@ -662,7 +665,7 @@ def summary(m, rows):
         lines += ["", "## Drawn cells", "", "| cell | reproducible (script re-run, sha256 of GDS) | gds sha256 | cdl sha256 | script sha256 |", "|---|---|---|---|---|"]
         for r in drawn:
             h = r["files_sha256"]
-            lines.append(f"| {r['cell']} | {r.get('reproducible')} | `{h['gds']}` | `{h['cdl']}` | `{h['script']}` |")
+            lines.append(f"| {r['cell']} | {r.get('reproducible')} | `{h['gds']}` | `{h.get('cdl', 'n/a')}` | `{h['script']}` |")
     if abutted:
         lines += ["", "### Abutment and grid cases (spec/stdcells.md, DRC acceptance 1, 3, 5)", "",
                   "| cell | case | kind | result | observed |", "|---|---|---|---|---|"]

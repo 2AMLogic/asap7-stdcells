@@ -211,3 +211,18 @@ description. This repo did not run `klt characterize` on ASAP7 cells.
 
 Not filed because already covered: `klt pdk` discovery maps only the `klayout`
 and `libs_ref` assets for an ASAP7 tree (documented, `docs/cli/pdk.md`).
+
+## 2026-10-27: deck hash re-derived (issue #35)
+
+The klt used for the 2026-10-27 regression record
+(`verification/records/20261027T020058Z-klt0.8.1.dev55_g879d39bad82b/`, klt
+`0.8.1.dev55+g879d39bad82b`, KLayout 0.30.12) packages an ASAP7 deck with content
+hash `sha256:48ac590ab1567b68d95a28e73391ff983070d8ccba28f628e1a127dd4da80e7f`,
+not the `08dba3ee...` above or the `827ad7eb...` of the 2026-10-23 records. The
+declared rule-category count is unchanged at 263 (`--expect-rule-categories 263`
+accepted). The same run checks the shipped cells `INVx1`, `NAND2x1`, `NOR2x1` and
+`DFFHQNx1` against this deck: `PASS` for DRC and LVS, and `FILLERxp5` keeps its
+decision-0007 verdict (`FAIL standalone / PASS abutted`). An earlier full run with
+the CI pin, klt `0.8.0` in a throwaway venv, reported the same deck hash and the
+same overall PASS; it was not committed because its envelopes name the venv path.
+`TAPCELL` is still `KNOWN-GAP` (klayout-tools#3811).
