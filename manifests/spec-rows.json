@@ -1,0 +1,35 @@
+{
+  "status": "ratified",
+  "rows": [
+    {
+      "id": "architecture"
+    },
+    {
+      "id": "cell-set"
+    },
+    {
+      "id": "drive-strengths"
+    },
+    {
+      "id": "threshold-flavours"
+    },
+    {
+      "id": "drawing-method"
+    },
+    {
+      "id": "drc"
+    },
+    {
+      "id": "lvs"
+    },
+    {
+      "id": "views"
+    },
+    {
+      "id": "pvt-corners"
+    },
+    {
+      "id": "integration-design"
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "rows": [
+    {
+      "id": "architecture",
+      "class": "design_constant",
+      "reason": "A fixed grid choice (7.5-track, 270 nm height, 54 nm site) read from the PDK; it is a geometric constant, not a measured quantity."
+    },
+    {
+      "id": "cell-set",
+      "class": "enumerated_inventory",
+      "reason": "A list of cells to be drawn; completeness is checked by counting cells against the list, not by a distribution."
+    },
+    {
+      "id": "drive-strengths",
+      "class": "enumerated_inventory",
+      "reason": "One x1 drive per function; a choice of variants, with further drives stretch and not claimed."
+    },
+    {
+      "id": "threshold-flavours",
+      "class": "design_constant",
+      "reason": "RVT only, fixed by the layer markers used; no flavour comparison is made or claimed."
+    },
+    {
+      "id": "drawing-method",
+      "class": "process_decision",
+      "reason": "How the geometry is produced (scripted klayout.db, decision 0003); a method choice with no numeric outcome."
+    },
+    {
+      "id": "drc",
+      "class": "deterministic_tool_verdict",
+      "reason": "Per-cell and per-abutment DRC is a deterministic pass or fail from the pinned deck; the same input always gives the same verdict, so no sampling applies."
+    },
+    {
+      "id": "lvs",
+      "class": "deterministic_tool_verdict",
+      "reason": "Per-cell LVS against its own CDL, fin count included, is a deterministic pass or fail from the extractor; no sampling applies."
+    },
+    {
+      "id": "views",
+      "class": "deliverable_inventory",
+      "reason": "GDS, LEF, CDL and structural Liberty are files whose presence and consistency are checked; timing Liberty is stretch and not claimed."
+    },
+    {
+      "id": "pvt-corners",
+      "class": "not_claimed_stretch",
+      "reason": "Corner definitions for any future characterization (TT target, FF and SS stretch); no characterization result is claimed, so no corner statistic exists."
+    },
+    {
+      "id": "integration-design",
+      "class": "deterministic_tool_verdict",
+      "reason": "An 8-bit counter flow through Yosys and OpenROAD, judged by tool pass or fail (synthesis, placement, routing, DRC); no timing figure is claimed."
+    }
+  ]
+}
