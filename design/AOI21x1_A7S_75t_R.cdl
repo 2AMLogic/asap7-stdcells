@@ -1,14 +1,13 @@
-* AOI21x1_A7S_75t_R: Y = !((A1 & A2) | B). Hand-written; topology as it will be drawn (static CMOS,
-* NMOS A1 over A2 in parallel with B; PMOS B in series with parallel A1, A2).
-* NFIN=3 per device (unit-drive rule of spec/stdcells.md, w=81.0n as in the
-* INVx1 CDL); fin counts are revisited in the cell's layout PR, which edits
-* this file and re-pairs it in design/cdl-freshness.json. Predictive-PDK
-* netlist; nothing here is a measured part.
+* AOI21x1_A7S_75t_R: Y = !((A1 & A2) | B). Hand-written; the topology drawn in
+* design/draw_AOI21x1_A7S_75t_R.py (gate order B, A1, A2; one transistor pair per diffusion span).
+* NFIN=3 per device is the unit-drive rule of spec/stdcells.md; w follows the
+* shipped CDL convention for the same fin count (27 nm fin pitch + 7 nm fin
+* width, 3 fins). Predictive-PDK netlist; nothing here is a measured part.
 .SUBCKT AOI21x1_A7S_75t_R A1 A2 B VDD VSS Y
-MM0 Y A1 n1 VSS nmos_rvt w=81.0n l=20n nfin=3
-MM1 n1 A2 VSS VSS nmos_rvt w=81.0n l=20n nfin=3
-MM2 Y B VSS VSS nmos_rvt w=81.0n l=20n nfin=3
-MM3 VDD B p1 VDD pmos_rvt w=81.0n l=20n nfin=3
-MM4 p1 A1 Y VDD pmos_rvt w=81.0n l=20n nfin=3
-MM5 p1 A2 Y VDD pmos_rvt w=81.0n l=20n nfin=3
+MM0 Y B VSS VSS nmos_rvt w=81.0n l=20n nfin=3
+MM1 n1 A1 VSS VSS nmos_rvt w=81.0n l=20n nfin=3
+MM2 Y A2 n1 VSS nmos_rvt w=81.0n l=20n nfin=3
+MM3 Y B p1 VDD pmos_rvt w=81.0n l=20n nfin=3
+MM4 p1 A1 VDD VDD pmos_rvt w=81.0n l=20n nfin=3
+MM5 p1 A2 VDD VDD pmos_rvt w=81.0n l=20n nfin=3
 .ENDS

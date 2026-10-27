@@ -3,21 +3,28 @@
   "kind": "generic",
   "status": "pass",
   "t1_item": 1,
-  "summary": "T1 item 1 (Design sources): 41/41 attestation checks passed (klt signoff --attest)",
+  "summary": "T1 item 1 (Design sources): 53/53 attestation checks passed (klt signoff --attest)",
   "source": "manifests/t1-item1-inventory.json",
   "attestation": {
     "producer": "klt signoff --attest",
     "inventory_schema_version": 1,
     "hash_algorithm": "sha256-raw-bytes",
-    "check_count": 41,
-    "passed_count": 41,
+    "check_count": 53,
+    "passed_count": 53,
     "checks": [
+      {
+        "check": "present",
+        "role": "source",
+        "path": "design/a7s_common.py",
+        "passed": true,
+        "content_hash": "sha256:4d16a992d3a13bbb21a0ccd73d5568fe6676938cd9c9d43eda9daf1d159344aa"
+      },
       {
         "check": "present",
         "role": "source",
         "path": "design/cdl-freshness.json",
         "passed": true,
-        "content_hash": "sha256:06991b4bb483d67a610cfa18a2ca959efcad4a8e3dcb96ce49f766649cd7ba4b"
+        "content_hash": "sha256:769b27a21cc361b5efffe0feee8399969938ab44bfe944be552d7dd96bec0f08"
       },
       {
         "check": "present",
@@ -36,9 +43,86 @@
       {
         "check": "present",
         "role": "source",
+        "path": "design/draw_AND2x1_A7S_75t_R.py",
+        "passed": true,
+        "content_hash": "sha256:5dec57d3cbf53f7af42c298f42988e30b0eadac1bf60fda2be4804da4a35ab3d"
+      },
+      {
+        "check": "present",
+        "role": "source",
+        "path": "design/draw_AOI21x1_A7S_75t_R.py",
+        "passed": true,
+        "content_hash": "sha256:c74061712a11cce37dded65730f5c2de3a1a03049c1e1a0d94f956c425779967"
+      },
+      {
+        "check": "present",
+        "role": "source",
+        "path": "design/draw_BUFx1_A7S_75t_R.py",
+        "passed": true,
+        "content_hash": "sha256:67f7e95f9157e925207b2fa6098a53a30e169876fa715136808b608b43dcb0ae"
+      },
+      {
+        "check": "present",
+        "role": "source",
+        "path": "design/draw_FILLER1_A7S_75t_R.py",
+        "passed": true,
+        "content_hash": "sha256:0bd2bc234fb52b3dd9d8849a97f239961ac18bd970d4daa9b24822092456c38d"
+      },
+      {
+        "check": "present",
+        "role": "source",
+        "path": "design/draw_FILLER2_A7S_75t_R.py",
+        "passed": true,
+        "content_hash": "sha256:9d4e0ecbd37a2d751d1e16c0343df325586ea569db88809fc520f2f07adc2635"
+      },
+      {
+        "check": "present",
+        "role": "source",
+        "path": "design/draw_FILLER4_A7S_75t_R.py",
+        "passed": true,
+        "content_hash": "sha256:a0ca15cb2703b45514221df3e641534414378109157a77d03e923fff63ea32c9"
+      },
+      {
+        "check": "present",
+        "role": "source",
         "path": "design/draw_INVx1_A7S_75t_R.py",
         "passed": true,
-        "content_hash": "sha256:d628e083d412964bce7f1e7113ab3d9ed99f57ef24c2a15fa9836d3e4403b2bf"
+        "content_hash": "sha256:8718423b9e1aa723d67bdfa0eeb631072f4e74266f7d719dd9cac3559ffdf168"
+      },
+      {
+        "check": "present",
+        "role": "source",
+        "path": "design/draw_NAND2x1_A7S_75t_R.py",
+        "passed": true,
+        "content_hash": "sha256:d04c6047434619ffa528a3418cb7e6bc8d4dad09626d29127e4c7863a0fd0eb9"
+      },
+      {
+        "check": "present",
+        "role": "source",
+        "path": "design/draw_NOR2x1_A7S_75t_R.py",
+        "passed": true,
+        "content_hash": "sha256:8a78a0274ba8261a9fdacb80ce57e08cfd85e2dc107531af629a065edba813be"
+      },
+      {
+        "check": "present",
+        "role": "source",
+        "path": "design/draw_OAI21x1_A7S_75t_R.py",
+        "passed": true,
+        "content_hash": "sha256:c969decbefaa3ecabf23fa25961d5831535dd2316cac38f63292dfde5677ff0e"
+      },
+      {
+        "check": "present",
+        "role": "source",
+        "path": "design/draw_OR2x1_A7S_75t_R.py",
+        "passed": true,
+        "content_hash": "sha256:f3160f3e89a67798ecd1b3baa833b055d1ca61e5a8f0ce883718621d4236e1f9"
+      },
+      {
+        "check": "present",
+        "role": "source",
+        "path": "design/draw_TAP_A7S_75t_R.py",
+        "passed": true,
+        "content_hash": "sha256:e7c61f3f5b6e3c5b646258bcd2fb5385fd773c42997a41c774ec5b968607cad1"
       },
       {
         "check": "present",
@@ -52,14 +136,14 @@
         "role": "derived",
         "path": "design/AND2x1_A7S_75t_R.cdl",
         "passed": true,
-        "content_hash": "sha256:4763a32d9abaf82b6d209210d5a6d0c94a3e9bef866913a13f42e71469e4c659"
+        "content_hash": "sha256:c29e9c0418c3ea9a1514d8a5f8abcd662d8adda46b468b0ce8cae7fd910bdebc"
       },
       {
         "check": "present",
         "role": "derived",
         "path": "design/AOI21x1_A7S_75t_R.cdl",
         "passed": true,
-        "content_hash": "sha256:4cbfdb9e45cfb54f167b80cd5ebeaf8de1ec696c97ff39d2dde5c834b2864d46"
+        "content_hash": "sha256:ee48104737393c1c05940eba8b44ad187b3b2562f55b99844fc1538af8bc2644"
       },
       {
         "check": "present",
@@ -73,7 +157,7 @@
         "role": "derived",
         "path": "design/BUFx1_A7S_75t_R.cdl",
         "passed": true,
-        "content_hash": "sha256:2101a87bd75e614045adfa3515dfd3e67bf58955b743fc70dfac2cb60e247fb6"
+        "content_hash": "sha256:44d6c5874ed69c18c1d1df77541ddd4abc2fc7068c3df3ad19a10c75c391e308"
       },
       {
         "check": "present",
@@ -101,7 +185,7 @@
         "role": "derived",
         "path": "design/NAND2x1_A7S_75t_R.cdl",
         "passed": true,
-        "content_hash": "sha256:d74bc7895e06b593e4362d1903c28c37eda09a286dd0f1258fe1d22304bc5012"
+        "content_hash": "sha256:d6741c767fd57879f0ba0f15adae920795d94c1f94a487f1ad7b7673af07151c"
       },
       {
         "check": "present",
@@ -115,7 +199,7 @@
         "role": "derived",
         "path": "design/NOR2x1_A7S_75t_R.cdl",
         "passed": true,
-        "content_hash": "sha256:d4501d662ed224ae8afa8bd0edfba870f54ad79e03d963929391966b74455b02"
+        "content_hash": "sha256:3446e0767e29458055653788cc51c8f15d262bf662bc764760fce42518df36c5"
       },
       {
         "check": "present",
@@ -129,7 +213,7 @@
         "role": "derived",
         "path": "design/OAI21x1_A7S_75t_R.cdl",
         "passed": true,
-        "content_hash": "sha256:56fc4687f0917256922178aa77de335bee81fdaa5836a9a8a9c162469cb9f2a6"
+        "content_hash": "sha256:81778ccb8638c57b212afb88b4bfc0d42ad616b5e1328fc1a65c2b410b7dcbbf"
       },
       {
         "check": "present",
@@ -143,7 +227,7 @@
         "role": "derived",
         "path": "design/OR2x1_A7S_75t_R.cdl",
         "passed": true,
-        "content_hash": "sha256:0cd551a85f21539acab03158c83501e3669da79b079eabc86137ec77cf5def7b"
+        "content_hash": "sha256:e3ac2a19c3587288db6387ba04d8a191e42ecd9ecdfae2852f68599d5f40e056"
       },
       {
         "check": "present",
@@ -437,7 +521,7 @@
         "path": "manifests/t1-item1-inventory.json",
         "scope": "repo"
       },
-      "content_hash": "sha256:4d4d73f75e6077891361af46ccb4f5b7dd12f5b04af35ffd9cd9e1e3de69bc87"
+      "content_hash": "sha256:9bcd4c5b3a48df2c81e130f905fa26303f57f1f01d37bd66f09b456698eb606c"
     }
   }
 }

@@ -68,7 +68,12 @@ needed: `python3 verification/test_run_regression.py`.
 ## Drawn cells
 
 A `cells.json` entry with `"source": "drawn"` names repo-relative `gds`, `cdl`
-and `script` paths (the script is `design/draw_<CELL>.py`). For each one the run:
+and `script` paths (the script is `design/draw_<CELL>.py`). A device-free drawn
+cell (fill, tap) sets `"cdl": null` with an `lvs_na` reason, as the shipped ones
+do; it gets no CDL hash and its LVS reads `n/a`. A drawn cell may also carry the
+`abutment_verdict` of decision 0007 (`FILLER1_A7S_75t_R`, one pitch wide), in
+which case its abutment cases run once, with the neighbour named there. For each
+one the run:
 
 - checks the committed GDS in place (no copy) with `klt drc` and `klt lvs`;
 - re-runs the script to a scratch file and compares `sha256` with the committed

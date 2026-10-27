@@ -1,0 +1,7 @@
+{
+  "schema_version": 1,
+  "error": {
+    "command": "drc",
+    "message": "klayout reported an error while running the deck script (exit status 1) -- the deck likely aborted part-way through, so the report file it did write covers only the rules that ran before the abort, and its verdict cannot be trusted. Pass --allow-deck-errors to accept a partial report anyway. klayout's own output:\nERROR: ../../../src/db/db/dbShape.h,1218,m_type == Polygon\nERROR: In /home/ubuntu/.local/share/uv/tools/klayout-tools/lib/python3.13/site-packages/klayout_tools/decks/asap7.drc: 'separation': Internal error: ../../../src/db/db/dbShape.h:1218 m_type == Polygon was not true in Region::separation_check\nERROR: RuntimeError: 'separation': Internal error: ../../../src/db/db/dbShape.h:1218 m_type == Polygon was not true in Region::separation_check in Executable::execute\n  /home/ubuntu/.local/share/uv/tools/klayout-tools/lib/python3.13/site-packages/klayout_tools/decks/asap7.drc:531:in `block in execute'\n  /home/ubuntu/.local/share/uv/tools/klayout-tools/lib/python3.13/site-packages/klayout_tools/decks/asap7.drc:535:in `execute'\n  :/built-in-macros/drc_interpreters.lym:31:in `instance_eval'\n  :/built-in-macros/drc_interpreters.lym:31:in `execute'"
+  }
+}

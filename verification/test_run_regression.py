@@ -350,6 +350,41 @@ class RunRegressionTest(unittest.TestCase):
         self.assertEqual(self.go(FakeKlt(redrawn=b"different"), self.drawn_cfg()), 1)
         self.assertEqual(self.drawn_row()["reproducible"], "FAIL")
 
+    def fill_cfg(self, verdict=False):
+        """A drawn device-free cell (no CDL, lvs_na) next to a drawn INVx1 neighbour."""
+        cfg = self.drawn_cfg()
+        (self.tmp / "layout" / "F.gds").write_bytes(b"drawn-gds")
+        (self.tmp / "design" / "draw_F.py").write_text("# F\n")
+        fill = {"name": "FILL_D", "source": "drawn", "gds": "layout/F.gds", "cdl": None, "lvs_na": "no devices",
+                "script": "design/draw_F.py", "neighbour": "INVx1_D"}
+        if verdict:
+            fill["abutment_verdict"] = {"decision": "0007", "neighbour": "INVx1_D"}
+        cfg["cells"].append(fill)
+        return cfg
+
+    def test_drawn_cell_without_cdl_runs_cases_and_records_no_cdl_hash(self):
+        self.assertEqual(self.go(FakeKlt(), self.fill_cfg()), 0)
+        row = next(c for c in self.manifest()["cells"] if c["cell"] == "FILL_D")
+        self.assertEqual(row["lvs"], "n/a")
+        self.assertEqual(sorted(row["files_sha256"]), ["gds", "script"])
+        self.assertEqual(row["reproducible"], "PASS")
+        self.assertEqual(len(row["cases"]), 1 + 16 + 1)
+        self.assertIn("`n/a`", (rr.HERE / "records" / "r1" / "summary.md").read_text())
+
+    def test_drawn_cell_with_abutment_verdict_runs_its_cases_once(self):
+        self.assertEqual(self.go(FakeKlt(), self.fill_cfg(verdict=True)), 0)
+        row = next(c for c in self.manifest()["cells"] if c["cell"] == "FILL_D")
+        ids = [c["id"] for c in row["cases"]]
+        self.assertEqual(len(ids), len(set(ids)))
+        self.assertEqual(ids.count("case5-grid"), 1)
+        self.assertEqual(row["drc"], "PASS standalone / PASS abutted")
+        self.assertEqual(len(row["cases"]), 1 + 1 + 16 + 1)
+
+    def test_drawn_cell_without_cdl_and_without_reason_is_setup_error(self):
+        cfg = self.fill_cfg()
+        del cfg["cells"][-1]["lvs_na"]
+        self.assertEqual(self.go(FakeKlt(), cfg), 2)
+
     def test_drawn_cell_with_missing_file_is_setup_error(self):
         (self.tmp / "design" / "draw_D.py").unlink()
         self.assertEqual(self.go(FakeKlt(), self.drawn_cfg()), 2)

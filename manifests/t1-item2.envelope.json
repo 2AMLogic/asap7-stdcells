@@ -1,0 +1,117 @@
+{
+  "schema_version": 1,
+  "kind": "generic",
+  "status": "pass",
+  "t1_item": 2,
+  "summary": "T1 item 2 (Layout, full-custom sub-case): 12 hand-scripted GDS cells (the fallback set), each reproduced byte for byte by its design/draw_<CELL>.py",
+  "source": "manifests/t1-item2-inventory.json",
+  "layout_provenance": {
+    "method": "scripted klayout.db geometry (spec/decisions/0003-drawing-method.md), hand-drawn, not place-and-route output",
+    "generators": "design/draw_<CELL>.py, shared helpers design/a7s_common.py; run under klt's interpreter with -I",
+    "edge_and_tap_decisions": [
+      "spec/decisions/0006-cell-edge-treatment.md",
+      "spec/decisions/0008-tap-well-geometry-and-logic-cell-conventions.md"
+    ],
+    "reproduced_by": "python3 verification/run_regression.py (redraw, sha256 compare per cell)",
+    "note": "Predictive ASAP7 layout only; never fabricated. No DRC or LVS claim is made by this envelope."
+  },
+  "provenance": {
+    "klt_version": "0.8.0",
+    "klayout_version": null,
+    "pdk": null,
+    "deck": null,
+    "input": {
+      "paths": [
+        {
+          "path": {
+            "path": "layout/INVx1_A7S_75t_R.gds",
+            "scope": "repo"
+          },
+          "content_hash": "sha256:be3a49ca6bd1bed2bbfb1c764f0c132a21296fa60dd620e3fd38dbe4217149dd"
+        },
+        {
+          "path": {
+            "path": "layout/BUFx1_A7S_75t_R.gds",
+            "scope": "repo"
+          },
+          "content_hash": "sha256:444555a2953ab1ba89c52c4821ea1276d1bb7ab86c67826e6d47977d3152a57c"
+        },
+        {
+          "path": {
+            "path": "layout/NAND2x1_A7S_75t_R.gds",
+            "scope": "repo"
+          },
+          "content_hash": "sha256:ca225773ada0018220aafb6c433194ea111e2e1e0ba37a26eccd2f5c979dcf37"
+        },
+        {
+          "path": {
+            "path": "layout/NOR2x1_A7S_75t_R.gds",
+            "scope": "repo"
+          },
+          "content_hash": "sha256:291158a4b51bcdf8a39fbf18ab7318ffb0a312551517e47520801596efa2b053"
+        },
+        {
+          "path": {
+            "path": "layout/AND2x1_A7S_75t_R.gds",
+            "scope": "repo"
+          },
+          "content_hash": "sha256:980f1b52b1f6be933f8e0d079adc93c5ebcd3b897b83e6bc50d6b9534163c700"
+        },
+        {
+          "path": {
+            "path": "layout/OR2x1_A7S_75t_R.gds",
+            "scope": "repo"
+          },
+          "content_hash": "sha256:2f99fc7ce6a28446aeebfdba6f6c9f341da95701e3d971511ce85218fad39835"
+        },
+        {
+          "path": {
+            "path": "layout/AOI21x1_A7S_75t_R.gds",
+            "scope": "repo"
+          },
+          "content_hash": "sha256:048cafe06e1fc3bf269ad8a7a57621fc7f3af86a70436816e60f440509e322cc"
+        },
+        {
+          "path": {
+            "path": "layout/OAI21x1_A7S_75t_R.gds",
+            "scope": "repo"
+          },
+          "content_hash": "sha256:91ab784c7b7edce299cf34c5e786cf31a95c119871c0db76292713e6ea5dbc2a"
+        },
+        {
+          "path": {
+            "path": "layout/FILLER1_A7S_75t_R.gds",
+            "scope": "repo"
+          },
+          "content_hash": "sha256:513a4be04109882dec2fac309057e8c72f7e4d3d2ed92af2a081787a429ecb32"
+        },
+        {
+          "path": {
+            "path": "layout/FILLER2_A7S_75t_R.gds",
+            "scope": "repo"
+          },
+          "content_hash": "sha256:c9513bc3890f1d24f2bf036ad4d5c7f0f3b03fb738129387d89ec6be397761dd"
+        },
+        {
+          "path": {
+            "path": "layout/FILLER4_A7S_75t_R.gds",
+            "scope": "repo"
+          },
+          "content_hash": "sha256:0b5455c4902ada06894dfc67f306e3a0e92143da87f22f44fa3ac706fbe01ea5"
+        },
+        {
+          "path": {
+            "path": "layout/TAP_A7S_75t_R.gds",
+            "scope": "repo"
+          },
+          "content_hash": "sha256:e7023058369cd003f0df15850e7a254aa5a14e1c0eac6c67859a3d890648bd96"
+        }
+      ],
+      "content_hash": "sha256:dd6b3dd0740df0122d7f496e4cf234d8ae8b21603d75ba8a361431c445f30f3a"
+    },
+    "regeneration": {
+      "generator": "for each cell: klt-interpreter -I design/draw_<CELL>_A7S_75t_R.py <out.gds> (klt 0.8.0 and 0.8.1.dev55, KLayout 0.30.12); the set digest is over the 12 regenerated streams",
+      "regenerated_hash": "sha256:dd6b3dd0740df0122d7f496e4cf234d8ae8b21603d75ba8a361431c445f30f3a"
+    }
+  }
+}
