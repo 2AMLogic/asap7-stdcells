@@ -5,6 +5,10 @@ triage role. Newest first.
 
 ### 2026-10-27
 
+- **PR #43**: feat(layout): draw the 11 remaining fallback cells and attest T1 item 2
+- **PR #42**: feat: add CDLs for cells 2-18 with function and freshness checks, attest T1 item 1
+- **Issue #35** (closed): T1 item 2 (layout): scripted GDS for the 11 remaining fallback-set cells (BUF..OAI21, FILLER1/2/4, TAP)
+- **Issue #34** (closed): T1 item 1 (design sources): CDL netlists for device-bearing cells 2-18 and klt signoff --attest 1
 - **PR #41**: feat(evidence): record T1 item 6 as not_applicable over all spec rows
 - **Issue #39** (closed): T1 item 6 (statistical claims): hash-bound not_applicable statement covering every ratified spec row
 
