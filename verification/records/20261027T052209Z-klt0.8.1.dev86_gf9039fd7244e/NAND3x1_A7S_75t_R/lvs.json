@@ -1,0 +1,199 @@
+{
+  "body_verification": {
+    "device_classes": [],
+    "device_count": 0,
+    "finding_count": 0,
+    "findings": [],
+    "reason": null,
+    "status": "verified"
+  },
+  "category_counts": {
+    "device.finfet_bulk_tied": 2
+  },
+  "category_error_counts": {},
+  "constant_nets_applied": null,
+  "counts": {
+    "devices": {
+      "layout": 6,
+      "matched": 6,
+      "reference": 6
+    },
+    "nets": {
+      "layout": 8,
+      "matched": 8,
+      "reference": 8
+    },
+    "pins": {
+      "layout": 6,
+      "matched": 6,
+      "reference": 6
+    }
+  },
+  "device_classes": [
+    "nfet",
+    "pfet"
+  ],
+  "device_parameter_coverage": [],
+  "engine": "klayout",
+  "environment": {
+    "engine": "klayout",
+    "engine_version": "0.30.12",
+    "extracted_netlist": null,
+    "layout_sha256": "4e234bfe8632f1846730b260f4427afafe3a8becb79f752d85802ac0aabbac63",
+    "netgen_binary": null,
+    "reference_sha256": "252eb323cf45942e76a021861da5773c9a9bb8e06bc58f0c40bc2740794b5814"
+  },
+  "error_count": 0,
+  "hints_applied": null,
+  "layout": {
+    "path": "layout/NAND3x1_A7S_75t_R.gds",
+    "scope": "repo"
+  },
+  "mismatch_count": 2,
+  "mismatches": [
+    {
+      "category": "device.finfet_bulk_tied",
+      "circuit": null,
+      "description": "options.finfet_bulk joined the nmos bulk net 'vsubs' onto layout net 'VSS' on 3 device(s) before comparing -- the bulk connectivity is a caller assertion, not geometry read from the layout",
+      "details": {
+        "bulk_net": "vsubs",
+        "device_classes": [
+          "nmos_rvt"
+        ],
+        "device_count": 3,
+        "net": "VSS",
+        "polarity": "nmos",
+        "status": "joined"
+      },
+      "device": null,
+      "instance": null,
+      "net": null,
+      "property": null,
+      "severity": "warning",
+      "side": "layout",
+      "subcircuit": null
+    },
+    {
+      "category": "device.finfet_bulk_tied",
+      "circuit": null,
+      "description": "options.finfet_bulk joined the pmos bulk net '$9' onto layout net 'VDD' on 3 device(s) before comparing -- the bulk connectivity is a caller assertion, not geometry read from the layout",
+      "details": {
+        "bulk_net": "$9",
+        "device_classes": [
+          "pmos_rvt"
+        ],
+        "device_count": 3,
+        "net": "VDD",
+        "polarity": "pmos",
+        "status": "joined"
+      },
+      "device": null,
+      "instance": null,
+      "net": null,
+      "property": null,
+      "severity": "warning",
+      "side": "layout",
+      "subcircuit": null
+    }
+  ],
+  "net_correspondence": [
+    {
+      "layout": "A",
+      "pin": true,
+      "reference": "A"
+    },
+    {
+      "layout": "B",
+      "pin": true,
+      "reference": "B"
+    },
+    {
+      "layout": "C",
+      "pin": true,
+      "reference": "C"
+    },
+    {
+      "layout": "VDD",
+      "pin": true,
+      "reference": "VDD"
+    },
+    {
+      "layout": "VSS|vsubs",
+      "pin": true,
+      "reference": "VSS"
+    },
+    {
+      "layout": "Y",
+      "pin": true,
+      "reference": "Y"
+    },
+    {
+      "layout": "\\$2",
+      "pin": false,
+      "reference": "Y_N1"
+    },
+    {
+      "layout": "\\$4",
+      "pin": false,
+      "reference": "Y_N2"
+    }
+  ],
+  "options": {
+    "anchor_top_level_pins": null,
+    "combine_devices": false,
+    "combine_devices_max_attempts": 5,
+    "combine_devices_per_circuit": null,
+    "compare_mos_flavour": false,
+    "compare_parameters": null,
+    "finfet_bulk": {
+      "nmos": "VSS",
+      "pmos": "VDD"
+    },
+    "flatten_layout": false,
+    "flatten_reference": false,
+    "netgen_setup": null,
+    "parameter_tolerance": null,
+    "power_connectivity": null,
+    "strict_top_level_pin_count": false,
+    "supply_nets": [
+      "GND",
+      "VCC",
+      "VDD",
+      "VGND",
+      "VPWR",
+      "VSS"
+    ]
+  },
+  "parameter_tolerance": null,
+  "power_connectivity": {
+    "expected_nets": null,
+    "finding_count": 0,
+    "findings": [],
+    "instance_count": 0,
+    "power_pins": [],
+    "power_pins_derivation": null,
+    "reason": "reference.form is 'plain-element', whose reference netlist carries its own power/ground pins and nets -- they take part in the ordinary compare, so this check (which exists to cover the signal-only 'gate-level-verilog' form) does not apply",
+    "status": "unchecked",
+    "unchecked_expected_pins": []
+  },
+  "provenance": {
+    "deck": {
+      "content_hash": "sha256:30a8d86cc36f99ffc54b0c86ab69a737acd91ba0fd21f6de3c842f9fba9d2aaf",
+      "name": "asap7",
+      "released": true
+    },
+    "input": {
+      "content_hash": "sha256:4e234bfe8632f1846730b260f4427afafe3a8becb79f752d85802ac0aabbac63",
+      "role": "layout"
+    },
+    "klayout_version": "0.30.12",
+    "klayout_version_mismatch": false,
+    "klt_version": "0.8.1.dev86+gf9039fd7244e",
+    "pdk": null
+  },
+  "reference": "design/NAND3x1_A7S_75t_R.cdl",
+  "reference_top": "NAND3X1_A7S_75T_R",
+  "schema_version": 2,
+  "status": "match",
+  "top": "NAND3x1_A7S_75t_R"
+}
