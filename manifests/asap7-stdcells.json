@@ -2,6 +2,18 @@
   "block": "asap7-stdcells",
   "kind": "digital",
   "evidence": {
+    "6": {
+      "not_applicable": {
+        "spec": {
+          "file": "manifests/spec-rows.json",
+          "content_hash": "sha256:721508d05b5a7614a77f5e7caa8145dc2a39256d7f9fdbd3a84ede042b31769e"
+        },
+        "statement": {
+          "file": "manifests/item6-na-statement.json",
+          "content_hash": "sha256:c8c5fece5e11b10fedbc6c2429a7b5c90ece2641bfd3546d4f22efcef60e2224"
+        }
+      }
+    },
     "2": {
       "file": "manifests/t1-item2.envelope.json",
       "content_hash": "sha256:dd6b3dd0740df0122d7f496e4cf234d8ae8b21603d75ba8a361431c445f30f3a"
