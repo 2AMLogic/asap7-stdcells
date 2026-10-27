@@ -3,6 +3,11 @@
 Chronological record of merged PRs and closed issues, maintained by the Guide
 triage role. Newest first.
 
+### 2026-10-27
+
+- **PR #41**: feat(evidence): record T1 item 6 as not_applicable over all spec rows
+- **Issue #39** (closed): T1 item 6 (statistical claims): hash-bound not_applicable statement covering every ratified spec row
+
 ### 2026-10-24
 
 - **PR #32**: ci: attest T1 items 9 and 10 with klt --attest envelopes (pin 0.8.0)

@@ -32,13 +32,14 @@ _None._
 
 Issues currently being built (`loom:building`).
 
-_None._
+- **#34**: T1 item 1 (design sources): CDL netlists for device-bearing cells 2-18 and klt signoff --attest 1
+- **#35**: T1 item 2 (layout): scripted GDS for the 11 remaining fallback-set cells (BUF..OAI21, FILLER1/2/4, TAP)
 
 ## PRs Awaiting Review
 
 PRs waiting on Judge (`loom:review-requested`).
 
-_None._
+- **#42**: feat: add CDLs for cells 2-18 with function and freshness checks, attest T1 item 1
 
 ## Approved (Awaiting Merge)
 
@@ -51,6 +52,8 @@ _None._
 Issues carrying `loom:curated`.
 
 - **#3**: Track the gap to T1 (klayout-tools design-evidence-tiers.md) *(curated)*
+- **#34**: T1 item 1 (design sources): CDL netlists for device-bearing cells 2-18 and klt signoff --attest 1 *(curated)*
+- **#35**: T1 item 2 (layout): scripted GDS for the 11 remaining fallback-set cells (BUF..OAI21, FILLER1/2/4, TAP) *(curated)*
 
 ## Proposed (Architect / Hermit)
 
@@ -68,10 +71,10 @@ _None._
 | Very important | 0 |
 | Important | 0 |
 | Ready (`loom:issue`) | 0 |
-| In Progress (`loom:building`) | 0 |
-| PRs awaiting review | 0 |
+| In Progress (`loom:building`) | 2 |
+| PRs awaiting review | 1 |
 | Approved PRs awaiting merge | 0 |
-| Curated | 1 |
+| Curated | 3 |
 | Architect / Hermit proposals | 0 |
 | Active epics | 0 |
 <!-- guide:plan-body:end -->
