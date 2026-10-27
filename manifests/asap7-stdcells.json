@@ -2,6 +2,10 @@
   "block": "asap7-stdcells",
   "kind": "digital",
   "evidence": {
+    "1": {
+      "file": "manifests/t1-item1.envelope.json",
+      "content_hash": "sha256:9bcd4c5b3a48df2c81e130f905fa26303f57f1f01d37bd66f09b456698eb606c"
+    },
     "6": {
       "not_applicable": {
         "spec": {

@@ -1,0 +1,20 @@
+* XNOR2x1_A7S_75t_R: Y = !(A ^ B). Hand-written; topology as it will be drawn (static CMOS,
+* inverters An, Bn feeding OAI22(A,B,An,Bn)).
+* NFIN=3 per device (unit-drive rule of spec/stdcells.md, w=81.0n as in the
+* INVx1 CDL); fin counts are revisited in the cell's layout PR, which edits
+* this file and re-pairs it in design/cdl-freshness.json. Predictive-PDK
+* netlist; nothing here is a measured part.
+.SUBCKT XNOR2x1_A7S_75t_R A B VDD VSS Y
+MM0 An A VSS VSS nmos_rvt w=81.0n l=20n nfin=3
+MM1 An A VDD VDD pmos_rvt w=81.0n l=20n nfin=3
+MM2 Bn B VSS VSS nmos_rvt w=81.0n l=20n nfin=3
+MM3 Bn B VDD VDD pmos_rvt w=81.0n l=20n nfin=3
+MM4 Y A x_n1 VSS nmos_rvt w=81.0n l=20n nfin=3
+MM5 Y B x_n1 VSS nmos_rvt w=81.0n l=20n nfin=3
+MM6 x_n1 An VSS VSS nmos_rvt w=81.0n l=20n nfin=3
+MM7 x_n1 Bn VSS VSS nmos_rvt w=81.0n l=20n nfin=3
+MM8 Y A x_p1 VDD pmos_rvt w=81.0n l=20n nfin=3
+MM9 x_p1 B VDD VDD pmos_rvt w=81.0n l=20n nfin=3
+MM10 Y An x_p2 VDD pmos_rvt w=81.0n l=20n nfin=3
+MM11 x_p2 Bn VDD VDD pmos_rvt w=81.0n l=20n nfin=3
+.ENDS

@@ -1,0 +1,9 @@
+* TIEHIx1_A7S_75t_R: H = 1. Hand-written; topology as it will be drawn (static CMOS,
+* one PMOS, source VDD, gate tied to VSS (always on)).
+* NFIN=3 per device (unit-drive rule of spec/stdcells.md, w=81.0n as in the
+* INVx1 CDL); fin counts are revisited in the cell's layout PR, which edits
+* this file and re-pairs it in design/cdl-freshness.json. Predictive-PDK
+* netlist; nothing here is a measured part.
+.SUBCKT TIEHIx1_A7S_75t_R H VDD VSS
+MM0 H VSS VDD VDD pmos_rvt w=81.0n l=20n nfin=3
+.ENDS
