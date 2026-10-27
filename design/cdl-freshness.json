@@ -9,7 +9,7 @@
   },
   "AOI22x1_A7S_75t_R": {
     "cdl_sha256": "00078a7f7e91045b748902202138adfc59c28c9c674ba186e910901a44aa66f4",
-    "script_sha256": null
+    "script_sha256": "d312b35a75f8e017981306e742c4430b34fe359dd1c12efe0ed5468eb066b741"
   },
   "BUFx1_A7S_75t_R": {
     "cdl_sha256": "44d6c5874ed69c18c1d1df77541ddd4abc2fc7068c3df3ad19a10c75c391e308",
@@ -33,7 +33,7 @@
   },
   "NAND3x1_A7S_75t_R": {
     "cdl_sha256": "252eb323cf45942e76a021861da5773c9a9bb8e06bc58f0c40bc2740794b5814",
-    "script_sha256": null
+    "script_sha256": "f75ba00b57be522c8fd4101e7dc0ee9527eb67e9153c3a0aa94425a524a330eb"
   },
   "NOR2x1_A7S_75t_R": {
     "cdl_sha256": "3446e0767e29458055653788cc51c8f15d262bf662bc764760fce42518df36c5",
@@ -41,7 +41,7 @@
   },
   "NOR3x1_A7S_75t_R": {
     "cdl_sha256": "887521358d2dbfce1b48e6c856e5bf65468be72a4b2cfe8351e3da752db0f660",
-    "script_sha256": null
+    "script_sha256": "199139638a8664ebcba3bc489fc23abfd078c7ddfe47e9ab78fbc4bf395c6441"
   },
   "OAI21x1_A7S_75t_R": {
     "cdl_sha256": "81778ccb8638c57b212afb88b4bfc0d42ad616b5e1328fc1a65c2b410b7dcbbf",
@@ -49,7 +49,7 @@
   },
   "OAI22x1_A7S_75t_R": {
     "cdl_sha256": "ea77fb56ae7ccb1f334e72c0e3703f44d233f3d14536e4c5d1ba4b7fc20e38fb",
-    "script_sha256": null
+    "script_sha256": "1c54fe400288d3714c115a5aa79141c9adf48e1183e83112ff3cdc35e1541e37"
   },
   "OR2x1_A7S_75t_R": {
     "cdl_sha256": "e3ac2a19c3587288db6387ba04d8a191e42ecd9ecdfae2852f68599d5f40e056",

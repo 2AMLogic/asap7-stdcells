@@ -7,5 +7,6 @@ The harness checks that re-running the script gives the same bytes.
 
 Cells so far: `INVx1`, `BUFx1`, `NAND2x1`, `NOR2x1`, `AND2x1`, `OR2x1`,
 `AOI21x1`, `OAI21x1`, `FILLER1`, `FILLER2`, `FILLER4`, `TAP` (all
-`_A7S_75t_R`), the 12-cell fallback set. Predictive-PDK layout only; never
+`_A7S_75t_R`), the 12-cell fallback set, plus `NAND3x1`, `NOR3x1`, `AOI22x1`
+and `OAI22x1` (#36, 16 of the 22 target cells). Predictive-PDK layout only; never
 fabricated.
