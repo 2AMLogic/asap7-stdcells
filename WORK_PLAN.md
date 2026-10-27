@@ -51,6 +51,7 @@ _None._
 Issues carrying `loom:curated`.
 
 - **#3**: Track the gap to T1 (klayout-tools design-evidence-tiers.md) *(curated)*
+- **#36**: T1 item 2 (layout): scripted GDS for the remaining target cells (NAND3, NOR3, AOI22, OAI22, XOR/XNOR, DFF, latch, ties) *(curated)*
 
 ## Proposed (Architect / Hermit)
 
@@ -71,7 +72,7 @@ _None._
 | In Progress (`loom:building`) | 0 |
 | PRs awaiting review | 0 |
 | Approved PRs awaiting merge | 0 |
-| Curated | 1 |
+| Curated | 2 |
 | Architect / Hermit proposals | 0 |
 | Active epics | 0 |
 <!-- guide:plan-body:end -->
