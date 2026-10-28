@@ -3,6 +3,13 @@
 Chronological record of merged PRs and closed issues, maintained by the Guide
 triage role. Newest first.
 
+### 2026-10-28
+
+- **PR #51**: feat: draw DHLx1 and DFFHQNx1 with DRC/LVS record
+- **PR #49**: feat: draw XOR2x1 and XNOR2x1 with DRC/LVS record
+- **PR #48**: feat: draw TIEHIx1 and TIELOx1 with DRC/LVS record
+- **Issue #36** (closed): T1 item 2 (layout): scripted GDS for the remaining target cells (NAND3, NOR3, AOI22, OAI22, XOR/XNOR, DFF, latch, ties)
+
 ### 2026-10-27
 
 - **PR #46**: feat: draw NAND3x1, NOR3x1, AOI22x1 and OAI22x1 layouts with DRC/LVS record
