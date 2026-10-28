@@ -1,0 +1,176 @@
+.SUBCKT INVx1_A7S_75t_R A VDD VSS Y
+MM0 Y A VSS VSS nmos_rvt w=81.0n l=20n nfin=3
+MM1 Y A VDD VDD pmos_rvt w=81.0n l=20n nfin=3
+.ENDS
+.SUBCKT BUFx1_A7S_75t_R A VDD VSS Y
+MM0 n1 A VSS VSS nmos_rvt w=81.0n l=20n nfin=3
+MM1 n1 A VDD VDD pmos_rvt w=81.0n l=20n nfin=3
+MM2 Y n1 VSS VSS nmos_rvt w=81.0n l=20n nfin=3
+MM3 Y n1 VDD VDD pmos_rvt w=81.0n l=20n nfin=3
+.ENDS
+.SUBCKT NAND2x1_A7S_75t_R A B VDD VSS Y
+MM0 n1 A VSS VSS nmos_rvt w=81.0n l=20n nfin=3
+MM1 Y B n1 VSS nmos_rvt w=81.0n l=20n nfin=3
+MM2 Y A VDD VDD pmos_rvt w=81.0n l=20n nfin=3
+MM3 Y B VDD VDD pmos_rvt w=81.0n l=20n nfin=3
+.ENDS
+.SUBCKT NOR2x1_A7S_75t_R A B VDD VSS Y
+MM0 Y A VSS VSS nmos_rvt w=81.0n l=20n nfin=3
+MM1 Y B VSS VSS nmos_rvt w=81.0n l=20n nfin=3
+MM2 p1 A VDD VDD pmos_rvt w=81.0n l=20n nfin=3
+MM3 Y B p1 VDD pmos_rvt w=81.0n l=20n nfin=3
+.ENDS
+.SUBCKT AND2x1_A7S_75t_R A B VDD VSS Y
+MM0 ynand A n1 VSS nmos_rvt w=81.0n l=20n nfin=3
+MM1 n1 B VSS VSS nmos_rvt w=81.0n l=20n nfin=3
+MM2 Y ynand VSS VSS nmos_rvt w=81.0n l=20n nfin=3
+MM3 ynand A VDD VDD pmos_rvt w=81.0n l=20n nfin=3
+MM4 ynand B VDD VDD pmos_rvt w=81.0n l=20n nfin=3
+MM5 Y ynand VDD VDD pmos_rvt w=81.0n l=20n nfin=3
+.ENDS
+.SUBCKT OR2x1_A7S_75t_R A B VDD VSS Y
+MM0 ynor A VSS VSS nmos_rvt w=81.0n l=20n nfin=3
+MM1 ynor B VSS VSS nmos_rvt w=81.0n l=20n nfin=3
+MM2 Y ynor VSS VSS nmos_rvt w=81.0n l=20n nfin=3
+MM3 ynor A p1 VDD pmos_rvt w=81.0n l=20n nfin=3
+MM4 p1 B VDD VDD pmos_rvt w=81.0n l=20n nfin=3
+MM5 Y ynor VDD VDD pmos_rvt w=81.0n l=20n nfin=3
+.ENDS
+.SUBCKT AOI21x1_A7S_75t_R A1 A2 B VDD VSS Y
+MM0 Y B VSS VSS nmos_rvt w=81.0n l=20n nfin=3
+MM1 n1 A1 VSS VSS nmos_rvt w=81.0n l=20n nfin=3
+MM2 Y A2 n1 VSS nmos_rvt w=81.0n l=20n nfin=3
+MM3 Y B p1 VDD pmos_rvt w=81.0n l=20n nfin=3
+MM4 p1 A1 VDD VDD pmos_rvt w=81.0n l=20n nfin=3
+MM5 p1 A2 VDD VDD pmos_rvt w=81.0n l=20n nfin=3
+.ENDS
+.SUBCKT OAI21x1_A7S_75t_R A1 A2 B VDD VSS Y
+MM0 Y B n1 VSS nmos_rvt w=81.0n l=20n nfin=3
+MM1 n1 A1 VSS VSS nmos_rvt w=81.0n l=20n nfin=3
+MM2 n1 A2 VSS VSS nmos_rvt w=81.0n l=20n nfin=3
+MM3 Y B VDD VDD pmos_rvt w=81.0n l=20n nfin=3
+MM4 Y A1 p1 VDD pmos_rvt w=81.0n l=20n nfin=3
+MM5 p1 A2 VDD VDD pmos_rvt w=81.0n l=20n nfin=3
+.ENDS
+.SUBCKT NAND3x1_A7S_75t_R A B C VDD VSS Y
+MM0 Y A Y_n1 VSS nmos_rvt w=81.0n l=20n nfin=3
+MM1 Y_n1 B Y_n2 VSS nmos_rvt w=81.0n l=20n nfin=3
+MM2 Y_n2 C VSS VSS nmos_rvt w=81.0n l=20n nfin=3
+MM3 Y A VDD VDD pmos_rvt w=81.0n l=20n nfin=3
+MM4 Y B VDD VDD pmos_rvt w=81.0n l=20n nfin=3
+MM5 Y C VDD VDD pmos_rvt w=81.0n l=20n nfin=3
+.ENDS
+.SUBCKT NOR3x1_A7S_75t_R A B C VDD VSS Y
+MM0 Y A VSS VSS nmos_rvt w=81.0n l=20n nfin=3
+MM1 Y B VSS VSS nmos_rvt w=81.0n l=20n nfin=3
+MM2 Y C VSS VSS nmos_rvt w=81.0n l=20n nfin=3
+MM3 Y A Y_p1 VDD pmos_rvt w=81.0n l=20n nfin=3
+MM4 Y_p1 B Y_p2 VDD pmos_rvt w=81.0n l=20n nfin=3
+MM5 Y_p2 C VDD VDD pmos_rvt w=81.0n l=20n nfin=3
+.ENDS
+.SUBCKT AOI22x1_A7S_75t_R A1 A2 B1 B2 VDD VSS Y
+MM0 Y A1 x_n1 VSS nmos_rvt w=81.0n l=20n nfin=3
+MM1 x_n1 A2 VSS VSS nmos_rvt w=81.0n l=20n nfin=3
+MM2 Y B1 x_n2 VSS nmos_rvt w=81.0n l=20n nfin=3
+MM3 x_n2 B2 VSS VSS nmos_rvt w=81.0n l=20n nfin=3
+MM4 VDD A1 x_p1 VDD pmos_rvt w=81.0n l=20n nfin=3
+MM5 VDD A2 x_p1 VDD pmos_rvt w=81.0n l=20n nfin=3
+MM6 x_p1 B1 Y VDD pmos_rvt w=81.0n l=20n nfin=3
+MM7 x_p1 B2 Y VDD pmos_rvt w=81.0n l=20n nfin=3
+.ENDS
+.SUBCKT OAI22x1_A7S_75t_R A1 A2 B1 B2 VDD VSS Y
+MM0 Y A1 x_n1 VSS nmos_rvt w=81.0n l=20n nfin=3
+MM1 Y A2 x_n1 VSS nmos_rvt w=81.0n l=20n nfin=3
+MM2 x_n1 B1 VSS VSS nmos_rvt w=81.0n l=20n nfin=3
+MM3 x_n1 B2 VSS VSS nmos_rvt w=81.0n l=20n nfin=3
+MM4 Y A1 x_p1 VDD pmos_rvt w=81.0n l=20n nfin=3
+MM5 x_p1 A2 VDD VDD pmos_rvt w=81.0n l=20n nfin=3
+MM6 Y B1 x_p2 VDD pmos_rvt w=81.0n l=20n nfin=3
+MM7 x_p2 B2 VDD VDD pmos_rvt w=81.0n l=20n nfin=3
+.ENDS
+.SUBCKT TIEHIx1_A7S_75t_R H VDD VSS
+MM0 H VSS VDD VDD pmos_rvt w=81.0n l=20n nfin=3
+.ENDS
+.SUBCKT TIELOx1_A7S_75t_R L VDD VSS
+MM0 L VDD VSS VSS nmos_rvt w=81.0n l=20n nfin=3
+.ENDS
+.SUBCKT XOR2x1_A7S_75t_R A B VDD VSS Y
+MM0 An A VSS VSS nmos_rvt w=81.0n l=20n nfin=3
+MM1 An A VDD VDD pmos_rvt w=81.0n l=20n nfin=3
+MM2 Bn B VSS VSS nmos_rvt w=81.0n l=20n nfin=3
+MM3 Bn B VDD VDD pmos_rvt w=81.0n l=20n nfin=3
+MM4 Y A x_n1 VSS nmos_rvt w=81.0n l=20n nfin=3
+MM5 x_n1 B VSS VSS nmos_rvt w=81.0n l=20n nfin=3
+MM6 Y An x_n2 VSS nmos_rvt w=81.0n l=20n nfin=3
+MM7 x_n2 Bn VSS VSS nmos_rvt w=81.0n l=20n nfin=3
+MM8 VDD A x_p1 VDD pmos_rvt w=81.0n l=20n nfin=3
+MM9 VDD B x_p1 VDD pmos_rvt w=81.0n l=20n nfin=3
+MM10 x_p1 An Y VDD pmos_rvt w=81.0n l=20n nfin=3
+MM11 x_p1 Bn Y VDD pmos_rvt w=81.0n l=20n nfin=3
+.ENDS
+.SUBCKT XNOR2x1_A7S_75t_R A B VDD VSS Y
+MM0 An A VSS VSS nmos_rvt w=81.0n l=20n nfin=3
+MM1 An A VDD VDD pmos_rvt w=81.0n l=20n nfin=3
+MM2 Bn B VSS VSS nmos_rvt w=81.0n l=20n nfin=3
+MM3 Bn B VDD VDD pmos_rvt w=81.0n l=20n nfin=3
+MM4 Y A x_n1 VSS nmos_rvt w=81.0n l=20n nfin=3
+MM5 Y B x_n1 VSS nmos_rvt w=81.0n l=20n nfin=3
+MM6 x_n1 An VSS VSS nmos_rvt w=81.0n l=20n nfin=3
+MM7 x_n1 Bn VSS VSS nmos_rvt w=81.0n l=20n nfin=3
+MM8 Y A x_p1 VDD pmos_rvt w=81.0n l=20n nfin=3
+MM9 x_p1 B VDD VDD pmos_rvt w=81.0n l=20n nfin=3
+MM10 Y An x_p2 VDD pmos_rvt w=81.0n l=20n nfin=3
+MM11 x_p2 Bn VDD VDD pmos_rvt w=81.0n l=20n nfin=3
+.ENDS
+.SUBCKT DHLx1_A7S_75t_R CLK D VDD VSS Q
+MM0 CLKb CLK VSS VSS nmos_rvt w=81.0n l=20n nfin=3
+MM1 CLKb CLK VDD VDD pmos_rvt w=81.0n l=20n nfin=3
+MM2 D CLK n1 VSS nmos_rvt w=81.0n l=20n nfin=3
+MM3 D CLKb n1 VDD pmos_rvt w=81.0n l=20n nfin=3
+MM4 n2 n1 VSS VSS nmos_rvt w=81.0n l=20n nfin=3
+MM5 n2 n1 VDD VDD pmos_rvt w=81.0n l=20n nfin=3
+MM6 Q n2 VSS VSS nmos_rvt w=81.0n l=20n nfin=3
+MM7 Q n2 VDD VDD pmos_rvt w=81.0n l=20n nfin=3
+MM8 Q CLKb n1 VSS nmos_rvt w=81.0n l=20n nfin=3
+MM9 Q CLK n1 VDD pmos_rvt w=81.0n l=20n nfin=3
+.ENDS
+.SUBCKT DFFHQNx1_A7S_75t_R CLK D VDD VSS QN
+MM0 CLKb CLK VSS VSS nmos_rvt w=81.0n l=20n nfin=3
+MM1 CLKb CLK VDD VDD pmos_rvt w=81.0n l=20n nfin=3
+MM2 D CLKb m1 VSS nmos_rvt w=81.0n l=20n nfin=3
+MM3 D CLK m1 VDD pmos_rvt w=81.0n l=20n nfin=3
+MM4 m2 m1 VSS VSS nmos_rvt w=81.0n l=20n nfin=3
+MM5 m2 m1 VDD VDD pmos_rvt w=81.0n l=20n nfin=3
+MM6 m3 m2 VSS VSS nmos_rvt w=81.0n l=20n nfin=3
+MM7 m3 m2 VDD VDD pmos_rvt w=81.0n l=20n nfin=3
+MM8 m3 CLK m1 VSS nmos_rvt w=81.0n l=20n nfin=3
+MM9 m3 CLKb m1 VDD pmos_rvt w=81.0n l=20n nfin=3
+MM10 m2 CLK s1 VSS nmos_rvt w=81.0n l=20n nfin=3
+MM11 m2 CLKb s1 VDD pmos_rvt w=81.0n l=20n nfin=3
+MM12 s2 s1 VSS VSS nmos_rvt w=81.0n l=20n nfin=3
+MM13 s2 s1 VDD VDD pmos_rvt w=81.0n l=20n nfin=3
+MM14 QN s2 VSS VSS nmos_rvt w=81.0n l=20n nfin=3
+MM15 QN s2 VDD VDD pmos_rvt w=81.0n l=20n nfin=3
+MM16 QN CLKb s1 VSS nmos_rvt w=81.0n l=20n nfin=3
+MM17 QN CLK s1 VDD pmos_rvt w=81.0n l=20n nfin=3
+.ENDS
+.SUBCKT A7S_75t_R_LIBRARY VDD VSS
+XINVx1 INVx1_A VDD VSS INVx1_Y INVx1_A7S_75t_R
+XBUFx1 BUFx1_A VDD VSS BUFx1_Y BUFx1_A7S_75t_R
+XNAND2x1 NAND2x1_A NAND2x1_B VDD VSS NAND2x1_Y NAND2x1_A7S_75t_R
+XNOR2x1 NOR2x1_A NOR2x1_B VDD VSS NOR2x1_Y NOR2x1_A7S_75t_R
+XAND2x1 AND2x1_A AND2x1_B VDD VSS AND2x1_Y AND2x1_A7S_75t_R
+XOR2x1 OR2x1_A OR2x1_B VDD VSS OR2x1_Y OR2x1_A7S_75t_R
+XAOI21x1 AOI21x1_A1 AOI21x1_A2 AOI21x1_B VDD VSS AOI21x1_Y AOI21x1_A7S_75t_R
+XOAI21x1 OAI21x1_A1 OAI21x1_A2 OAI21x1_B VDD VSS OAI21x1_Y OAI21x1_A7S_75t_R
+XNAND3x1 NAND3x1_A NAND3x1_B NAND3x1_C VDD VSS NAND3x1_Y NAND3x1_A7S_75t_R
+XNOR3x1 NOR3x1_A NOR3x1_B NOR3x1_C VDD VSS NOR3x1_Y NOR3x1_A7S_75t_R
+XAOI22x1 AOI22x1_A1 AOI22x1_A2 AOI22x1_B1 AOI22x1_B2 VDD VSS AOI22x1_Y AOI22x1_A7S_75t_R
+XOAI22x1 OAI22x1_A1 OAI22x1_A2 OAI22x1_B1 OAI22x1_B2 VDD VSS OAI22x1_Y OAI22x1_A7S_75t_R
+XTIEHIx1 TIEHIx1_H VDD VSS TIEHIx1_A7S_75t_R
+XTIELOx1 TIELOx1_L VDD VSS TIELOx1_A7S_75t_R
+XXOR2x1 XOR2x1_A XOR2x1_B VDD VSS XOR2x1_Y XOR2x1_A7S_75t_R
+XXNOR2x1 XNOR2x1_A XNOR2x1_B VDD VSS XNOR2x1_Y XNOR2x1_A7S_75t_R
+XDHLx1 DHLx1_CLK DHLx1_D VDD VSS DHLx1_Q DHLx1_A7S_75t_R
+XDFFHQNx1 DFFHQNx1_CLK DFFHQNx1_D VDD VSS DFFHQNx1_QN DFFHQNx1_A7S_75t_R
+.ENDS

@@ -1,0 +1,252 @@
+{
+  "body_verification": {
+    "device_classes": [],
+    "device_count": 0,
+    "finding_count": 0,
+    "findings": [],
+    "reason": null,
+    "status": "verified"
+  },
+  "category_counts": {
+    "device.finfet_bulk_tied": 2,
+    "device.property": 1,
+    "topology": 3
+  },
+  "category_error_counts": {
+    "device.property": 1,
+    "topology": 3
+  },
+  "constant_nets_applied": null,
+  "counts": {
+    "devices": {
+      "layout": 6,
+      "matched": 5,
+      "reference": 6
+    },
+    "nets": {
+      "layout": 7,
+      "matched": 3,
+      "reference": 7
+    },
+    "pins": {
+      "layout": 5,
+      "matched": 5,
+      "reference": 5
+    }
+  },
+  "device_classes": [
+    "nfet",
+    "pfet",
+    "resistor"
+  ],
+  "device_parameter_coverage": [],
+  "engine": "klayout",
+  "environment": {
+    "engine": "klayout",
+    "engine_version": "0.30.12",
+    "extracted_netlist": null,
+    "layout_sha256": "980f1b52b1f6be933f8e0d079adc93c5ebcd3b897b83e6bc50d6b9534163c700",
+    "netgen_binary": null,
+    "reference_sha256": "0167cd419557a865caae7bc7c27da95d15ff8bd216487146f21757e9b4c07741"
+  },
+  "error_count": 4,
+  "hints_applied": null,
+  "layout": {
+    "path": "layout/AND2x1_A7S_75t_R.gds",
+    "scope": "repo"
+  },
+  "mismatch_count": 6,
+  "mismatches": [
+    {
+      "category": "device.finfet_bulk_tied",
+      "circuit": null,
+      "description": "options.finfet_bulk joined the nmos bulk net 'vsubs' onto layout net 'VSS' on 3 device(s) before comparing -- the bulk connectivity is a caller assertion, not geometry read from the layout",
+      "details": {
+        "bulk_net": "vsubs",
+        "device_classes": [
+          "nmos_rvt"
+        ],
+        "device_count": 3,
+        "net": "VSS",
+        "polarity": "nmos",
+        "status": "joined"
+      },
+      "device": null,
+      "instance": null,
+      "net": null,
+      "property": null,
+      "severity": "warning",
+      "side": "layout",
+      "subcircuit": null
+    },
+    {
+      "category": "device.finfet_bulk_tied",
+      "circuit": null,
+      "description": "options.finfet_bulk joined the pmos bulk net '$8' onto layout net 'VDD' on 3 device(s) before comparing -- the bulk connectivity is a caller assertion, not geometry read from the layout",
+      "details": {
+        "bulk_net": "$8",
+        "device_classes": [
+          "pmos_rvt"
+        ],
+        "device_count": 3,
+        "net": "VDD",
+        "polarity": "pmos",
+        "status": "joined"
+      },
+      "device": null,
+      "instance": null,
+      "net": null,
+      "property": null,
+      "severity": "warning",
+      "side": "layout",
+      "subcircuit": null
+    },
+    {
+      "category": "device.property",
+      "circuit": null,
+      "description": "matched device parameter 'nfin' differs",
+      "details": null,
+      "device": {
+        "class": "nmos_rvt",
+        "layout": "\\$1",
+        "reference": "M0"
+      },
+      "instance": null,
+      "net": null,
+      "property": {
+        "layout": 3.0,
+        "name": "nfin",
+        "reference": 2.0
+      },
+      "severity": "error",
+      "side": "both",
+      "subcircuit": null
+    },
+    {
+      "category": "topology",
+      "circuit": null,
+      "description": "nets were paired despite a name/identity conflict",
+      "details": null,
+      "device": null,
+      "instance": null,
+      "net": {
+        "layout": "VSS|vsubs",
+        "reference": "VSS"
+      },
+      "property": null,
+      "severity": "error",
+      "side": "both",
+      "subcircuit": null
+    },
+    {
+      "category": "topology",
+      "circuit": null,
+      "description": "nets were paired despite a name/identity conflict",
+      "details": null,
+      "device": null,
+      "instance": null,
+      "net": {
+        "layout": "\\$2",
+        "reference": "N1"
+      },
+      "property": null,
+      "severity": "error",
+      "side": "both",
+      "subcircuit": null
+    },
+    {
+      "category": "topology",
+      "circuit": null,
+      "description": "nets were paired despite a name/identity conflict",
+      "details": null,
+      "device": null,
+      "instance": null,
+      "net": {
+        "layout": "\\$7",
+        "reference": "YNAND"
+      },
+      "property": null,
+      "severity": "error",
+      "side": "both",
+      "subcircuit": null
+    }
+  ],
+  "net_correspondence": [
+    {
+      "layout": "B",
+      "pin": true,
+      "reference": "B"
+    },
+    {
+      "layout": "VDD",
+      "pin": true,
+      "reference": "VDD"
+    },
+    {
+      "layout": "Y",
+      "pin": true,
+      "reference": "Y"
+    }
+  ],
+  "options": {
+    "anchor_top_level_pins": null,
+    "combine_devices": false,
+    "combine_devices_max_attempts": 5,
+    "combine_devices_per_circuit": null,
+    "compare_mos_flavour": false,
+    "compare_parameters": null,
+    "finfet_bulk": {
+      "nmos": "VSS",
+      "pmos": "VDD"
+    },
+    "flatten_layout": false,
+    "flatten_reference": false,
+    "netgen_setup": null,
+    "parameter_tolerance": null,
+    "power_connectivity": null,
+    "strict_top_level_pin_count": false,
+    "supply_nets": [
+      "GND",
+      "VCC",
+      "VDD",
+      "VGND",
+      "VPWR",
+      "VSS"
+    ]
+  },
+  "parameter_tolerance": null,
+  "power_connectivity": {
+    "excluded_pins": [],
+    "expected_nets": null,
+    "finding_count": 0,
+    "findings": [],
+    "instance_count": 0,
+    "power_pins": [],
+    "power_pins_derivation": null,
+    "reason": "reference.form is 'plain-element', whose reference netlist carries its own power/ground pins and nets -- they take part in the ordinary compare, so this check (which exists to cover the signal-only 'gate-level-verilog' form) does not apply",
+    "status": "unchecked",
+    "unchecked_expected_pins": []
+  },
+  "provenance": {
+    "deck": {
+      "content_hash": "sha256:ac57a7b68dd496e10a654ed79d29c1129bf3403d440ce5a73e43c5e8afd875aa",
+      "name": "asap7",
+      "released": false
+    },
+    "input": {
+      "content_hash": "sha256:980f1b52b1f6be933f8e0d079adc93c5ebcd3b897b83e6bc50d6b9534163c700",
+      "role": "layout"
+    },
+    "klayout_version": "0.30.12",
+    "klayout_version_mismatch": false,
+    "klt_git_commit": "4f345a577997d2c31d4fa55e0092efbb3ee24f41",
+    "klt_reinstall_spec": "klayout-tools @ git+https://github.com/2AMLogic/klayout-tools@4f345a577997d2c31d4fa55e0092efbb3ee24f41",
+    "klt_version": "0.8.1.dev604+g4f345a577997",
+    "pdk": null
+  },
+  "reference": "verification/.work/lvs-nfin-1-AND2x1.cdl",
+  "reference_top": "AND2X1_A7S_75T_R",
+  "schema_version": 2,
+  "status": "mismatch",
+  "top": "AND2x1_A7S_75t_R"
+}
