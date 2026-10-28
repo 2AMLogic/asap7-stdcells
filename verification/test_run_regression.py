@@ -228,6 +228,57 @@ class RunRegressionTest(unittest.TestCase):
         self.assertEqual(cases["case3-MY-self-below"][0], [("N", "MX"), ("C", "R180"), ("N", "MX")])
         self.assertEqual(cases["case3-MY-self-below"][1], [("N", "R0"), ("C", "MY"), ("N", "R0")])
 
+    def test_pair_and_end_rows_cover_spec_case_2_and_4(self):
+        rows, ids = rr.pair_rows("A", ["A", "B", "T"], "N")
+        self.assertEqual([r for r in rows if r], [[("N", "R0"), ("A", "R0"), (b, "R0"), ("N", "R0")] for b in ("A", "B", "T")])
+        self.assertEqual([i for i in ids if i], ["A", "B", "T"])
+        self.assertTrue(all(not r for r, i in zip(rows, ids) if i is None))  # rows are set off by an empty row
+        rows, ids = rr.end_rows("C", "T")
+        self.assertEqual([r for r in rows if r], [[("T", "R0"), ("C", "R0"), ("T", "R0")], [("T", "R0"), ("C", "R0")], [("C", "R0"), ("T", "R0")]])
+        self.assertEqual([i for i in ids if i], ["tap-both", "tap-left", "tap-right"])
+
+    def test_merged_rows_hold_every_ordered_pair_once(self):
+        names = ["A", "B", "T"]
+        rows, labels = rr.merged_rows(names, "N", "T")
+        pairs = {l for l in labels if l and "/case2-pair/" in l}
+        self.assertEqual(pairs, {f"{a}/case2-pair/{b}" for a in names for b in names})
+        self.assertEqual(len(rows), len(labels))
+        self.assertTrue(all(not r for r, l in zip(rows, labels) if l is None))
+        self.assertEqual(sum(1 for l in labels if l == "A/case3-R0-inv-above"), 2)  # a stacked case is two rows
+
+    def test_violating_rows_maps_marker_boxes_to_cases(self):
+        labels = ["A/case1-row", None, "A/case4-tap-left"]
+        env = {"violations": [{"bbox": {"left": 0, "bottom": 2200, "right": 10, "top": 2300}}]}
+        self.assertEqual(rr.violating_rows(env, labels), ["A/case4-tap-left"])
+        self.assertEqual(rr.violating_rows({"violations": []}, labels), [])
+
+    def test_family_coverage_lists_a_family_no_control_fires(self):
+        cov = rr.family_coverage({"spec_rule_families": ["FIN", "M1", "V1"]}, ["FIN.W.1", "M1.S.1", "M1.W.1"])
+        self.assertEqual(cov["families"]["M1"], ["M1.S.1", "M1.W.1"])
+        self.assertEqual(cov["families_without_control"], ["V1"])
+
+    def library_cfg(self):
+        cfg = self.drawn_cfg()
+        cfg["library_neighbour"] = cfg["library_tap"] = "INVx1_D"
+        cfg["spec_rule_families"] = ["M1", "FIN"]
+        return cfg
+
+    def test_library_cases_merged_stream_and_family_coverage_are_recorded(self):
+        klt = FakeKlt()
+        self.assertEqual(self.go(klt, self.library_cfg()), 1)  # FIN has no control that fires it
+        m = self.manifest()
+        cases = {c["id"]: c["result"] for c in self.drawn_row()["cases"]}
+        self.assertEqual((cases["case2-pairs"], cases["case4-ends"]), ("PASS", "PASS"))
+        self.assertEqual(m["merged_stream"]["result"], "PASS")
+        self.assertTrue((rr.HERE / "records" / "r1" / "merged" / "drc.json").is_file())
+        self.assertEqual(m["family_coverage"]["families_without_control"], ["FIN"])
+        self.assertIn("NO CONTROL FIRES", (rr.HERE / "records" / "r1" / "summary.md").read_text())
+
+    def test_failing_pair_case_fails_run_and_merged_stream(self):
+        self.assertEqual(self.go(FakeKlt(bad_case="case2-pairs"), self.library_cfg()), 1)
+        cases = {c["id"]: c["result"] for c in self.drawn_row()["cases"]}
+        self.assertEqual(cases["case2-pairs"], "FAIL")
+
     def test_drawn_cell_runs_cases_controls_and_reproducibility(self):
         klt = FakeKlt()
         self.assertEqual(self.go(klt, self.drawn_cfg()), 0)

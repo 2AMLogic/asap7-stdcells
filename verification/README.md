@@ -85,8 +85,13 @@ one the run:
   `INVx1`), and `case3-<R0|MX|MY|R180>-<inv|self>-<above|below>`, two stacked
   rows sharing a rail with the cell in each orientation, the other row holding
   `INVx1` in the mirrored orientation (`inv`) or the same cell mirrored
-  (`self`), above or below. Cases 2 and 4 need other cells and TAP and are not
-  built yet;
+  (`self`), above or below;
+- runs case 2 (`case2-pairs`): the cell as the left cell A of every ordered pair
+  (A, B) for all 22 drawn B, as one row per B, `INVx1 | A | B | INVx1`, rows set
+  off by an empty row, in one stream and one `klt drc` request per A. The 22
+  streams together are the 484 ordered pairs; a violation is attributed to its
+  pair from the marker box (`observed.violating_rows`). Case 4 (`case4-ends`):
+  rows `TAP | cell | TAP`, `TAP | cell` and `cell | TAP` in one stream;
 - runs the scripted grid and boundary checks (case 5, `case5-grid/checks.json`,
   klt does not check absolute grid origin on this path, klayout-tools#4082):
   boundary is one rectangle at the origin, 270 nm tall, width a multiple of
@@ -94,10 +99,21 @@ one the run:
   centres on x = 27 + 54k; labelled M1 pins 18 nm wide on the 36 nm track grid,
   rails 18 nm centred on a cell edge.
 
+After the cells, a run with no `--only` builds one top cell `LIBRARY_CASES` that
+holds cases 1-4 of every drawn cell (924 cases on 2200 rows, each case set off
+by an empty row) and runs one `klt drc` request on it: `<record>/merged/drc.json`,
+the library-wide envelope for T1 item 3. `klt drc` has no grid or batch mode, so
+this is one single-unit request, not a loop of 484 runs. The manifest and summary
+carry its `coverage.layers_in_stream_without_rules`, `coverage.rules_skipped` and
+`coverage.deck_scope` verbatim, and the rows of any violation.
+
 Control kinds: `drc_inject_box` (a box added on a layer; the named
 `expect_rule` must fire and must not fire on the clean cell), `lvs_nfin` (CDL
 copy with the NMOS fin count changed), `grid_offset` (every shape of one layer
-moved; the named scripted check must fail). The summary lists every deck rule id
+moved; the named scripted check must fail). `cells.json` `spec_rule_families`
+lists the rule-id families `spec/stdcells.md` requires a control for; a family
+in which no CAUGHT control fires any rule fails the run, and the summary table
+"Negative-control coverage per rule family" names it. The summary lists every deck rule id
 no control on a drawn cell fires as **unexercised**: a clean result says nothing
 about those.
 
@@ -136,10 +152,10 @@ the pin they were run with.
 
 Filed or found by this harness (tool gaps, not design findings):
 
-- 2AMLogic/klayout-tools#3811: the ASAP7 deck aborts (KLayout assertion or
-  SIGSEGV) on a layout with LIG shapes but no gate/active geometry. TAPCELL
-  therefore has no DRC verdict and is recorded `KNOWN-GAP`. The issue is
-  closed, and FILLERxp5 no longer aborts on current klt: it reports five
+- 2AMLogic/klayout-tools#3811: the ASAP7 deck aborted (KLayout assertion or
+  SIGSEGV) on a layout with LIG shapes but no gate/active geometry, so TAPCELL
+  was recorded `KNOWN-GAP`. Fixed in klt 0.8.0; TAPCELL now has a DRC verdict
+  and its `known_drc_gap` entry is gone. FILLERxp5 no longer aborts on current klt: it reports five
   width and gate-spacing rules when checked standalone, and is clean when
   abutted (`spec/decisions/0005-filler-drc-classification.md`;
   2AMLogic/klayout-tools#4029). Its harness verdict is its abutment cases,
