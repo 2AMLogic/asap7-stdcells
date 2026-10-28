@@ -3,14 +3,14 @@
   "kind": "generic",
   "status": "pass",
   "t1_item": 1,
-  "summary": "T1 item 1 (Design sources): 61/61 attestation checks passed (klt signoff --attest)",
+  "summary": "T1 item 1 (Design sources): 63/63 attestation checks passed (klt signoff --attest)",
   "source": "manifests/t1-item1-inventory.json",
   "attestation": {
     "producer": "klt signoff --attest",
     "inventory_schema_version": 1,
     "hash_algorithm": "sha256-raw-bytes",
-    "check_count": 61,
-    "passed_count": 61,
+    "check_count": 63,
+    "passed_count": 63,
     "checks": [
       {
         "check": "present",
@@ -24,7 +24,7 @@
         "role": "source",
         "path": "design/cdl-freshness.json",
         "passed": true,
-        "content_hash": "sha256:e91410a6756d61132a959d5e48c560e310228a79f23998ed399a30bf4ad60f67"
+        "content_hash": "sha256:b4aad1e4970a9db3d0c783e522bdd1c5ca86d0763c1347c0675eb3b0fc173594"
       },
       {
         "check": "present",
@@ -67,6 +67,20 @@
         "path": "design/draw_BUFx1_A7S_75t_R.py",
         "passed": true,
         "content_hash": "sha256:67f7e95f9157e925207b2fa6098a53a30e169876fa715136808b608b43dcb0ae"
+      },
+      {
+        "check": "present",
+        "role": "source",
+        "path": "design/draw_DFFHQNx1_A7S_75t_R.py",
+        "passed": true,
+        "content_hash": "sha256:2118ff146ac329b65bd1405e289f7d628216f5011d5128ed756a89eb38f52097"
+      },
+      {
+        "check": "present",
+        "role": "source",
+        "path": "design/draw_DHLx1_A7S_75t_R.py",
+        "passed": true,
+        "content_hash": "sha256:75663842a00974eb0d83897360006a8d7bb905ee51b55d73d6dc6fc584a984bf"
       },
       {
         "check": "present",
@@ -577,7 +591,7 @@
         "path": "manifests/t1-item1-inventory.json",
         "scope": "repo"
       },
-      "content_hash": "sha256:6dc1e84264b0b5f063ae8072788a89088e4b6fefb9fb84457bcbff3699d3abf7"
+      "content_hash": "sha256:a1a88b74552fed5fd9862719dbe61c5c2fbd8049485415c9ce4907df7bab9359"
     }
   }
 }
