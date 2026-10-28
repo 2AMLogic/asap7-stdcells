@@ -5,6 +5,8 @@ triage role. Newest first.
 
 ### 2026-10-28
 
+- **PR #57**: feat(verification): ERC supply structure with negative controls for T1 item 11
+- **Issue #40** (closed): T1 item 11 (power delivery): klt erc supply spec on abutted, mirrored cell rows with TAP ties
 - **PR #55**: feat: add DRC cases 2 and 4, family controls and a library-wide envelope
 - **PR #54**: feat: per-cell LVS fault controls, fill/tap structure check and library LVS for T1 item 4
 - **Issue #38** (closed): T1 item 4 (LVS clean): klt lvs match with exact NFIN for every device-bearing cell, with negative controls
