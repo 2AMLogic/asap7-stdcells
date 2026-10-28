@@ -31,7 +31,7 @@ def build(name=CELL):
     m1(d, 108, 36, 126, 144)
     gate_contact(d, 1)                  # gate to VDD
     m1(d, 72, 162, 90, 261)
-    for text, x, y in (("L", 117, 135),):
+    for text, x, y in (("L", 117, 72),):
         d.label(text, x, y)
     return d
 

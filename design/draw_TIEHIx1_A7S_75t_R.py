@@ -31,7 +31,7 @@ def build(name=CELL):
     m1(d, 108, 126, 126, 234)
     gate_contact(d, 1)                  # gate to VSS
     m1(d, 72, 9, 90, 108)
-    for text, x, y in (("H", 117, 135),):
+    for text, x, y in (("H", 117, 200),):
         d.label(text, x, y)
     return d
 

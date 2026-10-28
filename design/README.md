@@ -31,7 +31,7 @@ the switch-level check ignores fin counts and drive strength.
 Cells so far: the 12-cell fallback set of `spec/stdcells.md`: `INVx1`, `BUFx1`,
 `NAND2x1`, `NOR2x1`, `AND2x1`, `OR2x1`, `AOI21x1`, `OAI21x1`, `FILLER1`,
 `FILLER2`, `FILLER4`, `TAP` (all `_A7S_75t_R`), plus `NAND3x1`, `NOR3x1`, `AOI22x1`,
-`OAI22x1` from #36. The script location (`design/`,
+`OAI22x1`, `TIEHIx1`, `TIELOx1` from #36. The script location (`design/`,
 not `layout/`) is noted in `spec/decisions/0006-cell-edge-treatment.md`; the TAP
 geometry and the conventions the logic cells share are in
 `spec/decisions/0008-tap-well-geometry-and-logic-cell-conventions.md`. Cells are
