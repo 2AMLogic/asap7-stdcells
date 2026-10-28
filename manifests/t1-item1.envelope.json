@@ -3,14 +3,14 @@
   "kind": "generic",
   "status": "pass",
   "t1_item": 1,
-  "summary": "T1 item 1 (Design sources): 57/57 attestation checks passed (klt signoff --attest)",
+  "summary": "T1 item 1 (Design sources): 59/59 attestation checks passed (klt signoff --attest)",
   "source": "manifests/t1-item1-inventory.json",
   "attestation": {
     "producer": "klt signoff --attest",
     "inventory_schema_version": 1,
     "hash_algorithm": "sha256-raw-bytes",
-    "check_count": 57,
-    "passed_count": 57,
+    "check_count": 59,
+    "passed_count": 59,
     "checks": [
       {
         "check": "present",
@@ -24,7 +24,7 @@
         "role": "source",
         "path": "design/cdl-freshness.json",
         "passed": true,
-        "content_hash": "sha256:f56bc1809cd5aecb2fec20e2ebc3385a22b71ed02b6f6d47ba6d7bd6c8b5861d"
+        "content_hash": "sha256:75cc2fe0b573d7f6823fe9f72d4935fd430545a6d01e9a1d0906c8e12df00ed4"
       },
       {
         "check": "present",
@@ -151,6 +151,20 @@
         "path": "design/draw_TAP_A7S_75t_R.py",
         "passed": true,
         "content_hash": "sha256:e7c61f3f5b6e3c5b646258bcd2fb5385fd773c42997a41c774ec5b968607cad1"
+      },
+      {
+        "check": "present",
+        "role": "source",
+        "path": "design/draw_TIEHIx1_A7S_75t_R.py",
+        "passed": true,
+        "content_hash": "sha256:63e99c269fa7119c15b28db20f5b61969c9e385a00dee3a7193aea708ff51475"
+      },
+      {
+        "check": "present",
+        "role": "source",
+        "path": "design/draw_TIELOx1_A7S_75t_R.py",
+        "passed": true,
+        "content_hash": "sha256:2db055c95176988bae4a1c997e2ea5cccaf2701ac733999c2115ffd009fd06bb"
       },
       {
         "check": "present",
@@ -549,7 +563,7 @@
         "path": "manifests/t1-item1-inventory.json",
         "scope": "repo"
       },
-      "content_hash": "sha256:c6b931be485bbb8509a502108b89ac7cf02bf5bba2e027b81e17184cca3c8eaa"
+      "content_hash": "sha256:493c63e33e32d787f75187e76132758fae5f1fce6d8438ee8dfab559583b462d"
     }
   }
 }

@@ -57,11 +57,11 @@
   },
   "TIEHIx1_A7S_75t_R": {
     "cdl_sha256": "bbefc3cb943d5e928d3e6c2655d5d0c8ec78bec6523d958572ef463fd69bfc45",
-    "script_sha256": null
+    "script_sha256": "63e99c269fa7119c15b28db20f5b61969c9e385a00dee3a7193aea708ff51475"
   },
   "TIELOx1_A7S_75t_R": {
     "cdl_sha256": "b31af09267fe55917755444d61589f78144ebd0794fc0f2ed0f4ab7d384e4f9f",
-    "script_sha256": null
+    "script_sha256": "2db055c95176988bae4a1c997e2ea5cccaf2701ac733999c2115ffd009fd06bb"
   },
   "XNOR2x1_A7S_75t_R": {
     "cdl_sha256": "8af9e840597cd051650f58035415414a875f1df35fe1cc4feed25c8b6b099218",
