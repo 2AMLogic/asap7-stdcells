@@ -1,0 +1,10 @@
+* extracted by klt extract --deck asap7
+
+* cell TIEHIx1_A7S_75t_R
+* pin H
+* pin VDD
+* pin VSS
+.SUBCKT TIEHIx1_A7S_75t_R H VDD VSS
+* device instance $1 r0 *1 0,0.018 pmos_rvt
+M$1 H VSS VDD \$4 pmos_rvt L=0.02U W=0.081U NFIN=3
+.ENDS TIEHIx1_A7S_75t_R
