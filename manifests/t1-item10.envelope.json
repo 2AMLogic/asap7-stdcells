@@ -45,7 +45,7 @@
         "role": "hygiene",
         "path": "spec/bringup.md",
         "passed": true,
-        "content_hash": "sha256:c16f1fd363d0b4cf47ae5b50f34df8dba18caa9da9701b3d949cf67f80d7ffe7"
+        "content_hash": "sha256:62c7ea1addcbd5c58f1bb31a0a76668341df0715f46ee9e9038c6b443f53529f"
       },
       {
         "check": "present",
