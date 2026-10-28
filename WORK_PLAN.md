@@ -21,7 +21,6 @@ _None._
 `loom:important`; taken before unlabelled work.
 
 - **#37**: T1 item 3 (DRC clean): all five DRC acceptance case families per drawn cell, with negative controls and a citable envelope
-- **#38**: T1 item 4 (LVS clean): klt lvs match with exact NFIN for every device-bearing cell, with negative controls
 
 ## Ready
 
@@ -33,13 +32,13 @@ _None._
 
 Issues currently being built (`loom:building`).
 
-_None._
+- **#40**: T1 item 11 (power delivery): klt erc supply spec on abutted, mirrored cell rows with TAP ties
 
 ## PRs Awaiting Review
 
 PRs waiting on Judge (`loom:review-requested`).
 
-_None._
+- **#57**: feat(verification): ERC supply structure with negative controls for T1 item 11
 
 ## Approved (Awaiting Merge)
 
@@ -52,6 +51,8 @@ _None._
 Issues carrying `loom:curated`.
 
 - **#3**: Track the gap to T1 (klayout-tools design-evidence-tiers.md) *(curated)*
+- **#37**: T1 item 3 (DRC clean): all five DRC acceptance case families per drawn cell, with negative controls and a citable envelope *(curated)*
+- **#40**: T1 item 11 (power delivery): klt erc supply spec on abutted, mirrored cell rows with TAP ties *(curated)*
 
 ## Proposed (Architect / Hermit)
 
@@ -67,12 +68,12 @@ _None._
 |------|-------|
 | Operator merge-risk holds | 0 |
 | Very important | 0 |
-| Important | 2 |
+| Important | 1 |
 | Ready (`loom:issue`) | 0 |
-| In Progress (`loom:building`) | 0 |
-| PRs awaiting review | 0 |
+| In Progress (`loom:building`) | 1 |
+| PRs awaiting review | 1 |
 | Approved PRs awaiting merge | 0 |
-| Curated | 1 |
+| Curated | 3 |
 | Architect / Hermit proposals | 0 |
 | Active epics | 0 |
 <!-- guide:plan-body:end -->
