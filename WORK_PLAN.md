@@ -32,13 +32,13 @@ _None._
 
 Issues currently being built (`loom:building`).
 
-- **#40**: T1 item 11 (power delivery): klt erc supply spec on abutted, mirrored cell rows with TAP ties
+_None._
 
 ## PRs Awaiting Review
 
 PRs waiting on Judge (`loom:review-requested`).
 
-- **#57**: feat(verification): ERC supply structure with negative controls for T1 item 11
+_None._
 
 ## Approved (Awaiting Merge)
 
@@ -52,7 +52,6 @@ Issues carrying `loom:curated`.
 
 - **#3**: Track the gap to T1 (klayout-tools design-evidence-tiers.md) *(curated)*
 - **#37**: T1 item 3 (DRC clean): all five DRC acceptance case families per drawn cell, with negative controls and a citable envelope *(curated)*
-- **#40**: T1 item 11 (power delivery): klt erc supply spec on abutted, mirrored cell rows with TAP ties *(curated)*
 
 ## Proposed (Architect / Hermit)
 
@@ -70,10 +69,10 @@ _None._
 | Very important | 0 |
 | Important | 1 |
 | Ready (`loom:issue`) | 0 |
-| In Progress (`loom:building`) | 1 |
-| PRs awaiting review | 1 |
+| In Progress (`loom:building`) | 0 |
+| PRs awaiting review | 0 |
 | Approved PRs awaiting merge | 0 |
-| Curated | 3 |
+| Curated | 2 |
 | Architect / Hermit proposals | 0 |
 | Active epics | 0 |
 <!-- guide:plan-body:end -->
