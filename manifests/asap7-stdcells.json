@@ -33,6 +33,16 @@
     "4": {
       "file": "verification/records/20261028T210000Z-klt0.8.1.dev604_g4f345a577997/library/lvs.json",
       "content_hash": "sha256:02f7e3ec8b46e3024d369046f58705aaff6cc94426a90f5b0567aaeb1dcebdef"
-    }
+    },
+    "11": [
+      {
+        "file": "verification/erc/erc.json",
+        "content_hash": "sha256:ca68a81ff84fc79469971bf0e0b9a2db715ff63acdaaea8d1eeb41140a8cfc88"
+      },
+      {
+        "file": "verification/records/20261028T210000Z-klt0.8.1.dev604_g4f345a577997/library/lvs.json",
+        "content_hash": "sha256:02f7e3ec8b46e3024d369046f58705aaff6cc94426a90f5b0567aaeb1dcebdef"
+      }
+    ]
   }
 }

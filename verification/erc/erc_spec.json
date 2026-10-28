@@ -1,0 +1,101 @@
+{
+  "_comment": [
+    "Supply spec for the ERC test structure (T1 item 11). ASAP7 layer numbers from design/a7s_common.py.",
+    "Gate role GATE 7/0 with active_layer ACTIVE 11/0 is required first by klt erc; no signal net is graded.",
+    "Power path: LISD (17/0) and LIG (16/0) -V0 (18/0)- M1 (19/0, rails, labels on 19/251) -V1 (21/0)- M2 (20/0, VSS strap). GATE-LIG is direct overlap, declared as a via on LIG's own layer so contacted gates are not reported floating.",
+    "n-well tie: ACTIVE inside WELL (1/0) under NSELECT (12/0) -> tap_requires NSELECT removes every PMOS source/drain.",
+    "substrate tie: region = extent minus WELL; ACTIVE under PSELECT (13/0) -> tap_requires PSELECT removes every NMOS source/drain."
+  ],
+  "stackup": [
+    {
+      "name": "gate",
+      "layer": "7/0",
+      "role": "gate",
+      "active_layer": "11/0"
+    },
+    {
+      "name": "lig",
+      "layer": "16/0"
+    },
+    {
+      "name": "lisd",
+      "layer": "17/0"
+    },
+    {
+      "name": "m1",
+      "layer": "19/0",
+      "label_layer": "19/251"
+    },
+    {
+      "name": "m2",
+      "layer": "20/0"
+    }
+  ],
+  "vias": [
+    {
+      "name": "gate_lig",
+      "layer": "16/0",
+      "between": [
+        "gate",
+        "lig"
+      ]
+    },
+    {
+      "name": "v0_lig",
+      "layer": "18/0",
+      "between": [
+        "lig",
+        "m1"
+      ]
+    },
+    {
+      "name": "v0",
+      "layer": "18/0",
+      "between": [
+        "lisd",
+        "m1"
+      ]
+    },
+    {
+      "name": "v1",
+      "layer": "21/0",
+      "between": [
+        "m1",
+        "m2"
+      ]
+    }
+  ],
+  "nets": [
+    {
+      "name": "VDD",
+      "kind": "supply"
+    },
+    {
+      "name": "VSS",
+      "kind": "supply"
+    }
+  ],
+  "ties": [
+    {
+      "name": "nwell_tie",
+      "well_layer": "1/0",
+      "tap_layer": "11/0",
+      "tap_requires": [
+        "12/0"
+      ],
+      "connect_to": "lisd",
+      "net": "VDD"
+    },
+    {
+      "name": "substrate_tie",
+      "well_layer": null,
+      "well_complement_of": "1/0",
+      "tap_layer": "11/0",
+      "tap_requires": [
+        "13/0"
+      ],
+      "connect_to": "lisd",
+      "net": "VSS"
+    }
+  ]
+}
