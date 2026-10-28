@@ -3,28 +3,28 @@
   "kind": "generic",
   "status": "pass",
   "t1_item": 1,
-  "summary": "T1 item 1 (Design sources): 59/59 attestation checks passed (klt signoff --attest)",
+  "summary": "T1 item 1 (Design sources): 61/61 attestation checks passed (klt signoff --attest)",
   "source": "manifests/t1-item1-inventory.json",
   "attestation": {
     "producer": "klt signoff --attest",
     "inventory_schema_version": 1,
     "hash_algorithm": "sha256-raw-bytes",
-    "check_count": 59,
-    "passed_count": 59,
+    "check_count": 61,
+    "passed_count": 61,
     "checks": [
       {
         "check": "present",
         "role": "source",
         "path": "design/a7s_common.py",
         "passed": true,
-        "content_hash": "sha256:4d16a992d3a13bbb21a0ccd73d5568fe6676938cd9c9d43eda9daf1d159344aa"
+        "content_hash": "sha256:6e357ef67470b7635d575da370bae6ad5baab44596b9cabc1144898196aa9ecb"
       },
       {
         "check": "present",
         "role": "source",
         "path": "design/cdl-freshness.json",
         "passed": true,
-        "content_hash": "sha256:75cc2fe0b573d7f6823fe9f72d4935fd430545a6d01e9a1d0906c8e12df00ed4"
+        "content_hash": "sha256:e91410a6756d61132a959d5e48c560e310228a79f23998ed399a30bf4ad60f67"
       },
       {
         "check": "present",
@@ -165,6 +165,20 @@
         "path": "design/draw_TIELOx1_A7S_75t_R.py",
         "passed": true,
         "content_hash": "sha256:2db055c95176988bae4a1c997e2ea5cccaf2701ac733999c2115ffd009fd06bb"
+      },
+      {
+        "check": "present",
+        "role": "source",
+        "path": "design/draw_XNOR2x1_A7S_75t_R.py",
+        "passed": true,
+        "content_hash": "sha256:a9b0da28cd7fd999a8d1b7faa36394d2744932efea8b4967122a023bcfdad4b2"
+      },
+      {
+        "check": "present",
+        "role": "source",
+        "path": "design/draw_XOR2x1_A7S_75t_R.py",
+        "passed": true,
+        "content_hash": "sha256:744fd74a901b3e51d8532902c8b4da46e641b16565c587755a1306ce6369d7e2"
       },
       {
         "check": "present",
@@ -563,7 +577,7 @@
         "path": "manifests/t1-item1-inventory.json",
         "scope": "repo"
       },
-      "content_hash": "sha256:493c63e33e32d787f75187e76132758fae5f1fce6d8438ee8dfab559583b462d"
+      "content_hash": "sha256:6dc1e84264b0b5f063ae8072788a89088e4b6fefb9fb84457bcbff3699d3abf7"
     }
   }
 }

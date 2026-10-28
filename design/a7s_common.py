@@ -178,3 +178,19 @@ def link(d, y0, vias):
     d.box("M2", min(vias) - 5, y0, max(vias) + 23, y0 + 18)
     for x in vias:
         d.box("V1", x, y0, x + 18, y0 + 18)
+
+
+class Shifted:
+    """A CellDraw seen through an x offset of `sites` whole sites, so a block drawn in
+    its own site numbering (gate j, x = 27 + 54 j) can be placed further along a wider
+    cell. An even shift keeps the gates at odd sites and the shapes on the 36 nm M1
+    track grid (54 nm x an even number of sites is a multiple of 36 nm)."""
+
+    def __init__(self, d, sites):
+        self.d, self.dx = d, SITE * sites
+
+    def box(self, layer, x0, y0, x1, y1):
+        self.d.box(layer, x0 + self.dx, y0, x1 + self.dx, y1)
+
+    def label(self, text, x, y):
+        self.d.label(text, x + self.dx, y)

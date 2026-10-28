@@ -26,6 +26,8 @@
     "design/draw_TAP_A7S_75t_R.py",
     "design/draw_TIEHIx1_A7S_75t_R.py",
     "design/draw_TIELOx1_A7S_75t_R.py",
+    "design/draw_XNOR2x1_A7S_75t_R.py",
+    "design/draw_XOR2x1_A7S_75t_R.py",
     "spec/stdcells.md"
   ],
   "derived": [
