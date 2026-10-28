@@ -20,7 +20,8 @@ _None._
 
 `loom:important`; taken before unlabelled work.
 
-_None._
+- **#37**: T1 item 3 (DRC clean): all five DRC acceptance case families per drawn cell, with negative controls and a citable envelope
+- **#38**: T1 item 4 (LVS clean): klt lvs match with exact NFIN for every device-bearing cell, with negative controls
 
 ## Ready
 
@@ -66,7 +67,7 @@ _None._
 |------|-------|
 | Operator merge-risk holds | 0 |
 | Very important | 0 |
-| Important | 0 |
+| Important | 2 |
 | Ready (`loom:issue`) | 0 |
 | In Progress (`loom:building`) | 0 |
 | PRs awaiting review | 0 |
