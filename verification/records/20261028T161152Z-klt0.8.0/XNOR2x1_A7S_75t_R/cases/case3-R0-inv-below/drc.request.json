@@ -1,6 +1,0 @@
-{
-  "deck_file": "/tmp/t36/v080/lib/python3.14/site-packages/klayout_tools/decks/asap7.drc",
-  "engine": "klayout",
-  "expect_rule_categories": 263,
-  "file": "verification/.work/XNOR2x1_A7S_75t_R.case3-R0-inv-below.gds"
-}
