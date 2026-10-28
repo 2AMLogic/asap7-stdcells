@@ -29,6 +29,10 @@
     "10": {
       "file": "manifests/t1-item10.envelope.json",
       "content_hash": "sha256:4a0d8ca1ea90bf38483450577e0d627a4258b76806c308ea6f475abc2e3bf0d7"
+    },
+    "4": {
+      "file": "verification/records/20261028T210000Z-klt0.8.1.dev604_g4f345a577997/library/lvs.json",
+      "content_hash": "sha256:02f7e3ec8b46e3024d369046f58705aaff6cc94426a90f5b0567aaeb1dcebdef"
     }
   }
 }

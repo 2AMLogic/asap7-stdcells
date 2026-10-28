@@ -1,0 +1,206 @@
+{
+  "body_verification": {
+    "device_classes": [],
+    "device_count": 0,
+    "finding_count": 0,
+    "findings": [],
+    "reason": null,
+    "status": "verified"
+  },
+  "category_counts": {
+    "device.finfet_bulk_tied": 2,
+    "net.supply_fragmented": 1
+  },
+  "category_error_counts": {},
+  "constant_nets_applied": null,
+  "counts": {
+    "devices": {
+      "layout": 2,
+      "matched": 2,
+      "reference": 2
+    },
+    "nets": {
+      "layout": 4,
+      "matched": 4,
+      "reference": 4
+    },
+    "pins": {
+      "layout": 4,
+      "matched": 4,
+      "reference": 4
+    }
+  },
+  "device_classes": [
+    "nfet",
+    "pfet",
+    "resistor"
+  ],
+  "device_parameter_coverage": [],
+  "engine": "klayout",
+  "environment": {
+    "engine": "klayout",
+    "engine_version": "0.30.12",
+    "extracted_netlist": null,
+    "layout_sha256": "6f016f8858ec1eeb6f187da3736445b6d27e46b0a9e25f232a77b320cc4dbcb5",
+    "netgen_binary": null,
+    "reference_sha256": "3e3e2548fb8f571c2e373dcbf565ecb0288e6433e803fbf06561cb16b70caf53"
+  },
+  "error_count": 0,
+  "hints_applied": null,
+  "layout": {
+    "path": "verification/.work/INVx1_ASAP7_75t_R.gds",
+    "scope": "repo"
+  },
+  "mismatch_count": 3,
+  "mismatches": [
+    {
+      "category": "device.finfet_bulk_tied",
+      "circuit": null,
+      "description": "options.finfet_bulk joined the nmos bulk net 'vsubs' onto layout net 'VSS' on 1 device(s) before comparing -- the bulk connectivity is a caller assertion, not geometry read from the layout",
+      "details": {
+        "bulk_net": "vsubs",
+        "device_classes": [
+          "nmos_rvt"
+        ],
+        "device_count": 1,
+        "net": "VSS",
+        "polarity": "nmos",
+        "status": "joined"
+      },
+      "device": null,
+      "instance": null,
+      "net": null,
+      "property": null,
+      "severity": "warning",
+      "side": "layout",
+      "subcircuit": null
+    },
+    {
+      "category": "device.finfet_bulk_tied",
+      "circuit": null,
+      "description": "options.finfet_bulk joined the pmos bulk net 'VDD' onto layout net 'VDD' on 1 device(s) before comparing -- the bulk connectivity is a caller assertion, not geometry read from the layout",
+      "details": {
+        "bulk_net": "VDD",
+        "device_classes": [
+          "pmos_rvt"
+        ],
+        "device_count": 1,
+        "net": "VDD",
+        "polarity": "pmos",
+        "status": "joined"
+      },
+      "device": null,
+      "instance": null,
+      "net": null,
+      "property": null,
+      "severity": "warning",
+      "side": "layout",
+      "subcircuit": null
+    },
+    {
+      "category": "net.supply_fragmented",
+      "circuit": {
+        "layout": "INVx1_ASAP7_75t_R",
+        "reference": null
+      },
+      "description": "supply 'VDD' spans 2 disconnected layout nets in circuit 'INVx1_ASAP7_75t_R'; connect the supply grid or configure options.supply_nets for this design's domains. A signal-topology match does not verify power delivery.",
+      "details": {
+        "fragment_count": 2,
+        "supply": "VDD"
+      },
+      "device": null,
+      "instance": null,
+      "net": {
+        "layout": "VDD",
+        "reference": null
+      },
+      "property": null,
+      "severity": "warning",
+      "side": "layout",
+      "subcircuit": null
+    }
+  ],
+  "net_correspondence": [
+    {
+      "layout": "A",
+      "pin": true,
+      "reference": "A"
+    },
+    {
+      "layout": "VDD",
+      "pin": true,
+      "reference": "VDD"
+    },
+    {
+      "layout": "VSS|vsubs",
+      "pin": true,
+      "reference": "VSS"
+    },
+    {
+      "layout": "Y",
+      "pin": true,
+      "reference": "Y"
+    }
+  ],
+  "options": {
+    "anchor_top_level_pins": null,
+    "combine_devices": false,
+    "combine_devices_max_attempts": 5,
+    "combine_devices_per_circuit": null,
+    "compare_mos_flavour": false,
+    "compare_parameters": null,
+    "finfet_bulk": {
+      "nmos": "VSS",
+      "pmos": "VDD"
+    },
+    "flatten_layout": false,
+    "flatten_reference": false,
+    "netgen_setup": null,
+    "parameter_tolerance": null,
+    "power_connectivity": null,
+    "strict_top_level_pin_count": false,
+    "supply_nets": [
+      "GND",
+      "VCC",
+      "VDD",
+      "VGND",
+      "VPWR",
+      "VSS"
+    ]
+  },
+  "parameter_tolerance": null,
+  "power_connectivity": {
+    "excluded_pins": [],
+    "expected_nets": null,
+    "finding_count": 0,
+    "findings": [],
+    "instance_count": 0,
+    "power_pins": [],
+    "power_pins_derivation": null,
+    "reason": "reference.form is 'plain-element', whose reference netlist carries its own power/ground pins and nets -- they take part in the ordinary compare, so this check (which exists to cover the signal-only 'gate-level-verilog' form) does not apply",
+    "status": "unchecked",
+    "unchecked_expected_pins": []
+  },
+  "provenance": {
+    "deck": {
+      "content_hash": "sha256:ac57a7b68dd496e10a654ed79d29c1129bf3403d440ce5a73e43c5e8afd875aa",
+      "name": "asap7",
+      "released": false
+    },
+    "input": {
+      "content_hash": "sha256:6f016f8858ec1eeb6f187da3736445b6d27e46b0a9e25f232a77b320cc4dbcb5",
+      "role": "layout"
+    },
+    "klayout_version": "0.30.12",
+    "klayout_version_mismatch": false,
+    "klt_git_commit": "4f345a577997d2c31d4fa55e0092efbb3ee24f41",
+    "klt_reinstall_spec": "klayout-tools @ git+https://github.com/2AMLogic/klayout-tools@4f345a577997d2c31d4fa55e0092efbb3ee24f41",
+    "klt_version": "0.8.1.dev604+g4f345a577997",
+    "pdk": null
+  },
+  "reference": "verification/.pdk/lambdapdk-0.2.17/asap7sc7p5t_28_R.cdl",
+  "reference_top": "INVX1_ASAP7_75T_R",
+  "schema_version": 2,
+  "status": "match",
+  "top": "INVx1_ASAP7_75t_R"
+}

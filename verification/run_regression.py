@@ -106,7 +106,20 @@ elif a[0] == "place":
             dy = h if orient in ("MX", "R180") else 0
             top.insert(db.CellInstArray(c.cell_index(), db.Trans(codes[orient], x + dx, y + dy)))
             x += w
+    if spec.get("rail_labels"):
+        # Net labels for the two rails on the top cell: sub-cell labels name nets
+        # only inside their own cell, and klt needs VDD/VSS visible at the top.
+        lab = o.layer(19, 251)
+        top.shapes(lab).insert(db.Text("VSS", db.Trans(db.Point(x // 2, 0))))
+        top.shapes(lab).insert(db.Text("VDD", db.Trans(db.Point(x // 2, row_h))))
     o.write(out)
+elif a[0] == "layers":
+    # Layer/datatype pairs with geometry under the stream's single top cell.
+    lay = db.Layout()
+    lay.read(a[1])
+    top = lay.top_cell()
+    print(json.dumps(sorted("%d/%d" % (lay.get_info(i).layer, lay.get_info(i).datatype)
+                            for i in lay.layer_indexes() if not top.bbox_per_layer(i).empty())))
 elif a[0] == "grid":
     # Scripted grid and boundary checks (spec/stdcells.md DRC acceptance case 5).
     src, cell = a[1:3]
@@ -239,13 +252,29 @@ class Klt:
             args.append(json.dumps(inject))
         self._helper(*args)
 
-    def place(self, libs, rows, out, top="CASE_TOP"):
+    def place(self, libs, rows, out, top="CASE_TOP", rail_labels=False):
         """Abut rows of (cell, orientation) pairs into one top cell `top`."""
-        self._helper("place", json.dumps({"top": top, "libs": {k: str(v) for k, v in libs.items()}, "rows": rows}), str(out))
+        spec = {"top": top, "libs": {k: str(v) for k, v in libs.items()}, "rows": rows}
+        if rail_labels:
+            spec["rail_labels"] = True
+        self._helper("place", json.dumps(spec), str(out))
 
     def grid(self, src, cell, mutate=None):
         args = ["grid", str(src), cell] + ([json.dumps(mutate)] if mutate else [])
         return json.loads(self._helper(*args))
+
+    def layers(self, src):
+        return json.loads(self._helper("layers", str(src)))
+
+    def extract_report(self, gds, cell, netlist=None):
+        """`klt extract --deck asap7` summary of one cell; the netlist is kept at `netlist` if given."""
+        out = ["-o", rel(netlist)] if netlist else ["--no-netlist"]
+        r = subprocess.run([self.exe, "extract", rel(gds), "--deck", "asap7", "--top", cell, *out,
+                            "--format", "json"], capture_output=True, text=True, cwd=REPO)
+        try:
+            return json.loads(r.stdout), r.stderr.strip()
+        except ValueError:
+            return None, (r.stderr.strip() or r.stdout.strip() or f"exit {r.returncode}")
 
     def redraw(self, script, out):
         """Run a drawing script under klt's interpreter, writing the GDS to `out`."""
@@ -321,6 +350,99 @@ def wrong_nfin_cdl(src: Path, cell, delta):
     if not m:
         raise SetupError(f"no NMOS nfin= card in {cell}")
     return block.replace(m.group(0), f"{m.group(1)}{int(m.group(2)) + delta}", 1) + "\n"
+
+
+def fault_cdl(src: Path, cell, variant):
+    """A CDL copy of one cell with a single seeded fault (LVS negative control).
+
+    `nfin+1` / `nfin-1` change the fin count of the first NMOS card (first PMOS
+    card in a cell with no NMOS). `netswap` swaps the gate and source nets of the
+    first MOS card whose two differ; gate and drain would not do, because in a
+    one-device cell klt pairs pins by topology and not by name, so any relabelling
+    of its pins still matches. The copy is derived from the cell's own CDL, never
+    hand-edited.
+    """
+    if variant in ("nfin+1", "nfin-1"):
+        delta = 1 if variant == "nfin+1" else -1
+        try:
+            return wrong_nfin_cdl(src, cell, delta)
+        except SetupError:  # no NMOS (a tie-high cell): change the first PMOS card instead
+            block = cdl_subckt(src.read_text(), cell)
+            m = re.search(r"(pmos\w*\s.*?nfin=)(\d+)", block, re.I)
+            if not m:
+                raise
+            return block.replace(m.group(0), f"{m.group(1)}{int(m.group(2)) + delta}", 1) + "\n"
+    if variant != "netswap":
+        raise SetupError(f"unknown LVS control variant {variant}")
+    block = cdl_subckt(src.read_text(), cell)
+    for line in block.splitlines():
+        f = line.split()
+        if len(f) > 5 and f[0].upper().startswith("M") and f[2] != f[3]:
+            f[2], f[3] = f[3], f[2]  # card: name drain gate source bulk model ...
+            return block.replace(line, " ".join(f), 1) + "\n"
+    raise SetupError(f"no MOS card with distinct gate and source in {cell}")
+
+
+def lvs_control_caught(env, variant):
+    """(caught, observed) for an LVS control: it must mismatch in the expected category."""
+    if env is None or env.get("status") != "mismatch":
+        return False, {"status": (env or {}).get("status")}
+    errs = [m for m in env.get("mismatches", []) if m.get("severity") == "error"]
+    seen = sorted({m["category"] for m in errs})
+    if variant.startswith("nfin"):
+        props = [m["property"] for m in errs if m["category"] == "device.property" and (m.get("property") or {}).get("name") == "nfin"]
+        hit = bool(props)
+    else:
+        props = []
+        hit = bool(errs)  # a wiring fault: any error-severity category, listed in the record
+    return hit, {"status": env["status"], "error_categories": seen, "nfin": [[p["layout"], p["reference"]] for p in props],
+                 "category_counts": env.get("category_counts")}
+
+
+def cdl_nfins(cdl: Path, cell):
+    """{'nmos': [nfin, ...], 'pmos': [...]} (sorted) over the MOS cards of one CDL cell."""
+    out = {"nmos": [], "pmos": []}
+    for line in cdl_subckt(cdl.read_text(), cell).splitlines():
+        f = line.split()
+        m = re.search(r"\bnfin=(\d+)", line, re.I)
+        if len(f) > 5 and f[0].upper().startswith("M") and m:
+            out["nmos" if f[5].lower().startswith("nmos") else "pmos"].append(int(m.group(1)))
+    return {k: sorted(v) for k, v in out.items()}
+
+
+def reconcile_nfin(klt, gds, cdl, cell, outdir):
+    """Keep the `klt extract` netlist of a cell and compare its per-device NFIN with the CDL, exactly."""
+    netlist = outdir / "extract.spice"
+    outdir.mkdir(parents=True, exist_ok=True)
+    env, err = klt.extract_report(gds, cell, netlist)
+    res = {"id": "nfin-reconcile", "kind": "extract_nfin", "result": "ERROR"}
+    if env is None:
+        res["error"] = f"klt extract: {err}"
+        return res
+    save(outdir / "extract.json", repo_relative(env))
+    got = {"nmos": [], "pmos": []}
+    for d in env.get("devices", []):
+        got["nmos" if d["class"].lower().startswith("nmos") else "pmos"].append(int(d["params"]["nfin"]))
+    got = {k: sorted(v) for k, v in got.items()}
+    want = cdl_nfins(cdl, cell)
+    res["observed"] = {"extract": got, "cdl": want}
+    res["result"] = "PASS" if got == want and (got["nmos"] or got["pmos"]) else "FAIL"
+    return res
+
+
+def structural_check(klt, gds, cell, expect_layers, outdir):
+    """Fill/tap cells: klt extract reports zero devices, and the layer set is the expected one."""
+    env, err = klt.extract_report(gds, cell)
+    res = {"id": "structure", "kind": "structural", "result": "ERROR"}
+    if env is None:
+        res["error"] = f"klt extract: {err}"
+        return res
+    save(outdir / "extract.json", repo_relative(env))
+    layers = klt.layers(gds)
+    res["observed"] = {"device_count": env.get("device_count"), "net_count": env.get("net_count"), "layers": layers}
+    res["expected_layers"] = expect_layers
+    res["result"] = "PASS" if env.get("status") == "extracted" and env.get("device_count") == 0 and layers == expect_layers else "FAIL"
+    return res
 
 
 def drc_request(gds, info):
@@ -558,6 +680,69 @@ def family_coverage(cfg, fired):
     return {"families": per, "families_without_control": [f for f, rules in per.items() if not rules]}
 
 
+LIBRARY_TOP = "A7S_75t_R_LIBRARY"
+LIBRARY_OPTIONS = {"flatten_layout": True, "flatten_reference": True}
+
+
+def library_cdl(cells):
+    """The library CDL: every device-bearing cell's own .SUBCKT plus a top that instantiates each once.
+
+    Signal pins of each instance go to nets private to it; VDD and VSS are shared, as the
+    abutted rails are in the stream.
+    """
+    blocks, insts = [], []
+    for c in cells:
+        block = cdl_subckt((REPO / c["cdl"]).read_text(), c["name"])
+        blocks.append(block)
+        short = c["name"].split("_")[0]
+        ports = block.splitlines()[0].split()[2:]
+        nets = [p if p in ("VDD", "VSS") else f"{short}_{p}" for p in ports]
+        insts.append(f"X{short} {' '.join(nets)} {c['name']}")
+    return "\n".join(blocks) + f"\n.SUBCKT {LIBRARY_TOP} VDD VSS\n" + "\n".join(insts) + "\n.ENDS\n"
+
+
+def run_library(klt, cfg, out):
+    """Item-4 envelope form: one stream with every drawn cell in a row against the library CDL.
+
+    The stream and CDL are written to verification/library/ (derived, regenerated each run;
+    a diff there means a cell changed). Both sides are flattened (`flatten_layout`,
+    `flatten_reference`, disclosed by klt as `topology.flattened`), because klt names sub-cell
+    nets only inside the sub-cell and finfet_bulk needs VDD/VSS on the top circuit.
+    """
+    cells = [c for c in cfg["cells"] if c["source"] == "drawn"]
+    libdir = HERE / "library"
+    libdir.mkdir(exist_ok=True)
+    gds, cdl = libdir / f"{LIBRARY_TOP}.gds", libdir / f"{LIBRARY_TOP}.cdl"
+    klt.place({c["name"]: REPO / c["gds"] for c in cells}, [[(c["name"], "R0") for c in cells]], gds,
+              top=LIBRARY_TOP, rail_labels=True)
+    cdl.write_text(library_cdl([c for c in cells if c.get("cdl")]))
+    request = lvs_request(gds, cdl, LIBRARY_TOP, {**cfg["lvs_options"], **LIBRARY_OPTIONS})
+    env, err = run_one(klt, "lvs", request, out, "lvs")
+    res = {"id": "library-lvs", "kind": "library_lvs", "result": verdict_lvs(env), "cells": [c["name"] for c in cells],
+           "files_sha256": {"gds": sha256_file(gds), "cdl": sha256_file(cdl)}}
+    if env is None:
+        res["error"] = f"klt lvs: {err}"
+    else:
+        res["observed"] = {"status": env.get("status"), "counts": env.get("counts"), "category_counts": env.get("category_counts"),
+                           "power_connectivity": (env.get("power_connectivity") or {}).get("status")}
+    return res
+
+
+def expand_controls(cfg):
+    """`lvs_each_drawn` stands for one `lvs_fault` control per variant per drawn cell with a CDL."""
+    out = []
+    for ctl in cfg["controls"]:
+        if ctl["kind"] != "lvs_each_drawn":
+            out.append(ctl)
+            continue
+        for c in cfg["cells"]:
+            if c["source"] == "drawn" and c.get("cdl"):
+                for v in ctl["variants"]:
+                    out.append({"id": f"{ctl['id']}-{v}-{c['name'].split('_')[0]}", "kind": "lvs_fault",
+                                "base_cell": c["name"], "variant": v})
+    return out
+
+
 def run(args, klt=None):
     cfg = load_cells(Path(args.cells))
     pdk_dir = HERE / ".pdk"
@@ -631,12 +816,20 @@ def run(args, klt=None):
         if cell["cdl"] is None:
             row["lvs"] = "n/a"
             row["lvs_na"] = cell["lvs_na"]
+            if cell.get("structure"):
+                st = structural_check(klt, gds, name, sorted(cell["structure"]["layers"]), out)
+                row["structure"] = st
+                ok &= st["result"] == "PASS"
         else:
             env, err = run_one(klt, "lvs", lvs_request(gds, src_cdl, name, cfg["lvs_options"]), out, "lvs")
             row["lvs"] = verdict_lvs(env)
             row["lvs_envelope"] = env
             if env is None:
                 row["error"] = f"klt lvs: {err}"
+            if cell["source"] == "drawn":
+                nf = reconcile_nfin(klt, gds, src_cdl, name, out)
+                row["nfin_reconcile"] = nf
+                ok &= nf["result"] == "PASS"
         verdict = cell.get("abutment_verdict")
         if verdict:
             # Decision 0007: the standalone result stays recorded (row["drc"]); the cell's
@@ -678,7 +871,7 @@ def run(args, klt=None):
 
     controls = []
     fired_by_controls = set()
-    for ctl in cfg["controls"]:
+    for ctl in expand_controls(cfg):
         if args.only and ctl["base_cell"] not in args.only:
             continue
         base = by_name[ctl["base_cell"]]
@@ -720,6 +913,13 @@ def run(args, klt=None):
                 res["observed"] = {"status": chk["status"], "failed": chk["failed"]}
                 res["expect_check"] = ctl["expect_check"]
                 res["result"] = "CAUGHT" if ctl["expect_check"] in chk["failed"] else "MISSED"
+            elif ctl["kind"] == "lvs_fault":
+                cdl = work / f"{ctl['id']}.cdl"
+                cdl.write_text(fault_cdl(base_cdl, ctl["base_cell"], ctl["variant"]))
+                env, err = run_one(klt, "lvs", lvs_request(base_gds, cdl, ctl["base_cell"], cfg["lvs_options"]), out, "lvs")
+                caught, res["observed"] = lvs_control_caught(env, ctl["variant"])
+                res["variant"] = ctl["variant"]
+                res["result"] = "CAUGHT" if caught else "MISSED"
             else:
                 klt.extract(base_gds, ctl["base_cell"], gds)
                 cdl = work / f"{ctl['id']}.cdl"
@@ -735,6 +935,11 @@ def run(args, klt=None):
     if not args.only and inv in drawn_libs and tap in drawn_libs:
         merged = run_merged(klt, info, work, record, drawn_libs, drawn_names, inv, tap)
         ok &= merged["result"] == "PASS"
+
+    library = None
+    if not args.only and any(c["source"] == "drawn" for c in cfg["cells"]):
+        library = run_library(klt, cfg, record / "library")
+        ok &= library["result"] == "PASS"
 
     drawn = {c["name"] for c in cfg["cells"] if c["source"] == "drawn"}
     fired = sorted({r for c in controls if c["base_cell"] in drawn and c["result"] == "CAUGHT"
@@ -756,6 +961,7 @@ def run(args, klt=None):
         "controls": controls,
         "merged_stream": merged,
         "family_coverage": families,
+        "library": library,
         "drawn_rules_fired_by_controls": fired,
         "drawn_rules_unexercised": sorted(set(info.get("rules", [])) - set(fired)) if drawn else [],
     }
@@ -826,6 +1032,27 @@ def summary(m, rows):
             sa = (r.get("drc_envelope") or {}).get("rule_counts")
             lines.append(f"\nABUTMENT VERDICT {r['cell']} (decision {r['abutment_verdict']}): the DRC verdict is its abutment "
                          f"cases; the standalone result is `{r['drc_standalone']}` with rule counts `{q(sa)}`, recorded in its drc.json.")
+    recon = [r for r in rows if r.get("nfin_reconcile")]
+    if recon:
+        lines += ["", "## NFIN of the kept `klt extract` netlist against the CDL (exact, per device class)", "",
+                  "| cell | result | extract nfin | cdl nfin |", "|---|---|---|---|"]
+        for r in recon:
+            n = r["nfin_reconcile"]
+            o = n.get("observed") or {}
+            lines.append(f"| {r['cell']} | {n['result']} | {q(o.get('extract', n.get('error')))} | {q(o.get('cdl', ''))} |")
+    structural = [r for r in rows if r.get("structure")]
+    if structural:
+        lines += ["", "## Fill and tap structural check (zero extracted devices, expected layer set)", "",
+                  "| cell | result | observed |", "|---|---|---|"]
+        for r in structural:
+            st = r["structure"]
+            lines.append(f"| {r['cell']} | {st['result']} | {q(st.get('observed') or st.get('error'))} |")
+    if m.get("library"):
+        lib = m["library"]
+        lines += ["", "## Library LVS (item 4 form: merged stream vs library CDL)", "",
+                  f"- result: **{lib['result']}** over {len(lib['cells'])} drawn cells, flattened on both sides",
+                  f"- observed: `{q(lib.get('observed') or lib.get('error'))}`",
+                  f"- stream and CDL sha256: `{q(lib['files_sha256'])}`"]
     lines += ["", "## Negative controls (must be CAUGHT)", "", "| control | base cell | result | observed |", "|---|---|---|---|"]
     for c in m["controls"]:
         lines.append(f"| {c['id']} | {c['base_cell']} | {c['result']} | {q(c.get('observed') or c.get('error'))} |")

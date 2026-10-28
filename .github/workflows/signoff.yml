@@ -7,8 +7,9 @@ name: klt signoff
 # manifest or the vendored checklist must regenerate the record in the same PR.
 #
 # Items 1, 9 and 10 cite tool-produced attestation envelopes (klt signoff
-# --attest); the remaining items have no evidence yet and grade unmet, so the
-# grader exits 3. That is the honest steady state, not a failure.
+# --attest); item 4 cites the library `klt lvs` envelope of a verification
+# record, pinned by the layout stream's content hash; the remaining items have
+# no evidence yet and grade unmet, so the grader exits 3. That is the honest steady state, not a failure.
 
 on:
   push:

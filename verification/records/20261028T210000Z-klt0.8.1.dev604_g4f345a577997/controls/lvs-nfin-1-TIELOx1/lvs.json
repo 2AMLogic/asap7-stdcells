@@ -1,0 +1,316 @@
+{
+  "body_verification": {
+    "device_classes": [],
+    "device_count": 0,
+    "finding_count": 0,
+    "findings": [],
+    "reason": null,
+    "status": "verified"
+  },
+  "category_counts": {
+    "device.finfet_bulk_tied": 2,
+    "device.property": 1,
+    "device.unmatched": 2,
+    "net.unmatched": 6
+  },
+  "category_error_counts": {
+    "device.property": 1
+  },
+  "constant_nets_applied": null,
+  "counts": {
+    "devices": {
+      "layout": 1,
+      "matched": 0,
+      "reference": 1
+    },
+    "nets": {
+      "layout": 3,
+      "matched": 0,
+      "reference": 3
+    },
+    "pins": {
+      "layout": 3,
+      "matched": 6,
+      "reference": 3
+    }
+  },
+  "device_classes": [
+    "nfet",
+    "pfet",
+    "resistor"
+  ],
+  "device_parameter_coverage": [],
+  "engine": "klayout",
+  "environment": {
+    "engine": "klayout",
+    "engine_version": "0.30.12",
+    "extracted_netlist": null,
+    "layout_sha256": "8aea407bb2ba6591f9edc3f62966646c50f97fdaaa287e16584329f62481c60b",
+    "netgen_binary": null,
+    "reference_sha256": "63b1079232dfc20bb0a1b4d2db763f6171cb32fd50b9c33a877285bcb2a7541d"
+  },
+  "error_count": 1,
+  "hints_applied": null,
+  "layout": {
+    "path": "layout/TIELOx1_A7S_75t_R.gds",
+    "scope": "repo"
+  },
+  "mismatch_count": 11,
+  "mismatches": [
+    {
+      "category": "device.finfet_bulk_tied",
+      "circuit": null,
+      "description": "options.finfet_bulk joined the nmos bulk net 'vsubs' onto layout net 'VSS' on 1 device(s) before comparing -- the bulk connectivity is a caller assertion, not geometry read from the layout",
+      "details": {
+        "bulk_net": "vsubs",
+        "device_classes": [
+          "nmos_rvt"
+        ],
+        "device_count": 1,
+        "net": "VSS",
+        "polarity": "nmos",
+        "status": "joined"
+      },
+      "device": null,
+      "instance": null,
+      "net": null,
+      "property": null,
+      "severity": "warning",
+      "side": "layout",
+      "subcircuit": null
+    },
+    {
+      "category": "device.finfet_bulk_tied",
+      "circuit": null,
+      "description": "options.finfet_bulk found no pmos devices to tie on 0 device(s) before comparing -- the bulk connectivity is a caller assertion, not geometry read from the layout",
+      "details": {
+        "bulk_net": null,
+        "device_classes": [],
+        "device_count": 0,
+        "net": "VDD",
+        "polarity": "pmos",
+        "status": "no_devices"
+      },
+      "device": null,
+      "instance": null,
+      "net": null,
+      "property": null,
+      "severity": "warning",
+      "side": "layout",
+      "subcircuit": null
+    },
+    {
+      "category": "device.property",
+      "circuit": null,
+      "description": "matched device parameter 'nfin' differs",
+      "details": null,
+      "device": {
+        "class": "nmos_rvt",
+        "layout": "\\$1",
+        "reference": "M0"
+      },
+      "instance": null,
+      "net": null,
+      "property": {
+        "layout": 3.0,
+        "name": "nfin",
+        "reference": 2.0
+      },
+      "severity": "error",
+      "side": "both",
+      "subcircuit": null
+    },
+    {
+      "category": "device.unmatched",
+      "circuit": null,
+      "description": "device has no counterpart on the other side, but the circuit is too small for the comparer to pair it structurally -- the root cause is the parameter difference reported as 'device.property' on this same device pair (see docs/cli/lvs.md, \"Negative controls\")",
+      "details": null,
+      "device": {
+        "class": "nmos_rvt",
+        "layout": "\\$1",
+        "reference": null
+      },
+      "instance": null,
+      "net": null,
+      "property": null,
+      "severity": "warning",
+      "side": "layout",
+      "subcircuit": null
+    },
+    {
+      "category": "device.unmatched",
+      "circuit": null,
+      "description": "device has no counterpart on the other side, but the circuit is too small for the comparer to pair it structurally -- the root cause is the parameter difference reported as 'device.property' on this same device pair (see docs/cli/lvs.md, \"Negative controls\")",
+      "details": null,
+      "device": {
+        "class": "nmos_rvt",
+        "layout": null,
+        "reference": "M0"
+      },
+      "instance": null,
+      "net": null,
+      "property": null,
+      "severity": "warning",
+      "side": "reference",
+      "subcircuit": null
+    },
+    {
+      "category": "net.unmatched",
+      "circuit": null,
+      "description": "net has no counterpart on the other side, but only because the one device pair reported as 'device.property' failed to pair -- no other device or subcircuit touches this net, so it is collateral, not an independent connectivity defect",
+      "details": null,
+      "device": null,
+      "instance": null,
+      "net": {
+        "layout": "L",
+        "reference": null
+      },
+      "property": null,
+      "severity": "warning",
+      "side": "layout",
+      "subcircuit": null
+    },
+    {
+      "category": "net.unmatched",
+      "circuit": null,
+      "description": "net has no counterpart on the other side, but only because the one device pair reported as 'device.property' failed to pair -- no other device or subcircuit touches this net, so it is collateral, not an independent connectivity defect",
+      "details": null,
+      "device": null,
+      "instance": null,
+      "net": {
+        "layout": "VDD",
+        "reference": null
+      },
+      "property": null,
+      "severity": "warning",
+      "side": "layout",
+      "subcircuit": null
+    },
+    {
+      "category": "net.unmatched",
+      "circuit": null,
+      "description": "net has no counterpart on the other side, but only because the one device pair reported as 'device.property' failed to pair -- no other device or subcircuit touches this net, so it is collateral, not an independent connectivity defect",
+      "details": null,
+      "device": null,
+      "instance": null,
+      "net": {
+        "layout": "VSS|vsubs",
+        "reference": null
+      },
+      "property": null,
+      "severity": "warning",
+      "side": "layout",
+      "subcircuit": null
+    },
+    {
+      "category": "net.unmatched",
+      "circuit": null,
+      "description": "net has no counterpart on the other side, but only because the one device pair reported as 'device.property' failed to pair -- no other device or subcircuit touches this net, so it is collateral, not an independent connectivity defect",
+      "details": null,
+      "device": null,
+      "instance": null,
+      "net": {
+        "layout": null,
+        "reference": "L"
+      },
+      "property": null,
+      "severity": "warning",
+      "side": "reference",
+      "subcircuit": null
+    },
+    {
+      "category": "net.unmatched",
+      "circuit": null,
+      "description": "net has no counterpart on the other side, but only because the one device pair reported as 'device.property' failed to pair -- no other device or subcircuit touches this net, so it is collateral, not an independent connectivity defect",
+      "details": null,
+      "device": null,
+      "instance": null,
+      "net": {
+        "layout": null,
+        "reference": "VDD"
+      },
+      "property": null,
+      "severity": "warning",
+      "side": "reference",
+      "subcircuit": null
+    },
+    {
+      "category": "net.unmatched",
+      "circuit": null,
+      "description": "net has no counterpart on the other side, but only because the one device pair reported as 'device.property' failed to pair -- no other device or subcircuit touches this net, so it is collateral, not an independent connectivity defect",
+      "details": null,
+      "device": null,
+      "instance": null,
+      "net": {
+        "layout": null,
+        "reference": "VSS"
+      },
+      "property": null,
+      "severity": "warning",
+      "side": "reference",
+      "subcircuit": null
+    }
+  ],
+  "net_correspondence": [],
+  "options": {
+    "anchor_top_level_pins": null,
+    "combine_devices": false,
+    "combine_devices_max_attempts": 5,
+    "combine_devices_per_circuit": null,
+    "compare_mos_flavour": false,
+    "compare_parameters": null,
+    "finfet_bulk": {
+      "nmos": "VSS",
+      "pmos": "VDD"
+    },
+    "flatten_layout": false,
+    "flatten_reference": false,
+    "netgen_setup": null,
+    "parameter_tolerance": null,
+    "power_connectivity": null,
+    "strict_top_level_pin_count": false,
+    "supply_nets": [
+      "GND",
+      "VCC",
+      "VDD",
+      "VGND",
+      "VPWR",
+      "VSS"
+    ]
+  },
+  "parameter_tolerance": null,
+  "power_connectivity": {
+    "excluded_pins": [],
+    "expected_nets": null,
+    "finding_count": 0,
+    "findings": [],
+    "instance_count": 0,
+    "power_pins": [],
+    "power_pins_derivation": null,
+    "reason": "reference.form is 'plain-element', whose reference netlist carries its own power/ground pins and nets -- they take part in the ordinary compare, so this check (which exists to cover the signal-only 'gate-level-verilog' form) does not apply",
+    "status": "unchecked",
+    "unchecked_expected_pins": []
+  },
+  "provenance": {
+    "deck": {
+      "content_hash": "sha256:ac57a7b68dd496e10a654ed79d29c1129bf3403d440ce5a73e43c5e8afd875aa",
+      "name": "asap7",
+      "released": false
+    },
+    "input": {
+      "content_hash": "sha256:8aea407bb2ba6591f9edc3f62966646c50f97fdaaa287e16584329f62481c60b",
+      "role": "layout"
+    },
+    "klayout_version": "0.30.12",
+    "klayout_version_mismatch": false,
+    "klt_git_commit": "4f345a577997d2c31d4fa55e0092efbb3ee24f41",
+    "klt_reinstall_spec": "klayout-tools @ git+https://github.com/2AMLogic/klayout-tools@4f345a577997d2c31d4fa55e0092efbb3ee24f41",
+    "klt_version": "0.8.1.dev604+g4f345a577997",
+    "pdk": null
+  },
+  "reference": "verification/.work/lvs-nfin-1-TIELOx1.cdl",
+  "reference_top": "TIELOX1_A7S_75T_R",
+  "schema_version": 2,
+  "status": "mismatch",
+  "top": "TIELOx1_A7S_75t_R"
+}

@@ -69,17 +69,17 @@
      "cdl": "design/DFFHQNx1_A7S_75t_R.cdl", "script": "design/draw_DFFHQNx1_A7S_75t_R.py", "neighbour": "INVx1_A7S_75t_R"},
     {"name": "FILLER1_A7S_75t_R", "source": "drawn", "gds": "layout/FILLER1_A7S_75t_R.gds", "cdl": null,
      "lvs_na": "draws no devices; docs/cli/lvs.md: inline extraction yields no circuit and klt lvs exits 1",
-     "script": "design/draw_FILLER1_A7S_75t_R.py", "neighbour": "INVx1_A7S_75t_R",
+     "script": "design/draw_FILLER1_A7S_75t_R.py", "structure": {"layers": ["1/0","10/0","100/0","12/0","13/0","19/0","19/251","2/0","7/0"]}, "neighbour": "INVx1_A7S_75t_R",
      "abutment_verdict": {"decision": "0007", "neighbour": "INVx1_A7S_75t_R"}},
     {"name": "FILLER2_A7S_75t_R", "source": "drawn", "gds": "layout/FILLER2_A7S_75t_R.gds", "cdl": null,
      "lvs_na": "draws no devices; docs/cli/lvs.md: inline extraction yields no circuit and klt lvs exits 1",
-     "script": "design/draw_FILLER2_A7S_75t_R.py", "neighbour": "INVx1_A7S_75t_R"},
+     "script": "design/draw_FILLER2_A7S_75t_R.py", "structure": {"layers": ["1/0","10/0","100/0","12/0","13/0","19/0","19/251","2/0","7/0"]}, "neighbour": "INVx1_A7S_75t_R"},
     {"name": "FILLER4_A7S_75t_R", "source": "drawn", "gds": "layout/FILLER4_A7S_75t_R.gds", "cdl": null,
      "lvs_na": "draws no devices; docs/cli/lvs.md: inline extraction yields no circuit and klt lvs exits 1",
-     "script": "design/draw_FILLER4_A7S_75t_R.py", "neighbour": "INVx1_A7S_75t_R"},
+     "script": "design/draw_FILLER4_A7S_75t_R.py", "structure": {"layers": ["1/0","10/0","100/0","12/0","13/0","19/0","19/251","2/0","7/0"]}, "neighbour": "INVx1_A7S_75t_R"},
     {"name": "TAP_A7S_75t_R", "source": "drawn", "gds": "layout/TAP_A7S_75t_R.gds", "cdl": null,
      "lvs_na": "draws no devices; docs/cli/lvs.md: inline extraction yields no circuit and klt lvs exits 1",
-     "script": "design/draw_TAP_A7S_75t_R.py", "neighbour": "INVx1_A7S_75t_R"}
+     "script": "design/draw_TAP_A7S_75t_R.py", "structure": {"layers": ["1/0","10/0","100/0","11/0","12/0","13/0","17/0","18/0","19/0","19/251","2/0","7/0","88/0"]}, "neighbour": "INVx1_A7S_75t_R"}
   ],
   "controls": [
     {
@@ -123,6 +123,7 @@
     {"id": "drawn-v2-width", "kind": "drc_inject_box", "base_cell": "INVx1_A7S_75t_R", "layer": [25, 0], "box_dbu": [200, 300, 264, 364], "expect_rule": "V2.W.1", "note": "A 16 nm V2, below the 18 nm minimum."},
     {"id": "drawn-v3-width", "kind": "drc_inject_box", "base_cell": "INVx1_A7S_75t_R", "layer": [35, 0], "box_dbu": [200, 300, 264, 364], "expect_rule": "V3.W.1", "note": "A 16 nm V3, below the 18 nm minimum."},
     {"id": "drawn-lvs-wrong-nfin", "kind": "lvs_nfin", "base_cell": "INVx1_A7S_75t_R", "nfin_delta": 1, "note": "Reference CDL copy with the NMOS fin count changed by +1. Must mismatch."},
+    {"id": "lvs", "kind": "lvs_each_drawn", "variants": ["nfin+1", "nfin-1", "netswap"], "note": "For every drawn cell with a CDL: a CDL copy with the first NMOS fin count +1, -1, or the gate and source nets of the first MOS card swapped. Each must mismatch; the fin controls on device.property nfin."},
     {"id": "drawn-gate-off-grid", "kind": "grid_offset", "base_cell": "INVx1_A7S_75t_R", "layer": [7, 0], "dx_nm": 1, "dy_nm": 0, "expect_check": "GATE.X", "note": "Every GATE moved 1 nm in x: off the 54 nm gate grid. The scripted grid check must fail."}
   ]
 }

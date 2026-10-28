@@ -35,7 +35,7 @@ class FakeKlt:
         return {"deck_path": "/deck/asap7.drc", "rule_count": 263, "klayout": "0.0",
                 "rules": ["M1.S.1", "M1.S.2", "FIN.W.1"]}
 
-    def place(self, libs, rows, out, top="CASE_TOP"):
+    def place(self, libs, rows, out, top="CASE_TOP", rail_labels=False):
         self.placed.append((libs, rows, Path(out).name))
         Path(out).write_bytes(b"placed")
 
@@ -51,6 +51,13 @@ class FakeKlt:
 
     def extract(self, src, cell, out, inject=None):
         Path(out).write_bytes(b"gds")
+
+    def extract_report(self, gds, cell, netlist=None):
+        return {"status": "extracted", "device_count": 2,
+                "devices": [{"class": "nmos_rvt", "params": {"nfin": 3}}, {"class": "pmos_rvt", "params": {"nfin": 3}}]}, ""
+
+    def layers(self, src):
+        return []
 
     def run(self, cmd, request):
         if self.error:
@@ -186,6 +193,66 @@ class RunRegressionTest(unittest.TestCase):
         self.assertIn("nmos_rvt w=81.0n l=20n nfin=4", out)
         self.assertIn("pmos_rvt w=81.0n l=20n nfin=3", out)
 
+    def test_fault_cdl_variants(self):
+        p = self.tmp / "x.cdl"
+        p.write_text(CDL)
+        self.assertIn("nfin=2", rr.fault_cdl(p, "INVx1_X", "nfin-1").splitlines()[1])
+        self.assertIn("MM0 Y VSS A VSS", rr.fault_cdl(p, "INVx1_X", "netswap"))
+        with self.assertRaises(rr.SetupError):
+            rr.fault_cdl(p, "INVx1_X", "bogus")
+
+    def test_lvs_control_caught_requires_expected_category(self):
+        mm = lambda cat, prop=None: {"category": cat, "severity": "error", "property": {"name": prop, "layout": 3, "reference": 4} if prop else None}
+        self.assertTrue(rr.lvs_control_caught({"status": "mismatch", "mismatches": [mm("device.property", "nfin")]}, "nfin+1")[0])
+        self.assertFalse(rr.lvs_control_caught({"status": "mismatch", "mismatches": [mm("net.mismatch")]}, "nfin+1")[0])
+        self.assertTrue(rr.lvs_control_caught({"status": "mismatch", "mismatches": [mm("net.mismatch")]}, "netswap")[0])
+        self.assertFalse(rr.lvs_control_caught({"status": "match", "mismatches": []}, "netswap")[0])
+
+    def test_lvs_each_drawn_expands_per_cell_and_variant(self):
+        cfg = {"cells": [{"name": "INVx1_D", "source": "drawn", "cdl": "c"}, {"name": "TAP_D", "source": "drawn", "cdl": None},
+                         {"name": "INVx1_X", "source": "shipped", "cdl": "cdl"}],
+               "controls": [{"id": "lvs", "kind": "lvs_each_drawn", "variants": ["nfin+1", "netswap"]}]}
+        ids = [c["id"] for c in rr.expand_controls(cfg)]
+        self.assertEqual(ids, ["lvs-nfin+1-INVx1", "lvs-netswap-INVx1"])
+
+    def test_library_cdl_instantiates_each_cell_with_private_signal_nets(self):
+        cells = [{"name": "INVx1_X", "cdl": "design/D.cdl"}]
+        (self.tmp / "design" / "D.cdl").write_text(CDL)
+        text = rr.library_cdl(cells)
+        self.assertIn(".SUBCKT A7S_75t_R_LIBRARY VDD VSS", text)
+        self.assertIn("XINVx1 INVx1_A VDD VSS INVx1_Y INVx1_X", text)
+
+    def test_cdl_nfins_and_reconcile(self):
+        p = self.tmp / "x.cdl"
+        p.write_text(CDL)
+        self.assertEqual(rr.cdl_nfins(p, "INVx1_X"), {"nmos": [3], "pmos": [3]})
+
+        class K(FakeKlt):
+            def extract_report(self, gds, cell, netlist=None):
+                return {"devices": [{"class": "nmos_rvt", "params": {"nfin": self.n}}, {"class": "pmos_rvt", "params": {"nfin": 3}}]}, ""
+
+        k = K()
+        k.n = 3
+        self.assertEqual(rr.reconcile_nfin(k, self.tmp / "g.gds", p, "INVx1_X", self.tmp / "o")["result"], "PASS")
+        k.n = 4
+        self.assertEqual(rr.reconcile_nfin(k, self.tmp / "g.gds", p, "INVx1_X", self.tmp / "o")["result"], "FAIL")
+
+    def test_structural_check(self):
+        class K(FakeKlt):
+            def extract_report(self, gds, cell, netlist=None):
+                return {"status": "extracted", "device_count": self.n}, ""
+
+            def layers(self, src):
+                return ["1/0", "100/0"]
+
+        k = K()
+        k.n = 0
+        out = self.tmp / "o"
+        self.assertEqual(rr.structural_check(k, self.tmp / "g.gds", "F", ["1/0", "100/0"], out)["result"], "PASS")
+        self.assertEqual(rr.structural_check(k, self.tmp / "g.gds", "F", ["1/0"], out)["result"], "FAIL")
+        k.n = 2
+        self.assertEqual(rr.structural_check(k, self.tmp / "g.gds", "F", ["1/0", "100/0"], out)["result"], "FAIL")
+
     def test_wrong_nfin_cdl_unknown_cell(self):
         p = self.tmp / "x.cdl"
         p.write_text(CDL)
@@ -294,7 +361,7 @@ class RunRegressionTest(unittest.TestCase):
         self.assertTrue((rec / "drc.json").is_file() and (rec / "lvs.json").is_file())
         # the drawn cell is checked in place, never copied out of a library
         self.assertEqual(json.loads((rec / "drc.request.json").read_text())["file"], "layout/D.gds")
-        self.assertEqual(len(klt.placed), 17)
+        self.assertEqual(len(klt.placed), 18)  # 17 abutment cases + the library row
         self.assertEqual(klt.placed[0][0], {"INVx1_D": rr.REPO / "layout/D.gds"})
         m = self.manifest()
         self.assertEqual(m["overall"], "PASS")

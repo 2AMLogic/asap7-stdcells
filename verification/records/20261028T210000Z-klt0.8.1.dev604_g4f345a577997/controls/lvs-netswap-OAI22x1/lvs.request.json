@@ -1,0 +1,17 @@
+{
+  "layout": {
+    "deck": "asap7",
+    "file": "layout/OAI22x1_A7S_75t_R.gds",
+    "top": "OAI22x1_A7S_75t_R"
+  },
+  "options": {
+    "finfet_bulk": {
+      "nmos": "VSS",
+      "pmos": "VDD"
+    }
+  },
+  "reference": {
+    "netlist": "verification/.work/lvs-netswap-OAI22x1.cdl",
+    "top": "OAI22x1_A7S_75t_R"
+  }
+}

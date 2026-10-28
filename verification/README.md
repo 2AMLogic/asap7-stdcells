@@ -107,6 +107,39 @@ this is one single-unit request, not a loop of 484 runs. The manifest and summar
 carry its `coverage.layers_in_stream_without_rules`, `coverage.rules_skipped` and
 `coverage.deck_scope` verbatim, and the rows of any violation.
 
+LVS controls and library LVS (T1 item 4). For every drawn cell that has a CDL,
+the `lvs_each_drawn` control expands to three `lvs_fault` controls, each a CDL
+copy derived from the cell's own CDL (never hand-edited), compared against the
+committed GDS:
+
+- `nfin+1`, `nfin-1`: the fin count of the first NMOS card (first PMOS card in
+  `TIEHIx1`, which has no NMOS) changed by one. Caught only if klt reports a
+  `device.property` error on `nfin`; the layout and reference values are
+  recorded.
+- `netswap`: the gate and source nets of the first MOS card exchanged. Caught on
+  any error-severity category, listed in the record. Gate and drain are not
+  used: klt pairs top-level pins by topology, not by name, so in a one-device
+  cell that swap still matches (2AMLogic/klayout-tools#4513).
+
+A control that matches fails the run. Beside them, per drawn cell with a CDL the
+run keeps the `klt extract --deck asap7` netlist (`<cell>/extract.spice`,
+`extract.json`) and compares its per-device `nfin` with the CDL exactly (the
+`nfin-reconcile` result). Fill and tap cells (`structure` in `cells.json`) get
+a structural check: zero extracted devices and the expected layer set.
+`verification/nfin-reconciliation.md` holds the by-hand reading of the first
+cell of each kind.
+
+A full run also builds `verification/library/A7S_75t_R_LIBRARY.gds` (every drawn
+cell in one row, `VDD`/`VSS` labelled on the top cell) and
+`A7S_75t_R_LIBRARY.cdl` (each cell's `.SUBCKT` plus a top that instantiates each
+once) and runs `klt lvs` on them as `<record>/library/lvs.json`. Both sides are
+flattened (`flatten_layout`, `flatten_reference`; klt reports
+`topology.flattened`), because klt names sub-cell nets only inside the sub-cell
+and `finfet_bulk` needs the rails on the top circuit
+(2AMLogic/klayout-tools#4514). That envelope is the evidence cited for item 4.
+The two files are derived and regenerated on every full run; a diff there means a
+cell changed.
+
 Control kinds: `drc_inject_box` (a box added on a layer; the named
 `expect_rule` must fire and must not fire on the clean cell), `lvs_nfin` (CDL
 copy with the NMOS fin count changed), `grid_offset` (every shape of one layer
@@ -152,10 +185,11 @@ the pin they were run with.
 
 Filed or found by this harness (tool gaps, not design findings):
 
-- 2AMLogic/klayout-tools#3811: the ASAP7 deck aborted (KLayout assertion or
-  SIGSEGV) on a layout with LIG shapes but no gate/active geometry, so TAPCELL
-  was recorded `KNOWN-GAP`. Fixed in klt 0.8.0; TAPCELL now has a DRC verdict
-  and its `known_drc_gap` entry is gone. FILLERxp5 no longer aborts on current klt: it reports five
+- 2AMLogic/klayout-tools#3811: the ASAP7 deck aborts (KLayout assertion or
+  SIGSEGV) on a layout with LIG shapes but no gate/active geometry. TAPCELL
+  therefore had no DRC verdict and was recorded `KNOWN-GAP`; on klt
+  0.8.1.dev604 it produces one, so the `known_drc_gap` entry is gone and the
+  harness reports TAPCELL's own verdict. The issue is closed, and FILLERxp5 no longer aborts on current klt: it reports five
   width and gate-spacing rules when checked standalone, and is clean when
   abutted (`spec/decisions/0005-filler-drc-classification.md`;
   2AMLogic/klayout-tools#4029). Its harness verdict is its abutment cases,
