@@ -153,6 +153,52 @@ about those.
 Re-draw a cell by hand: `"$(head -1 "$(command -v klt)" | cut -c3-)" -I
 design/draw_INVx1_A7S_75t_R.py`.
 
+## ERC supply structure (T1 item 11)
+
+`verification/erc/` holds the structural power-delivery evidence. Cells draw no
+taps, so the tie lives in `TAP` and the test is a structure, not a cell:
+`build_erc_structure.py` places two mirrored rows of abutted library cells
+(`TAP` at both ends of each row, the second row `MX` so the two rows share the
+`VDD` rail) and joins the two outer `VSS` rails with an M2 strap over V1.
+`erc_spec.json` declares `VDD` and `VSS` as `kind: supply` over
+LIG/LISD/V0/M1/V1/M2, the n-well tie (ACTIVE under NSELECT inside WELL) and the
+substrate tie (ACTIVE under PSELECT, region = extent minus WELL).
+
+```
+python3 verification/erc/run_erc.py          # build, run klt erc, check the controls
+python3 verification/erc/run_erc.py --check  # klt erc --check --rerun on the committed reports
+```
+
+`erc.json` is the committed report for `erc.gds`: `erc_status: clean`, `VDD` and
+`VSS` each `matched_islands: 1`, no finding, nothing skipped. Exit 4 is by design
+(no antenna table for ASAP7, `status: not_checked`). Three controls, each a copy
+of the structure with one defect, must fire exactly the rule they target:
+
+| Control | Defect | Fires |
+|---|---|---|
+| `control-no-tap` | every `TAP` replaced by `FILLER2` | `erc.missing_tie` (3: one n-well, two substrate regions) |
+| `control-rail-short` | M1 bar from the `VSS` rail to the shared `VDD` rail | `erc.supply_short` |
+| `control-vss-cut` | V1 under the top `VSS` strap end removed | `erc.unconnected_net` (`VSS`, 2 islands) |
+
+Item 11 cites `erc.json` with item 4's library `lvs.json`, which pairs `VDD` and
+`VSS` in `net_correspondence`; `klt signoff` grades it `met`. Read it narrowly:
+
+- The substrate tie is declared with `well_complement_of`, so `klt` reports it
+  under `checked_by_well_assertion`: the region is derived from the stream, not
+  drawn.
+- `erc.json` was run with `klt 0.8.1.dev604`; CI grades with `klayout-tools==0.8.0`,
+  which also grades item 11 `met` on it. `klt erc --check --rerun` on 0.8.0 reports
+  drift on `provenance.klt_git_commit`, `provenance.klt_reinstall_spec` and
+  `erc_coverage.inapplicable` only (tool-version fields, filed as
+  2AMLogic/klayout-tools#4542); the cheap `--check` is the reproducibility gate.
+- GATE-to-LIG is a direct overlap with no via layer. `erc_spec.json` declares it
+  as a via on LIG's own layer, which `klt` accepts (2AMLogic/klayout-tools#4541).
+- A clean supply spec is not proof of continuity of every rail on every layout:
+  the structure has two rows and one strap, and `nets[].roles` is not declared
+  because M1 carries signal wiring too, so the severed-rail negative
+  (`supply_unlabelled_islands`) is `{}`: not measured.
+- Predictive PDK, tool results only.
+
 ## Pins
 
 | What | Value |
