@@ -528,6 +528,88 @@ def abutment_cases(cell, neighbour):
     return cases
 
 
+def pair_rows(cell, others, neighbour):
+    """DRC acceptance case 2: `cell` as the left cell A of every ordered pair (A, B).
+
+    One row per B in `others`, INVx1 at both ends: neighbour | A | B | neighbour.
+    Rows are separated by an empty row so they do not interact. Returns
+    (rows, row_ids) where row_ids[i] is the B that rows[i] holds, or None for a gap.
+    """
+    rows, ids = [], []
+    for b in others:
+        rows += [[(neighbour, "R0"), (cell, "R0"), (b, "R0"), (neighbour, "R0")], []]
+        ids += [b, None]
+    return rows, ids
+
+
+def end_rows(cell, tap):
+    """DRC acceptance case 4: TAP | cell | TAP, and a row with TAP at one end only (each end)."""
+    rows = [[(tap, "R0"), (cell, "R0"), (tap, "R0")], [], [(tap, "R0"), (cell, "R0")], [], [(cell, "R0"), (tap, "R0")]]
+    return rows, ["tap-both", None, "tap-left", None, "tap-right"]
+
+
+def merged_rows(names, neighbour, tap):
+    """Every acceptance case 1-4 of every cell as rows of one top cell, each case set off by an empty row.
+
+    Returns (rows, labels) with labels[i] naming the case row i belongs to (None for a gap row).
+    """
+    rows, labels = [], []
+
+    def add(case_rows, label):
+        rows.extend(case_rows)
+        labels.extend([label if r else None for r in case_rows])
+        rows.append([])
+        labels.append(None)
+
+    for a in names:
+        for cid, case_rows in abutment_cases(a, neighbour):
+            add(case_rows, f"{a}/{cid}")
+        pr, ids = pair_rows(a, names, neighbour)
+        for r, i in zip(pr, ids):
+            if r:
+                add([r], f"{a}/case2-pair/{i}")
+        er, ids = end_rows(a, tap)
+        for r, i in zip(er, ids):
+            if r:
+                add([r], f"{a}/case4-{i}")
+    return rows, labels
+
+
+def violating_rows(env, labels, row_h=1080):
+    """Labels of the rows a violating envelope points at (marker bbox in dbu; a row is 270 nm = 1080 dbu)."""
+    hit = set()
+    for v in (env or {}).get("violations", []) or []:
+        bb = v.get("bbox")
+        if not isinstance(bb, dict):
+            continue
+        for r in range(bb["bottom"] // row_h, (bb["top"] - 1) // row_h + 1):
+            if 0 <= r < len(labels) and labels[r]:
+                hit.add(labels[r])
+    return sorted(hit)
+
+
+def run_library_cases(klt, info, work, out, name, libs, names, neighbour, tap):
+    """DRC acceptance cases 2 (ordered pairs) and 4 (row ends with TAP) for one drawn cell."""
+    results = []
+    for cid, (rows, ids) in (("case2-pairs", pair_rows(name, names, neighbour)), ("case4-ends", end_rows(name, tap))):
+        res = {"id": cid, "kind": "drc_abutment", "result": "ERROR"}
+        results.append(res)
+        cgds = work / f"{name}.{cid}.gds"
+        try:
+            klt.place(libs, rows, cgds)
+            env, err = run_one(klt, "drc", drc_request(cgds, info), out / "cases" / cid, "drc")
+            res["result"] = verdict_drc(env)
+            res["observed"] = {"status": (env or {}).get("status"), "rule_counts": (env or {}).get("rule_counts"),
+                               "rows": [i for i in ids if i]}
+            if env is None:
+                res["error"] = f"klt drc: {err}"
+            elif res["result"] == "FAIL":
+                res["observed"]["violating_rows"] = violating_rows(env, ids)
+        except SetupError as e:
+            res["error"] = str(e)
+    return results
+
+
 def cell_files(cell, paths):
     """(gds, cdl) of a cell: pinned PDK files if shipped, repo files if drawn."""
     if cell["source"] == "drawn":
@@ -559,6 +641,43 @@ def run_abutment_cases(klt, info, work, out, name, gds, libs, neighbour, with_se
         except SetupError as e:
             res["error"] = str(e)
     return results
+
+
+def run_merged(klt, info, work, record, libs, names, neighbour, tap):
+    """One `klt drc` request on one stream holding every acceptance case 1-4 of every drawn cell.
+
+    This is the library's citable T1 item 3 envelope; `rows` maps each stream
+    row to its case so a violation is attributable.
+    """
+    rows, labels = merged_rows(names, neighbour, tap)
+    out = record / "merged"
+    res = {"id": "merged-stream", "kind": "drc_merged", "result": "ERROR", "cases": len({l for l in labels if l}),
+           "rows": len(rows), "cells": len(names)}
+    mgds = work / "LIBRARY_CASES.gds"
+    try:
+        klt.place(libs, rows, mgds, top="LIBRARY_CASES")
+        res["gds_sha256"] = sha256_file(mgds)
+        env, err = run_one(klt, "drc", drc_request(mgds, info), out, "drc")
+        res["result"] = verdict_drc(env)
+        res["envelope"] = env
+        res["observed"] = {"status": (env or {}).get("status"), "violation_count": (env or {}).get("violation_count"),
+                           "rule_counts": (env or {}).get("rule_counts"),
+                           "coverage": {k: ((env or {}).get("coverage") or {}).get(k)
+                                        for k in ("layers_in_stream_without_rules", "rules_skipped", "deck_scope")}}
+        if env is None:
+            res["error"] = f"klt drc: {err}"
+        elif res["result"] == "FAIL":
+            res["observed"]["violating_rows"] = violating_rows(env, labels)
+    except SetupError as e:
+        res["error"] = str(e)
+    return res
+
+
+def family_coverage(cfg, fired):
+    """Per rule-id family named in the spec's negative-control list: rules fired by a CAUGHT control."""
+    fams = cfg.get("spec_rule_families", [])
+    per = {f: sorted(r for r in fired if r.split(".")[0] == f) for f in fams}
+    return {"families": per, "families_without_control": [f for f, rules in per.items() if not rules]}
 
 
 LIBRARY_TOP = "A7S_75t_R_LIBRARY"
@@ -635,6 +754,9 @@ def run(args, klt=None):
     info = klt.info()
     klt_version = klt.version()
     by_name = {c["name"]: c for c in cfg["cells"]}
+    drawn_names = [c["name"] for c in cfg["cells"] if c["source"] == "drawn"]
+    drawn_libs = {n: REPO / by_name[n]["gds"] for n in drawn_names}
+    inv, tap = cfg.get("library_neighbour"), cfg.get("library_tap")
     for c in cfg["cells"]:
         if c["source"] == "drawn":
             for key in ("gds", "cdl", "script"):
@@ -732,6 +854,10 @@ def run(args, klt=None):
                 libs = {name: gds, neighbour: cell_files(by_name[neighbour], paths)[0]}
                 row["cases"] += run_abutment_cases(klt, info, work, out, name, gds, libs, neighbour)
                 ok &= all(c["result"] == "PASS" for c in row["cases"])
+            if inv in drawn_libs and tap in drawn_libs:
+                lib_cases = run_library_cases(klt, info, work, out, name, drawn_libs, drawn_names, inv, tap)
+                row["cases"] += lib_cases
+                ok &= all(c["result"] == "PASS" for c in lib_cases)
             res = {"id": "case5-grid", "kind": "grid_check", "result": "ERROR"}
             row["cases"].append(res)
             try:
@@ -805,13 +931,22 @@ def run(args, klt=None):
             res["error"] = str(e)
         ok &= res["result"] == "CAUGHT"
 
+    merged = None
+    if not args.only and inv in drawn_libs and tap in drawn_libs:
+        merged = run_merged(klt, info, work, record, drawn_libs, drawn_names, inv, tap)
+        ok &= merged["result"] == "PASS"
+
     library = None
     if not args.only and any(c["source"] == "drawn" for c in cfg["cells"]):
         library = run_library(klt, cfg, record / "library")
         ok &= library["result"] == "PASS"
 
     drawn = {c["name"] for c in cfg["cells"] if c["source"] == "drawn"}
-    fired = sorted({r for c in controls if c["base_cell"] in drawn for r in (c.get("observed") or {}).get("rule_counts", {})})
+    fired = sorted({r for c in controls if c["base_cell"] in drawn and c["result"] == "CAUGHT"
+                    for r in (c.get("observed") or {}).get("rule_counts", {})})
+    families = family_coverage(cfg, fired) if drawn and not args.only else None
+    if families is not None:
+        ok &= not families["families_without_control"]
     manifest = {
         "record_id": record_id,
         "utc": stamp,
@@ -824,10 +959,14 @@ def run(args, klt=None):
         "overall": "PASS" if ok else "FAIL",
         "cells": [{k: v for k, v in r.items() if not k.endswith("_envelope")} for r in rows],
         "controls": controls,
+        "merged_stream": merged,
+        "family_coverage": families,
         "library": library,
         "drawn_rules_fired_by_controls": fired,
         "drawn_rules_unexercised": sorted(set(info.get("rules", [])) - set(fired)) if drawn else [],
     }
+    if merged:
+        merged.pop("envelope", None)
     save(record / "manifest.json", manifest)
     (record / "summary.md").write_text(summary(manifest, rows))
     print((record / "summary.md").read_text())
@@ -878,6 +1017,16 @@ def summary(m, rows):
         for r in abutted:
             for c in r["cases"]:
                 lines.append(f"| {r['cell']} | {c['id']} | {c['kind']} | {c['result']} | {q(c.get('observed') or c.get('error'))} |")
+    mg = m.get("merged_stream")
+    if mg:
+        lines += ["", "## Merged test-layout stream (one `klt drc` request, cases 1-4 of every drawn cell)", "",
+                  f"- result: **{mg['result']}**; {mg['cases']} cases on {mg['rows']} rows, {mg['cells']} cells; stream sha256 `{mg.get('gds_sha256')}`",
+                  f"- observed: `{q(mg.get('observed') or mg.get('error'))}`"]
+    fc = m.get("family_coverage")
+    if fc:
+        lines += ["", "## Negative-control coverage per rule family (spec/stdcells.md)", "", "| family | rules fired by a caught control |", "|---|---|"]
+        for f, rl in fc["families"].items():
+            lines.append(f"| {f} | {', '.join(f'`{r}`' for r in rl) if rl else '**NO CONTROL FIRES (unexercised)**'} |")
     for r in rows:
         if r.get("abutment_verdict"):
             sa = (r.get("drc_envelope") or {}).get("rule_counts")

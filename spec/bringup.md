@@ -226,3 +226,16 @@ decision-0007 verdict (`FAIL standalone / PASS abutted`). An earlier full run wi
 the CI pin, klt `0.8.0` in a throwaway venv, reported the same deck hash and the
 same overall PASS; it was not committed because its envelopes name the venv path.
 `TAPCELL` is still `KNOWN-GAP` (klayout-tools#3811).
+
+## 2026-10-28: deck hash re-derived again (issue #37)
+
+The klt installed on the worker for the 2026-10-28 records
+(`verification/records/20261028T181104Z-klt0.8.1.dev604_g4f345a577997/`, klt `0.8.1.dev604+g4f345a577997`, KLayout 0.30.12)
+packages an ASAP7 deck with content hash
+`sha256:14f146f02cd731de3e0b59452eadfdab9c2c947724a219a1002a31b5e0f12d13` and
+**267** declared rule categories (`--expect-rule-categories 267`, assertion
+satisfied), not the 263 and `48ac590a...` of the 2026-10-27 section. The same run
+checks the shipped cells against it: `INVx1`, `NAND2x1`, `NOR2x1` and `DFFHQNx1`
+`PASS` for DRC and LVS, `FILLERxp5` keeps its decision-0007 verdict, and `TAPCELL`
+now reports a DRC verdict (`PASS`) instead of the klayout-tools#3811 abort. The
+spec text still names 263; a record states the count the deck it ran declares.
