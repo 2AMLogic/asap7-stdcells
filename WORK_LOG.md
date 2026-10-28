@@ -5,6 +5,9 @@ triage role. Newest first.
 
 ### 2026-10-28
 
+- **PR #55**: feat: add DRC cases 2 and 4, family controls and a library-wide envelope
+- **PR #54**: feat: per-cell LVS fault controls, fill/tap structure check and library LVS for T1 item 4
+- **Issue #38** (closed): T1 item 4 (LVS clean): klt lvs match with exact NFIN for every device-bearing cell, with negative controls
 - **PR #51**: feat: draw DHLx1 and DFFHQNx1 with DRC/LVS record
 - **PR #49**: feat: draw XOR2x1 and XNOR2x1 with DRC/LVS record
 - **PR #48**: feat: draw TIEHIx1 and TIELOx1 with DRC/LVS record
