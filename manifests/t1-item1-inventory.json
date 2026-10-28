@@ -11,6 +11,8 @@
     "design/draw_AND2x1_A7S_75t_R.py",
     "design/draw_AOI21x1_A7S_75t_R.py",
     "design/draw_AOI22x1_A7S_75t_R.py",
+    "design/draw_DFFHQNx1_A7S_75t_R.py",
+    "design/draw_DHLx1_A7S_75t_R.py",
     "design/draw_BUFx1_A7S_75t_R.py",
     "design/draw_FILLER1_A7S_75t_R.py",
     "design/draw_FILLER2_A7S_75t_R.py",
