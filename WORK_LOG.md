@@ -5,6 +5,7 @@ triage role. Newest first.
 
 ### 2026-10-27
 
+- **PR #46**: feat: draw NAND3x1, NOR3x1, AOI22x1 and OAI22x1 layouts with DRC/LVS record
 - **PR #43**: feat(layout): draw the 11 remaining fallback cells and attest T1 item 2
 - **PR #42**: feat: add CDLs for cells 2-18 with function and freshness checks, attest T1 item 1
 - **Issue #35** (closed): T1 item 2 (layout): scripted GDS for the 11 remaining fallback-set cells (BUF..OAI21, FILLER1/2/4, TAP)
