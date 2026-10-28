@@ -65,10 +65,10 @@
   },
   "XNOR2x1_A7S_75t_R": {
     "cdl_sha256": "8af9e840597cd051650f58035415414a875f1df35fe1cc4feed25c8b6b099218",
-    "script_sha256": null
+    "script_sha256": "a9b0da28cd7fd999a8d1b7faa36394d2744932efea8b4967122a023bcfdad4b2"
   },
   "XOR2x1_A7S_75t_R": {
     "cdl_sha256": "d8189dec20f0bf7baa0cbafacae2ce121d6ca1c721d6cf927660ae64745faa46",
-    "script_sha256": null
+    "script_sha256": "744fd74a901b3e51d8532902c8b4da46e641b16565c587755a1306ce6369d7e2"
   }
 }

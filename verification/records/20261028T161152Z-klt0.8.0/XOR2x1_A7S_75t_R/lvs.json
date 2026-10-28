@@ -1,0 +1,209 @@
+{
+  "body_verification": {
+    "device_classes": [],
+    "device_count": 0,
+    "finding_count": 0,
+    "findings": [],
+    "reason": null,
+    "status": "verified"
+  },
+  "category_counts": {
+    "device.finfet_bulk_tied": 2
+  },
+  "category_error_counts": {},
+  "constant_nets_applied": null,
+  "counts": {
+    "devices": {
+      "layout": 12,
+      "matched": 12,
+      "reference": 12
+    },
+    "nets": {
+      "layout": 10,
+      "matched": 10,
+      "reference": 10
+    },
+    "pins": {
+      "layout": 5,
+      "matched": 5,
+      "reference": 5
+    }
+  },
+  "device_classes": [
+    "nfet",
+    "pfet"
+  ],
+  "device_parameter_coverage": [],
+  "engine": "klayout",
+  "environment": {
+    "engine": "klayout",
+    "engine_version": "0.30.12",
+    "extracted_netlist": null,
+    "layout_sha256": "2f993a86c7fc67ed58be9324a128a1d22e10f96a668542f24fcf3e7560da8491",
+    "netgen_binary": null,
+    "reference_sha256": "d8189dec20f0bf7baa0cbafacae2ce121d6ca1c721d6cf927660ae64745faa46"
+  },
+  "error_count": 0,
+  "hints_applied": null,
+  "layout": {
+    "path": "layout/XOR2x1_A7S_75t_R.gds",
+    "scope": "repo"
+  },
+  "mismatch_count": 2,
+  "mismatches": [
+    {
+      "category": "device.finfet_bulk_tied",
+      "circuit": null,
+      "description": "options.finfet_bulk joined the nmos bulk net 'vsubs' onto layout net 'VSS' on 6 device(s) before comparing -- the bulk connectivity is a caller assertion, not geometry read from the layout",
+      "details": {
+        "bulk_net": "vsubs",
+        "device_classes": [
+          "nmos_rvt"
+        ],
+        "device_count": 6,
+        "net": "VSS",
+        "polarity": "nmos",
+        "status": "joined"
+      },
+      "device": null,
+      "instance": null,
+      "net": null,
+      "property": null,
+      "severity": "warning",
+      "side": "layout",
+      "subcircuit": null
+    },
+    {
+      "category": "device.finfet_bulk_tied",
+      "circuit": null,
+      "description": "options.finfet_bulk joined the pmos bulk net '$20' onto layout net 'VDD' on 6 device(s) before comparing -- the bulk connectivity is a caller assertion, not geometry read from the layout",
+      "details": {
+        "bulk_net": "$20",
+        "device_classes": [
+          "pmos_rvt"
+        ],
+        "device_count": 6,
+        "net": "VDD",
+        "polarity": "pmos",
+        "status": "joined"
+      },
+      "device": null,
+      "instance": null,
+      "net": null,
+      "property": null,
+      "severity": "warning",
+      "side": "layout",
+      "subcircuit": null
+    }
+  ],
+  "net_correspondence": [
+    {
+      "layout": "A",
+      "pin": true,
+      "reference": "A"
+    },
+    {
+      "layout": "\\$2",
+      "pin": false,
+      "reference": "AN"
+    },
+    {
+      "layout": "B",
+      "pin": true,
+      "reference": "B"
+    },
+    {
+      "layout": "\\$3",
+      "pin": false,
+      "reference": "BN"
+    },
+    {
+      "layout": "VDD",
+      "pin": true,
+      "reference": "VDD"
+    },
+    {
+      "layout": "VSS|vsubs",
+      "pin": true,
+      "reference": "VSS"
+    },
+    {
+      "layout": "\\$13",
+      "pin": false,
+      "reference": "X_N1"
+    },
+    {
+      "layout": "\\$9",
+      "pin": false,
+      "reference": "X_N2"
+    },
+    {
+      "layout": "\\$15",
+      "pin": false,
+      "reference": "X_P1"
+    },
+    {
+      "layout": "Y",
+      "pin": true,
+      "reference": "Y"
+    }
+  ],
+  "options": {
+    "anchor_top_level_pins": null,
+    "combine_devices": false,
+    "combine_devices_max_attempts": 5,
+    "combine_devices_per_circuit": null,
+    "compare_mos_flavour": false,
+    "compare_parameters": null,
+    "finfet_bulk": {
+      "nmos": "VSS",
+      "pmos": "VDD"
+    },
+    "flatten_layout": false,
+    "flatten_reference": false,
+    "netgen_setup": null,
+    "parameter_tolerance": null,
+    "power_connectivity": null,
+    "strict_top_level_pin_count": false,
+    "supply_nets": [
+      "GND",
+      "VCC",
+      "VDD",
+      "VGND",
+      "VPWR",
+      "VSS"
+    ]
+  },
+  "parameter_tolerance": null,
+  "power_connectivity": {
+    "expected_nets": null,
+    "finding_count": 0,
+    "findings": [],
+    "instance_count": 0,
+    "power_pins": [],
+    "power_pins_derivation": null,
+    "reason": "reference.form is 'plain-element', whose reference netlist carries its own power/ground pins and nets -- they take part in the ordinary compare, so this check (which exists to cover the signal-only 'gate-level-verilog' form) does not apply",
+    "status": "unchecked",
+    "unchecked_expected_pins": []
+  },
+  "provenance": {
+    "deck": {
+      "content_hash": "sha256:30a8d86cc36f99ffc54b0c86ab69a737acd91ba0fd21f6de3c842f9fba9d2aaf",
+      "name": "asap7",
+      "released": true
+    },
+    "input": {
+      "content_hash": "sha256:2f993a86c7fc67ed58be9324a128a1d22e10f96a668542f24fcf3e7560da8491",
+      "role": "layout"
+    },
+    "klayout_version": "0.30.12",
+    "klayout_version_mismatch": false,
+    "klt_version": "0.8.0",
+    "pdk": null
+  },
+  "reference": "design/XOR2x1_A7S_75t_R.cdl",
+  "reference_top": "XOR2X1_A7S_75T_R",
+  "schema_version": 2,
+  "status": "match",
+  "top": "XOR2x1_A7S_75t_R"
+}
