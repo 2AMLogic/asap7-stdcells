@@ -24,7 +24,7 @@
         "role": "testbench",
         "path": "verification/cells.json",
         "passed": true,
-        "content_hash": "sha256:4e8aa1240adcfefa4e27a09ca37ea1d77b12dc01d58eef004cef824e281201a4"
+        "content_hash": "sha256:464f7c7ca7b9bd80a85bc55cfc65dde702dea3d56eae3399b9bad8dde15bc60f"
       },
       {
         "check": "present",
