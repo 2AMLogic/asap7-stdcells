@@ -1,0 +1,178 @@
+{
+  "body_verification": {
+    "device_classes": [],
+    "device_count": 0,
+    "finding_count": 0,
+    "findings": [],
+    "reason": null,
+    "status": "verified"
+  },
+  "category_counts": {
+    "device.finfet_bulk_tied": 2
+  },
+  "category_error_counts": {},
+  "constant_nets_applied": null,
+  "counts": {
+    "devices": {
+      "layout": 1,
+      "matched": 1,
+      "reference": 1
+    },
+    "nets": {
+      "layout": 3,
+      "matched": 3,
+      "reference": 3
+    },
+    "pins": {
+      "layout": 3,
+      "matched": 3,
+      "reference": 3
+    }
+  },
+  "device_classes": [
+    "nfet",
+    "pfet",
+    "resistor"
+  ],
+  "device_parameter_coverage": [],
+  "engine": "klayout",
+  "environment": {
+    "engine": "klayout",
+    "engine_version": "0.30.12",
+    "extracted_netlist": null,
+    "layout_sha256": "8aea407bb2ba6591f9edc3f62966646c50f97fdaaa287e16584329f62481c60b",
+    "netgen_binary": null,
+    "reference_sha256": "b31af09267fe55917755444d61589f78144ebd0794fc0f2ed0f4ab7d384e4f9f"
+  },
+  "error_count": 0,
+  "hints_applied": null,
+  "layout": {
+    "path": "layout/TIELOx1_A7S_75t_R.gds",
+    "scope": "repo"
+  },
+  "mismatch_count": 2,
+  "mismatches": [
+    {
+      "category": "device.finfet_bulk_tied",
+      "circuit": null,
+      "description": "options.finfet_bulk found no pmos devices to tie on 0 device(s) before comparing -- the bulk connectivity is a caller assertion, not geometry read from the layout",
+      "details": {
+        "bulk_net": null,
+        "circuit": "TIELOx1_A7S_75t_R",
+        "device_classes": [],
+        "device_count": 0,
+        "net": "VDD",
+        "polarity": "pmos",
+        "status": "no_devices"
+      },
+      "device": null,
+      "instance": null,
+      "net": null,
+      "property": null,
+      "severity": "warning",
+      "side": "layout",
+      "subcircuit": null
+    },
+    {
+      "category": "device.finfet_bulk_tied",
+      "circuit": null,
+      "description": "options.finfet_bulk joined the nmos bulk net 'vsubs' onto layout net 'VSS' on 1 device(s) before comparing -- the bulk connectivity is a caller assertion, not geometry read from the layout",
+      "details": {
+        "bulk_net": "vsubs",
+        "circuit": "TIELOx1_A7S_75t_R",
+        "device_classes": [
+          "nmos_rvt"
+        ],
+        "device_count": 1,
+        "net": "VSS",
+        "polarity": "nmos",
+        "status": "joined"
+      },
+      "device": null,
+      "instance": null,
+      "net": null,
+      "property": null,
+      "severity": "warning",
+      "side": "layout",
+      "subcircuit": null
+    }
+  ],
+  "net_correspondence": [
+    {
+      "layout": "L",
+      "pin": true,
+      "reference": "L"
+    },
+    {
+      "layout": "VDD",
+      "pin": true,
+      "reference": "VDD"
+    },
+    {
+      "layout": "VSS|vsubs",
+      "pin": true,
+      "reference": "VSS"
+    }
+  ],
+  "options": {
+    "anchor_top_level_pins": null,
+    "combine_devices": false,
+    "combine_devices_max_attempts": 5,
+    "combine_devices_per_circuit": null,
+    "compare_mos_flavour": false,
+    "compare_parameters": null,
+    "finfet_bulk": {
+      "nmos": "VSS",
+      "pmos": "VDD"
+    },
+    "flatten_layout": false,
+    "flatten_reference": false,
+    "netgen_setup": null,
+    "parameter_tolerance": null,
+    "power_connectivity": null,
+    "strict_top_level_pin_count": false,
+    "supply_nets": [
+      "GND",
+      "VCC",
+      "VDD",
+      "VGND",
+      "VPWR",
+      "VSS"
+    ]
+  },
+  "parameter_tolerance": null,
+  "power_connectivity": {
+    "excluded_pins": [],
+    "expected_nets": null,
+    "finding_count": 0,
+    "findings": [],
+    "instance_count": 0,
+    "power_pins": [],
+    "power_pins_derivation": null,
+    "reason": "reference.form is 'plain-element', whose reference netlist carries its own power/ground pins and nets -- they take part in the ordinary compare, so this check (which exists to cover the signal-only 'gate-level-verilog' form) does not apply",
+    "status": "unchecked",
+    "unchecked_expected_pins": []
+  },
+  "provenance": {
+    "deck": {
+      "content_hash": "sha256:ac57a7b68dd496e10a654ed79d29c1129bf3403d440ce5a73e43c5e8afd875aa",
+      "name": "asap7",
+      "released": false
+    },
+    "input": {
+      "content_hash": "sha256:8aea407bb2ba6591f9edc3f62966646c50f97fdaaa287e16584329f62481c60b",
+      "role": "layout"
+    },
+    "klayout_version": "0.30.12",
+    "klayout_version_mismatch": false,
+    "klt_git_commit": "680c6f4a751891cc1f14c1fa5a240df8cfbf32b4",
+    "klt_reinstall_spec": "klayout-tools @ git+https://github.com/2AMLogic/klayout-tools@680c6f4a751891cc1f14c1fa5a240df8cfbf32b4",
+    "klt_version": "0.8.1.dev670+g680c6f4a7518",
+    "pdk": null
+  },
+  "reference": "design/TIELOx1_A7S_75t_R.cdl",
+  "reference_top": "TIELOX1_A7S_75T_R",
+  "schema_version": 2,
+  "status": "match",
+  "top": "TIELOx1_A7S_75t_R"
+}

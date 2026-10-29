@@ -1,0 +1,6 @@
+{
+  "deck_file": "/home/ubuntu/.local/share/uv/tools/klayout-tools/lib/python3.14/site-packages/klayout_tools/decks/asap7.drc",
+  "engine": "klayout",
+  "expect_rule_categories": 267,
+  "file": "verification/.work/INVx1_A7S_75t_R.case3-R180-self-above.gds"
+}

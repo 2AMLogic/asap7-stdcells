@@ -82,6 +82,11 @@ def wells_and_selects(d):
     d.box("WELL", 0, 135, d.w, H)
 
 
+def well_only(d):
+    """N-well over the upper half and no NSELECT or PSELECT (decision 0010)."""
+    d.box("WELL", 0, 135, d.w, H)
+
+
 def rails(d, labels_x=18):
     """18 nm M1 rails centred on the bottom (VSS) and top (VDD) cell edges."""
     d.box("M1", 0, -9, d.w, 9)

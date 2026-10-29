@@ -1,0 +1,1418 @@
+{
+  "body_verification": {
+    "device_classes": [],
+    "device_count": 0,
+    "finding_count": 0,
+    "findings": [],
+    "reason": null,
+    "status": "verified"
+  },
+  "category_counts": {
+    "device.finfet_bulk_tied": 34,
+    "topology.flattened": 2
+  },
+  "category_error_counts": {},
+  "constant_nets_applied": null,
+  "counts": {
+    "devices": {
+      "layout": 120,
+      "matched": 120,
+      "reference": 120
+    },
+    "nets": {
+      "layout": 98,
+      "matched": 98,
+      "reference": 98
+    },
+    "pins": {
+      "layout": 2,
+      "matched": 2,
+      "reference": 2
+    }
+  },
+  "device_classes": [
+    "nfet",
+    "pfet",
+    "resistor"
+  ],
+  "device_parameter_coverage": [],
+  "engine": "klayout",
+  "environment": {
+    "engine": "klayout",
+    "engine_version": "0.30.12",
+    "extracted_netlist": null,
+    "layout_sha256": "bf619dcce132b568d08c94951199f6f08720d842ef11c1a09404ff0357c9cba4",
+    "netgen_binary": null,
+    "reference_sha256": "f9f4fe127718e007e0504a103d8c74ceb5f84269a6a22bb59e9cfc3c673b268f"
+  },
+  "error_count": 0,
+  "hints_applied": null,
+  "layout": {
+    "path": "verification/library/A7S_75t_R_LIBRARY.gds",
+    "scope": "repo"
+  },
+  "mismatch_count": 36,
+  "mismatches": [
+    {
+      "category": "device.finfet_bulk_tied",
+      "circuit": null,
+      "description": "options.finfet_bulk joined the nmos bulk net 'vsubs' onto layout net 'VSS' on 1 device(s) before comparing -- the bulk connectivity is a caller assertion, not geometry read from the layout",
+      "details": {
+        "bulk_net": "vsubs",
+        "circuit": "INVx1_A7S_75t_R",
+        "device_classes": [
+          "nmos_rvt"
+        ],
+        "device_count": 1,
+        "net": "VSS",
+        "polarity": "nmos",
+        "status": "joined"
+      },
+      "device": null,
+      "instance": null,
+      "net": null,
+      "property": null,
+      "severity": "warning",
+      "side": "layout",
+      "subcircuit": null
+    },
+    {
+      "category": "device.finfet_bulk_tied",
+      "circuit": null,
+      "description": "options.finfet_bulk joined the pmos bulk net '$5' onto layout net 'VDD' on 1 device(s) before comparing -- the bulk connectivity is a caller assertion, not geometry read from the layout",
+      "details": {
+        "bulk_net": "$5",
+        "circuit": "INVx1_A7S_75t_R",
+        "device_classes": [
+          "pmos_rvt"
+        ],
+        "device_count": 1,
+        "net": "VDD",
+        "polarity": "pmos",
+        "status": "joined"
+      },
+      "device": null,
+      "instance": null,
+      "net": null,
+      "property": null,
+      "severity": "warning",
+      "side": "layout",
+      "subcircuit": null
+    },
+    {
+      "category": "device.finfet_bulk_tied",
+      "circuit": null,
+      "description": "options.finfet_bulk joined the nmos bulk net 'vsubs' onto layout net 'VSS' on 2 device(s) before comparing -- the bulk connectivity is a caller assertion, not geometry read from the layout",
+      "details": {
+        "bulk_net": "vsubs",
+        "circuit": "BUFx1_A7S_75t_R",
+        "device_classes": [
+          "nmos_rvt"
+        ],
+        "device_count": 2,
+        "net": "VSS",
+        "polarity": "nmos",
+        "status": "joined"
+      },
+      "device": null,
+      "instance": null,
+      "net": null,
+      "property": null,
+      "severity": "warning",
+      "side": "layout",
+      "subcircuit": null
+    },
+    {
+      "category": "device.finfet_bulk_tied",
+      "circuit": null,
+      "description": "options.finfet_bulk joined the pmos bulk net '$6' onto layout net 'VDD' on 2 device(s) before comparing -- the bulk connectivity is a caller assertion, not geometry read from the layout",
+      "details": {
+        "bulk_net": "$6",
+        "circuit": "BUFx1_A7S_75t_R",
+        "device_classes": [
+          "pmos_rvt"
+        ],
+        "device_count": 2,
+        "net": "VDD",
+        "polarity": "pmos",
+        "status": "joined"
+      },
+      "device": null,
+      "instance": null,
+      "net": null,
+      "property": null,
+      "severity": "warning",
+      "side": "layout",
+      "subcircuit": null
+    },
+    {
+      "category": "device.finfet_bulk_tied",
+      "circuit": null,
+      "description": "options.finfet_bulk joined the nmos bulk net 'vsubs' onto layout net 'VSS' on 2 device(s) before comparing -- the bulk connectivity is a caller assertion, not geometry read from the layout",
+      "details": {
+        "bulk_net": "vsubs",
+        "circuit": "NAND2x1_A7S_75t_R",
+        "device_classes": [
+          "nmos_rvt"
+        ],
+        "device_count": 2,
+        "net": "VSS",
+        "polarity": "nmos",
+        "status": "joined"
+      },
+      "device": null,
+      "instance": null,
+      "net": null,
+      "property": null,
+      "severity": "warning",
+      "side": "layout",
+      "subcircuit": null
+    },
+    {
+      "category": "device.finfet_bulk_tied",
+      "circuit": null,
+      "description": "options.finfet_bulk joined the pmos bulk net '$6' onto layout net 'VDD' on 2 device(s) before comparing -- the bulk connectivity is a caller assertion, not geometry read from the layout",
+      "details": {
+        "bulk_net": "$6",
+        "circuit": "NAND2x1_A7S_75t_R",
+        "device_classes": [
+          "pmos_rvt"
+        ],
+        "device_count": 2,
+        "net": "VDD",
+        "polarity": "pmos",
+        "status": "joined"
+      },
+      "device": null,
+      "instance": null,
+      "net": null,
+      "property": null,
+      "severity": "warning",
+      "side": "layout",
+      "subcircuit": null
+    },
+    {
+      "category": "device.finfet_bulk_tied",
+      "circuit": null,
+      "description": "options.finfet_bulk joined the nmos bulk net 'vsubs' onto layout net 'VSS' on 2 device(s) before comparing -- the bulk connectivity is a caller assertion, not geometry read from the layout",
+      "details": {
+        "bulk_net": "vsubs",
+        "circuit": "NOR2x1_A7S_75t_R",
+        "device_classes": [
+          "nmos_rvt"
+        ],
+        "device_count": 2,
+        "net": "VSS",
+        "polarity": "nmos",
+        "status": "joined"
+      },
+      "device": null,
+      "instance": null,
+      "net": null,
+      "property": null,
+      "severity": "warning",
+      "side": "layout",
+      "subcircuit": null
+    },
+    {
+      "category": "device.finfet_bulk_tied",
+      "circuit": null,
+      "description": "options.finfet_bulk joined the pmos bulk net '$6' onto layout net 'VDD' on 2 device(s) before comparing -- the bulk connectivity is a caller assertion, not geometry read from the layout",
+      "details": {
+        "bulk_net": "$6",
+        "circuit": "NOR2x1_A7S_75t_R",
+        "device_classes": [
+          "pmos_rvt"
+        ],
+        "device_count": 2,
+        "net": "VDD",
+        "polarity": "pmos",
+        "status": "joined"
+      },
+      "device": null,
+      "instance": null,
+      "net": null,
+      "property": null,
+      "severity": "warning",
+      "side": "layout",
+      "subcircuit": null
+    },
+    {
+      "category": "device.finfet_bulk_tied",
+      "circuit": null,
+      "description": "options.finfet_bulk joined the nmos bulk net 'vsubs' onto layout net 'VSS' on 3 device(s) before comparing -- the bulk connectivity is a caller assertion, not geometry read from the layout",
+      "details": {
+        "bulk_net": "vsubs",
+        "circuit": "AND2x1_A7S_75t_R",
+        "device_classes": [
+          "nmos_rvt"
+        ],
+        "device_count": 3,
+        "net": "VSS",
+        "polarity": "nmos",
+        "status": "joined"
+      },
+      "device": null,
+      "instance": null,
+      "net": null,
+      "property": null,
+      "severity": "warning",
+      "side": "layout",
+      "subcircuit": null
+    },
+    {
+      "category": "device.finfet_bulk_tied",
+      "circuit": null,
+      "description": "options.finfet_bulk joined the pmos bulk net '$8' onto layout net 'VDD' on 3 device(s) before comparing -- the bulk connectivity is a caller assertion, not geometry read from the layout",
+      "details": {
+        "bulk_net": "$8",
+        "circuit": "AND2x1_A7S_75t_R",
+        "device_classes": [
+          "pmos_rvt"
+        ],
+        "device_count": 3,
+        "net": "VDD",
+        "polarity": "pmos",
+        "status": "joined"
+      },
+      "device": null,
+      "instance": null,
+      "net": null,
+      "property": null,
+      "severity": "warning",
+      "side": "layout",
+      "subcircuit": null
+    },
+    {
+      "category": "device.finfet_bulk_tied",
+      "circuit": null,
+      "description": "options.finfet_bulk joined the nmos bulk net 'vsubs' onto layout net 'VSS' on 3 device(s) before comparing -- the bulk connectivity is a caller assertion, not geometry read from the layout",
+      "details": {
+        "bulk_net": "vsubs",
+        "circuit": "OR2x1_A7S_75t_R",
+        "device_classes": [
+          "nmos_rvt"
+        ],
+        "device_count": 3,
+        "net": "VSS",
+        "polarity": "nmos",
+        "status": "joined"
+      },
+      "device": null,
+      "instance": null,
+      "net": null,
+      "property": null,
+      "severity": "warning",
+      "side": "layout",
+      "subcircuit": null
+    },
+    {
+      "category": "device.finfet_bulk_tied",
+      "circuit": null,
+      "description": "options.finfet_bulk joined the pmos bulk net '$8' onto layout net 'VDD' on 3 device(s) before comparing -- the bulk connectivity is a caller assertion, not geometry read from the layout",
+      "details": {
+        "bulk_net": "$8",
+        "circuit": "OR2x1_A7S_75t_R",
+        "device_classes": [
+          "pmos_rvt"
+        ],
+        "device_count": 3,
+        "net": "VDD",
+        "polarity": "pmos",
+        "status": "joined"
+      },
+      "device": null,
+      "instance": null,
+      "net": null,
+      "property": null,
+      "severity": "warning",
+      "side": "layout",
+      "subcircuit": null
+    },
+    {
+      "category": "device.finfet_bulk_tied",
+      "circuit": null,
+      "description": "options.finfet_bulk joined the nmos bulk net 'vsubs' onto layout net 'VSS' on 3 device(s) before comparing -- the bulk connectivity is a caller assertion, not geometry read from the layout",
+      "details": {
+        "bulk_net": "vsubs",
+        "circuit": "AOI21x1_A7S_75t_R",
+        "device_classes": [
+          "nmos_rvt"
+        ],
+        "device_count": 3,
+        "net": "VSS",
+        "polarity": "nmos",
+        "status": "joined"
+      },
+      "device": null,
+      "instance": null,
+      "net": null,
+      "property": null,
+      "severity": "warning",
+      "side": "layout",
+      "subcircuit": null
+    },
+    {
+      "category": "device.finfet_bulk_tied",
+      "circuit": null,
+      "description": "options.finfet_bulk joined the pmos bulk net '$9' onto layout net 'VDD' on 3 device(s) before comparing -- the bulk connectivity is a caller assertion, not geometry read from the layout",
+      "details": {
+        "bulk_net": "$9",
+        "circuit": "AOI21x1_A7S_75t_R",
+        "device_classes": [
+          "pmos_rvt"
+        ],
+        "device_count": 3,
+        "net": "VDD",
+        "polarity": "pmos",
+        "status": "joined"
+      },
+      "device": null,
+      "instance": null,
+      "net": null,
+      "property": null,
+      "severity": "warning",
+      "side": "layout",
+      "subcircuit": null
+    },
+    {
+      "category": "device.finfet_bulk_tied",
+      "circuit": null,
+      "description": "options.finfet_bulk joined the nmos bulk net 'vsubs' onto layout net 'VSS' on 3 device(s) before comparing -- the bulk connectivity is a caller assertion, not geometry read from the layout",
+      "details": {
+        "bulk_net": "vsubs",
+        "circuit": "OAI21x1_A7S_75t_R",
+        "device_classes": [
+          "nmos_rvt"
+        ],
+        "device_count": 3,
+        "net": "VSS",
+        "polarity": "nmos",
+        "status": "joined"
+      },
+      "device": null,
+      "instance": null,
+      "net": null,
+      "property": null,
+      "severity": "warning",
+      "side": "layout",
+      "subcircuit": null
+    },
+    {
+      "category": "device.finfet_bulk_tied",
+      "circuit": null,
+      "description": "options.finfet_bulk joined the pmos bulk net '$9' onto layout net 'VDD' on 3 device(s) before comparing -- the bulk connectivity is a caller assertion, not geometry read from the layout",
+      "details": {
+        "bulk_net": "$9",
+        "circuit": "OAI21x1_A7S_75t_R",
+        "device_classes": [
+          "pmos_rvt"
+        ],
+        "device_count": 3,
+        "net": "VDD",
+        "polarity": "pmos",
+        "status": "joined"
+      },
+      "device": null,
+      "instance": null,
+      "net": null,
+      "property": null,
+      "severity": "warning",
+      "side": "layout",
+      "subcircuit": null
+    },
+    {
+      "category": "device.finfet_bulk_tied",
+      "circuit": null,
+      "description": "options.finfet_bulk joined the nmos bulk net 'vsubs' onto layout net 'VSS' on 3 device(s) before comparing -- the bulk connectivity is a caller assertion, not geometry read from the layout",
+      "details": {
+        "bulk_net": "vsubs",
+        "circuit": "NAND3x1_A7S_75t_R",
+        "device_classes": [
+          "nmos_rvt"
+        ],
+        "device_count": 3,
+        "net": "VSS",
+        "polarity": "nmos",
+        "status": "joined"
+      },
+      "device": null,
+      "instance": null,
+      "net": null,
+      "property": null,
+      "severity": "warning",
+      "side": "layout",
+      "subcircuit": null
+    },
+    {
+      "category": "device.finfet_bulk_tied",
+      "circuit": null,
+      "description": "options.finfet_bulk joined the pmos bulk net '$9' onto layout net 'VDD' on 3 device(s) before comparing -- the bulk connectivity is a caller assertion, not geometry read from the layout",
+      "details": {
+        "bulk_net": "$9",
+        "circuit": "NAND3x1_A7S_75t_R",
+        "device_classes": [
+          "pmos_rvt"
+        ],
+        "device_count": 3,
+        "net": "VDD",
+        "polarity": "pmos",
+        "status": "joined"
+      },
+      "device": null,
+      "instance": null,
+      "net": null,
+      "property": null,
+      "severity": "warning",
+      "side": "layout",
+      "subcircuit": null
+    },
+    {
+      "category": "device.finfet_bulk_tied",
+      "circuit": null,
+      "description": "options.finfet_bulk joined the nmos bulk net 'vsubs' onto layout net 'VSS' on 3 device(s) before comparing -- the bulk connectivity is a caller assertion, not geometry read from the layout",
+      "details": {
+        "bulk_net": "vsubs",
+        "circuit": "NOR3x1_A7S_75t_R",
+        "device_classes": [
+          "nmos_rvt"
+        ],
+        "device_count": 3,
+        "net": "VSS",
+        "polarity": "nmos",
+        "status": "joined"
+      },
+      "device": null,
+      "instance": null,
+      "net": null,
+      "property": null,
+      "severity": "warning",
+      "side": "layout",
+      "subcircuit": null
+    },
+    {
+      "category": "device.finfet_bulk_tied",
+      "circuit": null,
+      "description": "options.finfet_bulk joined the pmos bulk net '$9' onto layout net 'VDD' on 3 device(s) before comparing -- the bulk connectivity is a caller assertion, not geometry read from the layout",
+      "details": {
+        "bulk_net": "$9",
+        "circuit": "NOR3x1_A7S_75t_R",
+        "device_classes": [
+          "pmos_rvt"
+        ],
+        "device_count": 3,
+        "net": "VDD",
+        "polarity": "pmos",
+        "status": "joined"
+      },
+      "device": null,
+      "instance": null,
+      "net": null,
+      "property": null,
+      "severity": "warning",
+      "side": "layout",
+      "subcircuit": null
+    },
+    {
+      "category": "device.finfet_bulk_tied",
+      "circuit": null,
+      "description": "options.finfet_bulk joined the nmos bulk net 'vsubs' onto layout net 'VSS' on 4 device(s) before comparing -- the bulk connectivity is a caller assertion, not geometry read from the layout",
+      "details": {
+        "bulk_net": "vsubs",
+        "circuit": "AOI22x1_A7S_75t_R",
+        "device_classes": [
+          "nmos_rvt"
+        ],
+        "device_count": 4,
+        "net": "VSS",
+        "polarity": "nmos",
+        "status": "joined"
+      },
+      "device": null,
+      "instance": null,
+      "net": null,
+      "property": null,
+      "severity": "warning",
+      "side": "layout",
+      "subcircuit": null
+    },
+    {
+      "category": "device.finfet_bulk_tied",
+      "circuit": null,
+      "description": "options.finfet_bulk joined the pmos bulk net '$9' onto layout net 'VDD' on 4 device(s) before comparing -- the bulk connectivity is a caller assertion, not geometry read from the layout",
+      "details": {
+        "bulk_net": "$9",
+        "circuit": "AOI22x1_A7S_75t_R",
+        "device_classes": [
+          "pmos_rvt"
+        ],
+        "device_count": 4,
+        "net": "VDD",
+        "polarity": "pmos",
+        "status": "joined"
+      },
+      "device": null,
+      "instance": null,
+      "net": null,
+      "property": null,
+      "severity": "warning",
+      "side": "layout",
+      "subcircuit": null
+    },
+    {
+      "category": "device.finfet_bulk_tied",
+      "circuit": null,
+      "description": "options.finfet_bulk joined the nmos bulk net 'vsubs' onto layout net 'VSS' on 4 device(s) before comparing -- the bulk connectivity is a caller assertion, not geometry read from the layout",
+      "details": {
+        "bulk_net": "vsubs",
+        "circuit": "OAI22x1_A7S_75t_R",
+        "device_classes": [
+          "nmos_rvt"
+        ],
+        "device_count": 4,
+        "net": "VSS",
+        "polarity": "nmos",
+        "status": "joined"
+      },
+      "device": null,
+      "instance": null,
+      "net": null,
+      "property": null,
+      "severity": "warning",
+      "side": "layout",
+      "subcircuit": null
+    },
+    {
+      "category": "device.finfet_bulk_tied",
+      "circuit": null,
+      "description": "options.finfet_bulk joined the pmos bulk net '$9' onto layout net 'VDD' on 4 device(s) before comparing -- the bulk connectivity is a caller assertion, not geometry read from the layout",
+      "details": {
+        "bulk_net": "$9",
+        "circuit": "OAI22x1_A7S_75t_R",
+        "device_classes": [
+          "pmos_rvt"
+        ],
+        "device_count": 4,
+        "net": "VDD",
+        "polarity": "pmos",
+        "status": "joined"
+      },
+      "device": null,
+      "instance": null,
+      "net": null,
+      "property": null,
+      "severity": "warning",
+      "side": "layout",
+      "subcircuit": null
+    },
+    {
+      "category": "device.finfet_bulk_tied",
+      "circuit": null,
+      "description": "options.finfet_bulk joined the pmos bulk net '$4' onto layout net 'VDD' on 1 device(s) before comparing -- the bulk connectivity is a caller assertion, not geometry read from the layout",
+      "details": {
+        "bulk_net": "$4",
+        "circuit": "TIEHIx1_A7S_75t_R",
+        "device_classes": [
+          "pmos_rvt"
+        ],
+        "device_count": 1,
+        "net": "VDD",
+        "polarity": "pmos",
+        "status": "joined"
+      },
+      "device": null,
+      "instance": null,
+      "net": null,
+      "property": null,
+      "severity": "warning",
+      "side": "layout",
+      "subcircuit": null
+    },
+    {
+      "category": "device.finfet_bulk_tied",
+      "circuit": null,
+      "description": "options.finfet_bulk joined the nmos bulk net 'vsubs' onto layout net 'VSS' on 1 device(s) before comparing -- the bulk connectivity is a caller assertion, not geometry read from the layout",
+      "details": {
+        "bulk_net": "vsubs",
+        "circuit": "TIELOx1_A7S_75t_R",
+        "device_classes": [
+          "nmos_rvt"
+        ],
+        "device_count": 1,
+        "net": "VSS",
+        "polarity": "nmos",
+        "status": "joined"
+      },
+      "device": null,
+      "instance": null,
+      "net": null,
+      "property": null,
+      "severity": "warning",
+      "side": "layout",
+      "subcircuit": null
+    },
+    {
+      "category": "device.finfet_bulk_tied",
+      "circuit": null,
+      "description": "options.finfet_bulk joined the nmos bulk net 'vsubs' onto layout net 'VSS' on 6 device(s) before comparing -- the bulk connectivity is a caller assertion, not geometry read from the layout",
+      "details": {
+        "bulk_net": "vsubs",
+        "circuit": "XOR2x1_A7S_75t_R",
+        "device_classes": [
+          "nmos_rvt"
+        ],
+        "device_count": 6,
+        "net": "VSS",
+        "polarity": "nmos",
+        "status": "joined"
+      },
+      "device": null,
+      "instance": null,
+      "net": null,
+      "property": null,
+      "severity": "warning",
+      "side": "layout",
+      "subcircuit": null
+    },
+    {
+      "category": "device.finfet_bulk_tied",
+      "circuit": null,
+      "description": "options.finfet_bulk joined the pmos bulk net '$20' onto layout net 'VDD' on 6 device(s) before comparing -- the bulk connectivity is a caller assertion, not geometry read from the layout",
+      "details": {
+        "bulk_net": "$20",
+        "circuit": "XOR2x1_A7S_75t_R",
+        "device_classes": [
+          "pmos_rvt"
+        ],
+        "device_count": 6,
+        "net": "VDD",
+        "polarity": "pmos",
+        "status": "joined"
+      },
+      "device": null,
+      "instance": null,
+      "net": null,
+      "property": null,
+      "severity": "warning",
+      "side": "layout",
+      "subcircuit": null
+    },
+    {
+      "category": "device.finfet_bulk_tied",
+      "circuit": null,
+      "description": "options.finfet_bulk joined the nmos bulk net 'vsubs' onto layout net 'VSS' on 6 device(s) before comparing -- the bulk connectivity is a caller assertion, not geometry read from the layout",
+      "details": {
+        "bulk_net": "vsubs",
+        "circuit": "XNOR2x1_A7S_75t_R",
+        "device_classes": [
+          "nmos_rvt"
+        ],
+        "device_count": 6,
+        "net": "VSS",
+        "polarity": "nmos",
+        "status": "joined"
+      },
+      "device": null,
+      "instance": null,
+      "net": null,
+      "property": null,
+      "severity": "warning",
+      "side": "layout",
+      "subcircuit": null
+    },
+    {
+      "category": "device.finfet_bulk_tied",
+      "circuit": null,
+      "description": "options.finfet_bulk joined the pmos bulk net '$20' onto layout net 'VDD' on 6 device(s) before comparing -- the bulk connectivity is a caller assertion, not geometry read from the layout",
+      "details": {
+        "bulk_net": "$20",
+        "circuit": "XNOR2x1_A7S_75t_R",
+        "device_classes": [
+          "pmos_rvt"
+        ],
+        "device_count": 6,
+        "net": "VDD",
+        "polarity": "pmos",
+        "status": "joined"
+      },
+      "device": null,
+      "instance": null,
+      "net": null,
+      "property": null,
+      "severity": "warning",
+      "side": "layout",
+      "subcircuit": null
+    },
+    {
+      "category": "device.finfet_bulk_tied",
+      "circuit": null,
+      "description": "options.finfet_bulk joined the nmos bulk net 'vsubs' onto layout net 'VSS' on 5 device(s) before comparing -- the bulk connectivity is a caller assertion, not geometry read from the layout",
+      "details": {
+        "bulk_net": "vsubs",
+        "circuit": "DHLx1_A7S_75t_R",
+        "device_classes": [
+          "nmos_rvt"
+        ],
+        "device_count": 5,
+        "net": "VSS",
+        "polarity": "nmos",
+        "status": "joined"
+      },
+      "device": null,
+      "instance": null,
+      "net": null,
+      "property": null,
+      "severity": "warning",
+      "side": "layout",
+      "subcircuit": null
+    },
+    {
+      "category": "device.finfet_bulk_tied",
+      "circuit": null,
+      "description": "options.finfet_bulk joined the pmos bulk net '$20' onto layout net 'VDD' on 5 device(s) before comparing -- the bulk connectivity is a caller assertion, not geometry read from the layout",
+      "details": {
+        "bulk_net": "$20",
+        "circuit": "DHLx1_A7S_75t_R",
+        "device_classes": [
+          "pmos_rvt"
+        ],
+        "device_count": 5,
+        "net": "VDD",
+        "polarity": "pmos",
+        "status": "joined"
+      },
+      "device": null,
+      "instance": null,
+      "net": null,
+      "property": null,
+      "severity": "warning",
+      "side": "layout",
+      "subcircuit": null
+    },
+    {
+      "category": "device.finfet_bulk_tied",
+      "circuit": null,
+      "description": "options.finfet_bulk joined the nmos bulk net 'vsubs' onto layout net 'VSS' on 9 device(s) before comparing -- the bulk connectivity is a caller assertion, not geometry read from the layout",
+      "details": {
+        "bulk_net": "vsubs",
+        "circuit": "DFFHQNx1_A7S_75t_R",
+        "device_classes": [
+          "nmos_rvt"
+        ],
+        "device_count": 9,
+        "net": "VSS",
+        "polarity": "nmos",
+        "status": "joined"
+      },
+      "device": null,
+      "instance": null,
+      "net": null,
+      "property": null,
+      "severity": "warning",
+      "side": "layout",
+      "subcircuit": null
+    },
+    {
+      "category": "device.finfet_bulk_tied",
+      "circuit": null,
+      "description": "options.finfet_bulk joined the pmos bulk net '$31' onto layout net 'VDD' on 9 device(s) before comparing -- the bulk connectivity is a caller assertion, not geometry read from the layout",
+      "details": {
+        "bulk_net": "$31",
+        "circuit": "DFFHQNx1_A7S_75t_R",
+        "device_classes": [
+          "pmos_rvt"
+        ],
+        "device_count": 9,
+        "net": "VDD",
+        "polarity": "pmos",
+        "status": "joined"
+      },
+      "device": null,
+      "instance": null,
+      "net": null,
+      "property": null,
+      "severity": "warning",
+      "side": "layout",
+      "subcircuit": null
+    },
+    {
+      "category": "topology.flattened",
+      "circuit": null,
+      "description": "options.flatten_layout flattened the layout netlist before comparing: 23 circuit(s) were collapsed into 5 top-level circuit(s), substituting every subcircuit-call instance in place -- this compare verified topology only after removing the original hierarchy boundaries on this side (see docs/cli/lvs.md, \"topology.flattened\")",
+      "details": null,
+      "device": null,
+      "instance": null,
+      "net": null,
+      "property": null,
+      "severity": "warning",
+      "side": "layout",
+      "subcircuit": null
+    },
+    {
+      "category": "topology.flattened",
+      "circuit": null,
+      "description": "options.flatten_reference flattened the reference netlist before comparing: 19 circuit(s) were collapsed into 1 top-level circuit(s), substituting every subcircuit-call instance in place -- this compare verified topology only after removing the original hierarchy boundaries on this side (see docs/cli/lvs.md, \"topology.flattened\")",
+      "details": null,
+      "device": null,
+      "instance": null,
+      "net": null,
+      "property": null,
+      "severity": "warning",
+      "side": "reference",
+      "subcircuit": null
+    }
+  ],
+  "net_correspondence": [
+    {
+      "layout": "\\$5_A",
+      "pin": false,
+      "reference": "AND2X1_A"
+    },
+    {
+      "layout": "\\$5_B",
+      "pin": false,
+      "reference": "AND2X1_B"
+    },
+    {
+      "layout": "\\$0",
+      "pin": false,
+      "reference": "AND2X1_N1"
+    },
+    {
+      "layout": "\\$5_Y",
+      "pin": false,
+      "reference": "AND2X1_Y"
+    },
+    {
+      "layout": "\\$0",
+      "pin": false,
+      "reference": "AND2X1_YNAND"
+    },
+    {
+      "layout": "\\$7_A1",
+      "pin": false,
+      "reference": "AOI21X1_A1"
+    },
+    {
+      "layout": "\\$7_A2",
+      "pin": false,
+      "reference": "AOI21X1_A2"
+    },
+    {
+      "layout": "\\$7_B",
+      "pin": false,
+      "reference": "AOI21X1_B"
+    },
+    {
+      "layout": "\\$0",
+      "pin": false,
+      "reference": "AOI21X1_N1"
+    },
+    {
+      "layout": "\\$0",
+      "pin": false,
+      "reference": "AOI21X1_P1"
+    },
+    {
+      "layout": "\\$7_Y",
+      "pin": false,
+      "reference": "AOI21X1_Y"
+    },
+    {
+      "layout": "\\$11_A1",
+      "pin": false,
+      "reference": "AOI22X1_A1"
+    },
+    {
+      "layout": "\\$11_A2",
+      "pin": false,
+      "reference": "AOI22X1_A2"
+    },
+    {
+      "layout": "\\$11_B1",
+      "pin": false,
+      "reference": "AOI22X1_B1"
+    },
+    {
+      "layout": "\\$11_B2",
+      "pin": false,
+      "reference": "AOI22X1_B2"
+    },
+    {
+      "layout": "\\$0",
+      "pin": false,
+      "reference": "AOI22X1_X_N1"
+    },
+    {
+      "layout": "\\$0",
+      "pin": false,
+      "reference": "AOI22X1_X_N2"
+    },
+    {
+      "layout": "\\$0",
+      "pin": false,
+      "reference": "AOI22X1_X_P1"
+    },
+    {
+      "layout": "\\$11_Y",
+      "pin": false,
+      "reference": "AOI22X1_Y"
+    },
+    {
+      "layout": "\\$2_A",
+      "pin": false,
+      "reference": "BUFX1_A"
+    },
+    {
+      "layout": "\\$0",
+      "pin": false,
+      "reference": "BUFX1_N1"
+    },
+    {
+      "layout": "\\$2_Y",
+      "pin": false,
+      "reference": "BUFX1_Y"
+    },
+    {
+      "layout": "\\$18_CLK",
+      "pin": false,
+      "reference": "DFFHQNX1_CLK"
+    },
+    {
+      "layout": "\\$0",
+      "pin": false,
+      "reference": "DFFHQNX1_CLKB"
+    },
+    {
+      "layout": "\\$18_D",
+      "pin": false,
+      "reference": "DFFHQNX1_D"
+    },
+    {
+      "layout": "\\$0",
+      "pin": false,
+      "reference": "DFFHQNX1_M1"
+    },
+    {
+      "layout": "\\$0",
+      "pin": false,
+      "reference": "DFFHQNX1_M2"
+    },
+    {
+      "layout": "\\$0",
+      "pin": false,
+      "reference": "DFFHQNX1_M3"
+    },
+    {
+      "layout": "\\$18_QN",
+      "pin": false,
+      "reference": "DFFHQNX1_QN"
+    },
+    {
+      "layout": "\\$0",
+      "pin": false,
+      "reference": "DFFHQNX1_S1"
+    },
+    {
+      "layout": "\\$0",
+      "pin": false,
+      "reference": "DFFHQNX1_S2"
+    },
+    {
+      "layout": "\\$17_CLK",
+      "pin": false,
+      "reference": "DHLX1_CLK"
+    },
+    {
+      "layout": "\\$0",
+      "pin": false,
+      "reference": "DHLX1_CLKB"
+    },
+    {
+      "layout": "\\$17_D",
+      "pin": false,
+      "reference": "DHLX1_D"
+    },
+    {
+      "layout": "\\$0",
+      "pin": false,
+      "reference": "DHLX1_N1"
+    },
+    {
+      "layout": "\\$0",
+      "pin": false,
+      "reference": "DHLX1_N2"
+    },
+    {
+      "layout": "\\$17_Q",
+      "pin": false,
+      "reference": "DHLX1_Q"
+    },
+    {
+      "layout": "\\$1_A",
+      "pin": false,
+      "reference": "INVX1_A"
+    },
+    {
+      "layout": "\\$1_Y",
+      "pin": false,
+      "reference": "INVX1_Y"
+    },
+    {
+      "layout": "\\$3_A",
+      "pin": false,
+      "reference": "NAND2X1_A"
+    },
+    {
+      "layout": "\\$3_B",
+      "pin": false,
+      "reference": "NAND2X1_B"
+    },
+    {
+      "layout": "\\$0",
+      "pin": false,
+      "reference": "NAND2X1_N1"
+    },
+    {
+      "layout": "\\$3_Y",
+      "pin": false,
+      "reference": "NAND2X1_Y"
+    },
+    {
+      "layout": "\\$9_A",
+      "pin": false,
+      "reference": "NAND3X1_A"
+    },
+    {
+      "layout": "\\$9_B",
+      "pin": false,
+      "reference": "NAND3X1_B"
+    },
+    {
+      "layout": "\\$9_C",
+      "pin": false,
+      "reference": "NAND3X1_C"
+    },
+    {
+      "layout": "\\$9_Y",
+      "pin": false,
+      "reference": "NAND3X1_Y"
+    },
+    {
+      "layout": "\\$0",
+      "pin": false,
+      "reference": "NAND3X1_Y_N1"
+    },
+    {
+      "layout": "\\$0",
+      "pin": false,
+      "reference": "NAND3X1_Y_N2"
+    },
+    {
+      "layout": "\\$4_A",
+      "pin": false,
+      "reference": "NOR2X1_A"
+    },
+    {
+      "layout": "\\$4_B",
+      "pin": false,
+      "reference": "NOR2X1_B"
+    },
+    {
+      "layout": "\\$0",
+      "pin": false,
+      "reference": "NOR2X1_P1"
+    },
+    {
+      "layout": "\\$4_Y",
+      "pin": false,
+      "reference": "NOR2X1_Y"
+    },
+    {
+      "layout": "\\$10_A",
+      "pin": false,
+      "reference": "NOR3X1_A"
+    },
+    {
+      "layout": "\\$10_B",
+      "pin": false,
+      "reference": "NOR3X1_B"
+    },
+    {
+      "layout": "\\$10_C",
+      "pin": false,
+      "reference": "NOR3X1_C"
+    },
+    {
+      "layout": "\\$10_Y",
+      "pin": false,
+      "reference": "NOR3X1_Y"
+    },
+    {
+      "layout": "\\$0",
+      "pin": false,
+      "reference": "NOR3X1_Y_P1"
+    },
+    {
+      "layout": "\\$0",
+      "pin": false,
+      "reference": "NOR3X1_Y_P2"
+    },
+    {
+      "layout": "\\$8_A1",
+      "pin": false,
+      "reference": "OAI21X1_A1"
+    },
+    {
+      "layout": "\\$8_A2",
+      "pin": false,
+      "reference": "OAI21X1_A2"
+    },
+    {
+      "layout": "\\$8_B",
+      "pin": false,
+      "reference": "OAI21X1_B"
+    },
+    {
+      "layout": "\\$0",
+      "pin": false,
+      "reference": "OAI21X1_N1"
+    },
+    {
+      "layout": "\\$0",
+      "pin": false,
+      "reference": "OAI21X1_P1"
+    },
+    {
+      "layout": "\\$8_Y",
+      "pin": false,
+      "reference": "OAI21X1_Y"
+    },
+    {
+      "layout": "\\$12_A1",
+      "pin": false,
+      "reference": "OAI22X1_A1"
+    },
+    {
+      "layout": "\\$12_A2",
+      "pin": false,
+      "reference": "OAI22X1_A2"
+    },
+    {
+      "layout": "\\$12_B1",
+      "pin": false,
+      "reference": "OAI22X1_B1"
+    },
+    {
+      "layout": "\\$12_B2",
+      "pin": false,
+      "reference": "OAI22X1_B2"
+    },
+    {
+      "layout": "\\$0",
+      "pin": false,
+      "reference": "OAI22X1_X_N1"
+    },
+    {
+      "layout": "\\$0",
+      "pin": false,
+      "reference": "OAI22X1_X_P1"
+    },
+    {
+      "layout": "\\$0",
+      "pin": false,
+      "reference": "OAI22X1_X_P2"
+    },
+    {
+      "layout": "\\$12_Y",
+      "pin": false,
+      "reference": "OAI22X1_Y"
+    },
+    {
+      "layout": "\\$6_A",
+      "pin": false,
+      "reference": "OR2X1_A"
+    },
+    {
+      "layout": "\\$6_B",
+      "pin": false,
+      "reference": "OR2X1_B"
+    },
+    {
+      "layout": "\\$0",
+      "pin": false,
+      "reference": "OR2X1_P1"
+    },
+    {
+      "layout": "\\$6_Y",
+      "pin": false,
+      "reference": "OR2X1_Y"
+    },
+    {
+      "layout": "\\$0",
+      "pin": false,
+      "reference": "OR2X1_YNOR"
+    },
+    {
+      "layout": "\\$13_H",
+      "pin": false,
+      "reference": "TIEHIX1_H"
+    },
+    {
+      "layout": "\\$14_L",
+      "pin": false,
+      "reference": "TIELOX1_L"
+    },
+    {
+      "layout": "VDD",
+      "pin": true,
+      "reference": "VDD"
+    },
+    {
+      "layout": "VSS|vsubs",
+      "pin": true,
+      "reference": "VSS"
+    },
+    {
+      "layout": "\\$16_A",
+      "pin": false,
+      "reference": "XNOR2X1_A"
+    },
+    {
+      "layout": "\\$0",
+      "pin": false,
+      "reference": "XNOR2X1_AN"
+    },
+    {
+      "layout": "\\$16_B",
+      "pin": false,
+      "reference": "XNOR2X1_B"
+    },
+    {
+      "layout": "\\$0",
+      "pin": false,
+      "reference": "XNOR2X1_BN"
+    },
+    {
+      "layout": "\\$0",
+      "pin": false,
+      "reference": "XNOR2X1_X_N1"
+    },
+    {
+      "layout": "\\$0",
+      "pin": false,
+      "reference": "XNOR2X1_X_P1"
+    },
+    {
+      "layout": "\\$0",
+      "pin": false,
+      "reference": "XNOR2X1_X_P2"
+    },
+    {
+      "layout": "\\$16_Y",
+      "pin": false,
+      "reference": "XNOR2X1_Y"
+    },
+    {
+      "layout": "\\$15_A",
+      "pin": false,
+      "reference": "XOR2X1_A"
+    },
+    {
+      "layout": "\\$0",
+      "pin": false,
+      "reference": "XOR2X1_AN"
+    },
+    {
+      "layout": "\\$15_B",
+      "pin": false,
+      "reference": "XOR2X1_B"
+    },
+    {
+      "layout": "\\$0",
+      "pin": false,
+      "reference": "XOR2X1_BN"
+    },
+    {
+      "layout": "\\$0",
+      "pin": false,
+      "reference": "XOR2X1_X_N1"
+    },
+    {
+      "layout": "\\$0",
+      "pin": false,
+      "reference": "XOR2X1_X_N2"
+    },
+    {
+      "layout": "\\$0",
+      "pin": false,
+      "reference": "XOR2X1_X_P1"
+    },
+    {
+      "layout": "\\$15_Y",
+      "pin": false,
+      "reference": "XOR2X1_Y"
+    }
+  ],
+  "options": {
+    "anchor_top_level_pins": null,
+    "combine_devices": false,
+    "combine_devices_max_attempts": 5,
+    "combine_devices_per_circuit": null,
+    "compare_mos_flavour": false,
+    "compare_parameters": null,
+    "finfet_bulk": {
+      "nmos": "VSS",
+      "pmos": "VDD"
+    },
+    "flatten_layout": true,
+    "flatten_reference": true,
+    "netgen_setup": null,
+    "parameter_tolerance": null,
+    "power_connectivity": null,
+    "strict_top_level_pin_count": false,
+    "supply_nets": [
+      "GND",
+      "VCC",
+      "VDD",
+      "VGND",
+      "VPWR",
+      "VSS"
+    ]
+  },
+  "parameter_tolerance": null,
+  "power_connectivity": {
+    "excluded_pins": [],
+    "expected_nets": null,
+    "finding_count": 0,
+    "findings": [],
+    "instance_count": 0,
+    "power_pins": [],
+    "power_pins_derivation": null,
+    "reason": "reference.form is 'plain-element', whose reference netlist carries its own power/ground pins and nets -- they take part in the ordinary compare, so this check (which exists to cover the signal-only 'gate-level-verilog' form) does not apply",
+    "status": "unchecked",
+    "unchecked_expected_pins": []
+  },
+  "provenance": {
+    "deck": {
+      "content_hash": "sha256:ac57a7b68dd496e10a654ed79d29c1129bf3403d440ce5a73e43c5e8afd875aa",
+      "name": "asap7",
+      "released": false
+    },
+    "input": {
+      "content_hash": "sha256:bf619dcce132b568d08c94951199f6f08720d842ef11c1a09404ff0357c9cba4",
+      "role": "layout"
+    },
+    "klayout_version": "0.30.12",
+    "klayout_version_mismatch": false,
+    "klt_git_commit": "680c6f4a751891cc1f14c1fa5a240df8cfbf32b4",
+    "klt_reinstall_spec": "klayout-tools @ git+https://github.com/2AMLogic/klayout-tools@680c6f4a751891cc1f14c1fa5a240df8cfbf32b4",
+    "klt_version": "0.8.1.dev670+g680c6f4a7518",
+    "pdk": null
+  },
+  "reference": "verification/library/A7S_75t_R_LIBRARY.cdl",
+  "reference_top": "A7S_75T_R_LIBRARY",
+  "schema_version": 2,
+  "status": "match",
+  "top": "A7S_75t_R_LIBRARY"
+}

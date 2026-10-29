@@ -8,3 +8,9 @@
 # fail `klt env-provenance lint-envelope`. Re-recorded with repo-relative
 # layout paths per the operator ruling on issue #14 (option a, 2026-10-21).
 20261017T215608Z-klt0.7.1.dev1765_gb61f753d0369 20261021T173640Z-klt0.7.1.dev2410_ga1b9a046d3ad
+#
+# 20261028T181104Z-klt0.8.1.dev604_g4f345a577997 recorded the FILLER1 case 4
+# finding (NSELECT.W.1 / PSELECT.W.1, merged/drc.json status: violations). The
+# finding is resolved by decision 0010 (FILLER1 drawn without implants) and the
+# record below re-runs all five case families.
+20261028T181104Z-klt0.8.1.dev604_g4f345a577997 20261029T012553Z-klt0.8.1.dev670_g680c6f4a7518

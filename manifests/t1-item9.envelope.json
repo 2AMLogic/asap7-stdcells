@@ -24,14 +24,14 @@
         "role": "testbench",
         "path": "verification/cells.json",
         "passed": true,
-        "content_hash": "sha256:f27837204280071579e36aad02907baeb715d303ef27b4a89602af4e9eaa7421"
+        "content_hash": "sha256:e3e1fe1f79d37d301aa9b57da0eddea47f14d39fedda6f9a016931be2a5f2a93"
       },
       {
         "check": "present",
         "role": "testbench",
         "path": "verification/records/SUPERSEDED.txt",
         "passed": true,
-        "content_hash": "sha256:1ce48f4e032643d02b88c552f8c8b5c02b865e8053c4a41e8560c17b057df9ad"
+        "content_hash": "sha256:fc4f14c8aaa677d8f3d513c4508cff7859eaa5dbdfb9ee30c24d567305ffefdd"
       },
       {
         "check": "present",

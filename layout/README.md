@@ -14,33 +14,42 @@ fabricated.
 ## DRC record (T1 item 3)
 
 All five acceptance cases of `spec/stdcells.md` run for every drawn cell:
-`verification/records/20261028T181104Z-klt0.8.1.dev604_g4f345a577997/`
-(klt `0.8.1.dev604+g4f345a577997`, KLayout 0.30.12, deck
+`verification/records/20261029T012553Z-klt0.8.1.dev670_g680c6f4a7518/`
+(klt `0.8.1.dev670+g680c6f4a7518`, KLayout 0.30.12, deck
 `sha256:14f146f02cd731de3e0b59452eadfdab9c2c947724a219a1002a31b5e0f12d13`,
 267 rule categories). Predictive-PDK tool results only.
 
-- Cases 1, 2 (all 484 ordered pairs), 3 and 5 are clean for all 22 cells. Case 4
-  is clean for 21 cells.
-- **Open finding, not waived: `FILLER1_A7S_75t_R` case 4.** In `TAP | FILLER1 |
-  TAP`, `TAP | FILLER1` and `FILLER1 | TAP` the deck reports `NSELECT.W.1` and
-  `PSELECT.W.1` (3 each). `TAP` carries the opposite implant to a transistor in
-  each half (decision 0008) and `FILLER1` is one 54 nm site wide, so a 54 nm
-  island of the other implant sits next to the TAP's 108 nm one. The same geometry
-  is clean between `INVx1`s (case 1) and in every case 2 pair. No cell, spec text
-  or waiver was changed to hide it.
+- Cases 1, 2 (all 484 ordered pairs), 3, 4 and 5 are clean for all 22 cells.
+- The case 4 finding on `FILLER1_A7S_75t_R` (`NSELECT.W.1` / `PSELECT.W.1`, three
+  hits each, in `TAP | FILLER1 | TAP`, `TAP | FILLER1` and `FILLER1 | TAP`) is
+  resolved by decision 0010: `FILLER1` is drawn without NSELECT and PSELECT
+  (operator ruling, option (a)). `TAP`, the other cells and `spec/stdcells.md`
+  are unchanged and no waiver was issued. The record that showed the finding,
+  `verification/records/20261028T181104Z-klt0.8.1.dev604_g4f345a577997/`, is kept
+  and listed in `verification/records/SUPERSEDED.txt`.
 - The library-wide envelope `merged/drc.json` (one `klt drc` request on one stream
-  with cases 1-4 of every cell, 924 cases) has `status: violations` with exactly
-  those six hits, so **item 3 is not met** and `manifests/asap7-stdcells.json`
-  cites no item 3 evidence.
+  with cases 1-4 of every cell, 924 cases) has `status: clean`, `violation_count`
+  0, `coverage_assertion` 267 expected and 267 observed. It is the item 3
+  evidence. Its input stream is the scratch `verification/.work/LIBRARY_CASES.gds`
+  (not committed); the manifest pins it by content hash
+  `sha256:54ed8000e771ea0d3e49bfe256eb4655b9410a1a002b33d88db17aa1974ee133`.
 - Coverage fields of that envelope, quoted: `coverage.layers_in_stream_without_rules`
   `[]`, `coverage.rules_skipped` `[]`, `coverage.deck_scope` `[]`. The envelope also
-  lists 67 `unmodeled_rules` (DRM rules the deck does not implement) and 5
+  reports 67 `unmodeled_rules` (DRM rules the deck does not implement) and 5
   `isolation_only_rules` (`FIN.W.2`, `GATE.S.3`, `NSELECT.W.1`, `PSELECT.W.1`,
-  `WELL.W.1`), as the envelope reports them.
+  `WELL.W.1`), as it states them. A clean result says nothing about those.
 - Negative controls: every family the spec lists (`WELL`, `FIN`, `GATE`, `ACTIVE`,
   `GCUT`, `NSELECT`/`PSELECT`/`SLVT`/`LVT`, `SDT`, `LISD`, `LIG`, `V0`, `M1`-`M3`,
   `V1`-`V3`) has at least one CAUGHT control. 210 deck rules still have none that
   fires them and are listed as unexercised in the record's `summary.md`.
+- `klt signoff` (pinned `klayout-tools==0.8.0`) grades item 3 `met` on that
+  envelope. The same redraw changes `layout/FILLER1_A7S_75t_R.gds`, so the item 2
+  attestation, which pins that file's hash, now grades `unmet` (`stale_evidence`).
+  It cannot be regenerated here (`klt signoff --attest 2` needs a stream, not the
+  inventory it was built from; klayout-tools#4221, tracked as #50), so the
+  envelope is left as committed and the grade is reported as it is.
+- Item 4 now cites the library `lvs.json` of the new record, whose layout stream
+  is the regenerated library GDS.
 
 ## LVS and the `finfet_bulk` warnings
 
