@@ -1,0 +1,17 @@
+{
+  "layout": {
+    "deck": "asap7",
+    "file": "layout/BUFx1_A7S_75t_R.gds",
+    "top": "BUFx1_A7S_75t_R"
+  },
+  "options": {
+    "finfet_bulk": {
+      "nmos": "VSS",
+      "pmos": "VDD"
+    }
+  },
+  "reference": {
+    "netlist": "verification/.work/lvs-netswap-BUFx1.cdl",
+    "top": "BUFx1_A7S_75t_R"
+  }
+}

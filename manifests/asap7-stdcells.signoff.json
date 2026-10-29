@@ -63,22 +63,12 @@
       "partition": null,
       "text": "committed routed GDS/OASIS from place-and-route, reproducibly generated from the gate-level netlist (P&R script/flow committed, not a one-off hand edit). For the same full-custom sub-case, this item is satisfied instead by the Analog column's artifact: committed GDS/OASIS, reproducibly generated or with documented provenance \u2014 hand-drawn layout, not P&R output.",
       "notes": [],
-      "status": "met",
-      "reason": null,
+      "status": "unmet",
+      "reason": "stale_evidence",
       "graded_by_build": true,
-      "citation": {
-        "file": "manifests/t1-item2.envelope.json",
-        "command": null,
-        "kind": "generic",
-        "check_status": "pass",
-        "content_hash": "sha256:dd6b3dd0740df0122d7f496e4cf234d8ae8b21603d75ba8a361431c445f30f3a",
-        "input_verified": true,
-        "exit_status": 0,
+      "citation": null,
+      "detail": {
         "artifact_binding": {
-          "t1_item": 2,
-          "path": null,
-          "content_hash": "sha256:dd6b3dd0740df0122d7f496e4cf234d8ae8b21603d75ba8a361431c445f30f3a",
-          "input_verified": true,
           "members": [
             {
               "path": {
@@ -150,7 +140,7 @@
                 "scope": "repo"
               },
               "content_hash": "sha256:513a4be04109882dec2fac309057e8c72f7e4d3d2ed92af2a081787a429ecb32",
-              "status": "verified"
+              "status": "stale"
             },
             {
               "path": {
@@ -176,14 +166,7 @@
               "content_hash": "sha256:e7023058369cd003f0df15850e7a254aa5a14e1c0eac6c67859a3d890648bd96",
               "status": "verified"
             }
-          ],
-          "summary": "T1 item 2 (Layout, full-custom sub-case): 12 hand-scripted GDS cells (the fallback set), each reproduced byte for byte by its design/draw_<CELL>.py",
-          "source": "manifests/t1-item2-inventory.json",
-          "regeneration": {
-            "generator": "for each cell: klt-interpreter -I design/draw_<CELL>_A7S_75t_R.py <out.gds> (klt 0.8.0 and 0.8.1.dev55, KLayout 0.30.12); the set digest is over the 12 regenerated streams",
-            "regenerated_hash": "sha256:dd6b3dd0740df0122d7f496e4cf234d8ae8b21603d75ba8a361431c445f30f3a",
-            "executed_by_klt": false
-          }
+          ]
         }
       }
     },
@@ -194,10 +177,23 @@
       "partition": null,
       "text": "latest `klt drc` JSON report: `status: clean`, fresh, with the deck identified (content hash). Known deck coverage gaps (rule-free layers, skipped rules) must be enumerated in the claim, not hidden behind \"clean\" \u2014 a clean verdict from a deck with undisclosed holes is a false claim. The report already states its own gaps, so the disclosure is those fields quoted from the cited envelope's `coverage` block (`docs/cli/drc.md`), not prose written from memory: `coverage.layers_in_stream_without_rules` (layers drawn in this stream that the deck has no rule for), `coverage.rules_skipped` (rules the deck carries but this run did not evaluate), and `coverage.deck_scope` (which chapters of the foundry DRM the deck transcribes at all). A claim that leaves a non-empty `layers_in_stream_without_rules` or `rules_skipped` unstated, or that never states the `deck_scope` its \"clean\" was measured inside, has not satisfied this item however clean the `status` is. **This disclosure is claimant-enforced, not tool-enforced**: `klt signoff` grades item 3 on `status: \"clean\"` alone \u2014 a deck with rule-free drawn layers or skipped rules grades `met` exactly like a fully-covering one. Since #2002 it does *report* all three fields (item 3's citation carries a `coverage` block quoting them verbatim, `docs/cli/signoff.md` \u2192 \"DRC coverage is reported, not graded\"), so a reviewer no longer has to re-open the DRC envelope to find them \u2014 but reporting is not enforcing: nothing compares them against what the claim actually disclosed, so a `met` verdict from `klt signoff` is still not evidence that the gaps were disclosed. A reviewer must read the reported `coverage` against the claim themselves.",
       "notes": [],
-      "status": "unmet",
-      "reason": "no_evidence",
+      "status": "met",
+      "reason": null,
       "graded_by_build": true,
-      "citation": null
+      "citation": {
+        "file": "verification/records/20261029T012553Z-klt0.8.1.dev670_g680c6f4a7518/merged/drc.json",
+        "command": null,
+        "kind": "drc",
+        "check_status": "clean",
+        "content_hash": "sha256:54ed8000e771ea0d3e49bfe256eb4655b9410a1a002b33d88db17aa1974ee133",
+        "input_verified": true,
+        "exit_status": 0,
+        "coverage": {
+          "layers_in_stream_without_rules": [],
+          "rules_skipped": [],
+          "deck_scope": []
+        }
+      }
     },
     {
       "tier": "T1",
@@ -210,11 +206,11 @@
       "reason": null,
       "graded_by_build": true,
       "citation": {
-        "file": "verification/records/20261028T210000Z-klt0.8.1.dev604_g4f345a577997/library/lvs.json",
+        "file": "verification/records/20261029T012553Z-klt0.8.1.dev670_g680c6f4a7518/library/lvs.json",
         "command": null,
         "kind": "lvs",
         "check_status": "match",
-        "content_hash": "sha256:02f7e3ec8b46e3024d369046f58705aaff6cc94426a90f5b0567aaeb1dcebdef",
+        "content_hash": "sha256:bf619dcce132b568d08c94951199f6f08720d842ef11c1a09404ff0357c9cba4",
         "input_verified": true,
         "exit_status": 0
       }
@@ -441,11 +437,11 @@
             "exit_status": 0
           },
           {
-            "file": "verification/records/20261028T210000Z-klt0.8.1.dev604_g4f345a577997/library/lvs.json",
+            "file": "verification/records/20261029T012553Z-klt0.8.1.dev670_g680c6f4a7518/library/lvs.json",
             "command": null,
             "kind": "lvs",
             "check_status": "match",
-            "content_hash": "sha256:02f7e3ec8b46e3024d369046f58705aaff6cc94426a90f5b0567aaeb1dcebdef",
+            "content_hash": "sha256:bf619dcce132b568d08c94951199f6f08720d842ef11c1a09404ff0357c9cba4",
             "input_verified": true,
             "exit_status": 0
           }
