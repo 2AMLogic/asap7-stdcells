@@ -3,6 +3,11 @@
 Chronological record of merged PRs and closed issues, maintained by the Guide
 triage role. Newest first.
 
+### 2026-10-29
+
+- **PR #60**: feat(layout): draw FILLER1 without implants and cite the clean DRC envelope
+- **Issue #37** (closed): T1 item 3 (DRC clean): all five DRC acceptance case families per drawn cell, with negative controls and a citable envelope
+
 ### 2026-10-28
 
 - **PR #57**: feat(verification): ERC supply structure with negative controls for T1 item 11
