@@ -5,6 +5,12 @@ triage role. Newest first.
 
 ### 2026-11-05
 
+- **PR #74**: test: add negative control for the GDS redraw freshness check
+- **Issue #73** (closed): Follow-on from PR #72: negative control for check_gds_fresh.py; file multi-stream --attest gap
+- **PR #72**: feat(signoff): attest T1 item 2 over the 22-cell library under klt 0.9.0
+- **Issue #50** (closed): T1 item 2 (layout): re-attest over the full target cell set
+- **PR #70**: feat: generate and check LEF views for the 22 drawn cells
+- **Issue #65** (closed): Generate and check LEF views for the 22 drawn cells (spec "Views": LEF is target)
 - **PR #69**: feat: add structural Liberty view and Yosys counter mapping smoke
 - **Issue #66** (closed): Write the structural Liberty view (pins, functions, areas, no timing) and prove Yosys maps to it
 - **PR #68**: docs: point README status at the signoff record
