@@ -89,6 +89,14 @@ jobs:
           rm -rf verification/records/.attest-coldstart verification/.work
           exit $rc
 
+      - name: GDS freshness negative control
+        run: |
+          set -uo pipefail
+          # The redraw check (attested under item 2) must flag a flipped byte,
+          # a missing GDS, a missing script and a failing script; if any broken
+          # copy passes, the check could silently never fire.
+          python3 -I design/check_gds_fresh_negctl.py
+
       - name: Re-attest T1 item 2 against the committed envelope
         run: |
           set -uo pipefail
