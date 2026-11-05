@@ -5,7 +5,11 @@ For each design/draw_<CELL>.py this runs the script into a temporary file and
 compares it with layout/<CELL>.gds. It exits non-zero if a committed GDS
 differs from its script's output, if a GDS has no draw script, or if a draw
 script has no committed GDS. Needs klayout.db (installed with klt).
+
+`--root DIR` checks a tree other than this repo (default: this repo's root);
+design/check_gds_fresh_negctl.py uses it to run the checker on broken copies.
 """
+import argparse
 import pathlib
 import subprocess
 import sys
@@ -15,8 +19,11 @@ ROOT = pathlib.Path(__file__).resolve().parent.parent
 
 
 def main():
-    scripts = {p.stem[len("draw_"):]: p for p in (ROOT / "design").glob("draw_*.py")}
-    gds = {p.stem: p for p in (ROOT / "layout").glob("*.gds")}
+    ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
+    ap.add_argument("--root", type=pathlib.Path, default=ROOT, help="tree to check (default: this repo)")
+    root = ap.parse_args().root.resolve()
+    scripts = {p.stem[len("draw_"):]: p for p in (root / "design").glob("draw_*.py")}
+    gds = {p.stem: p for p in (root / "layout").glob("*.gds")}
     bad = 0
     for cell in sorted(set(scripts) | set(gds)):
         if cell not in scripts or cell not in gds:
