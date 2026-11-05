@@ -12,8 +12,12 @@ FinFET node for research and teaching; no fab manufactures it. This block is
 this repo is a tool result against a predictive model — there is no silicon,
 no shuttle and no measurement at the end of the ladder.
 
-**Status: specification ratified, ASAP7 brought up under `klt`.** No cell is
-drawn yet.
+**Status: specification ratified, ASAP7 brought up under `klt`, cells drawn.**
+The tier verdict of record is
+[`manifests/asap7-stdcells.signoff.json`](manifests/asap7-stdcells.signoff.json);
+it, not this paragraph, is the authority on which evidence items are met,
+unmet or have no evidence yet. All of it is layout, DRC and LVS against a
+predictive model.
 
 **Built agent-native.** Every specification, decision record, testbench, and
 line of documentation here is produced by AI agents working from a ratified
@@ -65,8 +69,11 @@ timing target against a predictive model.
 
 Maturity ladder: ASAP7 brought up under `klt` → spec ratified → first cell
 DRC/LVS-clean → full set DRC/LVS-clean → abutment regression clean → LEF
-views checked → integration design routed. **Current position: spec ratified,
-ASAP7 brought up, no cell drawn.** There is no silicon rung.
+views checked → integration design routed. **Current position:** see the
+graded record in
+[`manifests/asap7-stdcells.signoff.json`](manifests/asap7-stdcells.signoff.json)
+for which T1 items are met, unmet or lack evidence; this ladder is not
+re-graded by hand here. There is no silicon rung.
 
 ## Repo layout
 
@@ -90,9 +97,8 @@ klt signoff --manifest manifests/asap7-stdcells.json \
 ```
 
 CI (`.github/workflows/signoff.yml`) re-runs this and byte-compares it with the
-committed record. T1 items 9 (testbenches shipped) and 10 (repo hygiene) are
-met; the other nine grade unmet (the grader exits 3, which CI accepts), because
-they need drawn cells. Items 9 and 10 cite tool-produced attestation envelopes,
+committed record. Items the record grades unmet make the grader exit 3, which
+CI accepts; the record, not this paragraph, says which. Items 1, 9 and 10 cite tool-produced attestation envelopes,
 not hand-written ones. Refresh them after changing any inventoried file, then
 regenerate the record above in the same PR:
 
