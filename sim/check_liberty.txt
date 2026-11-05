@@ -1,0 +1,4 @@
+PASS A7S_75t_R_structural.lib: 22 cells, function/area/pins/no-timing checks
+PASS negative control (wrong function (NAND2x1 made AND)) rejected: NAND2x1.Y: function '(A&B)' wrong at {'A': 0, 'B': 0}
+PASS negative control (wrong area (INVx1 +1%)) rejected: INVx1: area 0.044177 != GDS boundary 0.04374
+PASS negative control (timing group added) rejected: forbidden timing/power/capacitance content: 'timing'

@@ -8,6 +8,7 @@ Source of truth for the drawn cells.
 | `<CELL>.cdl` | Hand-written CDL the cell is compared against by `klt lvs`; fin counts as in `spec/stdcells.md`. |
 | `a7s_common.py` | Shared geometry helpers (layer table, grid, frame, contact, link). Every draw script imports it; `draw_INVx1` uses only the layer table and the writer, so its GDS is unchanged by the refactor. |
 | `check_cdl_function.py` | Switch-level evaluation of every CDL against the function in the spec cell table (full truth table for combinational cells, clocked sequence for `DHLx1` and `DFFHQNx1`). Exit 0 only if all 18 pass. |
+| `write_liberty.py`, `check_liberty.py`, `liberty_common.py` | Write `layout/A7S_75t_R_structural.lib` (pins, directions, functions, areas; no timing) and check it: function against the `check_cdl_function.py` truth table, area against the GDS boundary, no timing content, byte-identical regeneration, three negative controls. Run with `python3 -I`. |
 | `check_cdl_fresh.py`, `cdl-freshness.json` | The freshness rule below. |
 
 Cells with a CDL: the 18 device-bearing cells of the spec cell table (1-18,
