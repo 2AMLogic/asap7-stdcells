@@ -66,7 +66,8 @@ timing target against a predictive model.
 Maturity ladder: ASAP7 brought up under `klt` → spec ratified → first cell
 DRC/LVS-clean → full set DRC/LVS-clean → abutment regression clean → LEF
 views checked → integration design routed. **Current position: spec ratified,
-ASAP7 brought up, no cell drawn.** There is no silicon rung.
+ASAP7 brought up, all 22 cells drawn, LEF view generated and checked against the
+GDS (OpenROAD reads it with the pinned tech LEF; `verification/lef/`).** There is no silicon rung.
 
 ## Repo layout
 

@@ -1,0 +1,1286 @@
+VERSION 5.8 ;
+BUSBITCHARS "[]" ;
+DIVIDERCHAR "/" ;
+
+SITE asap7sc7p5t
+  CLASS CORE ;
+  SYMMETRY Y ;
+  SIZE 0.054 BY 0.270 ;
+END asap7sc7p5t
+
+MACRO AND2x1_A7S_75t_R
+  CLASS CORE ;
+  ORIGIN 0 0 ;
+  FOREIGN AND2x1_A7S_75t_R 0 0 ;
+  SIZE 0.378 BY 0.270 ;
+  SYMMETRY X Y ;
+  SITE asap7sc7p5t ;
+  PIN VDD
+    DIRECTION INOUT ;
+    USE POWER ;
+    PORT
+      LAYER M1 ;
+        RECT 0.036 0.207 0.054 0.261 ;
+        RECT 0.216 0.207 0.234 0.261 ;
+        RECT 0.252 0.207 0.270 0.261 ;
+        RECT 0.000 0.261 0.378 0.279 ;
+    END
+  END VDD
+  PIN VSS
+    DIRECTION INOUT ;
+    USE GROUND ;
+    PORT
+      LAYER M1 ;
+        RECT 0.000 -0.009 0.378 0.009 ;
+        RECT 0.216 0.009 0.234 0.063 ;
+        RECT 0.252 0.009 0.270 0.063 ;
+    END
+  END VSS
+  PIN A
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER M1 ;
+        RECT 0.072 0.108 0.090 0.162 ;
+    END
+  END A
+  PIN B
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER M1 ;
+        RECT 0.180 0.108 0.198 0.162 ;
+    END
+  END B
+  PIN Y
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER M1 ;
+        RECT 0.324 0.036 0.342 0.234 ;
+    END
+  END Y
+  OBS
+      LAYER M1 ;
+        RECT 0.036 0.036 0.054 0.131 ;
+        RECT 0.108 0.036 0.162 0.054 ;
+        RECT 0.108 0.103 0.126 0.216 ;
+        RECT 0.288 0.103 0.306 0.162 ;
+        RECT 0.108 0.216 0.162 0.234 ;
+      LAYER M2 ;
+        RECT 0.031 0.108 0.311 0.126 ;
+  END
+END AND2x1_A7S_75t_R
+
+MACRO AOI21x1_A7S_75t_R
+  CLASS CORE ;
+  ORIGIN 0 0 ;
+  FOREIGN AOI21x1_A7S_75t_R 0 0 ;
+  SIZE 0.378 BY 0.270 ;
+  SYMMETRY X Y ;
+  SITE asap7sc7p5t ;
+  PIN VDD
+    DIRECTION INOUT ;
+    USE POWER ;
+    PORT
+      LAYER M1 ;
+        RECT 0.216 0.207 0.234 0.261 ;
+        RECT 0.252 0.207 0.270 0.261 ;
+        RECT 0.000 0.261 0.378 0.279 ;
+    END
+  END VDD
+  PIN VSS
+    DIRECTION INOUT ;
+    USE GROUND ;
+    PORT
+      LAYER M1 ;
+        RECT 0.000 -0.009 0.378 0.009 ;
+        RECT 0.108 0.009 0.126 0.063 ;
+        RECT 0.144 0.009 0.162 0.063 ;
+    END
+  END VSS
+  PIN A1
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER M1 ;
+        RECT 0.180 0.108 0.198 0.162 ;
+    END
+  END A1
+  PIN A2
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER M1 ;
+        RECT 0.288 0.108 0.306 0.162 ;
+    END
+  END A2
+  PIN B
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER M1 ;
+        RECT 0.072 0.108 0.090 0.162 ;
+    END
+  END B
+  PIN Y
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER M1 ;
+        RECT 0.036 0.036 0.054 0.234 ;
+    END
+  END Y
+  OBS
+      LAYER M1 ;
+        RECT 0.216 0.036 0.270 0.054 ;
+        RECT 0.324 0.036 0.342 0.095 ;
+        RECT 0.324 0.198 0.342 0.234 ;
+        RECT 0.108 0.216 0.162 0.234 ;
+      LAYER M2 ;
+        RECT 0.031 0.072 0.347 0.090 ;
+        RECT 0.121 0.216 0.347 0.234 ;
+  END
+END AOI21x1_A7S_75t_R
+
+MACRO AOI22x1_A7S_75t_R
+  CLASS CORE ;
+  ORIGIN 0 0 ;
+  FOREIGN AOI22x1_A7S_75t_R 0 0 ;
+  SIZE 0.486 BY 0.270 ;
+  SYMMETRY X Y ;
+  SITE asap7sc7p5t ;
+  PIN VDD
+    DIRECTION INOUT ;
+    USE POWER ;
+    PORT
+      LAYER M1 ;
+        RECT 0.144 0.207 0.162 0.261 ;
+        RECT 0.000 0.261 0.486 0.279 ;
+    END
+  END VDD
+  PIN VSS
+    DIRECTION INOUT ;
+    USE GROUND ;
+    PORT
+      LAYER M1 ;
+        RECT 0.000 -0.009 0.486 0.009 ;
+        RECT 0.216 0.009 0.234 0.063 ;
+        RECT 0.252 0.009 0.270 0.063 ;
+    END
+  END VSS
+  PIN A1
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER M1 ;
+        RECT 0.072 0.108 0.090 0.162 ;
+    END
+  END A1
+  PIN A2
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER M1 ;
+        RECT 0.180 0.108 0.198 0.162 ;
+    END
+  END A2
+  PIN B1
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER M1 ;
+        RECT 0.396 0.108 0.414 0.162 ;
+    END
+  END B1
+  PIN B2
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER M1 ;
+        RECT 0.288 0.108 0.306 0.162 ;
+    END
+  END B2
+  PIN Y
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER M1 ;
+        RECT 0.036 0.036 0.054 0.095 ;
+    END
+  END Y
+  OBS
+      LAYER M1 ;
+        RECT 0.432 0.036 0.450 0.095 ;
+        RECT 0.360 0.067 0.378 0.234 ;
+        RECT 0.036 0.175 0.054 0.234 ;
+        RECT 0.216 0.175 0.234 0.216 ;
+        RECT 0.432 0.175 0.450 0.234 ;
+        RECT 0.216 0.216 0.270 0.234 ;
+      LAYER M2 ;
+        RECT 0.031 0.072 0.455 0.090 ;
+        RECT 0.031 0.180 0.455 0.198 ;
+  END
+END AOI22x1_A7S_75t_R
+
+MACRO BUFx1_A7S_75t_R
+  CLASS CORE ;
+  ORIGIN 0 0 ;
+  FOREIGN BUFx1_A7S_75t_R 0 0 ;
+  SIZE 0.270 BY 0.270 ;
+  SYMMETRY X Y ;
+  SITE asap7sc7p5t ;
+  PIN VDD
+    DIRECTION INOUT ;
+    USE POWER ;
+    PORT
+      LAYER M1 ;
+        RECT 0.108 0.207 0.126 0.261 ;
+        RECT 0.000 0.261 0.270 0.279 ;
+    END
+  END VDD
+  PIN VSS
+    DIRECTION INOUT ;
+    USE GROUND ;
+    PORT
+      LAYER M1 ;
+        RECT 0.000 -0.009 0.270 0.009 ;
+        RECT 0.108 0.009 0.126 0.063 ;
+    END
+  END VSS
+  PIN A
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER M1 ;
+        RECT 0.072 0.108 0.090 0.162 ;
+    END
+  END A
+  PIN Y
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER M1 ;
+        RECT 0.216 0.036 0.234 0.234 ;
+    END
+  END Y
+  OBS
+      LAYER M1 ;
+        RECT 0.036 0.036 0.054 0.234 ;
+        RECT 0.180 0.103 0.198 0.162 ;
+      LAYER M2 ;
+        RECT 0.031 0.108 0.203 0.126 ;
+  END
+END BUFx1_A7S_75t_R
+
+MACRO DFFHQNx1_A7S_75t_R
+  CLASS CORE ;
+  ORIGIN 0 0 ;
+  FOREIGN DFFHQNx1_A7S_75t_R 0 0 ;
+  SIZE 1.458 BY 0.270 ;
+  SYMMETRY X Y ;
+  SITE asap7sc7p5t ;
+  PIN VDD
+    DIRECTION INOUT ;
+    USE POWER ;
+    PORT
+      LAYER M1 ;
+        RECT 0.108 0.207 0.126 0.261 ;
+        RECT 0.684 0.207 0.702 0.261 ;
+        RECT 1.332 0.207 1.350 0.261 ;
+        RECT 0.000 0.261 1.458 0.279 ;
+    END
+  END VDD
+  PIN VSS
+    DIRECTION INOUT ;
+    USE GROUND ;
+    PORT
+      LAYER M1 ;
+        RECT 0.000 -0.009 1.458 0.009 ;
+        RECT 0.108 0.009 0.126 0.063 ;
+        RECT 0.684 0.009 0.702 0.063 ;
+        RECT 1.332 0.009 1.350 0.063 ;
+    END
+  END VSS
+  PIN CLK
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER M1 ;
+        RECT 0.072 0.108 0.090 0.234 ;
+    END
+  END CLK
+  PIN D
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER M1 ;
+        RECT 0.252 0.036 0.270 0.095 ;
+    END
+  END D
+  PIN QN
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER M1 ;
+        RECT 1.404 0.034 1.422 0.236 ;
+    END
+  END QN
+  OBS
+      LAYER M1 ;
+        RECT 0.036 0.034 0.054 0.236 ;
+        RECT 0.288 0.034 0.306 0.162 ;
+        RECT 0.360 0.034 0.378 0.236 ;
+        RECT 0.576 0.034 0.594 0.236 ;
+        RECT 0.756 0.034 0.774 0.236 ;
+        RECT 0.936 0.034 0.954 0.162 ;
+        RECT 1.008 0.034 1.026 0.236 ;
+        RECT 1.224 0.034 1.242 0.236 ;
+        RECT 0.432 0.036 0.450 0.131 ;
+        RECT 0.900 0.036 0.918 0.095 ;
+        RECT 1.080 0.036 1.098 0.131 ;
+        RECT 0.720 0.072 0.738 0.162 ;
+        RECT 0.396 0.108 0.414 0.234 ;
+        RECT 0.612 0.108 0.630 0.198 ;
+        RECT 1.044 0.108 1.062 0.234 ;
+        RECT 1.260 0.108 1.278 0.162 ;
+        RECT 1.368 0.108 1.386 0.162 ;
+        RECT 0.252 0.139 0.270 0.234 ;
+        RECT 0.900 0.139 0.918 0.234 ;
+        RECT 0.432 0.175 0.450 0.234 ;
+        RECT 1.080 0.175 1.098 0.234 ;
+      LAYER M2 ;
+        RECT 0.031 0.036 0.959 0.054 ;
+        RECT 0.198 0.072 0.275 0.090 ;
+        RECT 0.355 0.072 0.738 0.090 ;
+        RECT 0.895 0.072 1.427 0.090 ;
+        RECT 0.198 0.090 0.216 0.180 ;
+        RECT 0.427 0.108 0.599 0.126 ;
+        RECT 0.751 0.108 1.103 0.126 ;
+        RECT 1.219 0.108 1.391 0.126 ;
+        RECT 0.247 0.144 0.594 0.162 ;
+        RECT 0.751 0.144 0.923 0.162 ;
+        RECT 1.003 0.144 1.283 0.162 ;
+        RECT 0.198 0.180 0.455 0.198 ;
+        RECT 0.607 0.180 0.779 0.198 ;
+        RECT 1.075 0.180 1.427 0.198 ;
+        RECT 0.067 0.216 1.062 0.234 ;
+  END
+END DFFHQNx1_A7S_75t_R
+
+MACRO DHLx1_A7S_75t_R
+  CLASS CORE ;
+  ORIGIN 0 0 ;
+  FOREIGN DHLx1_A7S_75t_R 0 0 ;
+  SIZE 0.810 BY 0.270 ;
+  SYMMETRY X Y ;
+  SITE asap7sc7p5t ;
+  PIN VDD
+    DIRECTION INOUT ;
+    USE POWER ;
+    PORT
+      LAYER M1 ;
+        RECT 0.144 0.207 0.162 0.261 ;
+        RECT 0.432 0.207 0.450 0.261 ;
+        RECT 0.000 0.261 0.810 0.279 ;
+    END
+  END VDD
+  PIN VSS
+    DIRECTION INOUT ;
+    USE GROUND ;
+    PORT
+      LAYER M1 ;
+        RECT 0.000 -0.009 0.810 0.009 ;
+        RECT 0.144 0.009 0.162 0.063 ;
+        RECT 0.432 0.009 0.450 0.063 ;
+    END
+  END VSS
+  PIN CLK
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER M1 ;
+        RECT 0.396 0.108 0.414 0.162 ;
+    END
+  END CLK
+  PIN D
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER M1 ;
+        RECT 0.756 0.036 0.774 0.095 ;
+    END
+  END D
+  PIN Q
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER M1 ;
+        RECT 0.216 0.034 0.234 0.236 ;
+    END
+  END Q
+  OBS
+      LAYER M1 ;
+        RECT 0.036 0.034 0.054 0.236 ;
+        RECT 0.360 0.034 0.378 0.236 ;
+        RECT 0.684 0.034 0.702 0.236 ;
+        RECT 0.576 0.036 0.594 0.095 ;
+        RECT 0.612 0.067 0.630 0.162 ;
+        RECT 0.072 0.108 0.090 0.162 ;
+        RECT 0.180 0.108 0.198 0.162 ;
+        RECT 0.720 0.108 0.738 0.162 ;
+        RECT 0.576 0.175 0.594 0.234 ;
+        RECT 0.756 0.175 0.774 0.234 ;
+      LAYER M2 ;
+        RECT 0.211 0.036 0.599 0.054 ;
+        RECT 0.355 0.072 0.635 0.090 ;
+        RECT 0.751 0.072 0.801 0.090 ;
+        RECT 0.783 0.090 0.801 0.180 ;
+        RECT 0.067 0.108 0.707 0.126 ;
+        RECT 0.031 0.144 0.203 0.162 ;
+        RECT 0.391 0.144 0.743 0.162 ;
+        RECT 0.571 0.180 0.801 0.198 ;
+        RECT 0.211 0.216 0.779 0.234 ;
+  END
+END DHLx1_A7S_75t_R
+
+MACRO FILLER1_A7S_75t_R
+  CLASS CORE ;
+  ORIGIN 0 0 ;
+  FOREIGN FILLER1_A7S_75t_R 0 0 ;
+  SIZE 0.054 BY 0.270 ;
+  SYMMETRY X Y ;
+  SITE asap7sc7p5t ;
+  PIN VDD
+    DIRECTION INOUT ;
+    USE POWER ;
+    PORT
+      LAYER M1 ;
+        RECT 0.000 0.261 0.054 0.279 ;
+    END
+  END VDD
+  PIN VSS
+    DIRECTION INOUT ;
+    USE GROUND ;
+    PORT
+      LAYER M1 ;
+        RECT 0.000 -0.009 0.054 0.009 ;
+    END
+  END VSS
+END FILLER1_A7S_75t_R
+
+MACRO FILLER2_A7S_75t_R
+  CLASS CORE ;
+  ORIGIN 0 0 ;
+  FOREIGN FILLER2_A7S_75t_R 0 0 ;
+  SIZE 0.108 BY 0.270 ;
+  SYMMETRY X Y ;
+  SITE asap7sc7p5t ;
+  PIN VDD
+    DIRECTION INOUT ;
+    USE POWER ;
+    PORT
+      LAYER M1 ;
+        RECT 0.000 0.261 0.108 0.279 ;
+    END
+  END VDD
+  PIN VSS
+    DIRECTION INOUT ;
+    USE GROUND ;
+    PORT
+      LAYER M1 ;
+        RECT 0.000 -0.009 0.108 0.009 ;
+    END
+  END VSS
+END FILLER2_A7S_75t_R
+
+MACRO FILLER4_A7S_75t_R
+  CLASS CORE ;
+  ORIGIN 0 0 ;
+  FOREIGN FILLER4_A7S_75t_R 0 0 ;
+  SIZE 0.216 BY 0.270 ;
+  SYMMETRY X Y ;
+  SITE asap7sc7p5t ;
+  PIN VDD
+    DIRECTION INOUT ;
+    USE POWER ;
+    PORT
+      LAYER M1 ;
+        RECT 0.000 0.261 0.216 0.279 ;
+    END
+  END VDD
+  PIN VSS
+    DIRECTION INOUT ;
+    USE GROUND ;
+    PORT
+      LAYER M1 ;
+        RECT 0.000 -0.009 0.216 0.009 ;
+    END
+  END VSS
+END FILLER4_A7S_75t_R
+
+MACRO INVx1_A7S_75t_R
+  CLASS CORE ;
+  ORIGIN 0 0 ;
+  FOREIGN INVx1_A7S_75t_R 0 0 ;
+  SIZE 0.162 BY 0.270 ;
+  SYMMETRY X Y ;
+  SITE asap7sc7p5t ;
+  PIN VDD
+    DIRECTION INOUT ;
+    USE POWER ;
+    PORT
+      LAYER M1 ;
+        RECT 0.036 0.207 0.054 0.261 ;
+        RECT 0.000 0.261 0.162 0.279 ;
+    END
+  END VDD
+  PIN VSS
+    DIRECTION INOUT ;
+    USE GROUND ;
+    PORT
+      LAYER M1 ;
+        RECT 0.000 -0.009 0.162 0.009 ;
+        RECT 0.036 0.009 0.054 0.063 ;
+    END
+  END VSS
+  PIN A
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER M1 ;
+        RECT 0.072 0.108 0.090 0.162 ;
+    END
+  END A
+  PIN Y
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER M1 ;
+        RECT 0.108 0.036 0.126 0.234 ;
+    END
+  END Y
+END INVx1_A7S_75t_R
+
+MACRO NAND2x1_A7S_75t_R
+  CLASS CORE ;
+  ORIGIN 0 0 ;
+  FOREIGN NAND2x1_A7S_75t_R 0 0 ;
+  SIZE 0.270 BY 0.270 ;
+  SYMMETRY X Y ;
+  SITE asap7sc7p5t ;
+  PIN VDD
+    DIRECTION INOUT ;
+    USE POWER ;
+    PORT
+      LAYER M1 ;
+        RECT 0.036 0.207 0.054 0.261 ;
+        RECT 0.216 0.207 0.234 0.261 ;
+        RECT 0.000 0.261 0.270 0.279 ;
+    END
+  END VDD
+  PIN VSS
+    DIRECTION INOUT ;
+    USE GROUND ;
+    PORT
+      LAYER M1 ;
+        RECT 0.000 -0.009 0.270 0.009 ;
+        RECT 0.036 0.009 0.054 0.063 ;
+    END
+  END VSS
+  PIN A
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER M1 ;
+        RECT 0.072 0.108 0.090 0.162 ;
+    END
+  END A
+  PIN B
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER M1 ;
+        RECT 0.180 0.108 0.198 0.162 ;
+    END
+  END B
+  PIN Y
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER M1 ;
+        RECT 0.216 0.036 0.234 0.095 ;
+    END
+  END Y
+  OBS
+      LAYER M1 ;
+        RECT 0.144 0.067 0.162 0.234 ;
+      LAYER M2 ;
+        RECT 0.139 0.072 0.239 0.090 ;
+  END
+END NAND2x1_A7S_75t_R
+
+MACRO NAND3x1_A7S_75t_R
+  CLASS CORE ;
+  ORIGIN 0 0 ;
+  FOREIGN NAND3x1_A7S_75t_R 0 0 ;
+  SIZE 0.378 BY 0.270 ;
+  SYMMETRY X Y ;
+  SITE asap7sc7p5t ;
+  PIN VDD
+    DIRECTION INOUT ;
+    USE POWER ;
+    PORT
+      LAYER M1 ;
+        RECT 0.108 0.207 0.126 0.261 ;
+        RECT 0.144 0.207 0.162 0.261 ;
+        RECT 0.324 0.207 0.342 0.261 ;
+        RECT 0.000 0.261 0.378 0.279 ;
+    END
+  END VDD
+  PIN VSS
+    DIRECTION INOUT ;
+    USE GROUND ;
+    PORT
+      LAYER M1 ;
+        RECT 0.000 -0.009 0.378 0.009 ;
+        RECT 0.324 0.009 0.342 0.063 ;
+    END
+  END VSS
+  PIN A
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER M1 ;
+        RECT 0.072 0.108 0.090 0.162 ;
+    END
+  END A
+  PIN B
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER M1 ;
+        RECT 0.180 0.108 0.198 0.162 ;
+    END
+  END B
+  PIN C
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER M1 ;
+        RECT 0.288 0.108 0.306 0.162 ;
+    END
+  END C
+  PIN Y
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER M1 ;
+        RECT 0.036 0.036 0.054 0.234 ;
+    END
+  END Y
+  OBS
+      LAYER M1 ;
+        RECT 0.108 0.036 0.162 0.054 ;
+        RECT 0.216 0.036 0.270 0.054 ;
+        RECT 0.216 0.175 0.234 0.216 ;
+        RECT 0.216 0.216 0.270 0.234 ;
+      LAYER M2 ;
+        RECT 0.031 0.180 0.239 0.198 ;
+  END
+END NAND3x1_A7S_75t_R
+
+MACRO NOR2x1_A7S_75t_R
+  CLASS CORE ;
+  ORIGIN 0 0 ;
+  FOREIGN NOR2x1_A7S_75t_R 0 0 ;
+  SIZE 0.270 BY 0.270 ;
+  SYMMETRY X Y ;
+  SITE asap7sc7p5t ;
+  PIN VDD
+    DIRECTION INOUT ;
+    USE POWER ;
+    PORT
+      LAYER M1 ;
+        RECT 0.036 0.207 0.054 0.261 ;
+        RECT 0.000 0.261 0.270 0.279 ;
+    END
+  END VDD
+  PIN VSS
+    DIRECTION INOUT ;
+    USE GROUND ;
+    PORT
+      LAYER M1 ;
+        RECT 0.000 -0.009 0.270 0.009 ;
+        RECT 0.036 0.009 0.054 0.063 ;
+        RECT 0.216 0.009 0.234 0.063 ;
+    END
+  END VSS
+  PIN A
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER M1 ;
+        RECT 0.072 0.108 0.090 0.162 ;
+    END
+  END A
+  PIN B
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER M1 ;
+        RECT 0.180 0.108 0.198 0.162 ;
+    END
+  END B
+  PIN Y
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER M1 ;
+        RECT 0.216 0.198 0.234 0.234 ;
+    END
+  END Y
+  OBS
+      LAYER M1 ;
+        RECT 0.144 0.036 0.162 0.234 ;
+      LAYER M2 ;
+        RECT 0.139 0.216 0.239 0.234 ;
+  END
+END NOR2x1_A7S_75t_R
+
+MACRO NOR3x1_A7S_75t_R
+  CLASS CORE ;
+  ORIGIN 0 0 ;
+  FOREIGN NOR3x1_A7S_75t_R 0 0 ;
+  SIZE 0.378 BY 0.270 ;
+  SYMMETRY X Y ;
+  SITE asap7sc7p5t ;
+  PIN VDD
+    DIRECTION INOUT ;
+    USE POWER ;
+    PORT
+      LAYER M1 ;
+        RECT 0.324 0.207 0.342 0.261 ;
+        RECT 0.000 0.261 0.378 0.279 ;
+    END
+  END VDD
+  PIN VSS
+    DIRECTION INOUT ;
+    USE GROUND ;
+    PORT
+      LAYER M1 ;
+        RECT 0.000 -0.009 0.378 0.009 ;
+        RECT 0.108 0.009 0.126 0.063 ;
+        RECT 0.144 0.009 0.162 0.063 ;
+        RECT 0.324 0.009 0.342 0.063 ;
+    END
+  END VSS
+  PIN A
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER M1 ;
+        RECT 0.072 0.108 0.090 0.162 ;
+    END
+  END A
+  PIN B
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER M1 ;
+        RECT 0.180 0.108 0.198 0.162 ;
+    END
+  END B
+  PIN C
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER M1 ;
+        RECT 0.288 0.108 0.306 0.162 ;
+    END
+  END C
+  PIN Y
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER M1 ;
+        RECT 0.036 0.036 0.054 0.234 ;
+    END
+  END Y
+  OBS
+      LAYER M1 ;
+        RECT 0.216 0.036 0.270 0.054 ;
+        RECT 0.216 0.054 0.234 0.095 ;
+        RECT 0.108 0.216 0.162 0.234 ;
+        RECT 0.216 0.216 0.270 0.234 ;
+      LAYER M2 ;
+        RECT 0.031 0.072 0.239 0.090 ;
+  END
+END NOR3x1_A7S_75t_R
+
+MACRO OAI21x1_A7S_75t_R
+  CLASS CORE ;
+  ORIGIN 0 0 ;
+  FOREIGN OAI21x1_A7S_75t_R 0 0 ;
+  SIZE 0.378 BY 0.270 ;
+  SYMMETRY X Y ;
+  SITE asap7sc7p5t ;
+  PIN VDD
+    DIRECTION INOUT ;
+    USE POWER ;
+    PORT
+      LAYER M1 ;
+        RECT 0.036 0.207 0.054 0.261 ;
+        RECT 0.324 0.207 0.342 0.261 ;
+        RECT 0.000 0.261 0.378 0.279 ;
+    END
+  END VDD
+  PIN VSS
+    DIRECTION INOUT ;
+    USE GROUND ;
+    PORT
+      LAYER M1 ;
+        RECT 0.000 -0.009 0.378 0.009 ;
+        RECT 0.216 0.009 0.234 0.063 ;
+        RECT 0.252 0.009 0.270 0.063 ;
+    END
+  END VSS
+  PIN A1
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER M1 ;
+        RECT 0.180 0.108 0.198 0.162 ;
+    END
+  END A1
+  PIN A2
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER M1 ;
+        RECT 0.288 0.108 0.306 0.162 ;
+    END
+  END A2
+  PIN B
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER M1 ;
+        RECT 0.072 0.108 0.090 0.162 ;
+    END
+  END B
+  PIN Y
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER M1 ;
+        RECT 0.036 0.036 0.054 0.131 ;
+    END
+  END Y
+  OBS
+      LAYER M1 ;
+        RECT 0.108 0.036 0.162 0.054 ;
+        RECT 0.324 0.036 0.342 0.095 ;
+        RECT 0.108 0.103 0.126 0.216 ;
+        RECT 0.108 0.216 0.162 0.234 ;
+        RECT 0.216 0.216 0.270 0.234 ;
+      LAYER M2 ;
+        RECT 0.121 0.036 0.347 0.054 ;
+        RECT 0.031 0.108 0.131 0.126 ;
+  END
+END OAI21x1_A7S_75t_R
+
+MACRO OAI22x1_A7S_75t_R
+  CLASS CORE ;
+  ORIGIN 0 0 ;
+  FOREIGN OAI22x1_A7S_75t_R 0 0 ;
+  SIZE 0.486 BY 0.270 ;
+  SYMMETRY X Y ;
+  SITE asap7sc7p5t ;
+  PIN VDD
+    DIRECTION INOUT ;
+    USE POWER ;
+    PORT
+      LAYER M1 ;
+        RECT 0.216 0.207 0.234 0.261 ;
+        RECT 0.252 0.207 0.270 0.261 ;
+        RECT 0.000 0.261 0.486 0.279 ;
+    END
+  END VDD
+  PIN VSS
+    DIRECTION INOUT ;
+    USE GROUND ;
+    PORT
+      LAYER M1 ;
+        RECT 0.000 -0.009 0.486 0.009 ;
+        RECT 0.360 0.009 0.378 0.063 ;
+    END
+  END VSS
+  PIN A1
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER M1 ;
+        RECT 0.072 0.108 0.090 0.162 ;
+    END
+  END A1
+  PIN A2
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER M1 ;
+        RECT 0.180 0.108 0.198 0.162 ;
+    END
+  END A2
+  PIN B1
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER M1 ;
+        RECT 0.396 0.108 0.414 0.162 ;
+    END
+  END B1
+  PIN B2
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER M1 ;
+        RECT 0.288 0.108 0.306 0.162 ;
+    END
+  END B2
+  PIN Y
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER M1 ;
+        RECT 0.144 0.036 0.162 0.234 ;
+    END
+  END Y
+  OBS
+      LAYER M1 ;
+        RECT 0.036 0.036 0.054 0.095 ;
+        RECT 0.216 0.036 0.270 0.054 ;
+        RECT 0.432 0.036 0.450 0.095 ;
+        RECT 0.216 0.054 0.234 0.095 ;
+        RECT 0.036 0.175 0.054 0.234 ;
+        RECT 0.432 0.175 0.450 0.234 ;
+      LAYER M2 ;
+        RECT 0.031 0.072 0.455 0.090 ;
+        RECT 0.031 0.180 0.455 0.198 ;
+  END
+END OAI22x1_A7S_75t_R
+
+MACRO OR2x1_A7S_75t_R
+  CLASS CORE ;
+  ORIGIN 0 0 ;
+  FOREIGN OR2x1_A7S_75t_R 0 0 ;
+  SIZE 0.378 BY 0.270 ;
+  SYMMETRY X Y ;
+  SITE asap7sc7p5t ;
+  PIN VDD
+    DIRECTION INOUT ;
+    USE POWER ;
+    PORT
+      LAYER M1 ;
+        RECT 0.216 0.207 0.234 0.261 ;
+        RECT 0.252 0.207 0.270 0.261 ;
+        RECT 0.000 0.261 0.378 0.279 ;
+    END
+  END VDD
+  PIN VSS
+    DIRECTION INOUT ;
+    USE GROUND ;
+    PORT
+      LAYER M1 ;
+        RECT 0.000 -0.009 0.378 0.009 ;
+        RECT 0.036 0.009 0.054 0.063 ;
+        RECT 0.216 0.009 0.234 0.063 ;
+        RECT 0.252 0.009 0.270 0.063 ;
+    END
+  END VSS
+  PIN A
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER M1 ;
+        RECT 0.072 0.108 0.090 0.162 ;
+    END
+  END A
+  PIN B
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER M1 ;
+        RECT 0.180 0.108 0.198 0.162 ;
+    END
+  END B
+  PIN Y
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER M1 ;
+        RECT 0.324 0.036 0.342 0.234 ;
+    END
+  END Y
+  OBS
+      LAYER M1 ;
+        RECT 0.108 0.036 0.162 0.054 ;
+        RECT 0.108 0.054 0.126 0.131 ;
+        RECT 0.036 0.103 0.054 0.234 ;
+        RECT 0.288 0.103 0.306 0.162 ;
+        RECT 0.108 0.216 0.162 0.234 ;
+      LAYER M2 ;
+        RECT 0.031 0.108 0.311 0.126 ;
+  END
+END OR2x1_A7S_75t_R
+
+MACRO TAP_A7S_75t_R
+  CLASS CORE ;
+  ORIGIN 0 0 ;
+  FOREIGN TAP_A7S_75t_R 0 0 ;
+  SIZE 0.108 BY 0.270 ;
+  SYMMETRY X Y ;
+  SITE asap7sc7p5t ;
+  PIN VDD
+    DIRECTION INOUT ;
+    USE POWER ;
+    PORT
+      LAYER M1 ;
+        RECT 0.036 0.207 0.054 0.261 ;
+        RECT 0.000 0.261 0.108 0.279 ;
+    END
+  END VDD
+  PIN VSS
+    DIRECTION INOUT ;
+    USE GROUND ;
+    PORT
+      LAYER M1 ;
+        RECT 0.000 -0.009 0.108 0.009 ;
+        RECT 0.036 0.009 0.054 0.063 ;
+    END
+  END VSS
+END TAP_A7S_75t_R
+
+MACRO TIEHIx1_A7S_75t_R
+  CLASS CORE ;
+  ORIGIN 0 0 ;
+  FOREIGN TIEHIx1_A7S_75t_R 0 0 ;
+  SIZE 0.162 BY 0.270 ;
+  SYMMETRY X Y ;
+  SITE asap7sc7p5t ;
+  PIN VDD
+    DIRECTION INOUT ;
+    USE POWER ;
+    PORT
+      LAYER M1 ;
+        RECT 0.036 0.207 0.054 0.261 ;
+        RECT 0.000 0.261 0.162 0.279 ;
+    END
+  END VDD
+  PIN VSS
+    DIRECTION INOUT ;
+    USE GROUND ;
+    PORT
+      LAYER M1 ;
+        RECT 0.000 -0.009 0.162 0.009 ;
+        RECT 0.072 0.009 0.090 0.162 ;
+    END
+  END VSS
+  PIN H
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER M1 ;
+        RECT 0.108 0.126 0.126 0.234 ;
+    END
+  END H
+END TIEHIx1_A7S_75t_R
+
+MACRO TIELOx1_A7S_75t_R
+  CLASS CORE ;
+  ORIGIN 0 0 ;
+  FOREIGN TIELOx1_A7S_75t_R 0 0 ;
+  SIZE 0.162 BY 0.270 ;
+  SYMMETRY X Y ;
+  SITE asap7sc7p5t ;
+  PIN VDD
+    DIRECTION INOUT ;
+    USE POWER ;
+    PORT
+      LAYER M1 ;
+        RECT 0.072 0.108 0.090 0.261 ;
+        RECT 0.000 0.261 0.162 0.279 ;
+    END
+  END VDD
+  PIN VSS
+    DIRECTION INOUT ;
+    USE GROUND ;
+    PORT
+      LAYER M1 ;
+        RECT 0.000 -0.009 0.162 0.009 ;
+        RECT 0.036 0.009 0.054 0.063 ;
+    END
+  END VSS
+  PIN L
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER M1 ;
+        RECT 0.108 0.036 0.126 0.144 ;
+    END
+  END L
+END TIELOx1_A7S_75t_R
+
+MACRO XNOR2x1_A7S_75t_R
+  CLASS CORE ;
+  ORIGIN 0 0 ;
+  FOREIGN XNOR2x1_A7S_75t_R 0 0 ;
+  SIZE 0.810 BY 0.270 ;
+  SYMMETRY X Y ;
+  SITE asap7sc7p5t ;
+  PIN VDD
+    DIRECTION INOUT ;
+    USE POWER ;
+    PORT
+      LAYER M1 ;
+        RECT 0.108 0.207 0.126 0.261 ;
+        RECT 0.540 0.207 0.558 0.261 ;
+        RECT 0.576 0.207 0.594 0.261 ;
+        RECT 0.000 0.261 0.810 0.279 ;
+    END
+  END VDD
+  PIN VSS
+    DIRECTION INOUT ;
+    USE GROUND ;
+    PORT
+      LAYER M1 ;
+        RECT 0.000 -0.009 0.810 0.009 ;
+        RECT 0.108 0.009 0.126 0.063 ;
+        RECT 0.684 0.009 0.702 0.063 ;
+    END
+  END VSS
+  PIN A
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER M1 ;
+        RECT 0.180 0.106 0.198 0.162 ;
+    END
+  END A
+  PIN B
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER M1 ;
+        RECT 0.072 0.108 0.090 0.164 ;
+    END
+  END B
+  PIN Y
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER M1 ;
+        RECT 0.468 0.036 0.486 0.234 ;
+    END
+  END Y
+  OBS
+      LAYER M1 ;
+        RECT 0.216 0.034 0.234 0.234 ;
+        RECT 0.720 0.034 0.738 0.162 ;
+        RECT 0.036 0.036 0.054 0.236 ;
+        RECT 0.360 0.036 0.378 0.095 ;
+        RECT 0.540 0.036 0.594 0.054 ;
+        RECT 0.756 0.036 0.774 0.095 ;
+        RECT 0.540 0.054 0.558 0.095 ;
+        RECT 0.396 0.106 0.414 0.162 ;
+        RECT 0.504 0.108 0.522 0.164 ;
+        RECT 0.612 0.108 0.630 0.236 ;
+        RECT 0.360 0.175 0.378 0.234 ;
+        RECT 0.756 0.175 0.774 0.234 ;
+      LAYER M2 ;
+        RECT 0.211 0.036 0.743 0.054 ;
+        RECT 0.355 0.072 0.779 0.090 ;
+        RECT 0.175 0.108 0.419 0.126 ;
+        RECT 0.067 0.144 0.527 0.162 ;
+        RECT 0.355 0.180 0.779 0.198 ;
+        RECT 0.031 0.216 0.635 0.234 ;
+  END
+END XNOR2x1_A7S_75t_R
+
+MACRO XOR2x1_A7S_75t_R
+  CLASS CORE ;
+  ORIGIN 0 0 ;
+  FOREIGN XOR2x1_A7S_75t_R 0 0 ;
+  SIZE 0.810 BY 0.270 ;
+  SYMMETRY X Y ;
+  SITE asap7sc7p5t ;
+  PIN VDD
+    DIRECTION INOUT ;
+    USE POWER ;
+    PORT
+      LAYER M1 ;
+        RECT 0.108 0.207 0.126 0.261 ;
+        RECT 0.468 0.207 0.486 0.261 ;
+        RECT 0.000 0.261 0.810 0.279 ;
+    END
+  END VDD
+  PIN VSS
+    DIRECTION INOUT ;
+    USE GROUND ;
+    PORT
+      LAYER M1 ;
+        RECT 0.000 -0.009 0.810 0.009 ;
+        RECT 0.108 0.009 0.126 0.063 ;
+        RECT 0.540 0.009 0.558 0.063 ;
+        RECT 0.576 0.009 0.594 0.063 ;
+    END
+  END VSS
+  PIN A
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER M1 ;
+        RECT 0.180 0.106 0.198 0.162 ;
+    END
+  END A
+  PIN B
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER M1 ;
+        RECT 0.072 0.108 0.090 0.164 ;
+    END
+  END B
+  PIN Y
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER M1 ;
+        RECT 0.360 0.036 0.378 0.095 ;
+    END
+  END Y
+  OBS
+      LAYER M1 ;
+        RECT 0.036 0.034 0.054 0.234 ;
+        RECT 0.612 0.034 0.630 0.162 ;
+        RECT 0.216 0.036 0.234 0.236 ;
+        RECT 0.756 0.036 0.774 0.095 ;
+        RECT 0.684 0.067 0.702 0.234 ;
+        RECT 0.396 0.106 0.414 0.162 ;
+        RECT 0.504 0.108 0.522 0.164 ;
+        RECT 0.720 0.108 0.738 0.236 ;
+        RECT 0.360 0.175 0.378 0.234 ;
+        RECT 0.540 0.175 0.558 0.216 ;
+        RECT 0.756 0.175 0.774 0.234 ;
+        RECT 0.540 0.216 0.594 0.234 ;
+      LAYER M2 ;
+        RECT 0.031 0.036 0.635 0.054 ;
+        RECT 0.355 0.072 0.779 0.090 ;
+        RECT 0.175 0.108 0.419 0.126 ;
+        RECT 0.067 0.144 0.527 0.162 ;
+        RECT 0.355 0.180 0.779 0.198 ;
+        RECT 0.211 0.216 0.743 0.234 ;
+  END
+END XOR2x1_A7S_75t_R
+
+END LIBRARY

@@ -23,7 +23,8 @@ class FakeKlt:
     exe = "klt"
 
     def __init__(self, drc="clean", lvs="match", control_drc="violations", control_lvs="mismatch", error=False,
-                 bad_case=None, grid="pass", control_grid="fail", redrawn=b"drawn-gds"):
+                 bad_case=None, grid="pass", control_grid="fail", redrawn=b"drawn-gds", lef="PASS"):
+        self.lef = lef
         self.s = {"drc": drc, "lvs": lvs, "cdrc": control_drc, "clvs": control_lvs}
         self.error = error
         self.bad_case = bad_case
@@ -45,6 +46,10 @@ class FakeKlt:
 
     def redraw(self, script, out):
         Path(out).write_bytes(self.redrawn)
+
+    def lef_check(self, work):
+        return {"lef": "layout/A7S_75t_R.lef", "reproducible": self.lef, "result": "PASS" if self.lef == "PASS" else "FAIL",
+                "check": {"result": "PASS", "cells": {}}}
 
     def version(self):
         return "0.0.test"
@@ -467,6 +472,14 @@ class RunRegressionTest(unittest.TestCase):
     def test_gds_that_does_not_reproduce_fails_run(self):
         self.assertEqual(self.go(FakeKlt(redrawn=b"different"), self.drawn_cfg()), 1)
         self.assertEqual(self.drawn_row()["reproducible"], "FAIL")
+
+    def test_stale_lef_fails_run(self):
+        self.assertEqual(self.go(FakeKlt(lef="FAIL"), self.drawn_cfg()), 1)
+        self.assertEqual(self.manifest()["lef"]["result"], "FAIL")
+
+    def test_lef_section_recorded_on_pass(self):
+        self.assertEqual(self.go(FakeKlt(), self.drawn_cfg()), 0)
+        self.assertEqual(self.manifest()["lef"]["result"], "PASS")
 
     def fill_cfg(self, verdict=False):
         """A drawn device-free cell (no CDL, lvs_na) next to a drawn INVx1 neighbour."""
