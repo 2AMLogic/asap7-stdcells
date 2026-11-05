@@ -582,16 +582,336 @@
     ]
   },
   "provenance": {
-    "klt_version": "0.8.0",
+    "klt_version": "0.9.0",
     "klayout_version": null,
     "pdk": null,
     "deck": null,
     "input": {
-      "path": {
-        "path": "manifests/t1-item1-inventory.json",
-        "scope": "repo"
-      },
-      "content_hash": "sha256:a1a88b74552fed5fd9862719dbe61c5c2fbd8049485415c9ce4907df7bab9359"
+      "paths": [
+        {
+          "path": {
+            "path": "design/AND2x1_A7S_75t_R.cdl",
+            "scope": "repo"
+          },
+          "content_hash": "sha256:c29e9c0418c3ea9a1514d8a5f8abcd662d8adda46b468b0ce8cae7fd910bdebc"
+        },
+        {
+          "path": {
+            "path": "design/AOI21x1_A7S_75t_R.cdl",
+            "scope": "repo"
+          },
+          "content_hash": "sha256:ee48104737393c1c05940eba8b44ad187b3b2562f55b99844fc1538af8bc2644"
+        },
+        {
+          "path": {
+            "path": "design/AOI22x1_A7S_75t_R.cdl",
+            "scope": "repo"
+          },
+          "content_hash": "sha256:00078a7f7e91045b748902202138adfc59c28c9c674ba186e910901a44aa66f4"
+        },
+        {
+          "path": {
+            "path": "design/BUFx1_A7S_75t_R.cdl",
+            "scope": "repo"
+          },
+          "content_hash": "sha256:44d6c5874ed69c18c1d1df77541ddd4abc2fc7068c3df3ad19a10c75c391e308"
+        },
+        {
+          "path": {
+            "path": "design/DFFHQNx1_A7S_75t_R.cdl",
+            "scope": "repo"
+          },
+          "content_hash": "sha256:a9d8421bf25cb074303a90cb46e9a530f2ccde4df0ee410ca7597b8c6079ddb7"
+        },
+        {
+          "path": {
+            "path": "design/DHLx1_A7S_75t_R.cdl",
+            "scope": "repo"
+          },
+          "content_hash": "sha256:7916f18b28164978f3714e731a6bf609c83ce1faedff454cd1ea7038221f1364"
+        },
+        {
+          "path": {
+            "path": "design/INVx1_A7S_75t_R.cdl",
+            "scope": "repo"
+          },
+          "content_hash": "sha256:7f04577a450b9197cf2f1a639f5b480a23130693d7704ddc47f171f1a1a00fa7"
+        },
+        {
+          "path": {
+            "path": "design/NAND2x1_A7S_75t_R.cdl",
+            "scope": "repo"
+          },
+          "content_hash": "sha256:d6741c767fd57879f0ba0f15adae920795d94c1f94a487f1ad7b7673af07151c"
+        },
+        {
+          "path": {
+            "path": "design/NAND3x1_A7S_75t_R.cdl",
+            "scope": "repo"
+          },
+          "content_hash": "sha256:252eb323cf45942e76a021861da5773c9a9bb8e06bc58f0c40bc2740794b5814"
+        },
+        {
+          "path": {
+            "path": "design/NOR2x1_A7S_75t_R.cdl",
+            "scope": "repo"
+          },
+          "content_hash": "sha256:3446e0767e29458055653788cc51c8f15d262bf662bc764760fce42518df36c5"
+        },
+        {
+          "path": {
+            "path": "design/NOR3x1_A7S_75t_R.cdl",
+            "scope": "repo"
+          },
+          "content_hash": "sha256:887521358d2dbfce1b48e6c856e5bf65468be72a4b2cfe8351e3da752db0f660"
+        },
+        {
+          "path": {
+            "path": "design/OAI21x1_A7S_75t_R.cdl",
+            "scope": "repo"
+          },
+          "content_hash": "sha256:81778ccb8638c57b212afb88b4bfc0d42ad616b5e1328fc1a65c2b410b7dcbbf"
+        },
+        {
+          "path": {
+            "path": "design/OAI22x1_A7S_75t_R.cdl",
+            "scope": "repo"
+          },
+          "content_hash": "sha256:ea77fb56ae7ccb1f334e72c0e3703f44d233f3d14536e4c5d1ba4b7fc20e38fb"
+        },
+        {
+          "path": {
+            "path": "design/OR2x1_A7S_75t_R.cdl",
+            "scope": "repo"
+          },
+          "content_hash": "sha256:e3ac2a19c3587288db6387ba04d8a191e42ecd9ecdfae2852f68599d5f40e056"
+        },
+        {
+          "path": {
+            "path": "design/TIEHIx1_A7S_75t_R.cdl",
+            "scope": "repo"
+          },
+          "content_hash": "sha256:bbefc3cb943d5e928d3e6c2655d5d0c8ec78bec6523d958572ef463fd69bfc45"
+        },
+        {
+          "path": {
+            "path": "design/TIELOx1_A7S_75t_R.cdl",
+            "scope": "repo"
+          },
+          "content_hash": "sha256:b31af09267fe55917755444d61589f78144ebd0794fc0f2ed0f4ab7d384e4f9f"
+        },
+        {
+          "path": {
+            "path": "design/XNOR2x1_A7S_75t_R.cdl",
+            "scope": "repo"
+          },
+          "content_hash": "sha256:8af9e840597cd051650f58035415414a875f1df35fe1cc4feed25c8b6b099218"
+        },
+        {
+          "path": {
+            "path": "design/XOR2x1_A7S_75t_R.cdl",
+            "scope": "repo"
+          },
+          "content_hash": "sha256:d8189dec20f0bf7baa0cbafacae2ce121d6ca1c721d6cf927660ae64745faa46"
+        },
+        {
+          "path": {
+            "path": "design/a7s_common.py",
+            "scope": "repo"
+          },
+          "content_hash": "sha256:87ea6bfeee9973f43f525a5e66b792c4b906f56749125ec1e0ea150b6c8d6aad"
+        },
+        {
+          "path": {
+            "path": "design/cdl-freshness.json",
+            "scope": "repo"
+          },
+          "content_hash": "sha256:b4aad1e4970a9db3d0c783e522bdd1c5ca86d0763c1347c0675eb3b0fc173594"
+        },
+        {
+          "path": {
+            "path": "design/check_cdl_fresh.py",
+            "scope": "repo"
+          },
+          "content_hash": "sha256:abe125b048b71c4e6187fb16a24fb4fdbef6b2ebb53d9544736dc8d672f19b91"
+        },
+        {
+          "path": {
+            "path": "design/check_cdl_function.py",
+            "scope": "repo"
+          },
+          "content_hash": "sha256:115d0e04e558db840f572c51a12787a6993d5be2b133a40ec796994eb3094874"
+        },
+        {
+          "path": {
+            "path": "design/draw_AND2x1_A7S_75t_R.py",
+            "scope": "repo"
+          },
+          "content_hash": "sha256:5dec57d3cbf53f7af42c298f42988e30b0eadac1bf60fda2be4804da4a35ab3d"
+        },
+        {
+          "path": {
+            "path": "design/draw_AOI21x1_A7S_75t_R.py",
+            "scope": "repo"
+          },
+          "content_hash": "sha256:c74061712a11cce37dded65730f5c2de3a1a03049c1e1a0d94f956c425779967"
+        },
+        {
+          "path": {
+            "path": "design/draw_AOI22x1_A7S_75t_R.py",
+            "scope": "repo"
+          },
+          "content_hash": "sha256:d312b35a75f8e017981306e742c4430b34fe359dd1c12efe0ed5468eb066b741"
+        },
+        {
+          "path": {
+            "path": "design/draw_BUFx1_A7S_75t_R.py",
+            "scope": "repo"
+          },
+          "content_hash": "sha256:67f7e95f9157e925207b2fa6098a53a30e169876fa715136808b608b43dcb0ae"
+        },
+        {
+          "path": {
+            "path": "design/draw_DFFHQNx1_A7S_75t_R.py",
+            "scope": "repo"
+          },
+          "content_hash": "sha256:2118ff146ac329b65bd1405e289f7d628216f5011d5128ed756a89eb38f52097"
+        },
+        {
+          "path": {
+            "path": "design/draw_DHLx1_A7S_75t_R.py",
+            "scope": "repo"
+          },
+          "content_hash": "sha256:75663842a00974eb0d83897360006a8d7bb905ee51b55d73d6dc6fc584a984bf"
+        },
+        {
+          "path": {
+            "path": "design/draw_FILLER1_A7S_75t_R.py",
+            "scope": "repo"
+          },
+          "content_hash": "sha256:1bac09db2786eae5f3dcb2221a5448fbf6a83577ab4004edf5a0e7cee2c64889"
+        },
+        {
+          "path": {
+            "path": "design/draw_FILLER2_A7S_75t_R.py",
+            "scope": "repo"
+          },
+          "content_hash": "sha256:9d4e0ecbd37a2d751d1e16c0343df325586ea569db88809fc520f2f07adc2635"
+        },
+        {
+          "path": {
+            "path": "design/draw_FILLER4_A7S_75t_R.py",
+            "scope": "repo"
+          },
+          "content_hash": "sha256:a0ca15cb2703b45514221df3e641534414378109157a77d03e923fff63ea32c9"
+        },
+        {
+          "path": {
+            "path": "design/draw_INVx1_A7S_75t_R.py",
+            "scope": "repo"
+          },
+          "content_hash": "sha256:8718423b9e1aa723d67bdfa0eeb631072f4e74266f7d719dd9cac3559ffdf168"
+        },
+        {
+          "path": {
+            "path": "design/draw_NAND2x1_A7S_75t_R.py",
+            "scope": "repo"
+          },
+          "content_hash": "sha256:d04c6047434619ffa528a3418cb7e6bc8d4dad09626d29127e4c7863a0fd0eb9"
+        },
+        {
+          "path": {
+            "path": "design/draw_NAND3x1_A7S_75t_R.py",
+            "scope": "repo"
+          },
+          "content_hash": "sha256:f75ba00b57be522c8fd4101e7dc0ee9527eb67e9153c3a0aa94425a524a330eb"
+        },
+        {
+          "path": {
+            "path": "design/draw_NOR2x1_A7S_75t_R.py",
+            "scope": "repo"
+          },
+          "content_hash": "sha256:8a78a0274ba8261a9fdacb80ce57e08cfd85e2dc107531af629a065edba813be"
+        },
+        {
+          "path": {
+            "path": "design/draw_NOR3x1_A7S_75t_R.py",
+            "scope": "repo"
+          },
+          "content_hash": "sha256:199139638a8664ebcba3bc489fc23abfd078c7ddfe47e9ab78fbc4bf395c6441"
+        },
+        {
+          "path": {
+            "path": "design/draw_OAI21x1_A7S_75t_R.py",
+            "scope": "repo"
+          },
+          "content_hash": "sha256:c969decbefaa3ecabf23fa25961d5831535dd2316cac38f63292dfde5677ff0e"
+        },
+        {
+          "path": {
+            "path": "design/draw_OAI22x1_A7S_75t_R.py",
+            "scope": "repo"
+          },
+          "content_hash": "sha256:1c54fe400288d3714c115a5aa79141c9adf48e1183e83112ff3cdc35e1541e37"
+        },
+        {
+          "path": {
+            "path": "design/draw_OR2x1_A7S_75t_R.py",
+            "scope": "repo"
+          },
+          "content_hash": "sha256:f3160f3e89a67798ecd1b3baa833b055d1ca61e5a8f0ce883718621d4236e1f9"
+        },
+        {
+          "path": {
+            "path": "design/draw_TAP_A7S_75t_R.py",
+            "scope": "repo"
+          },
+          "content_hash": "sha256:e7c61f3f5b6e3c5b646258bcd2fb5385fd773c42997a41c774ec5b968607cad1"
+        },
+        {
+          "path": {
+            "path": "design/draw_TIEHIx1_A7S_75t_R.py",
+            "scope": "repo"
+          },
+          "content_hash": "sha256:63e99c269fa7119c15b28db20f5b61969c9e385a00dee3a7193aea708ff51475"
+        },
+        {
+          "path": {
+            "path": "design/draw_TIELOx1_A7S_75t_R.py",
+            "scope": "repo"
+          },
+          "content_hash": "sha256:2db055c95176988bae4a1c997e2ea5cccaf2701ac733999c2115ffd009fd06bb"
+        },
+        {
+          "path": {
+            "path": "design/draw_XNOR2x1_A7S_75t_R.py",
+            "scope": "repo"
+          },
+          "content_hash": "sha256:a9b0da28cd7fd999a8d1b7faa36394d2744932efea8b4967122a023bcfdad4b2"
+        },
+        {
+          "path": {
+            "path": "design/draw_XOR2x1_A7S_75t_R.py",
+            "scope": "repo"
+          },
+          "content_hash": "sha256:744fd74a901b3e51d8532902c8b4da46e641b16565c587755a1306ce6369d7e2"
+        },
+        {
+          "path": {
+            "path": "manifests/t1-item1-inventory.json",
+            "scope": "repo"
+          },
+          "content_hash": "sha256:a1a88b74552fed5fd9862719dbe61c5c2fbd8049485415c9ce4907df7bab9359"
+        },
+        {
+          "path": {
+            "path": "spec/stdcells.md",
+            "scope": "repo"
+          },
+          "content_hash": "sha256:84d7bcc9b7bc3823566a987fe48b339db1a20efc8cafeff16119a43c50bdb9ba"
+        }
+      ],
+      "content_hash": "sha256:031a2429f269006ddb3a8c8b5a85905df32e948fdd819f2bf3a16bf662520fba"
     }
   }
 }

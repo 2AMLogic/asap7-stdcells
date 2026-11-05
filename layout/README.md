@@ -42,12 +42,12 @@ All five acceptance cases of `spec/stdcells.md` run for every drawn cell:
   `GCUT`, `NSELECT`/`PSELECT`/`SLVT`/`LVT`, `SDT`, `LISD`, `LIG`, `V0`, `M1`-`M3`,
   `V1`-`V3`) has at least one CAUGHT control. 210 deck rules still have none that
   fires them and are listed as unexercised in the record's `summary.md`.
-- `klt signoff` (pinned `klayout-tools==0.8.0`) grades item 3 `met` on that
-  envelope. The same redraw changes `layout/FILLER1_A7S_75t_R.gds`, so the item 2
-  attestation, which pins that file's hash, now grades `unmet` (`stale_evidence`).
-  It cannot be regenerated here (`klt signoff --attest 2` needs a stream, not the
-  inventory it was built from; klayout-tools#4221, tracked as #50), so the
-  envelope is left as committed and the grade is reported as it is.
+- `klt signoff` (pinned `klayout-tools==0.9.0`) grades item 3 `met` on that
+  envelope. Item 2 is attested with `klt signoff --attest 2` on the committed library
+  stream `verification/library/A7S_75t_R_LIBRARY.gds` (all 22 drawn cells), plus the
+  inventory check `design/check_gds_fresh.py`, which redraws every `layout/<CELL>.gds`
+  from its script and compares bytes. `--attest 2` takes one stream, so it attests the
+  library stream, not each cell. The grader reports item 2 `met`.
 - Item 4 now cites the library `lvs.json` of the new record, whose layout stream
   is the regenerated library GDS.
 

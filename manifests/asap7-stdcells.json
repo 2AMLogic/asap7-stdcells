@@ -4,7 +4,7 @@
   "evidence": {
     "1": {
       "file": "manifests/t1-item1.envelope.json",
-      "content_hash": "sha256:a1a88b74552fed5fd9862719dbe61c5c2fbd8049485415c9ce4907df7bab9359"
+      "content_hash": "sha256:031a2429f269006ddb3a8c8b5a85905df32e948fdd819f2bf3a16bf662520fba"
     },
     "6": {
       "not_applicable": {
@@ -20,7 +20,7 @@
     },
     "2": {
       "file": "manifests/t1-item2.envelope.json",
-      "content_hash": "sha256:dd6b3dd0740df0122d7f496e4cf234d8ae8b21603d75ba8a361431c445f30f3a"
+      "content_hash": "sha256:bf619dcce132b568d08c94951199f6f08720d842ef11c1a09404ff0357c9cba4"
     },
     "3": {
       "file": "verification/records/20261029T012553Z-klt0.8.1.dev670_g680c6f4a7518/merged/drc.json",
