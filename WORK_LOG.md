@@ -3,6 +3,13 @@
 Chronological record of merged PRs and closed issues, maintained by the Guide
 triage role. Newest first.
 
+### 2026-11-05
+
+- **PR #69**: feat: add structural Liberty view and Yosys counter mapping smoke
+- **Issue #66** (closed): Write the structural Liberty view (pins, functions, areas, no timing) and prove Yosys maps to it
+- **PR #68**: docs: point README status at the signoff record
+- **Issue #67** (closed): README status and maturity position are stale: say all 22 cells are drawn and checked
+
 ### 2026-11-01
 
 - **PR #63**: Bump Repo Skills 0.24.7 -> 0.25.1
