@@ -6,7 +6,7 @@ name: klt signoff
 # (manifests/asap7-stdcells.signoff.json). Whoever changes cited evidence, the
 # manifest or the vendored checklist must regenerate the record in the same PR.
 #
-# Items 1, 9 and 10 cite tool-produced attestation envelopes (klt signoff
+# Items 1, 2, 9 and 10 cite tool-produced attestation envelopes (klt signoff
 # --attest); item 4 cites the library `klt lvs` envelope of a verification
 # record, pinned by the layout stream's content hash; the remaining items have
 # no evidence yet and grade unmet, so the grader exits 3. That is the honest steady state, not a failure.
@@ -32,7 +32,7 @@ jobs:
           python-version: "3.10"
 
       - name: Install pinned klt
-        run: pip install klayout-tools==0.8.0
+        run: pip install klayout-tools==0.9.0
 
       - name: Install KLayout (klt DRC runs the system klayout binary)
         run: |
@@ -88,6 +88,20 @@ jobs:
           rc=$?
           rm -rf verification/records/.attest-coldstart verification/.work
           exit $rc
+
+      - name: Re-attest T1 item 2 against the committed envelope
+        run: |
+          set -uo pipefail
+          # Item 2 attests the committed library stream; its inventory declares
+          # the check that redraws every cell's GDS from its draw script.
+          klt signoff --attest 2 \
+              --input verification/library/A7S_75t_R_LIBRARY.gds \
+              --inventory manifests/t1-item2-inventory.json \
+              --check manifests/t1-item2.envelope.json || {
+            echo "::error::T1 item 2 attestation drifted from manifests/t1-item2.envelope.json. Refresh:"
+            echo "  klt signoff --attest 2 --input verification/library/A7S_75t_R_LIBRARY.gds --inventory manifests/t1-item2-inventory.json -o manifests/t1-item2.envelope.json"
+            exit 1
+          }
 
       - name: Re-attest T1 items 1, 9 and 10 against the committed envelopes
         run: |
