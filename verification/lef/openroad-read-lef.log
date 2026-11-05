@@ -1,0 +1,6 @@
+openroad: 26Q3-1510-g6cb3f2b704 
+tech LEF sha256: 830a032810b054d0dc24601c3f57c86073469e6c9cfb0314b2c82eb335b021d2
+library LEF sha256: 0652f7a4837acccb9ba451de1d55e55c4fb7976d0ed8fadf979cdc776e97e8b1
+[INFO ODB-0227] LEF file: /tmp/a7s65-pdk/x/lambdapdk/asap7/base/apr/asap7_tech.lef, created 24 layers, 9 vias
+[INFO ODB-0227] LEF file: /home/ubuntu/GitHub/asap7-stdcells/.loom/worktrees/issue-65/verification/lef/../../layout/A7S_75t_R.lef, created 22 library cells
+LEF_READ_DONE
