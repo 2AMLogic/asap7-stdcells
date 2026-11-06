@@ -1,0 +1,58 @@
+{
+ "cell": {
+  "name": "NAND2x1_ASAP7_75t_R",
+  "subckt": "NAND2x1_A7S_75t_R",
+  "netlist": "NAND2x1.osdi.spice",
+  "pins": [
+   {
+    "name": "A",
+    "direction": "input"
+   },
+   {
+    "name": "B",
+    "direction": "input"
+   },
+   {
+    "name": "Y",
+    "direction": "output",
+    "function": "!(A&B)"
+   }
+  ],
+  "power_pins": {
+   "vdd": "VDD",
+   "gnd": "VSS",
+   "bulk_gnd": "vsubs"
+  }
+ },
+ "corner": {
+  "name": "TT_0p70V_25C",
+  "process": "tt",
+  "supply_v": 0.7,
+  "temperature_c": 25
+ },
+ "grid": {
+  "input_transition_ns": [
+   0.005,
+   0.01,
+   0.02,
+   0.04
+  ],
+  "output_load_pf": [
+   0.00072,
+   0.00144,
+   0.00288,
+   0.00576
+  ]
+ },
+ "models": {
+  "lib": "asap7_bsimcmg.lib"
+ },
+ "options": {
+  "osdi_preload": [
+   "scratch/sim/osdi/bsimcmg.osdi"
+  ]
+ },
+ "output": {
+  "lib": "out/NAND2x1.lib"
+ }
+}

@@ -1,0 +1,1067 @@
+{
+  "schema_version": 1,
+  "cell": {
+    "name": "INVx1_ASAP7_75t_R",
+    "subckt": "INVx1_A7S_75t_R",
+    "netlist": {
+      "path": null,
+      "scope": "external"
+    },
+    "pins": [
+      {
+        "name": "A",
+        "direction": "input",
+        "function": null,
+        "capacitance_pf": 0.00024723214285714284,
+        "capacitance_source": "measured",
+        "declared_capacitance_pf": null,
+        "measured_capacitance_pf": 0.00024723214285714284,
+        "measured_rise_capacitance_pf": 0.00024825,
+        "measured_fall_capacitance_pf": 0.0002462142857142857
+      },
+      {
+        "name": "Y",
+        "direction": "output",
+        "function": "!A",
+        "capacitance_pf": null,
+        "capacitance_source": null,
+        "declared_capacitance_pf": null,
+        "measured_capacitance_pf": null,
+        "measured_rise_capacitance_pf": null,
+        "measured_fall_capacitance_pf": null
+      }
+    ]
+  },
+  "corner": {
+    "name": "TT_0p70V_25C",
+    "process": "tt",
+    "supply_v": 0.7,
+    "temperature_c": 25.0
+  },
+  "grid": {
+    "input_transition_ns": [
+      0.005,
+      0.01,
+      0.02,
+      0.04
+    ],
+    "output_load_pf": [
+      0.00072,
+      0.00144,
+      0.00288,
+      0.00576
+    ],
+    "points": 16,
+    "arc_count": 1,
+    "measurement_count": 64,
+    "power_measurement_count": 64,
+    "leakage_measurement_count": 2,
+    "capacitance_measurement_count": 2,
+    "total_measurement_count": 132
+  },
+  "thresholds": {
+    "input_threshold_pct_rise": 50.0,
+    "input_threshold_pct_fall": 50.0,
+    "output_threshold_pct_rise": 50.0,
+    "output_threshold_pct_fall": 50.0,
+    "slew_lower_threshold_pct_rise": 20.0,
+    "slew_lower_threshold_pct_fall": 20.0,
+    "slew_upper_threshold_pct_rise": 80.0,
+    "slew_upper_threshold_pct_fall": 80.0,
+    "slew_derate_from_library": 1.0
+  },
+  "units": {
+    "time": "ns",
+    "capacitance": "pF",
+    "internal_energy": "pJ",
+    "leakage_power": "pW"
+  },
+  "arcs": [
+    {
+      "output_pin": "Y",
+      "related_pin": "A",
+      "timing_sense": "negative_unate",
+      "measured_sense": "negative_unate",
+      "timing_type": "combinational",
+      "side_inputs": {},
+      "cell_rise": {
+        "index_1": [
+          0.005,
+          0.01,
+          0.02,
+          0.04
+        ],
+        "index_2": [
+          0.00072,
+          0.00144,
+          0.00288,
+          0.00576
+        ],
+        "values": [
+          [
+            0.00597264,
+            0.008950409999999999,
+            0.014825000000000001,
+            0.0264946
+          ],
+          [
+            0.00805502,
+            0.011059399999999999,
+            0.016949000000000002,
+            0.028640000000000002
+          ],
+          [
+            0.0112582,
+            0.0152087,
+            0.0212217,
+            0.032932499999999996
+          ],
+          [
+            0.015697000000000003,
+            0.0214858,
+            0.029514099999999998,
+            0.0415483
+          ]
+        ]
+      },
+      "cell_fall": {
+        "index_1": [
+          0.005,
+          0.01,
+          0.02,
+          0.04
+        ],
+        "index_2": [
+          0.00072,
+          0.00144,
+          0.00288,
+          0.00576
+        ],
+        "values": [
+          [
+            0.0053779299999999995,
+            0.00788751,
+            0.0128286,
+            0.0226523
+          ],
+          [
+            0.007322500000000001,
+            0.009959270000000001,
+            0.014916299999999999,
+            0.024754
+          ],
+          [
+            0.010141299999999999,
+            0.0137994,
+            0.0190975,
+            0.0289542
+          ],
+          [
+            0.0140372,
+            0.019334499999999998,
+            0.0267444,
+            0.0373741
+          ]
+        ]
+      },
+      "rise_transition": {
+        "index_1": [
+          0.005,
+          0.01,
+          0.02,
+          0.04
+        ],
+        "index_2": [
+          0.00072,
+          0.00144,
+          0.00288,
+          0.00576
+        ],
+        "values": [
+          [
+            0.00482859,
+            0.00908911,
+            0.017670699999999998,
+            0.0348457
+          ],
+          [
+            0.00556711,
+            0.009250350000000001,
+            0.017667,
+            0.0348421
+          ],
+          [
+            0.0078054000000000005,
+            0.0108262,
+            0.018126299999999998,
+            0.034843700000000005
+          ],
+          [
+            0.011474100000000001,
+            0.0152892,
+            0.0213845,
+            0.0358676
+          ]
+        ]
+      },
+      "fall_transition": {
+        "index_1": [
+          0.005,
+          0.01,
+          0.02,
+          0.04
+        ],
+        "index_2": [
+          0.00072,
+          0.00144,
+          0.00288,
+          0.00576
+        ],
+        "values": [
+          [
+            0.0038858800000000004,
+            0.0071359200000000005,
+            0.0138879,
+            0.027384
+          ],
+          [
+            0.0046738199999999995,
+            0.0074454,
+            0.0138913,
+            0.027387799999999997
+          ],
+          [
+            0.0066766,
+            0.00917904,
+            0.0146028,
+            0.0273882
+          ],
+          [
+            0.0098108,
+            0.0131131,
+            0.0181979,
+            0.0289501
+          ]
+        ]
+      },
+      "rise_power": {
+        "index_1": [
+          0.005,
+          0.01,
+          0.02,
+          0.04
+        ],
+        "index_2": [
+          0.00072,
+          0.00144,
+          0.00288,
+          0.00576
+        ],
+        "values": [
+          [
+            3.346518000000003e-05,
+            3.8638425000000055e-05,
+            4.283650000000004e-05,
+            4.550423499999996e-05
+          ],
+          [
+            2.9288035000000004e-05,
+            3.404758000000006e-05,
+            3.916360000000003e-05,
+            4.323252499999989e-05
+          ],
+          [
+            2.9190769999999996e-05,
+            3.108276500000002e-05,
+            3.509586500000008e-05,
+            3.977151500000019e-05
+          ],
+          [
+            3.635264500000002e-05,
+            3.454618999999999e-05,
+            3.459897000000008e-05,
+            3.718753500000019e-05
+          ]
+        ]
+      },
+      "fall_power": {
+        "index_1": [
+          0.005,
+          0.01,
+          0.02,
+          0.04
+        ],
+        "index_2": [
+          0.00072,
+          0.00144,
+          0.00288,
+          0.00576
+        ],
+        "values": [
+          [
+            3.4875225000000016e-05,
+            3.9625040000000004e-05,
+            4.295630500000011e-05,
+            4.4952879999999966e-05
+          ],
+          [
+            3.0148369999999982e-05,
+            3.541877500000005e-05,
+            4.009190500000009e-05,
+            4.333118999999986e-05
+          ],
+          [
+            2.8673224999999997e-05,
+            3.1695125000000084e-05,
+            3.6274349999999996e-05,
+            4.056727500000002e-05
+          ],
+          [
+            3.360027999999997e-05,
+            3.3041820000000014e-05,
+            3.460187499999996e-05,
+            3.802827000000007e-05
+          ]
+        ]
+      }
+    }
+  ],
+  "leakage": {
+    "cell_leakage_power_pw": 37.173395,
+    "states": [
+      {
+        "when": "!A",
+        "inputs": {
+          "A": false
+        },
+        "value_pw": 35.43239
+      },
+      {
+        "when": "A",
+        "inputs": {
+          "A": true
+        },
+        "value_pw": 38.9144
+      }
+    ]
+  },
+  "cells": [
+    {
+      "cell": {
+        "name": "INVx1_ASAP7_75t_R",
+        "subckt": "INVx1_A7S_75t_R",
+        "netlist": {
+          "path": null,
+          "scope": "external"
+        },
+        "pins": [
+          {
+            "name": "A",
+            "direction": "input",
+            "function": null,
+            "capacitance_pf": 0.00024723214285714284,
+            "capacitance_source": "measured",
+            "declared_capacitance_pf": null,
+            "measured_capacitance_pf": 0.00024723214285714284,
+            "measured_rise_capacitance_pf": 0.00024825,
+            "measured_fall_capacitance_pf": 0.0002462142857142857
+          },
+          {
+            "name": "Y",
+            "direction": "output",
+            "function": "!A",
+            "capacitance_pf": null,
+            "capacitance_source": null,
+            "declared_capacitance_pf": null,
+            "measured_capacitance_pf": null,
+            "measured_rise_capacitance_pf": null,
+            "measured_fall_capacitance_pf": null
+          }
+        ]
+      },
+      "arcs": [
+        {
+          "output_pin": "Y",
+          "related_pin": "A",
+          "timing_sense": "negative_unate",
+          "measured_sense": "negative_unate",
+          "timing_type": "combinational",
+          "side_inputs": {},
+          "cell_rise": {
+            "index_1": [
+              0.005,
+              0.01,
+              0.02,
+              0.04
+            ],
+            "index_2": [
+              0.00072,
+              0.00144,
+              0.00288,
+              0.00576
+            ],
+            "values": [
+              [
+                0.00597264,
+                0.008950409999999999,
+                0.014825000000000001,
+                0.0264946
+              ],
+              [
+                0.00805502,
+                0.011059399999999999,
+                0.016949000000000002,
+                0.028640000000000002
+              ],
+              [
+                0.0112582,
+                0.0152087,
+                0.0212217,
+                0.032932499999999996
+              ],
+              [
+                0.015697000000000003,
+                0.0214858,
+                0.029514099999999998,
+                0.0415483
+              ]
+            ]
+          },
+          "cell_fall": {
+            "index_1": [
+              0.005,
+              0.01,
+              0.02,
+              0.04
+            ],
+            "index_2": [
+              0.00072,
+              0.00144,
+              0.00288,
+              0.00576
+            ],
+            "values": [
+              [
+                0.0053779299999999995,
+                0.00788751,
+                0.0128286,
+                0.0226523
+              ],
+              [
+                0.007322500000000001,
+                0.009959270000000001,
+                0.014916299999999999,
+                0.024754
+              ],
+              [
+                0.010141299999999999,
+                0.0137994,
+                0.0190975,
+                0.0289542
+              ],
+              [
+                0.0140372,
+                0.019334499999999998,
+                0.0267444,
+                0.0373741
+              ]
+            ]
+          },
+          "rise_transition": {
+            "index_1": [
+              0.005,
+              0.01,
+              0.02,
+              0.04
+            ],
+            "index_2": [
+              0.00072,
+              0.00144,
+              0.00288,
+              0.00576
+            ],
+            "values": [
+              [
+                0.00482859,
+                0.00908911,
+                0.017670699999999998,
+                0.0348457
+              ],
+              [
+                0.00556711,
+                0.009250350000000001,
+                0.017667,
+                0.0348421
+              ],
+              [
+                0.0078054000000000005,
+                0.0108262,
+                0.018126299999999998,
+                0.034843700000000005
+              ],
+              [
+                0.011474100000000001,
+                0.0152892,
+                0.0213845,
+                0.0358676
+              ]
+            ]
+          },
+          "fall_transition": {
+            "index_1": [
+              0.005,
+              0.01,
+              0.02,
+              0.04
+            ],
+            "index_2": [
+              0.00072,
+              0.00144,
+              0.00288,
+              0.00576
+            ],
+            "values": [
+              [
+                0.0038858800000000004,
+                0.0071359200000000005,
+                0.0138879,
+                0.027384
+              ],
+              [
+                0.0046738199999999995,
+                0.0074454,
+                0.0138913,
+                0.027387799999999997
+              ],
+              [
+                0.0066766,
+                0.00917904,
+                0.0146028,
+                0.0273882
+              ],
+              [
+                0.0098108,
+                0.0131131,
+                0.0181979,
+                0.0289501
+              ]
+            ]
+          },
+          "rise_power": {
+            "index_1": [
+              0.005,
+              0.01,
+              0.02,
+              0.04
+            ],
+            "index_2": [
+              0.00072,
+              0.00144,
+              0.00288,
+              0.00576
+            ],
+            "values": [
+              [
+                3.346518000000003e-05,
+                3.8638425000000055e-05,
+                4.283650000000004e-05,
+                4.550423499999996e-05
+              ],
+              [
+                2.9288035000000004e-05,
+                3.404758000000006e-05,
+                3.916360000000003e-05,
+                4.323252499999989e-05
+              ],
+              [
+                2.9190769999999996e-05,
+                3.108276500000002e-05,
+                3.509586500000008e-05,
+                3.977151500000019e-05
+              ],
+              [
+                3.635264500000002e-05,
+                3.454618999999999e-05,
+                3.459897000000008e-05,
+                3.718753500000019e-05
+              ]
+            ]
+          },
+          "fall_power": {
+            "index_1": [
+              0.005,
+              0.01,
+              0.02,
+              0.04
+            ],
+            "index_2": [
+              0.00072,
+              0.00144,
+              0.00288,
+              0.00576
+            ],
+            "values": [
+              [
+                3.4875225000000016e-05,
+                3.9625040000000004e-05,
+                4.295630500000011e-05,
+                4.4952879999999966e-05
+              ],
+              [
+                3.0148369999999982e-05,
+                3.541877500000005e-05,
+                4.009190500000009e-05,
+                4.333118999999986e-05
+              ],
+              [
+                2.8673224999999997e-05,
+                3.1695125000000084e-05,
+                3.6274349999999996e-05,
+                4.056727500000002e-05
+              ],
+              [
+                3.360027999999997e-05,
+                3.3041820000000014e-05,
+                3.460187499999996e-05,
+                3.802827000000007e-05
+              ]
+            ]
+          }
+        }
+      ],
+      "leakage": {
+        "cell_leakage_power_pw": 37.173395,
+        "states": [
+          {
+            "when": "!A",
+            "inputs": {
+              "A": false
+            },
+            "value_pw": 35.43239
+          },
+          {
+            "when": "A",
+            "inputs": {
+              "A": true
+            },
+            "value_pw": 38.9144
+          }
+        ]
+      },
+      "constraints": [],
+      "simulation": {
+        "testbench": "scratch/run/INVx1.out/testbench.spice",
+        "request": "scratch/run/INVx1.out/sim-request.json",
+        "report": "scratch/run/INVx1.out/sim-report.json",
+        "corner_id": "tt/0.700V/25C",
+        "status": "pass",
+        "runtime_s": 1.925,
+        "engine": "ngspice",
+        "engine_version": "46",
+        "window": {
+          "settle_ns": 2.0,
+          "tran_step_ns": 0.0008333333333333333
+        }
+      }
+    }
+  ],
+  "liberty": {
+    "path": "scratch/run/out/INVx1.lib",
+    "library_name": "INVx1_ASAP7_75t_R_TT_0p70V_25C",
+    "cell_count": 1,
+    "time_unit": "1ns",
+    "capacitive_load_unit": [
+      1.0,
+      "pf"
+    ],
+    "roundtrip": {
+      "engine": "klt_statime_native",
+      "status": "skipped",
+      "message": "the emitted Liberty was NOT verified against klt_statime_native's reader: the klt_statime_native extension is not installed -- from a repo checkout, run `maturin develop --release` inside native/statime/ (or `pip install ./native/statime`)",
+      "probe_netlist": "scratch/run/INVx1.out/roundtrip-probe.v"
+    }
+  },
+  "simulation": {
+    "testbench": "scratch/run/INVx1.out/testbench.spice",
+    "request": "scratch/run/INVx1.out/sim-request.json",
+    "report": "scratch/run/INVx1.out/sim-report.json",
+    "corner_id": "tt/0.700V/25C",
+    "status": "pass",
+    "runtime_s": 1.925,
+    "engine": "ngspice",
+    "engine_version": "46",
+    "window": {
+      "settle_ns": 2.0,
+      "tran_step_ns": 0.0008333333333333333
+    }
+  },
+  "comparison": {
+    "schema_version": 1,
+    "ours": "scratch/run/out/INVx1.lib",
+    "reference": "scratch/ref/INVBUF_TT.lib",
+    "tolerances": {
+      "cell_rise": {
+        "rel": 0.15,
+        "abs": 0.005
+      },
+      "cell_fall": {
+        "rel": 0.15,
+        "abs": 0.005
+      },
+      "rise_transition": {
+        "rel": 0.25,
+        "abs": 0.005
+      },
+      "fall_transition": {
+        "rel": 0.25,
+        "abs": 0.005
+      },
+      "rise_power": {
+        "rel": 0.5,
+        "abs": 0.003
+      },
+      "fall_power": {
+        "rel": 0.5,
+        "abs": 0.003
+      },
+      "leakage_power": {
+        "rel": 0.15,
+        "abs": 5.0
+      },
+      "cell_leakage_power": {
+        "rel": 0.1,
+        "abs": 5.0
+      }
+    },
+    "cells": [
+      {
+        "name": "INVx1_ASAP7_75t_R",
+        "arcs": [
+          {
+            "output_pin": "Y",
+            "related_pin": "A",
+            "tables": {
+              "cell_rise": {
+                "interpolated": true,
+                "points": 16,
+                "violations": 16,
+                "max_abs_delta": 2.165012679519998,
+                "max_rel_delta": 0.9972451448732808,
+                "mean_rel_delta": 0.9911411735118109,
+                "worst": {
+                  "index_1": 0.005,
+                  "index_2": 0.00072,
+                  "ours": 0.00597264,
+                  "reference": 2.1680414124399974,
+                  "delta": -2.1620687724399974,
+                  "rel_delta": -0.9972451448732808,
+                  "bound": 0.3252062118659996,
+                  "tolerance_used": 6.648300965821872,
+                  "within_tolerance": false
+                },
+                "within_tolerance": false
+              },
+              "cell_fall": {
+                "interpolated": true,
+                "points": 16,
+                "violations": 16,
+                "max_abs_delta": 1.9633571443200006,
+                "max_rel_delta": 0.9972642925041253,
+                "mean_rel_delta": 0.9913163542284072,
+                "worst": {
+                  "index_1": 0.005,
+                  "index_2": 0.00072,
+                  "ours": 0.00537793,
+                  "reference": 1.9658278555400006,
+                  "delta": -1.9604499255400005,
+                  "rel_delta": -0.9972642925041253,
+                  "bound": 0.2948741783310001,
+                  "tolerance_used": 6.648428616694169,
+                  "within_tolerance": false
+                },
+                "within_tolerance": false
+              },
+              "rise_transition": {
+                "interpolated": true,
+                "points": 16,
+                "violations": 16,
+                "max_abs_delta": 1.2487529087999991,
+                "max_rel_delta": 0.9960714275776518,
+                "mean_rel_delta": 0.9856610912490803,
+                "worst": {
+                  "index_1": 0.005,
+                  "index_2": 0.00072,
+                  "ours": 0.00482859,
+                  "reference": 1.22909532545,
+                  "delta": -1.22426673545,
+                  "rel_delta": -0.9960714275776518,
+                  "bound": 0.3072738313625,
+                  "tolerance_used": 3.984285710310607,
+                  "within_tolerance": false
+                },
+                "within_tolerance": false
+              },
+              "fall_transition": {
+                "interpolated": true,
+                "points": 16,
+                "violations": 16,
+                "max_abs_delta": 0.9959484055999991,
+                "max_rel_delta": 0.9960445495212827,
+                "mean_rel_delta": 0.9854963231879713,
+                "worst": {
+                  "index_1": 0.005,
+                  "index_2": 0.00072,
+                  "ours": 0.00388588,
+                  "reference": 0.9824114903999983,
+                  "delta": -0.9785256103999983,
+                  "rel_delta": -0.9960445495212827,
+                  "bound": 0.24560287259999958,
+                  "tolerance_used": 3.984178198085131,
+                  "within_tolerance": false
+                },
+                "within_tolerance": false
+              },
+              "rise_power": {
+                "interpolated": true,
+                "points": 16,
+                "violations": 16,
+                "max_abs_delta": 0.12353022336,
+                "max_rel_delta": 0.9997637075115102,
+                "mean_rel_delta": 0.9997045685249241,
+                "worst": {
+                  "index_1": 0.02,
+                  "index_2": 0.00072,
+                  "ours": 2.91908e-05,
+                  "reference": 0.12353672428000002,
+                  "delta": -0.12350753348000003,
+                  "rel_delta": -0.9997637075115102,
+                  "bound": 0.06176836214000001,
+                  "tolerance_used": 1.9995274150230204,
+                  "within_tolerance": false
+                },
+                "within_tolerance": false
+              },
+              "fall_power": {
+                "interpolated": true,
+                "points": 16,
+                "violations": 16,
+                "max_abs_delta": 0.021790945083999994,
+                "max_rel_delta": 1.0020700028908232,
+                "mean_rel_delta": 1.0016905386070234,
+                "worst": {
+                  "index_1": 0.005,
+                  "index_2": 0.00576,
+                  "ours": 4.49529e-05,
+                  "reference": -0.021716346483999994,
+                  "delta": 0.021761299383999993,
+                  "rel_delta": 1.0020700028908232,
+                  "bound": 0.010858173241999997,
+                  "tolerance_used": 2.0041400057816463,
+                  "within_tolerance": false
+                },
+                "within_tolerance": false
+              }
+            }
+          }
+        ],
+        "leakage": {
+          "states": [],
+          "cell_leakage_power": null
+        },
+        "missing": [
+          "leakage_power when \"!A\": matches more than one reference leakage_power group",
+          "leakage_power when \"A\": matches more than one reference leakage_power group",
+          "cell_leakage_power: not in the reference"
+        ],
+        "notes": [
+          "internal_power A->Y: more than one group; compared the first"
+        ]
+      }
+    ],
+    "summary": {
+      "cell_count": 1,
+      "fields": {
+        "cell_rise": {
+          "compared": 16,
+          "violations": 16,
+          "max_abs_delta": 2.165012679519998,
+          "max_rel_delta": 0.9972451448732808,
+          "worst": {
+            "where": "INVx1_ASAP7_75t_R A->Y cell_rise",
+            "index_1": 0.005,
+            "index_2": 0.00072,
+            "ours": 0.00597264,
+            "reference": 2.1680414124399974,
+            "delta": -2.1620687724399974,
+            "rel_delta": -0.9972451448732808,
+            "bound": 0.3252062118659996,
+            "tolerance_used": 6.648300965821872,
+            "within_tolerance": false
+          },
+          "tolerance": {
+            "rel": 0.15,
+            "abs": 0.005
+          },
+          "within_tolerance": false
+        },
+        "cell_fall": {
+          "compared": 16,
+          "violations": 16,
+          "max_abs_delta": 1.9633571443200006,
+          "max_rel_delta": 0.9972642925041253,
+          "worst": {
+            "where": "INVx1_ASAP7_75t_R A->Y cell_fall",
+            "index_1": 0.005,
+            "index_2": 0.00072,
+            "ours": 0.00537793,
+            "reference": 1.9658278555400006,
+            "delta": -1.9604499255400005,
+            "rel_delta": -0.9972642925041253,
+            "bound": 0.2948741783310001,
+            "tolerance_used": 6.648428616694169,
+            "within_tolerance": false
+          },
+          "tolerance": {
+            "rel": 0.15,
+            "abs": 0.005
+          },
+          "within_tolerance": false
+        },
+        "rise_transition": {
+          "compared": 16,
+          "violations": 16,
+          "max_abs_delta": 1.2487529087999991,
+          "max_rel_delta": 0.9960714275776518,
+          "worst": {
+            "where": "INVx1_ASAP7_75t_R A->Y rise_transition",
+            "index_1": 0.005,
+            "index_2": 0.00072,
+            "ours": 0.00482859,
+            "reference": 1.22909532545,
+            "delta": -1.22426673545,
+            "rel_delta": -0.9960714275776518,
+            "bound": 0.3072738313625,
+            "tolerance_used": 3.984285710310607,
+            "within_tolerance": false
+          },
+          "tolerance": {
+            "rel": 0.25,
+            "abs": 0.005
+          },
+          "within_tolerance": false
+        },
+        "fall_transition": {
+          "compared": 16,
+          "violations": 16,
+          "max_abs_delta": 0.9959484055999991,
+          "max_rel_delta": 0.9960445495212827,
+          "worst": {
+            "where": "INVx1_ASAP7_75t_R A->Y fall_transition",
+            "index_1": 0.005,
+            "index_2": 0.00072,
+            "ours": 0.00388588,
+            "reference": 0.9824114903999983,
+            "delta": -0.9785256103999983,
+            "rel_delta": -0.9960445495212827,
+            "bound": 0.24560287259999958,
+            "tolerance_used": 3.984178198085131,
+            "within_tolerance": false
+          },
+          "tolerance": {
+            "rel": 0.25,
+            "abs": 0.005
+          },
+          "within_tolerance": false
+        },
+        "rise_power": {
+          "compared": 16,
+          "violations": 16,
+          "max_abs_delta": 0.12353022336,
+          "max_rel_delta": 0.9997637075115102,
+          "worst": {
+            "where": "INVx1_ASAP7_75t_R A->Y rise_power",
+            "index_1": 0.02,
+            "index_2": 0.00072,
+            "ours": 2.91908e-05,
+            "reference": 0.12353672428000002,
+            "delta": -0.12350753348000003,
+            "rel_delta": -0.9997637075115102,
+            "bound": 0.06176836214000001,
+            "tolerance_used": 1.9995274150230204,
+            "within_tolerance": false
+          },
+          "tolerance": {
+            "rel": 0.5,
+            "abs": 0.003
+          },
+          "within_tolerance": false
+        },
+        "fall_power": {
+          "compared": 16,
+          "violations": 16,
+          "max_abs_delta": 0.021790945083999994,
+          "max_rel_delta": 1.0020700028908232,
+          "worst": {
+            "where": "INVx1_ASAP7_75t_R A->Y fall_power",
+            "index_1": 0.005,
+            "index_2": 0.00576,
+            "ours": 4.49529e-05,
+            "reference": -0.021716346483999994,
+            "delta": 0.021761299383999993,
+            "rel_delta": 1.0020700028908232,
+            "bound": 0.010858173241999997,
+            "tolerance_used": 2.0041400057816463,
+            "within_tolerance": false
+          },
+          "tolerance": {
+            "rel": 0.5,
+            "abs": 0.003
+          },
+          "within_tolerance": false
+        },
+        "leakage_power": {
+          "compared": 0,
+          "violations": 0,
+          "max_abs_delta": null,
+          "max_rel_delta": null,
+          "worst": null,
+          "tolerance": {
+            "rel": 0.15,
+            "abs": 5.0
+          },
+          "within_tolerance": false
+        },
+        "cell_leakage_power": {
+          "compared": 0,
+          "violations": 0,
+          "max_abs_delta": null,
+          "max_rel_delta": null,
+          "worst": null,
+          "tolerance": {
+            "rel": 0.1,
+            "abs": 5.0
+          },
+          "within_tolerance": false
+        }
+      },
+      "missing": [
+        "INVx1_ASAP7_75t_R: leakage_power when \"!A\": matches more than one reference leakage_power group",
+        "INVx1_ASAP7_75t_R: leakage_power when \"A\": matches more than one reference leakage_power group",
+        "INVx1_ASAP7_75t_R: cell_leakage_power: not in the reference"
+      ],
+      "within_tolerance": false
+    }
+  },
+  "provenance": {
+    "klt_version": "0.9.2.dev103+g9f4cec35997a",
+    "klt_git_commit": "9f4cec35997a8d52de2037a8b0ab278232da5e70",
+    "klt_reinstall_spec": "klayout-tools @ git+https://github.com/2AMLogic/klayout-tools@9f4cec35997a8d52de2037a8b0ab278232da5e70",
+    "klayout_version": "0.30.13",
+    "pdk": null,
+    "deck": null,
+    "input": {
+      "content_hash": "sha256:2394ac0e1e3b730bb814ab0f7b2f754d39595d98c45d783c8ea2f05163db2df0",
+      "role": "netlist"
+    }
+  }
+}
