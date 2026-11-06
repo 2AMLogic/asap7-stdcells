@@ -47,7 +47,14 @@ group per related pin.
   not meaningful; `compare.py` does the unit-normalised tabulation instead.
 - Combinational arcs only; the Liberty round-trip check was `skipped` by klt
   (native reader not installed), so the emitted files were not parse-checked.
-- Absolute scratch paths appear in the committed request and report files.
+- **Path normalisation**: the committed request, report and sim-report JSON
+  are klt's output with one change, made by `normalize_paths.py` (called from
+  `run.sh`, step 5b): the scratch-dir prefix is replaced by `scratch` and the
+  absolute `ngspice` binary path by `ngspice`, as plain text substitution, so
+  the records carry no host paths (the evidence lint rejects them). No key or
+  value is otherwise altered. The records under
+  `records/2026-11-06/attempt1-floating-well/` got the same substitution. The
+  `.lib`, `.spice` and `.md` files are unmodified.
 
 ## Reproduce
 

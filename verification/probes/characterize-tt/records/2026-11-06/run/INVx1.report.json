@@ -650,9 +650,9 @@
       },
       "constraints": [],
       "simulation": {
-        "testbench": "/tmp/p76r3/run/INVx1.out/testbench.spice",
-        "request": "/tmp/p76r3/run/INVx1.out/sim-request.json",
-        "report": "/tmp/p76r3/run/INVx1.out/sim-report.json",
+        "testbench": "scratch/run/INVx1.out/testbench.spice",
+        "request": "scratch/run/INVx1.out/sim-request.json",
+        "report": "scratch/run/INVx1.out/sim-report.json",
         "corner_id": "tt/0.700V/25C",
         "status": "pass",
         "runtime_s": 1.925,
@@ -666,7 +666,7 @@
     }
   ],
   "liberty": {
-    "path": "/tmp/p76r3/run/out/INVx1.lib",
+    "path": "scratch/run/out/INVx1.lib",
     "library_name": "INVx1_ASAP7_75t_R_TT_0p70V_25C",
     "cell_count": 1,
     "time_unit": "1ns",
@@ -678,13 +678,13 @@
       "engine": "klt_statime_native",
       "status": "skipped",
       "message": "the emitted Liberty was NOT verified against klt_statime_native's reader: the klt_statime_native extension is not installed -- from a repo checkout, run `maturin develop --release` inside native/statime/ (or `pip install ./native/statime`)",
-      "probe_netlist": "/tmp/p76r3/run/INVx1.out/roundtrip-probe.v"
+      "probe_netlist": "scratch/run/INVx1.out/roundtrip-probe.v"
     }
   },
   "simulation": {
-    "testbench": "/tmp/p76r3/run/INVx1.out/testbench.spice",
-    "request": "/tmp/p76r3/run/INVx1.out/sim-request.json",
-    "report": "/tmp/p76r3/run/INVx1.out/sim-report.json",
+    "testbench": "scratch/run/INVx1.out/testbench.spice",
+    "request": "scratch/run/INVx1.out/sim-request.json",
+    "report": "scratch/run/INVx1.out/sim-report.json",
     "corner_id": "tt/0.700V/25C",
     "status": "pass",
     "runtime_s": 1.925,
@@ -697,8 +697,8 @@
   },
   "comparison": {
     "schema_version": 1,
-    "ours": "/tmp/p76r3/run/out/INVx1.lib",
-    "reference": "/tmp/p76r3/ref/INVBUF_TT.lib",
+    "ours": "scratch/run/out/INVx1.lib",
+    "reference": "scratch/ref/INVBUF_TT.lib",
     "tolerances": {
       "cell_rise": {
         "rel": 0.15,

@@ -25,7 +25,7 @@
   "environment": {
     "engine": "ngspice",
     "engine_version": "46",
-    "ngspice_binary": "/home/ubuntu/.local/bin/ngspice",
+    "ngspice_binary": "ngspice",
     "engine_build": {
       "version_banner": "******\n** ngspice-46 : Circuit level simulation program\n** Compiled with KLU Direct Linear Solver\n** The U. C. Berkeley CAD Group\n** Copyright 1985-1994, Regents of the University of California.\n** Copyright 2001-2025, The ngspice team.\n** Please get your ngspice manual from https://ngspice.sourceforge.io/docs.html\n** Please file your bug-reports at http://ngspice.sourceforge.net/bugrep.html\n** Creation Date: Thu Oct  1 23:51:59 UTC 2026\n******",
       "binary_sha256": "dc859418bedd0478ff439a2d3e2e09f4386a7f4d5e3f17671953e101a000cc60",
@@ -3154,10 +3154,10 @@
       ],
       "diagnostics": [],
       "artifacts": {
-        "log": "/tmp/p76r3/run/INVx1.out/sim/tt_0p700V_25C/ngspice.log",
+        "log": "scratch/run/INVx1.out/sim/tt_0p700V_25C/ngspice.log",
         "raw": null,
         "waveform": null,
-        "deck": "/tmp/p76r3/run/INVx1.out/sim/tt_0p700V_25C/corner.cir"
+        "deck": "scratch/run/INVx1.out/sim/tt_0p700V_25C/corner.cir"
       },
       "monte_carlo": null
     }

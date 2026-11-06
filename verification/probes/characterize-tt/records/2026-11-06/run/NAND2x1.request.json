@@ -49,7 +49,7 @@
  },
  "options": {
   "osdi_preload": [
-   "/tmp/p76r3/sim/osdi/bsimcmg.osdi"
+   "scratch/sim/osdi/bsimcmg.osdi"
   ]
  },
  "output": {

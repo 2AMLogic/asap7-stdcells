@@ -59,6 +59,16 @@ python3 -I "$HERE/compare.py" INVx1 "$SCRATCH/run/out/INVx1.lib" \
 python3 -I "$HERE/compare.py" NAND2x1 "$SCRATCH/run/out/NAND2x1.lib" \
   "$SCRATCH/ref/SIMPLE_TT.lib" "$SCRATCH/run/compare-NAND2x1.md"
 
+# 5b. Evidence copies: host-absolute paths (scratch dir, ngspice binary) are
+#     replaced by relative references with a plain text substitution, so the
+#     records to commit carry no host paths. Raw output stays in $SCRATCH/run.
+mkdir "$SCRATCH/records"
+cp "$SCRATCH"/run/INVx1.request.json "$SCRATCH"/run/INVx1.report.json \
+   "$SCRATCH"/run/INVx1.sim-report.json "$SCRATCH"/run/NAND2x1.request.json \
+   "$SCRATCH"/run/NAND2x1.report.json "$SCRATCH"/run/NAND2x1.sim-report.json \
+   "$SCRATCH/records/"
+python3 -I "$HERE/normalize_paths.py" "$SCRATCH" "$SCRATCH"/records/*.json
+
 # 6. Tool versions.
 {
   echo "klt: $(klt --version)"
