@@ -33,7 +33,7 @@ set is DRC/LVS-clean).
 | DRC | clean against every rule id the pinned deck implements, per cell and per abutment case (see "DRC acceptance") | — | — | The deck is the thing under test. |
 | LVS | every device-bearing cell matches its own CDL through `klt lvs --deck asap7`, fin count included (see "LVS acceptance") | — | — | `NFIN` is compared exactly by the extractor. |
 | Views | GDS, LEF, CDL; structural Liberty (see "Views") | GDS, CDL | timing Liberty (decision 0002) | Integration needs a library view for Yosys; timing numbers need a reproducible characterization. |
-| PVT corners | TT 0.70 V 25 C for any characterization | — | FF 0.77 V 0 C and SS 0.63 V 100 C | The corners the shipped RVT Liberty is characterized at (`nom_voltage`/`nom_temperature` of `asap7sc7p5t_*_RVT_{TT,FF,SS}_nldm.lib.gz`). |
+| PVT corners | TT 0.70 V 25 C for any characterization | — | FF 0.77 V 0 C and SS 0.63 V 100 C for timing Liberty | The corners the shipped RVT Liberty is characterized at (`nom_voltage`/`nom_temperature` of `asap7sc7p5t_*_RVT_{TT,FF,SS}_nldm.lib.gz`). Decision 0011 promotes FF and SS to the corner set of T1 items 5 and 8 and fixes the item-5 margin budget; timing Liberty stays stretch. |
 | Integration design | 8-bit synchronous up-counter with enable, synthesised with Yosys to this library only, placed and routed with OpenROAD (see "Integration design") | cells placed in abutted rows, DRC-clean | a larger design | Needs only DFF, XOR, AND, INV, BUF, TIE from the target set. |
 
 ## Architecture, read from the PDK
