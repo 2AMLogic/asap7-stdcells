@@ -5,7 +5,7 @@
   "tier": null,
   "t1_item_count": 11,
   "build_t1_item_count": 11,
-  "t1_met_count": 7,
+  "t1_met_count": 8,
   "t1_not_applicable_count": 1,
   "source_doc": "manifests/design-evidence-tiers.md",
   "source_doc_content_hash": "sha256:a26b90262320d0fbd32b3f549a02b6300832706041797a559d8bf6bdb62efdc7",
@@ -604,10 +604,557 @@
       "notes": [
         "A `klt pex` citation is only as good as the **device-body bias** of the netlist it ran on (#1983). A device body left on an anonymous, deck-synthesized net has no DC bias path at all, which makes a resimulation of that extracted netlist *physically wrong, not merely imprecise* (`docs/cli/extract.md` \u2192 \"Coverage\") \u2014 the run converges and reports numbers, and those numbers are not comparable to the schematic leg they are being diffed against. A `klt pex` report states the condition in its own `body_bias` block (`docs/cli/pex.md`), and `klt signoff` surfaces it verbatim on this item's citation (`citation.body_bias`). **It does not grade on it**: an item-7 citation whose `body_bias.status` is `\"unbiased\"` still renders `met`, because the condition is a deck-coverage property some PDKs produce on every layout they extract, not a defect this command can adjudicate. So a claim citing item 7 must read that field and state whether its post-layout numbers were measured on a properly-biased netlist \u2014 claimant-enforced, exactly like item 3's DRC-coverage disclosure. The same discipline applies upstream at item 4: `klt lvs`'s `body_verification` block says whether the compare verified the body ties at all, and `\"unchecked\"` (a pre-extracted netlist) is not `\"verified\"`."
       ],
-      "status": "unmet",
-      "reason": "no_evidence",
+      "status": "met",
+      "reason": null,
       "graded_by_build": true,
-      "citation": null
+      "citation": {
+        "file": "verification/pex/records/2026-11-07/AND2x1/tied.json",
+        "command": null,
+        "kind": "pex",
+        "check_status": "pass",
+        "content_hash": "sha256:980f1b52b1f6be933f8e0d079adc93c5ebcd3b897b83e6bc50d6b9534163c700",
+        "input_verified": true,
+        "exit_status": 0,
+        "pex_inputs": [
+          {
+            "role": "reference_netlist",
+            "path": "design/AND2x1_A7S_75t_R.cdl",
+            "sha256": "sha256:c29e9c0418c3ea9a1514d8a5f8abcd662d8adda46b468b0ce8cae7fd910bdebc",
+            "status": "verified"
+          }
+        ],
+        "body_bias": {
+          "status": "tied",
+          "unbiased_device_count": 3,
+          "unbiased_nets": [
+            "\\$8"
+          ]
+        }
+      },
+      "citations_graded": [
+        {
+          "citation": "verification/pex/records/2026-11-07/AND2x1/tied.json",
+          "status": "met",
+          "reason": null
+        },
+        {
+          "citation": "verification/pex/records/2026-11-07/AOI21x1/tied.json",
+          "status": "met",
+          "reason": null
+        },
+        {
+          "citation": "verification/pex/records/2026-11-07/AOI22x1/tied.json",
+          "status": "met",
+          "reason": null
+        },
+        {
+          "citation": "verification/pex/records/2026-11-07/BUFx1/tied.json",
+          "status": "met",
+          "reason": null
+        },
+        {
+          "citation": "verification/pex/records/2026-11-07/DFFHQNx1/tied.json",
+          "status": "met",
+          "reason": null
+        },
+        {
+          "citation": "verification/pex/records/2026-11-07/DHLx1/tied.json",
+          "status": "met",
+          "reason": null
+        },
+        {
+          "citation": "verification/pex/records/2026-11-07/INVx1/tied.json",
+          "status": "met",
+          "reason": null
+        },
+        {
+          "citation": "verification/pex/records/2026-11-07/NAND2x1/tied.json",
+          "status": "met",
+          "reason": null
+        },
+        {
+          "citation": "verification/pex/records/2026-11-07/NAND3x1/tied.json",
+          "status": "met",
+          "reason": null
+        },
+        {
+          "citation": "verification/pex/records/2026-11-07/NOR2x1/tied.json",
+          "status": "met",
+          "reason": null
+        },
+        {
+          "citation": "verification/pex/records/2026-11-07/NOR3x1/tied.json",
+          "status": "met",
+          "reason": null
+        },
+        {
+          "citation": "verification/pex/records/2026-11-07/OAI21x1/tied.json",
+          "status": "met",
+          "reason": null
+        },
+        {
+          "citation": "verification/pex/records/2026-11-07/OAI22x1/tied.json",
+          "status": "met",
+          "reason": null
+        },
+        {
+          "citation": "verification/pex/records/2026-11-07/OR2x1/tied.json",
+          "status": "met",
+          "reason": null
+        },
+        {
+          "citation": "verification/pex/records/2026-11-07/TIEHIx1/tied.json",
+          "status": "met",
+          "reason": null
+        },
+        {
+          "citation": "verification/pex/records/2026-11-07/TIELOx1/tied.json",
+          "status": "met",
+          "reason": null
+        },
+        {
+          "citation": "verification/pex/records/2026-11-07/XNOR2x1/tied.json",
+          "status": "met",
+          "reason": null
+        },
+        {
+          "citation": "verification/pex/records/2026-11-07/XOR2x1/tied.json",
+          "status": "met",
+          "reason": null
+        }
+      ],
+      "citations": [
+        {
+          "file": "verification/pex/records/2026-11-07/AND2x1/tied.json",
+          "command": null,
+          "kind": "pex",
+          "check_status": "pass",
+          "content_hash": "sha256:980f1b52b1f6be933f8e0d079adc93c5ebcd3b897b83e6bc50d6b9534163c700",
+          "input_verified": true,
+          "exit_status": 0,
+          "pex_inputs": [
+            {
+              "role": "reference_netlist",
+              "path": "design/AND2x1_A7S_75t_R.cdl",
+              "sha256": "sha256:c29e9c0418c3ea9a1514d8a5f8abcd662d8adda46b468b0ce8cae7fd910bdebc",
+              "status": "verified"
+            }
+          ],
+          "body_bias": {
+            "status": "tied",
+            "unbiased_device_count": 3,
+            "unbiased_nets": [
+              "\\$8"
+            ]
+          }
+        },
+        {
+          "file": "verification/pex/records/2026-11-07/AOI21x1/tied.json",
+          "command": null,
+          "kind": "pex",
+          "check_status": "pass",
+          "content_hash": "sha256:048cafe06e1fc3bf269ad8a7a57621fc7f3af86a70436816e60f440509e322cc",
+          "input_verified": true,
+          "exit_status": 0,
+          "pex_inputs": [
+            {
+              "role": "reference_netlist",
+              "path": "design/AOI21x1_A7S_75t_R.cdl",
+              "sha256": "sha256:ee48104737393c1c05940eba8b44ad187b3b2562f55b99844fc1538af8bc2644",
+              "status": "verified"
+            }
+          ],
+          "body_bias": {
+            "status": "tied",
+            "unbiased_device_count": 3,
+            "unbiased_nets": [
+              "\\$9"
+            ]
+          }
+        },
+        {
+          "file": "verification/pex/records/2026-11-07/AOI22x1/tied.json",
+          "command": null,
+          "kind": "pex",
+          "check_status": "pass",
+          "content_hash": "sha256:9e1f48a4332104c04f6973d387f4460edefd1fce7e420ac75bb566d6609ddb9d",
+          "input_verified": true,
+          "exit_status": 0,
+          "pex_inputs": [
+            {
+              "role": "reference_netlist",
+              "path": "design/AOI22x1_A7S_75t_R.cdl",
+              "sha256": "sha256:00078a7f7e91045b748902202138adfc59c28c9c674ba186e910901a44aa66f4",
+              "status": "verified"
+            }
+          ],
+          "body_bias": {
+            "status": "tied",
+            "unbiased_device_count": 4,
+            "unbiased_nets": [
+              "\\$9"
+            ]
+          }
+        },
+        {
+          "file": "verification/pex/records/2026-11-07/BUFx1/tied.json",
+          "command": null,
+          "kind": "pex",
+          "check_status": "pass",
+          "content_hash": "sha256:444555a2953ab1ba89c52c4821ea1276d1bb7ab86c67826e6d47977d3152a57c",
+          "input_verified": true,
+          "exit_status": 0,
+          "pex_inputs": [
+            {
+              "role": "reference_netlist",
+              "path": "design/BUFx1_A7S_75t_R.cdl",
+              "sha256": "sha256:44d6c5874ed69c18c1d1df77541ddd4abc2fc7068c3df3ad19a10c75c391e308",
+              "status": "verified"
+            }
+          ],
+          "body_bias": {
+            "status": "tied",
+            "unbiased_device_count": 2,
+            "unbiased_nets": [
+              "\\$6"
+            ]
+          }
+        },
+        {
+          "file": "verification/pex/records/2026-11-07/DFFHQNx1/tied.json",
+          "command": null,
+          "kind": "pex",
+          "check_status": "pass",
+          "content_hash": "sha256:322d0bacae8f6ff78bdd79ac22f49f0e53c854ebdd565d25e0c5bf7c11261442",
+          "input_verified": true,
+          "exit_status": 0,
+          "pex_inputs": [
+            {
+              "role": "reference_netlist",
+              "path": "design/DFFHQNx1_A7S_75t_R.cdl",
+              "sha256": "sha256:a9d8421bf25cb074303a90cb46e9a530f2ccde4df0ee410ca7597b8c6079ddb7",
+              "status": "verified"
+            }
+          ],
+          "body_bias": {
+            "status": "tied",
+            "unbiased_device_count": 9,
+            "unbiased_nets": [
+              "\\$31"
+            ]
+          }
+        },
+        {
+          "file": "verification/pex/records/2026-11-07/DHLx1/tied.json",
+          "command": null,
+          "kind": "pex",
+          "check_status": "pass",
+          "content_hash": "sha256:30c2e805061faf607d45d81d057122ef8f7c9ff2ec0b09cdc4507a8718e23d3a",
+          "input_verified": true,
+          "exit_status": 0,
+          "pex_inputs": [
+            {
+              "role": "reference_netlist",
+              "path": "design/DHLx1_A7S_75t_R.cdl",
+              "sha256": "sha256:7916f18b28164978f3714e731a6bf609c83ce1faedff454cd1ea7038221f1364",
+              "status": "verified"
+            }
+          ],
+          "body_bias": {
+            "status": "tied",
+            "unbiased_device_count": 5,
+            "unbiased_nets": [
+              "\\$20"
+            ]
+          }
+        },
+        {
+          "file": "verification/pex/records/2026-11-07/INVx1/tied.json",
+          "command": null,
+          "kind": "pex",
+          "check_status": "pass",
+          "content_hash": "sha256:be3a49ca6bd1bed2bbfb1c764f0c132a21296fa60dd620e3fd38dbe4217149dd",
+          "input_verified": true,
+          "exit_status": 0,
+          "pex_inputs": [
+            {
+              "role": "reference_netlist",
+              "path": "design/INVx1_A7S_75t_R.cdl",
+              "sha256": "sha256:7f04577a450b9197cf2f1a639f5b480a23130693d7704ddc47f171f1a1a00fa7",
+              "status": "verified"
+            }
+          ],
+          "body_bias": {
+            "status": "tied",
+            "unbiased_device_count": 1,
+            "unbiased_nets": [
+              "\\$5"
+            ]
+          }
+        },
+        {
+          "file": "verification/pex/records/2026-11-07/NAND2x1/tied.json",
+          "command": null,
+          "kind": "pex",
+          "check_status": "pass",
+          "content_hash": "sha256:ca225773ada0018220aafb6c433194ea111e2e1e0ba37a26eccd2f5c979dcf37",
+          "input_verified": true,
+          "exit_status": 0,
+          "pex_inputs": [
+            {
+              "role": "reference_netlist",
+              "path": "design/NAND2x1_A7S_75t_R.cdl",
+              "sha256": "sha256:d6741c767fd57879f0ba0f15adae920795d94c1f94a487f1ad7b7673af07151c",
+              "status": "verified"
+            }
+          ],
+          "body_bias": {
+            "status": "tied",
+            "unbiased_device_count": 2,
+            "unbiased_nets": [
+              "\\$6"
+            ]
+          }
+        },
+        {
+          "file": "verification/pex/records/2026-11-07/NAND3x1/tied.json",
+          "command": null,
+          "kind": "pex",
+          "check_status": "pass",
+          "content_hash": "sha256:4e234bfe8632f1846730b260f4427afafe3a8becb79f752d85802ac0aabbac63",
+          "input_verified": true,
+          "exit_status": 0,
+          "pex_inputs": [
+            {
+              "role": "reference_netlist",
+              "path": "design/NAND3x1_A7S_75t_R.cdl",
+              "sha256": "sha256:252eb323cf45942e76a021861da5773c9a9bb8e06bc58f0c40bc2740794b5814",
+              "status": "verified"
+            }
+          ],
+          "body_bias": {
+            "status": "tied",
+            "unbiased_device_count": 3,
+            "unbiased_nets": [
+              "\\$9"
+            ]
+          }
+        },
+        {
+          "file": "verification/pex/records/2026-11-07/NOR2x1/tied.json",
+          "command": null,
+          "kind": "pex",
+          "check_status": "pass",
+          "content_hash": "sha256:291158a4b51bcdf8a39fbf18ab7318ffb0a312551517e47520801596efa2b053",
+          "input_verified": true,
+          "exit_status": 0,
+          "pex_inputs": [
+            {
+              "role": "reference_netlist",
+              "path": "design/NOR2x1_A7S_75t_R.cdl",
+              "sha256": "sha256:3446e0767e29458055653788cc51c8f15d262bf662bc764760fce42518df36c5",
+              "status": "verified"
+            }
+          ],
+          "body_bias": {
+            "status": "tied",
+            "unbiased_device_count": 2,
+            "unbiased_nets": [
+              "\\$6"
+            ]
+          }
+        },
+        {
+          "file": "verification/pex/records/2026-11-07/NOR3x1/tied.json",
+          "command": null,
+          "kind": "pex",
+          "check_status": "pass",
+          "content_hash": "sha256:ed4fd6acf8eb30f141519ec0b03176e34c069fe3092d7dceeba6461950cbdbae",
+          "input_verified": true,
+          "exit_status": 0,
+          "pex_inputs": [
+            {
+              "role": "reference_netlist",
+              "path": "design/NOR3x1_A7S_75t_R.cdl",
+              "sha256": "sha256:887521358d2dbfce1b48e6c856e5bf65468be72a4b2cfe8351e3da752db0f660",
+              "status": "verified"
+            }
+          ],
+          "body_bias": {
+            "status": "tied",
+            "unbiased_device_count": 3,
+            "unbiased_nets": [
+              "\\$9"
+            ]
+          }
+        },
+        {
+          "file": "verification/pex/records/2026-11-07/OAI21x1/tied.json",
+          "command": null,
+          "kind": "pex",
+          "check_status": "pass",
+          "content_hash": "sha256:91ab784c7b7edce299cf34c5e786cf31a95c119871c0db76292713e6ea5dbc2a",
+          "input_verified": true,
+          "exit_status": 0,
+          "pex_inputs": [
+            {
+              "role": "reference_netlist",
+              "path": "design/OAI21x1_A7S_75t_R.cdl",
+              "sha256": "sha256:81778ccb8638c57b212afb88b4bfc0d42ad616b5e1328fc1a65c2b410b7dcbbf",
+              "status": "verified"
+            }
+          ],
+          "body_bias": {
+            "status": "tied",
+            "unbiased_device_count": 3,
+            "unbiased_nets": [
+              "\\$9"
+            ]
+          }
+        },
+        {
+          "file": "verification/pex/records/2026-11-07/OAI22x1/tied.json",
+          "command": null,
+          "kind": "pex",
+          "check_status": "pass",
+          "content_hash": "sha256:e7697b823a1c28ff1d42f19cfc11761aa398405cf8390d6a51adcc3bb1bad155",
+          "input_verified": true,
+          "exit_status": 0,
+          "pex_inputs": [
+            {
+              "role": "reference_netlist",
+              "path": "design/OAI22x1_A7S_75t_R.cdl",
+              "sha256": "sha256:ea77fb56ae7ccb1f334e72c0e3703f44d233f3d14536e4c5d1ba4b7fc20e38fb",
+              "status": "verified"
+            }
+          ],
+          "body_bias": {
+            "status": "tied",
+            "unbiased_device_count": 4,
+            "unbiased_nets": [
+              "\\$9"
+            ]
+          }
+        },
+        {
+          "file": "verification/pex/records/2026-11-07/OR2x1/tied.json",
+          "command": null,
+          "kind": "pex",
+          "check_status": "pass",
+          "content_hash": "sha256:2f99fc7ce6a28446aeebfdba6f6c9f341da95701e3d971511ce85218fad39835",
+          "input_verified": true,
+          "exit_status": 0,
+          "pex_inputs": [
+            {
+              "role": "reference_netlist",
+              "path": "design/OR2x1_A7S_75t_R.cdl",
+              "sha256": "sha256:e3ac2a19c3587288db6387ba04d8a191e42ecd9ecdfae2852f68599d5f40e056",
+              "status": "verified"
+            }
+          ],
+          "body_bias": {
+            "status": "tied",
+            "unbiased_device_count": 3,
+            "unbiased_nets": [
+              "\\$8"
+            ]
+          }
+        },
+        {
+          "file": "verification/pex/records/2026-11-07/TIEHIx1/tied.json",
+          "command": null,
+          "kind": "pex",
+          "check_status": "pass",
+          "content_hash": "sha256:90b631717968a96fa5a19b55a856f7a54888ea79e0ae345b7970c08df516dba7",
+          "input_verified": true,
+          "exit_status": 0,
+          "pex_inputs": [
+            {
+              "role": "reference_netlist",
+              "path": "design/TIEHIx1_A7S_75t_R.cdl",
+              "sha256": "sha256:bbefc3cb943d5e928d3e6c2655d5d0c8ec78bec6523d958572ef463fd69bfc45",
+              "status": "verified"
+            }
+          ],
+          "body_bias": {
+            "status": "tied",
+            "unbiased_device_count": 1,
+            "unbiased_nets": [
+              "\\$4"
+            ]
+          }
+        },
+        {
+          "file": "verification/pex/records/2026-11-07/TIELOx1/tied.json",
+          "command": null,
+          "kind": "pex",
+          "check_status": "pass",
+          "content_hash": "sha256:8aea407bb2ba6591f9edc3f62966646c50f97fdaaa287e16584329f62481c60b",
+          "input_verified": true,
+          "exit_status": 0,
+          "pex_inputs": [
+            {
+              "role": "reference_netlist",
+              "path": "design/TIELOx1_A7S_75t_R.cdl",
+              "sha256": "sha256:b31af09267fe55917755444d61589f78144ebd0794fc0f2ed0f4ab7d384e4f9f",
+              "status": "verified"
+            }
+          ],
+          "body_bias": {
+            "status": "biased",
+            "unbiased_device_count": 0,
+            "unbiased_nets": []
+          }
+        },
+        {
+          "file": "verification/pex/records/2026-11-07/XNOR2x1/tied.json",
+          "command": null,
+          "kind": "pex",
+          "check_status": "pass",
+          "content_hash": "sha256:291b6a49e9fab3bfae799bb056ecb71ca6c2c0adc28de449db6f18e130ed8976",
+          "input_verified": true,
+          "exit_status": 0,
+          "pex_inputs": [
+            {
+              "role": "reference_netlist",
+              "path": "design/XNOR2x1_A7S_75t_R.cdl",
+              "sha256": "sha256:8af9e840597cd051650f58035415414a875f1df35fe1cc4feed25c8b6b099218",
+              "status": "verified"
+            }
+          ],
+          "body_bias": {
+            "status": "tied",
+            "unbiased_device_count": 6,
+            "unbiased_nets": [
+              "\\$20"
+            ]
+          }
+        },
+        {
+          "file": "verification/pex/records/2026-11-07/XOR2x1/tied.json",
+          "command": null,
+          "kind": "pex",
+          "check_status": "pass",
+          "content_hash": "sha256:2f993a86c7fc67ed58be9324a128a1d22e10f96a668542f24fcf3e7560da8491",
+          "input_verified": true,
+          "exit_status": 0,
+          "pex_inputs": [
+            {
+              "role": "reference_netlist",
+              "path": "design/XOR2x1_A7S_75t_R.cdl",
+              "sha256": "sha256:d8189dec20f0bf7baa0cbafacae2ce121d6ca1c721d6cf927660ae64745faa46",
+              "status": "verified"
+            }
+          ],
+          "body_bias": {
+            "status": "tied",
+            "unbiased_device_count": 6,
+            "unbiased_nets": [
+              "\\$20"
+            ]
+          }
+        }
+      ]
     },
     {
       "tier": "T1",
