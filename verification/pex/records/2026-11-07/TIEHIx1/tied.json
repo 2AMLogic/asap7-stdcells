@@ -1,0 +1,317 @@
+{
+ "schema_version": 2,
+ "status": "pass",
+ "layout": {
+  "path": "layout/TIEHIx1_A7S_75t_R.gds",
+  "scope": "repo"
+ },
+ "netlist": {
+  "path": null,
+  "scope": "external"
+ },
+ "reference_netlist": {
+  "path": "design/TIEHIx1_A7S_75t_R.cdl",
+  "scope": "repo"
+ },
+ "reference_netlist_sha256": "sha256:bbefc3cb943d5e928d3e6c2655d5d0c8ec78bec6523d958572ef463fd69bfc45",
+ "extraction": {
+  "deck": "asap7",
+  "device_count": 1,
+  "net_count": 4,
+  "netlist_sha256": "30fbb3b989395b8bc8a7cb5bc9bc6480a8f3481242b575479297c1b8957cff24",
+  "model": {
+   "capacitance": "net-to-ground for every net's own (non-coupled) area/perimeter, plus net-to-net for the vertical-overlap coupling `coupling` describes below -- a coupled net pair gets a direct capacitor between their two hub nodes, not just capacitors to the deck's ground/substrate net",
+   "coupling": "vertical overlap (crossover) unconditionally -- where one net's conductor on an adjacent metal level sits directly over another *distinct* net's conductor, that overlap area is charged between the two nets instead of to ground (issue #760) -- plus lateral (same-layer, sidewall) coupling, but only for a net pair naming one of the caller's declared `--critical-net` nets (issue #976): facing-edge length within that layer's own minimum-spacing lookback is charged between the two nets, *additively* (not deducted from either net's substrate fringe term, unlike the vertical case -- a known simplification). Any same-layer pair with neither side named `--critical-net`, and fringe shielding in general, are still not modelled",
+   "resistance": "single lumped series resistance per net, distributed as a star across that net's device terminals (issue #592) -- not a per-segment, distributed RC ladder, *unless* `--distributed-rc` names this net via `--critical-net` (issue #977, Epic #709 Phase 2b): then the net's terminals are ordered along their approximate physical spread and its total R/C is broken into a chain of per-segment resistors (segment length proportional to inter-terminal distance) with a ground capacitor at each terminal node (proportional to its adjacent segment length/2), instead of one star hub -- still an approximation (terminal position is a device-placement proxy, not true per-segment routing geometry), but a strictly finer-grained one than the single-hub star",
+   "frequency": "quasi-static -- one frequency-independent R and C per net; no skin effect, no distributed transmission-line behavior"
+  },
+  "critical_nets": [],
+  "distributed_rc": false,
+  "mom_rlc_override": null,
+  "label_layers": null,
+  "device_models": null,
+  "rename_declared_pins": false,
+  "tie_declared_pins": false,
+  "pdk": null,
+  "parasitic_integrity": {
+   "short_threshold_ohm": 1.0,
+   "cap_tolerance": {
+    "absolute_ff": 1e-06,
+    "relative": 1e-09
+   },
+   "max_detail_items": 20,
+   "nets_checked": 3,
+   "nets_with_findings": 0,
+   "open_nets": 0,
+   "island_components": 0,
+   "orphan_nodes": 0,
+   "suspicious_resistors": 0,
+   "short_candidates": 0,
+   "capacitance_mismatches": 0,
+   "nets": [
+    {
+     "net": "H",
+     "net_id": 2,
+     "rc_model": "lumped",
+     "integrity": {
+      "open": {
+       "status": "not_applicable",
+       "reason": "lumped model: terminal legs attach to the hub by construction; no distributed segments to check connectivity over",
+       "disconnected_count": 0,
+       "disconnected_terminals": [],
+       "details_truncated": false
+      },
+      "islands": {
+       "count": 0,
+       "details": [],
+       "details_truncated": false,
+       "reason": null
+      },
+      "orphan_nodes": {
+       "count": 0,
+       "details": [],
+       "details_truncated": false,
+       "reason": null
+      },
+      "suspicious_resistors": {
+       "count": 0,
+       "details": [],
+       "details_truncated": false,
+       "reason": null
+      },
+      "short_candidates": {
+       "count": 0,
+       "details": [],
+       "details_truncated": false,
+       "reason": null
+      },
+      "capacitance": {
+       "status": "pass",
+       "declared_ff": 0.001693,
+       "computed_ff": 0.001693,
+       "delta_ff": 0.0,
+       "reason": null,
+       "tolerance": {
+        "absolute_ff": 1e-06,
+        "relative": 1e-09
+       }
+      }
+     }
+    },
+    {
+     "net": "VDD",
+     "net_id": 1,
+     "rc_model": "lumped",
+     "integrity": {
+      "open": {
+       "status": "not_applicable",
+       "reason": "lumped model: terminal legs attach to the hub by construction; no distributed segments to check connectivity over",
+       "disconnected_count": 0,
+       "disconnected_terminals": [],
+       "details_truncated": false
+      },
+      "islands": {
+       "count": 0,
+       "details": [],
+       "details_truncated": false,
+       "reason": null
+      },
+      "orphan_nodes": {
+       "count": 0,
+       "details": [],
+       "details_truncated": false,
+       "reason": null
+      },
+      "suspicious_resistors": {
+       "count": 0,
+       "details": [],
+       "details_truncated": false,
+       "reason": null
+      },
+      "short_candidates": {
+       "count": 0,
+       "details": [],
+       "details_truncated": false,
+       "reason": null
+      },
+      "capacitance": {
+       "status": "pass",
+       "declared_ff": 0.003386,
+       "computed_ff": 0.003386,
+       "delta_ff": 0.0,
+       "reason": null,
+       "tolerance": {
+        "absolute_ff": 1e-06,
+        "relative": 1e-09
+       }
+      }
+     }
+    },
+    {
+     "net": "VSS",
+     "net_id": 3,
+     "rc_model": "lumped",
+     "integrity": {
+      "open": {
+       "status": "not_applicable",
+       "reason": "lumped model: terminal legs attach to the hub by construction; no distributed segments to check connectivity over",
+       "disconnected_count": 0,
+       "disconnected_terminals": [],
+       "details_truncated": false
+      },
+      "islands": {
+       "count": 0,
+       "details": [],
+       "details_truncated": false,
+       "reason": null
+      },
+      "orphan_nodes": {
+       "count": 0,
+       "details": [],
+       "details_truncated": false,
+       "reason": null
+      },
+      "suspicious_resistors": {
+       "count": 0,
+       "details": [],
+       "details_truncated": false,
+       "reason": null
+      },
+      "short_candidates": {
+       "count": 0,
+       "details": [],
+       "details_truncated": false,
+       "reason": null
+      },
+      "capacitance": {
+       "status": "pass",
+       "declared_ff": 0.004938,
+       "computed_ff": 0.004938,
+       "delta_ff": 0.0,
+       "reason": null,
+       "tolerance": {
+        "absolute_ff": 1e-06,
+        "relative": 1e-09
+       }
+      }
+     }
+    }
+   ]
+  }
+ },
+ "body_bias": {
+  "status": "tied",
+  "unbiased_device_count": 1,
+  "unbiased_nets": [
+   "\\$4"
+  ],
+  "unbiased_pmos_body_nets": [
+   {
+    "device": "$1",
+    "net": "\\$4"
+   }
+  ],
+  "tied": [
+   {
+    "extracted_net": "\\$4",
+    "schematic_net": "VDD",
+    "source": "declared"
+   }
+  ]
+ },
+ "measurement": {
+  "mode": "command",
+  "command": [
+   "python",
+   "-I",
+   "./verification/pex/pex_measure.py",
+   "--cell",
+   "TIEHIx1",
+   "--lib",
+   "scratch/asap7_bsimcmg.lib",
+   "--osdi",
+   "scratch/sim/osdi/bsimcmg.osdi"
+  ],
+  "timeout_s": 1800.0,
+  "sides": {
+   "schematic": {
+    "netlist": {
+     "path": "design/TIEHIx1_A7S_75t_R.cdl",
+     "scope": "repo"
+    },
+    "exit_status": 0,
+    "corner_count": 1,
+    "measurement_names": [
+     "checks_ok"
+    ]
+   },
+   "extracted": {
+    "netlist": {
+     "path": null,
+     "scope": "external"
+    },
+    "exit_status": 0,
+    "corner_count": 1,
+    "measurement_names": [
+     "checks_ok"
+    ]
+   }
+  }
+ },
+ "testbenches": [],
+ "corner_count": 1,
+ "delta": [
+  {
+   "spec_row": "checks_ok",
+   "corner_id": "tt/0.700V/25C",
+   "schematic_value": 2.0,
+   "extracted_value": 2.0,
+   "delta_pct": 0.0,
+   "status": "pass",
+   "schematic_status": "pass",
+   "extracted_status": "pass"
+  }
+ ],
+ "coverage": {
+  "testbenches": 0,
+  "delta_rows": 1,
+  "corners_compared": 1,
+  "schema_version": 1,
+  "known": true,
+  "checked": [
+   "comparison:[0,\"tt/0.700V/25C\",\"checks_ok\"]"
+  ],
+  "skipped": [],
+  "inapplicable": [],
+  "unknown": [],
+  "nothing_checked": false,
+  "nothing_checked_reasons": []
+ },
+ "passed": 1,
+ "failed": 0,
+ "errored": 0,
+ "schematic_failed": 0,
+ "pin_count_mismatch": null,
+ "backend_failure": null,
+ "flat_dut_mismatch": null,
+ "pin_order_mismatch": null,
+ "model_mismatch": null,
+ "flatten_schematic": false,
+ "schematic_flatten": null,
+ "provenance": {
+  "klt_version": "0.9.2.dev247+g6c8de4e4f36a",
+  "klt_git_commit": "6c8de4e4f36a7426c22d691864420e6d46f3f0b9",
+  "klt_reinstall_spec": "klayout-tools @ git+https://github.com/2AMLogic/klayout-tools@6c8de4e4f36a7426c22d691864420e6d46f3f0b9",
+  "klayout_version": "0.30.13",
+  "pdk": null,
+  "deck": {
+   "name": "asap7",
+   "content_hash": "sha256:5c58a50e5f6a9099810b3fde37eaa8d93b0897653cb6597a831baac1f5ebee76",
+   "released": true
+  },
+  "input": {
+   "content_hash": "sha256:90b631717968a96fa5a19b55a856f7a54888ea79e0ae345b7970c08df516dba7",
+   "role": "layout"
+  }
+ }
+}
