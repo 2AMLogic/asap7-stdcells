@@ -1,0 +1,334 @@
+{
+  "schema_version": 1,
+  "status": "error",
+  "request_count": 17,
+  "max_in_flight": 4,
+  "submitted": 17,
+  "refused": 2,
+  "refused_codes": [],
+  "requests": [
+    {
+      "index": 0,
+      "request": "scratch/run/AND2x1.request.json",
+      "status": "pass",
+      "exit_code": 0,
+      "job_id": "klt-sim-d491852f4927",
+      "job_ids": [
+        "klt-sim-d491852f4927"
+      ],
+      "report": "scratch/run/out/AND2x1.request/report.json",
+      "error": null,
+      "shards": [
+        {
+          "job_id": "klt-sim-d491852f4927",
+          "last_state": "done",
+          "interrupted_observations": 0
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "request": "scratch/run/AOI21x1.request.json",
+      "status": "pass",
+      "exit_code": 0,
+      "job_id": "klt-sim-eef9e1280563",
+      "job_ids": [
+        "klt-sim-eef9e1280563"
+      ],
+      "report": "scratch/run/out/AOI21x1.request/report.json",
+      "error": null,
+      "shards": [
+        {
+          "job_id": "klt-sim-eef9e1280563",
+          "last_state": "done",
+          "interrupted_observations": 0
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "request": "scratch/run/AOI22x1.request.json",
+      "status": "error",
+      "exit_code": 4,
+      "job_id": "klt-sim-15dd57961052",
+      "job_ids": [
+        "klt-sim-15dd57961052"
+      ],
+      "report": "scratch/run/out/AOI22x1.request/report.json",
+      "error": null,
+      "shards": [
+        {
+          "job_id": "klt-sim-15dd57961052",
+          "last_state": "failed",
+          "interrupted_observations": 0
+        }
+      ]
+    },
+    {
+      "index": 3,
+      "request": "scratch/run/BUFx1.request.json",
+      "status": "pass",
+      "exit_code": 0,
+      "job_id": "klt-sim-4dcee0c8d38b",
+      "job_ids": [
+        "klt-sim-4dcee0c8d38b"
+      ],
+      "report": "scratch/run/out/BUFx1.request/report.json",
+      "error": null,
+      "shards": [
+        {
+          "job_id": "klt-sim-4dcee0c8d38b",
+          "last_state": "done",
+          "interrupted_observations": 0
+        }
+      ]
+    },
+    {
+      "index": 4,
+      "request": "scratch/run/INVx1.request.json",
+      "status": "pass",
+      "exit_code": 0,
+      "job_id": "klt-sim-bf8340e2cdde",
+      "job_ids": [
+        "klt-sim-bf8340e2cdde"
+      ],
+      "report": "scratch/run/out/INVx1.request/report.json",
+      "error": null,
+      "shards": [
+        {
+          "job_id": "klt-sim-bf8340e2cdde",
+          "last_state": "done",
+          "interrupted_observations": 0
+        }
+      ]
+    },
+    {
+      "index": 5,
+      "request": "scratch/run/INVx1_negctl.request.json",
+      "status": "fail",
+      "exit_code": 3,
+      "job_id": "klt-sim-637e22278a0a",
+      "job_ids": [
+        "klt-sim-637e22278a0a"
+      ],
+      "report": "scratch/run/out/INVx1_negctl.request/report.json",
+      "error": null,
+      "shards": [
+        {
+          "job_id": "klt-sim-637e22278a0a",
+          "last_state": "failed",
+          "interrupted_observations": 0
+        }
+      ]
+    },
+    {
+      "index": 6,
+      "request": "scratch/run/NAND2x1.request.json",
+      "status": "pass",
+      "exit_code": 0,
+      "job_id": "klt-sim-3473da2cce9a",
+      "job_ids": [
+        "klt-sim-3473da2cce9a"
+      ],
+      "report": "scratch/run/out/NAND2x1.request/report.json",
+      "error": null,
+      "shards": [
+        {
+          "job_id": "klt-sim-3473da2cce9a",
+          "last_state": "done",
+          "interrupted_observations": 0
+        }
+      ]
+    },
+    {
+      "index": 7,
+      "request": "scratch/run/NAND3x1.request.json",
+      "status": "pass",
+      "exit_code": 0,
+      "job_id": "klt-sim-b6365eab910f",
+      "job_ids": [
+        "klt-sim-b6365eab910f"
+      ],
+      "report": "scratch/run/out/NAND3x1.request/report.json",
+      "error": null,
+      "shards": [
+        {
+          "job_id": "klt-sim-b6365eab910f",
+          "last_state": "done",
+          "interrupted_observations": 0
+        }
+      ]
+    },
+    {
+      "index": 8,
+      "request": "scratch/run/NOR2x1.request.json",
+      "status": "pass",
+      "exit_code": 0,
+      "job_id": "klt-sim-c421da0f9748",
+      "job_ids": [
+        "klt-sim-c421da0f9748"
+      ],
+      "report": "scratch/run/out/NOR2x1.request/report.json",
+      "error": null,
+      "shards": [
+        {
+          "job_id": "klt-sim-c421da0f9748",
+          "last_state": "done",
+          "interrupted_observations": 0
+        }
+      ]
+    },
+    {
+      "index": 9,
+      "request": "scratch/run/NOR3x1.request.json",
+      "status": "pass",
+      "exit_code": 0,
+      "job_id": "klt-sim-f8c56f3b1a36",
+      "job_ids": [
+        "klt-sim-f8c56f3b1a36"
+      ],
+      "report": "scratch/run/out/NOR3x1.request/report.json",
+      "error": null,
+      "shards": [
+        {
+          "job_id": "klt-sim-f8c56f3b1a36",
+          "last_state": "done",
+          "interrupted_observations": 0
+        }
+      ]
+    },
+    {
+      "index": 10,
+      "request": "scratch/run/OAI21x1.request.json",
+      "status": "pass",
+      "exit_code": 0,
+      "job_id": "klt-sim-6836be2f7a9b",
+      "job_ids": [
+        "klt-sim-6836be2f7a9b"
+      ],
+      "report": "scratch/run/out/OAI21x1.request/report.json",
+      "error": null,
+      "shards": [
+        {
+          "job_id": "klt-sim-6836be2f7a9b",
+          "last_state": "done",
+          "interrupted_observations": 0
+        }
+      ]
+    },
+    {
+      "index": 11,
+      "request": "scratch/run/OAI22x1.request.json",
+      "status": "error",
+      "exit_code": 4,
+      "job_id": "klt-sim-bc5b0408f1d3",
+      "job_ids": [
+        "klt-sim-bc5b0408f1d3"
+      ],
+      "report": "scratch/run/out/OAI22x1.request/report.json",
+      "error": null,
+      "shards": [
+        {
+          "job_id": "klt-sim-bc5b0408f1d3",
+          "last_state": "failed",
+          "interrupted_observations": 0
+        }
+      ]
+    },
+    {
+      "index": 12,
+      "request": "scratch/run/OR2x1.request.json",
+      "status": "pass",
+      "exit_code": 0,
+      "job_id": "klt-sim-4ebb9ee450dd",
+      "job_ids": [
+        "klt-sim-4ebb9ee450dd"
+      ],
+      "report": "scratch/run/out/OR2x1.request/report.json",
+      "error": null,
+      "shards": [
+        {
+          "job_id": "klt-sim-4ebb9ee450dd",
+          "last_state": "done",
+          "interrupted_observations": 0
+        }
+      ]
+    },
+    {
+      "index": 13,
+      "request": "scratch/run/TIEHIx1.request.json",
+      "status": "pass",
+      "exit_code": 0,
+      "job_id": "klt-sim-4f1f8e11010d",
+      "job_ids": [
+        "klt-sim-4f1f8e11010d"
+      ],
+      "report": "scratch/run/out/TIEHIx1.request/report.json",
+      "error": null,
+      "shards": [
+        {
+          "job_id": "klt-sim-4f1f8e11010d",
+          "last_state": "done",
+          "interrupted_observations": 0
+        }
+      ]
+    },
+    {
+      "index": 14,
+      "request": "scratch/run/TIELOx1.request.json",
+      "status": "pass",
+      "exit_code": 0,
+      "job_id": "klt-sim-6bfe234c5923",
+      "job_ids": [
+        "klt-sim-6bfe234c5923"
+      ],
+      "report": "scratch/run/out/TIELOx1.request/report.json",
+      "error": null,
+      "shards": [
+        {
+          "job_id": "klt-sim-6bfe234c5923",
+          "last_state": "done",
+          "interrupted_observations": 0
+        }
+      ]
+    },
+    {
+      "index": 15,
+      "request": "scratch/run/XNOR2x1.request.json",
+      "status": "pass",
+      "exit_code": 0,
+      "job_id": "klt-sim-344854ed25cd",
+      "job_ids": [
+        "klt-sim-344854ed25cd"
+      ],
+      "report": "scratch/run/out/XNOR2x1.request/report.json",
+      "error": null,
+      "shards": [
+        {
+          "job_id": "klt-sim-344854ed25cd",
+          "last_state": "done",
+          "interrupted_observations": 0
+        }
+      ]
+    },
+    {
+      "index": 16,
+      "request": "scratch/run/XOR2x1.request.json",
+      "status": "pass",
+      "exit_code": 0,
+      "job_id": "klt-sim-dd99a1d76c60",
+      "job_ids": [
+        "klt-sim-dd99a1d76c60"
+      ],
+      "report": "scratch/run/out/XOR2x1.request/report.json",
+      "error": null,
+      "shards": [
+        {
+          "job_id": "klt-sim-dd99a1d76c60",
+          "last_state": "done",
+          "interrupted_observations": 0
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+* TIELOx1 corner testbench (decision 0011); a predictive-model run, not a measured part.
+.include TIELOx1.osdi.spice
+vsup vdd 0 DC 0.7
+Xdut y vdd 0 0 TIELOx1_A7S_75t_R
+Cload y 0 1.440000e-15
+Bylvl ylvl 0 V='v(y)/v(vdd)'
+Bymid ymid 0 V='v(y)-0.5*v(vdd)'

@@ -1,0 +1,10 @@
+* NOR3x1 corner testbench (decision 0011); a predictive-model run, not a measured part.
+.include NOR3x1.osdi.spice
+vsup vdd 0 DC 0.7
+Xdut in_a in_b in_c vdd 0 y 0 NOR3x1_A7S_75t_R
+Cload y 0 1.440000e-15
+Bylvl ylvl 0 V='v(y)/v(vdd)'
+Bymid ymid 0 V='v(y)-0.5*v(vdd)'
+Bimid_a imid_a 0 V='v(in_a)-0.5*v(vdd)'
+Bimid_b imid_b 0 V='v(in_b)-0.5*v(vdd)'
+Bimid_c imid_c 0 V='v(in_c)-0.5*v(vdd)'

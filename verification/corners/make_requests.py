@@ -12,8 +12,9 @@ Testbench: the inputs walk an Eulerian circuit of the directed n-cube, so every
 single-input transition from every input vector happens exactly once. After each
 step, `lvl_<k>` is Y / VDD at the end of the step (graded against the truth
 table) and, when Y is expected to change, `tpd_<k>` is the input-50% to
-Y-50% delay (graded against the budget). The 50% thresholds are `par()`
-expressions of the corner's own supply, so one request carries all three corners.
+Y-50% delay (graded against the budget). The levels and 50% thresholds are
+behavioural-source node voltages (Y/VDD, Y-VDD/2) of the corner's own supply, so
+one request carries all three corners.
 
 Negative control: the same generation for INVx1 with the nmos gate cut from the
 input (`INVx1_negctl`), so Y cannot fall; the sweep must flag the A=1 level
@@ -28,8 +29,8 @@ import re
 import sys
 from pathlib import Path
 
-from klayout_tools import asap7_bsimcmg
-from klayout_tools.extract import run_extract
+# klayout_tools is imported in main() so the pure parts (euler_walk, build) can
+# be self-tested without the klt tool's Python.
 
 # --- constants fixed by decision 0011 --------------------------------------
 CORNERS = [  # (process section, VDD volts, temperature C)
@@ -125,7 +126,11 @@ def build(base, inputs, out, func, ours, subckt_ports, negctl):
         f"{SUPPLY_KEY} vdd 0 DC 0.7",
         f"Xdut {inst} {ours}",
         f"Cload y 0 {fmt(LOAD_F)}",
-    ]
+        # Supply-relative views as node voltages: ngspice allows at most 99
+        # par() calls per input file, which the 4-input cells exceed.
+        "Bylvl ylvl 0 V='v(y)/v(vdd)'",
+        "Bymid ymid 0 V='v(y)-0.5*v(vdd)'",
+    ] + [f"Bimid_{p.lower()} imid_{p.lower()} 0 V='v(in_{p.lower()})-0.5*v(vdd)'" for p in inputs]
     stim, meas = [], []
     vec = {p: bool((walk[0] >> i) & 1) for i, p in enumerate(inputs)}
     events = {p: [] for p in inputs}
@@ -150,7 +155,7 @@ def build(base, inputs, out, func, ours, subckt_ports, negctl):
     def level_card(name, at, expected):
         lim = {"min": HIGH_FRAC} if expected else {"max": LOW_FRAC}
         meas.append({"name": name, "unit": "VDD", "limits": lim,
-                     "spice": f".meas tran {name} FIND par('v(y)/v(vdd)') AT={fmt(at)}"})
+                     "spice": f".meas tran {name} FIND v(ylvl) AT={fmt(at)}"})
 
     last = max(len(walk) - 1, 0)
     if n:
@@ -165,8 +170,8 @@ def build(base, inputs, out, func, ours, subckt_ports, negctl):
             td = fmt(t(k) - 1e-12)
             meas.append({
                 "name": f"tpd_{k:03d}", "unit": "s", "limits": {"max": BUDGET_S},
-                "spice": (f".meas tran tpd_{k:03d} TRIG par('v(in_{pin.lower()})-0.5*v(vdd)') "
-                          f"VAL=0 {idir}=1 TD={td} TARG par('v(y)-0.5*v(vdd)') VAL=0 {ydir}=1 TD={td}"),
+                "spice": (f".meas tran tpd_{k:03d} TRIG v(imid_{pin.lower()}) "
+                          f"VAL=0 {idir}=1 TD={td} TARG v(ymid) VAL=0 {ydir}=1 TD={td}"),
             })
     tstop = (SETTLE_S + last * STEP_S) if n else 200e-12
     return "\n".join(tb) + "\n", stim, meas, tstop, arcs, exp
@@ -185,6 +190,9 @@ def exclude_rules():
 
 
 def main(argv):
+    from klayout_tools import asap7_bsimcmg
+    from klayout_tools.extract import run_extract
+
     layout, cards, osdi, work = argv[:4]
     only = argv[4:]
     layout, cards, work = Path(layout), Path(cards), Path(work)

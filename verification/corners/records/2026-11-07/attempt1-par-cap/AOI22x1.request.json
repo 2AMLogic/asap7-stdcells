@@ -1,0 +1,1320 @@
+{
+ "netlist": "AOI22x1.tb.spice",
+ "engine": "ngspice",
+ "models": {
+  "lib": "asap7_bsimcmg.lib"
+ },
+ "corners": {
+  "process": [
+   "tt",
+   "ff",
+   "ss"
+  ],
+  "supply_v": {
+   "vsup": [
+    0.63,
+    0.7,
+    0.77
+   ]
+  },
+  "temperature_c": [
+   0,
+   25,
+   100
+  ]
+ },
+ "exclude": [
+  {
+   "process": "tt",
+   "supply_v": {
+    "vsup": 0.7
+   },
+   "temperature_c": 0
+  },
+  {
+   "process": "tt",
+   "supply_v": {
+    "vsup": 0.7
+   },
+   "temperature_c": 100
+  },
+  {
+   "process": "tt",
+   "supply_v": {
+    "vsup": 0.77
+   },
+   "temperature_c": 25
+  },
+  {
+   "process": "tt",
+   "supply_v": {
+    "vsup": 0.77
+   },
+   "temperature_c": 0
+  },
+  {
+   "process": "tt",
+   "supply_v": {
+    "vsup": 0.77
+   },
+   "temperature_c": 100
+  },
+  {
+   "process": "tt",
+   "supply_v": {
+    "vsup": 0.63
+   },
+   "temperature_c": 25
+  },
+  {
+   "process": "tt",
+   "supply_v": {
+    "vsup": 0.63
+   },
+   "temperature_c": 0
+  },
+  {
+   "process": "tt",
+   "supply_v": {
+    "vsup": 0.63
+   },
+   "temperature_c": 100
+  },
+  {
+   "process": "ff",
+   "supply_v": {
+    "vsup": 0.7
+   },
+   "temperature_c": 25
+  },
+  {
+   "process": "ff",
+   "supply_v": {
+    "vsup": 0.7
+   },
+   "temperature_c": 0
+  },
+  {
+   "process": "ff",
+   "supply_v": {
+    "vsup": 0.7
+   },
+   "temperature_c": 100
+  },
+  {
+   "process": "ff",
+   "supply_v": {
+    "vsup": 0.77
+   },
+   "temperature_c": 25
+  },
+  {
+   "process": "ff",
+   "supply_v": {
+    "vsup": 0.77
+   },
+   "temperature_c": 100
+  },
+  {
+   "process": "ff",
+   "supply_v": {
+    "vsup": 0.63
+   },
+   "temperature_c": 25
+  },
+  {
+   "process": "ff",
+   "supply_v": {
+    "vsup": 0.63
+   },
+   "temperature_c": 0
+  },
+  {
+   "process": "ff",
+   "supply_v": {
+    "vsup": 0.63
+   },
+   "temperature_c": 100
+  },
+  {
+   "process": "ss",
+   "supply_v": {
+    "vsup": 0.7
+   },
+   "temperature_c": 25
+  },
+  {
+   "process": "ss",
+   "supply_v": {
+    "vsup": 0.7
+   },
+   "temperature_c": 0
+  },
+  {
+   "process": "ss",
+   "supply_v": {
+    "vsup": 0.7
+   },
+   "temperature_c": 100
+  },
+  {
+   "process": "ss",
+   "supply_v": {
+    "vsup": 0.77
+   },
+   "temperature_c": 25
+  },
+  {
+   "process": "ss",
+   "supply_v": {
+    "vsup": 0.77
+   },
+   "temperature_c": 0
+  },
+  {
+   "process": "ss",
+   "supply_v": {
+    "vsup": 0.77
+   },
+   "temperature_c": 100
+  },
+  {
+   "process": "ss",
+   "supply_v": {
+    "vsup": 0.63
+   },
+   "temperature_c": 25
+  },
+  {
+   "process": "ss",
+   "supply_v": {
+    "vsup": 0.63
+   },
+   "temperature_c": 0
+  }
+ ],
+ "analysis": {
+  "kind": "tran",
+  "args": "1p 1.650000e-08"
+ },
+ "stimulus": {
+  "signals": [
+   {
+    "source": "Va1",
+    "node": "in_a1",
+    "ref": "0",
+    "initial": 0.0,
+    "rise_s": 1e-11,
+    "fall_s": 1e-11,
+    "events": [
+     {
+      "t_s": 5e-10,
+      "level": {
+       "frac_of": "vsup",
+       "fraction": 1.0
+      }
+     },
+     {
+      "t_s": 7.500000000000001e-10,
+      "level": 0.0
+     },
+     {
+      "t_s": 1.25e-09,
+      "level": {
+       "frac_of": "vsup",
+       "fraction": 1.0
+      }
+     },
+     {
+      "t_s": 1.5000000000000002e-09,
+      "level": 0.0
+     },
+     {
+      "t_s": 2.2500000000000003e-09,
+      "level": {
+       "frac_of": "vsup",
+       "fraction": 1.0
+      }
+     },
+     {
+      "t_s": 2.5e-09,
+      "level": 0.0
+     },
+     {
+      "t_s": 3e-09,
+      "level": {
+       "frac_of": "vsup",
+       "fraction": 1.0
+      }
+     },
+     {
+      "t_s": 3.25e-09,
+      "level": 0.0
+     },
+     {
+      "t_s": 4.250000000000001e-09,
+      "level": {
+       "frac_of": "vsup",
+       "fraction": 1.0
+      }
+     },
+     {
+      "t_s": 4.500000000000001e-09,
+      "level": 0.0
+     },
+     {
+      "t_s": 5.000000000000001e-09,
+      "level": {
+       "frac_of": "vsup",
+       "fraction": 1.0
+      }
+     },
+     {
+      "t_s": 5.250000000000001e-09,
+      "level": 0.0
+     },
+     {
+      "t_s": 6.000000000000001e-09,
+      "level": {
+       "frac_of": "vsup",
+       "fraction": 1.0
+      }
+     },
+     {
+      "t_s": 6.2500000000000005e-09,
+      "level": 0.0
+     },
+     {
+      "t_s": 6.750000000000001e-09,
+      "level": {
+       "frac_of": "vsup",
+       "fraction": 1.0
+      }
+     },
+     {
+      "t_s": 1.3e-08,
+      "level": 0.0
+     }
+    ]
+   },
+   {
+    "source": "Va2",
+    "node": "in_a2",
+    "ref": "0",
+    "initial": 0.0,
+    "rise_s": 1e-11,
+    "fall_s": 1e-11,
+    "events": [
+     {
+      "t_s": 1e-09,
+      "level": {
+       "frac_of": "vsup",
+       "fraction": 1.0
+      }
+     },
+     {
+      "t_s": 1.75e-09,
+      "level": 0.0
+     },
+     {
+      "t_s": 2.7500000000000002e-09,
+      "level": {
+       "frac_of": "vsup",
+       "fraction": 1.0
+      }
+     },
+     {
+      "t_s": 3.5000000000000003e-09,
+      "level": 0.0
+     },
+     {
+      "t_s": 4.75e-09,
+      "level": {
+       "frac_of": "vsup",
+       "fraction": 1.0
+      }
+     },
+     {
+      "t_s": 5.5000000000000004e-09,
+      "level": 0.0
+     },
+     {
+      "t_s": 6.500000000000001e-09,
+      "level": {
+       "frac_of": "vsup",
+       "fraction": 1.0
+      }
+     },
+     {
+      "t_s": 7.000000000000001e-09,
+      "level": 0.0
+     },
+     {
+      "t_s": 7.25e-09,
+      "level": {
+       "frac_of": "vsup",
+       "fraction": 1.0
+      }
+     },
+     {
+      "t_s": 7.75e-09,
+      "level": 0.0
+     },
+     {
+      "t_s": 8e-09,
+      "level": {
+       "frac_of": "vsup",
+       "fraction": 1.0
+      }
+     },
+     {
+      "t_s": 8.75e-09,
+      "level": 0.0
+     },
+     {
+      "t_s": 9e-09,
+      "level": {
+       "frac_of": "vsup",
+       "fraction": 1.0
+      }
+     },
+     {
+      "t_s": 9.5e-09,
+      "level": 0.0
+     },
+     {
+      "t_s": 1.1750000000000001e-08,
+      "level": {
+       "frac_of": "vsup",
+       "fraction": 1.0
+      }
+     },
+     {
+      "t_s": 1.525e-08,
+      "level": 0.0
+     }
+    ]
+   },
+   {
+    "source": "Vb1",
+    "node": "in_b1",
+    "ref": "0",
+    "initial": 0.0,
+    "rise_s": 1e-11,
+    "fall_s": 1e-11,
+    "events": [
+     {
+      "t_s": 2e-09,
+      "level": {
+       "frac_of": "vsup",
+       "fraction": 1.0
+      }
+     },
+     {
+      "t_s": 3.7500000000000005e-09,
+      "level": 0.0
+     },
+     {
+      "t_s": 5.750000000000001e-09,
+      "level": {
+       "frac_of": "vsup",
+       "fraction": 1.0
+      }
+     },
+     {
+      "t_s": 7.500000000000001e-09,
+      "level": 0.0
+     },
+     {
+      "t_s": 8.25e-09,
+      "level": {
+       "frac_of": "vsup",
+       "fraction": 1.0
+      }
+     },
+     {
+      "t_s": 9.25e-09,
+      "level": 0.0
+     },
+     {
+      "t_s": 9.75e-09,
+      "level": {
+       "frac_of": "vsup",
+       "fraction": 1.0
+      }
+     },
+     {
+      "t_s": 1e-08,
+      "level": 0.0
+     },
+     {
+      "t_s": 1.05e-08,
+      "level": {
+       "frac_of": "vsup",
+       "fraction": 1.0
+      }
+     },
+     {
+      "t_s": 1.125e-08,
+      "level": 0.0
+     },
+     {
+      "t_s": 1.2500000000000001e-08,
+      "level": {
+       "frac_of": "vsup",
+       "fraction": 1.0
+      }
+     },
+     {
+      "t_s": 1.325e-08,
+      "level": 0.0
+     },
+     {
+      "t_s": 1.35e-08,
+      "level": {
+       "frac_of": "vsup",
+       "fraction": 1.0
+      }
+     },
+     {
+      "t_s": 1.4e-08,
+      "level": 0.0
+     },
+     {
+      "t_s": 1.475e-08,
+      "level": {
+       "frac_of": "vsup",
+       "fraction": 1.0
+      }
+     },
+     {
+      "t_s": 1.6e-08,
+      "level": 0.0
+     }
+    ]
+   },
+   {
+    "source": "Vb2",
+    "node": "in_b2",
+    "ref": "0",
+    "initial": 0.0,
+    "rise_s": 1e-11,
+    "fall_s": 1e-11,
+    "events": [
+     {
+      "t_s": 4e-09,
+      "level": {
+       "frac_of": "vsup",
+       "fraction": 1.0
+      }
+     },
+     {
+      "t_s": 8.5e-09,
+      "level": 0.0
+     },
+     {
+      "t_s": 1.025e-08,
+      "level": {
+       "frac_of": "vsup",
+       "fraction": 1.0
+      }
+     },
+     {
+      "t_s": 1.075e-08,
+      "level": 0.0
+     },
+     {
+      "t_s": 1.1000000000000001e-08,
+      "level": {
+       "frac_of": "vsup",
+       "fraction": 1.0
+      }
+     },
+     {
+      "t_s": 1.15e-08,
+      "level": 0.0
+     },
+     {
+      "t_s": 1.2e-08,
+      "level": {
+       "frac_of": "vsup",
+       "fraction": 1.0
+      }
+     },
+     {
+      "t_s": 1.225e-08,
+      "level": 0.0
+     },
+     {
+      "t_s": 1.275e-08,
+      "level": {
+       "frac_of": "vsup",
+       "fraction": 1.0
+      }
+     },
+     {
+      "t_s": 1.375e-08,
+      "level": 0.0
+     },
+     {
+      "t_s": 1.425e-08,
+      "level": {
+       "frac_of": "vsup",
+       "fraction": 1.0
+      }
+     },
+     {
+      "t_s": 1.45e-08,
+      "level": 0.0
+     },
+     {
+      "t_s": 1.5000000000000002e-08,
+      "level": {
+       "frac_of": "vsup",
+       "fraction": 1.0
+      }
+     },
+     {
+      "t_s": 1.5500000000000003e-08,
+      "level": 0.0
+     },
+     {
+      "t_s": 1.5750000000000002e-08,
+      "level": {
+       "frac_of": "vsup",
+       "fraction": 1.0
+      }
+     },
+     {
+      "t_s": 1.6250000000000003e-08,
+      "level": 0.0
+     }
+    ]
+   }
+  ]
+ },
+ "measurements": [
+  {
+   "name": "lvl_000",
+   "unit": "VDD",
+   "limits": {
+    "min": 0.9
+   },
+   "spice": ".meas tran lvl_000 FIND par('v(y)/v(vdd)') AT=4.900000e-10"
+  },
+  {
+   "name": "lvl_001",
+   "unit": "VDD",
+   "limits": {
+    "min": 0.9
+   },
+   "spice": ".meas tran lvl_001 FIND par('v(y)/v(vdd)') AT=7.400000e-10"
+  },
+  {
+   "name": "lvl_002",
+   "unit": "VDD",
+   "limits": {
+    "min": 0.9
+   },
+   "spice": ".meas tran lvl_002 FIND par('v(y)/v(vdd)') AT=9.900000e-10"
+  },
+  {
+   "name": "lvl_003",
+   "unit": "VDD",
+   "limits": {
+    "min": 0.9
+   },
+   "spice": ".meas tran lvl_003 FIND par('v(y)/v(vdd)') AT=1.240000e-09"
+  },
+  {
+   "name": "lvl_004",
+   "unit": "VDD",
+   "limits": {
+    "max": 0.1
+   },
+   "spice": ".meas tran lvl_004 FIND par('v(y)/v(vdd)') AT=1.490000e-09"
+  },
+  {
+   "name": "tpd_004",
+   "unit": "s",
+   "limits": {
+    "max": 9e-11
+   },
+   "spice": ".meas tran tpd_004 TRIG par('v(in_a1)-0.5*v(vdd)') VAL=0 RISE=1 TD=1.249000e-09 TARG par('v(y)-0.5*v(vdd)') VAL=0 FALL=1 TD=1.249000e-09"
+  },
+  {
+   "name": "lvl_005",
+   "unit": "VDD",
+   "limits": {
+    "min": 0.9
+   },
+   "spice": ".meas tran lvl_005 FIND par('v(y)/v(vdd)') AT=1.740000e-09"
+  },
+  {
+   "name": "tpd_005",
+   "unit": "s",
+   "limits": {
+    "max": 9e-11
+   },
+   "spice": ".meas tran tpd_005 TRIG par('v(in_a1)-0.5*v(vdd)') VAL=0 FALL=1 TD=1.499000e-09 TARG par('v(y)-0.5*v(vdd)') VAL=0 RISE=1 TD=1.499000e-09"
+  },
+  {
+   "name": "lvl_006",
+   "unit": "VDD",
+   "limits": {
+    "min": 0.9
+   },
+   "spice": ".meas tran lvl_006 FIND par('v(y)/v(vdd)') AT=1.990000e-09"
+  },
+  {
+   "name": "lvl_007",
+   "unit": "VDD",
+   "limits": {
+    "min": 0.9
+   },
+   "spice": ".meas tran lvl_007 FIND par('v(y)/v(vdd)') AT=2.240000e-09"
+  },
+  {
+   "name": "lvl_008",
+   "unit": "VDD",
+   "limits": {
+    "min": 0.9
+   },
+   "spice": ".meas tran lvl_008 FIND par('v(y)/v(vdd)') AT=2.490000e-09"
+  },
+  {
+   "name": "lvl_009",
+   "unit": "VDD",
+   "limits": {
+    "min": 0.9
+   },
+   "spice": ".meas tran lvl_009 FIND par('v(y)/v(vdd)') AT=2.740000e-09"
+  },
+  {
+   "name": "lvl_010",
+   "unit": "VDD",
+   "limits": {
+    "min": 0.9
+   },
+   "spice": ".meas tran lvl_010 FIND par('v(y)/v(vdd)') AT=2.990000e-09"
+  },
+  {
+   "name": "lvl_011",
+   "unit": "VDD",
+   "limits": {
+    "max": 0.1
+   },
+   "spice": ".meas tran lvl_011 FIND par('v(y)/v(vdd)') AT=3.240000e-09"
+  },
+  {
+   "name": "tpd_011",
+   "unit": "s",
+   "limits": {
+    "max": 9e-11
+   },
+   "spice": ".meas tran tpd_011 TRIG par('v(in_a1)-0.5*v(vdd)') VAL=0 RISE=1 TD=2.999000e-09 TARG par('v(y)-0.5*v(vdd)') VAL=0 FALL=1 TD=2.999000e-09"
+  },
+  {
+   "name": "lvl_012",
+   "unit": "VDD",
+   "limits": {
+    "min": 0.9
+   },
+   "spice": ".meas tran lvl_012 FIND par('v(y)/v(vdd)') AT=3.490000e-09"
+  },
+  {
+   "name": "tpd_012",
+   "unit": "s",
+   "limits": {
+    "max": 9e-11
+   },
+   "spice": ".meas tran tpd_012 TRIG par('v(in_a1)-0.5*v(vdd)') VAL=0 FALL=1 TD=3.249000e-09 TARG par('v(y)-0.5*v(vdd)') VAL=0 RISE=1 TD=3.249000e-09"
+  },
+  {
+   "name": "lvl_013",
+   "unit": "VDD",
+   "limits": {
+    "min": 0.9
+   },
+   "spice": ".meas tran lvl_013 FIND par('v(y)/v(vdd)') AT=3.740000e-09"
+  },
+  {
+   "name": "lvl_014",
+   "unit": "VDD",
+   "limits": {
+    "min": 0.9
+   },
+   "spice": ".meas tran lvl_014 FIND par('v(y)/v(vdd)') AT=3.990000e-09"
+  },
+  {
+   "name": "lvl_015",
+   "unit": "VDD",
+   "limits": {
+    "min": 0.9
+   },
+   "spice": ".meas tran lvl_015 FIND par('v(y)/v(vdd)') AT=4.240000e-09"
+  },
+  {
+   "name": "lvl_016",
+   "unit": "VDD",
+   "limits": {
+    "min": 0.9
+   },
+   "spice": ".meas tran lvl_016 FIND par('v(y)/v(vdd)') AT=4.490000e-09"
+  },
+  {
+   "name": "lvl_017",
+   "unit": "VDD",
+   "limits": {
+    "min": 0.9
+   },
+   "spice": ".meas tran lvl_017 FIND par('v(y)/v(vdd)') AT=4.740000e-09"
+  },
+  {
+   "name": "lvl_018",
+   "unit": "VDD",
+   "limits": {
+    "min": 0.9
+   },
+   "spice": ".meas tran lvl_018 FIND par('v(y)/v(vdd)') AT=4.990000e-09"
+  },
+  {
+   "name": "lvl_019",
+   "unit": "VDD",
+   "limits": {
+    "max": 0.1
+   },
+   "spice": ".meas tran lvl_019 FIND par('v(y)/v(vdd)') AT=5.240000e-09"
+  },
+  {
+   "name": "tpd_019",
+   "unit": "s",
+   "limits": {
+    "max": 9e-11
+   },
+   "spice": ".meas tran tpd_019 TRIG par('v(in_a1)-0.5*v(vdd)') VAL=0 RISE=1 TD=4.999000e-09 TARG par('v(y)-0.5*v(vdd)') VAL=0 FALL=1 TD=4.999000e-09"
+  },
+  {
+   "name": "lvl_020",
+   "unit": "VDD",
+   "limits": {
+    "min": 0.9
+   },
+   "spice": ".meas tran lvl_020 FIND par('v(y)/v(vdd)') AT=5.490000e-09"
+  },
+  {
+   "name": "tpd_020",
+   "unit": "s",
+   "limits": {
+    "max": 9e-11
+   },
+   "spice": ".meas tran tpd_020 TRIG par('v(in_a1)-0.5*v(vdd)') VAL=0 FALL=1 TD=5.249000e-09 TARG par('v(y)-0.5*v(vdd)') VAL=0 RISE=1 TD=5.249000e-09"
+  },
+  {
+   "name": "lvl_021",
+   "unit": "VDD",
+   "limits": {
+    "min": 0.9
+   },
+   "spice": ".meas tran lvl_021 FIND par('v(y)/v(vdd)') AT=5.740000e-09"
+  },
+  {
+   "name": "lvl_022",
+   "unit": "VDD",
+   "limits": {
+    "max": 0.1
+   },
+   "spice": ".meas tran lvl_022 FIND par('v(y)/v(vdd)') AT=5.990000e-09"
+  },
+  {
+   "name": "tpd_022",
+   "unit": "s",
+   "limits": {
+    "max": 9e-11
+   },
+   "spice": ".meas tran tpd_022 TRIG par('v(in_b1)-0.5*v(vdd)') VAL=0 RISE=1 TD=5.749000e-09 TARG par('v(y)-0.5*v(vdd)') VAL=0 FALL=1 TD=5.749000e-09"
+  },
+  {
+   "name": "lvl_023",
+   "unit": "VDD",
+   "limits": {
+    "max": 0.1
+   },
+   "spice": ".meas tran lvl_023 FIND par('v(y)/v(vdd)') AT=6.240000e-09"
+  },
+  {
+   "name": "lvl_024",
+   "unit": "VDD",
+   "limits": {
+    "max": 0.1
+   },
+   "spice": ".meas tran lvl_024 FIND par('v(y)/v(vdd)') AT=6.490000e-09"
+  },
+  {
+   "name": "lvl_025",
+   "unit": "VDD",
+   "limits": {
+    "max": 0.1
+   },
+   "spice": ".meas tran lvl_025 FIND par('v(y)/v(vdd)') AT=6.740000e-09"
+  },
+  {
+   "name": "lvl_026",
+   "unit": "VDD",
+   "limits": {
+    "max": 0.1
+   },
+   "spice": ".meas tran lvl_026 FIND par('v(y)/v(vdd)') AT=6.990000e-09"
+  },
+  {
+   "name": "lvl_027",
+   "unit": "VDD",
+   "limits": {
+    "max": 0.1
+   },
+   "spice": ".meas tran lvl_027 FIND par('v(y)/v(vdd)') AT=7.240000e-09"
+  },
+  {
+   "name": "lvl_028",
+   "unit": "VDD",
+   "limits": {
+    "max": 0.1
+   },
+   "spice": ".meas tran lvl_028 FIND par('v(y)/v(vdd)') AT=7.490000e-09"
+  },
+  {
+   "name": "lvl_029",
+   "unit": "VDD",
+   "limits": {
+    "max": 0.1
+   },
+   "spice": ".meas tran lvl_029 FIND par('v(y)/v(vdd)') AT=7.740000e-09"
+  },
+  {
+   "name": "lvl_030",
+   "unit": "VDD",
+   "limits": {
+    "min": 0.9
+   },
+   "spice": ".meas tran lvl_030 FIND par('v(y)/v(vdd)') AT=7.990000e-09"
+  },
+  {
+   "name": "tpd_030",
+   "unit": "s",
+   "limits": {
+    "max": 9e-11
+   },
+   "spice": ".meas tran tpd_030 TRIG par('v(in_a2)-0.5*v(vdd)') VAL=0 FALL=1 TD=7.749000e-09 TARG par('v(y)-0.5*v(vdd)') VAL=0 RISE=1 TD=7.749000e-09"
+  },
+  {
+   "name": "lvl_031",
+   "unit": "VDD",
+   "limits": {
+    "max": 0.1
+   },
+   "spice": ".meas tran lvl_031 FIND par('v(y)/v(vdd)') AT=8.240000e-09"
+  },
+  {
+   "name": "tpd_031",
+   "unit": "s",
+   "limits": {
+    "max": 9e-11
+   },
+   "spice": ".meas tran tpd_031 TRIG par('v(in_a2)-0.5*v(vdd)') VAL=0 RISE=1 TD=7.999000e-09 TARG par('v(y)-0.5*v(vdd)') VAL=0 FALL=1 TD=7.999000e-09"
+  },
+  {
+   "name": "lvl_032",
+   "unit": "VDD",
+   "limits": {
+    "max": 0.1
+   },
+   "spice": ".meas tran lvl_032 FIND par('v(y)/v(vdd)') AT=8.490000e-09"
+  },
+  {
+   "name": "lvl_033",
+   "unit": "VDD",
+   "limits": {
+    "max": 0.1
+   },
+   "spice": ".meas tran lvl_033 FIND par('v(y)/v(vdd)') AT=8.740000e-09"
+  },
+  {
+   "name": "lvl_034",
+   "unit": "VDD",
+   "limits": {
+    "min": 0.9
+   },
+   "spice": ".meas tran lvl_034 FIND par('v(y)/v(vdd)') AT=8.990000e-09"
+  },
+  {
+   "name": "tpd_034",
+   "unit": "s",
+   "limits": {
+    "max": 9e-11
+   },
+   "spice": ".meas tran tpd_034 TRIG par('v(in_a2)-0.5*v(vdd)') VAL=0 FALL=1 TD=8.749000e-09 TARG par('v(y)-0.5*v(vdd)') VAL=0 RISE=1 TD=8.749000e-09"
+  },
+  {
+   "name": "lvl_035",
+   "unit": "VDD",
+   "limits": {
+    "max": 0.1
+   },
+   "spice": ".meas tran lvl_035 FIND par('v(y)/v(vdd)') AT=9.240000e-09"
+  },
+  {
+   "name": "tpd_035",
+   "unit": "s",
+   "limits": {
+    "max": 9e-11
+   },
+   "spice": ".meas tran tpd_035 TRIG par('v(in_a2)-0.5*v(vdd)') VAL=0 RISE=1 TD=8.999000e-09 TARG par('v(y)-0.5*v(vdd)') VAL=0 FALL=1 TD=8.999000e-09"
+  },
+  {
+   "name": "lvl_036",
+   "unit": "VDD",
+   "limits": {
+    "max": 0.1
+   },
+   "spice": ".meas tran lvl_036 FIND par('v(y)/v(vdd)') AT=9.490000e-09"
+  },
+  {
+   "name": "lvl_037",
+   "unit": "VDD",
+   "limits": {
+    "min": 0.9
+   },
+   "spice": ".meas tran lvl_037 FIND par('v(y)/v(vdd)') AT=9.740000e-09"
+  },
+  {
+   "name": "tpd_037",
+   "unit": "s",
+   "limits": {
+    "max": 9e-11
+   },
+   "spice": ".meas tran tpd_037 TRIG par('v(in_a2)-0.5*v(vdd)') VAL=0 FALL=1 TD=9.499000e-09 TARG par('v(y)-0.5*v(vdd)') VAL=0 RISE=1 TD=9.499000e-09"
+  },
+  {
+   "name": "lvl_038",
+   "unit": "VDD",
+   "limits": {
+    "min": 0.9
+   },
+   "spice": ".meas tran lvl_038 FIND par('v(y)/v(vdd)') AT=9.990000e-09"
+  },
+  {
+   "name": "lvl_039",
+   "unit": "VDD",
+   "limits": {
+    "min": 0.9
+   },
+   "spice": ".meas tran lvl_039 FIND par('v(y)/v(vdd)') AT=1.024000e-08"
+  },
+  {
+   "name": "lvl_040",
+   "unit": "VDD",
+   "limits": {
+    "min": 0.9
+   },
+   "spice": ".meas tran lvl_040 FIND par('v(y)/v(vdd)') AT=1.049000e-08"
+  },
+  {
+   "name": "lvl_041",
+   "unit": "VDD",
+   "limits": {
+    "max": 0.1
+   },
+   "spice": ".meas tran lvl_041 FIND par('v(y)/v(vdd)') AT=1.074000e-08"
+  },
+  {
+   "name": "tpd_041",
+   "unit": "s",
+   "limits": {
+    "max": 9e-11
+   },
+   "spice": ".meas tran tpd_041 TRIG par('v(in_b1)-0.5*v(vdd)') VAL=0 RISE=1 TD=1.049900e-08 TARG par('v(y)-0.5*v(vdd)') VAL=0 FALL=1 TD=1.049900e-08"
+  },
+  {
+   "name": "lvl_042",
+   "unit": "VDD",
+   "limits": {
+    "min": 0.9
+   },
+   "spice": ".meas tran lvl_042 FIND par('v(y)/v(vdd)') AT=1.099000e-08"
+  },
+  {
+   "name": "tpd_042",
+   "unit": "s",
+   "limits": {
+    "max": 9e-11
+   },
+   "spice": ".meas tran tpd_042 TRIG par('v(in_b2)-0.5*v(vdd)') VAL=0 FALL=1 TD=1.074900e-08 TARG par('v(y)-0.5*v(vdd)') VAL=0 RISE=1 TD=1.074900e-08"
+  },
+  {
+   "name": "lvl_043",
+   "unit": "VDD",
+   "limits": {
+    "max": 0.1
+   },
+   "spice": ".meas tran lvl_043 FIND par('v(y)/v(vdd)') AT=1.124000e-08"
+  },
+  {
+   "name": "tpd_043",
+   "unit": "s",
+   "limits": {
+    "max": 9e-11
+   },
+   "spice": ".meas tran tpd_043 TRIG par('v(in_b2)-0.5*v(vdd)') VAL=0 RISE=1 TD=1.099900e-08 TARG par('v(y)-0.5*v(vdd)') VAL=0 FALL=1 TD=1.099900e-08"
+  },
+  {
+   "name": "lvl_044",
+   "unit": "VDD",
+   "limits": {
+    "min": 0.9
+   },
+   "spice": ".meas tran lvl_044 FIND par('v(y)/v(vdd)') AT=1.149000e-08"
+  },
+  {
+   "name": "tpd_044",
+   "unit": "s",
+   "limits": {
+    "max": 9e-11
+   },
+   "spice": ".meas tran tpd_044 TRIG par('v(in_b1)-0.5*v(vdd)') VAL=0 FALL=1 TD=1.124900e-08 TARG par('v(y)-0.5*v(vdd)') VAL=0 RISE=1 TD=1.124900e-08"
+  },
+  {
+   "name": "lvl_045",
+   "unit": "VDD",
+   "limits": {
+    "min": 0.9
+   },
+   "spice": ".meas tran lvl_045 FIND par('v(y)/v(vdd)') AT=1.174000e-08"
+  },
+  {
+   "name": "lvl_046",
+   "unit": "VDD",
+   "limits": {
+    "max": 0.1
+   },
+   "spice": ".meas tran lvl_046 FIND par('v(y)/v(vdd)') AT=1.199000e-08"
+  },
+  {
+   "name": "tpd_046",
+   "unit": "s",
+   "limits": {
+    "max": 9e-11
+   },
+   "spice": ".meas tran tpd_046 TRIG par('v(in_a2)-0.5*v(vdd)') VAL=0 RISE=1 TD=1.174900e-08 TARG par('v(y)-0.5*v(vdd)') VAL=0 FALL=1 TD=1.174900e-08"
+  },
+  {
+   "name": "lvl_047",
+   "unit": "VDD",
+   "limits": {
+    "max": 0.1
+   },
+   "spice": ".meas tran lvl_047 FIND par('v(y)/v(vdd)') AT=1.224000e-08"
+  },
+  {
+   "name": "lvl_048",
+   "unit": "VDD",
+   "limits": {
+    "max": 0.1
+   },
+   "spice": ".meas tran lvl_048 FIND par('v(y)/v(vdd)') AT=1.249000e-08"
+  },
+  {
+   "name": "lvl_049",
+   "unit": "VDD",
+   "limits": {
+    "max": 0.1
+   },
+   "spice": ".meas tran lvl_049 FIND par('v(y)/v(vdd)') AT=1.274000e-08"
+  },
+  {
+   "name": "lvl_050",
+   "unit": "VDD",
+   "limits": {
+    "max": 0.1
+   },
+   "spice": ".meas tran lvl_050 FIND par('v(y)/v(vdd)') AT=1.299000e-08"
+  },
+  {
+   "name": "lvl_051",
+   "unit": "VDD",
+   "limits": {
+    "max": 0.1
+   },
+   "spice": ".meas tran lvl_051 FIND par('v(y)/v(vdd)') AT=1.324000e-08"
+  },
+  {
+   "name": "lvl_052",
+   "unit": "VDD",
+   "limits": {
+    "min": 0.9
+   },
+   "spice": ".meas tran lvl_052 FIND par('v(y)/v(vdd)') AT=1.349000e-08"
+  },
+  {
+   "name": "tpd_052",
+   "unit": "s",
+   "limits": {
+    "max": 9e-11
+   },
+   "spice": ".meas tran tpd_052 TRIG par('v(in_b1)-0.5*v(vdd)') VAL=0 FALL=1 TD=1.324900e-08 TARG par('v(y)-0.5*v(vdd)') VAL=0 RISE=1 TD=1.324900e-08"
+  },
+  {
+   "name": "lvl_053",
+   "unit": "VDD",
+   "limits": {
+    "max": 0.1
+   },
+   "spice": ".meas tran lvl_053 FIND par('v(y)/v(vdd)') AT=1.374000e-08"
+  },
+  {
+   "name": "tpd_053",
+   "unit": "s",
+   "limits": {
+    "max": 9e-11
+   },
+   "spice": ".meas tran tpd_053 TRIG par('v(in_b1)-0.5*v(vdd)') VAL=0 RISE=1 TD=1.349900e-08 TARG par('v(y)-0.5*v(vdd)') VAL=0 FALL=1 TD=1.349900e-08"
+  },
+  {
+   "name": "lvl_054",
+   "unit": "VDD",
+   "limits": {
+    "min": 0.9
+   },
+   "spice": ".meas tran lvl_054 FIND par('v(y)/v(vdd)') AT=1.399000e-08"
+  },
+  {
+   "name": "tpd_054",
+   "unit": "s",
+   "limits": {
+    "max": 9e-11
+   },
+   "spice": ".meas tran tpd_054 TRIG par('v(in_b2)-0.5*v(vdd)') VAL=0 FALL=1 TD=1.374900e-08 TARG par('v(y)-0.5*v(vdd)') VAL=0 RISE=1 TD=1.374900e-08"
+  },
+  {
+   "name": "lvl_055",
+   "unit": "VDD",
+   "limits": {
+    "min": 0.9
+   },
+   "spice": ".meas tran lvl_055 FIND par('v(y)/v(vdd)') AT=1.424000e-08"
+  },
+  {
+   "name": "lvl_056",
+   "unit": "VDD",
+   "limits": {
+    "min": 0.9
+   },
+   "spice": ".meas tran lvl_056 FIND par('v(y)/v(vdd)') AT=1.449000e-08"
+  },
+  {
+   "name": "lvl_057",
+   "unit": "VDD",
+   "limits": {
+    "min": 0.9
+   },
+   "spice": ".meas tran lvl_057 FIND par('v(y)/v(vdd)') AT=1.474000e-08"
+  },
+  {
+   "name": "lvl_058",
+   "unit": "VDD",
+   "limits": {
+    "min": 0.9
+   },
+   "spice": ".meas tran lvl_058 FIND par('v(y)/v(vdd)') AT=1.499000e-08"
+  },
+  {
+   "name": "lvl_059",
+   "unit": "VDD",
+   "limits": {
+    "max": 0.1
+   },
+   "spice": ".meas tran lvl_059 FIND par('v(y)/v(vdd)') AT=1.524000e-08"
+  },
+  {
+   "name": "tpd_059",
+   "unit": "s",
+   "limits": {
+    "max": 9e-11
+   },
+   "spice": ".meas tran tpd_059 TRIG par('v(in_b2)-0.5*v(vdd)') VAL=0 RISE=1 TD=1.499900e-08 TARG par('v(y)-0.5*v(vdd)') VAL=0 FALL=1 TD=1.499900e-08"
+  },
+  {
+   "name": "lvl_060",
+   "unit": "VDD",
+   "limits": {
+    "max": 0.1
+   },
+   "spice": ".meas tran lvl_060 FIND par('v(y)/v(vdd)') AT=1.549000e-08"
+  },
+  {
+   "name": "lvl_061",
+   "unit": "VDD",
+   "limits": {
+    "min": 0.9
+   },
+   "spice": ".meas tran lvl_061 FIND par('v(y)/v(vdd)') AT=1.574000e-08"
+  },
+  {
+   "name": "tpd_061",
+   "unit": "s",
+   "limits": {
+    "max": 9e-11
+   },
+   "spice": ".meas tran tpd_061 TRIG par('v(in_b2)-0.5*v(vdd)') VAL=0 FALL=1 TD=1.549900e-08 TARG par('v(y)-0.5*v(vdd)') VAL=0 RISE=1 TD=1.549900e-08"
+  },
+  {
+   "name": "lvl_062",
+   "unit": "VDD",
+   "limits": {
+    "max": 0.1
+   },
+   "spice": ".meas tran lvl_062 FIND par('v(y)/v(vdd)') AT=1.599000e-08"
+  },
+  {
+   "name": "tpd_062",
+   "unit": "s",
+   "limits": {
+    "max": 9e-11
+   },
+   "spice": ".meas tran tpd_062 TRIG par('v(in_b2)-0.5*v(vdd)') VAL=0 RISE=1 TD=1.574900e-08 TARG par('v(y)-0.5*v(vdd)') VAL=0 FALL=1 TD=1.574900e-08"
+  },
+  {
+   "name": "lvl_063",
+   "unit": "VDD",
+   "limits": {
+    "min": 0.9
+   },
+   "spice": ".meas tran lvl_063 FIND par('v(y)/v(vdd)') AT=1.624000e-08"
+  },
+  {
+   "name": "tpd_063",
+   "unit": "s",
+   "limits": {
+    "max": 9e-11
+   },
+   "spice": ".meas tran tpd_063 TRIG par('v(in_b1)-0.5*v(vdd)') VAL=0 FALL=1 TD=1.599900e-08 TARG par('v(y)-0.5*v(vdd)') VAL=0 RISE=1 TD=1.599900e-08"
+  },
+  {
+   "name": "lvl_064",
+   "unit": "VDD",
+   "limits": {
+    "min": 0.9
+   },
+   "spice": ".meas tran lvl_064 FIND par('v(y)/v(vdd)') AT=1.649000e-08"
+  }
+ ],
+ "options": {
+  "osdi_preload": [
+   "scratch/sim/osdi/bsimcmg.osdi"
+  ],
+  "stage_model_inputs": true,
+  "timeout_s": 600,
+  "ngspice_init": [
+   "set measureprec=9"
+  ]
+ }
+}

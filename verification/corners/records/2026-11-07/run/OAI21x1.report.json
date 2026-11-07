@@ -1,0 +1,2965 @@
+{
+ "schema_version": 3,
+ "netlist": {
+  "path": null,
+  "scope": "external"
+ },
+ "status": "pass",
+ "corner_count": 3,
+ "passed": 3,
+ "failed": 0,
+ "errored": 0,
+ "inconclusive": 0,
+ "diagnostic_counts": {
+  "by_code": {},
+  "by_severity": {},
+  "corners_with_diagnostics": 0
+ },
+ "metrics": {
+  "sim__corner__count": 3,
+  "sim__corner__passed_count": 3,
+  "sim__corner__failed_count": 0,
+  "sim__corner__errored_count": 0,
+  "sim__corner__inconclusive_count": 0
+ },
+ "environment": {
+  "engine": "ngspice",
+  "engine_version": "46",
+  "ngspice_binary": "ngspice",
+  "engine_build": {
+   "version_banner": "******\n** ngspice-46 : Circuit level simulation program\n** Compiled with KLU Direct Linear Solver\n** The U. C. Berkeley CAD Group\n** Copyright 1985-1994, Regents of the University of California.\n** Copyright 2001-2025, The ngspice team.\n** Please get your ngspice manual from https://ngspice.sourceforge.io/docs.html\n** Please file your bug-reports at http://ngspice.sourceforge.net/bugrep.html\n** Creation Date: Thu Oct  1 23:51:59 UTC 2026\n******",
+   "binary_sha256": "dc859418bedd0478ff439a2d3e2e09f4386a7f4d5e3f17671953e101a000cc60",
+   "probe": "ok",
+   "reason": null
+  },
+  "models_lib": {
+   "path": null,
+   "scope": "external"
+  },
+  "models_lib_sha256": "ed21e96383c01c41e9b00a442c08d7bf9daebed057206788526c1115c1418d4f",
+  "models_lib_sha256_scope": "client",
+  "netlist_sha256": "6410316780afb78e8d67d99e3dc6b4335bfd3dbcd6d03ece8e128fb661ed53c6",
+  "netlist_closure": [
+   {
+    "path": null,
+    "scope": "external",
+    "sha256": "6410316780afb78e8d67d99e3dc6b4335bfd3dbcd6d03ece8e128fb661ed53c6"
+   },
+   {
+    "path": null,
+    "scope": "external",
+    "sha256": "b8bdfa7b95ce651d948c2623d9b39e22abb5c910862dede1ac07a05f3b5b681b"
+   }
+  ],
+  "netlist_identity": "sha256:cf3b27be3d128212785898f8aba41dece36ccf363b198ac2f6f90496d0fc72eb",
+  "osdi_preload": [
+   {
+    "name": "bsimcmg.osdi",
+    "path": null,
+    "scope": "external",
+    "sha256": "4e755d14e901a84600124be5cb73e36302117b6cfc694e52ffc17640945cd9e3"
+   }
+  ],
+  "staged_model_inputs": [
+   {
+    "name": "asap7_bsimcmg.lib",
+    "field": "models.lib",
+    "kind": "library",
+    "sha256": "ed21e96383c01c41e9b00a442c08d7bf9daebed057206788526c1115c1418d4f",
+    "rewritten": false,
+    "source_sha256": "ed21e96383c01c41e9b00a442c08d7bf9daebed057206788526c1115c1418d4f"
+   },
+   {
+    "name": "bsimcmg.osdi",
+    "field": "options.osdi_preload[0]",
+    "kind": "osdi",
+    "sha256": "4e755d14e901a84600124be5cb73e36302117b6cfc694e52ffc17640945cd9e3",
+    "rewritten": false,
+    "source_sha256": "4e755d14e901a84600124be5cb73e36302117b6cfc694e52ffc17640945cd9e3"
+   }
+  ],
+  "remote": {
+   "provider": "aws-batch-fleet",
+   "job_id": "klt-sim-b906e3d51f39",
+   "region": "us-east-1",
+   "instance_id": "i-023f5526a5376e0a2",
+   "instance_type": "m7i.4xlarge",
+   "availability_zone": "us-east-1d",
+   "ami_id": "ami-095c25ae241a4d360",
+   "lifecycle": "spot",
+   "spot": true,
+   "state": "done",
+   "exit_code": "0",
+   "concurrency": "1",
+   "physical_cores": "8",
+   "elapsed_seconds": 29,
+   "client_submitted_at": "2026-11-07T22:40:33.591877Z",
+   "client_launched_at": "2026-11-07T22:40:53.784918Z",
+   "client_status_terminal_at": "2026-11-07T22:41:55.878259Z",
+   "client_collected_at": "2026-11-07T22:41:56.621486Z",
+   "runner_klt_version": "0.9.0",
+   "client_klt_version": "0.9.2.dev244+g92e2b15a66f2",
+   "runner_compatibility": "match",
+   "runner_request_features": {
+    "required": [
+     "stimulus",
+     "options.ngspice_init",
+     "options.osdi_preload",
+     "options.stage_model_inputs"
+    ],
+    "missing": [],
+    "status": "supported"
+   },
+   "worker_environment": {
+    "capture": "ok",
+    "simulator": {
+     "requested_binary": "ngspice",
+     "binary_source": "PATH",
+     "selected_path": "ngspice",
+     "version_banner": "******\n** ngspice-46 : Circuit level simulation program\n** Compiled with KLU Direct Linear Solver\n** The U. C. Berkeley CAD Group\n** Copyright 1985-1994, Regents of the University of California.\n** Copyright 2001-2025, The ngspice team.\n** Please get your ngspice manual from https://ngspice.sourceforge.io/docs.html\n** Please file your bug-reports at http://ngspice.sourceforge.net/bugrep.html\n** Creation Date: Thu Oct  1 23:51:59 UTC 2026\n******\n",
+     "version_probe": "ok"
+    },
+    "pdk": {
+     "variant": null,
+     "root": "/opt/pdk",
+     "stamp_scheme": null,
+     "stamp_sha256": null,
+     "stamp_text": null,
+     "models_staged": true,
+     "stamp_scope": "image"
+    },
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8488C",
+    "omp_num_threads": null,
+    "image_manifest": null,
+    "model_inputs": [
+     {
+      "name": "asap7_bsimcmg.lib",
+      "sha256": "ed21e96383c01c41e9b00a442c08d7bf9daebed057206788526c1115c1418d4f"
+     },
+     {
+      "name": "bsimcmg.osdi",
+      "sha256": "4e755d14e901a84600124be5cb73e36302117b6cfc694e52ffc17640945cd9e3"
+     }
+    ],
+    "diagnostics": [
+     "pdk root or variant unknown on worker"
+    ],
+    "pdk_stamp_comparison": {
+     "basis": "staged_model_inputs",
+     "status": "match"
+    },
+    "engine_build_comparison": {
+     "status": "match"
+    }
+   },
+   "runner_model_inputs": [
+    {
+     "name": "asap7_bsimcmg.lib",
+     "sha256": "ed21e96383c01c41e9b00a442c08d7bf9daebed057206788526c1115c1418d4f"
+    },
+    {
+     "name": "bsimcmg.osdi",
+     "sha256": "4e755d14e901a84600124be5cb73e36302117b6cfc694e52ffc17640945cd9e3"
+    }
+   ],
+   "job_ceiling": {
+    "basis": "conservative_serial_bound",
+    "unit_count": 3,
+    "per_unit_timeout_s": 600,
+    "overhead_s": 120.0,
+    "job_bound_s": 1920.0,
+    "max_job_seconds": 3600.0,
+    "max_job_seconds_source": "fleet_config",
+    "exceeds_ceiling": false,
+    "check": "warn",
+    "max_units_per_job": 5,
+    "recommended_hosts": 1
+   }
+  },
+  "engine_host": "worker",
+  "client_ngspice_binary": "ngspice",
+  "backend": {
+   "resolved": "batch",
+   "source": "flag",
+   "requested": "batch"
+  },
+  "stimulus": {
+   "supply_relative": true,
+   "corners": [
+    {
+     "corner_id": "tt/0.700V/25C",
+     "signals": [
+      {
+       "source": "Va1",
+       "node": "in_a1",
+       "ref": "0",
+       "initial": 0.0,
+       "skew_s": 0.0,
+       "events": [
+        {
+         "t_s": 5e-10,
+         "t_applied_s": 5e-10,
+         "level": 0.7,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 7.500000000000001e-10,
+         "t_applied_s": 7.500000000000001e-10,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        },
+        {
+         "t_s": 1.25e-09,
+         "t_applied_s": 1.25e-09,
+         "level": 0.7,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 1.5000000000000002e-09,
+         "t_applied_s": 1.5000000000000002e-09,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        },
+        {
+         "t_s": 2.2500000000000003e-09,
+         "t_applied_s": 2.2500000000000003e-09,
+         "level": 0.7,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 2.5e-09,
+         "t_applied_s": 2.5e-09,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        },
+        {
+         "t_s": 3e-09,
+         "t_applied_s": 3e-09,
+         "level": 0.7,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 5.250000000000001e-09,
+         "t_applied_s": 5.250000000000001e-09,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        }
+       ],
+       "pwl": [
+        [
+         0.0,
+         0.0
+        ],
+        [
+         5e-10,
+         0.0
+        ],
+        [
+         5.1e-10,
+         0.7
+        ],
+        [
+         7.500000000000001e-10,
+         0.7
+        ],
+        [
+         7.600000000000001e-10,
+         0.0
+        ],
+        [
+         1.25e-09,
+         0.0
+        ],
+        [
+         1.26e-09,
+         0.7
+        ],
+        [
+         1.5000000000000002e-09,
+         0.7
+        ],
+        [
+         1.5100000000000002e-09,
+         0.0
+        ],
+        [
+         2.2500000000000003e-09,
+         0.0
+        ],
+        [
+         2.2600000000000005e-09,
+         0.7
+        ],
+        [
+         2.5e-09,
+         0.7
+        ],
+        [
+         2.5100000000000002e-09,
+         0.0
+        ],
+        [
+         3e-09,
+         0.0
+        ],
+        [
+         3.01e-09,
+         0.7
+        ],
+        [
+         5.250000000000001e-09,
+         0.7
+        ],
+        [
+         5.2600000000000004e-09,
+         0.0
+        ]
+       ]
+      },
+      {
+       "source": "Va2",
+       "node": "in_a2",
+       "ref": "0",
+       "initial": 0.0,
+       "skew_s": 0.0,
+       "events": [
+        {
+         "t_s": 1e-09,
+         "t_applied_s": 1e-09,
+         "level": 0.7,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 1.75e-09,
+         "t_applied_s": 1.75e-09,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        },
+        {
+         "t_s": 2.7500000000000002e-09,
+         "t_applied_s": 2.7500000000000002e-09,
+         "level": 0.7,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 3.25e-09,
+         "t_applied_s": 3.25e-09,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        },
+        {
+         "t_s": 3.5000000000000003e-09,
+         "t_applied_s": 3.5000000000000003e-09,
+         "level": 0.7,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 4e-09,
+         "t_applied_s": 4e-09,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        },
+        {
+         "t_s": 4.75e-09,
+         "t_applied_s": 4.75e-09,
+         "level": 0.7,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 6.000000000000001e-09,
+         "t_applied_s": 6.000000000000001e-09,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        }
+       ],
+       "pwl": [
+        [
+         0.0,
+         0.0
+        ],
+        [
+         1e-09,
+         0.0
+        ],
+        [
+         1.01e-09,
+         0.7
+        ],
+        [
+         1.75e-09,
+         0.7
+        ],
+        [
+         1.76e-09,
+         0.0
+        ],
+        [
+         2.7500000000000002e-09,
+         0.0
+        ],
+        [
+         2.7600000000000004e-09,
+         0.7
+        ],
+        [
+         3.25e-09,
+         0.7
+        ],
+        [
+         3.2600000000000003e-09,
+         0.0
+        ],
+        [
+         3.5000000000000003e-09,
+         0.0
+        ],
+        [
+         3.5100000000000005e-09,
+         0.7
+        ],
+        [
+         4e-09,
+         0.7
+        ],
+        [
+         4.01e-09,
+         0.0
+        ],
+        [
+         4.75e-09,
+         0.0
+        ],
+        [
+         4.76e-09,
+         0.7
+        ],
+        [
+         6.000000000000001e-09,
+         0.7
+        ],
+        [
+         6.0100000000000005e-09,
+         0.0
+        ]
+       ]
+      },
+      {
+       "source": "Vb",
+       "node": "in_b",
+       "ref": "0",
+       "initial": 0.0,
+       "skew_s": 0.0,
+       "events": [
+        {
+         "t_s": 2e-09,
+         "t_applied_s": 2e-09,
+         "level": 0.7,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 3.7500000000000005e-09,
+         "t_applied_s": 3.7500000000000005e-09,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        },
+        {
+         "t_s": 4.250000000000001e-09,
+         "t_applied_s": 4.250000000000001e-09,
+         "level": 0.7,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 4.500000000000001e-09,
+         "t_applied_s": 4.500000000000001e-09,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        },
+        {
+         "t_s": 5.000000000000001e-09,
+         "t_applied_s": 5.000000000000001e-09,
+         "level": 0.7,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 5.5000000000000004e-09,
+         "t_applied_s": 5.5000000000000004e-09,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        },
+        {
+         "t_s": 5.750000000000001e-09,
+         "t_applied_s": 5.750000000000001e-09,
+         "level": 0.7,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 6.2500000000000005e-09,
+         "t_applied_s": 6.2500000000000005e-09,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        }
+       ],
+       "pwl": [
+        [
+         0.0,
+         0.0
+        ],
+        [
+         2e-09,
+         0.0
+        ],
+        [
+         2.0100000000000003e-09,
+         0.7
+        ],
+        [
+         3.7500000000000005e-09,
+         0.7
+        ],
+        [
+         3.76e-09,
+         0.0
+        ],
+        [
+         4.250000000000001e-09,
+         0.0
+        ],
+        [
+         4.260000000000001e-09,
+         0.7
+        ],
+        [
+         4.500000000000001e-09,
+         0.7
+        ],
+        [
+         4.51e-09,
+         0.0
+        ],
+        [
+         5.000000000000001e-09,
+         0.0
+        ],
+        [
+         5.010000000000001e-09,
+         0.7
+        ],
+        [
+         5.5000000000000004e-09,
+         0.7
+        ],
+        [
+         5.51e-09,
+         0.0
+        ],
+        [
+         5.750000000000001e-09,
+         0.0
+        ],
+        [
+         5.760000000000001e-09,
+         0.7
+        ],
+        [
+         6.2500000000000005e-09,
+         0.7
+        ],
+        [
+         6.26e-09,
+         0.0
+        ]
+       ]
+      }
+     ]
+    },
+    {
+     "corner_id": "ff/0.770V/0C",
+     "signals": [
+      {
+       "source": "Va1",
+       "node": "in_a1",
+       "ref": "0",
+       "initial": 0.0,
+       "skew_s": 0.0,
+       "events": [
+        {
+         "t_s": 5e-10,
+         "t_applied_s": 5e-10,
+         "level": 0.77,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 7.500000000000001e-10,
+         "t_applied_s": 7.500000000000001e-10,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        },
+        {
+         "t_s": 1.25e-09,
+         "t_applied_s": 1.25e-09,
+         "level": 0.77,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 1.5000000000000002e-09,
+         "t_applied_s": 1.5000000000000002e-09,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        },
+        {
+         "t_s": 2.2500000000000003e-09,
+         "t_applied_s": 2.2500000000000003e-09,
+         "level": 0.77,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 2.5e-09,
+         "t_applied_s": 2.5e-09,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        },
+        {
+         "t_s": 3e-09,
+         "t_applied_s": 3e-09,
+         "level": 0.77,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 5.250000000000001e-09,
+         "t_applied_s": 5.250000000000001e-09,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        }
+       ],
+       "pwl": [
+        [
+         0.0,
+         0.0
+        ],
+        [
+         5e-10,
+         0.0
+        ],
+        [
+         5.1e-10,
+         0.77
+        ],
+        [
+         7.500000000000001e-10,
+         0.77
+        ],
+        [
+         7.600000000000001e-10,
+         0.0
+        ],
+        [
+         1.25e-09,
+         0.0
+        ],
+        [
+         1.26e-09,
+         0.77
+        ],
+        [
+         1.5000000000000002e-09,
+         0.77
+        ],
+        [
+         1.5100000000000002e-09,
+         0.0
+        ],
+        [
+         2.2500000000000003e-09,
+         0.0
+        ],
+        [
+         2.2600000000000005e-09,
+         0.77
+        ],
+        [
+         2.5e-09,
+         0.77
+        ],
+        [
+         2.5100000000000002e-09,
+         0.0
+        ],
+        [
+         3e-09,
+         0.0
+        ],
+        [
+         3.01e-09,
+         0.77
+        ],
+        [
+         5.250000000000001e-09,
+         0.77
+        ],
+        [
+         5.2600000000000004e-09,
+         0.0
+        ]
+       ]
+      },
+      {
+       "source": "Va2",
+       "node": "in_a2",
+       "ref": "0",
+       "initial": 0.0,
+       "skew_s": 0.0,
+       "events": [
+        {
+         "t_s": 1e-09,
+         "t_applied_s": 1e-09,
+         "level": 0.77,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 1.75e-09,
+         "t_applied_s": 1.75e-09,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        },
+        {
+         "t_s": 2.7500000000000002e-09,
+         "t_applied_s": 2.7500000000000002e-09,
+         "level": 0.77,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 3.25e-09,
+         "t_applied_s": 3.25e-09,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        },
+        {
+         "t_s": 3.5000000000000003e-09,
+         "t_applied_s": 3.5000000000000003e-09,
+         "level": 0.77,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 4e-09,
+         "t_applied_s": 4e-09,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        },
+        {
+         "t_s": 4.75e-09,
+         "t_applied_s": 4.75e-09,
+         "level": 0.77,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 6.000000000000001e-09,
+         "t_applied_s": 6.000000000000001e-09,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        }
+       ],
+       "pwl": [
+        [
+         0.0,
+         0.0
+        ],
+        [
+         1e-09,
+         0.0
+        ],
+        [
+         1.01e-09,
+         0.77
+        ],
+        [
+         1.75e-09,
+         0.77
+        ],
+        [
+         1.76e-09,
+         0.0
+        ],
+        [
+         2.7500000000000002e-09,
+         0.0
+        ],
+        [
+         2.7600000000000004e-09,
+         0.77
+        ],
+        [
+         3.25e-09,
+         0.77
+        ],
+        [
+         3.2600000000000003e-09,
+         0.0
+        ],
+        [
+         3.5000000000000003e-09,
+         0.0
+        ],
+        [
+         3.5100000000000005e-09,
+         0.77
+        ],
+        [
+         4e-09,
+         0.77
+        ],
+        [
+         4.01e-09,
+         0.0
+        ],
+        [
+         4.75e-09,
+         0.0
+        ],
+        [
+         4.76e-09,
+         0.77
+        ],
+        [
+         6.000000000000001e-09,
+         0.77
+        ],
+        [
+         6.0100000000000005e-09,
+         0.0
+        ]
+       ]
+      },
+      {
+       "source": "Vb",
+       "node": "in_b",
+       "ref": "0",
+       "initial": 0.0,
+       "skew_s": 0.0,
+       "events": [
+        {
+         "t_s": 2e-09,
+         "t_applied_s": 2e-09,
+         "level": 0.77,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 3.7500000000000005e-09,
+         "t_applied_s": 3.7500000000000005e-09,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        },
+        {
+         "t_s": 4.250000000000001e-09,
+         "t_applied_s": 4.250000000000001e-09,
+         "level": 0.77,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 4.500000000000001e-09,
+         "t_applied_s": 4.500000000000001e-09,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        },
+        {
+         "t_s": 5.000000000000001e-09,
+         "t_applied_s": 5.000000000000001e-09,
+         "level": 0.77,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 5.5000000000000004e-09,
+         "t_applied_s": 5.5000000000000004e-09,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        },
+        {
+         "t_s": 5.750000000000001e-09,
+         "t_applied_s": 5.750000000000001e-09,
+         "level": 0.77,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 6.2500000000000005e-09,
+         "t_applied_s": 6.2500000000000005e-09,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        }
+       ],
+       "pwl": [
+        [
+         0.0,
+         0.0
+        ],
+        [
+         2e-09,
+         0.0
+        ],
+        [
+         2.0100000000000003e-09,
+         0.77
+        ],
+        [
+         3.7500000000000005e-09,
+         0.77
+        ],
+        [
+         3.76e-09,
+         0.0
+        ],
+        [
+         4.250000000000001e-09,
+         0.0
+        ],
+        [
+         4.260000000000001e-09,
+         0.77
+        ],
+        [
+         4.500000000000001e-09,
+         0.77
+        ],
+        [
+         4.51e-09,
+         0.0
+        ],
+        [
+         5.000000000000001e-09,
+         0.0
+        ],
+        [
+         5.010000000000001e-09,
+         0.77
+        ],
+        [
+         5.5000000000000004e-09,
+         0.77
+        ],
+        [
+         5.51e-09,
+         0.0
+        ],
+        [
+         5.750000000000001e-09,
+         0.0
+        ],
+        [
+         5.760000000000001e-09,
+         0.77
+        ],
+        [
+         6.2500000000000005e-09,
+         0.77
+        ],
+        [
+         6.26e-09,
+         0.0
+        ]
+       ]
+      }
+     ]
+    },
+    {
+     "corner_id": "ss/0.630V/100C",
+     "signals": [
+      {
+       "source": "Va1",
+       "node": "in_a1",
+       "ref": "0",
+       "initial": 0.0,
+       "skew_s": 0.0,
+       "events": [
+        {
+         "t_s": 5e-10,
+         "t_applied_s": 5e-10,
+         "level": 0.63,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 7.500000000000001e-10,
+         "t_applied_s": 7.500000000000001e-10,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        },
+        {
+         "t_s": 1.25e-09,
+         "t_applied_s": 1.25e-09,
+         "level": 0.63,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 1.5000000000000002e-09,
+         "t_applied_s": 1.5000000000000002e-09,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        },
+        {
+         "t_s": 2.2500000000000003e-09,
+         "t_applied_s": 2.2500000000000003e-09,
+         "level": 0.63,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 2.5e-09,
+         "t_applied_s": 2.5e-09,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        },
+        {
+         "t_s": 3e-09,
+         "t_applied_s": 3e-09,
+         "level": 0.63,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 5.250000000000001e-09,
+         "t_applied_s": 5.250000000000001e-09,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        }
+       ],
+       "pwl": [
+        [
+         0.0,
+         0.0
+        ],
+        [
+         5e-10,
+         0.0
+        ],
+        [
+         5.1e-10,
+         0.63
+        ],
+        [
+         7.500000000000001e-10,
+         0.63
+        ],
+        [
+         7.600000000000001e-10,
+         0.0
+        ],
+        [
+         1.25e-09,
+         0.0
+        ],
+        [
+         1.26e-09,
+         0.63
+        ],
+        [
+         1.5000000000000002e-09,
+         0.63
+        ],
+        [
+         1.5100000000000002e-09,
+         0.0
+        ],
+        [
+         2.2500000000000003e-09,
+         0.0
+        ],
+        [
+         2.2600000000000005e-09,
+         0.63
+        ],
+        [
+         2.5e-09,
+         0.63
+        ],
+        [
+         2.5100000000000002e-09,
+         0.0
+        ],
+        [
+         3e-09,
+         0.0
+        ],
+        [
+         3.01e-09,
+         0.63
+        ],
+        [
+         5.250000000000001e-09,
+         0.63
+        ],
+        [
+         5.2600000000000004e-09,
+         0.0
+        ]
+       ]
+      },
+      {
+       "source": "Va2",
+       "node": "in_a2",
+       "ref": "0",
+       "initial": 0.0,
+       "skew_s": 0.0,
+       "events": [
+        {
+         "t_s": 1e-09,
+         "t_applied_s": 1e-09,
+         "level": 0.63,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 1.75e-09,
+         "t_applied_s": 1.75e-09,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        },
+        {
+         "t_s": 2.7500000000000002e-09,
+         "t_applied_s": 2.7500000000000002e-09,
+         "level": 0.63,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 3.25e-09,
+         "t_applied_s": 3.25e-09,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        },
+        {
+         "t_s": 3.5000000000000003e-09,
+         "t_applied_s": 3.5000000000000003e-09,
+         "level": 0.63,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 4e-09,
+         "t_applied_s": 4e-09,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        },
+        {
+         "t_s": 4.75e-09,
+         "t_applied_s": 4.75e-09,
+         "level": 0.63,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 6.000000000000001e-09,
+         "t_applied_s": 6.000000000000001e-09,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        }
+       ],
+       "pwl": [
+        [
+         0.0,
+         0.0
+        ],
+        [
+         1e-09,
+         0.0
+        ],
+        [
+         1.01e-09,
+         0.63
+        ],
+        [
+         1.75e-09,
+         0.63
+        ],
+        [
+         1.76e-09,
+         0.0
+        ],
+        [
+         2.7500000000000002e-09,
+         0.0
+        ],
+        [
+         2.7600000000000004e-09,
+         0.63
+        ],
+        [
+         3.25e-09,
+         0.63
+        ],
+        [
+         3.2600000000000003e-09,
+         0.0
+        ],
+        [
+         3.5000000000000003e-09,
+         0.0
+        ],
+        [
+         3.5100000000000005e-09,
+         0.63
+        ],
+        [
+         4e-09,
+         0.63
+        ],
+        [
+         4.01e-09,
+         0.0
+        ],
+        [
+         4.75e-09,
+         0.0
+        ],
+        [
+         4.76e-09,
+         0.63
+        ],
+        [
+         6.000000000000001e-09,
+         0.63
+        ],
+        [
+         6.0100000000000005e-09,
+         0.0
+        ]
+       ]
+      },
+      {
+       "source": "Vb",
+       "node": "in_b",
+       "ref": "0",
+       "initial": 0.0,
+       "skew_s": 0.0,
+       "events": [
+        {
+         "t_s": 2e-09,
+         "t_applied_s": 2e-09,
+         "level": 0.63,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 3.7500000000000005e-09,
+         "t_applied_s": 3.7500000000000005e-09,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        },
+        {
+         "t_s": 4.250000000000001e-09,
+         "t_applied_s": 4.250000000000001e-09,
+         "level": 0.63,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 4.500000000000001e-09,
+         "t_applied_s": 4.500000000000001e-09,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        },
+        {
+         "t_s": 5.000000000000001e-09,
+         "t_applied_s": 5.000000000000001e-09,
+         "level": 0.63,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 5.5000000000000004e-09,
+         "t_applied_s": 5.5000000000000004e-09,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        },
+        {
+         "t_s": 5.750000000000001e-09,
+         "t_applied_s": 5.750000000000001e-09,
+         "level": 0.63,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 6.2500000000000005e-09,
+         "t_applied_s": 6.2500000000000005e-09,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        }
+       ],
+       "pwl": [
+        [
+         0.0,
+         0.0
+        ],
+        [
+         2e-09,
+         0.0
+        ],
+        [
+         2.0100000000000003e-09,
+         0.63
+        ],
+        [
+         3.7500000000000005e-09,
+         0.63
+        ],
+        [
+         3.76e-09,
+         0.0
+        ],
+        [
+         4.250000000000001e-09,
+         0.0
+        ],
+        [
+         4.260000000000001e-09,
+         0.63
+        ],
+        [
+         4.500000000000001e-09,
+         0.63
+        ],
+        [
+         4.51e-09,
+         0.0
+        ],
+        [
+         5.000000000000001e-09,
+         0.0
+        ],
+        [
+         5.010000000000001e-09,
+         0.63
+        ],
+        [
+         5.5000000000000004e-09,
+         0.63
+        ],
+        [
+         5.51e-09,
+         0.0
+        ],
+        [
+         5.750000000000001e-09,
+         0.0
+        ],
+        [
+         5.760000000000001e-09,
+         0.63
+        ],
+        [
+         6.2500000000000005e-09,
+         0.63
+        ],
+        [
+         6.26e-09,
+         0.0
+        ]
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "coverage": {
+  "corners_simulated": 3,
+  "measurements_declared": 35,
+  "measurements_with_limits": 35,
+  "unrecognized_limit_keys": [],
+  "schema_version": 1,
+  "known": true,
+  "checked": [
+   "limit:[0,\"tt/0.700V/25C\",\"lvl_000\",\"min\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"lvl_001\",\"min\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"lvl_002\",\"min\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"lvl_003\",\"min\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"lvl_004\",\"min\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"lvl_005\",\"min\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"lvl_006\",\"min\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"lvl_007\",\"min\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"lvl_008\",\"max\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"lvl_009\",\"min\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"lvl_010\",\"max\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"lvl_011\",\"max\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"lvl_012\",\"max\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"lvl_013\",\"max\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"lvl_014\",\"min\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"lvl_015\",\"min\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"lvl_016\",\"max\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"lvl_017\",\"min\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"lvl_018\",\"min\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"lvl_019\",\"max\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"lvl_020\",\"max\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"lvl_021\",\"min\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"lvl_022\",\"max\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"lvl_023\",\"min\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"lvl_024\",\"min\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"tpd_008\",\"max\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"tpd_009\",\"max\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"tpd_010\",\"max\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"tpd_014\",\"max\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"tpd_016\",\"max\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"tpd_017\",\"max\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"tpd_019\",\"max\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"tpd_021\",\"max\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"tpd_022\",\"max\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"tpd_023\",\"max\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"lvl_000\",\"min\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"lvl_001\",\"min\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"lvl_002\",\"min\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"lvl_003\",\"min\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"lvl_004\",\"min\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"lvl_005\",\"min\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"lvl_006\",\"min\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"lvl_007\",\"min\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"lvl_008\",\"max\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"lvl_009\",\"min\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"lvl_010\",\"max\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"lvl_011\",\"max\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"lvl_012\",\"max\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"lvl_013\",\"max\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"lvl_014\",\"min\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"lvl_015\",\"min\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"lvl_016\",\"max\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"lvl_017\",\"min\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"lvl_018\",\"min\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"lvl_019\",\"max\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"lvl_020\",\"max\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"lvl_021\",\"min\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"lvl_022\",\"max\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"lvl_023\",\"min\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"lvl_024\",\"min\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"tpd_008\",\"max\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"tpd_009\",\"max\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"tpd_010\",\"max\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"tpd_014\",\"max\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"tpd_016\",\"max\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"tpd_017\",\"max\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"tpd_019\",\"max\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"tpd_021\",\"max\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"tpd_022\",\"max\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"tpd_023\",\"max\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"lvl_000\",\"min\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"lvl_001\",\"min\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"lvl_002\",\"min\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"lvl_003\",\"min\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"lvl_004\",\"min\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"lvl_005\",\"min\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"lvl_006\",\"min\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"lvl_007\",\"min\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"lvl_008\",\"max\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"lvl_009\",\"min\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"lvl_010\",\"max\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"lvl_011\",\"max\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"lvl_012\",\"max\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"lvl_013\",\"max\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"lvl_014\",\"min\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"lvl_015\",\"min\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"lvl_016\",\"max\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"lvl_017\",\"min\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"lvl_018\",\"min\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"lvl_019\",\"max\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"lvl_020\",\"max\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"lvl_021\",\"min\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"lvl_022\",\"max\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"lvl_023\",\"min\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"lvl_024\",\"min\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"tpd_008\",\"max\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"tpd_009\",\"max\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"tpd_010\",\"max\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"tpd_014\",\"max\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"tpd_016\",\"max\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"tpd_017\",\"max\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"tpd_019\",\"max\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"tpd_021\",\"max\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"tpd_022\",\"max\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"tpd_023\",\"max\"]"
+  ],
+  "skipped": [],
+  "inapplicable": [],
+  "unknown": [],
+  "nothing_checked": false,
+  "nothing_checked_reasons": []
+ },
+ "provenance": {
+  "klt_version": "0.9.2.dev244+g92e2b15a66f2",
+  "klt_git_commit": "92e2b15a66f2b9d6ae69ed1b6cf6ec2e99a1e0e6",
+  "klt_reinstall_spec": "klayout-tools @ git+https://github.com/2AMLogic/klayout-tools@92e2b15a66f2b9d6ae69ed1b6cf6ec2e99a1e0e6",
+  "klayout_version": "0.30.13",
+  "pdk": null,
+  "deck": {
+   "name": "asap7_bsimcmg.lib",
+   "content_hash": "sha256:ed21e96383c01c41e9b00a442c08d7bf9daebed057206788526c1115c1418d4f",
+   "released": false
+  },
+  "input": {
+   "content_hash": "sha256:6410316780afb78e8d67d99e3dc6b4335bfd3dbcd6d03ece8e128fb661ed53c6",
+   "role": "netlist"
+  }
+ },
+ "measurements": [
+  {
+   "name": "lvl_000",
+   "unit": "VDD",
+   "limits": {
+    "min": 0.9
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 0.9999988417,
+    "margin": 0.09999884169999995
+   }
+  },
+  {
+   "name": "lvl_001",
+   "unit": "VDD",
+   "limits": {
+    "min": 0.9
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 0.9999970354,
+    "margin": 0.09999703539999993
+   }
+  },
+  {
+   "name": "lvl_002",
+   "unit": "VDD",
+   "limits": {
+    "min": 0.9
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 0.999978801,
+    "margin": 0.099978801
+   }
+  },
+  {
+   "name": "lvl_003",
+   "unit": "VDD",
+   "limits": {
+    "min": 0.9
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 0.9999970255,
+    "margin": 0.0999970255
+   }
+  },
+  {
+   "name": "lvl_004",
+   "unit": "VDD",
+   "limits": {
+    "min": 0.9
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ff/0.770V/0C",
+    "value": 1.000007878,
+    "margin": 0.10000787799999988
+   }
+  },
+  {
+   "name": "lvl_005",
+   "unit": "VDD",
+   "limits": {
+    "min": 0.9
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 0.9999970254,
+    "margin": 0.0999970254
+   }
+  },
+  {
+   "name": "lvl_006",
+   "unit": "VDD",
+   "limits": {
+    "min": 0.9
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 0.9999788015,
+    "margin": 0.09997880149999994
+   }
+  },
+  {
+   "name": "lvl_007",
+   "unit": "VDD",
+   "limits": {
+    "min": 0.9
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 0.9997940919,
+    "margin": 0.09979409189999999
+   }
+  },
+  {
+   "name": "lvl_008",
+   "unit": "VDD",
+   "limits": {
+    "max": 0.1
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 2.344815264e-05,
+    "margin": 0.09997655184736001
+   }
+  },
+  {
+   "name": "tpd_008",
+   "unit": "s",
+   "limits": {
+    "max": 9e-11
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 1.961317093e-11,
+    "margin": 7.038682907e-11
+   }
+  },
+  {
+   "name": "lvl_009",
+   "unit": "VDD",
+   "limits": {
+    "min": 0.9
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 0.9997600743,
+    "margin": 0.0997600743
+   }
+  },
+  {
+   "name": "tpd_009",
+   "unit": "s",
+   "limits": {
+    "max": 9e-11
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 2.668471326e-11,
+    "margin": 6.331528674e-11
+   }
+  },
+  {
+   "name": "lvl_010",
+   "unit": "VDD",
+   "limits": {
+    "max": 0.1
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 0.0001138539853,
+    "margin": 0.0998861460147
+   }
+  },
+  {
+   "name": "tpd_010",
+   "unit": "s",
+   "limits": {
+    "max": 9e-11
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 2.052419187e-11,
+    "margin": 6.947580813e-11
+   }
+  },
+  {
+   "name": "lvl_011",
+   "unit": "VDD",
+   "limits": {
+    "max": 0.1
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 8.807641607e-06,
+    "margin": 0.099991192358393
+   }
+  },
+  {
+   "name": "lvl_012",
+   "unit": "VDD",
+   "limits": {
+    "max": 0.1
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 2.344807217e-05,
+    "margin": 0.09997655192783
+   }
+  },
+  {
+   "name": "lvl_013",
+   "unit": "VDD",
+   "limits": {
+    "max": 0.1
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 4.97987418e-05,
+    "margin": 0.0999502012582
+   }
+  },
+  {
+   "name": "lvl_014",
+   "unit": "VDD",
+   "limits": {
+    "min": 0.9
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ff/0.770V/0C",
+    "value": 1.000002419,
+    "margin": 0.10000241900000006
+   }
+  },
+  {
+   "name": "tpd_014",
+   "unit": "s",
+   "limits": {
+    "max": 9e-11
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 1.390516228e-11,
+    "margin": 7.609483772e-11
+   }
+  },
+  {
+   "name": "lvl_015",
+   "unit": "VDD",
+   "limits": {
+    "min": 0.9
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 0.9999970355,
+    "margin": 0.09999703549999994
+   }
+  },
+  {
+   "name": "lvl_016",
+   "unit": "VDD",
+   "limits": {
+    "max": 0.1
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 2.344814473e-05,
+    "margin": 0.09997655185527
+   }
+  },
+  {
+   "name": "tpd_016",
+   "unit": "s",
+   "limits": {
+    "max": 9e-11
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 1.864721835e-11,
+    "margin": 7.135278165e-11
+   }
+  },
+  {
+   "name": "lvl_017",
+   "unit": "VDD",
+   "limits": {
+    "min": 0.9
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 0.9999970345,
+    "margin": 0.09999703449999997
+   }
+  },
+  {
+   "name": "tpd_017",
+   "unit": "s",
+   "limits": {
+    "max": 9e-11
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 1.397216566e-11,
+    "margin": 7.602783434e-11
+   }
+  },
+  {
+   "name": "lvl_018",
+   "unit": "VDD",
+   "limits": {
+    "min": 0.9
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ff/0.770V/0C",
+    "value": 1.000007369,
+    "margin": 0.10000736899999996
+   }
+  },
+  {
+   "name": "lvl_019",
+   "unit": "VDD",
+   "limits": {
+    "max": 0.1
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 3.270301108e-05,
+    "margin": 0.09996729698892001
+   }
+  },
+  {
+   "name": "tpd_019",
+   "unit": "s",
+   "limits": {
+    "max": 9e-11
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 1.493082555e-11,
+    "margin": 7.506917445e-11
+   }
+  },
+  {
+   "name": "lvl_020",
+   "unit": "VDD",
+   "limits": {
+    "max": 0.1
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 0.0001025222412,
+    "margin": 0.09989747775880001
+   }
+  },
+  {
+   "name": "lvl_021",
+   "unit": "VDD",
+   "limits": {
+    "min": 0.9
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 0.9999970252,
+    "margin": 0.09999702519999998
+   }
+  },
+  {
+   "name": "tpd_021",
+   "unit": "s",
+   "limits": {
+    "max": 9e-11
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 1.41740056e-11,
+    "margin": 7.58259944e-11
+   }
+  },
+  {
+   "name": "lvl_022",
+   "unit": "VDD",
+   "limits": {
+    "max": 0.1
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 0.0001135915611,
+    "margin": 0.09988640843890001
+   }
+  },
+  {
+   "name": "tpd_022",
+   "unit": "s",
+   "limits": {
+    "max": 9e-11
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 2.001629925e-11,
+    "margin": 6.998370075e-11
+   }
+  },
+  {
+   "name": "lvl_023",
+   "unit": "VDD",
+   "limits": {
+    "min": 0.9
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 0.9997590323,
+    "margin": 0.09975903229999994
+   }
+  },
+  {
+   "name": "tpd_023",
+   "unit": "s",
+   "limits": {
+    "max": 9e-11
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 2.74596269e-11,
+    "margin": 6.25403731e-11
+   }
+  },
+  {
+   "name": "lvl_024",
+   "unit": "VDD",
+   "limits": {
+    "min": 0.9
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 0.9999999382,
+    "margin": 0.09999993819999997
+   }
+  }
+ ],
+ "corners": [
+  {
+   "corner_id": "tt/0.700V/25C",
+   "process": "tt",
+   "supply_v": {
+    "vsup": 0.7
+   },
+   "temperature_c": 25,
+   "status": "pass",
+   "runtime_s": 0.367,
+   "peak_rss_bytes": 50380800,
+   "engine_exit_code": 0,
+   "engine_killed_by_signal": null,
+   "measurements": [
+    {
+     "name": "lvl_000",
+     "value": 0.9999999084,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09999990839999995
+    },
+    {
+     "name": "lvl_001",
+     "value": 0.9999998094,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09999980939999997
+    },
+    {
+     "name": "lvl_002",
+     "value": 0.9999940325,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09999403249999994
+    },
+    {
+     "name": "lvl_003",
+     "value": 0.9999998068,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09999980679999998
+    },
+    {
+     "name": "lvl_004",
+     "value": 1.000013319,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.10001331899999999
+    },
+    {
+     "name": "lvl_005",
+     "value": 0.9999998068,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09999980679999998
+    },
+    {
+     "name": "lvl_006",
+     "value": 0.9999940327,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09999403269999996
+    },
+    {
+     "name": "lvl_007",
+     "value": 0.9999080857,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09990808569999998
+    },
+    {
+     "name": "lvl_008",
+     "value": 6.044166571e-07,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.0999993955833429
+    },
+    {
+     "name": "tpd_008",
+     "value": 1.325680621e-11,
+     "unit": "s",
+     "status": "pass",
+     "margin": 7.674319379e-11
+    },
+    {
+     "name": "lvl_009",
+     "value": 0.9999000462,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09990004619999993
+    },
+    {
+     "name": "tpd_009",
+     "value": 1.749279142e-11,
+     "unit": "s",
+     "status": "pass",
+     "margin": 7.250720858e-11
+    },
+    {
+     "name": "lvl_010",
+     "value": 4.762090957e-05,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09995237909043
+    },
+    {
+     "name": "tpd_010",
+     "value": 1.397996741e-11,
+     "unit": "s",
+     "status": "pass",
+     "margin": 7.602003258999999e-11
+    },
+    {
+     "name": "lvl_011",
+     "value": 2.302963492e-07,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.0999997697036508
+    },
+    {
+     "name": "lvl_012",
+     "value": 6.044166568e-07,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09999939558334321
+    },
+    {
+     "name": "lvl_013",
+     "value": 2.133834062e-05,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09997866165938
+    },
+    {
+     "name": "lvl_014",
+     "value": 1.000004624,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.10000462399999999
+    },
+    {
+     "name": "tpd_014",
+     "value": 9.578944784e-12,
+     "unit": "s",
+     "status": "pass",
+     "margin": 8.0421055216e-11
+    },
+    {
+     "name": "lvl_015",
+     "value": 0.9999998093,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09999980929999996
+    },
+    {
+     "name": "lvl_016",
+     "value": 6.044166558e-07,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09999939558334421
+    },
+    {
+     "name": "tpd_016",
+     "value": 1.271335349e-11,
+     "unit": "s",
+     "status": "pass",
+     "margin": 7.728664651e-11
+    },
+    {
+     "name": "lvl_017",
+     "value": 0.9999998093,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09999980929999996
+    },
+    {
+     "name": "tpd_017",
+     "value": 9.63467199e-12,
+     "unit": "s",
+     "status": "pass",
+     "margin": 8.036532801e-11
+    },
+    {
+     "name": "lvl_018",
+     "value": 1.00001283,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.10001282999999994
+    },
+    {
+     "name": "lvl_019",
+     "value": 1.332590841e-05,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09998667409159001
+    },
+    {
+     "name": "tpd_019",
+     "value": 1.04082288e-11,
+     "unit": "s",
+     "status": "pass",
+     "margin": 7.95917712e-11
+    },
+    {
+     "name": "lvl_020",
+     "value": 4.454195945e-05,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09995545804055
+    },
+    {
+     "name": "lvl_021",
+     "value": 0.9999998068,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09999980679999998
+    },
+    {
+     "name": "tpd_021",
+     "value": 9.718682708e-12,
+     "unit": "s",
+     "status": "pass",
+     "margin": 8.0281317292e-11
+    },
+    {
+     "name": "lvl_022",
+     "value": 4.756957335e-05,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09995243042665
+    },
+    {
+     "name": "tpd_022",
+     "value": 1.375176801e-11,
+     "unit": "s",
+     "status": "pass",
+     "margin": 7.624823199e-11
+    },
+    {
+     "name": "lvl_023",
+     "value": 0.9998998328,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09989983280000003
+    },
+    {
+     "name": "tpd_023",
+     "value": 1.792179125e-11,
+     "unit": "s",
+     "status": "pass",
+     "margin": 7.207820875e-11
+    },
+    {
+     "name": "lvl_024",
+     "value": 0.9999999492,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.0999999492
+    }
+   ],
+   "diagnostics": [],
+   "artifacts": {
+    "log": null,
+    "raw": null,
+    "waveform": null,
+    "deck": null
+   },
+   "monte_carlo": null
+  },
+  {
+   "corner_id": "ff/0.770V/0C",
+   "process": "ff",
+   "supply_v": {
+    "vsup": 0.77
+   },
+   "temperature_c": 0,
+   "status": "pass",
+   "runtime_s": 0.367,
+   "peak_rss_bytes": 50380800,
+   "engine_exit_code": 0,
+   "engine_killed_by_signal": null,
+   "measurements": [
+    {
+     "name": "lvl_000",
+     "value": 0.9999999323,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09999993229999993
+    },
+    {
+     "name": "lvl_001",
+     "value": 0.9999998838,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09999988380000002
+    },
+    {
+     "name": "lvl_002",
+     "value": 0.9999969704,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.0999969704
+    },
+    {
+     "name": "lvl_003",
+     "value": 0.9999998826,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09999988259999992
+    },
+    {
+     "name": "lvl_004",
+     "value": 1.000007878,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.10000787799999988
+    },
+    {
+     "name": "lvl_005",
+     "value": 0.9999998826,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09999988259999992
+    },
+    {
+     "name": "lvl_006",
+     "value": 0.9999969706,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09999697060000001
+    },
+    {
+     "name": "lvl_007",
+     "value": 0.9999437731,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09994377310000002
+    },
+    {
+     "name": "lvl_008",
+     "value": 1.369867253e-07,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09999986301327471
+    },
+    {
+     "name": "tpd_008",
+     "value": 9.670989341e-12,
+     "unit": "s",
+     "status": "pass",
+     "margin": 8.0329010659e-11
+    },
+    {
+     "name": "lvl_009",
+     "value": 0.9999406237,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09994062370000001
+    },
+    {
+     "name": "tpd_009",
+     "value": 1.242626965e-11,
+     "unit": "s",
+     "status": "pass",
+     "margin": 7.757373035e-11
+    },
+    {
+     "name": "lvl_010",
+     "value": 3.074670487e-05,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09996925329513001
+    },
+    {
+     "name": "tpd_010",
+     "value": 1.031665351e-11,
+     "unit": "s",
+     "status": "pass",
+     "margin": 7.968334649e-11
+    },
+    {
+     "name": "lvl_011",
+     "value": 5.440365859e-08,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09999994559634141
+    },
+    {
+     "name": "lvl_012",
+     "value": 1.369867252e-07,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.0999998630132748
+    },
+    {
+     "name": "lvl_013",
+     "value": 1.494173571e-05,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09998505826429001
+    },
+    {
+     "name": "lvl_014",
+     "value": 1.000002419,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.10000241900000006
+    },
+    {
+     "name": "tpd_014",
+     "value": 7.10253414e-12,
+     "unit": "s",
+     "status": "pass",
+     "margin": 8.289746586e-11
+    },
+    {
+     "name": "lvl_015",
+     "value": 0.9999998839,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09999988390000003
+    },
+    {
+     "name": "lvl_016",
+     "value": 1.369867253e-07,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09999986301327471
+    },
+    {
+     "name": "tpd_016",
+     "value": 9.397476762e-12,
+     "unit": "s",
+     "status": "pass",
+     "margin": 8.0602523238e-11
+    },
+    {
+     "name": "lvl_017",
+     "value": 0.9999998839,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09999988390000003
+    },
+    {
+     "name": "tpd_017",
+     "value": 7.150230494e-12,
+     "unit": "s",
+     "status": "pass",
+     "margin": 8.2849769506e-11
+    },
+    {
+     "name": "lvl_018",
+     "value": 1.000007369,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.10000736899999996
+    },
+    {
+     "name": "lvl_019",
+     "value": 1.011755798e-05,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09998988244202
+    },
+    {
+     "name": "tpd_019",
+     "value": 7.835861366e-12,
+     "unit": "s",
+     "status": "pass",
+     "margin": 8.2164138634e-11
+    },
+    {
+     "name": "lvl_020",
+     "value": 2.937297738e-05,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09997062702262001
+    },
+    {
+     "name": "lvl_021",
+     "value": 0.9999998827,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09999988269999993
+    },
+    {
+     "name": "tpd_021",
+     "value": 7.224204317e-12,
+     "unit": "s",
+     "status": "pass",
+     "margin": 8.2775795683e-11
+    },
+    {
+     "name": "lvl_022",
+     "value": 3.074699769e-05,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09996925300231001
+    },
+    {
+     "name": "tpd_022",
+     "value": 1.030314681e-11,
+     "unit": "s",
+     "status": "pass",
+     "margin": 7.969685319e-11
+    },
+    {
+     "name": "lvl_023",
+     "value": 0.9999405716,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09994057160000003
+    },
+    {
+     "name": "tpd_023",
+     "value": 1.261995476e-11,
+     "unit": "s",
+     "status": "pass",
+     "margin": 7.738004524e-11
+    },
+    {
+     "name": "lvl_024",
+     "value": 0.9999999426,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.0999999426
+    }
+   ],
+   "diagnostics": [],
+   "artifacts": {
+    "log": null,
+    "raw": null,
+    "waveform": null,
+    "deck": null
+   },
+   "monte_carlo": null
+  },
+  {
+   "corner_id": "ss/0.630V/100C",
+   "process": "ss",
+   "supply_v": {
+    "vsup": 0.63
+   },
+   "temperature_c": 100,
+   "status": "pass",
+   "runtime_s": 0.367,
+   "peak_rss_bytes": 50380800,
+   "engine_exit_code": 0,
+   "engine_killed_by_signal": null,
+   "measurements": [
+    {
+     "name": "lvl_000",
+     "value": 0.9999988417,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09999884169999995
+    },
+    {
+     "name": "lvl_001",
+     "value": 0.9999970354,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09999703539999993
+    },
+    {
+     "name": "lvl_002",
+     "value": 0.999978801,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.099978801
+    },
+    {
+     "name": "lvl_003",
+     "value": 0.9999970255,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.0999970255
+    },
+    {
+     "name": "lvl_004",
+     "value": 1.000026569,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.10002656900000007
+    },
+    {
+     "name": "lvl_005",
+     "value": 0.9999970254,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.0999970254
+    },
+    {
+     "name": "lvl_006",
+     "value": 0.9999788015,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09997880149999994
+    },
+    {
+     "name": "lvl_007",
+     "value": 0.9997940919,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09979409189999999
+    },
+    {
+     "name": "lvl_008",
+     "value": 2.344815264e-05,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09997655184736001
+    },
+    {
+     "name": "tpd_008",
+     "value": 1.961317093e-11,
+     "unit": "s",
+     "status": "pass",
+     "margin": 7.038682907e-11
+    },
+    {
+     "name": "lvl_009",
+     "value": 0.9997600743,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.0997600743
+    },
+    {
+     "name": "tpd_009",
+     "value": 2.668471326e-11,
+     "unit": "s",
+     "status": "pass",
+     "margin": 6.331528674e-11
+    },
+    {
+     "name": "lvl_010",
+     "value": 0.0001138539853,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.0998861460147
+    },
+    {
+     "name": "tpd_010",
+     "value": 2.052419187e-11,
+     "unit": "s",
+     "status": "pass",
+     "margin": 6.947580813e-11
+    },
+    {
+     "name": "lvl_011",
+     "value": 8.807641607e-06,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.099991192358393
+    },
+    {
+     "name": "lvl_012",
+     "value": 2.344807217e-05,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09997655192783
+    },
+    {
+     "name": "lvl_013",
+     "value": 4.97987418e-05,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.0999502012582
+    },
+    {
+     "name": "lvl_014",
+     "value": 1.000006582,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.1000065819999999
+    },
+    {
+     "name": "tpd_014",
+     "value": 1.390516228e-11,
+     "unit": "s",
+     "status": "pass",
+     "margin": 7.609483772e-11
+    },
+    {
+     "name": "lvl_015",
+     "value": 0.9999970355,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09999703549999994
+    },
+    {
+     "name": "lvl_016",
+     "value": 2.344814473e-05,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09997655185527
+    },
+    {
+     "name": "tpd_016",
+     "value": 1.864721835e-11,
+     "unit": "s",
+     "status": "pass",
+     "margin": 7.135278165e-11
+    },
+    {
+     "name": "lvl_017",
+     "value": 0.9999970345,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09999703449999997
+    },
+    {
+     "name": "tpd_017",
+     "value": 1.397216566e-11,
+     "unit": "s",
+     "status": "pass",
+     "margin": 7.602783434e-11
+    },
+    {
+     "name": "lvl_018",
+     "value": 1.000026243,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.10002624299999996
+    },
+    {
+     "name": "lvl_019",
+     "value": 3.270301108e-05,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09996729698892001
+    },
+    {
+     "name": "tpd_019",
+     "value": 1.493082555e-11,
+     "unit": "s",
+     "status": "pass",
+     "margin": 7.506917445e-11
+    },
+    {
+     "name": "lvl_020",
+     "value": 0.0001025222412,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09989747775880001
+    },
+    {
+     "name": "lvl_021",
+     "value": 0.9999970252,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09999702519999998
+    },
+    {
+     "name": "tpd_021",
+     "value": 1.41740056e-11,
+     "unit": "s",
+     "status": "pass",
+     "margin": 7.58259944e-11
+    },
+    {
+     "name": "lvl_022",
+     "value": 0.0001135915611,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09988640843890001
+    },
+    {
+     "name": "tpd_022",
+     "value": 2.001629925e-11,
+     "unit": "s",
+     "status": "pass",
+     "margin": 6.998370075e-11
+    },
+    {
+     "name": "lvl_023",
+     "value": 0.9997590323,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09975903229999994
+    },
+    {
+     "name": "tpd_023",
+     "value": 2.74596269e-11,
+     "unit": "s",
+     "status": "pass",
+     "margin": 6.25403731e-11
+    },
+    {
+     "name": "lvl_024",
+     "value": 0.9999999382,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09999993819999997
+    }
+   ],
+   "diagnostics": [],
+   "artifacts": {
+    "log": null,
+    "raw": null,
+    "waveform": null,
+    "deck": null
+   },
+   "monte_carlo": null
+  }
+ ]
+}
