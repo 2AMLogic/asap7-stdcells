@@ -51,6 +51,20 @@ on the drawn INVx1 and NAND2x1 at TT once the n-well is tied to VDD.
    made by the generator standing in for the TAP cell; with the well floating the
    transient is singular).
 
+8. **`/opt/pdk` is an allowed envelope path prefix for batch-sim records.** The
+   evidence-lint step in `.github/workflows/signoff.yml` runs `klt env-provenance
+   lint-envelope` with an allow-list of absolute path prefixes (operator ruling,
+   issue #14: the checkout/worktree prefix is never allowed). The committed batch
+   reports of item 5 record the Spot batch worker's PDK install root,
+   `"root": "/opt/pdk"`, at `environment.remote.worker_environment.pdk.root`.
+   That path is a fleet-wide constant of the worker image, the same kind of
+   thing as the klayout-tools venv prefix already allowed, and is not a checkout
+   or worktree path, so it leaks no host or checkout location. It is added to the
+   allow-list as a **prefix only**: the existing venv prefix stays, the
+   checkout/worktree prefix stays disallowed, and no other prefix is added. The
+   committed reports are left untouched (append-only evidence); only the lint's
+   allow-list changes. Any further prefix needs its own decision.
+
 ## Limits
 
 - Pre-layout parasitics only: the extracted netlists carry devices, no wire
