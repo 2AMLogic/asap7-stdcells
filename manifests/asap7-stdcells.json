@@ -47,6 +47,80 @@
         "file": "verification/records/20261029T012553Z-klt0.8.1.dev670_g680c6f4a7518/library/lvs.json",
         "content_hash": "sha256:bf619dcce132b568d08c94951199f6f08720d842ef11c1a09404ff0357c9cba4"
       }
+    ],
+    "7": [
+      {
+        "file": "verification/pex/records/2026-11-07/AND2x1/tied.json",
+        "content_hash": "sha256:980f1b52b1f6be933f8e0d079adc93c5ebcd3b897b83e6bc50d6b9534163c700"
+      },
+      {
+        "file": "verification/pex/records/2026-11-07/AOI21x1/tied.json",
+        "content_hash": "sha256:048cafe06e1fc3bf269ad8a7a57621fc7f3af86a70436816e60f440509e322cc"
+      },
+      {
+        "file": "verification/pex/records/2026-11-07/AOI22x1/tied.json",
+        "content_hash": "sha256:9e1f48a4332104c04f6973d387f4460edefd1fce7e420ac75bb566d6609ddb9d"
+      },
+      {
+        "file": "verification/pex/records/2026-11-07/BUFx1/tied.json",
+        "content_hash": "sha256:444555a2953ab1ba89c52c4821ea1276d1bb7ab86c67826e6d47977d3152a57c"
+      },
+      {
+        "file": "verification/pex/records/2026-11-07/DFFHQNx1/tied.json",
+        "content_hash": "sha256:322d0bacae8f6ff78bdd79ac22f49f0e53c854ebdd565d25e0c5bf7c11261442"
+      },
+      {
+        "file": "verification/pex/records/2026-11-07/DHLx1/tied.json",
+        "content_hash": "sha256:30c2e805061faf607d45d81d057122ef8f7c9ff2ec0b09cdc4507a8718e23d3a"
+      },
+      {
+        "file": "verification/pex/records/2026-11-07/INVx1/tied.json",
+        "content_hash": "sha256:be3a49ca6bd1bed2bbfb1c764f0c132a21296fa60dd620e3fd38dbe4217149dd"
+      },
+      {
+        "file": "verification/pex/records/2026-11-07/NAND2x1/tied.json",
+        "content_hash": "sha256:ca225773ada0018220aafb6c433194ea111e2e1e0ba37a26eccd2f5c979dcf37"
+      },
+      {
+        "file": "verification/pex/records/2026-11-07/NAND3x1/tied.json",
+        "content_hash": "sha256:4e234bfe8632f1846730b260f4427afafe3a8becb79f752d85802ac0aabbac63"
+      },
+      {
+        "file": "verification/pex/records/2026-11-07/NOR2x1/tied.json",
+        "content_hash": "sha256:291158a4b51bcdf8a39fbf18ab7318ffb0a312551517e47520801596efa2b053"
+      },
+      {
+        "file": "verification/pex/records/2026-11-07/NOR3x1/tied.json",
+        "content_hash": "sha256:ed4fd6acf8eb30f141519ec0b03176e34c069fe3092d7dceeba6461950cbdbae"
+      },
+      {
+        "file": "verification/pex/records/2026-11-07/OAI21x1/tied.json",
+        "content_hash": "sha256:91ab784c7b7edce299cf34c5e786cf31a95c119871c0db76292713e6ea5dbc2a"
+      },
+      {
+        "file": "verification/pex/records/2026-11-07/OAI22x1/tied.json",
+        "content_hash": "sha256:e7697b823a1c28ff1d42f19cfc11761aa398405cf8390d6a51adcc3bb1bad155"
+      },
+      {
+        "file": "verification/pex/records/2026-11-07/OR2x1/tied.json",
+        "content_hash": "sha256:2f99fc7ce6a28446aeebfdba6f6c9f341da95701e3d971511ce85218fad39835"
+      },
+      {
+        "file": "verification/pex/records/2026-11-07/TIEHIx1/tied.json",
+        "content_hash": "sha256:90b631717968a96fa5a19b55a856f7a54888ea79e0ae345b7970c08df516dba7"
+      },
+      {
+        "file": "verification/pex/records/2026-11-07/TIELOx1/tied.json",
+        "content_hash": "sha256:8aea407bb2ba6591f9edc3f62966646c50f97fdaaa287e16584329f62481c60b"
+      },
+      {
+        "file": "verification/pex/records/2026-11-07/XNOR2x1/tied.json",
+        "content_hash": "sha256:291b6a49e9fab3bfae799bb056ecb71ca6c2c0adc28de449db6f18e130ed8976"
+      },
+      {
+        "file": "verification/pex/records/2026-11-07/XOR2x1/tied.json",
+        "content_hash": "sha256:2f993a86c7fc67ed58be9324a128a1d22e10f96a668542f24fcf3e7560da8491"
+      }
     ]
   }
 }

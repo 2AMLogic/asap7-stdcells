@@ -1,0 +1,2445 @@
+{
+ "schema": "asap7-stdcells.pex-summary/1",
+ "corner": "TT 0.70 V 25 C",
+ "cells": [
+  {
+   "cell": "INVx1_A7S_75t_R",
+   "extract_only": {
+    "body_bias": {
+     "status": "unbiased",
+     "unbiased_device_count": 1,
+     "unbiased_nets": [
+      "\\$5"
+     ],
+     "unbiased_pmos_body_nets": [
+      {
+       "device": "$2",
+       "net": "\\$5"
+      }
+     ]
+    },
+    "exit_code": 4
+   },
+   "untied": {
+    "exit_code": 0,
+    "status": "pass",
+    "body_bias_status": "unbiased",
+    "unbiased_nets": [
+     "\\$5"
+    ],
+    "tied": null,
+    "model_mismatch": null,
+    "rows": [
+     {
+      "spec_row": "checks_ok",
+      "schematic_value": 4.0,
+      "extracted_value": 4.0,
+      "delta_pct": 0.0,
+      "status": "pass"
+     },
+     {
+      "spec_row": "tpd_A_r2f@750p",
+      "schematic_value": 6.77406e-12,
+      "extracted_value": 6.79571e-12,
+      "delta_pct": 0.32,
+      "status": "pass"
+     },
+     {
+      "spec_row": "tpd_A_f2r@1000p",
+      "schematic_value": 7.54668e-12,
+      "extracted_value": 7.57261e-12,
+      "delta_pct": 0.344,
+      "status": "pass"
+     }
+    ],
+    "error": null
+   },
+   "tied": {
+    "exit_code": 0,
+    "status": "pass",
+    "body_bias_status": "tied",
+    "unbiased_nets": [
+     "\\$5"
+    ],
+    "tied": [
+     {
+      "extracted_net": "\\$5",
+      "schematic_net": "VDD",
+      "source": "declared"
+     }
+    ],
+    "model_mismatch": null,
+    "rows": [
+     {
+      "spec_row": "checks_ok",
+      "schematic_value": 4.0,
+      "extracted_value": 4.0,
+      "delta_pct": 0.0,
+      "status": "pass"
+     },
+     {
+      "spec_row": "tpd_A_r2f@750p",
+      "schematic_value": 6.77406e-12,
+      "extracted_value": 6.79571e-12,
+      "delta_pct": 0.32,
+      "status": "pass"
+     },
+     {
+      "spec_row": "tpd_A_f2r@1000p",
+      "schematic_value": 7.54668e-12,
+      "extracted_value": 7.57262e-12,
+      "delta_pct": 0.344,
+      "status": "pass"
+     }
+    ],
+    "error": null
+   }
+  },
+  {
+   "cell": "BUFx1_A7S_75t_R",
+   "extract_only": {
+    "body_bias": {
+     "status": "unbiased",
+     "unbiased_device_count": 2,
+     "unbiased_nets": [
+      "\\$6"
+     ],
+     "unbiased_pmos_body_nets": [
+      {
+       "device": "$3",
+       "net": "\\$6"
+      },
+      {
+       "device": "$4",
+       "net": "\\$6"
+      }
+     ]
+    },
+    "exit_code": 4
+   },
+   "untied": {
+    "exit_code": 4,
+    "status": "error",
+    "body_bias_status": "unbiased",
+    "unbiased_nets": [
+     "\\$6"
+    ],
+    "tied": null,
+    "model_mismatch": null,
+    "rows": [
+     {
+      "spec_row": "checks_ok",
+      "schematic_value": 4.0,
+      "extracted_value": 0.0,
+      "delta_pct": -100.0,
+      "status": "fail"
+     },
+     {
+      "spec_row": "tpd_A_r2r@750p",
+      "schematic_value": 1.00907e-11,
+      "extracted_value": null,
+      "delta_pct": null,
+      "status": "error"
+     },
+     {
+      "spec_row": "tpd_A_f2f@1000p",
+      "schematic_value": 9.97472e-12,
+      "extracted_value": null,
+      "delta_pct": null,
+      "status": "error"
+     }
+    ],
+    "error": "klt pex: 2 of 3 delta rows errored; first cause (extracted side, stage execute): 50% threshold not crossed after the edge at 750 ps (Warning: singular matrix: check node xdut._6; ngspice aborted the transient: timestep too small; no results exist past the abort, so measurements beyond it produce no value (engine log: Error: Transient op failed, timestep too small).; Warning: Dynamic gmin stepping failed; measurement 'chk_0' prod)"
+   },
+   "tied": {
+    "exit_code": 0,
+    "status": "pass",
+    "body_bias_status": "tied",
+    "unbiased_nets": [
+     "\\$6"
+    ],
+    "tied": [
+     {
+      "extracted_net": "\\$6",
+      "schematic_net": "VDD",
+      "source": "declared"
+     }
+    ],
+    "model_mismatch": null,
+    "rows": [
+     {
+      "spec_row": "checks_ok",
+      "schematic_value": 4.0,
+      "extracted_value": 4.0,
+      "delta_pct": 0.0,
+      "status": "pass"
+     },
+     {
+      "spec_row": "tpd_A_r2r@750p",
+      "schematic_value": 1.00907e-11,
+      "extracted_value": 1.01623e-11,
+      "delta_pct": 0.71,
+      "status": "pass"
+     },
+     {
+      "spec_row": "tpd_A_f2f@1000p",
+      "schematic_value": 9.97472e-12,
+      "extracted_value": 1.00502e-11,
+      "delta_pct": 0.757,
+      "status": "pass"
+     }
+    ],
+    "error": null
+   }
+  },
+  {
+   "cell": "NAND2x1_A7S_75t_R",
+   "extract_only": {
+    "body_bias": {
+     "status": "unbiased",
+     "unbiased_device_count": 2,
+     "unbiased_nets": [
+      "\\$6"
+     ],
+     "unbiased_pmos_body_nets": [
+      {
+       "device": "$3",
+       "net": "\\$6"
+      },
+      {
+       "device": "$4",
+       "net": "\\$6"
+      }
+     ]
+    },
+    "exit_code": 4
+   },
+   "untied": {
+    "exit_code": 0,
+    "status": "pass",
+    "body_bias_status": "unbiased",
+    "unbiased_nets": [
+     "\\$6"
+    ],
+    "tied": null,
+    "model_mismatch": null,
+    "rows": [
+     {
+      "spec_row": "checks_ok",
+      "schematic_value": 8.0,
+      "extracted_value": 8.0,
+      "delta_pct": 0.0,
+      "status": "pass"
+     },
+     {
+      "spec_row": "tpd_A_r2f@1250p",
+      "schematic_value": 1.0218e-11,
+      "extracted_value": 1.02682e-11,
+      "delta_pct": 0.491,
+      "status": "pass"
+     },
+     {
+      "spec_row": "tpd_A_f2r@1500p",
+      "schematic_value": 8.33289e-12,
+      "extracted_value": 8.36574e-12,
+      "delta_pct": 0.394,
+      "status": "pass"
+     },
+     {
+      "spec_row": "tpd_B_r2f@2000p",
+      "schematic_value": 1.00436e-11,
+      "extracted_value": 1.0091e-11,
+      "delta_pct": 0.472,
+      "status": "pass"
+     },
+     {
+      "spec_row": "tpd_B_f2r@2250p",
+      "schematic_value": 7.81885e-12,
+      "extracted_value": 7.85136e-12,
+      "delta_pct": 0.416,
+      "status": "pass"
+     }
+    ],
+    "error": null
+   },
+   "tied": {
+    "exit_code": 0,
+    "status": "pass",
+    "body_bias_status": "tied",
+    "unbiased_nets": [
+     "\\$6"
+    ],
+    "tied": [
+     {
+      "extracted_net": "\\$6",
+      "schematic_net": "VDD",
+      "source": "declared"
+     }
+    ],
+    "model_mismatch": null,
+    "rows": [
+     {
+      "spec_row": "checks_ok",
+      "schematic_value": 8.0,
+      "extracted_value": 8.0,
+      "delta_pct": 0.0,
+      "status": "pass"
+     },
+     {
+      "spec_row": "tpd_A_r2f@1250p",
+      "schematic_value": 1.0218e-11,
+      "extracted_value": 1.02682e-11,
+      "delta_pct": 0.491,
+      "status": "pass"
+     },
+     {
+      "spec_row": "tpd_A_f2r@1500p",
+      "schematic_value": 8.33289e-12,
+      "extracted_value": 8.36574e-12,
+      "delta_pct": 0.394,
+      "status": "pass"
+     },
+     {
+      "spec_row": "tpd_B_r2f@2000p",
+      "schematic_value": 1.00436e-11,
+      "extracted_value": 1.0091e-11,
+      "delta_pct": 0.472,
+      "status": "pass"
+     },
+     {
+      "spec_row": "tpd_B_f2r@2250p",
+      "schematic_value": 7.81885e-12,
+      "extracted_value": 7.85138e-12,
+      "delta_pct": 0.416,
+      "status": "pass"
+     }
+    ],
+    "error": null
+   }
+  },
+  {
+   "cell": "NOR2x1_A7S_75t_R",
+   "extract_only": {
+    "body_bias": {
+     "status": "unbiased",
+     "unbiased_device_count": 2,
+     "unbiased_nets": [
+      "\\$6"
+     ],
+     "unbiased_pmos_body_nets": [
+      {
+       "device": "$3",
+       "net": "\\$6"
+      },
+      {
+       "device": "$4",
+       "net": "\\$6"
+      }
+     ]
+    },
+    "exit_code": 4
+   },
+   "untied": {
+    "exit_code": 4,
+    "status": "error",
+    "body_bias_status": "unbiased",
+    "unbiased_nets": [
+     "\\$6"
+    ],
+    "tied": null,
+    "model_mismatch": null,
+    "rows": [
+     {
+      "spec_row": "checks_ok",
+      "schematic_value": 8.0,
+      "extracted_value": 0.0,
+      "delta_pct": -100.0,
+      "status": "fail"
+     },
+     {
+      "spec_row": "tpd_A_r2f@1250p",
+      "schematic_value": 7.4022e-12,
+      "extracted_value": null,
+      "delta_pct": null,
+      "status": "error"
+     },
+     {
+      "spec_row": "tpd_A_f2r@1500p",
+      "schematic_value": 1.28685e-11,
+      "extracted_value": null,
+      "delta_pct": null,
+      "status": "error"
+     },
+     {
+      "spec_row": "tpd_B_r2f@2000p",
+      "schematic_value": 7.00656e-12,
+      "extracted_value": null,
+      "delta_pct": null,
+      "status": "error"
+     },
+     {
+      "spec_row": "tpd_B_f2r@2250p",
+      "schematic_value": 1.23828e-11,
+      "extracted_value": null,
+      "delta_pct": null,
+      "status": "error"
+     }
+    ],
+    "error": "klt pex: 4 of 5 delta rows errored; first cause (extracted side, stage execute): 50% threshold not crossed after the edge at 1250 ps (Warning: singular matrix: check node xdut._6; ngspice aborted the transient: timestep too small; no results exist past the abort, so measurements beyond it produce no value (engine log: Error: Transient op failed, timestep too small).; Warning: Dynamic gmin stepping failed; measurement 'chk_0' prod)"
+   },
+   "tied": {
+    "exit_code": 0,
+    "status": "pass",
+    "body_bias_status": "tied",
+    "unbiased_nets": [
+     "\\$6"
+    ],
+    "tied": [
+     {
+      "extracted_net": "\\$6",
+      "schematic_net": "VDD",
+      "source": "declared"
+     }
+    ],
+    "model_mismatch": null,
+    "rows": [
+     {
+      "spec_row": "checks_ok",
+      "schematic_value": 8.0,
+      "extracted_value": 8.0,
+      "delta_pct": 0.0,
+      "status": "pass"
+     },
+     {
+      "spec_row": "tpd_A_r2f@1250p",
+      "schematic_value": 7.4022e-12,
+      "extracted_value": 7.43071e-12,
+      "delta_pct": 0.385,
+      "status": "pass"
+     },
+     {
+      "spec_row": "tpd_A_f2r@1500p",
+      "schematic_value": 1.28685e-11,
+      "extracted_value": 1.29331e-11,
+      "delta_pct": 0.502,
+      "status": "pass"
+     },
+     {
+      "spec_row": "tpd_B_r2f@2000p",
+      "schematic_value": 7.00656e-12,
+      "extracted_value": 7.03416e-12,
+      "delta_pct": 0.394,
+      "status": "pass"
+     },
+     {
+      "spec_row": "tpd_B_f2r@2250p",
+      "schematic_value": 1.23828e-11,
+      "extracted_value": 1.2443e-11,
+      "delta_pct": 0.486,
+      "status": "pass"
+     }
+    ],
+    "error": null
+   }
+  },
+  {
+   "cell": "AND2x1_A7S_75t_R",
+   "extract_only": {
+    "body_bias": {
+     "status": "unbiased",
+     "unbiased_device_count": 3,
+     "unbiased_nets": [
+      "\\$8"
+     ],
+     "unbiased_pmos_body_nets": [
+      {
+       "device": "$4",
+       "net": "\\$8"
+      },
+      {
+       "device": "$5",
+       "net": "\\$8"
+      },
+      {
+       "device": "$6",
+       "net": "\\$8"
+      }
+     ]
+    },
+    "exit_code": 4
+   },
+   "untied": {
+    "exit_code": 4,
+    "status": "error",
+    "body_bias_status": "unbiased",
+    "unbiased_nets": [
+     "\\$8"
+    ],
+    "tied": null,
+    "model_mismatch": null,
+    "rows": [
+     {
+      "spec_row": "checks_ok",
+      "schematic_value": 8.0,
+      "extracted_value": 0.0,
+      "delta_pct": -100.0,
+      "status": "fail"
+     },
+     {
+      "spec_row": "tpd_A_r2r@1250p",
+      "schematic_value": 1.25053e-11,
+      "extracted_value": null,
+      "delta_pct": null,
+      "status": "error"
+     },
+     {
+      "spec_row": "tpd_A_f2f@1500p",
+      "schematic_value": 1.03249e-11,
+      "extracted_value": null,
+      "delta_pct": null,
+      "status": "error"
+     },
+     {
+      "spec_row": "tpd_B_r2r@2000p",
+      "schematic_value": 1.27244e-11,
+      "extracted_value": null,
+      "delta_pct": null,
+      "status": "error"
+     },
+     {
+      "spec_row": "tpd_B_f2f@2250p",
+      "schematic_value": 1.10685e-11,
+      "extracted_value": null,
+      "delta_pct": null,
+      "status": "error"
+     }
+    ],
+    "error": "klt pex: 4 of 5 delta rows errored; first cause (extracted side, stage execute): 50% threshold not crossed after the edge at 1250 ps (Warning: singular matrix: check node xdut._8; ngspice aborted the transient: timestep too small; no results exist past the abort, so measurements beyond it produce no value (engine log: Error: Transient op failed, timestep too small).; Warning: Dynamic gmin stepping failed; measurement 'chk_0' prod)"
+   },
+   "tied": {
+    "exit_code": 0,
+    "status": "pass",
+    "body_bias_status": "tied",
+    "unbiased_nets": [
+     "\\$8"
+    ],
+    "tied": [
+     {
+      "extracted_net": "\\$8",
+      "schematic_net": "VDD",
+      "source": "declared"
+     }
+    ],
+    "model_mismatch": null,
+    "rows": [
+     {
+      "spec_row": "checks_ok",
+      "schematic_value": 8.0,
+      "extracted_value": 8.0,
+      "delta_pct": 0.0,
+      "status": "pass"
+     },
+     {
+      "spec_row": "tpd_A_r2r@1250p",
+      "schematic_value": 1.25053e-11,
+      "extracted_value": 1.2639e-11,
+      "delta_pct": 1.069,
+      "status": "pass"
+     },
+     {
+      "spec_row": "tpd_A_f2f@1500p",
+      "schematic_value": 1.03249e-11,
+      "extracted_value": 1.04223e-11,
+      "delta_pct": 0.943,
+      "status": "pass"
+     },
+     {
+      "spec_row": "tpd_B_r2r@2000p",
+      "schematic_value": 1.27244e-11,
+      "extracted_value": 1.28621e-11,
+      "delta_pct": 1.082,
+      "status": "pass"
+     },
+     {
+      "spec_row": "tpd_B_f2f@2250p",
+      "schematic_value": 1.10685e-11,
+      "extracted_value": 1.11689e-11,
+      "delta_pct": 0.907,
+      "status": "pass"
+     }
+    ],
+    "error": null
+   }
+  },
+  {
+   "cell": "OR2x1_A7S_75t_R",
+   "extract_only": {
+    "body_bias": {
+     "status": "unbiased",
+     "unbiased_device_count": 3,
+     "unbiased_nets": [
+      "\\$8"
+     ],
+     "unbiased_pmos_body_nets": [
+      {
+       "device": "$4",
+       "net": "\\$8"
+      },
+      {
+       "device": "$5",
+       "net": "\\$8"
+      },
+      {
+       "device": "$6",
+       "net": "\\$8"
+      }
+     ]
+    },
+    "exit_code": 4
+   },
+   "untied": {
+    "exit_code": 4,
+    "status": "error",
+    "body_bias_status": "unbiased",
+    "unbiased_nets": [
+     "\\$8"
+    ],
+    "tied": null,
+    "model_mismatch": null,
+    "rows": [
+     {
+      "spec_row": "checks_ok",
+      "schematic_value": 8.0,
+      "extracted_value": 0.0,
+      "delta_pct": -100.0,
+      "status": "fail"
+     },
+     {
+      "spec_row": "tpd_A_r2r@1250p",
+      "schematic_value": 1.04125e-11,
+      "extracted_value": null,
+      "delta_pct": null,
+      "status": "error"
+     },
+     {
+      "spec_row": "tpd_A_f2f@1500p",
+      "schematic_value": 1.32223e-11,
+      "extracted_value": null,
+      "delta_pct": null,
+      "status": "error"
+     },
+     {
+      "spec_row": "tpd_B_r2r@2000p",
+      "schematic_value": 1.10403e-11,
+      "extracted_value": null,
+      "delta_pct": null,
+      "status": "error"
+     },
+     {
+      "spec_row": "tpd_B_f2f@2250p",
+      "schematic_value": 1.37673e-11,
+      "extracted_value": null,
+      "delta_pct": null,
+      "status": "error"
+     }
+    ],
+    "error": "klt pex: 4 of 5 delta rows errored; first cause (extracted side, stage execute): 50% threshold not crossed after the edge at 1250 ps (Warning: singular matrix: check node xdut._8; ngspice aborted the transient: timestep too small; no results exist past the abort, so measurements beyond it produce no value (engine log: Error: Transient op failed, timestep too small).; Warning: Dynamic gmin stepping failed; measurement 'chk_0' prod)"
+   },
+   "tied": {
+    "exit_code": 0,
+    "status": "pass",
+    "body_bias_status": "tied",
+    "unbiased_nets": [
+     "\\$8"
+    ],
+    "tied": [
+     {
+      "extracted_net": "\\$8",
+      "schematic_net": "VDD",
+      "source": "declared"
+     }
+    ],
+    "model_mismatch": null,
+    "rows": [
+     {
+      "spec_row": "checks_ok",
+      "schematic_value": 8.0,
+      "extracted_value": 8.0,
+      "delta_pct": 0.0,
+      "status": "pass"
+     },
+     {
+      "spec_row": "tpd_A_r2r@1250p",
+      "schematic_value": 1.04125e-11,
+      "extracted_value": 1.05017e-11,
+      "delta_pct": 0.857,
+      "status": "pass"
+     },
+     {
+      "spec_row": "tpd_A_f2f@1500p",
+      "schematic_value": 1.32223e-11,
+      "extracted_value": 1.33719e-11,
+      "delta_pct": 1.131,
+      "status": "pass"
+     },
+     {
+      "spec_row": "tpd_B_r2r@2000p",
+      "schematic_value": 1.10403e-11,
+      "extracted_value": 1.11348e-11,
+      "delta_pct": 0.856,
+      "status": "pass"
+     },
+     {
+      "spec_row": "tpd_B_f2f@2250p",
+      "schematic_value": 1.37673e-11,
+      "extracted_value": 1.39265e-11,
+      "delta_pct": 1.156,
+      "status": "pass"
+     }
+    ],
+    "error": null
+   }
+  },
+  {
+   "cell": "XOR2x1_A7S_75t_R",
+   "extract_only": {
+    "body_bias": {
+     "status": "unbiased",
+     "unbiased_device_count": 6,
+     "unbiased_nets": [
+      "\\$20"
+     ],
+     "unbiased_pmos_body_nets": [
+      {
+       "device": "$10",
+       "net": "\\$20"
+      },
+      {
+       "device": "$11",
+       "net": "\\$20"
+      },
+      {
+       "device": "$12",
+       "net": "\\$20"
+      },
+      {
+       "device": "$7",
+       "net": "\\$20"
+      },
+      {
+       "device": "$8",
+       "net": "\\$20"
+      },
+      {
+       "device": "$9",
+       "net": "\\$20"
+      }
+     ]
+    },
+    "exit_code": 4
+   },
+   "untied": {
+    "exit_code": 4,
+    "status": "error",
+    "body_bias_status": "unbiased",
+    "unbiased_nets": [
+     "\\$20"
+    ],
+    "tied": null,
+    "model_mismatch": null,
+    "rows": [
+     {
+      "spec_row": "checks_ok",
+      "schematic_value": 8.0,
+      "extracted_value": 0.0,
+      "delta_pct": -100.0,
+      "status": "fail"
+     },
+     {
+      "spec_row": "tpd_A_r2r@1250p",
+      "schematic_value": 1.56432e-11,
+      "extracted_value": null,
+      "delta_pct": null,
+      "status": "error"
+     },
+     {
+      "spec_row": "tpd_A_f2f@1500p",
+      "schematic_value": 1.31842e-11,
+      "extracted_value": null,
+      "delta_pct": null,
+      "status": "error"
+     },
+     {
+      "spec_row": "tpd_B_r2r@2000p",
+      "schematic_value": 1.64075e-11,
+      "extracted_value": null,
+      "delta_pct": null,
+      "status": "error"
+     },
+     {
+      "spec_row": "tpd_B_f2f@2250p",
+      "schematic_value": 1.40746e-11,
+      "extracted_value": null,
+      "delta_pct": null,
+      "status": "error"
+     }
+    ],
+    "error": "klt pex: 4 of 5 delta rows errored; first cause (extracted side, stage execute): 50% threshold not crossed after the edge at 1250 ps (Warning: singular matrix: check node xdut._20; ngspice aborted the transient: timestep too small; no results exist past the abort, so measurements beyond it produce no value (engine log: Error: Transient op failed, timestep too small).; Warning: Dynamic gmin stepping failed; measurement 'chk_0' pro)"
+   },
+   "tied": {
+    "exit_code": 0,
+    "status": "pass",
+    "body_bias_status": "tied",
+    "unbiased_nets": [
+     "\\$20"
+    ],
+    "tied": [
+     {
+      "extracted_net": "\\$20",
+      "schematic_net": "VDD",
+      "source": "declared"
+     }
+    ],
+    "model_mismatch": null,
+    "rows": [
+     {
+      "spec_row": "checks_ok",
+      "schematic_value": 8.0,
+      "extracted_value": 8.0,
+      "delta_pct": 0.0,
+      "status": "pass"
+     },
+     {
+      "spec_row": "tpd_A_r2r@1250p",
+      "schematic_value": 1.56432e-11,
+      "extracted_value": 1.58289e-11,
+      "delta_pct": 1.187,
+      "status": "pass"
+     },
+     {
+      "spec_row": "tpd_A_f2f@1500p",
+      "schematic_value": 1.31842e-11,
+      "extracted_value": 1.33446e-11,
+      "delta_pct": 1.217,
+      "status": "pass"
+     },
+     {
+      "spec_row": "tpd_B_r2r@2000p",
+      "schematic_value": 1.64075e-11,
+      "extracted_value": 1.66048e-11,
+      "delta_pct": 1.202,
+      "status": "pass"
+     },
+     {
+      "spec_row": "tpd_B_f2f@2250p",
+      "schematic_value": 1.40746e-11,
+      "extracted_value": 1.42492e-11,
+      "delta_pct": 1.241,
+      "status": "pass"
+     }
+    ],
+    "error": null
+   }
+  },
+  {
+   "cell": "XNOR2x1_A7S_75t_R",
+   "extract_only": {
+    "body_bias": {
+     "status": "unbiased",
+     "unbiased_device_count": 6,
+     "unbiased_nets": [
+      "\\$20"
+     ],
+     "unbiased_pmos_body_nets": [
+      {
+       "device": "$10",
+       "net": "\\$20"
+      },
+      {
+       "device": "$11",
+       "net": "\\$20"
+      },
+      {
+       "device": "$12",
+       "net": "\\$20"
+      },
+      {
+       "device": "$7",
+       "net": "\\$20"
+      },
+      {
+       "device": "$8",
+       "net": "\\$20"
+      },
+      {
+       "device": "$9",
+       "net": "\\$20"
+      }
+     ]
+    },
+    "exit_code": 4
+   },
+   "untied": {
+    "exit_code": 4,
+    "status": "error",
+    "body_bias_status": "unbiased",
+    "unbiased_nets": [
+     "\\$20"
+    ],
+    "tied": null,
+    "model_mismatch": null,
+    "rows": [
+     {
+      "spec_row": "checks_ok",
+      "schematic_value": 8.0,
+      "extracted_value": 0.0,
+      "delta_pct": -100.0,
+      "status": "fail"
+     },
+     {
+      "spec_row": "tpd_A_r2f@1250p",
+      "schematic_value": 9.3764e-12,
+      "extracted_value": null,
+      "delta_pct": null,
+      "status": "error"
+     },
+     {
+      "spec_row": "tpd_A_f2r@1500p",
+      "schematic_value": 1.23903e-11,
+      "extracted_value": null,
+      "delta_pct": null,
+      "status": "error"
+     },
+     {
+      "spec_row": "tpd_B_r2f@2000p",
+      "schematic_value": 1.0544e-11,
+      "extracted_value": null,
+      "delta_pct": null,
+      "status": "error"
+     },
+     {
+      "spec_row": "tpd_B_f2r@2250p",
+      "schematic_value": 1.33548e-11,
+      "extracted_value": null,
+      "delta_pct": null,
+      "status": "error"
+     }
+    ],
+    "error": "klt pex: 4 of 5 delta rows errored; first cause (extracted side, stage execute): 50% threshold not crossed after the edge at 1250 ps (Warning: singular matrix: check node xdut._20; ngspice aborted the transient: timestep too small; no results exist past the abort, so measurements beyond it produce no value (engine log: Error: Transient op failed, timestep too small).; Warning: Dynamic gmin stepping failed; measurement 'chk_0' pro)"
+   },
+   "tied": {
+    "exit_code": 0,
+    "status": "pass",
+    "body_bias_status": "tied",
+    "unbiased_nets": [
+     "\\$20"
+    ],
+    "tied": [
+     {
+      "extracted_net": "\\$20",
+      "schematic_net": "VDD",
+      "source": "declared"
+     }
+    ],
+    "model_mismatch": null,
+    "rows": [
+     {
+      "spec_row": "checks_ok",
+      "schematic_value": 8.0,
+      "extracted_value": 8.0,
+      "delta_pct": 0.0,
+      "status": "pass"
+     },
+     {
+      "spec_row": "tpd_A_r2f@1250p",
+      "schematic_value": 9.3764e-12,
+      "extracted_value": 9.4399e-12,
+      "delta_pct": 0.677,
+      "status": "pass"
+     },
+     {
+      "spec_row": "tpd_A_f2r@1500p",
+      "schematic_value": 1.23903e-11,
+      "extracted_value": 1.24829e-11,
+      "delta_pct": 0.747,
+      "status": "pass"
+     },
+     {
+      "spec_row": "tpd_B_r2f@2000p",
+      "schematic_value": 1.0544e-11,
+      "extracted_value": 1.06109e-11,
+      "delta_pct": 0.634,
+      "status": "pass"
+     },
+     {
+      "spec_row": "tpd_B_f2r@2250p",
+      "schematic_value": 1.33548e-11,
+      "extracted_value": 1.34516e-11,
+      "delta_pct": 0.725,
+      "status": "pass"
+     }
+    ],
+    "error": null
+   }
+  },
+  {
+   "cell": "NAND3x1_A7S_75t_R",
+   "extract_only": {
+    "body_bias": {
+     "status": "unbiased",
+     "unbiased_device_count": 3,
+     "unbiased_nets": [
+      "\\$9"
+     ],
+     "unbiased_pmos_body_nets": [
+      {
+       "device": "$4",
+       "net": "\\$9"
+      },
+      {
+       "device": "$5",
+       "net": "\\$9"
+      },
+      {
+       "device": "$6",
+       "net": "\\$9"
+      }
+     ]
+    },
+    "exit_code": 4
+   },
+   "untied": {
+    "exit_code": 4,
+    "status": "error",
+    "body_bias_status": "unbiased",
+    "unbiased_nets": [
+     "\\$9"
+    ],
+    "tied": null,
+    "model_mismatch": null,
+    "rows": [
+     {
+      "spec_row": "checks_ok",
+      "schematic_value": 14.0,
+      "extracted_value": 0.0,
+      "delta_pct": -100.0,
+      "status": "fail"
+     },
+     {
+      "spec_row": "tpd_A_r2f@2250p",
+      "schematic_value": 1.3369e-11,
+      "extracted_value": null,
+      "delta_pct": null,
+      "status": "error"
+     },
+     {
+      "spec_row": "tpd_A_f2r@2500p",
+      "schematic_value": 8.02689e-12,
+      "extracted_value": null,
+      "delta_pct": null,
+      "status": "error"
+     },
+     {
+      "spec_row": "tpd_B_r2f@3000p",
+      "schematic_value": 1.41798e-11,
+      "extracted_value": null,
+      "delta_pct": null,
+      "status": "error"
+     },
+     {
+      "spec_row": "tpd_B_f2r@3250p",
+      "schematic_value": 8.58435e-12,
+      "extracted_value": null,
+      "delta_pct": null,
+      "status": "error"
+     },
+     {
+      "spec_row": "tpd_C_r2f@3750p",
+      "schematic_value": 1.43572e-11,
+      "extracted_value": null,
+      "delta_pct": null,
+      "status": "error"
+     },
+     {
+      "spec_row": "tpd_C_f2r@4000p",
+      "schematic_value": 8.99818e-12,
+      "extracted_value": null,
+      "delta_pct": null,
+      "status": "error"
+     }
+    ],
+    "error": "klt pex: 6 of 7 delta rows errored; first cause (extracted side, stage execute): 50% threshold not crossed after the edge at 2250 ps (Warning: singular matrix: check node xdut._9; ngspice aborted the transient: timestep too small; no results exist past the abort, so measurements beyond it produce no value (engine log: Error: Transient op failed, timestep too small).; Warning: Dynamic gmin stepping failed; measurement 'chk_0' prod)"
+   },
+   "tied": {
+    "exit_code": 0,
+    "status": "pass",
+    "body_bias_status": "tied",
+    "unbiased_nets": [
+     "\\$9"
+    ],
+    "tied": [
+     {
+      "extracted_net": "\\$9",
+      "schematic_net": "VDD",
+      "source": "declared"
+     }
+    ],
+    "model_mismatch": null,
+    "rows": [
+     {
+      "spec_row": "checks_ok",
+      "schematic_value": 14.0,
+      "extracted_value": 14.0,
+      "delta_pct": 0.0,
+      "status": "pass"
+     },
+     {
+      "spec_row": "tpd_A_r2f@2250p",
+      "schematic_value": 1.3369e-11,
+      "extracted_value": 1.34601e-11,
+      "delta_pct": 0.681,
+      "status": "pass"
+     },
+     {
+      "spec_row": "tpd_A_f2r@2500p",
+      "schematic_value": 8.02689e-12,
+      "extracted_value": 8.0697e-12,
+      "delta_pct": 0.533,
+      "status": "pass"
+     },
+     {
+      "spec_row": "tpd_B_r2f@3000p",
+      "schematic_value": 1.41798e-11,
+      "extracted_value": 1.42831e-11,
+      "delta_pct": 0.729,
+      "status": "pass"
+     },
+     {
+      "spec_row": "tpd_B_f2r@3250p",
+      "schematic_value": 8.58435e-12,
+      "extracted_value": 8.63249e-12,
+      "delta_pct": 0.561,
+      "status": "pass"
+     },
+     {
+      "spec_row": "tpd_C_r2f@3750p",
+      "schematic_value": 1.43572e-11,
+      "extracted_value": 1.44678e-11,
+      "delta_pct": 0.77,
+      "status": "pass"
+     },
+     {
+      "spec_row": "tpd_C_f2r@4000p",
+      "schematic_value": 8.99818e-12,
+      "extracted_value": 9.04886e-12,
+      "delta_pct": 0.563,
+      "status": "pass"
+     }
+    ],
+    "error": null
+   }
+  },
+  {
+   "cell": "NOR3x1_A7S_75t_R",
+   "extract_only": {
+    "body_bias": {
+     "status": "unbiased",
+     "unbiased_device_count": 3,
+     "unbiased_nets": [
+      "\\$9"
+     ],
+     "unbiased_pmos_body_nets": [
+      {
+       "device": "$4",
+       "net": "\\$9"
+      },
+      {
+       "device": "$5",
+       "net": "\\$9"
+      },
+      {
+       "device": "$6",
+       "net": "\\$9"
+      }
+     ]
+    },
+    "exit_code": 4
+   },
+   "untied": {
+    "exit_code": 4,
+    "status": "error",
+    "body_bias_status": "unbiased",
+    "unbiased_nets": [
+     "\\$9"
+    ],
+    "tied": null,
+    "model_mismatch": null,
+    "rows": [
+     {
+      "spec_row": "checks_ok",
+      "schematic_value": 14.0,
+      "extracted_value": 0.0,
+      "delta_pct": -100.0,
+      "status": "fail"
+     },
+     {
+      "spec_row": "tpd_A_r2f@2250p",
+      "schematic_value": 7.17674e-12,
+      "extracted_value": null,
+      "delta_pct": null,
+      "status": "error"
+     },
+     {
+      "spec_row": "tpd_A_f2r@2500p",
+      "schematic_value": 1.73439e-11,
+      "extracted_value": null,
+      "delta_pct": null,
+      "status": "error"
+     },
+     {
+      "spec_row": "tpd_B_r2f@3000p",
+      "schematic_value": 7.62504e-12,
+      "extracted_value": null,
+      "delta_pct": null,
+      "status": "error"
+     },
+     {
+      "spec_row": "tpd_B_f2r@3250p",
+      "schematic_value": 1.87465e-11,
+      "extracted_value": null,
+      "delta_pct": null,
+      "status": "error"
+     },
+     {
+      "spec_row": "tpd_C_r2f@3750p",
+      "schematic_value": 7.86499e-12,
+      "extracted_value": null,
+      "delta_pct": null,
+      "status": "error"
+     },
+     {
+      "spec_row": "tpd_C_f2r@4000p",
+      "schematic_value": 1.9129e-11,
+      "extracted_value": null,
+      "delta_pct": null,
+      "status": "error"
+     }
+    ],
+    "error": "klt pex: 6 of 7 delta rows errored; first cause (extracted side, stage execute): 50% threshold not crossed after the edge at 2250 ps (Warning: singular matrix: check node xdut._9; ngspice aborted the transient: timestep too small; no results exist past the abort, so measurements beyond it produce no value (engine log: Error: Transient op failed, timestep too small).; Warning: Dynamic gmin stepping failed; measurement 'chk_0' prod)"
+   },
+   "tied": {
+    "exit_code": 0,
+    "status": "pass",
+    "body_bias_status": "tied",
+    "unbiased_nets": [
+     "\\$9"
+    ],
+    "tied": [
+     {
+      "extracted_net": "\\$9",
+      "schematic_net": "VDD",
+      "source": "declared"
+     }
+    ],
+    "model_mismatch": null,
+    "rows": [
+     {
+      "spec_row": "checks_ok",
+      "schematic_value": 14.0,
+      "extracted_value": 14.0,
+      "delta_pct": 0.0,
+      "status": "pass"
+     },
+     {
+      "spec_row": "tpd_A_r2f@2250p",
+      "schematic_value": 7.17674e-12,
+      "extracted_value": 7.21253e-12,
+      "delta_pct": 0.499,
+      "status": "pass"
+     },
+     {
+      "spec_row": "tpd_A_f2r@2500p",
+      "schematic_value": 1.73439e-11,
+      "extracted_value": 1.74632e-11,
+      "delta_pct": 0.688,
+      "status": "pass"
+     },
+     {
+      "spec_row": "tpd_B_r2f@3000p",
+      "schematic_value": 7.62504e-12,
+      "extracted_value": 7.66526e-12,
+      "delta_pct": 0.527,
+      "status": "pass"
+     },
+     {
+      "spec_row": "tpd_B_f2r@3250p",
+      "schematic_value": 1.87465e-11,
+      "extracted_value": 1.88826e-11,
+      "delta_pct": 0.726,
+      "status": "pass"
+     },
+     {
+      "spec_row": "tpd_C_r2f@3750p",
+      "schematic_value": 7.86499e-12,
+      "extracted_value": 7.90712e-12,
+      "delta_pct": 0.536,
+      "status": "pass"
+     },
+     {
+      "spec_row": "tpd_C_f2r@4000p",
+      "schematic_value": 1.9129e-11,
+      "extracted_value": 1.92725e-11,
+      "delta_pct": 0.75,
+      "status": "pass"
+     }
+    ],
+    "error": null
+   }
+  },
+  {
+   "cell": "AOI21x1_A7S_75t_R",
+   "extract_only": {
+    "body_bias": {
+     "status": "unbiased",
+     "unbiased_device_count": 3,
+     "unbiased_nets": [
+      "\\$9"
+     ],
+     "unbiased_pmos_body_nets": [
+      {
+       "device": "$4",
+       "net": "\\$9"
+      },
+      {
+       "device": "$5",
+       "net": "\\$9"
+      },
+      {
+       "device": "$6",
+       "net": "\\$9"
+      }
+     ]
+    },
+    "exit_code": 4
+   },
+   "untied": {
+    "exit_code": 0,
+    "status": "pass",
+    "body_bias_status": "unbiased",
+    "unbiased_nets": [
+     "\\$9"
+    ],
+    "tied": null,
+    "model_mismatch": null,
+    "rows": [
+     {
+      "spec_row": "checks_ok",
+      "schematic_value": 14.0,
+      "extracted_value": 14.0,
+      "delta_pct": 0.0,
+      "status": "pass"
+     },
+     {
+      "spec_row": "tpd_A1_r2f@2250p",
+      "schematic_value": 1.12975e-11,
+      "extracted_value": 1.13947e-11,
+      "delta_pct": 0.86,
+      "status": "pass"
+     },
+     {
+      "spec_row": "tpd_A1_f2r@2500p",
+      "schematic_value": 1.43502e-11,
+      "extracted_value": 1.44799e-11,
+      "delta_pct": 0.904,
+      "status": "pass"
+     },
+     {
+      "spec_row": "tpd_A2_r2f@3000p",
+      "schematic_value": 1.11655e-11,
+      "extracted_value": 1.12559e-11,
+      "delta_pct": 0.81,
+      "status": "pass"
+     },
+     {
+      "spec_row": "tpd_A2_f2r@3250p",
+      "schematic_value": 1.33119e-11,
+      "extracted_value": 1.34327e-11,
+      "delta_pct": 0.907,
+      "status": "pass"
+     },
+     {
+      "spec_row": "tpd_B_r2f@3750p",
+      "schematic_value": 6.9587e-12,
+      "extracted_value": 7.00155e-12,
+      "delta_pct": 0.616,
+      "status": "pass"
+     },
+     {
+      "spec_row": "tpd_B_f2r@4000p",
+      "schematic_value": 9.91249e-12,
+      "extracted_value": 9.97987e-12,
+      "delta_pct": 0.68,
+      "status": "pass"
+     }
+    ],
+    "error": null
+   },
+   "tied": {
+    "exit_code": 0,
+    "status": "pass",
+    "body_bias_status": "tied",
+    "unbiased_nets": [
+     "\\$9"
+    ],
+    "tied": [
+     {
+      "extracted_net": "\\$9",
+      "schematic_net": "VDD",
+      "source": "declared"
+     }
+    ],
+    "model_mismatch": null,
+    "rows": [
+     {
+      "spec_row": "checks_ok",
+      "schematic_value": 14.0,
+      "extracted_value": 14.0,
+      "delta_pct": 0.0,
+      "status": "pass"
+     },
+     {
+      "spec_row": "tpd_A1_r2f@2250p",
+      "schematic_value": 1.12975e-11,
+      "extracted_value": 1.13946e-11,
+      "delta_pct": 0.859,
+      "status": "pass"
+     },
+     {
+      "spec_row": "tpd_A1_f2r@2500p",
+      "schematic_value": 1.43502e-11,
+      "extracted_value": 1.44799e-11,
+      "delta_pct": 0.904,
+      "status": "pass"
+     },
+     {
+      "spec_row": "tpd_A2_r2f@3000p",
+      "schematic_value": 1.11655e-11,
+      "extracted_value": 1.12559e-11,
+      "delta_pct": 0.81,
+      "status": "pass"
+     },
+     {
+      "spec_row": "tpd_A2_f2r@3250p",
+      "schematic_value": 1.33119e-11,
+      "extracted_value": 1.34327e-11,
+      "delta_pct": 0.907,
+      "status": "pass"
+     },
+     {
+      "spec_row": "tpd_B_r2f@3750p",
+      "schematic_value": 6.9587e-12,
+      "extracted_value": 7.00158e-12,
+      "delta_pct": 0.616,
+      "status": "pass"
+     },
+     {
+      "spec_row": "tpd_B_f2r@4000p",
+      "schematic_value": 9.91249e-12,
+      "extracted_value": 9.97987e-12,
+      "delta_pct": 0.68,
+      "status": "pass"
+     }
+    ],
+    "error": null
+   }
+  },
+  {
+   "cell": "OAI21x1_A7S_75t_R",
+   "extract_only": {
+    "body_bias": {
+     "status": "unbiased",
+     "unbiased_device_count": 3,
+     "unbiased_nets": [
+      "\\$9"
+     ],
+     "unbiased_pmos_body_nets": [
+      {
+       "device": "$4",
+       "net": "\\$9"
+      },
+      {
+       "device": "$5",
+       "net": "\\$9"
+      },
+      {
+       "device": "$6",
+       "net": "\\$9"
+      }
+     ]
+    },
+    "exit_code": 4
+   },
+   "untied": {
+    "exit_code": 4,
+    "status": "error",
+    "body_bias_status": "unbiased",
+    "unbiased_nets": [
+     "\\$9"
+    ],
+    "tied": null,
+    "model_mismatch": null,
+    "rows": [
+     {
+      "spec_row": "checks_ok",
+      "schematic_value": 14.0,
+      "extracted_value": 0.0,
+      "delta_pct": -100.0,
+      "status": "fail"
+     },
+     {
+      "spec_row": "tpd_A1_r2f@2250p",
+      "schematic_value": 1.05869e-11,
+      "extracted_value": null,
+      "delta_pct": null,
+      "status": "error"
+     },
+     {
+      "spec_row": "tpd_A1_f2r@2500p",
+      "schematic_value": 1.39394e-11,
+      "extracted_value": null,
+      "delta_pct": null,
+      "status": "error"
+     },
+     {
+      "spec_row": "tpd_A2_r2f@3000p",
+      "schematic_value": 1.1333e-11,
+      "extracted_value": null,
+      "delta_pct": null,
+      "status": "error"
+     },
+     {
+      "spec_row": "tpd_A2_f2r@3250p",
+      "schematic_value": 1.43811e-11,
+      "extracted_value": null,
+      "delta_pct": null,
+      "status": "error"
+     },
+     {
+      "spec_row": "tpd_B_r2f@3750p",
+      "schematic_value": 1.10465e-11,
+      "extracted_value": null,
+      "delta_pct": null,
+      "status": "error"
+     },
+     {
+      "spec_row": "tpd_B_f2r@4000p",
+      "schematic_value": 7.89379e-12,
+      "extracted_value": null,
+      "delta_pct": null,
+      "status": "error"
+     }
+    ],
+    "error": "klt pex: 6 of 7 delta rows errored; first cause (extracted side, stage execute): 50% threshold not crossed after the edge at 2250 ps (Warning: singular matrix: check node xdut._9; ngspice aborted the transient: timestep too small; no results exist past the abort, so measurements beyond it produce no value (engine log: Error: Transient op failed, timestep too small).; Warning: Dynamic gmin stepping failed; measurement 'chk_0' prod)"
+   },
+   "tied": {
+    "exit_code": 0,
+    "status": "pass",
+    "body_bias_status": "tied",
+    "unbiased_nets": [
+     "\\$9"
+    ],
+    "tied": [
+     {
+      "extracted_net": "\\$9",
+      "schematic_net": "VDD",
+      "source": "declared"
+     }
+    ],
+    "model_mismatch": null,
+    "rows": [
+     {
+      "spec_row": "checks_ok",
+      "schematic_value": 14.0,
+      "extracted_value": 14.0,
+      "delta_pct": 0.0,
+      "status": "pass"
+     },
+     {
+      "spec_row": "tpd_A1_r2f@2250p",
+      "schematic_value": 1.05869e-11,
+      "extracted_value": 1.06685e-11,
+      "delta_pct": 0.771,
+      "status": "pass"
+     },
+     {
+      "spec_row": "tpd_A1_f2r@2500p",
+      "schematic_value": 1.39394e-11,
+      "extracted_value": 1.40342e-11,
+      "delta_pct": 0.68,
+      "status": "pass"
+     },
+     {
+      "spec_row": "tpd_A2_r2f@3000p",
+      "schematic_value": 1.1333e-11,
+      "extracted_value": 1.14189e-11,
+      "delta_pct": 0.758,
+      "status": "pass"
+     },
+     {
+      "spec_row": "tpd_A2_f2r@3250p",
+      "schematic_value": 1.43811e-11,
+      "extracted_value": 1.44833e-11,
+      "delta_pct": 0.711,
+      "status": "pass"
+     },
+     {
+      "spec_row": "tpd_B_r2f@3750p",
+      "schematic_value": 1.10465e-11,
+      "extracted_value": 1.11044e-11,
+      "delta_pct": 0.524,
+      "status": "pass"
+     },
+     {
+      "spec_row": "tpd_B_f2r@4000p",
+      "schematic_value": 7.89379e-12,
+      "extracted_value": 7.93084e-12,
+      "delta_pct": 0.469,
+      "status": "pass"
+     }
+    ],
+    "error": null
+   }
+  },
+  {
+   "cell": "AOI22x1_A7S_75t_R",
+   "extract_only": {
+    "body_bias": {
+     "status": "unbiased",
+     "unbiased_device_count": 4,
+     "unbiased_nets": [
+      "\\$9"
+     ],
+     "unbiased_pmos_body_nets": [
+      {
+       "device": "$5",
+       "net": "\\$9"
+      },
+      {
+       "device": "$6",
+       "net": "\\$9"
+      },
+      {
+       "device": "$7",
+       "net": "\\$9"
+      },
+      {
+       "device": "$8",
+       "net": "\\$9"
+      }
+     ]
+    },
+    "exit_code": 4
+   },
+   "untied": {
+    "exit_code": 0,
+    "status": "pass",
+    "body_bias_status": "unbiased",
+    "unbiased_nets": [
+     "\\$9"
+    ],
+    "tied": null,
+    "model_mismatch": null,
+    "rows": [
+     {
+      "spec_row": "checks_ok",
+      "schematic_value": 24.0,
+      "extracted_value": 24.0,
+      "delta_pct": 0.0,
+      "status": "pass"
+     },
+     {
+      "spec_row": "tpd_A1_r2f@4250p",
+      "schematic_value": 1.22814e-11,
+      "extracted_value": 1.24137e-11,
+      "delta_pct": 1.077,
+      "status": "pass"
+     },
+     {
+      "spec_row": "tpd_A1_f2r@4500p",
+      "schematic_value": 1.17054e-11,
+      "extracted_value": 1.18448e-11,
+      "delta_pct": 1.191,
+      "status": "pass"
+     },
+     {
+      "spec_row": "tpd_A2_r2f@5000p",
+      "schematic_value": 1.24176e-11,
+      "extracted_value": 1.25529e-11,
+      "delta_pct": 1.09,
+      "status": "pass"
+     },
+     {
+      "spec_row": "tpd_A2_f2r@5250p",
+      "schematic_value": 1.24939e-11,
+      "extracted_value": 1.26358e-11,
+      "delta_pct": 1.136,
+      "status": "pass"
+     },
+     {
+      "spec_row": "tpd_B1_r2f@5750p",
+      "schematic_value": 1.03663e-11,
+      "extracted_value": 1.0446e-11,
+      "delta_pct": 0.769,
+      "status": "pass"
+     },
+     {
+      "spec_row": "tpd_B1_f2r@6000p",
+      "schematic_value": 1.02908e-11,
+      "extracted_value": 1.03708e-11,
+      "delta_pct": 0.777,
+      "status": "pass"
+     },
+     {
+      "spec_row": "tpd_B2_r2f@6500p",
+      "schematic_value": 1.05144e-11,
+      "extracted_value": 1.06002e-11,
+      "delta_pct": 0.816,
+      "status": "pass"
+     },
+     {
+      "spec_row": "tpd_B2_f2r@6750p",
+      "schematic_value": 1.10594e-11,
+      "extracted_value": 1.11423e-11,
+      "delta_pct": 0.75,
+      "status": "pass"
+     }
+    ],
+    "error": null
+   },
+   "tied": {
+    "exit_code": 0,
+    "status": "pass",
+    "body_bias_status": "tied",
+    "unbiased_nets": [
+     "\\$9"
+    ],
+    "tied": [
+     {
+      "extracted_net": "\\$9",
+      "schematic_net": "VDD",
+      "source": "declared"
+     }
+    ],
+    "model_mismatch": null,
+    "rows": [
+     {
+      "spec_row": "checks_ok",
+      "schematic_value": 24.0,
+      "extracted_value": 24.0,
+      "delta_pct": 0.0,
+      "status": "pass"
+     },
+     {
+      "spec_row": "tpd_A1_r2f@4250p",
+      "schematic_value": 1.22814e-11,
+      "extracted_value": 1.24137e-11,
+      "delta_pct": 1.077,
+      "status": "pass"
+     },
+     {
+      "spec_row": "tpd_A1_f2r@4500p",
+      "schematic_value": 1.17054e-11,
+      "extracted_value": 1.18448e-11,
+      "delta_pct": 1.191,
+      "status": "pass"
+     },
+     {
+      "spec_row": "tpd_A2_r2f@5000p",
+      "schematic_value": 1.24176e-11,
+      "extracted_value": 1.25528e-11,
+      "delta_pct": 1.089,
+      "status": "pass"
+     },
+     {
+      "spec_row": "tpd_A2_f2r@5250p",
+      "schematic_value": 1.24939e-11,
+      "extracted_value": 1.26359e-11,
+      "delta_pct": 1.137,
+      "status": "pass"
+     },
+     {
+      "spec_row": "tpd_B1_r2f@5750p",
+      "schematic_value": 1.03663e-11,
+      "extracted_value": 1.04459e-11,
+      "delta_pct": 0.768,
+      "status": "pass"
+     },
+     {
+      "spec_row": "tpd_B1_f2r@6000p",
+      "schematic_value": 1.02908e-11,
+      "extracted_value": 1.03709e-11,
+      "delta_pct": 0.778,
+      "status": "pass"
+     },
+     {
+      "spec_row": "tpd_B2_r2f@6500p",
+      "schematic_value": 1.05144e-11,
+      "extracted_value": 1.06001e-11,
+      "delta_pct": 0.815,
+      "status": "pass"
+     },
+     {
+      "spec_row": "tpd_B2_f2r@6750p",
+      "schematic_value": 1.10594e-11,
+      "extracted_value": 1.11423e-11,
+      "delta_pct": 0.75,
+      "status": "pass"
+     }
+    ],
+    "error": null
+   }
+  },
+  {
+   "cell": "OAI22x1_A7S_75t_R",
+   "extract_only": {
+    "body_bias": {
+     "status": "unbiased",
+     "unbiased_device_count": 4,
+     "unbiased_nets": [
+      "\\$9"
+     ],
+     "unbiased_pmos_body_nets": [
+      {
+       "device": "$5",
+       "net": "\\$9"
+      },
+      {
+       "device": "$6",
+       "net": "\\$9"
+      },
+      {
+       "device": "$7",
+       "net": "\\$9"
+      },
+      {
+       "device": "$8",
+       "net": "\\$9"
+      }
+     ]
+    },
+    "exit_code": 4
+   },
+   "untied": {
+    "exit_code": 4,
+    "status": "error",
+    "body_bias_status": "unbiased",
+    "unbiased_nets": [
+     "\\$9"
+    ],
+    "tied": null,
+    "model_mismatch": null,
+    "rows": [
+     {
+      "spec_row": "checks_ok",
+      "schematic_value": 24.0,
+      "extracted_value": 0.0,
+      "delta_pct": -100.0,
+      "status": "fail"
+     },
+     {
+      "spec_row": "tpd_A1_r2f@4250p",
+      "schematic_value": 1.14336e-11,
+      "extracted_value": null,
+      "delta_pct": null,
+      "status": "error"
+     },
+     {
+      "spec_row": "tpd_A1_f2r@4500p",
+      "schematic_value": 1.31104e-11,
+      "extracted_value": null,
+      "delta_pct": null,
+      "status": "error"
+     },
+     {
+      "spec_row": "tpd_A2_r2f@5000p",
+      "schematic_value": 1.21813e-11,
+      "extracted_value": null,
+      "delta_pct": null,
+      "status": "error"
+     },
+     {
+      "spec_row": "tpd_A2_f2r@5250p",
+      "schematic_value": 1.35601e-11,
+      "extracted_value": null,
+      "delta_pct": null,
+      "status": "error"
+     },
+     {
+      "spec_row": "tpd_B1_r2f@5750p",
+      "schematic_value": 1.19662e-11,
+      "extracted_value": null,
+      "delta_pct": null,
+      "status": "error"
+     },
+     {
+      "spec_row": "tpd_B1_f2r@6000p",
+      "schematic_value": 1.46715e-11,
+      "extracted_value": null,
+      "delta_pct": null,
+      "status": "error"
+     },
+     {
+      "spec_row": "tpd_B2_r2f@6500p",
+      "schematic_value": 1.27359e-11,
+      "extracted_value": null,
+      "delta_pct": null,
+      "status": "error"
+     },
+     {
+      "spec_row": "tpd_B2_f2r@6750p",
+      "schematic_value": 1.51148e-11,
+      "extracted_value": null,
+      "delta_pct": null,
+      "status": "error"
+     }
+    ],
+    "error": "klt pex: 8 of 9 delta rows errored; first cause (extracted side, stage execute): 50% threshold not crossed after the edge at 4250 ps (Warning: singular matrix: check node xdut._9; ngspice aborted the transient: timestep too small; no results exist past the abort, so measurements beyond it produce no value (engine log: Error: Transient op failed, timestep too small).; Warning: Dynamic gmin stepping failed; measurement 'chk_0' prod)"
+   },
+   "tied": {
+    "exit_code": 0,
+    "status": "pass",
+    "body_bias_status": "tied",
+    "unbiased_nets": [
+     "\\$9"
+    ],
+    "tied": [
+     {
+      "extracted_net": "\\$9",
+      "schematic_net": "VDD",
+      "source": "declared"
+     }
+    ],
+    "model_mismatch": null,
+    "rows": [
+     {
+      "spec_row": "checks_ok",
+      "schematic_value": 24.0,
+      "extracted_value": 24.0,
+      "delta_pct": 0.0,
+      "status": "pass"
+     },
+     {
+      "spec_row": "tpd_A1_r2f@4250p",
+      "schematic_value": 1.14336e-11,
+      "extracted_value": 1.15248e-11,
+      "delta_pct": 0.798,
+      "status": "pass"
+     },
+     {
+      "spec_row": "tpd_A1_f2r@4500p",
+      "schematic_value": 1.31104e-11,
+      "extracted_value": 1.32192e-11,
+      "delta_pct": 0.83,
+      "status": "pass"
+     },
+     {
+      "spec_row": "tpd_A2_r2f@5000p",
+      "schematic_value": 1.21813e-11,
+      "extracted_value": 1.22754e-11,
+      "delta_pct": 0.772,
+      "status": "pass"
+     },
+     {
+      "spec_row": "tpd_A2_f2r@5250p",
+      "schematic_value": 1.35601e-11,
+      "extracted_value": 1.36778e-11,
+      "delta_pct": 0.868,
+      "status": "pass"
+     },
+     {
+      "spec_row": "tpd_B1_r2f@5750p",
+      "schematic_value": 1.19662e-11,
+      "extracted_value": 1.21105e-11,
+      "delta_pct": 1.206,
+      "status": "pass"
+     },
+     {
+      "spec_row": "tpd_B1_f2r@6000p",
+      "schematic_value": 1.46715e-11,
+      "extracted_value": 1.48541e-11,
+      "delta_pct": 1.245,
+      "status": "pass"
+     },
+     {
+      "spec_row": "tpd_B2_r2f@6500p",
+      "schematic_value": 1.27359e-11,
+      "extracted_value": 1.28857e-11,
+      "delta_pct": 1.176,
+      "status": "pass"
+     },
+     {
+      "spec_row": "tpd_B2_f2r@6750p",
+      "schematic_value": 1.51148e-11,
+      "extracted_value": 1.52939e-11,
+      "delta_pct": 1.185,
+      "status": "pass"
+     }
+    ],
+    "error": null
+   }
+  },
+  {
+   "cell": "TIEHIx1_A7S_75t_R",
+   "extract_only": {
+    "body_bias": {
+     "status": "unbiased",
+     "unbiased_device_count": 1,
+     "unbiased_nets": [
+      "\\$4"
+     ],
+     "unbiased_pmos_body_nets": [
+      {
+       "device": "$1",
+       "net": "\\$4"
+      }
+     ]
+    },
+    "exit_code": 4
+   },
+   "untied": {
+    "exit_code": 3,
+    "status": "fail",
+    "body_bias_status": "unbiased",
+    "unbiased_nets": [
+     "\\$4"
+    ],
+    "tied": null,
+    "model_mismatch": null,
+    "rows": [
+     {
+      "spec_row": "checks_ok",
+      "schematic_value": 2.0,
+      "extracted_value": 0.0,
+      "delta_pct": -100.0,
+      "status": "fail"
+     }
+    ],
+    "error": null
+   },
+   "tied": {
+    "exit_code": 0,
+    "status": "pass",
+    "body_bias_status": "tied",
+    "unbiased_nets": [
+     "\\$4"
+    ],
+    "tied": [
+     {
+      "extracted_net": "\\$4",
+      "schematic_net": "VDD",
+      "source": "declared"
+     }
+    ],
+    "model_mismatch": null,
+    "rows": [
+     {
+      "spec_row": "checks_ok",
+      "schematic_value": 2.0,
+      "extracted_value": 2.0,
+      "delta_pct": 0.0,
+      "status": "pass"
+     }
+    ],
+    "error": null
+   }
+  },
+  {
+   "cell": "TIELOx1_A7S_75t_R",
+   "extract_only": {
+    "body_bias": {
+     "status": "biased",
+     "unbiased_device_count": 0,
+     "unbiased_nets": [],
+     "unbiased_pmos_body_nets": []
+    },
+    "exit_code": 4
+   },
+   "untied": {
+    "exit_code": 0,
+    "status": "pass",
+    "body_bias_status": "biased",
+    "unbiased_nets": [],
+    "tied": null,
+    "model_mismatch": null,
+    "rows": [
+     {
+      "spec_row": "checks_ok",
+      "schematic_value": 2.0,
+      "extracted_value": 2.0,
+      "delta_pct": 0.0,
+      "status": "pass"
+     }
+    ],
+    "error": null
+   },
+   "tied": {
+    "exit_code": 0,
+    "status": "pass",
+    "body_bias_status": "biased",
+    "unbiased_nets": [],
+    "tied": null,
+    "model_mismatch": null,
+    "rows": [
+     {
+      "spec_row": "checks_ok",
+      "schematic_value": 2.0,
+      "extracted_value": 2.0,
+      "delta_pct": 0.0,
+      "status": "pass"
+     }
+    ],
+    "error": null
+   }
+  },
+  {
+   "cell": "DHLx1_A7S_75t_R",
+   "extract_only": {
+    "body_bias": {
+     "status": "unbiased",
+     "unbiased_device_count": 5,
+     "unbiased_nets": [
+      "\\$20"
+     ],
+     "unbiased_pmos_body_nets": [
+      {
+       "device": "$10",
+       "net": "\\$20"
+      },
+      {
+       "device": "$6",
+       "net": "\\$20"
+      },
+      {
+       "device": "$7",
+       "net": "\\$20"
+      },
+      {
+       "device": "$8",
+       "net": "\\$20"
+      },
+      {
+       "device": "$9",
+       "net": "\\$20"
+      }
+     ]
+    },
+    "exit_code": 4
+   },
+   "untied": {
+    "exit_code": 4,
+    "status": "error",
+    "body_bias_status": "unbiased",
+    "unbiased_nets": [
+     "\\$20"
+    ],
+    "tied": null,
+    "model_mismatch": null,
+    "rows": [
+     {
+      "spec_row": "checks_ok",
+      "schematic_value": 7.0,
+      "extracted_value": 0.0,
+      "delta_pct": -100.0,
+      "status": "fail"
+     },
+     {
+      "spec_row": "tpd_D_r2r@250p",
+      "schematic_value": 1.264e-11,
+      "extracted_value": null,
+      "delta_pct": null,
+      "status": "error"
+     },
+     {
+      "spec_row": "tpd_D_f2f@500p",
+      "schematic_value": 1.18726e-11,
+      "extracted_value": null,
+      "delta_pct": null,
+      "status": "error"
+     },
+     {
+      "spec_row": "tpd_CLK_r2f@1500p",
+      "schematic_value": 1.28181e-11,
+      "extracted_value": null,
+      "delta_pct": null,
+      "status": "error"
+     }
+    ],
+    "error": "klt pex: 3 of 4 delta rows errored; first cause (extracted side, stage execute): 50% threshold not crossed after the edge at 250 ps (Warning: singular matrix: check node xdut._20; ngspice aborted the transient: timestep too small; no results exist past the abort, so measurements beyond it produce no value (engine log: Error: Transient op failed, timestep too small).; Warning: Dynamic gmin stepping failed; measurement 'chk_0' pro)"
+   },
+   "tied": {
+    "exit_code": 0,
+    "status": "pass",
+    "body_bias_status": "tied",
+    "unbiased_nets": [
+     "\\$20"
+    ],
+    "tied": [
+     {
+      "extracted_net": "\\$20",
+      "schematic_net": "VDD",
+      "source": "declared"
+     }
+    ],
+    "model_mismatch": null,
+    "rows": [
+     {
+      "spec_row": "checks_ok",
+      "schematic_value": 7.0,
+      "extracted_value": 7.0,
+      "delta_pct": 0.0,
+      "status": "pass"
+     },
+     {
+      "spec_row": "tpd_D_r2r@250p",
+      "schematic_value": 1.264e-11,
+      "extracted_value": 1.28399e-11,
+      "delta_pct": 1.581,
+      "status": "pass"
+     },
+     {
+      "spec_row": "tpd_D_f2f@500p",
+      "schematic_value": 1.18726e-11,
+      "extracted_value": 1.20505e-11,
+      "delta_pct": 1.498,
+      "status": "pass"
+     },
+     {
+      "spec_row": "tpd_CLK_r2f@1500p",
+      "schematic_value": 1.28181e-11,
+      "extracted_value": 1.30362e-11,
+      "delta_pct": 1.702,
+      "status": "pass"
+     }
+    ],
+    "error": null
+   }
+  },
+  {
+   "cell": "DFFHQNx1_A7S_75t_R",
+   "extract_only": {
+    "body_bias": {
+     "status": "unbiased",
+     "unbiased_device_count": 9,
+     "unbiased_nets": [
+      "\\$31"
+     ],
+     "unbiased_pmos_body_nets": [
+      {
+       "device": "$10",
+       "net": "\\$31"
+      },
+      {
+       "device": "$11",
+       "net": "\\$31"
+      },
+      {
+       "device": "$12",
+       "net": "\\$31"
+      },
+      {
+       "device": "$13",
+       "net": "\\$31"
+      },
+      {
+       "device": "$14",
+       "net": "\\$31"
+      },
+      {
+       "device": "$15",
+       "net": "\\$31"
+      },
+      {
+       "device": "$16",
+       "net": "\\$31"
+      },
+      {
+       "device": "$17",
+       "net": "\\$31"
+      },
+      {
+       "device": "$18",
+       "net": "\\$31"
+      }
+     ]
+    },
+    "exit_code": 4
+   },
+   "untied": {
+    "exit_code": 4,
+    "status": "error",
+    "body_bias_status": "unbiased",
+    "unbiased_nets": [
+     "\\$31"
+    ],
+    "tied": null,
+    "model_mismatch": null,
+    "rows": [
+     {
+      "spec_row": "checks_ok",
+      "schematic_value": 5.0,
+      "extracted_value": 0.0,
+      "delta_pct": -100.0,
+      "status": "fail"
+     },
+     {
+      "spec_row": "tpd_CLK_r2f@1000p",
+      "schematic_value": 1.43544e-11,
+      "extracted_value": null,
+      "delta_pct": null,
+      "status": "error"
+     },
+     {
+      "spec_row": "tpd_CLK_r2r@1750p",
+      "schematic_value": 1.84554e-11,
+      "extracted_value": null,
+      "delta_pct": null,
+      "status": "error"
+     }
+    ],
+    "error": "klt pex: 2 of 3 delta rows errored; first cause (extracted side, stage execute): 50% threshold not crossed after the edge at 1000 ps (Warning: singular matrix: check node xdut._31; ngspice aborted the transient: timestep too small; no results exist past the abort, so measurements beyond it produce no value (engine log: Error: Transient op failed, timestep too small).; Warning: Dynamic gmin stepping failed; measurement 'chk_0' pro)"
+   },
+   "tied": {
+    "exit_code": 0,
+    "status": "pass",
+    "body_bias_status": "tied",
+    "unbiased_nets": [
+     "\\$31"
+    ],
+    "tied": [
+     {
+      "extracted_net": "\\$31",
+      "schematic_net": "VDD",
+      "source": "declared"
+     }
+    ],
+    "model_mismatch": null,
+    "rows": [
+     {
+      "spec_row": "checks_ok",
+      "schematic_value": 5.0,
+      "extracted_value": 5.0,
+      "delta_pct": 0.0,
+      "status": "pass"
+     },
+     {
+      "spec_row": "tpd_CLK_r2f@1000p",
+      "schematic_value": 1.43544e-11,
+      "extracted_value": 1.45672e-11,
+      "delta_pct": 1.482,
+      "status": "pass"
+     },
+     {
+      "spec_row": "tpd_CLK_r2r@1750p",
+      "schematic_value": 1.84554e-11,
+      "extracted_value": 1.87736e-11,
+      "delta_pct": 1.724,
+      "status": "pass"
+     }
+    ],
+    "error": null
+   }
+  }
+ ],
+ "negative_controls": [
+  {
+   "id": "nand2-open-input-A",
+   "broken": "input A disconnected from both gates",
+   "v0_shape_deleted": 5,
+   "extracted_netlist_changed": true,
+   "tied_status": "fail",
+   "tied_rows": [
+    {
+     "spec_row": "checks_ok",
+     "schematic_value": 8.0,
+     "extracted_value": 6.0,
+     "delta_pct": -25.0,
+     "status": "fail"
+    },
+    {
+     "spec_row": "tpd_A_r2f@1250p",
+     "schematic_value": 1.0218e-11,
+     "extracted_value": 7.66355e-10,
+     "delta_pct": 7400.049,
+     "status": "pass"
+    },
+    {
+     "spec_row": "tpd_A_f2r@1500p",
+     "schematic_value": 8.33289e-12,
+     "extracted_value": 2.57139e-10,
+     "delta_pct": 2985.832,
+     "status": "pass"
+    },
+    {
+     "spec_row": "tpd_B_r2f@2000p",
+     "schematic_value": 1.00436e-11,
+     "extracted_value": 1.63554e-11,
+     "delta_pct": 62.844,
+     "status": "pass"
+    },
+    {
+     "spec_row": "tpd_B_f2r@2250p",
+     "schematic_value": 7.81885e-12,
+     "extracted_value": 7.14042e-12,
+     "delta_pct": -8.677,
+     "status": "pass"
+    }
+   ],
+   "flagged": true
+  },
+  {
+   "id": "nand2-open-output-Y",
+   "broken": "output Y split: one pull-up drain left on a floating node",
+   "v0_shape_deleted": 4,
+   "extracted_netlist_changed": true,
+   "tied_status": "error",
+   "tied_rows": [
+    {
+     "spec_row": "checks_ok",
+     "schematic_value": 8.0,
+     "extracted_value": 3.0,
+     "delta_pct": -62.5,
+     "status": "fail"
+    },
+    {
+     "spec_row": "tpd_A_r2f@1250p",
+     "schematic_value": 1.0218e-11,
+     "extracted_value": null,
+     "delta_pct": null,
+     "status": "error"
+    },
+    {
+     "spec_row": "tpd_A_f2r@1500p",
+     "schematic_value": 8.33289e-12,
+     "extracted_value": null,
+     "delta_pct": null,
+     "status": "error"
+    },
+    {
+     "spec_row": "tpd_B_r2f@2000p",
+     "schematic_value": 1.00436e-11,
+     "extracted_value": null,
+     "delta_pct": null,
+     "status": "error"
+    },
+    {
+     "spec_row": "tpd_B_f2r@2250p",
+     "schematic_value": 7.81885e-12,
+     "extracted_value": null,
+     "delta_pct": null,
+     "status": "error"
+    }
+   ],
+   "flagged": true
+  }
+ ]
+}
