@@ -17,7 +17,7 @@
         "role": "hygiene",
         "path": ".github/workflows/signoff.yml",
         "passed": true,
-        "content_hash": "sha256:aeabd9984c5ae37f92a44433232caf1fda25bb96a6fd651069c700afd500600b"
+        "content_hash": "sha256:d32754152efca7b117ea2813215f0edb2a42bcf88d5955e50804081b48e512bc"
       },
       {
         "check": "present",
@@ -59,7 +59,7 @@
         "role": "hygiene",
         "path": "spec/stdcells.md",
         "passed": true,
-        "content_hash": "sha256:84d7bcc9b7bc3823566a987fe48b339db1a20efc8cafeff16119a43c50bdb9ba"
+        "content_hash": "sha256:227462783dd8129e4ae998c12a6925bf0f630a36d81889dd28486a5ebc83a623"
       },
       {
         "check": "command",
