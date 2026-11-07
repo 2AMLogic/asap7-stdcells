@@ -3,6 +3,11 @@
 Chronological record of merged PRs and closed issues, maintained by the Guide
 triage role. Newest first.
 
+### 2026-11-06
+
+- **PR #77**: feat: add klt characterize TT probe on drawn INVx1 and NAND2x1
+- **Issue #76** (closed): Probe klt characterize at TT 0.70 V / 25 C on the drawn INVx1 and NAND2x1, vs shipped
+
 ### 2026-11-05
 
 - **PR #74**: test: add negative control for the GDS redraw freshness check
