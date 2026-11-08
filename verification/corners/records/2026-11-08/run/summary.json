@@ -1,0 +1,151 @@
+{
+ "schema": "asap7-stdcells.corners/1",
+ "cells": {
+  "INVx1": {
+   "status": "pass",
+   "job_id": "klt-sim-8e94a97cc923",
+   "budget_s": 9e-11,
+   "corners": [
+    {
+     "corner": "tt/0.700V/25C",
+     "status": "pass",
+     "levels_checked": 3,
+     "levels_failed": [],
+     "arcs_measured": 2,
+     "arcs_over_budget": [],
+     "worst_arc_delay_s": 9.364788677e-12,
+     "margin_s": 8.063521132299999e-11
+    },
+    {
+     "corner": "ff/0.770V/0C",
+     "status": "pass",
+     "levels_checked": 3,
+     "levels_failed": [],
+     "arcs_measured": 2,
+     "arcs_over_budget": [],
+     "worst_arc_delay_s": 6.941017137e-12,
+     "margin_s": 8.3058982863e-11
+    },
+    {
+     "corner": "ss/0.630V/100C",
+     "status": "pass",
+     "levels_checked": 3,
+     "levels_failed": [],
+     "arcs_measured": 2,
+     "arcs_over_budget": [],
+     "worst_arc_delay_s": 1.359234456e-11,
+     "margin_s": 7.640765544000001e-11
+    }
+   ]
+  },
+  "INVx1_negctl": {
+   "status": "fail",
+   "job_id": "klt-sim-9a45b98aa935",
+   "budget_s": 9e-11,
+   "corners": [
+    {
+     "corner": "tt/0.700V/25C",
+     "status": "fail",
+     "levels_checked": 3,
+     "levels_failed": [
+      "lvl_001"
+     ],
+     "arcs_measured": 2,
+     "arcs_over_budget": [],
+     "worst_arc_delay_s": 4.824944266e-11,
+     "margin_s": 4.175055734e-11
+    },
+    {
+     "corner": "ff/0.770V/0C",
+     "status": "fail",
+     "levels_checked": 3,
+     "levels_failed": [
+      "lvl_001"
+     ],
+     "arcs_measured": 2,
+     "arcs_over_budget": [],
+     "worst_arc_delay_s": 2.405198624e-11,
+     "margin_s": 6.594801376e-11
+    },
+    {
+     "corner": "ss/0.630V/100C",
+     "status": "fail",
+     "levels_checked": 3,
+     "levels_failed": [
+      "lvl_001"
+     ],
+     "arcs_measured": 2,
+     "arcs_over_budget": [],
+     "worst_arc_delay_s": 7.794012328e-11,
+     "margin_s": 1.2059876720000004e-11
+    }
+   ]
+  },
+  "INVx1_slow": {
+   "status": "fail",
+   "job_id": "klt-sim-6d5eb745a294",
+   "budget_s": 9e-11,
+   "corners": [
+    {
+     "corner": "tt/0.700V/25C",
+     "status": "fail",
+     "levels_checked": 3,
+     "levels_failed": [],
+     "arcs_measured": 2,
+     "arcs_over_budget": [
+      "tpd_001",
+      "tpd_002"
+     ],
+     "worst_arc_delay_s": 1.332667422e-10,
+     "margin_s": -4.326674220000001e-11
+    },
+    {
+     "corner": "ff/0.770V/0C",
+     "status": "fail",
+     "levels_checked": 3,
+     "levels_failed": [],
+     "arcs_measured": 2,
+     "arcs_over_budget": [
+      "tpd_001",
+      "tpd_002"
+     ],
+     "worst_arc_delay_s": 1.027788342e-10,
+     "margin_s": -1.2778834199999999e-11
+    },
+    {
+     "corner": "ss/0.630V/100C",
+     "status": "fail",
+     "levels_checked": 3,
+     "levels_failed": [],
+     "arcs_measured": 2,
+     "arcs_over_budget": [
+      "tpd_001",
+      "tpd_002"
+     ],
+     "worst_arc_delay_s": 1.914204457e-10,
+     "margin_s": -1.014204457e-10
+    }
+   ]
+  }
+ },
+ "negative_control": {
+  "cell": "INVx1_negctl",
+  "expected_fail": "lvl_001",
+  "present": true,
+  "flagged_at_all_corners": true
+ },
+ "timing_control": {
+  "cell": "INVx1_slow",
+  "present": true,
+  "flagged": true,
+  "corners_over_budget": [
+   "tt/0.700V/25C",
+   "ff/0.770V/0C",
+   "ss/0.630V/100C"
+  ],
+  "levels_intact": true
+ },
+ "timing_finding": null,
+ "all_cells_pass": true,
+ "finding": null
+}

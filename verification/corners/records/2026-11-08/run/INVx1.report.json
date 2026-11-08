@@ -1,0 +1,643 @@
+{
+ "schema_version": 3,
+ "netlist": {
+  "path": null,
+  "scope": "external"
+ },
+ "status": "pass",
+ "corner_count": 3,
+ "passed": 3,
+ "failed": 0,
+ "errored": 0,
+ "inconclusive": 0,
+ "diagnostic_counts": {
+  "by_code": {},
+  "by_severity": {},
+  "corners_with_diagnostics": 0
+ },
+ "metrics": {
+  "sim__corner__count": 3,
+  "sim__corner__passed_count": 3,
+  "sim__corner__failed_count": 0,
+  "sim__corner__errored_count": 0,
+  "sim__corner__inconclusive_count": 0
+ },
+ "environment": {
+  "engine": "ngspice",
+  "engine_version": "46",
+  "ngspice_binary": "ngspice",
+  "engine_build": {
+   "version_banner": "******\n** ngspice-46 : Circuit level simulation program\n** Compiled with KLU Direct Linear Solver\n** The U. C. Berkeley CAD Group\n** Copyright 1985-1994, Regents of the University of California.\n** Copyright 2001-2025, The ngspice team.\n** Please get your ngspice manual from https://ngspice.sourceforge.io/docs.html\n** Please file your bug-reports at http://ngspice.sourceforge.net/bugrep.html\n** Creation Date: Thu Oct  1 23:51:59 UTC 2026\n******",
+   "binary_sha256": "dc859418bedd0478ff439a2d3e2e09f4386a7f4d5e3f17671953e101a000cc60",
+   "probe": "ok",
+   "reason": null
+  },
+  "models_lib": {
+   "path": null,
+   "scope": "external"
+  },
+  "models_lib_sha256": "ed21e96383c01c41e9b00a442c08d7bf9daebed057206788526c1115c1418d4f",
+  "models_lib_sha256_scope": "client",
+  "netlist_sha256": "87e589e81eaf1c250dd5989b6b9c89e7548706e5459dd5bf67df9d68983a205c",
+  "netlist_closure": [
+   {
+    "path": null,
+    "scope": "external",
+    "sha256": "87e589e81eaf1c250dd5989b6b9c89e7548706e5459dd5bf67df9d68983a205c"
+   },
+   {
+    "path": null,
+    "scope": "external",
+    "sha256": "2394ac0e1e3b730bb814ab0f7b2f754d39595d98c45d783c8ea2f05163db2df0"
+   }
+  ],
+  "netlist_identity": "sha256:807c0489435833514de0217cbc52a2a3ba7b3abe428eb4568694fb5c8938b4f6",
+  "osdi_preload": [
+   {
+    "name": "bsimcmg.osdi",
+    "path": null,
+    "scope": "external",
+    "sha256": "4e755d14e901a84600124be5cb73e36302117b6cfc694e52ffc17640945cd9e3"
+   }
+  ],
+  "staged_model_inputs": [
+   {
+    "name": "asap7_bsimcmg.lib",
+    "field": "models.lib",
+    "kind": "library",
+    "sha256": "ed21e96383c01c41e9b00a442c08d7bf9daebed057206788526c1115c1418d4f",
+    "rewritten": false,
+    "source_sha256": "ed21e96383c01c41e9b00a442c08d7bf9daebed057206788526c1115c1418d4f"
+   },
+   {
+    "name": "bsimcmg.osdi",
+    "field": "options.osdi_preload[0]",
+    "kind": "osdi",
+    "sha256": "4e755d14e901a84600124be5cb73e36302117b6cfc694e52ffc17640945cd9e3",
+    "rewritten": false,
+    "source_sha256": "4e755d14e901a84600124be5cb73e36302117b6cfc694e52ffc17640945cd9e3"
+   }
+  ],
+  "remote": {
+   "provider": "aws-batch-fleet",
+   "job_id": "klt-sim-8e94a97cc923",
+   "region": "us-east-1",
+   "instance_id": "i-0a0cfa1dfaf4f1abe",
+   "instance_type": "m7i.4xlarge",
+   "availability_zone": "us-east-1a",
+   "ami_id": "ami-095c25ae241a4d360",
+   "lifecycle": "spot",
+   "spot": true,
+   "state": "done",
+   "exit_code": "0",
+   "concurrency": "1",
+   "physical_cores": "8",
+   "elapsed_seconds": 17,
+   "client_submitted_at": "2026-11-08T21:56:31.535421Z",
+   "client_launched_at": "2026-11-08T21:56:53.105526Z",
+   "client_status_terminal_at": "2026-11-08T21:57:24.739435Z",
+   "client_collected_at": "2026-11-08T21:57:25.608576Z",
+   "runner_klt_version": "0.9.0",
+   "client_klt_version": "0.9.2.dev299+ge5ccedae13f0",
+   "runner_compatibility": "match",
+   "runner_request_features": {
+    "required": [
+     "stimulus",
+     "options.ngspice_init",
+     "options.osdi_preload",
+     "options.stage_model_inputs"
+    ],
+    "missing": [],
+    "status": "supported"
+   },
+   "worker_environment": {
+    "capture": "ok",
+    "simulator": {
+     "requested_binary": "ngspice",
+     "binary_source": "PATH",
+     "selected_path": "ngspice",
+     "version_banner": "******\n** ngspice-46 : Circuit level simulation program\n** Compiled with KLU Direct Linear Solver\n** The U. C. Berkeley CAD Group\n** Copyright 1985-1994, Regents of the University of California.\n** Copyright 2001-2025, The ngspice team.\n** Please get your ngspice manual from https://ngspice.sourceforge.io/docs.html\n** Please file your bug-reports at http://ngspice.sourceforge.net/bugrep.html\n** Creation Date: Thu Oct  1 23:51:59 UTC 2026\n******\n",
+     "version_probe": "ok"
+    },
+    "pdk": {
+     "variant": null,
+     "root": "/opt/pdk",
+     "stamp_scheme": null,
+     "stamp_sha256": null,
+     "stamp_text": null,
+     "models_staged": true,
+     "stamp_scope": "image"
+    },
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8488C",
+    "omp_num_threads": null,
+    "image_manifest": null,
+    "model_inputs": [
+     {
+      "name": "asap7_bsimcmg.lib",
+      "sha256": "ed21e96383c01c41e9b00a442c08d7bf9daebed057206788526c1115c1418d4f"
+     },
+     {
+      "name": "bsimcmg.osdi",
+      "sha256": "4e755d14e901a84600124be5cb73e36302117b6cfc694e52ffc17640945cd9e3"
+     }
+    ],
+    "diagnostics": [
+     "pdk root or variant unknown on worker"
+    ],
+    "pdk_stamp_comparison": {
+     "basis": "staged_model_inputs",
+     "status": "match"
+    },
+    "engine_build_comparison": {
+     "status": "match"
+    }
+   },
+   "runner_model_inputs": [
+    {
+     "name": "asap7_bsimcmg.lib",
+     "sha256": "ed21e96383c01c41e9b00a442c08d7bf9daebed057206788526c1115c1418d4f"
+    },
+    {
+     "name": "bsimcmg.osdi",
+     "sha256": "4e755d14e901a84600124be5cb73e36302117b6cfc694e52ffc17640945cd9e3"
+    }
+   ],
+   "job_ceiling": {
+    "basis": "conservative_serial_bound",
+    "unit_count": 3,
+    "per_unit_timeout_s": 600,
+    "overhead_s": 120.0,
+    "job_bound_s": 1920.0,
+    "max_job_seconds": 3600.0,
+    "max_job_seconds_source": "fleet_config",
+    "exceeds_ceiling": false,
+    "check": "warn",
+    "max_units_per_job": 5,
+    "recommended_hosts": 1
+   }
+  },
+  "engine_host": "worker",
+  "client_ngspice_binary": "ngspice",
+  "backend": {
+   "resolved": "batch",
+   "source": "flag",
+   "requested": "batch"
+  },
+  "stimulus": {
+   "supply_relative": true,
+   "corners": [
+    {
+     "corner_id": "tt/0.700V/25C",
+     "signals": [
+      {
+       "source": "Va",
+       "node": "in_a",
+       "ref": "0",
+       "initial": 0.0,
+       "skew_s": 0.0,
+       "events": [
+        {
+         "t_s": 5e-10,
+         "t_applied_s": 5e-10,
+         "level": 0.7,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 7.500000000000001e-10,
+         "t_applied_s": 7.500000000000001e-10,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        }
+       ],
+       "pwl": [
+        [
+         0.0,
+         0.0
+        ],
+        [
+         5e-10,
+         0.0
+        ],
+        [
+         5.1e-10,
+         0.7
+        ],
+        [
+         7.500000000000001e-10,
+         0.7
+        ],
+        [
+         7.600000000000001e-10,
+         0.0
+        ]
+       ]
+      }
+     ]
+    },
+    {
+     "corner_id": "ff/0.770V/0C",
+     "signals": [
+      {
+       "source": "Va",
+       "node": "in_a",
+       "ref": "0",
+       "initial": 0.0,
+       "skew_s": 0.0,
+       "events": [
+        {
+         "t_s": 5e-10,
+         "t_applied_s": 5e-10,
+         "level": 0.77,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 7.500000000000001e-10,
+         "t_applied_s": 7.500000000000001e-10,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        }
+       ],
+       "pwl": [
+        [
+         0.0,
+         0.0
+        ],
+        [
+         5e-10,
+         0.0
+        ],
+        [
+         5.1e-10,
+         0.77
+        ],
+        [
+         7.500000000000001e-10,
+         0.77
+        ],
+        [
+         7.600000000000001e-10,
+         0.0
+        ]
+       ]
+      }
+     ]
+    },
+    {
+     "corner_id": "ss/0.630V/100C",
+     "signals": [
+      {
+       "source": "Va",
+       "node": "in_a",
+       "ref": "0",
+       "initial": 0.0,
+       "skew_s": 0.0,
+       "events": [
+        {
+         "t_s": 5e-10,
+         "t_applied_s": 5e-10,
+         "level": 0.63,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 7.500000000000001e-10,
+         "t_applied_s": 7.500000000000001e-10,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        }
+       ],
+       "pwl": [
+        [
+         0.0,
+         0.0
+        ],
+        [
+         5e-10,
+         0.0
+        ],
+        [
+         5.1e-10,
+         0.63
+        ],
+        [
+         7.500000000000001e-10,
+         0.63
+        ],
+        [
+         7.600000000000001e-10,
+         0.0
+        ]
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "coverage": {
+  "corners_simulated": 3,
+  "measurements_declared": 5,
+  "measurements_with_limits": 5,
+  "unrecognized_limit_keys": [],
+  "schema_version": 1,
+  "known": true,
+  "checked": [
+   "limit:[0,\"tt/0.700V/25C\",\"lvl_000\",\"min\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"lvl_001\",\"max\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"lvl_002\",\"min\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"tpd_001\",\"max\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"tpd_002\",\"max\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"lvl_000\",\"min\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"lvl_001\",\"max\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"lvl_002\",\"min\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"tpd_001\",\"max\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"tpd_002\",\"max\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"lvl_000\",\"min\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"lvl_001\",\"max\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"lvl_002\",\"min\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"tpd_001\",\"max\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"tpd_002\",\"max\"]"
+  ],
+  "skipped": [],
+  "inapplicable": [],
+  "unknown": [],
+  "nothing_checked": false,
+  "nothing_checked_reasons": []
+ },
+ "provenance": {
+  "klt_version": "0.9.2.dev299+ge5ccedae13f0",
+  "klt_git_commit": "e5ccedae13f0edd8b80fb67445292623fb012895",
+  "klt_reinstall_spec": "klayout-tools @ git+https://github.com/2AMLogic/klayout-tools@e5ccedae13f0edd8b80fb67445292623fb012895",
+  "klayout_version": "0.30.13",
+  "pdk": null,
+  "deck": {
+   "name": "asap7_bsimcmg.lib",
+   "content_hash": "sha256:ed21e96383c01c41e9b00a442c08d7bf9daebed057206788526c1115c1418d4f",
+   "released": false
+  },
+  "input": {
+   "content_hash": "sha256:87e589e81eaf1c250dd5989b6b9c89e7548706e5459dd5bf67df9d68983a205c",
+   "role": "netlist"
+  }
+ },
+ "measurements": [
+  {
+   "name": "lvl_000",
+   "unit": "VDD",
+   "limits": {
+    "min": 0.9
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 0.9999970347,
+    "margin": 0.09999703469999999
+   }
+  },
+  {
+   "name": "lvl_001",
+   "unit": "VDD",
+   "limits": {
+    "max": 0.1
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 5.862607151e-06,
+    "margin": 0.099994137392849
+   }
+  },
+  {
+   "name": "tpd_001",
+   "unit": "s",
+   "limits": {
+    "max": 9e-11
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 1.144069502e-11,
+    "margin": 7.855930498e-11
+   }
+  },
+  {
+   "name": "lvl_002",
+   "unit": "VDD",
+   "limits": {
+    "min": 0.9
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 0.999997035,
+    "margin": 0.09999703500000001
+   }
+  },
+  {
+   "name": "tpd_002",
+   "unit": "s",
+   "limits": {
+    "max": 9e-11
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 1.359234456e-11,
+    "margin": 7.640765544000001e-11
+   }
+  }
+ ],
+ "corners": [
+  {
+   "corner_id": "tt/0.700V/25C",
+   "process": "tt",
+   "supply_v": {
+    "vsup": 0.7
+   },
+   "temperature_c": 25,
+   "status": "pass",
+   "runtime_s": 0.332,
+   "peak_rss_bytes": 50245632,
+   "engine_exit_code": 0,
+   "engine_killed_by_signal": null,
+   "measurements": [
+    {
+     "name": "lvl_000",
+     "value": 0.9999998095,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09999980949999998
+    },
+    {
+     "name": "lvl_001",
+     "value": 1.51104719e-07,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.099999848895281
+    },
+    {
+     "name": "tpd_001",
+     "value": 8.29871151e-12,
+     "unit": "s",
+     "status": "pass",
+     "margin": 8.170128849e-11
+    },
+    {
+     "name": "lvl_002",
+     "value": 0.9999998094,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09999980939999997
+    },
+    {
+     "name": "tpd_002",
+     "value": 9.364788677e-12,
+     "unit": "s",
+     "status": "pass",
+     "margin": 8.063521132299999e-11
+    }
+   ],
+   "diagnostics": [],
+   "artifacts": {
+    "log": null,
+    "raw": null,
+    "waveform": null,
+    "deck": null
+   },
+   "monte_carlo": null
+  },
+  {
+   "corner_id": "ff/0.770V/0C",
+   "process": "ff",
+   "supply_v": {
+    "vsup": 0.77
+   },
+   "temperature_c": 0,
+   "status": "pass",
+   "runtime_s": 0.325,
+   "peak_rss_bytes": 50245632,
+   "engine_exit_code": 0,
+   "engine_killed_by_signal": null,
+   "measurements": [
+    {
+     "name": "lvl_000",
+     "value": 0.999999884,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09999988399999993
+    },
+    {
+     "name": "lvl_001",
+     "value": 3.42467142e-08,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.0999999657532858
+    },
+    {
+     "name": "tpd_001",
+     "value": 6.388488628e-12,
+     "unit": "s",
+     "status": "pass",
+     "margin": 8.3611511372e-11
+    },
+    {
+     "name": "lvl_002",
+     "value": 0.9999998839,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09999988390000003
+    },
+    {
+     "name": "tpd_002",
+     "value": 6.941017137e-12,
+     "unit": "s",
+     "status": "pass",
+     "margin": 8.3058982863e-11
+    }
+   ],
+   "diagnostics": [],
+   "artifacts": {
+    "log": null,
+    "raw": null,
+    "waveform": null,
+    "deck": null
+   },
+   "monte_carlo": null
+  },
+  {
+   "corner_id": "ss/0.630V/100C",
+   "process": "ss",
+   "supply_v": {
+    "vsup": 0.63
+   },
+   "temperature_c": 100,
+   "status": "pass",
+   "runtime_s": 0.331,
+   "peak_rss_bytes": 50245632,
+   "engine_exit_code": 0,
+   "engine_killed_by_signal": null,
+   "measurements": [
+    {
+     "name": "lvl_000",
+     "value": 0.9999970347,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09999703469999999
+    },
+    {
+     "name": "lvl_001",
+     "value": 5.862607151e-06,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.099994137392849
+    },
+    {
+     "name": "tpd_001",
+     "value": 1.144069502e-11,
+     "unit": "s",
+     "status": "pass",
+     "margin": 7.855930498e-11
+    },
+    {
+     "name": "lvl_002",
+     "value": 0.999997035,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09999703500000001
+    },
+    {
+     "name": "tpd_002",
+     "value": 1.359234456e-11,
+     "unit": "s",
+     "status": "pass",
+     "margin": 7.640765544000001e-11
+    }
+   ],
+   "diagnostics": [],
+   "artifacts": {
+    "log": null,
+    "raw": null,
+    "waveform": null,
+    "deck": null
+   },
+   "monte_carlo": null
+  }
+ ]
+}

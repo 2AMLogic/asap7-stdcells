@@ -1,0 +1,15 @@
+INVx1     shipped INVx1      worst SS delay   16.43 ps
+BUFx1     shipped BUFx2      worst SS delay   29.34 ps
+NAND2x1   shipped NAND2xp5   worst SS delay   23.46 ps
+NAND3x1   shipped NAND3xp33  worst SS delay   30.57 ps
+NOR2x1    shipped NOR2xp33   worst SS delay   37.74 ps
+NOR3x1    shipped NOR3xp33   worst SS delay   44.14 ps
+AND2x1    shipped AND2x2     worst SS delay   31.36 ps
+OR2x1     shipped OR2x2      worst SS delay   36.86 ps
+XOR2x1    shipped XOR2xp5    worst SS delay   42.80 ps
+XNOR2x1   shipped XNOR2xp5   worst SS delay   39.01 ps
+AOI21x1   shipped AOI21xp5   worst SS delay   30.35 ps
+AOI22x1   shipped AOI22xp5   worst SS delay   32.65 ps
+OAI21x1   shipped OAI21xp5   worst SS delay   29.68 ps
+OAI22x1   shipped OAI22xp5   worst SS delay   31.78 ps
+worst over cells 44.14 ps; 2x rounded up to 5 ps = 90 ps

@@ -10,6 +10,8 @@
 # toolchain.sh). The grid is NOT run locally: the requests go through
 # `klt sim --batch-set --wait-for-capacity 600`; a failed submit is reported,
 # never re-run here. `--dry-run` as a second argument stops after validation.
+# Set CELLS="INVx1" (space-separated base cells) to generate and run only those
+# (INVx1 brings its two controls, INVx1_negctl and INVx1_slow, with it).
 set -euo pipefail
 
 SCRATCH="${1:?usage: run.sh <scratch-dir> [--dry-run]}"
@@ -46,7 +48,7 @@ python3 -I "$HERE/reference_budget.py" \
 
 # 4. Extract the drawn cells and write the requests.
 "$KLT_PY" -I "$HERE/make_requests.py" "$REPO/layout" \
-  "$PDKROOT/asap7/base/spice/hspice" "$OSDI" "$SCRATCH/run"
+  "$PDKROOT/asap7/base/spice/hspice" "$OSDI" "$SCRATCH/run" ${CELLS:-}
 {
   echo "klt: $(klt --version)"
   echo "ngspice: $(ngspice --version | grep -m1 -i 'ngspice-')"

@@ -1,0 +1,277 @@
+{
+ "netlist": "INVx1.tb.spice",
+ "engine": "ngspice",
+ "models": {
+  "lib": "asap7_bsimcmg.lib"
+ },
+ "corners": {
+  "process": [
+   "tt",
+   "ff",
+   "ss"
+  ],
+  "supply_v": {
+   "vsup": [
+    0.63,
+    0.7,
+    0.77
+   ]
+  },
+  "temperature_c": [
+   0,
+   25,
+   100
+  ]
+ },
+ "exclude": [
+  {
+   "process": "tt",
+   "supply_v": {
+    "vsup": 0.7
+   },
+   "temperature_c": 0
+  },
+  {
+   "process": "tt",
+   "supply_v": {
+    "vsup": 0.7
+   },
+   "temperature_c": 100
+  },
+  {
+   "process": "tt",
+   "supply_v": {
+    "vsup": 0.77
+   },
+   "temperature_c": 25
+  },
+  {
+   "process": "tt",
+   "supply_v": {
+    "vsup": 0.77
+   },
+   "temperature_c": 0
+  },
+  {
+   "process": "tt",
+   "supply_v": {
+    "vsup": 0.77
+   },
+   "temperature_c": 100
+  },
+  {
+   "process": "tt",
+   "supply_v": {
+    "vsup": 0.63
+   },
+   "temperature_c": 25
+  },
+  {
+   "process": "tt",
+   "supply_v": {
+    "vsup": 0.63
+   },
+   "temperature_c": 0
+  },
+  {
+   "process": "tt",
+   "supply_v": {
+    "vsup": 0.63
+   },
+   "temperature_c": 100
+  },
+  {
+   "process": "ff",
+   "supply_v": {
+    "vsup": 0.7
+   },
+   "temperature_c": 25
+  },
+  {
+   "process": "ff",
+   "supply_v": {
+    "vsup": 0.7
+   },
+   "temperature_c": 0
+  },
+  {
+   "process": "ff",
+   "supply_v": {
+    "vsup": 0.7
+   },
+   "temperature_c": 100
+  },
+  {
+   "process": "ff",
+   "supply_v": {
+    "vsup": 0.77
+   },
+   "temperature_c": 25
+  },
+  {
+   "process": "ff",
+   "supply_v": {
+    "vsup": 0.77
+   },
+   "temperature_c": 100
+  },
+  {
+   "process": "ff",
+   "supply_v": {
+    "vsup": 0.63
+   },
+   "temperature_c": 25
+  },
+  {
+   "process": "ff",
+   "supply_v": {
+    "vsup": 0.63
+   },
+   "temperature_c": 0
+  },
+  {
+   "process": "ff",
+   "supply_v": {
+    "vsup": 0.63
+   },
+   "temperature_c": 100
+  },
+  {
+   "process": "ss",
+   "supply_v": {
+    "vsup": 0.7
+   },
+   "temperature_c": 25
+  },
+  {
+   "process": "ss",
+   "supply_v": {
+    "vsup": 0.7
+   },
+   "temperature_c": 0
+  },
+  {
+   "process": "ss",
+   "supply_v": {
+    "vsup": 0.7
+   },
+   "temperature_c": 100
+  },
+  {
+   "process": "ss",
+   "supply_v": {
+    "vsup": 0.77
+   },
+   "temperature_c": 25
+  },
+  {
+   "process": "ss",
+   "supply_v": {
+    "vsup": 0.77
+   },
+   "temperature_c": 0
+  },
+  {
+   "process": "ss",
+   "supply_v": {
+    "vsup": 0.77
+   },
+   "temperature_c": 100
+  },
+  {
+   "process": "ss",
+   "supply_v": {
+    "vsup": 0.63
+   },
+   "temperature_c": 25
+  },
+  {
+   "process": "ss",
+   "supply_v": {
+    "vsup": 0.63
+   },
+   "temperature_c": 0
+  }
+ ],
+ "analysis": {
+  "kind": "tran",
+  "args": "1p 1.000000e-09"
+ },
+ "stimulus": {
+  "signals": [
+   {
+    "source": "Va",
+    "node": "in_a",
+    "ref": "0",
+    "initial": 0.0,
+    "rise_s": 1e-11,
+    "fall_s": 1e-11,
+    "events": [
+     {
+      "t_s": 5e-10,
+      "level": {
+       "frac_of": "vsup",
+       "fraction": 1.0
+      }
+     },
+     {
+      "t_s": 7.500000000000001e-10,
+      "level": 0.0
+     }
+    ]
+   }
+  ]
+ },
+ "measurements": [
+  {
+   "name": "lvl_000",
+   "unit": "VDD",
+   "limits": {
+    "min": 0.9
+   },
+   "spice": ".meas tran lvl_000 FIND v(ylvl) AT=4.900000e-10"
+  },
+  {
+   "name": "lvl_001",
+   "unit": "VDD",
+   "limits": {
+    "max": 0.1
+   },
+   "spice": ".meas tran lvl_001 FIND v(ylvl) AT=7.400000e-10"
+  },
+  {
+   "name": "tpd_001",
+   "unit": "s",
+   "limits": {
+    "max": 9e-11
+   },
+   "spice": ".meas tran tpd_001 TRIG v(imid_a) VAL=0 RISE=1 TD=4.990000e-10 TARG v(ymid) VAL=0 FALL=1 TD=4.990000e-10"
+  },
+  {
+   "name": "lvl_002",
+   "unit": "VDD",
+   "limits": {
+    "min": 0.9
+   },
+   "spice": ".meas tran lvl_002 FIND v(ylvl) AT=9.900000e-10"
+  },
+  {
+   "name": "tpd_002",
+   "unit": "s",
+   "limits": {
+    "max": 9e-11
+   },
+   "spice": ".meas tran tpd_002 TRIG v(imid_a) VAL=0 FALL=1 TD=7.490000e-10 TARG v(ymid) VAL=0 RISE=1 TD=7.490000e-10"
+  }
+ ],
+ "options": {
+  "osdi_preload": [
+   "scratch/sim/osdi/bsimcmg.osdi"
+  ],
+  "stage_model_inputs": true,
+  "timeout_s": 600,
+  "ngspice_init": [
+   "set measureprec=9"
+  ]
+ }
+}
