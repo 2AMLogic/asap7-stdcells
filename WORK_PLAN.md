@@ -32,7 +32,7 @@ _None._
 
 Issues currently being built (`loom:building`).
 
-- **#90**: verification: make the corner-matrix negative control fail on timing, not only on level
+_None._
 
 ## PRs Awaiting Review
 
@@ -50,12 +50,11 @@ _None._
 
 Issues carrying `loom:curated`.
 
-- **#90**: verification: make the corner-matrix negative control fail on timing, not only on level *(curated)*
 - **#3**: Track the gap to T1 (klayout-tools design-evidence-tiers.md) *(curated)*
 
 ## Proposed (Architect / Hermit)
 
-_None._
+- **#94**: Dedup item-5 corner-sweep drivers and Liberty budget scripts *(hermit)*
 
 ## Epics
 
@@ -69,10 +68,10 @@ _None._
 | Very important | 0 |
 | Important | 0 |
 | Ready (`loom:issue`) | 0 |
-| In Progress (`loom:building`) | 1 |
+| In Progress (`loom:building`) | 0 |
 | PRs awaiting review | 0 |
 | Approved PRs awaiting merge | 0 |
-| Curated | 2 |
-| Architect / Hermit proposals | 0 |
+| Curated | 1 |
+| Architect / Hermit proposals | 1 |
 | Active epics | 0 |
 <!-- guide:plan-body:end -->

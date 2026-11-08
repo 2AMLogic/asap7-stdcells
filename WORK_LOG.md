@@ -5,6 +5,13 @@ triage role. Newest first.
 
 ### 2026-11-08
 
+- **PR #95**: feat(verification): characterization report generator and item 8 envelope
+- **PR #93**: feat(verification): TT/FF/SS sweep of DFFHQNx1 and DHLx1, wire T1 item 5
+- **PR #92**: test(corners): add INVx1_slow timing control that fires the tpd limit
+- **Issue #90** (closed): verification: make the corner-matrix negative control fail on timing, not only on level
+- **Issue #86** (closed): T1 item 5 (corner verification): sequential cells' clock-to-Q, setup and hold per corner, and manifest wiring
+- **Issue #85** (closed): T1 item 8 (characterization report): aggregated per-corner report with generic evidence envelope
+- **Issue #82** (closed): T1 items 5, 7 and 8 have no open work (8 of 11 met)
 - **PR #88**: feat(verification): TT/FF/SS corner-matrix sweep of the combinational cells (decision 0011)
 - **Issue #83** (closed): T1 item 5 (corner verification): TT/FF/SS corner-matrix sim of the combinational cells with per-corner timing margin
 
