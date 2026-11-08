@@ -5,7 +5,7 @@
   "tier": null,
   "t1_item_count": 11,
   "build_t1_item_count": 11,
-  "t1_met_count": 8,
+  "t1_met_count": 9,
   "t1_not_applicable_count": 1,
   "source_doc": "manifests/design-evidence-tiers.md",
   "source_doc_content_hash": "sha256:a26b90262320d0fbd32b3f549a02b6300832706041797a559d8bf6bdb62efdc7",
@@ -514,10 +514,56 @@
       "notes": [
         "Both require the spec table itself to be ratified \u2014 verdicts against a draft spec are provisional by construction."
       ],
-      "status": "unmet",
-      "reason": "no_evidence",
+      "status": "met",
+      "reason": null,
       "graded_by_build": true,
-      "citation": null
+      "citation": {
+        "file": "manifests/t1-item5.envelope.json",
+        "command": null,
+        "kind": "model-run",
+        "check_status": "pass",
+        "content_hash": "sha256:44d2cbe00211e55013dc4fe4ccb591ce68f732fb1c057eecf94a768cab83cdb6",
+        "input_verified": true,
+        "exit_status": 0,
+        "method": "TT 0.70 V 25 C / FF 0.77 V 0 C / SS 0.63 V 100 C ngspice transient runs of the extracted, pre-layout BSIM-CMG netlists of the drawn cells (klt sim batch reports, decisions 0011 and 0012). A predictive-model run on a predictive PDK; not a measured part",
+        "executed_by_klt": false
+      },
+      "citations_graded": [
+        {
+          "citation": "manifests/t1-item5.envelope.json",
+          "rows": [
+            "cell-set",
+            "pvt-corners",
+            "timing-margin"
+          ],
+          "status": "met",
+          "reason": null
+        }
+      ],
+      "row_coverage": {
+        "failed_rows": [],
+        "uncovered_rows": [],
+        "declared_gaps": [],
+        "unratified_rows": [],
+        "row_sources": {
+          "cell-set": "derived",
+          "pvt-corners": "derived",
+          "timing-margin": "derived"
+        }
+      },
+      "citations": [
+        {
+          "file": "manifests/t1-item5.envelope.json",
+          "command": null,
+          "kind": "model-run",
+          "check_status": "pass",
+          "content_hash": "sha256:44d2cbe00211e55013dc4fe4ccb591ce68f732fb1c057eecf94a768cab83cdb6",
+          "input_verified": true,
+          "exit_status": 0,
+          "method": "TT 0.70 V 25 C / FF 0.77 V 0 C / SS 0.63 V 100 C ngspice transient runs of the extracted, pre-layout BSIM-CMG netlists of the drawn cells (klt sim batch reports, decisions 0011 and 0012). A predictive-model run on a predictive PDK; not a measured part",
+          "executed_by_klt": false
+        }
+      ]
     },
     {
       "tier": "T1",

@@ -5,9 +5,9 @@ of the 14 drawn combinational cells plus the 2 tie cells at TT 0.70 V 25 C,
 FF 0.77 V 0 C and SS 0.63 V 100 C, with a per-corner timing margin measured in
 the same sweep. The corner set, stimulus, thresholds and the 90 ps delay budget
 are fixed by `spec/decisions/0011-pvt-corner-set-and-margin-budget.md`, committed
-before the first fleet run. The sequential cells (DFFHQNx1, DHLx1) and the
-manifest wiring belong to the sibling issue that completes item 5; `manifests/`
-and `layout/A7S_75t_R_structural.lib` are untouched.
+before the first fleet run. The sequential cells (DFFHQNx1, DHLx1) are the second half of this directory
+(below, issue #86, decision 0012), and so is the item-5 manifest wiring;
+`layout/A7S_75t_R_structural.lib` is untouched.
 
 Everything here is a tool result against a predictive model of a predictive PDK.
 Nothing is a measured part, a published timing number or a claim about silicon.
@@ -82,3 +82,51 @@ Self-test, no klt or PDK needed: `python3 verification/corners/test_corners.py`
 Tool versions (`records/2026-11-07/run/versions.txt`): klt
 0.9.2.dev244+g92e2b15a66f2, ngspice-46, lambdapdk 0.2.17, OSDI module sha256
 `4e755d14...`.
+
+## Sequential cells (issue #86, decision 0012)
+
+`DFFHQNx1` (positive-edge flop) and `DHLx1` (latch, transparent while CLK is high),
+at the same three corners, load and edge rate. Decision 0012, committed before the
+run, fixes the stimulus and the budgets: clock-to-output / D-to-output 90 ps (as
+0011), **setup 45 ps and hold 35 ps**, each twice the worst shipped SS constraint
+of the two shipped analogues at 10 ps / 10 ps, rounded up to 5 ps
+(`reference_seq_budget.py`: worst setup 20.85 ps, worst hold 17.15 ps).
+
+Record `records/seq-2026-11-08/` (per-cell reports, `summary.json`, `summary.md`,
+the four requests, `versions.txt`). Per cell and corner: a functional capture check
+(flop captures 0, 1, 0; latch transparent D to Q for a rise and a fall, then
+CLK-rise to Q), the delays, and a data-to-active-edge offset sweep (-50 to +50 ps in
+2.5 ps steps, rise and fall of D). The trials at -45 ps (must capture the new value)
+and +35 ps (must keep the old one) carry klt limits; the rest are reduced to the
+measured setup and hold. Setup and hold are therefore 2.5 ps resolution figures from
+a sweep, not a bisection and not a published timing number.
+
+Result: every capture check, delay and budget trial passes at TT, FF and SS for both
+cells. Worst delay (ps): DFFHQNx1 15.2 / 20.3 / 29.5 (FF/TT/SS), DHLx1 13.0 / 17.3 /
+25.0. Measured setup 5 to 10 ps and hold -7.5 to -2.5 ps (data may change slightly
+before the edge); the narrowest margin is DHLx1 SS fall setup, 10.0 ps measured
+against 45 ps (35.0 ps margin). The full per-corner table is `summary.md`.
+
+**Negative controls** (`DFFHQNx1_negctl`, `DHLx1_negctl`: the input transmission
+gate tied off, nmos gate to VSS and pmos gate to VDD): at every corner at least one
+capture check fails (1 of 3 for the flop, 2 or 3 of 5 for the latch), and the
+delay measurements, which need a switching output, error. The control cells' klt
+verdict is `error`, which the batch-set exit code 4 reflects; that is the expected
+outcome, not a failed run.
+
+Tool notes: the OSDI module was the one built for decision 0011 (sha256 checked by
+`run_seq.sh` via `OSDI_PREBUILT`), and the requests are the same shape as #83's
+(corner axes crossed and `exclude`d down to the three points).
+
+### Item 5 wiring
+
+`manifests/t1-item5.envelope.json` is a `model-run` envelope assembled by
+`make_item5_envelope.py` from the two `summary.json` files (combinational #83 and
+sequential #86), because the batch reports carry no `spec_row` tags. `klt` does not
+re-execute it (`executed_by_klt: false`); `item5-sources.json` pins the two summaries
+by hash. It declares three rows, `cell-set` (all functional checks pass),
+`pvt-corners` (klt's verdict pass at TT, FF and SS) and `timing-margin` (minimum
+margin >= 0 against the decision budgets), per cell. The other rows of
+`manifests/spec-rows.json` are not simulation-gradable and are covered by other items.
+Reproduce the sequential record with
+`OSDI_PREBUILT=<osdi> KLT_SRC=<klayout-tools checkout> verification/corners/run_seq.sh <empty-dir>`.

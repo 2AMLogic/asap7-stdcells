@@ -128,6 +128,9 @@ def main(argv):
             report = json.loads(rp.read_text())
             cells[name] = reduce_report(report, json.loads((work / f"{name}.trials.json").read_text()))
             (rec / f"{name}.report.json").write_text(json.dumps(report, indent=1) + "\n")
+    for n in NEGCTLS:  # a stuck output has no setup/hold: do not report one
+        for r in cells.get(n, {"corners": []})["corners"]:
+            r["sweep"] = None
     neg = {}
     for n in NEGCTLS:
         c = cells.get(n)
@@ -148,7 +151,8 @@ def main(argv):
              "|---|---|---|---|---|---|---|---|---|---|---|"]
     for name, v in cells.items():
         for r in v["corners"]:
-            s = r["sweep"]
+            s = r["sweep"] or {k: dict.fromkeys(("setup_ps", "hold_ps", "setup_margin_ps", "hold_margin_ps"))
+                               for k in ("r", "f")}
             w, m = r["worst_delay_s"], r["delay_margin_s"]
             lines.append(
                 f"| {name} | {r['corner']} | {r['status']} | {len(r['captures_failed'])}/{r['captures_checked']}"

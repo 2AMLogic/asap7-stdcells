@@ -1,0 +1,4 @@
+DFFHQNx1  shipped DFFHQNx1  worst SS setup  16.43 ps  hold  17.15 ps
+DHLx1     shipped DHLx1     worst SS setup  20.85 ps  hold   5.84 ps
+setup: worst over cells 20.85 ps; 2x rounded up to 5 ps = 45 ps
+hold: worst over cells 17.15 ps; 2x rounded up to 5 ps = 35 ps
