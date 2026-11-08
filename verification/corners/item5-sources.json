@@ -1,0 +1,13 @@
+{
+ "note": "inputs of the item-5 model-run envelope; regenerate with make_item5_envelope.py",
+ "sources": [
+  {
+   "path": "verification/corners/records/2026-11-07/run/summary.json",
+   "content_hash": "sha256:4169495d274746598d557f44431749e186985b44e811d51c8832e16cf5d1503b"
+  },
+  {
+   "path": "verification/corners/records/seq-2026-11-08/summary.json",
+   "content_hash": "sha256:d88c91c0aa2d351eb870fcf9a5d846538c8bba132e01a9085a7ea4462f5adf69"
+  }
+ ]
+}

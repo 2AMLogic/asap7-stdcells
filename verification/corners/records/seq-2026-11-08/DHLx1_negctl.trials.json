@@ -1,0 +1,581 @@
+{
+ "inverting": false,
+ "setup_budget_ps": 45,
+ "hold_budget_ps": 35,
+ "trials": [
+  {
+   "name": "swr_m500",
+   "pol": "r",
+   "offset_ps": -50.0,
+   "new_bit": 1,
+   "cycle": 5
+  },
+  {
+   "name": "swf_m500",
+   "pol": "f",
+   "offset_ps": -50.0,
+   "new_bit": 0,
+   "cycle": 7
+  },
+  {
+   "name": "swr_m475",
+   "pol": "r",
+   "offset_ps": -47.5,
+   "new_bit": 1,
+   "cycle": 9
+  },
+  {
+   "name": "swf_m475",
+   "pol": "f",
+   "offset_ps": -47.5,
+   "new_bit": 0,
+   "cycle": 11
+  },
+  {
+   "name": "swr_m450",
+   "pol": "r",
+   "offset_ps": -45.0,
+   "new_bit": 1,
+   "cycle": 13
+  },
+  {
+   "name": "swf_m450",
+   "pol": "f",
+   "offset_ps": -45.0,
+   "new_bit": 0,
+   "cycle": 15
+  },
+  {
+   "name": "swr_m425",
+   "pol": "r",
+   "offset_ps": -42.5,
+   "new_bit": 1,
+   "cycle": 17
+  },
+  {
+   "name": "swf_m425",
+   "pol": "f",
+   "offset_ps": -42.5,
+   "new_bit": 0,
+   "cycle": 19
+  },
+  {
+   "name": "swr_m400",
+   "pol": "r",
+   "offset_ps": -40.0,
+   "new_bit": 1,
+   "cycle": 21
+  },
+  {
+   "name": "swf_m400",
+   "pol": "f",
+   "offset_ps": -40.0,
+   "new_bit": 0,
+   "cycle": 23
+  },
+  {
+   "name": "swr_m375",
+   "pol": "r",
+   "offset_ps": -37.5,
+   "new_bit": 1,
+   "cycle": 25
+  },
+  {
+   "name": "swf_m375",
+   "pol": "f",
+   "offset_ps": -37.5,
+   "new_bit": 0,
+   "cycle": 27
+  },
+  {
+   "name": "swr_m350",
+   "pol": "r",
+   "offset_ps": -35.0,
+   "new_bit": 1,
+   "cycle": 29
+  },
+  {
+   "name": "swf_m350",
+   "pol": "f",
+   "offset_ps": -35.0,
+   "new_bit": 0,
+   "cycle": 31
+  },
+  {
+   "name": "swr_m325",
+   "pol": "r",
+   "offset_ps": -32.5,
+   "new_bit": 1,
+   "cycle": 33
+  },
+  {
+   "name": "swf_m325",
+   "pol": "f",
+   "offset_ps": -32.5,
+   "new_bit": 0,
+   "cycle": 35
+  },
+  {
+   "name": "swr_m300",
+   "pol": "r",
+   "offset_ps": -30.0,
+   "new_bit": 1,
+   "cycle": 37
+  },
+  {
+   "name": "swf_m300",
+   "pol": "f",
+   "offset_ps": -30.0,
+   "new_bit": 0,
+   "cycle": 39
+  },
+  {
+   "name": "swr_m275",
+   "pol": "r",
+   "offset_ps": -27.5,
+   "new_bit": 1,
+   "cycle": 41
+  },
+  {
+   "name": "swf_m275",
+   "pol": "f",
+   "offset_ps": -27.5,
+   "new_bit": 0,
+   "cycle": 43
+  },
+  {
+   "name": "swr_m250",
+   "pol": "r",
+   "offset_ps": -25.0,
+   "new_bit": 1,
+   "cycle": 45
+  },
+  {
+   "name": "swf_m250",
+   "pol": "f",
+   "offset_ps": -25.0,
+   "new_bit": 0,
+   "cycle": 47
+  },
+  {
+   "name": "swr_m225",
+   "pol": "r",
+   "offset_ps": -22.5,
+   "new_bit": 1,
+   "cycle": 49
+  },
+  {
+   "name": "swf_m225",
+   "pol": "f",
+   "offset_ps": -22.5,
+   "new_bit": 0,
+   "cycle": 51
+  },
+  {
+   "name": "swr_m200",
+   "pol": "r",
+   "offset_ps": -20.0,
+   "new_bit": 1,
+   "cycle": 53
+  },
+  {
+   "name": "swf_m200",
+   "pol": "f",
+   "offset_ps": -20.0,
+   "new_bit": 0,
+   "cycle": 55
+  },
+  {
+   "name": "swr_m175",
+   "pol": "r",
+   "offset_ps": -17.5,
+   "new_bit": 1,
+   "cycle": 57
+  },
+  {
+   "name": "swf_m175",
+   "pol": "f",
+   "offset_ps": -17.5,
+   "new_bit": 0,
+   "cycle": 59
+  },
+  {
+   "name": "swr_m150",
+   "pol": "r",
+   "offset_ps": -15.0,
+   "new_bit": 1,
+   "cycle": 61
+  },
+  {
+   "name": "swf_m150",
+   "pol": "f",
+   "offset_ps": -15.0,
+   "new_bit": 0,
+   "cycle": 63
+  },
+  {
+   "name": "swr_m125",
+   "pol": "r",
+   "offset_ps": -12.5,
+   "new_bit": 1,
+   "cycle": 65
+  },
+  {
+   "name": "swf_m125",
+   "pol": "f",
+   "offset_ps": -12.5,
+   "new_bit": 0,
+   "cycle": 67
+  },
+  {
+   "name": "swr_m100",
+   "pol": "r",
+   "offset_ps": -10.0,
+   "new_bit": 1,
+   "cycle": 69
+  },
+  {
+   "name": "swf_m100",
+   "pol": "f",
+   "offset_ps": -10.0,
+   "new_bit": 0,
+   "cycle": 71
+  },
+  {
+   "name": "swr_m075",
+   "pol": "r",
+   "offset_ps": -7.5,
+   "new_bit": 1,
+   "cycle": 73
+  },
+  {
+   "name": "swf_m075",
+   "pol": "f",
+   "offset_ps": -7.5,
+   "new_bit": 0,
+   "cycle": 75
+  },
+  {
+   "name": "swr_m050",
+   "pol": "r",
+   "offset_ps": -5.0,
+   "new_bit": 1,
+   "cycle": 77
+  },
+  {
+   "name": "swf_m050",
+   "pol": "f",
+   "offset_ps": -5.0,
+   "new_bit": 0,
+   "cycle": 79
+  },
+  {
+   "name": "swr_m025",
+   "pol": "r",
+   "offset_ps": -2.5,
+   "new_bit": 1,
+   "cycle": 81
+  },
+  {
+   "name": "swf_m025",
+   "pol": "f",
+   "offset_ps": -2.5,
+   "new_bit": 0,
+   "cycle": 83
+  },
+  {
+   "name": "swr_p000",
+   "pol": "r",
+   "offset_ps": 0.0,
+   "new_bit": 1,
+   "cycle": 85
+  },
+  {
+   "name": "swf_p000",
+   "pol": "f",
+   "offset_ps": 0.0,
+   "new_bit": 0,
+   "cycle": 87
+  },
+  {
+   "name": "swr_p025",
+   "pol": "r",
+   "offset_ps": 2.5,
+   "new_bit": 1,
+   "cycle": 89
+  },
+  {
+   "name": "swf_p025",
+   "pol": "f",
+   "offset_ps": 2.5,
+   "new_bit": 0,
+   "cycle": 91
+  },
+  {
+   "name": "swr_p050",
+   "pol": "r",
+   "offset_ps": 5.0,
+   "new_bit": 1,
+   "cycle": 93
+  },
+  {
+   "name": "swf_p050",
+   "pol": "f",
+   "offset_ps": 5.0,
+   "new_bit": 0,
+   "cycle": 95
+  },
+  {
+   "name": "swr_p075",
+   "pol": "r",
+   "offset_ps": 7.5,
+   "new_bit": 1,
+   "cycle": 97
+  },
+  {
+   "name": "swf_p075",
+   "pol": "f",
+   "offset_ps": 7.5,
+   "new_bit": 0,
+   "cycle": 99
+  },
+  {
+   "name": "swr_p100",
+   "pol": "r",
+   "offset_ps": 10.0,
+   "new_bit": 1,
+   "cycle": 101
+  },
+  {
+   "name": "swf_p100",
+   "pol": "f",
+   "offset_ps": 10.0,
+   "new_bit": 0,
+   "cycle": 103
+  },
+  {
+   "name": "swr_p125",
+   "pol": "r",
+   "offset_ps": 12.5,
+   "new_bit": 1,
+   "cycle": 105
+  },
+  {
+   "name": "swf_p125",
+   "pol": "f",
+   "offset_ps": 12.5,
+   "new_bit": 0,
+   "cycle": 107
+  },
+  {
+   "name": "swr_p150",
+   "pol": "r",
+   "offset_ps": 15.0,
+   "new_bit": 1,
+   "cycle": 109
+  },
+  {
+   "name": "swf_p150",
+   "pol": "f",
+   "offset_ps": 15.0,
+   "new_bit": 0,
+   "cycle": 111
+  },
+  {
+   "name": "swr_p175",
+   "pol": "r",
+   "offset_ps": 17.5,
+   "new_bit": 1,
+   "cycle": 113
+  },
+  {
+   "name": "swf_p175",
+   "pol": "f",
+   "offset_ps": 17.5,
+   "new_bit": 0,
+   "cycle": 115
+  },
+  {
+   "name": "swr_p200",
+   "pol": "r",
+   "offset_ps": 20.0,
+   "new_bit": 1,
+   "cycle": 117
+  },
+  {
+   "name": "swf_p200",
+   "pol": "f",
+   "offset_ps": 20.0,
+   "new_bit": 0,
+   "cycle": 119
+  },
+  {
+   "name": "swr_p225",
+   "pol": "r",
+   "offset_ps": 22.5,
+   "new_bit": 1,
+   "cycle": 121
+  },
+  {
+   "name": "swf_p225",
+   "pol": "f",
+   "offset_ps": 22.5,
+   "new_bit": 0,
+   "cycle": 123
+  },
+  {
+   "name": "swr_p250",
+   "pol": "r",
+   "offset_ps": 25.0,
+   "new_bit": 1,
+   "cycle": 125
+  },
+  {
+   "name": "swf_p250",
+   "pol": "f",
+   "offset_ps": 25.0,
+   "new_bit": 0,
+   "cycle": 127
+  },
+  {
+   "name": "swr_p275",
+   "pol": "r",
+   "offset_ps": 27.5,
+   "new_bit": 1,
+   "cycle": 129
+  },
+  {
+   "name": "swf_p275",
+   "pol": "f",
+   "offset_ps": 27.5,
+   "new_bit": 0,
+   "cycle": 131
+  },
+  {
+   "name": "swr_p300",
+   "pol": "r",
+   "offset_ps": 30.0,
+   "new_bit": 1,
+   "cycle": 133
+  },
+  {
+   "name": "swf_p300",
+   "pol": "f",
+   "offset_ps": 30.0,
+   "new_bit": 0,
+   "cycle": 135
+  },
+  {
+   "name": "swr_p325",
+   "pol": "r",
+   "offset_ps": 32.5,
+   "new_bit": 1,
+   "cycle": 137
+  },
+  {
+   "name": "swf_p325",
+   "pol": "f",
+   "offset_ps": 32.5,
+   "new_bit": 0,
+   "cycle": 139
+  },
+  {
+   "name": "swr_p350",
+   "pol": "r",
+   "offset_ps": 35.0,
+   "new_bit": 1,
+   "cycle": 141
+  },
+  {
+   "name": "swf_p350",
+   "pol": "f",
+   "offset_ps": 35.0,
+   "new_bit": 0,
+   "cycle": 143
+  },
+  {
+   "name": "swr_p375",
+   "pol": "r",
+   "offset_ps": 37.5,
+   "new_bit": 1,
+   "cycle": 145
+  },
+  {
+   "name": "swf_p375",
+   "pol": "f",
+   "offset_ps": 37.5,
+   "new_bit": 0,
+   "cycle": 147
+  },
+  {
+   "name": "swr_p400",
+   "pol": "r",
+   "offset_ps": 40.0,
+   "new_bit": 1,
+   "cycle": 149
+  },
+  {
+   "name": "swf_p400",
+   "pol": "f",
+   "offset_ps": 40.0,
+   "new_bit": 0,
+   "cycle": 151
+  },
+  {
+   "name": "swr_p425",
+   "pol": "r",
+   "offset_ps": 42.5,
+   "new_bit": 1,
+   "cycle": 153
+  },
+  {
+   "name": "swf_p425",
+   "pol": "f",
+   "offset_ps": 42.5,
+   "new_bit": 0,
+   "cycle": 155
+  },
+  {
+   "name": "swr_p450",
+   "pol": "r",
+   "offset_ps": 45.0,
+   "new_bit": 1,
+   "cycle": 157
+  },
+  {
+   "name": "swf_p450",
+   "pol": "f",
+   "offset_ps": 45.0,
+   "new_bit": 0,
+   "cycle": 159
+  },
+  {
+   "name": "swr_p475",
+   "pol": "r",
+   "offset_ps": 47.5,
+   "new_bit": 1,
+   "cycle": 161
+  },
+  {
+   "name": "swf_p475",
+   "pol": "f",
+   "offset_ps": 47.5,
+   "new_bit": 0,
+   "cycle": 163
+  },
+  {
+   "name": "swr_p500",
+   "pol": "r",
+   "offset_ps": 50.0,
+   "new_bit": 1,
+   "cycle": 165
+  },
+  {
+   "name": "swf_p500",
+   "pol": "f",
+   "offset_ps": 50.0,
+   "new_bit": 0,
+   "cycle": 167
+  }
+ ]
+}

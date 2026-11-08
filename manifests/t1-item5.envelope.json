@@ -1,0 +1,1248 @@
+{
+ "schema_version": 1,
+ "kind": "model-run",
+ "status": "pass",
+ "method": "TT 0.70 V 25 C / FF 0.77 V 0 C / SS 0.63 V 100 C ngspice transient runs of the extracted, pre-layout BSIM-CMG netlists of the drawn cells (klt sim batch reports, decisions 0011 and 0012). A predictive-model run on a predictive PDK; not a measured part",
+ "measurements": [
+  {
+   "name": "AND2x1.functional_checks_pass",
+   "spec_row": "cell-set",
+   "limits": {
+    "min": 1.0
+   },
+   "status": "pass"
+  },
+  {
+   "name": "AND2x1.klt_verdict_pass",
+   "spec_row": "pvt-corners",
+   "limits": {
+    "min": 1.0
+   },
+   "status": "pass"
+  },
+  {
+   "name": "AND2x1.min_margin_ps",
+   "spec_row": "timing-margin",
+   "limits": {
+    "min": 0.0
+   },
+   "status": "pass"
+  },
+  {
+   "name": "AOI21x1.functional_checks_pass",
+   "spec_row": "cell-set",
+   "limits": {
+    "min": 1.0
+   },
+   "status": "pass"
+  },
+  {
+   "name": "AOI21x1.klt_verdict_pass",
+   "spec_row": "pvt-corners",
+   "limits": {
+    "min": 1.0
+   },
+   "status": "pass"
+  },
+  {
+   "name": "AOI21x1.min_margin_ps",
+   "spec_row": "timing-margin",
+   "limits": {
+    "min": 0.0
+   },
+   "status": "pass"
+  },
+  {
+   "name": "AOI22x1.functional_checks_pass",
+   "spec_row": "cell-set",
+   "limits": {
+    "min": 1.0
+   },
+   "status": "pass"
+  },
+  {
+   "name": "AOI22x1.klt_verdict_pass",
+   "spec_row": "pvt-corners",
+   "limits": {
+    "min": 1.0
+   },
+   "status": "pass"
+  },
+  {
+   "name": "AOI22x1.min_margin_ps",
+   "spec_row": "timing-margin",
+   "limits": {
+    "min": 0.0
+   },
+   "status": "pass"
+  },
+  {
+   "name": "BUFx1.functional_checks_pass",
+   "spec_row": "cell-set",
+   "limits": {
+    "min": 1.0
+   },
+   "status": "pass"
+  },
+  {
+   "name": "BUFx1.klt_verdict_pass",
+   "spec_row": "pvt-corners",
+   "limits": {
+    "min": 1.0
+   },
+   "status": "pass"
+  },
+  {
+   "name": "BUFx1.min_margin_ps",
+   "spec_row": "timing-margin",
+   "limits": {
+    "min": 0.0
+   },
+   "status": "pass"
+  },
+  {
+   "name": "DFFHQNx1.functional_checks_pass",
+   "spec_row": "cell-set",
+   "limits": {
+    "min": 1.0
+   },
+   "status": "pass"
+  },
+  {
+   "name": "DFFHQNx1.klt_verdict_pass",
+   "spec_row": "pvt-corners",
+   "limits": {
+    "min": 1.0
+   },
+   "status": "pass"
+  },
+  {
+   "name": "DFFHQNx1.min_margin_ps",
+   "spec_row": "timing-margin",
+   "limits": {
+    "min": 0.0
+   },
+   "status": "pass"
+  },
+  {
+   "name": "DHLx1.functional_checks_pass",
+   "spec_row": "cell-set",
+   "limits": {
+    "min": 1.0
+   },
+   "status": "pass"
+  },
+  {
+   "name": "DHLx1.klt_verdict_pass",
+   "spec_row": "pvt-corners",
+   "limits": {
+    "min": 1.0
+   },
+   "status": "pass"
+  },
+  {
+   "name": "DHLx1.min_margin_ps",
+   "spec_row": "timing-margin",
+   "limits": {
+    "min": 0.0
+   },
+   "status": "pass"
+  },
+  {
+   "name": "INVx1.functional_checks_pass",
+   "spec_row": "cell-set",
+   "limits": {
+    "min": 1.0
+   },
+   "status": "pass"
+  },
+  {
+   "name": "INVx1.klt_verdict_pass",
+   "spec_row": "pvt-corners",
+   "limits": {
+    "min": 1.0
+   },
+   "status": "pass"
+  },
+  {
+   "name": "INVx1.min_margin_ps",
+   "spec_row": "timing-margin",
+   "limits": {
+    "min": 0.0
+   },
+   "status": "pass"
+  },
+  {
+   "name": "NAND2x1.functional_checks_pass",
+   "spec_row": "cell-set",
+   "limits": {
+    "min": 1.0
+   },
+   "status": "pass"
+  },
+  {
+   "name": "NAND2x1.klt_verdict_pass",
+   "spec_row": "pvt-corners",
+   "limits": {
+    "min": 1.0
+   },
+   "status": "pass"
+  },
+  {
+   "name": "NAND2x1.min_margin_ps",
+   "spec_row": "timing-margin",
+   "limits": {
+    "min": 0.0
+   },
+   "status": "pass"
+  },
+  {
+   "name": "NAND3x1.functional_checks_pass",
+   "spec_row": "cell-set",
+   "limits": {
+    "min": 1.0
+   },
+   "status": "pass"
+  },
+  {
+   "name": "NAND3x1.klt_verdict_pass",
+   "spec_row": "pvt-corners",
+   "limits": {
+    "min": 1.0
+   },
+   "status": "pass"
+  },
+  {
+   "name": "NAND3x1.min_margin_ps",
+   "spec_row": "timing-margin",
+   "limits": {
+    "min": 0.0
+   },
+   "status": "pass"
+  },
+  {
+   "name": "NOR2x1.functional_checks_pass",
+   "spec_row": "cell-set",
+   "limits": {
+    "min": 1.0
+   },
+   "status": "pass"
+  },
+  {
+   "name": "NOR2x1.klt_verdict_pass",
+   "spec_row": "pvt-corners",
+   "limits": {
+    "min": 1.0
+   },
+   "status": "pass"
+  },
+  {
+   "name": "NOR2x1.min_margin_ps",
+   "spec_row": "timing-margin",
+   "limits": {
+    "min": 0.0
+   },
+   "status": "pass"
+  },
+  {
+   "name": "NOR3x1.functional_checks_pass",
+   "spec_row": "cell-set",
+   "limits": {
+    "min": 1.0
+   },
+   "status": "pass"
+  },
+  {
+   "name": "NOR3x1.klt_verdict_pass",
+   "spec_row": "pvt-corners",
+   "limits": {
+    "min": 1.0
+   },
+   "status": "pass"
+  },
+  {
+   "name": "NOR3x1.min_margin_ps",
+   "spec_row": "timing-margin",
+   "limits": {
+    "min": 0.0
+   },
+   "status": "pass"
+  },
+  {
+   "name": "OAI21x1.functional_checks_pass",
+   "spec_row": "cell-set",
+   "limits": {
+    "min": 1.0
+   },
+   "status": "pass"
+  },
+  {
+   "name": "OAI21x1.klt_verdict_pass",
+   "spec_row": "pvt-corners",
+   "limits": {
+    "min": 1.0
+   },
+   "status": "pass"
+  },
+  {
+   "name": "OAI21x1.min_margin_ps",
+   "spec_row": "timing-margin",
+   "limits": {
+    "min": 0.0
+   },
+   "status": "pass"
+  },
+  {
+   "name": "OAI22x1.functional_checks_pass",
+   "spec_row": "cell-set",
+   "limits": {
+    "min": 1.0
+   },
+   "status": "pass"
+  },
+  {
+   "name": "OAI22x1.klt_verdict_pass",
+   "spec_row": "pvt-corners",
+   "limits": {
+    "min": 1.0
+   },
+   "status": "pass"
+  },
+  {
+   "name": "OAI22x1.min_margin_ps",
+   "spec_row": "timing-margin",
+   "limits": {
+    "min": 0.0
+   },
+   "status": "pass"
+  },
+  {
+   "name": "OR2x1.functional_checks_pass",
+   "spec_row": "cell-set",
+   "limits": {
+    "min": 1.0
+   },
+   "status": "pass"
+  },
+  {
+   "name": "OR2x1.klt_verdict_pass",
+   "spec_row": "pvt-corners",
+   "limits": {
+    "min": 1.0
+   },
+   "status": "pass"
+  },
+  {
+   "name": "OR2x1.min_margin_ps",
+   "spec_row": "timing-margin",
+   "limits": {
+    "min": 0.0
+   },
+   "status": "pass"
+  },
+  {
+   "name": "TIEHIx1.functional_checks_pass",
+   "spec_row": "cell-set",
+   "limits": {
+    "min": 1.0
+   },
+   "status": "pass"
+  },
+  {
+   "name": "TIEHIx1.klt_verdict_pass",
+   "spec_row": "pvt-corners",
+   "limits": {
+    "min": 1.0
+   },
+   "status": "pass"
+  },
+  {
+   "name": "TIELOx1.functional_checks_pass",
+   "spec_row": "cell-set",
+   "limits": {
+    "min": 1.0
+   },
+   "status": "pass"
+  },
+  {
+   "name": "TIELOx1.klt_verdict_pass",
+   "spec_row": "pvt-corners",
+   "limits": {
+    "min": 1.0
+   },
+   "status": "pass"
+  },
+  {
+   "name": "XNOR2x1.functional_checks_pass",
+   "spec_row": "cell-set",
+   "limits": {
+    "min": 1.0
+   },
+   "status": "pass"
+  },
+  {
+   "name": "XNOR2x1.klt_verdict_pass",
+   "spec_row": "pvt-corners",
+   "limits": {
+    "min": 1.0
+   },
+   "status": "pass"
+  },
+  {
+   "name": "XNOR2x1.min_margin_ps",
+   "spec_row": "timing-margin",
+   "limits": {
+    "min": 0.0
+   },
+   "status": "pass"
+  },
+  {
+   "name": "XOR2x1.functional_checks_pass",
+   "spec_row": "cell-set",
+   "limits": {
+    "min": 1.0
+   },
+   "status": "pass"
+  },
+  {
+   "name": "XOR2x1.klt_verdict_pass",
+   "spec_row": "pvt-corners",
+   "limits": {
+    "min": 1.0
+   },
+   "status": "pass"
+  },
+  {
+   "name": "XOR2x1.min_margin_ps",
+   "spec_row": "timing-margin",
+   "limits": {
+    "min": 0.0
+   },
+   "status": "pass"
+  }
+ ],
+ "corners": [
+  {
+   "corner_id": "tt/0.700V/25C",
+   "status": "pass",
+   "measurements": [
+    {
+     "name": "AND2x1.functional_checks_pass",
+     "status": "pass",
+     "value": 1.0
+    },
+    {
+     "name": "AND2x1.klt_verdict_pass",
+     "status": "pass",
+     "value": 1.0
+    },
+    {
+     "name": "AND2x1.min_margin_ps",
+     "status": "pass",
+     "value": 75.415
+    },
+    {
+     "name": "AOI21x1.functional_checks_pass",
+     "status": "pass",
+     "value": 1.0
+    },
+    {
+     "name": "AOI21x1.klt_verdict_pass",
+     "status": "pass",
+     "value": 1.0
+    },
+    {
+     "name": "AOI21x1.min_margin_ps",
+     "status": "pass",
+     "value": 72.115
+    },
+    {
+     "name": "AOI22x1.functional_checks_pass",
+     "status": "pass",
+     "value": 1.0
+    },
+    {
+     "name": "AOI22x1.klt_verdict_pass",
+     "status": "pass",
+     "value": 1.0
+    },
+    {
+     "name": "AOI22x1.min_margin_ps",
+     "status": "pass",
+     "value": 70.254
+    },
+    {
+     "name": "BUFx1.functional_checks_pass",
+     "status": "pass",
+     "value": 1.0
+    },
+    {
+     "name": "BUFx1.klt_verdict_pass",
+     "status": "pass",
+     "value": 1.0
+    },
+    {
+     "name": "BUFx1.min_margin_ps",
+     "status": "pass",
+     "value": 78.093
+    },
+    {
+     "name": "DFFHQNx1.functional_checks_pass",
+     "status": "pass",
+     "value": 1.0
+    },
+    {
+     "name": "DFFHQNx1.klt_verdict_pass",
+     "status": "pass",
+     "value": 1.0
+    },
+    {
+     "name": "DFFHQNx1.min_margin_ps",
+     "status": "pass",
+     "value": 37.5
+    },
+    {
+     "name": "DHLx1.functional_checks_pass",
+     "status": "pass",
+     "value": 1.0
+    },
+    {
+     "name": "DHLx1.klt_verdict_pass",
+     "status": "pass",
+     "value": 1.0
+    },
+    {
+     "name": "DHLx1.min_margin_ps",
+     "status": "pass",
+     "value": 37.5
+    },
+    {
+     "name": "INVx1.functional_checks_pass",
+     "status": "pass",
+     "value": 1.0
+    },
+    {
+     "name": "INVx1.klt_verdict_pass",
+     "status": "pass",
+     "value": 1.0
+    },
+    {
+     "name": "INVx1.min_margin_ps",
+     "status": "pass",
+     "value": 80.635
+    },
+    {
+     "name": "NAND2x1.functional_checks_pass",
+     "status": "pass",
+     "value": 1.0
+    },
+    {
+     "name": "NAND2x1.klt_verdict_pass",
+     "status": "pass",
+     "value": 1.0
+    },
+    {
+     "name": "NAND2x1.min_margin_ps",
+     "status": "pass",
+     "value": 77.114
+    },
+    {
+     "name": "NAND3x1.functional_checks_pass",
+     "status": "pass",
+     "value": 1.0
+    },
+    {
+     "name": "NAND3x1.klt_verdict_pass",
+     "status": "pass",
+     "value": 1.0
+    },
+    {
+     "name": "NAND3x1.min_margin_ps",
+     "status": "pass",
+     "value": 71.673
+    },
+    {
+     "name": "NOR2x1.functional_checks_pass",
+     "status": "pass",
+     "value": 1.0
+    },
+    {
+     "name": "NOR2x1.klt_verdict_pass",
+     "status": "pass",
+     "value": 1.0
+    },
+    {
+     "name": "NOR2x1.min_margin_ps",
+     "status": "pass",
+     "value": 73.574
+    },
+    {
+     "name": "NOR3x1.functional_checks_pass",
+     "status": "pass",
+     "value": 1.0
+    },
+    {
+     "name": "NOR3x1.klt_verdict_pass",
+     "status": "pass",
+     "value": 1.0
+    },
+    {
+     "name": "NOR3x1.min_margin_ps",
+     "status": "pass",
+     "value": 65.419
+    },
+    {
+     "name": "OAI21x1.functional_checks_pass",
+     "status": "pass",
+     "value": 1.0
+    },
+    {
+     "name": "OAI21x1.klt_verdict_pass",
+     "status": "pass",
+     "value": 1.0
+    },
+    {
+     "name": "OAI21x1.min_margin_ps",
+     "status": "pass",
+     "value": 72.078
+    },
+    {
+     "name": "OAI22x1.functional_checks_pass",
+     "status": "pass",
+     "value": 1.0
+    },
+    {
+     "name": "OAI22x1.klt_verdict_pass",
+     "status": "pass",
+     "value": 1.0
+    },
+    {
+     "name": "OAI22x1.min_margin_ps",
+     "status": "pass",
+     "value": 70.638
+    },
+    {
+     "name": "OR2x1.functional_checks_pass",
+     "status": "pass",
+     "value": 1.0
+    },
+    {
+     "name": "OR2x1.klt_verdict_pass",
+     "status": "pass",
+     "value": 1.0
+    },
+    {
+     "name": "OR2x1.min_margin_ps",
+     "status": "pass",
+     "value": 74.589
+    },
+    {
+     "name": "TIEHIx1.functional_checks_pass",
+     "status": "pass",
+     "value": 1.0
+    },
+    {
+     "name": "TIEHIx1.klt_verdict_pass",
+     "status": "pass",
+     "value": 1.0
+    },
+    {
+     "name": "TIELOx1.functional_checks_pass",
+     "status": "pass",
+     "value": 1.0
+    },
+    {
+     "name": "TIELOx1.klt_verdict_pass",
+     "status": "pass",
+     "value": 1.0
+    },
+    {
+     "name": "XNOR2x1.functional_checks_pass",
+     "status": "pass",
+     "value": 1.0
+    },
+    {
+     "name": "XNOR2x1.klt_verdict_pass",
+     "status": "pass",
+     "value": 1.0
+    },
+    {
+     "name": "XNOR2x1.min_margin_ps",
+     "status": "pass",
+     "value": 68.924
+    },
+    {
+     "name": "XOR2x1.functional_checks_pass",
+     "status": "pass",
+     "value": 1.0
+    },
+    {
+     "name": "XOR2x1.klt_verdict_pass",
+     "status": "pass",
+     "value": 1.0
+    },
+    {
+     "name": "XOR2x1.min_margin_ps",
+     "status": "pass",
+     "value": 70.038
+    }
+   ]
+  },
+  {
+   "corner_id": "ff/0.770V/0C",
+   "status": "pass",
+   "measurements": [
+    {
+     "name": "AND2x1.functional_checks_pass",
+     "status": "pass",
+     "value": 1.0
+    },
+    {
+     "name": "AND2x1.klt_verdict_pass",
+     "status": "pass",
+     "value": 1.0
+    },
+    {
+     "name": "AND2x1.min_margin_ps",
+     "status": "pass",
+     "value": 79.177
+    },
+    {
+     "name": "AOI21x1.functional_checks_pass",
+     "status": "pass",
+     "value": 1.0
+    },
+    {
+     "name": "AOI21x1.klt_verdict_pass",
+     "status": "pass",
+     "value": 1.0
+    },
+    {
+     "name": "AOI21x1.min_margin_ps",
+     "status": "pass",
+     "value": 77.398
+    },
+    {
+     "name": "AOI22x1.functional_checks_pass",
+     "status": "pass",
+     "value": 1.0
+    },
+    {
+     "name": "AOI22x1.klt_verdict_pass",
+     "status": "pass",
+     "value": 1.0
+    },
+    {
+     "name": "AOI22x1.min_margin_ps",
+     "status": "pass",
+     "value": 75.915
+    },
+    {
+     "name": "BUFx1.functional_checks_pass",
+     "status": "pass",
+     "value": 1.0
+    },
+    {
+     "name": "BUFx1.klt_verdict_pass",
+     "status": "pass",
+     "value": 1.0
+    },
+    {
+     "name": "BUFx1.min_margin_ps",
+     "status": "pass",
+     "value": 81.199
+    },
+    {
+     "name": "DFFHQNx1.functional_checks_pass",
+     "status": "pass",
+     "value": 1.0
+    },
+    {
+     "name": "DFFHQNx1.klt_verdict_pass",
+     "status": "pass",
+     "value": 1.0
+    },
+    {
+     "name": "DFFHQNx1.min_margin_ps",
+     "status": "pass",
+     "value": 37.5
+    },
+    {
+     "name": "DHLx1.functional_checks_pass",
+     "status": "pass",
+     "value": 1.0
+    },
+    {
+     "name": "DHLx1.klt_verdict_pass",
+     "status": "pass",
+     "value": 1.0
+    },
+    {
+     "name": "DHLx1.min_margin_ps",
+     "status": "pass",
+     "value": 37.5
+    },
+    {
+     "name": "INVx1.functional_checks_pass",
+     "status": "pass",
+     "value": 1.0
+    },
+    {
+     "name": "INVx1.klt_verdict_pass",
+     "status": "pass",
+     "value": 1.0
+    },
+    {
+     "name": "INVx1.min_margin_ps",
+     "status": "pass",
+     "value": 83.059
+    },
+    {
+     "name": "NAND2x1.functional_checks_pass",
+     "status": "pass",
+     "value": 1.0
+    },
+    {
+     "name": "NAND2x1.klt_verdict_pass",
+     "status": "pass",
+     "value": 1.0
+    },
+    {
+     "name": "NAND2x1.min_margin_ps",
+     "status": "pass",
+     "value": 80.581
+    },
+    {
+     "name": "NAND3x1.functional_checks_pass",
+     "status": "pass",
+     "value": 1.0
+    },
+    {
+     "name": "NAND3x1.klt_verdict_pass",
+     "status": "pass",
+     "value": 1.0
+    },
+    {
+     "name": "NAND3x1.min_margin_ps",
+     "status": "pass",
+     "value": 76.882
+    },
+    {
+     "name": "NOR2x1.functional_checks_pass",
+     "status": "pass",
+     "value": 1.0
+    },
+    {
+     "name": "NOR2x1.klt_verdict_pass",
+     "status": "pass",
+     "value": 1.0
+    },
+    {
+     "name": "NOR2x1.min_margin_ps",
+     "status": "pass",
+     "value": 78.612
+    },
+    {
+     "name": "NOR3x1.functional_checks_pass",
+     "status": "pass",
+     "value": 1.0
+    },
+    {
+     "name": "NOR3x1.klt_verdict_pass",
+     "status": "pass",
+     "value": 1.0
+    },
+    {
+     "name": "NOR3x1.min_margin_ps",
+     "status": "pass",
+     "value": 73.234
+    },
+    {
+     "name": "OAI21x1.functional_checks_pass",
+     "status": "pass",
+     "value": 1.0
+    },
+    {
+     "name": "OAI21x1.klt_verdict_pass",
+     "status": "pass",
+     "value": 1.0
+    },
+    {
+     "name": "OAI21x1.min_margin_ps",
+     "status": "pass",
+     "value": 77.38
+    },
+    {
+     "name": "OAI22x1.functional_checks_pass",
+     "status": "pass",
+     "value": 1.0
+    },
+    {
+     "name": "OAI22x1.klt_verdict_pass",
+     "status": "pass",
+     "value": 1.0
+    },
+    {
+     "name": "OAI22x1.min_margin_ps",
+     "status": "pass",
+     "value": 76.192
+    },
+    {
+     "name": "OR2x1.functional_checks_pass",
+     "status": "pass",
+     "value": 1.0
+    },
+    {
+     "name": "OR2x1.klt_verdict_pass",
+     "status": "pass",
+     "value": 1.0
+    },
+    {
+     "name": "OR2x1.min_margin_ps",
+     "status": "pass",
+     "value": 78.475
+    },
+    {
+     "name": "TIEHIx1.functional_checks_pass",
+     "status": "pass",
+     "value": 1.0
+    },
+    {
+     "name": "TIEHIx1.klt_verdict_pass",
+     "status": "pass",
+     "value": 1.0
+    },
+    {
+     "name": "TIELOx1.functional_checks_pass",
+     "status": "pass",
+     "value": 1.0
+    },
+    {
+     "name": "TIELOx1.klt_verdict_pass",
+     "status": "pass",
+     "value": 1.0
+    },
+    {
+     "name": "XNOR2x1.functional_checks_pass",
+     "status": "pass",
+     "value": 1.0
+    },
+    {
+     "name": "XNOR2x1.klt_verdict_pass",
+     "status": "pass",
+     "value": 1.0
+    },
+    {
+     "name": "XNOR2x1.min_margin_ps",
+     "status": "pass",
+     "value": 74.901
+    },
+    {
+     "name": "XOR2x1.functional_checks_pass",
+     "status": "pass",
+     "value": 1.0
+    },
+    {
+     "name": "XOR2x1.klt_verdict_pass",
+     "status": "pass",
+     "value": 1.0
+    },
+    {
+     "name": "XOR2x1.min_margin_ps",
+     "status": "pass",
+     "value": 75.83
+    }
+   ]
+  },
+  {
+   "corner_id": "ss/0.630V/100C",
+   "status": "pass",
+   "measurements": [
+    {
+     "name": "AND2x1.functional_checks_pass",
+     "status": "pass",
+     "value": 1.0
+    },
+    {
+     "name": "AND2x1.klt_verdict_pass",
+     "status": "pass",
+     "value": 1.0
+    },
+    {
+     "name": "AND2x1.min_margin_ps",
+     "status": "pass",
+     "value": 68.704
+    },
+    {
+     "name": "AOI21x1.functional_checks_pass",
+     "status": "pass",
+     "value": 1.0
+    },
+    {
+     "name": "AOI21x1.klt_verdict_pass",
+     "status": "pass",
+     "value": 1.0
+    },
+    {
+     "name": "AOI21x1.min_margin_ps",
+     "status": "pass",
+     "value": 62.605
+    },
+    {
+     "name": "AOI22x1.functional_checks_pass",
+     "status": "pass",
+     "value": 1.0
+    },
+    {
+     "name": "AOI22x1.klt_verdict_pass",
+     "status": "pass",
+     "value": 1.0
+    },
+    {
+     "name": "AOI22x1.min_margin_ps",
+     "status": "pass",
+     "value": 60.018
+    },
+    {
+     "name": "BUFx1.functional_checks_pass",
+     "status": "pass",
+     "value": 1.0
+    },
+    {
+     "name": "BUFx1.klt_verdict_pass",
+     "status": "pass",
+     "value": 1.0
+    },
+    {
+     "name": "BUFx1.min_margin_ps",
+     "status": "pass",
+     "value": 72.688
+    },
+    {
+     "name": "DFFHQNx1.functional_checks_pass",
+     "status": "pass",
+     "value": 1.0
+    },
+    {
+     "name": "DFFHQNx1.klt_verdict_pass",
+     "status": "pass",
+     "value": 1.0
+    },
+    {
+     "name": "DFFHQNx1.min_margin_ps",
+     "status": "pass",
+     "value": 37.5
+    },
+    {
+     "name": "DHLx1.functional_checks_pass",
+     "status": "pass",
+     "value": 1.0
+    },
+    {
+     "name": "DHLx1.klt_verdict_pass",
+     "status": "pass",
+     "value": 1.0
+    },
+    {
+     "name": "DHLx1.min_margin_ps",
+     "status": "pass",
+     "value": 35.0
+    },
+    {
+     "name": "INVx1.functional_checks_pass",
+     "status": "pass",
+     "value": 1.0
+    },
+    {
+     "name": "INVx1.klt_verdict_pass",
+     "status": "pass",
+     "value": 1.0
+    },
+    {
+     "name": "INVx1.min_margin_ps",
+     "status": "pass",
+     "value": 76.408
+    },
+    {
+     "name": "NAND2x1.functional_checks_pass",
+     "status": "pass",
+     "value": 1.0
+    },
+    {
+     "name": "NAND2x1.klt_verdict_pass",
+     "status": "pass",
+     "value": 1.0
+    },
+    {
+     "name": "NAND2x1.min_margin_ps",
+     "status": "pass",
+     "value": 70.895
+    },
+    {
+     "name": "NAND3x1.functional_checks_pass",
+     "status": "pass",
+     "value": 1.0
+    },
+    {
+     "name": "NAND3x1.klt_verdict_pass",
+     "status": "pass",
+     "value": 1.0
+    },
+    {
+     "name": "NAND3x1.min_margin_ps",
+     "status": "pass",
+     "value": 62.136
+    },
+    {
+     "name": "NOR2x1.functional_checks_pass",
+     "status": "pass",
+     "value": 1.0
+    },
+    {
+     "name": "NOR2x1.klt_verdict_pass",
+     "status": "pass",
+     "value": 1.0
+    },
+    {
+     "name": "NOR2x1.min_margin_ps",
+     "status": "pass",
+     "value": 64.538
+    },
+    {
+     "name": "NOR3x1.functional_checks_pass",
+     "status": "pass",
+     "value": 1.0
+    },
+    {
+     "name": "NOR3x1.klt_verdict_pass",
+     "status": "pass",
+     "value": 1.0
+    },
+    {
+     "name": "NOR3x1.min_margin_ps",
+     "status": "pass",
+     "value": 51.185
+    },
+    {
+     "name": "OAI21x1.functional_checks_pass",
+     "status": "pass",
+     "value": 1.0
+    },
+    {
+     "name": "OAI21x1.klt_verdict_pass",
+     "status": "pass",
+     "value": 1.0
+    },
+    {
+     "name": "OAI21x1.min_margin_ps",
+     "status": "pass",
+     "value": 62.54
+    },
+    {
+     "name": "OAI22x1.functional_checks_pass",
+     "status": "pass",
+     "value": 1.0
+    },
+    {
+     "name": "OAI22x1.klt_verdict_pass",
+     "status": "pass",
+     "value": 1.0
+    },
+    {
+     "name": "OAI22x1.min_margin_ps",
+     "status": "pass",
+     "value": 60.604
+    },
+    {
+     "name": "OR2x1.functional_checks_pass",
+     "status": "pass",
+     "value": 1.0
+    },
+    {
+     "name": "OR2x1.klt_verdict_pass",
+     "status": "pass",
+     "value": 1.0
+    },
+    {
+     "name": "OR2x1.min_margin_ps",
+     "status": "pass",
+     "value": 67.59
+    },
+    {
+     "name": "TIEHIx1.functional_checks_pass",
+     "status": "pass",
+     "value": 1.0
+    },
+    {
+     "name": "TIEHIx1.klt_verdict_pass",
+     "status": "pass",
+     "value": 1.0
+    },
+    {
+     "name": "TIELOx1.functional_checks_pass",
+     "status": "pass",
+     "value": 1.0
+    },
+    {
+     "name": "TIELOx1.klt_verdict_pass",
+     "status": "pass",
+     "value": 1.0
+    },
+    {
+     "name": "XNOR2x1.functional_checks_pass",
+     "status": "pass",
+     "value": 1.0
+    },
+    {
+     "name": "XNOR2x1.klt_verdict_pass",
+     "status": "pass",
+     "value": 1.0
+    },
+    {
+     "name": "XNOR2x1.min_margin_ps",
+     "status": "pass",
+     "value": 58.25
+    },
+    {
+     "name": "XOR2x1.functional_checks_pass",
+     "status": "pass",
+     "value": 1.0
+    },
+    {
+     "name": "XOR2x1.klt_verdict_pass",
+     "status": "pass",
+     "value": 1.0
+    },
+    {
+     "name": "XOR2x1.min_margin_ps",
+     "status": "pass",
+     "value": 59.712
+    }
+   ]
+  }
+ ],
+ "negative_controls": {
+  "combinational": {
+   "cell": "INVx1_negctl",
+   "expected_fail": "lvl_001",
+   "present": true,
+   "flagged_at_all_corners": true
+  },
+  "sequential": {
+   "DFFHQNx1_negctl": {
+    "present": true,
+    "flagged_at_all_corners": true
+   },
+   "DHLx1_negctl": {
+    "present": true,
+    "flagged_at_all_corners": true
+   }
+  }
+ },
+ "provenance": {
+  "input": {
+   "path": "verification/corners/item5-sources.json",
+   "content_hash": "sha256:44d2cbe00211e55013dc4fe4ccb591ce68f732fb1c057eecf94a768cab83cdb6"
+  }
+ }
+}

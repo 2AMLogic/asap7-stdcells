@@ -1,0 +1,333 @@
+{
+ "schema": "asap7-stdcells.corners-seq/1",
+ "cells": {
+  "DFFHQNx1": {
+   "status": "pass",
+   "job_id": "klt-sim-4f5b78459205",
+   "delay_budget_s": 9e-11,
+   "setup_budget_ps": 45,
+   "hold_budget_ps": 35,
+   "corners": [
+    {
+     "corner": "tt/0.700V/25C",
+     "status": "pass",
+     "captures_checked": 3,
+     "captures_failed": [],
+     "budget_trials_failed": [],
+     "delays_measured": 2,
+     "delays_over_budget": [],
+     "worst_delay_s": 2.027862319e-11,
+     "delay_margin_s": 6.972137681e-11,
+     "sweep": {
+      "r": {
+       "setup_ps": 7.5,
+       "hold_ps": -5.0,
+       "metastable_offsets_ps": [],
+       "setup_margin_ps": 37.5,
+       "hold_margin_ps": 40.0,
+       "notes": []
+      },
+      "f": {
+       "setup_ps": 5.0,
+       "hold_ps": -2.5,
+       "metastable_offsets_ps": [],
+       "setup_margin_ps": 40.0,
+       "hold_margin_ps": 37.5,
+       "notes": []
+      }
+     }
+    },
+    {
+     "corner": "ff/0.770V/0C",
+     "status": "pass",
+     "captures_checked": 3,
+     "captures_failed": [],
+     "budget_trials_failed": [],
+     "delays_measured": 2,
+     "delays_over_budget": [],
+     "worst_delay_s": 1.521257453e-11,
+     "delay_margin_s": 7.478742547e-11,
+     "sweep": {
+      "r": {
+       "setup_ps": 7.5,
+       "hold_ps": -5.0,
+       "metastable_offsets_ps": [],
+       "setup_margin_ps": 37.5,
+       "hold_margin_ps": 40.0,
+       "notes": []
+      },
+      "f": {
+       "setup_ps": 5.0,
+       "hold_ps": -2.5,
+       "metastable_offsets_ps": [],
+       "setup_margin_ps": 40.0,
+       "hold_margin_ps": 37.5,
+       "notes": []
+      }
+     }
+    },
+    {
+     "corner": "ss/0.630V/100C",
+     "status": "pass",
+     "captures_checked": 3,
+     "captures_failed": [],
+     "budget_trials_failed": [],
+     "delays_measured": 2,
+     "delays_over_budget": [],
+     "worst_delay_s": 2.950361239e-11,
+     "delay_margin_s": 6.049638761e-11,
+     "sweep": {
+      "r": {
+       "setup_ps": 7.5,
+       "hold_ps": -5.0,
+       "metastable_offsets_ps": [],
+       "setup_margin_ps": 37.5,
+       "hold_margin_ps": 40.0,
+       "notes": []
+      },
+      "f": {
+       "setup_ps": 7.5,
+       "hold_ps": -5.0,
+       "metastable_offsets_ps": [],
+       "setup_margin_ps": 37.5,
+       "hold_margin_ps": 40.0,
+       "notes": []
+      }
+     }
+    }
+   ]
+  },
+  "DFFHQNx1_negctl": {
+   "status": "error",
+   "job_id": "klt-sim-bd4597ee9d29",
+   "delay_budget_s": 9e-11,
+   "setup_budget_ps": 45,
+   "hold_budget_ps": 35,
+   "corners": [
+    {
+     "corner": "tt/0.700V/25C",
+     "status": "error",
+     "captures_checked": 3,
+     "captures_failed": [
+      "cap_p1"
+     ],
+     "budget_trials_failed": [
+      "swf_p350",
+      "swr_m450"
+     ],
+     "delays_measured": 0,
+     "delays_over_budget": [],
+     "worst_delay_s": null,
+     "delay_margin_s": null,
+     "sweep": null
+    },
+    {
+     "corner": "ff/0.770V/0C",
+     "status": "error",
+     "captures_checked": 3,
+     "captures_failed": [
+      "cap_p1"
+     ],
+     "budget_trials_failed": [
+      "swf_p350",
+      "swr_m450"
+     ],
+     "delays_measured": 0,
+     "delays_over_budget": [],
+     "worst_delay_s": null,
+     "delay_margin_s": null,
+     "sweep": null
+    },
+    {
+     "corner": "ss/0.630V/100C",
+     "status": "error",
+     "captures_checked": 3,
+     "captures_failed": [
+      "cap_p1"
+     ],
+     "budget_trials_failed": [
+      "swf_p350",
+      "swr_m450"
+     ],
+     "delays_measured": 0,
+     "delays_over_budget": [],
+     "worst_delay_s": null,
+     "delay_margin_s": null,
+     "sweep": null
+    }
+   ]
+  },
+  "DHLx1": {
+   "status": "pass",
+   "job_id": "klt-sim-4901941eb9b0",
+   "delay_budget_s": 9e-11,
+   "setup_budget_ps": 45,
+   "hold_budget_ps": 35,
+   "corners": [
+    {
+     "corner": "tt/0.700V/25C",
+     "status": "pass",
+     "captures_checked": 5,
+     "captures_failed": [],
+     "budget_trials_failed": [],
+     "delays_measured": 4,
+     "delays_over_budget": [],
+     "worst_delay_s": 1.730396041e-11,
+     "delay_margin_s": 7.269603959e-11,
+     "sweep": {
+      "r": {
+       "setup_ps": 5.0,
+       "hold_ps": -2.5,
+       "metastable_offsets_ps": [],
+       "setup_margin_ps": 40.0,
+       "hold_margin_ps": 37.5,
+       "notes": []
+      },
+      "f": {
+       "setup_ps": 7.5,
+       "hold_ps": -5.0,
+       "metastable_offsets_ps": [],
+       "setup_margin_ps": 37.5,
+       "hold_margin_ps": 40.0,
+       "notes": []
+      }
+     }
+    },
+    {
+     "corner": "ff/0.770V/0C",
+     "status": "pass",
+     "captures_checked": 5,
+     "captures_failed": [],
+     "budget_trials_failed": [],
+     "delays_measured": 4,
+     "delays_over_budget": [],
+     "worst_delay_s": 1.29815526e-11,
+     "delay_margin_s": 7.70184474e-11,
+     "sweep": {
+      "r": {
+       "setup_ps": 5.0,
+       "hold_ps": -2.5,
+       "metastable_offsets_ps": [],
+       "setup_margin_ps": 40.0,
+       "hold_margin_ps": 37.5,
+       "notes": []
+      },
+      "f": {
+       "setup_ps": 7.5,
+       "hold_ps": -5.0,
+       "metastable_offsets_ps": [],
+       "setup_margin_ps": 37.5,
+       "hold_margin_ps": 40.0,
+       "notes": []
+      }
+     }
+    },
+    {
+     "corner": "ss/0.630V/100C",
+     "status": "pass",
+     "captures_checked": 5,
+     "captures_failed": [],
+     "budget_trials_failed": [],
+     "delays_measured": 4,
+     "delays_over_budget": [],
+     "worst_delay_s": 2.502623686e-11,
+     "delay_margin_s": 6.497376314e-11,
+     "sweep": {
+      "r": {
+       "setup_ps": 7.5,
+       "hold_ps": -5.0,
+       "metastable_offsets_ps": [],
+       "setup_margin_ps": 37.5,
+       "hold_margin_ps": 40.0,
+       "notes": []
+      },
+      "f": {
+       "setup_ps": 10.0,
+       "hold_ps": -7.5,
+       "metastable_offsets_ps": [],
+       "setup_margin_ps": 35.0,
+       "hold_margin_ps": 42.5,
+       "notes": []
+      }
+     }
+    }
+   ]
+  },
+  "DHLx1_negctl": {
+   "status": "error",
+   "job_id": "klt-sim-46a33584b69a",
+   "delay_budget_s": 9e-11,
+   "setup_budget_ps": 45,
+   "hold_budget_ps": 35,
+   "corners": [
+    {
+     "corner": "tt/0.700V/25C",
+     "status": "error",
+     "captures_checked": 5,
+     "captures_failed": [
+      "cap_p1",
+      "cap_p3"
+     ],
+     "budget_trials_failed": [
+      "swf_p350",
+      "swr_m450"
+     ],
+     "delays_measured": 0,
+     "delays_over_budget": [],
+     "worst_delay_s": null,
+     "delay_margin_s": null,
+     "sweep": null
+    },
+    {
+     "corner": "ff/0.770V/0C",
+     "status": "error",
+     "captures_checked": 5,
+     "captures_failed": [
+      "cap_p1",
+      "cap_p3"
+     ],
+     "budget_trials_failed": [
+      "swf_p350",
+      "swr_m450"
+     ],
+     "delays_measured": 0,
+     "delays_over_budget": [],
+     "worst_delay_s": null,
+     "delay_margin_s": null,
+     "sweep": null
+    },
+    {
+     "corner": "ss/0.630V/100C",
+     "status": "error",
+     "captures_checked": 5,
+     "captures_failed": [
+      "cap_p0",
+      "cap_p2",
+      "cap_p4"
+     ],
+     "budget_trials_failed": [
+      "swf_m450",
+      "swr_p350"
+     ],
+     "delays_measured": 0,
+     "delays_over_budget": [],
+     "worst_delay_s": null,
+     "delay_margin_s": null,
+     "sweep": null
+    }
+   ]
+  }
+ },
+ "negative_controls": {
+  "DFFHQNx1_negctl": {
+   "present": true,
+   "flagged_at_all_corners": true
+  },
+  "DHLx1_negctl": {
+   "present": true,
+   "flagged_at_all_corners": true
+  }
+ },
+ "all_cells_pass": true,
+ "finding": null
+}

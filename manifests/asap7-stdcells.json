@@ -121,6 +121,31 @@
         "file": "verification/pex/records/2026-11-07/XOR2x1/tied.json",
         "content_hash": "sha256:2f993a86c7fc67ed58be9324a128a1d22e10f96a668542f24fcf3e7560da8491"
       }
+    ],
+    "5": [
+      {
+        "file": "manifests/t1-item5.envelope.json",
+        "content_hash": "sha256:44d2cbe00211e55013dc4fe4ccb591ce68f732fb1c057eecf94a768cab83cdb6",
+        "rows": [
+          "cell-set",
+          "pvt-corners",
+          "timing-margin"
+        ]
+      }
+    ]
+  },
+  "spec_rows": {
+    "5": [
+      {
+        "id": "cell-set"
+      },
+      {
+        "id": "pvt-corners"
+      },
+      {
+        "id": "timing-margin",
+        "timing_margin": true
+      }
     ]
   }
 }
