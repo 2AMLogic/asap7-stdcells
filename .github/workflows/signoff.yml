@@ -71,8 +71,15 @@ jobs:
           # (the uv tool venv the records were run in) is the only prefix
           # allowed; the checkout/worktree prefix is never allowed, so layout
           # paths stay repo-relative (operator ruling, issue #14).
+          # /opt/pdk is the Spot batch worker's own PDK install prefix, which
+          # the remote envelope records at
+          # environment.remote.worker_environment.pdk.root for batch-sim
+          # records (decision 0011). Like the tool venv it is a fleet-wide
+          # constant, not a checkout path, so it is allowed as a prefix only;
+          # the committed reports are left untouched (append-only evidence).
           klt env-provenance lint-envelope \
               --allow-prefix /home/ubuntu/.local/share/uv/tools/klayout-tools \
+              --allow-prefix /opt/pdk \
               "${files[@]}"
 
       - name: Item 9 cold start, output visible (diagnostic)

@@ -1,0 +1,7048 @@
+{
+ "schema_version": 3,
+ "netlist": {
+  "path": null,
+  "scope": "external"
+ },
+ "status": "pass",
+ "corner_count": 3,
+ "passed": 3,
+ "failed": 0,
+ "errored": 0,
+ "inconclusive": 0,
+ "diagnostic_counts": {
+  "by_code": {},
+  "by_severity": {},
+  "corners_with_diagnostics": 0
+ },
+ "metrics": {
+  "sim__corner__count": 3,
+  "sim__corner__passed_count": 3,
+  "sim__corner__failed_count": 0,
+  "sim__corner__errored_count": 0,
+  "sim__corner__inconclusive_count": 0
+ },
+ "environment": {
+  "engine": "ngspice",
+  "engine_version": "46",
+  "ngspice_binary": "ngspice",
+  "engine_build": {
+   "version_banner": "******\n** ngspice-46 : Circuit level simulation program\n** Compiled with KLU Direct Linear Solver\n** The U. C. Berkeley CAD Group\n** Copyright 1985-1994, Regents of the University of California.\n** Copyright 2001-2025, The ngspice team.\n** Please get your ngspice manual from https://ngspice.sourceforge.io/docs.html\n** Please file your bug-reports at http://ngspice.sourceforge.net/bugrep.html\n** Creation Date: Thu Oct  1 23:51:59 UTC 2026\n******",
+   "binary_sha256": "dc859418bedd0478ff439a2d3e2e09f4386a7f4d5e3f17671953e101a000cc60",
+   "probe": "ok",
+   "reason": null
+  },
+  "models_lib": {
+   "path": null,
+   "scope": "external"
+  },
+  "models_lib_sha256": "ed21e96383c01c41e9b00a442c08d7bf9daebed057206788526c1115c1418d4f",
+  "models_lib_sha256_scope": "client",
+  "netlist_sha256": "76c993b1ace80817ee0e45da13f5c887384eee581dd452ddd6323684dfa70981",
+  "netlist_closure": [
+   {
+    "path": null,
+    "scope": "external",
+    "sha256": "76c993b1ace80817ee0e45da13f5c887384eee581dd452ddd6323684dfa70981"
+   },
+   {
+    "path": null,
+    "scope": "external",
+    "sha256": "0b0643e548fa785354fb622d221e9aa33f7e009f26827527282b9b0a2bff9470"
+   }
+  ],
+  "netlist_identity": "sha256:368e23af5dbf4aa0b6108e3ce8bb889a6ac64e560c7cfa54b5a2ffdc31d4a4fb",
+  "osdi_preload": [
+   {
+    "name": "bsimcmg.osdi",
+    "path": null,
+    "scope": "external",
+    "sha256": "4e755d14e901a84600124be5cb73e36302117b6cfc694e52ffc17640945cd9e3"
+   }
+  ],
+  "staged_model_inputs": [
+   {
+    "name": "asap7_bsimcmg.lib",
+    "field": "models.lib",
+    "kind": "library",
+    "sha256": "ed21e96383c01c41e9b00a442c08d7bf9daebed057206788526c1115c1418d4f",
+    "rewritten": false,
+    "source_sha256": "ed21e96383c01c41e9b00a442c08d7bf9daebed057206788526c1115c1418d4f"
+   },
+   {
+    "name": "bsimcmg.osdi",
+    "field": "options.osdi_preload[0]",
+    "kind": "osdi",
+    "sha256": "4e755d14e901a84600124be5cb73e36302117b6cfc694e52ffc17640945cd9e3",
+    "rewritten": false,
+    "source_sha256": "4e755d14e901a84600124be5cb73e36302117b6cfc694e52ffc17640945cd9e3"
+   }
+  ],
+  "remote": {
+   "provider": "aws-batch-fleet",
+   "job_id": "klt-sim-6e6c1f774084",
+   "region": "us-east-1",
+   "instance_id": "i-057ae51105bb06791",
+   "instance_type": "m7i.4xlarge",
+   "availability_zone": "us-east-1d",
+   "ami_id": "ami-095c25ae241a4d360",
+   "lifecycle": "spot",
+   "spot": true,
+   "state": "done",
+   "exit_code": "0",
+   "concurrency": "1",
+   "physical_cores": "8",
+   "elapsed_seconds": 9,
+   "client_submitted_at": "2026-11-07T22:40:33.802951Z",
+   "client_launched_at": "2026-11-07T22:40:54.117278Z",
+   "client_status_terminal_at": "2026-11-07T22:41:25.504014Z",
+   "client_collected_at": "2026-11-07T22:41:26.274414Z",
+   "runner_klt_version": "0.9.0",
+   "client_klt_version": "0.9.2.dev244+g92e2b15a66f2",
+   "runner_compatibility": "match",
+   "runner_request_features": {
+    "required": [
+     "stimulus",
+     "options.ngspice_init",
+     "options.osdi_preload",
+     "options.stage_model_inputs"
+    ],
+    "missing": [],
+    "status": "supported"
+   },
+   "worker_environment": {
+    "capture": "ok",
+    "simulator": {
+     "requested_binary": "ngspice",
+     "binary_source": "PATH",
+     "selected_path": "ngspice",
+     "version_banner": "******\n** ngspice-46 : Circuit level simulation program\n** Compiled with KLU Direct Linear Solver\n** The U. C. Berkeley CAD Group\n** Copyright 1985-1994, Regents of the University of California.\n** Copyright 2001-2025, The ngspice team.\n** Please get your ngspice manual from https://ngspice.sourceforge.io/docs.html\n** Please file your bug-reports at http://ngspice.sourceforge.net/bugrep.html\n** Creation Date: Thu Oct  1 23:51:59 UTC 2026\n******\n",
+     "version_probe": "ok"
+    },
+    "pdk": {
+     "variant": null,
+     "root": "/opt/pdk",
+     "stamp_scheme": null,
+     "stamp_sha256": null,
+     "stamp_text": null,
+     "models_staged": true,
+     "stamp_scope": "image"
+    },
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8488C",
+    "omp_num_threads": null,
+    "image_manifest": null,
+    "model_inputs": [
+     {
+      "name": "asap7_bsimcmg.lib",
+      "sha256": "ed21e96383c01c41e9b00a442c08d7bf9daebed057206788526c1115c1418d4f"
+     },
+     {
+      "name": "bsimcmg.osdi",
+      "sha256": "4e755d14e901a84600124be5cb73e36302117b6cfc694e52ffc17640945cd9e3"
+     }
+    ],
+    "diagnostics": [
+     "pdk root or variant unknown on worker"
+    ],
+    "pdk_stamp_comparison": {
+     "basis": "staged_model_inputs",
+     "status": "match"
+    },
+    "engine_build_comparison": {
+     "status": "match"
+    }
+   },
+   "runner_model_inputs": [
+    {
+     "name": "asap7_bsimcmg.lib",
+     "sha256": "ed21e96383c01c41e9b00a442c08d7bf9daebed057206788526c1115c1418d4f"
+    },
+    {
+     "name": "bsimcmg.osdi",
+     "sha256": "4e755d14e901a84600124be5cb73e36302117b6cfc694e52ffc17640945cd9e3"
+    }
+   ],
+   "job_ceiling": {
+    "basis": "conservative_serial_bound",
+    "unit_count": 3,
+    "per_unit_timeout_s": 600,
+    "overhead_s": 120.0,
+    "job_bound_s": 1920.0,
+    "max_job_seconds": 3600.0,
+    "max_job_seconds_source": "fleet_config",
+    "exceeds_ceiling": false,
+    "check": "warn",
+    "max_units_per_job": 5,
+    "recommended_hosts": 1
+   }
+  },
+  "engine_host": "worker",
+  "client_ngspice_binary": "ngspice",
+  "backend": {
+   "resolved": "batch",
+   "source": "flag",
+   "requested": "batch"
+  },
+  "stimulus": {
+   "supply_relative": true,
+   "corners": [
+    {
+     "corner_id": "tt/0.700V/25C",
+     "signals": [
+      {
+       "source": "Va1",
+       "node": "in_a1",
+       "ref": "0",
+       "initial": 0.0,
+       "skew_s": 0.0,
+       "events": [
+        {
+         "t_s": 5e-10,
+         "t_applied_s": 5e-10,
+         "level": 0.7,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 7.500000000000001e-10,
+         "t_applied_s": 7.500000000000001e-10,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        },
+        {
+         "t_s": 1.25e-09,
+         "t_applied_s": 1.25e-09,
+         "level": 0.7,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 1.5000000000000002e-09,
+         "t_applied_s": 1.5000000000000002e-09,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        },
+        {
+         "t_s": 2.2500000000000003e-09,
+         "t_applied_s": 2.2500000000000003e-09,
+         "level": 0.7,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 2.5e-09,
+         "t_applied_s": 2.5e-09,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        },
+        {
+         "t_s": 3e-09,
+         "t_applied_s": 3e-09,
+         "level": 0.7,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 3.25e-09,
+         "t_applied_s": 3.25e-09,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        },
+        {
+         "t_s": 4.250000000000001e-09,
+         "t_applied_s": 4.250000000000001e-09,
+         "level": 0.7,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 4.500000000000001e-09,
+         "t_applied_s": 4.500000000000001e-09,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        },
+        {
+         "t_s": 5.000000000000001e-09,
+         "t_applied_s": 5.000000000000001e-09,
+         "level": 0.7,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 5.250000000000001e-09,
+         "t_applied_s": 5.250000000000001e-09,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        },
+        {
+         "t_s": 6.000000000000001e-09,
+         "t_applied_s": 6.000000000000001e-09,
+         "level": 0.7,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 6.2500000000000005e-09,
+         "t_applied_s": 6.2500000000000005e-09,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        },
+        {
+         "t_s": 6.750000000000001e-09,
+         "t_applied_s": 6.750000000000001e-09,
+         "level": 0.7,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 1.3e-08,
+         "t_applied_s": 1.3e-08,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        }
+       ],
+       "pwl": [
+        [
+         0.0,
+         0.0
+        ],
+        [
+         5e-10,
+         0.0
+        ],
+        [
+         5.1e-10,
+         0.7
+        ],
+        [
+         7.500000000000001e-10,
+         0.7
+        ],
+        [
+         7.600000000000001e-10,
+         0.0
+        ],
+        [
+         1.25e-09,
+         0.0
+        ],
+        [
+         1.26e-09,
+         0.7
+        ],
+        [
+         1.5000000000000002e-09,
+         0.7
+        ],
+        [
+         1.5100000000000002e-09,
+         0.0
+        ],
+        [
+         2.2500000000000003e-09,
+         0.0
+        ],
+        [
+         2.2600000000000005e-09,
+         0.7
+        ],
+        [
+         2.5e-09,
+         0.7
+        ],
+        [
+         2.5100000000000002e-09,
+         0.0
+        ],
+        [
+         3e-09,
+         0.0
+        ],
+        [
+         3.01e-09,
+         0.7
+        ],
+        [
+         3.25e-09,
+         0.7
+        ],
+        [
+         3.2600000000000003e-09,
+         0.0
+        ],
+        [
+         4.250000000000001e-09,
+         0.0
+        ],
+        [
+         4.260000000000001e-09,
+         0.7
+        ],
+        [
+         4.500000000000001e-09,
+         0.7
+        ],
+        [
+         4.51e-09,
+         0.0
+        ],
+        [
+         5.000000000000001e-09,
+         0.0
+        ],
+        [
+         5.010000000000001e-09,
+         0.7
+        ],
+        [
+         5.250000000000001e-09,
+         0.7
+        ],
+        [
+         5.2600000000000004e-09,
+         0.0
+        ],
+        [
+         6.000000000000001e-09,
+         0.0
+        ],
+        [
+         6.0100000000000005e-09,
+         0.7
+        ],
+        [
+         6.2500000000000005e-09,
+         0.7
+        ],
+        [
+         6.26e-09,
+         0.0
+        ],
+        [
+         6.750000000000001e-09,
+         0.0
+        ],
+        [
+         6.760000000000001e-09,
+         0.7
+        ],
+        [
+         1.3e-08,
+         0.7
+        ],
+        [
+         1.301e-08,
+         0.0
+        ]
+       ]
+      },
+      {
+       "source": "Va2",
+       "node": "in_a2",
+       "ref": "0",
+       "initial": 0.0,
+       "skew_s": 0.0,
+       "events": [
+        {
+         "t_s": 1e-09,
+         "t_applied_s": 1e-09,
+         "level": 0.7,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 1.75e-09,
+         "t_applied_s": 1.75e-09,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        },
+        {
+         "t_s": 2.7500000000000002e-09,
+         "t_applied_s": 2.7500000000000002e-09,
+         "level": 0.7,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 3.5000000000000003e-09,
+         "t_applied_s": 3.5000000000000003e-09,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        },
+        {
+         "t_s": 4.75e-09,
+         "t_applied_s": 4.75e-09,
+         "level": 0.7,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 5.5000000000000004e-09,
+         "t_applied_s": 5.5000000000000004e-09,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        },
+        {
+         "t_s": 6.500000000000001e-09,
+         "t_applied_s": 6.500000000000001e-09,
+         "level": 0.7,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 7.000000000000001e-09,
+         "t_applied_s": 7.000000000000001e-09,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        },
+        {
+         "t_s": 7.25e-09,
+         "t_applied_s": 7.25e-09,
+         "level": 0.7,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 7.75e-09,
+         "t_applied_s": 7.75e-09,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        },
+        {
+         "t_s": 8e-09,
+         "t_applied_s": 8e-09,
+         "level": 0.7,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 8.75e-09,
+         "t_applied_s": 8.75e-09,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        },
+        {
+         "t_s": 9e-09,
+         "t_applied_s": 9e-09,
+         "level": 0.7,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 9.5e-09,
+         "t_applied_s": 9.5e-09,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        },
+        {
+         "t_s": 1.1750000000000001e-08,
+         "t_applied_s": 1.1750000000000001e-08,
+         "level": 0.7,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 1.525e-08,
+         "t_applied_s": 1.525e-08,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        }
+       ],
+       "pwl": [
+        [
+         0.0,
+         0.0
+        ],
+        [
+         1e-09,
+         0.0
+        ],
+        [
+         1.01e-09,
+         0.7
+        ],
+        [
+         1.75e-09,
+         0.7
+        ],
+        [
+         1.76e-09,
+         0.0
+        ],
+        [
+         2.7500000000000002e-09,
+         0.0
+        ],
+        [
+         2.7600000000000004e-09,
+         0.7
+        ],
+        [
+         3.5000000000000003e-09,
+         0.7
+        ],
+        [
+         3.5100000000000005e-09,
+         0.0
+        ],
+        [
+         4.75e-09,
+         0.0
+        ],
+        [
+         4.76e-09,
+         0.7
+        ],
+        [
+         5.5000000000000004e-09,
+         0.7
+        ],
+        [
+         5.51e-09,
+         0.0
+        ],
+        [
+         6.500000000000001e-09,
+         0.0
+        ],
+        [
+         6.510000000000001e-09,
+         0.7
+        ],
+        [
+         7.000000000000001e-09,
+         0.7
+        ],
+        [
+         7.01e-09,
+         0.0
+        ],
+        [
+         7.25e-09,
+         0.0
+        ],
+        [
+         7.26e-09,
+         0.7
+        ],
+        [
+         7.75e-09,
+         0.7
+        ],
+        [
+         7.76e-09,
+         0.0
+        ],
+        [
+         8e-09,
+         0.0
+        ],
+        [
+         8.01e-09,
+         0.7
+        ],
+        [
+         8.75e-09,
+         0.7
+        ],
+        [
+         8.76e-09,
+         0.0
+        ],
+        [
+         9e-09,
+         0.0
+        ],
+        [
+         9.01e-09,
+         0.7
+        ],
+        [
+         9.5e-09,
+         0.7
+        ],
+        [
+         9.51e-09,
+         0.0
+        ],
+        [
+         1.1750000000000001e-08,
+         0.0
+        ],
+        [
+         1.176e-08,
+         0.7
+        ],
+        [
+         1.525e-08,
+         0.7
+        ],
+        [
+         1.5260000000000002e-08,
+         0.0
+        ]
+       ]
+      },
+      {
+       "source": "Vb1",
+       "node": "in_b1",
+       "ref": "0",
+       "initial": 0.0,
+       "skew_s": 0.0,
+       "events": [
+        {
+         "t_s": 2e-09,
+         "t_applied_s": 2e-09,
+         "level": 0.7,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 3.7500000000000005e-09,
+         "t_applied_s": 3.7500000000000005e-09,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        },
+        {
+         "t_s": 5.750000000000001e-09,
+         "t_applied_s": 5.750000000000001e-09,
+         "level": 0.7,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 7.500000000000001e-09,
+         "t_applied_s": 7.500000000000001e-09,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        },
+        {
+         "t_s": 8.25e-09,
+         "t_applied_s": 8.25e-09,
+         "level": 0.7,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 9.25e-09,
+         "t_applied_s": 9.25e-09,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        },
+        {
+         "t_s": 9.75e-09,
+         "t_applied_s": 9.75e-09,
+         "level": 0.7,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 1e-08,
+         "t_applied_s": 1e-08,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        },
+        {
+         "t_s": 1.05e-08,
+         "t_applied_s": 1.05e-08,
+         "level": 0.7,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 1.125e-08,
+         "t_applied_s": 1.125e-08,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        },
+        {
+         "t_s": 1.2500000000000001e-08,
+         "t_applied_s": 1.2500000000000001e-08,
+         "level": 0.7,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 1.325e-08,
+         "t_applied_s": 1.325e-08,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        },
+        {
+         "t_s": 1.35e-08,
+         "t_applied_s": 1.35e-08,
+         "level": 0.7,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 1.4e-08,
+         "t_applied_s": 1.4e-08,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        },
+        {
+         "t_s": 1.475e-08,
+         "t_applied_s": 1.475e-08,
+         "level": 0.7,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 1.6e-08,
+         "t_applied_s": 1.6e-08,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        }
+       ],
+       "pwl": [
+        [
+         0.0,
+         0.0
+        ],
+        [
+         2e-09,
+         0.0
+        ],
+        [
+         2.0100000000000003e-09,
+         0.7
+        ],
+        [
+         3.7500000000000005e-09,
+         0.7
+        ],
+        [
+         3.76e-09,
+         0.0
+        ],
+        [
+         5.750000000000001e-09,
+         0.0
+        ],
+        [
+         5.760000000000001e-09,
+         0.7
+        ],
+        [
+         7.500000000000001e-09,
+         0.7
+        ],
+        [
+         7.51e-09,
+         0.0
+        ],
+        [
+         8.25e-09,
+         0.0
+        ],
+        [
+         8.26e-09,
+         0.7
+        ],
+        [
+         9.25e-09,
+         0.7
+        ],
+        [
+         9.26e-09,
+         0.0
+        ],
+        [
+         9.75e-09,
+         0.0
+        ],
+        [
+         9.76e-09,
+         0.7
+        ],
+        [
+         1e-08,
+         0.7
+        ],
+        [
+         1.001e-08,
+         0.0
+        ],
+        [
+         1.05e-08,
+         0.0
+        ],
+        [
+         1.051e-08,
+         0.7
+        ],
+        [
+         1.125e-08,
+         0.7
+        ],
+        [
+         1.126e-08,
+         0.0
+        ],
+        [
+         1.2500000000000001e-08,
+         0.0
+        ],
+        [
+         1.2510000000000001e-08,
+         0.7
+        ],
+        [
+         1.325e-08,
+         0.7
+        ],
+        [
+         1.326e-08,
+         0.0
+        ],
+        [
+         1.35e-08,
+         0.0
+        ],
+        [
+         1.351e-08,
+         0.7
+        ],
+        [
+         1.4e-08,
+         0.7
+        ],
+        [
+         1.401e-08,
+         0.0
+        ],
+        [
+         1.475e-08,
+         0.0
+        ],
+        [
+         1.476e-08,
+         0.7
+        ],
+        [
+         1.6e-08,
+         0.7
+        ],
+        [
+         1.6010000000000002e-08,
+         0.0
+        ]
+       ]
+      },
+      {
+       "source": "Vb2",
+       "node": "in_b2",
+       "ref": "0",
+       "initial": 0.0,
+       "skew_s": 0.0,
+       "events": [
+        {
+         "t_s": 4e-09,
+         "t_applied_s": 4e-09,
+         "level": 0.7,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 8.5e-09,
+         "t_applied_s": 8.5e-09,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        },
+        {
+         "t_s": 1.025e-08,
+         "t_applied_s": 1.025e-08,
+         "level": 0.7,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 1.075e-08,
+         "t_applied_s": 1.075e-08,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        },
+        {
+         "t_s": 1.1000000000000001e-08,
+         "t_applied_s": 1.1000000000000001e-08,
+         "level": 0.7,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 1.15e-08,
+         "t_applied_s": 1.15e-08,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        },
+        {
+         "t_s": 1.2e-08,
+         "t_applied_s": 1.2e-08,
+         "level": 0.7,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 1.225e-08,
+         "t_applied_s": 1.225e-08,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        },
+        {
+         "t_s": 1.275e-08,
+         "t_applied_s": 1.275e-08,
+         "level": 0.7,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 1.375e-08,
+         "t_applied_s": 1.375e-08,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        },
+        {
+         "t_s": 1.425e-08,
+         "t_applied_s": 1.425e-08,
+         "level": 0.7,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 1.45e-08,
+         "t_applied_s": 1.45e-08,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        },
+        {
+         "t_s": 1.5000000000000002e-08,
+         "t_applied_s": 1.5000000000000002e-08,
+         "level": 0.7,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 1.5500000000000003e-08,
+         "t_applied_s": 1.5500000000000003e-08,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        },
+        {
+         "t_s": 1.5750000000000002e-08,
+         "t_applied_s": 1.5750000000000002e-08,
+         "level": 0.7,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 1.6250000000000003e-08,
+         "t_applied_s": 1.6250000000000003e-08,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        }
+       ],
+       "pwl": [
+        [
+         0.0,
+         0.0
+        ],
+        [
+         4e-09,
+         0.0
+        ],
+        [
+         4.01e-09,
+         0.7
+        ],
+        [
+         8.5e-09,
+         0.7
+        ],
+        [
+         8.51e-09,
+         0.0
+        ],
+        [
+         1.025e-08,
+         0.0
+        ],
+        [
+         1.026e-08,
+         0.7
+        ],
+        [
+         1.075e-08,
+         0.7
+        ],
+        [
+         1.076e-08,
+         0.0
+        ],
+        [
+         1.1000000000000001e-08,
+         0.0
+        ],
+        [
+         1.101e-08,
+         0.7
+        ],
+        [
+         1.15e-08,
+         0.7
+        ],
+        [
+         1.151e-08,
+         0.0
+        ],
+        [
+         1.2e-08,
+         0.0
+        ],
+        [
+         1.201e-08,
+         0.7
+        ],
+        [
+         1.225e-08,
+         0.7
+        ],
+        [
+         1.226e-08,
+         0.0
+        ],
+        [
+         1.275e-08,
+         0.0
+        ],
+        [
+         1.276e-08,
+         0.7
+        ],
+        [
+         1.375e-08,
+         0.7
+        ],
+        [
+         1.376e-08,
+         0.0
+        ],
+        [
+         1.425e-08,
+         0.0
+        ],
+        [
+         1.426e-08,
+         0.7
+        ],
+        [
+         1.45e-08,
+         0.7
+        ],
+        [
+         1.451e-08,
+         0.0
+        ],
+        [
+         1.5000000000000002e-08,
+         0.0
+        ],
+        [
+         1.5010000000000003e-08,
+         0.7
+        ],
+        [
+         1.5500000000000003e-08,
+         0.7
+        ],
+        [
+         1.5510000000000005e-08,
+         0.0
+        ],
+        [
+         1.5750000000000002e-08,
+         0.0
+        ],
+        [
+         1.5760000000000003e-08,
+         0.7
+        ],
+        [
+         1.6250000000000003e-08,
+         0.7
+        ],
+        [
+         1.6260000000000005e-08,
+         0.0
+        ]
+       ]
+      }
+     ]
+    },
+    {
+     "corner_id": "ff/0.770V/0C",
+     "signals": [
+      {
+       "source": "Va1",
+       "node": "in_a1",
+       "ref": "0",
+       "initial": 0.0,
+       "skew_s": 0.0,
+       "events": [
+        {
+         "t_s": 5e-10,
+         "t_applied_s": 5e-10,
+         "level": 0.77,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 7.500000000000001e-10,
+         "t_applied_s": 7.500000000000001e-10,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        },
+        {
+         "t_s": 1.25e-09,
+         "t_applied_s": 1.25e-09,
+         "level": 0.77,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 1.5000000000000002e-09,
+         "t_applied_s": 1.5000000000000002e-09,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        },
+        {
+         "t_s": 2.2500000000000003e-09,
+         "t_applied_s": 2.2500000000000003e-09,
+         "level": 0.77,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 2.5e-09,
+         "t_applied_s": 2.5e-09,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        },
+        {
+         "t_s": 3e-09,
+         "t_applied_s": 3e-09,
+         "level": 0.77,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 3.25e-09,
+         "t_applied_s": 3.25e-09,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        },
+        {
+         "t_s": 4.250000000000001e-09,
+         "t_applied_s": 4.250000000000001e-09,
+         "level": 0.77,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 4.500000000000001e-09,
+         "t_applied_s": 4.500000000000001e-09,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        },
+        {
+         "t_s": 5.000000000000001e-09,
+         "t_applied_s": 5.000000000000001e-09,
+         "level": 0.77,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 5.250000000000001e-09,
+         "t_applied_s": 5.250000000000001e-09,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        },
+        {
+         "t_s": 6.000000000000001e-09,
+         "t_applied_s": 6.000000000000001e-09,
+         "level": 0.77,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 6.2500000000000005e-09,
+         "t_applied_s": 6.2500000000000005e-09,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        },
+        {
+         "t_s": 6.750000000000001e-09,
+         "t_applied_s": 6.750000000000001e-09,
+         "level": 0.77,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 1.3e-08,
+         "t_applied_s": 1.3e-08,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        }
+       ],
+       "pwl": [
+        [
+         0.0,
+         0.0
+        ],
+        [
+         5e-10,
+         0.0
+        ],
+        [
+         5.1e-10,
+         0.77
+        ],
+        [
+         7.500000000000001e-10,
+         0.77
+        ],
+        [
+         7.600000000000001e-10,
+         0.0
+        ],
+        [
+         1.25e-09,
+         0.0
+        ],
+        [
+         1.26e-09,
+         0.77
+        ],
+        [
+         1.5000000000000002e-09,
+         0.77
+        ],
+        [
+         1.5100000000000002e-09,
+         0.0
+        ],
+        [
+         2.2500000000000003e-09,
+         0.0
+        ],
+        [
+         2.2600000000000005e-09,
+         0.77
+        ],
+        [
+         2.5e-09,
+         0.77
+        ],
+        [
+         2.5100000000000002e-09,
+         0.0
+        ],
+        [
+         3e-09,
+         0.0
+        ],
+        [
+         3.01e-09,
+         0.77
+        ],
+        [
+         3.25e-09,
+         0.77
+        ],
+        [
+         3.2600000000000003e-09,
+         0.0
+        ],
+        [
+         4.250000000000001e-09,
+         0.0
+        ],
+        [
+         4.260000000000001e-09,
+         0.77
+        ],
+        [
+         4.500000000000001e-09,
+         0.77
+        ],
+        [
+         4.51e-09,
+         0.0
+        ],
+        [
+         5.000000000000001e-09,
+         0.0
+        ],
+        [
+         5.010000000000001e-09,
+         0.77
+        ],
+        [
+         5.250000000000001e-09,
+         0.77
+        ],
+        [
+         5.2600000000000004e-09,
+         0.0
+        ],
+        [
+         6.000000000000001e-09,
+         0.0
+        ],
+        [
+         6.0100000000000005e-09,
+         0.77
+        ],
+        [
+         6.2500000000000005e-09,
+         0.77
+        ],
+        [
+         6.26e-09,
+         0.0
+        ],
+        [
+         6.750000000000001e-09,
+         0.0
+        ],
+        [
+         6.760000000000001e-09,
+         0.77
+        ],
+        [
+         1.3e-08,
+         0.77
+        ],
+        [
+         1.301e-08,
+         0.0
+        ]
+       ]
+      },
+      {
+       "source": "Va2",
+       "node": "in_a2",
+       "ref": "0",
+       "initial": 0.0,
+       "skew_s": 0.0,
+       "events": [
+        {
+         "t_s": 1e-09,
+         "t_applied_s": 1e-09,
+         "level": 0.77,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 1.75e-09,
+         "t_applied_s": 1.75e-09,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        },
+        {
+         "t_s": 2.7500000000000002e-09,
+         "t_applied_s": 2.7500000000000002e-09,
+         "level": 0.77,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 3.5000000000000003e-09,
+         "t_applied_s": 3.5000000000000003e-09,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        },
+        {
+         "t_s": 4.75e-09,
+         "t_applied_s": 4.75e-09,
+         "level": 0.77,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 5.5000000000000004e-09,
+         "t_applied_s": 5.5000000000000004e-09,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        },
+        {
+         "t_s": 6.500000000000001e-09,
+         "t_applied_s": 6.500000000000001e-09,
+         "level": 0.77,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 7.000000000000001e-09,
+         "t_applied_s": 7.000000000000001e-09,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        },
+        {
+         "t_s": 7.25e-09,
+         "t_applied_s": 7.25e-09,
+         "level": 0.77,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 7.75e-09,
+         "t_applied_s": 7.75e-09,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        },
+        {
+         "t_s": 8e-09,
+         "t_applied_s": 8e-09,
+         "level": 0.77,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 8.75e-09,
+         "t_applied_s": 8.75e-09,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        },
+        {
+         "t_s": 9e-09,
+         "t_applied_s": 9e-09,
+         "level": 0.77,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 9.5e-09,
+         "t_applied_s": 9.5e-09,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        },
+        {
+         "t_s": 1.1750000000000001e-08,
+         "t_applied_s": 1.1750000000000001e-08,
+         "level": 0.77,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 1.525e-08,
+         "t_applied_s": 1.525e-08,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        }
+       ],
+       "pwl": [
+        [
+         0.0,
+         0.0
+        ],
+        [
+         1e-09,
+         0.0
+        ],
+        [
+         1.01e-09,
+         0.77
+        ],
+        [
+         1.75e-09,
+         0.77
+        ],
+        [
+         1.76e-09,
+         0.0
+        ],
+        [
+         2.7500000000000002e-09,
+         0.0
+        ],
+        [
+         2.7600000000000004e-09,
+         0.77
+        ],
+        [
+         3.5000000000000003e-09,
+         0.77
+        ],
+        [
+         3.5100000000000005e-09,
+         0.0
+        ],
+        [
+         4.75e-09,
+         0.0
+        ],
+        [
+         4.76e-09,
+         0.77
+        ],
+        [
+         5.5000000000000004e-09,
+         0.77
+        ],
+        [
+         5.51e-09,
+         0.0
+        ],
+        [
+         6.500000000000001e-09,
+         0.0
+        ],
+        [
+         6.510000000000001e-09,
+         0.77
+        ],
+        [
+         7.000000000000001e-09,
+         0.77
+        ],
+        [
+         7.01e-09,
+         0.0
+        ],
+        [
+         7.25e-09,
+         0.0
+        ],
+        [
+         7.26e-09,
+         0.77
+        ],
+        [
+         7.75e-09,
+         0.77
+        ],
+        [
+         7.76e-09,
+         0.0
+        ],
+        [
+         8e-09,
+         0.0
+        ],
+        [
+         8.01e-09,
+         0.77
+        ],
+        [
+         8.75e-09,
+         0.77
+        ],
+        [
+         8.76e-09,
+         0.0
+        ],
+        [
+         9e-09,
+         0.0
+        ],
+        [
+         9.01e-09,
+         0.77
+        ],
+        [
+         9.5e-09,
+         0.77
+        ],
+        [
+         9.51e-09,
+         0.0
+        ],
+        [
+         1.1750000000000001e-08,
+         0.0
+        ],
+        [
+         1.176e-08,
+         0.77
+        ],
+        [
+         1.525e-08,
+         0.77
+        ],
+        [
+         1.5260000000000002e-08,
+         0.0
+        ]
+       ]
+      },
+      {
+       "source": "Vb1",
+       "node": "in_b1",
+       "ref": "0",
+       "initial": 0.0,
+       "skew_s": 0.0,
+       "events": [
+        {
+         "t_s": 2e-09,
+         "t_applied_s": 2e-09,
+         "level": 0.77,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 3.7500000000000005e-09,
+         "t_applied_s": 3.7500000000000005e-09,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        },
+        {
+         "t_s": 5.750000000000001e-09,
+         "t_applied_s": 5.750000000000001e-09,
+         "level": 0.77,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 7.500000000000001e-09,
+         "t_applied_s": 7.500000000000001e-09,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        },
+        {
+         "t_s": 8.25e-09,
+         "t_applied_s": 8.25e-09,
+         "level": 0.77,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 9.25e-09,
+         "t_applied_s": 9.25e-09,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        },
+        {
+         "t_s": 9.75e-09,
+         "t_applied_s": 9.75e-09,
+         "level": 0.77,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 1e-08,
+         "t_applied_s": 1e-08,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        },
+        {
+         "t_s": 1.05e-08,
+         "t_applied_s": 1.05e-08,
+         "level": 0.77,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 1.125e-08,
+         "t_applied_s": 1.125e-08,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        },
+        {
+         "t_s": 1.2500000000000001e-08,
+         "t_applied_s": 1.2500000000000001e-08,
+         "level": 0.77,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 1.325e-08,
+         "t_applied_s": 1.325e-08,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        },
+        {
+         "t_s": 1.35e-08,
+         "t_applied_s": 1.35e-08,
+         "level": 0.77,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 1.4e-08,
+         "t_applied_s": 1.4e-08,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        },
+        {
+         "t_s": 1.475e-08,
+         "t_applied_s": 1.475e-08,
+         "level": 0.77,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 1.6e-08,
+         "t_applied_s": 1.6e-08,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        }
+       ],
+       "pwl": [
+        [
+         0.0,
+         0.0
+        ],
+        [
+         2e-09,
+         0.0
+        ],
+        [
+         2.0100000000000003e-09,
+         0.77
+        ],
+        [
+         3.7500000000000005e-09,
+         0.77
+        ],
+        [
+         3.76e-09,
+         0.0
+        ],
+        [
+         5.750000000000001e-09,
+         0.0
+        ],
+        [
+         5.760000000000001e-09,
+         0.77
+        ],
+        [
+         7.500000000000001e-09,
+         0.77
+        ],
+        [
+         7.51e-09,
+         0.0
+        ],
+        [
+         8.25e-09,
+         0.0
+        ],
+        [
+         8.26e-09,
+         0.77
+        ],
+        [
+         9.25e-09,
+         0.77
+        ],
+        [
+         9.26e-09,
+         0.0
+        ],
+        [
+         9.75e-09,
+         0.0
+        ],
+        [
+         9.76e-09,
+         0.77
+        ],
+        [
+         1e-08,
+         0.77
+        ],
+        [
+         1.001e-08,
+         0.0
+        ],
+        [
+         1.05e-08,
+         0.0
+        ],
+        [
+         1.051e-08,
+         0.77
+        ],
+        [
+         1.125e-08,
+         0.77
+        ],
+        [
+         1.126e-08,
+         0.0
+        ],
+        [
+         1.2500000000000001e-08,
+         0.0
+        ],
+        [
+         1.2510000000000001e-08,
+         0.77
+        ],
+        [
+         1.325e-08,
+         0.77
+        ],
+        [
+         1.326e-08,
+         0.0
+        ],
+        [
+         1.35e-08,
+         0.0
+        ],
+        [
+         1.351e-08,
+         0.77
+        ],
+        [
+         1.4e-08,
+         0.77
+        ],
+        [
+         1.401e-08,
+         0.0
+        ],
+        [
+         1.475e-08,
+         0.0
+        ],
+        [
+         1.476e-08,
+         0.77
+        ],
+        [
+         1.6e-08,
+         0.77
+        ],
+        [
+         1.6010000000000002e-08,
+         0.0
+        ]
+       ]
+      },
+      {
+       "source": "Vb2",
+       "node": "in_b2",
+       "ref": "0",
+       "initial": 0.0,
+       "skew_s": 0.0,
+       "events": [
+        {
+         "t_s": 4e-09,
+         "t_applied_s": 4e-09,
+         "level": 0.77,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 8.5e-09,
+         "t_applied_s": 8.5e-09,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        },
+        {
+         "t_s": 1.025e-08,
+         "t_applied_s": 1.025e-08,
+         "level": 0.77,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 1.075e-08,
+         "t_applied_s": 1.075e-08,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        },
+        {
+         "t_s": 1.1000000000000001e-08,
+         "t_applied_s": 1.1000000000000001e-08,
+         "level": 0.77,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 1.15e-08,
+         "t_applied_s": 1.15e-08,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        },
+        {
+         "t_s": 1.2e-08,
+         "t_applied_s": 1.2e-08,
+         "level": 0.77,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 1.225e-08,
+         "t_applied_s": 1.225e-08,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        },
+        {
+         "t_s": 1.275e-08,
+         "t_applied_s": 1.275e-08,
+         "level": 0.77,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 1.375e-08,
+         "t_applied_s": 1.375e-08,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        },
+        {
+         "t_s": 1.425e-08,
+         "t_applied_s": 1.425e-08,
+         "level": 0.77,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 1.45e-08,
+         "t_applied_s": 1.45e-08,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        },
+        {
+         "t_s": 1.5000000000000002e-08,
+         "t_applied_s": 1.5000000000000002e-08,
+         "level": 0.77,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 1.5500000000000003e-08,
+         "t_applied_s": 1.5500000000000003e-08,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        },
+        {
+         "t_s": 1.5750000000000002e-08,
+         "t_applied_s": 1.5750000000000002e-08,
+         "level": 0.77,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 1.6250000000000003e-08,
+         "t_applied_s": 1.6250000000000003e-08,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        }
+       ],
+       "pwl": [
+        [
+         0.0,
+         0.0
+        ],
+        [
+         4e-09,
+         0.0
+        ],
+        [
+         4.01e-09,
+         0.77
+        ],
+        [
+         8.5e-09,
+         0.77
+        ],
+        [
+         8.51e-09,
+         0.0
+        ],
+        [
+         1.025e-08,
+         0.0
+        ],
+        [
+         1.026e-08,
+         0.77
+        ],
+        [
+         1.075e-08,
+         0.77
+        ],
+        [
+         1.076e-08,
+         0.0
+        ],
+        [
+         1.1000000000000001e-08,
+         0.0
+        ],
+        [
+         1.101e-08,
+         0.77
+        ],
+        [
+         1.15e-08,
+         0.77
+        ],
+        [
+         1.151e-08,
+         0.0
+        ],
+        [
+         1.2e-08,
+         0.0
+        ],
+        [
+         1.201e-08,
+         0.77
+        ],
+        [
+         1.225e-08,
+         0.77
+        ],
+        [
+         1.226e-08,
+         0.0
+        ],
+        [
+         1.275e-08,
+         0.0
+        ],
+        [
+         1.276e-08,
+         0.77
+        ],
+        [
+         1.375e-08,
+         0.77
+        ],
+        [
+         1.376e-08,
+         0.0
+        ],
+        [
+         1.425e-08,
+         0.0
+        ],
+        [
+         1.426e-08,
+         0.77
+        ],
+        [
+         1.45e-08,
+         0.77
+        ],
+        [
+         1.451e-08,
+         0.0
+        ],
+        [
+         1.5000000000000002e-08,
+         0.0
+        ],
+        [
+         1.5010000000000003e-08,
+         0.77
+        ],
+        [
+         1.5500000000000003e-08,
+         0.77
+        ],
+        [
+         1.5510000000000005e-08,
+         0.0
+        ],
+        [
+         1.5750000000000002e-08,
+         0.0
+        ],
+        [
+         1.5760000000000003e-08,
+         0.77
+        ],
+        [
+         1.6250000000000003e-08,
+         0.77
+        ],
+        [
+         1.6260000000000005e-08,
+         0.0
+        ]
+       ]
+      }
+     ]
+    },
+    {
+     "corner_id": "ss/0.630V/100C",
+     "signals": [
+      {
+       "source": "Va1",
+       "node": "in_a1",
+       "ref": "0",
+       "initial": 0.0,
+       "skew_s": 0.0,
+       "events": [
+        {
+         "t_s": 5e-10,
+         "t_applied_s": 5e-10,
+         "level": 0.63,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 7.500000000000001e-10,
+         "t_applied_s": 7.500000000000001e-10,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        },
+        {
+         "t_s": 1.25e-09,
+         "t_applied_s": 1.25e-09,
+         "level": 0.63,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 1.5000000000000002e-09,
+         "t_applied_s": 1.5000000000000002e-09,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        },
+        {
+         "t_s": 2.2500000000000003e-09,
+         "t_applied_s": 2.2500000000000003e-09,
+         "level": 0.63,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 2.5e-09,
+         "t_applied_s": 2.5e-09,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        },
+        {
+         "t_s": 3e-09,
+         "t_applied_s": 3e-09,
+         "level": 0.63,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 3.25e-09,
+         "t_applied_s": 3.25e-09,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        },
+        {
+         "t_s": 4.250000000000001e-09,
+         "t_applied_s": 4.250000000000001e-09,
+         "level": 0.63,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 4.500000000000001e-09,
+         "t_applied_s": 4.500000000000001e-09,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        },
+        {
+         "t_s": 5.000000000000001e-09,
+         "t_applied_s": 5.000000000000001e-09,
+         "level": 0.63,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 5.250000000000001e-09,
+         "t_applied_s": 5.250000000000001e-09,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        },
+        {
+         "t_s": 6.000000000000001e-09,
+         "t_applied_s": 6.000000000000001e-09,
+         "level": 0.63,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 6.2500000000000005e-09,
+         "t_applied_s": 6.2500000000000005e-09,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        },
+        {
+         "t_s": 6.750000000000001e-09,
+         "t_applied_s": 6.750000000000001e-09,
+         "level": 0.63,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 1.3e-08,
+         "t_applied_s": 1.3e-08,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        }
+       ],
+       "pwl": [
+        [
+         0.0,
+         0.0
+        ],
+        [
+         5e-10,
+         0.0
+        ],
+        [
+         5.1e-10,
+         0.63
+        ],
+        [
+         7.500000000000001e-10,
+         0.63
+        ],
+        [
+         7.600000000000001e-10,
+         0.0
+        ],
+        [
+         1.25e-09,
+         0.0
+        ],
+        [
+         1.26e-09,
+         0.63
+        ],
+        [
+         1.5000000000000002e-09,
+         0.63
+        ],
+        [
+         1.5100000000000002e-09,
+         0.0
+        ],
+        [
+         2.2500000000000003e-09,
+         0.0
+        ],
+        [
+         2.2600000000000005e-09,
+         0.63
+        ],
+        [
+         2.5e-09,
+         0.63
+        ],
+        [
+         2.5100000000000002e-09,
+         0.0
+        ],
+        [
+         3e-09,
+         0.0
+        ],
+        [
+         3.01e-09,
+         0.63
+        ],
+        [
+         3.25e-09,
+         0.63
+        ],
+        [
+         3.2600000000000003e-09,
+         0.0
+        ],
+        [
+         4.250000000000001e-09,
+         0.0
+        ],
+        [
+         4.260000000000001e-09,
+         0.63
+        ],
+        [
+         4.500000000000001e-09,
+         0.63
+        ],
+        [
+         4.51e-09,
+         0.0
+        ],
+        [
+         5.000000000000001e-09,
+         0.0
+        ],
+        [
+         5.010000000000001e-09,
+         0.63
+        ],
+        [
+         5.250000000000001e-09,
+         0.63
+        ],
+        [
+         5.2600000000000004e-09,
+         0.0
+        ],
+        [
+         6.000000000000001e-09,
+         0.0
+        ],
+        [
+         6.0100000000000005e-09,
+         0.63
+        ],
+        [
+         6.2500000000000005e-09,
+         0.63
+        ],
+        [
+         6.26e-09,
+         0.0
+        ],
+        [
+         6.750000000000001e-09,
+         0.0
+        ],
+        [
+         6.760000000000001e-09,
+         0.63
+        ],
+        [
+         1.3e-08,
+         0.63
+        ],
+        [
+         1.301e-08,
+         0.0
+        ]
+       ]
+      },
+      {
+       "source": "Va2",
+       "node": "in_a2",
+       "ref": "0",
+       "initial": 0.0,
+       "skew_s": 0.0,
+       "events": [
+        {
+         "t_s": 1e-09,
+         "t_applied_s": 1e-09,
+         "level": 0.63,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 1.75e-09,
+         "t_applied_s": 1.75e-09,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        },
+        {
+         "t_s": 2.7500000000000002e-09,
+         "t_applied_s": 2.7500000000000002e-09,
+         "level": 0.63,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 3.5000000000000003e-09,
+         "t_applied_s": 3.5000000000000003e-09,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        },
+        {
+         "t_s": 4.75e-09,
+         "t_applied_s": 4.75e-09,
+         "level": 0.63,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 5.5000000000000004e-09,
+         "t_applied_s": 5.5000000000000004e-09,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        },
+        {
+         "t_s": 6.500000000000001e-09,
+         "t_applied_s": 6.500000000000001e-09,
+         "level": 0.63,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 7.000000000000001e-09,
+         "t_applied_s": 7.000000000000001e-09,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        },
+        {
+         "t_s": 7.25e-09,
+         "t_applied_s": 7.25e-09,
+         "level": 0.63,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 7.75e-09,
+         "t_applied_s": 7.75e-09,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        },
+        {
+         "t_s": 8e-09,
+         "t_applied_s": 8e-09,
+         "level": 0.63,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 8.75e-09,
+         "t_applied_s": 8.75e-09,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        },
+        {
+         "t_s": 9e-09,
+         "t_applied_s": 9e-09,
+         "level": 0.63,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 9.5e-09,
+         "t_applied_s": 9.5e-09,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        },
+        {
+         "t_s": 1.1750000000000001e-08,
+         "t_applied_s": 1.1750000000000001e-08,
+         "level": 0.63,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 1.525e-08,
+         "t_applied_s": 1.525e-08,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        }
+       ],
+       "pwl": [
+        [
+         0.0,
+         0.0
+        ],
+        [
+         1e-09,
+         0.0
+        ],
+        [
+         1.01e-09,
+         0.63
+        ],
+        [
+         1.75e-09,
+         0.63
+        ],
+        [
+         1.76e-09,
+         0.0
+        ],
+        [
+         2.7500000000000002e-09,
+         0.0
+        ],
+        [
+         2.7600000000000004e-09,
+         0.63
+        ],
+        [
+         3.5000000000000003e-09,
+         0.63
+        ],
+        [
+         3.5100000000000005e-09,
+         0.0
+        ],
+        [
+         4.75e-09,
+         0.0
+        ],
+        [
+         4.76e-09,
+         0.63
+        ],
+        [
+         5.5000000000000004e-09,
+         0.63
+        ],
+        [
+         5.51e-09,
+         0.0
+        ],
+        [
+         6.500000000000001e-09,
+         0.0
+        ],
+        [
+         6.510000000000001e-09,
+         0.63
+        ],
+        [
+         7.000000000000001e-09,
+         0.63
+        ],
+        [
+         7.01e-09,
+         0.0
+        ],
+        [
+         7.25e-09,
+         0.0
+        ],
+        [
+         7.26e-09,
+         0.63
+        ],
+        [
+         7.75e-09,
+         0.63
+        ],
+        [
+         7.76e-09,
+         0.0
+        ],
+        [
+         8e-09,
+         0.0
+        ],
+        [
+         8.01e-09,
+         0.63
+        ],
+        [
+         8.75e-09,
+         0.63
+        ],
+        [
+         8.76e-09,
+         0.0
+        ],
+        [
+         9e-09,
+         0.0
+        ],
+        [
+         9.01e-09,
+         0.63
+        ],
+        [
+         9.5e-09,
+         0.63
+        ],
+        [
+         9.51e-09,
+         0.0
+        ],
+        [
+         1.1750000000000001e-08,
+         0.0
+        ],
+        [
+         1.176e-08,
+         0.63
+        ],
+        [
+         1.525e-08,
+         0.63
+        ],
+        [
+         1.5260000000000002e-08,
+         0.0
+        ]
+       ]
+      },
+      {
+       "source": "Vb1",
+       "node": "in_b1",
+       "ref": "0",
+       "initial": 0.0,
+       "skew_s": 0.0,
+       "events": [
+        {
+         "t_s": 2e-09,
+         "t_applied_s": 2e-09,
+         "level": 0.63,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 3.7500000000000005e-09,
+         "t_applied_s": 3.7500000000000005e-09,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        },
+        {
+         "t_s": 5.750000000000001e-09,
+         "t_applied_s": 5.750000000000001e-09,
+         "level": 0.63,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 7.500000000000001e-09,
+         "t_applied_s": 7.500000000000001e-09,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        },
+        {
+         "t_s": 8.25e-09,
+         "t_applied_s": 8.25e-09,
+         "level": 0.63,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 9.25e-09,
+         "t_applied_s": 9.25e-09,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        },
+        {
+         "t_s": 9.75e-09,
+         "t_applied_s": 9.75e-09,
+         "level": 0.63,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 1e-08,
+         "t_applied_s": 1e-08,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        },
+        {
+         "t_s": 1.05e-08,
+         "t_applied_s": 1.05e-08,
+         "level": 0.63,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 1.125e-08,
+         "t_applied_s": 1.125e-08,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        },
+        {
+         "t_s": 1.2500000000000001e-08,
+         "t_applied_s": 1.2500000000000001e-08,
+         "level": 0.63,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 1.325e-08,
+         "t_applied_s": 1.325e-08,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        },
+        {
+         "t_s": 1.35e-08,
+         "t_applied_s": 1.35e-08,
+         "level": 0.63,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 1.4e-08,
+         "t_applied_s": 1.4e-08,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        },
+        {
+         "t_s": 1.475e-08,
+         "t_applied_s": 1.475e-08,
+         "level": 0.63,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 1.6e-08,
+         "t_applied_s": 1.6e-08,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        }
+       ],
+       "pwl": [
+        [
+         0.0,
+         0.0
+        ],
+        [
+         2e-09,
+         0.0
+        ],
+        [
+         2.0100000000000003e-09,
+         0.63
+        ],
+        [
+         3.7500000000000005e-09,
+         0.63
+        ],
+        [
+         3.76e-09,
+         0.0
+        ],
+        [
+         5.750000000000001e-09,
+         0.0
+        ],
+        [
+         5.760000000000001e-09,
+         0.63
+        ],
+        [
+         7.500000000000001e-09,
+         0.63
+        ],
+        [
+         7.51e-09,
+         0.0
+        ],
+        [
+         8.25e-09,
+         0.0
+        ],
+        [
+         8.26e-09,
+         0.63
+        ],
+        [
+         9.25e-09,
+         0.63
+        ],
+        [
+         9.26e-09,
+         0.0
+        ],
+        [
+         9.75e-09,
+         0.0
+        ],
+        [
+         9.76e-09,
+         0.63
+        ],
+        [
+         1e-08,
+         0.63
+        ],
+        [
+         1.001e-08,
+         0.0
+        ],
+        [
+         1.05e-08,
+         0.0
+        ],
+        [
+         1.051e-08,
+         0.63
+        ],
+        [
+         1.125e-08,
+         0.63
+        ],
+        [
+         1.126e-08,
+         0.0
+        ],
+        [
+         1.2500000000000001e-08,
+         0.0
+        ],
+        [
+         1.2510000000000001e-08,
+         0.63
+        ],
+        [
+         1.325e-08,
+         0.63
+        ],
+        [
+         1.326e-08,
+         0.0
+        ],
+        [
+         1.35e-08,
+         0.0
+        ],
+        [
+         1.351e-08,
+         0.63
+        ],
+        [
+         1.4e-08,
+         0.63
+        ],
+        [
+         1.401e-08,
+         0.0
+        ],
+        [
+         1.475e-08,
+         0.0
+        ],
+        [
+         1.476e-08,
+         0.63
+        ],
+        [
+         1.6e-08,
+         0.63
+        ],
+        [
+         1.6010000000000002e-08,
+         0.0
+        ]
+       ]
+      },
+      {
+       "source": "Vb2",
+       "node": "in_b2",
+       "ref": "0",
+       "initial": 0.0,
+       "skew_s": 0.0,
+       "events": [
+        {
+         "t_s": 4e-09,
+         "t_applied_s": 4e-09,
+         "level": 0.63,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 8.5e-09,
+         "t_applied_s": 8.5e-09,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        },
+        {
+         "t_s": 1.025e-08,
+         "t_applied_s": 1.025e-08,
+         "level": 0.63,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 1.075e-08,
+         "t_applied_s": 1.075e-08,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        },
+        {
+         "t_s": 1.1000000000000001e-08,
+         "t_applied_s": 1.1000000000000001e-08,
+         "level": 0.63,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 1.15e-08,
+         "t_applied_s": 1.15e-08,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        },
+        {
+         "t_s": 1.2e-08,
+         "t_applied_s": 1.2e-08,
+         "level": 0.63,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 1.225e-08,
+         "t_applied_s": 1.225e-08,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        },
+        {
+         "t_s": 1.275e-08,
+         "t_applied_s": 1.275e-08,
+         "level": 0.63,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 1.375e-08,
+         "t_applied_s": 1.375e-08,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        },
+        {
+         "t_s": 1.425e-08,
+         "t_applied_s": 1.425e-08,
+         "level": 0.63,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 1.45e-08,
+         "t_applied_s": 1.45e-08,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        },
+        {
+         "t_s": 1.5000000000000002e-08,
+         "t_applied_s": 1.5000000000000002e-08,
+         "level": 0.63,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 1.5500000000000003e-08,
+         "t_applied_s": 1.5500000000000003e-08,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        },
+        {
+         "t_s": 1.5750000000000002e-08,
+         "t_applied_s": 1.5750000000000002e-08,
+         "level": 0.63,
+         "edge": "rise",
+         "transition_s": 1e-11,
+         "level_spec": {
+          "frac_of": "vsup",
+          "fraction": 1.0
+         }
+        },
+        {
+         "t_s": 1.6250000000000003e-08,
+         "t_applied_s": 1.6250000000000003e-08,
+         "level": 0.0,
+         "edge": "fall",
+         "transition_s": 1e-11
+        }
+       ],
+       "pwl": [
+        [
+         0.0,
+         0.0
+        ],
+        [
+         4e-09,
+         0.0
+        ],
+        [
+         4.01e-09,
+         0.63
+        ],
+        [
+         8.5e-09,
+         0.63
+        ],
+        [
+         8.51e-09,
+         0.0
+        ],
+        [
+         1.025e-08,
+         0.0
+        ],
+        [
+         1.026e-08,
+         0.63
+        ],
+        [
+         1.075e-08,
+         0.63
+        ],
+        [
+         1.076e-08,
+         0.0
+        ],
+        [
+         1.1000000000000001e-08,
+         0.0
+        ],
+        [
+         1.101e-08,
+         0.63
+        ],
+        [
+         1.15e-08,
+         0.63
+        ],
+        [
+         1.151e-08,
+         0.0
+        ],
+        [
+         1.2e-08,
+         0.0
+        ],
+        [
+         1.201e-08,
+         0.63
+        ],
+        [
+         1.225e-08,
+         0.63
+        ],
+        [
+         1.226e-08,
+         0.0
+        ],
+        [
+         1.275e-08,
+         0.0
+        ],
+        [
+         1.276e-08,
+         0.63
+        ],
+        [
+         1.375e-08,
+         0.63
+        ],
+        [
+         1.376e-08,
+         0.0
+        ],
+        [
+         1.425e-08,
+         0.0
+        ],
+        [
+         1.426e-08,
+         0.63
+        ],
+        [
+         1.45e-08,
+         0.63
+        ],
+        [
+         1.451e-08,
+         0.0
+        ],
+        [
+         1.5000000000000002e-08,
+         0.0
+        ],
+        [
+         1.5010000000000003e-08,
+         0.63
+        ],
+        [
+         1.5500000000000003e-08,
+         0.63
+        ],
+        [
+         1.5510000000000005e-08,
+         0.0
+        ],
+        [
+         1.5750000000000002e-08,
+         0.0
+        ],
+        [
+         1.5760000000000003e-08,
+         0.63
+        ],
+        [
+         1.6250000000000003e-08,
+         0.63
+        ],
+        [
+         1.6260000000000005e-08,
+         0.0
+        ]
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "coverage": {
+  "corners_simulated": 3,
+  "measurements_declared": 89,
+  "measurements_with_limits": 89,
+  "unrecognized_limit_keys": [],
+  "schema_version": 1,
+  "known": true,
+  "checked": [
+   "limit:[0,\"tt/0.700V/25C\",\"lvl_000\",\"min\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"lvl_001\",\"min\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"lvl_002\",\"min\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"lvl_003\",\"min\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"lvl_004\",\"min\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"lvl_005\",\"min\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"lvl_006\",\"min\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"lvl_007\",\"min\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"lvl_008\",\"max\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"lvl_009\",\"min\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"lvl_010\",\"max\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"lvl_011\",\"max\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"lvl_012\",\"max\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"lvl_013\",\"min\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"lvl_014\",\"min\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"lvl_015\",\"min\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"lvl_016\",\"max\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"lvl_017\",\"min\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"lvl_018\",\"max\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"lvl_019\",\"max\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"lvl_020\",\"max\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"lvl_021\",\"min\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"lvl_022\",\"min\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"lvl_023\",\"max\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"lvl_024\",\"min\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"lvl_025\",\"max\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"lvl_026\",\"max\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"lvl_027\",\"max\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"lvl_028\",\"max\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"lvl_029\",\"max\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"lvl_030\",\"max\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"lvl_031\",\"max\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"lvl_032\",\"max\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"lvl_033\",\"max\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"lvl_034\",\"max\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"lvl_035\",\"max\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"lvl_036\",\"min\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"lvl_037\",\"min\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"lvl_038\",\"max\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"lvl_039\",\"min\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"lvl_040\",\"max\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"lvl_041\",\"max\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"lvl_042\",\"max\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"lvl_043\",\"max\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"lvl_044\",\"max\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"lvl_045\",\"min\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"lvl_046\",\"min\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"lvl_047\",\"max\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"lvl_048\",\"min\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"lvl_049\",\"max\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"lvl_050\",\"max\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"lvl_051\",\"max\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"lvl_052\",\"max\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"lvl_053\",\"max\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"lvl_054\",\"max\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"lvl_055\",\"min\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"lvl_056\",\"max\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"lvl_057\",\"min\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"lvl_058\",\"max\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"lvl_059\",\"max\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"lvl_060\",\"min\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"lvl_061\",\"min\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"lvl_062\",\"min\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"lvl_063\",\"min\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"lvl_064\",\"min\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"tpd_008\",\"max\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"tpd_009\",\"max\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"tpd_010\",\"max\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"tpd_013\",\"max\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"tpd_016\",\"max\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"tpd_017\",\"max\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"tpd_018\",\"max\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"tpd_021\",\"max\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"tpd_023\",\"max\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"tpd_024\",\"max\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"tpd_025\",\"max\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"tpd_036\",\"max\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"tpd_038\",\"max\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"tpd_039\",\"max\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"tpd_040\",\"max\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"tpd_045\",\"max\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"tpd_047\",\"max\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"tpd_048\",\"max\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"tpd_049\",\"max\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"tpd_055\",\"max\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"tpd_056\",\"max\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"tpd_057\",\"max\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"tpd_058\",\"max\"]",
+   "limit:[0,\"tt/0.700V/25C\",\"tpd_060\",\"max\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"lvl_000\",\"min\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"lvl_001\",\"min\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"lvl_002\",\"min\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"lvl_003\",\"min\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"lvl_004\",\"min\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"lvl_005\",\"min\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"lvl_006\",\"min\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"lvl_007\",\"min\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"lvl_008\",\"max\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"lvl_009\",\"min\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"lvl_010\",\"max\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"lvl_011\",\"max\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"lvl_012\",\"max\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"lvl_013\",\"min\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"lvl_014\",\"min\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"lvl_015\",\"min\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"lvl_016\",\"max\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"lvl_017\",\"min\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"lvl_018\",\"max\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"lvl_019\",\"max\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"lvl_020\",\"max\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"lvl_021\",\"min\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"lvl_022\",\"min\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"lvl_023\",\"max\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"lvl_024\",\"min\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"lvl_025\",\"max\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"lvl_026\",\"max\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"lvl_027\",\"max\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"lvl_028\",\"max\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"lvl_029\",\"max\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"lvl_030\",\"max\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"lvl_031\",\"max\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"lvl_032\",\"max\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"lvl_033\",\"max\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"lvl_034\",\"max\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"lvl_035\",\"max\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"lvl_036\",\"min\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"lvl_037\",\"min\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"lvl_038\",\"max\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"lvl_039\",\"min\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"lvl_040\",\"max\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"lvl_041\",\"max\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"lvl_042\",\"max\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"lvl_043\",\"max\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"lvl_044\",\"max\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"lvl_045\",\"min\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"lvl_046\",\"min\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"lvl_047\",\"max\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"lvl_048\",\"min\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"lvl_049\",\"max\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"lvl_050\",\"max\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"lvl_051\",\"max\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"lvl_052\",\"max\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"lvl_053\",\"max\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"lvl_054\",\"max\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"lvl_055\",\"min\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"lvl_056\",\"max\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"lvl_057\",\"min\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"lvl_058\",\"max\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"lvl_059\",\"max\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"lvl_060\",\"min\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"lvl_061\",\"min\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"lvl_062\",\"min\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"lvl_063\",\"min\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"lvl_064\",\"min\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"tpd_008\",\"max\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"tpd_009\",\"max\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"tpd_010\",\"max\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"tpd_013\",\"max\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"tpd_016\",\"max\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"tpd_017\",\"max\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"tpd_018\",\"max\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"tpd_021\",\"max\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"tpd_023\",\"max\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"tpd_024\",\"max\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"tpd_025\",\"max\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"tpd_036\",\"max\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"tpd_038\",\"max\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"tpd_039\",\"max\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"tpd_040\",\"max\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"tpd_045\",\"max\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"tpd_047\",\"max\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"tpd_048\",\"max\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"tpd_049\",\"max\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"tpd_055\",\"max\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"tpd_056\",\"max\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"tpd_057\",\"max\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"tpd_058\",\"max\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"tpd_060\",\"max\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"lvl_000\",\"min\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"lvl_001\",\"min\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"lvl_002\",\"min\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"lvl_003\",\"min\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"lvl_004\",\"min\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"lvl_005\",\"min\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"lvl_006\",\"min\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"lvl_007\",\"min\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"lvl_008\",\"max\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"lvl_009\",\"min\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"lvl_010\",\"max\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"lvl_011\",\"max\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"lvl_012\",\"max\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"lvl_013\",\"min\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"lvl_014\",\"min\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"lvl_015\",\"min\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"lvl_016\",\"max\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"lvl_017\",\"min\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"lvl_018\",\"max\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"lvl_019\",\"max\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"lvl_020\",\"max\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"lvl_021\",\"min\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"lvl_022\",\"min\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"lvl_023\",\"max\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"lvl_024\",\"min\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"lvl_025\",\"max\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"lvl_026\",\"max\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"lvl_027\",\"max\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"lvl_028\",\"max\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"lvl_029\",\"max\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"lvl_030\",\"max\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"lvl_031\",\"max\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"lvl_032\",\"max\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"lvl_033\",\"max\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"lvl_034\",\"max\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"lvl_035\",\"max\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"lvl_036\",\"min\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"lvl_037\",\"min\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"lvl_038\",\"max\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"lvl_039\",\"min\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"lvl_040\",\"max\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"lvl_041\",\"max\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"lvl_042\",\"max\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"lvl_043\",\"max\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"lvl_044\",\"max\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"lvl_045\",\"min\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"lvl_046\",\"min\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"lvl_047\",\"max\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"lvl_048\",\"min\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"lvl_049\",\"max\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"lvl_050\",\"max\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"lvl_051\",\"max\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"lvl_052\",\"max\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"lvl_053\",\"max\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"lvl_054\",\"max\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"lvl_055\",\"min\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"lvl_056\",\"max\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"lvl_057\",\"min\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"lvl_058\",\"max\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"lvl_059\",\"max\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"lvl_060\",\"min\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"lvl_061\",\"min\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"lvl_062\",\"min\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"lvl_063\",\"min\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"lvl_064\",\"min\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"tpd_008\",\"max\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"tpd_009\",\"max\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"tpd_010\",\"max\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"tpd_013\",\"max\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"tpd_016\",\"max\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"tpd_017\",\"max\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"tpd_018\",\"max\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"tpd_021\",\"max\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"tpd_023\",\"max\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"tpd_024\",\"max\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"tpd_025\",\"max\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"tpd_036\",\"max\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"tpd_038\",\"max\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"tpd_039\",\"max\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"tpd_040\",\"max\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"tpd_045\",\"max\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"tpd_047\",\"max\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"tpd_048\",\"max\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"tpd_049\",\"max\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"tpd_055\",\"max\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"tpd_056\",\"max\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"tpd_057\",\"max\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"tpd_058\",\"max\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"tpd_060\",\"max\"]"
+  ],
+  "skipped": [],
+  "inapplicable": [],
+  "unknown": [],
+  "nothing_checked": false,
+  "nothing_checked_reasons": []
+ },
+ "provenance": {
+  "klt_version": "0.9.2.dev244+g92e2b15a66f2",
+  "klt_git_commit": "92e2b15a66f2b9d6ae69ed1b6cf6ec2e99a1e0e6",
+  "klt_reinstall_spec": "klayout-tools @ git+https://github.com/2AMLogic/klayout-tools@92e2b15a66f2b9d6ae69ed1b6cf6ec2e99a1e0e6",
+  "klayout_version": "0.30.13",
+  "pdk": null,
+  "deck": {
+   "name": "asap7_bsimcmg.lib",
+   "content_hash": "sha256:ed21e96383c01c41e9b00a442c08d7bf9daebed057206788526c1115c1418d4f",
+   "released": false
+  },
+  "input": {
+   "content_hash": "sha256:76c993b1ace80817ee0e45da13f5c887384eee581dd452ddd6323684dfa70981",
+   "role": "netlist"
+  }
+ },
+ "measurements": [
+  {
+   "name": "lvl_000",
+   "unit": "VDD",
+   "limits": {
+    "min": 0.9
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 0.9999975223,
+    "margin": 0.09999752230000003
+   }
+  },
+  {
+   "name": "lvl_001",
+   "unit": "VDD",
+   "limits": {
+    "min": 0.9
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 0.9997248832,
+    "margin": 0.09972488319999995
+   }
+  },
+  {
+   "name": "lvl_002",
+   "unit": "VDD",
+   "limits": {
+    "min": 0.9
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 0.9999998245,
+    "margin": 0.0999998245
+   }
+  },
+  {
+   "name": "lvl_003",
+   "unit": "VDD",
+   "limits": {
+    "min": 0.9
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 0.9998667871,
+    "margin": 0.09986678709999997
+   }
+  },
+  {
+   "name": "lvl_004",
+   "unit": "VDD",
+   "limits": {
+    "min": 0.9
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ff/0.770V/0C",
+    "value": 1.000016797,
+    "margin": 0.10001679699999999
+   }
+  },
+  {
+   "name": "lvl_005",
+   "unit": "VDD",
+   "limits": {
+    "min": 0.9
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 0.9999078334,
+    "margin": 0.09990783339999998
+   }
+  },
+  {
+   "name": "lvl_006",
+   "unit": "VDD",
+   "limits": {
+    "min": 0.9
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 0.9999998253,
+    "margin": 0.09999982529999996
+   }
+  },
+  {
+   "name": "lvl_007",
+   "unit": "VDD",
+   "limits": {
+    "min": 0.9
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 0.9999881432,
+    "margin": 0.09998814319999993
+   }
+  },
+  {
+   "name": "lvl_008",
+   "unit": "VDD",
+   "limits": {
+    "max": 0.1
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 2.344585442e-05,
+    "margin": 0.09997655414558
+   }
+  },
+  {
+   "name": "tpd_008",
+   "unit": "s",
+   "limits": {
+    "max": 9e-11
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 1.919238189e-11,
+    "margin": 7.080761811e-11
+   }
+  },
+  {
+   "name": "lvl_009",
+   "unit": "VDD",
+   "limits": {
+    "min": 0.9
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 0.9999877321,
+    "margin": 0.0999877321
+   }
+  },
+  {
+   "name": "tpd_009",
+   "unit": "s",
+   "limits": {
+    "max": 9e-11
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 2.54034435e-11,
+    "margin": 6.45965565e-11
+   }
+  },
+  {
+   "name": "lvl_010",
+   "unit": "VDD",
+   "limits": {
+    "max": 0.1
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 0.0001138749115,
+    "margin": 0.0998861250885
+   }
+  },
+  {
+   "name": "tpd_010",
+   "unit": "s",
+   "limits": {
+    "max": 9e-11
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 2.012093303e-11,
+    "margin": 6.987906697e-11
+   }
+  },
+  {
+   "name": "lvl_011",
+   "unit": "VDD",
+   "limits": {
+    "max": 0.1
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 8.818613385e-06,
+    "margin": 0.099991181386615
+   }
+  },
+  {
+   "name": "lvl_012",
+   "unit": "VDD",
+   "limits": {
+    "max": 0.1
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 6.088978324e-05,
+    "margin": 0.09993911021676001
+   }
+  },
+  {
+   "name": "lvl_013",
+   "unit": "VDD",
+   "limits": {
+    "min": 0.9
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 0.9999877077,
+    "margin": 0.09998770769999998
+   }
+  },
+  {
+   "name": "tpd_013",
+   "unit": "s",
+   "limits": {
+    "max": 9e-11
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 2.622664812e-11,
+    "margin": 6.377335188e-11
+   }
+  },
+  {
+   "name": "lvl_014",
+   "unit": "VDD",
+   "limits": {
+    "min": 0.9
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 0.9999503626,
+    "margin": 0.09995036260000001
+   }
+  },
+  {
+   "name": "lvl_015",
+   "unit": "VDD",
+   "limits": {
+    "min": 0.9
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 0.9999881322,
+    "margin": 0.09998813220000002
+   }
+  },
+  {
+   "name": "lvl_016",
+   "unit": "VDD",
+   "limits": {
+    "max": 0.1
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 0.0001141007563,
+    "margin": 0.0998858992437
+   }
+  },
+  {
+   "name": "tpd_016",
+   "unit": "s",
+   "limits": {
+    "max": 9e-11
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 2.056074358e-11,
+    "margin": 6.943925642e-11
+   }
+  },
+  {
+   "name": "lvl_017",
+   "unit": "VDD",
+   "limits": {
+    "min": 0.9
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 0.9999865069,
+    "margin": 0.0999865069
+   }
+  },
+  {
+   "name": "tpd_017",
+   "unit": "s",
+   "limits": {
+    "max": 9e-11
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 2.603337767e-11,
+    "margin": 6.396662233e-11
+   }
+  },
+  {
+   "name": "lvl_018",
+   "unit": "VDD",
+   "limits": {
+    "max": 0.1
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 0.0002061434321,
+    "margin": 0.0997938565679
+   }
+  },
+  {
+   "name": "tpd_018",
+   "unit": "s",
+   "limits": {
+    "max": 9e-11
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 2.148881675e-11,
+    "margin": 6.851118325000001e-11
+   }
+  },
+  {
+   "name": "lvl_019",
+   "unit": "VDD",
+   "limits": {
+    "max": 0.1
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 3.452087613e-05,
+    "margin": 0.09996547912387001
+   }
+  },
+  {
+   "name": "lvl_020",
+   "unit": "VDD",
+   "limits": {
+    "max": 0.1
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 8.003893935e-05,
+    "margin": 0.09991996106065
+   }
+  },
+  {
+   "name": "lvl_021",
+   "unit": "VDD",
+   "limits": {
+    "min": 0.9
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 0.9999864117,
+    "margin": 0.0999864117
+   }
+  },
+  {
+   "name": "tpd_021",
+   "unit": "s",
+   "limits": {
+    "max": 9e-11
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 2.689511859e-11,
+    "margin": 6.310488141e-11
+   }
+  },
+  {
+   "name": "lvl_022",
+   "unit": "VDD",
+   "limits": {
+    "min": 0.9
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ff/0.770V/0C",
+    "value": 1.000016099,
+    "margin": 0.10001609899999997
+   }
+  },
+  {
+   "name": "lvl_023",
+   "unit": "VDD",
+   "limits": {
+    "max": 0.1
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 3.28331701e-05,
+    "margin": 0.0999671668299
+   }
+  },
+  {
+   "name": "tpd_023",
+   "unit": "s",
+   "limits": {
+    "max": 9e-11
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 1.5360226e-11,
+    "margin": 7.4639774e-11
+   }
+  },
+  {
+   "name": "lvl_024",
+   "unit": "VDD",
+   "limits": {
+    "min": 0.9
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 0.9999988682,
+    "margin": 0.09999886819999992
+   }
+  },
+  {
+   "name": "tpd_024",
+   "unit": "s",
+   "limits": {
+    "max": 9e-11
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 2.526981569e-11,
+    "margin": 6.473018430999999e-11
+   }
+  },
+  {
+   "name": "lvl_025",
+   "unit": "VDD",
+   "limits": {
+    "max": 0.1
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 8.622143745e-05,
+    "margin": 0.09991377856255
+   }
+  },
+  {
+   "name": "tpd_025",
+   "unit": "s",
+   "limits": {
+    "max": 9e-11
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 1.605238708e-11,
+    "margin": 7.394761292e-11
+   }
+  },
+  {
+   "name": "lvl_026",
+   "unit": "VDD",
+   "limits": {
+    "max": 0.1
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 6.811713134e-06,
+    "margin": 0.099993188286866
+   }
+  },
+  {
+   "name": "lvl_027",
+   "unit": "VDD",
+   "limits": {
+    "max": 0.1
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 1.737030733e-05,
+    "margin": 0.09998262969267001
+   }
+  },
+  {
+   "name": "lvl_028",
+   "unit": "VDD",
+   "limits": {
+    "max": 0.1
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 3.209979583e-05,
+    "margin": 0.09996790020417
+   }
+  },
+  {
+   "name": "lvl_029",
+   "unit": "VDD",
+   "limits": {
+    "max": 0.1
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 8.758035337e-05,
+    "margin": 0.09991241964663
+   }
+  },
+  {
+   "name": "lvl_030",
+   "unit": "VDD",
+   "limits": {
+    "max": 0.1
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 5.527438388e-05,
+    "margin": 0.09994472561612
+   }
+  },
+  {
+   "name": "lvl_031",
+   "unit": "VDD",
+   "limits": {
+    "max": 0.1
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 6.345953375e-05,
+    "margin": 0.09993654046625
+   }
+  },
+  {
+   "name": "lvl_032",
+   "unit": "VDD",
+   "limits": {
+    "max": 0.1
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 1.341933167e-05,
+    "margin": 0.09998658066833001
+   }
+  },
+  {
+   "name": "lvl_033",
+   "unit": "VDD",
+   "limits": {
+    "max": 0.1
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 2.259381716e-05,
+    "margin": 0.09997740618284001
+   }
+  },
+  {
+   "name": "lvl_034",
+   "unit": "VDD",
+   "limits": {
+    "max": 0.1
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 2.344572011e-05,
+    "margin": 0.09997655427989001
+   }
+  },
+  {
+   "name": "lvl_035",
+   "unit": "VDD",
+   "limits": {
+    "max": 0.1
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 4.996872112e-05,
+    "margin": 0.09995003127888001
+   }
+  },
+  {
+   "name": "lvl_036",
+   "unit": "VDD",
+   "limits": {
+    "min": 0.9
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 0.999696212,
+    "margin": 0.099696212
+   }
+  },
+  {
+   "name": "tpd_036",
+   "unit": "s",
+   "limits": {
+    "max": 9e-11
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 2.861125324e-11,
+    "margin": 6.138874676e-11
+   }
+  },
+  {
+   "name": "lvl_037",
+   "unit": "VDD",
+   "limits": {
+    "min": 0.9
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 0.9997328933,
+    "margin": 0.09973289330000001
+   }
+  },
+  {
+   "name": "lvl_038",
+   "unit": "VDD",
+   "limits": {
+    "max": 0.1
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 2.344586831e-05,
+    "margin": 0.09997655413169
+   }
+  },
+  {
+   "name": "tpd_038",
+   "unit": "s",
+   "limits": {
+    "max": 9e-11
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 2.014821494e-11,
+    "margin": 6.985178506e-11
+   }
+  },
+  {
+   "name": "lvl_039",
+   "unit": "VDD",
+   "limits": {
+    "min": 0.9
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 0.9996787004,
+    "margin": 0.09967870039999993
+   }
+  },
+  {
+   "name": "tpd_039",
+   "unit": "s",
+   "limits": {
+    "max": 9e-11
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 2.748539703e-11,
+    "margin": 6.251460297e-11
+   }
+  },
+  {
+   "name": "lvl_040",
+   "unit": "VDD",
+   "limits": {
+    "max": 0.1
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 0.0001143535914,
+    "margin": 0.09988564640860001
+   }
+  },
+  {
+   "name": "tpd_040",
+   "unit": "s",
+   "limits": {
+    "max": 9e-11
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 2.105377902e-11,
+    "margin": 6.894622098e-11
+   }
+  },
+  {
+   "name": "lvl_041",
+   "unit": "VDD",
+   "limits": {
+    "max": 0.1
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 8.805970526e-06,
+    "margin": 0.09999119402947401
+   }
+  },
+  {
+   "name": "lvl_042",
+   "unit": "VDD",
+   "limits": {
+    "max": 0.1
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 2.344572088e-05,
+    "margin": 0.09997655427912
+   }
+  },
+  {
+   "name": "lvl_043",
+   "unit": "VDD",
+   "limits": {
+    "max": 0.1
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 4.982317287e-05,
+    "margin": 0.09995017682713
+   }
+  },
+  {
+   "name": "lvl_044",
+   "unit": "VDD",
+   "limits": {
+    "max": 0.1
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 0.0001026929417,
+    "margin": 0.09989730705830001
+   }
+  },
+  {
+   "name": "lvl_045",
+   "unit": "VDD",
+   "limits": {
+    "min": 0.9
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 0.9996772842,
+    "margin": 0.0996772842
+   }
+  },
+  {
+   "name": "tpd_045",
+   "unit": "s",
+   "limits": {
+    "max": 9e-11
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 2.826425257e-11,
+    "margin": 6.173574743e-11
+   }
+  },
+  {
+   "name": "lvl_046",
+   "unit": "VDD",
+   "limits": {
+    "min": 0.9
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ff/0.770V/0C",
+    "value": 1.000015187,
+    "margin": 0.100015187
+   }
+  },
+  {
+   "name": "lvl_047",
+   "unit": "VDD",
+   "limits": {
+    "max": 0.1
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 9.816256987e-05,
+    "margin": 0.09990183743013001
+   }
+  },
+  {
+   "name": "tpd_047",
+   "unit": "s",
+   "limits": {
+    "max": 9e-11
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 1.745394064e-11,
+    "margin": 7.254605935999999e-11
+   }
+  },
+  {
+   "name": "lvl_048",
+   "unit": "VDD",
+   "limits": {
+    "min": 0.9
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 0.9996868986,
+    "margin": 0.09968689860000002
+   }
+  },
+  {
+   "name": "tpd_048",
+   "unit": "s",
+   "limits": {
+    "max": 9e-11
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 2.939605233e-11,
+    "margin": 6.060394767e-11
+   }
+  },
+  {
+   "name": "lvl_049",
+   "unit": "VDD",
+   "limits": {
+    "max": 0.1
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 2.169535842e-05,
+    "margin": 0.09997830464158
+   }
+  },
+  {
+   "name": "tpd_049",
+   "unit": "s",
+   "limits": {
+    "max": 9e-11
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 1.645729736e-11,
+    "margin": 7.354270264e-11
+   }
+  },
+  {
+   "name": "lvl_050",
+   "unit": "VDD",
+   "limits": {
+    "max": 0.1
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 3.388891658e-05,
+    "margin": 0.09996611108342
+   }
+  },
+  {
+   "name": "lvl_051",
+   "unit": "VDD",
+   "limits": {
+    "max": 0.1
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 8.73913945e-05,
+    "margin": 0.09991260860550001
+   }
+  },
+  {
+   "name": "lvl_052",
+   "unit": "VDD",
+   "limits": {
+    "max": 0.1
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 0.0001344835038,
+    "margin": 0.0998655164962
+   }
+  },
+  {
+   "name": "lvl_053",
+   "unit": "VDD",
+   "limits": {
+    "max": 0.1
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 2.22856518e-05,
+    "margin": 0.0999777143482
+   }
+  },
+  {
+   "name": "lvl_054",
+   "unit": "VDD",
+   "limits": {
+    "max": 0.1
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 3.496105323e-05,
+    "margin": 0.09996503894677
+   }
+  },
+  {
+   "name": "lvl_055",
+   "unit": "VDD",
+   "limits": {
+    "min": 0.9
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 0.999670697,
+    "margin": 0.09967069699999997
+   }
+  },
+  {
+   "name": "tpd_055",
+   "unit": "s",
+   "limits": {
+    "max": 9e-11
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 2.82204001e-11,
+    "margin": 6.17795999e-11
+   }
+  },
+  {
+   "name": "lvl_056",
+   "unit": "VDD",
+   "limits": {
+    "max": 0.1
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 0.0002071274044,
+    "margin": 0.0997928725956
+   }
+  },
+  {
+   "name": "tpd_056",
+   "unit": "s",
+   "limits": {
+    "max": 9e-11
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 2.241768242e-11,
+    "margin": 6.758231758e-11
+   }
+  },
+  {
+   "name": "lvl_057",
+   "unit": "VDD",
+   "limits": {
+    "min": 0.9
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 0.9996693773,
+    "margin": 0.09966937730000003
+   }
+  },
+  {
+   "name": "tpd_057",
+   "unit": "s",
+   "limits": {
+    "max": 9e-11
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 2.893534098e-11,
+    "margin": 6.106465902e-11
+   }
+  },
+  {
+   "name": "lvl_058",
+   "unit": "VDD",
+   "limits": {
+    "max": 0.1
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 0.000114601592,
+    "margin": 0.09988539840800001
+   }
+  },
+  {
+   "name": "tpd_058",
+   "unit": "s",
+   "limits": {
+    "max": 9e-11
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 2.149653503e-11,
+    "margin": 6.850346497e-11
+   }
+  },
+  {
+   "name": "lvl_059",
+   "unit": "VDD",
+   "limits": {
+    "max": 0.1
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 7.537856702e-05,
+    "margin": 0.09992462143298
+   }
+  },
+  {
+   "name": "lvl_060",
+   "unit": "VDD",
+   "limits": {
+    "min": 0.9
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ff/0.770V/0C",
+    "value": 1.000004595,
+    "margin": 0.10000459500000003
+   }
+  },
+  {
+   "name": "tpd_060",
+   "unit": "s",
+   "limits": {
+    "max": 9e-11
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 2.610151448e-11,
+    "margin": 6.389848552e-11
+   }
+  },
+  {
+   "name": "lvl_061",
+   "unit": "VDD",
+   "limits": {
+    "min": 0.9
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 0.9999881387,
+    "margin": 0.0999881387
+   }
+  },
+  {
+   "name": "lvl_062",
+   "unit": "VDD",
+   "limits": {
+    "min": 0.9
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ff/0.770V/0C",
+    "value": 1.000014705,
+    "margin": 0.10001470499999987
+   }
+  },
+  {
+   "name": "lvl_063",
+   "unit": "VDD",
+   "limits": {
+    "min": 0.9
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 0.9999880929,
+    "margin": 0.09998809289999999
+   }
+  },
+  {
+   "name": "lvl_064",
+   "unit": "VDD",
+   "limits": {
+    "min": 0.9
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 0.9999503664,
+    "margin": 0.09995036639999999
+   }
+  }
+ ],
+ "corners": [
+  {
+   "corner_id": "tt/0.700V/25C",
+   "process": "tt",
+   "supply_v": {
+    "vsup": 0.7
+   },
+   "temperature_c": 25,
+   "status": "pass",
+   "runtime_s": 1.019,
+   "peak_rss_bytes": 50450432,
+   "engine_exit_code": 0,
+   "engine_killed_by_signal": null,
+   "measurements": [
+    {
+     "name": "lvl_000",
+     "value": 0.9999997655,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.0999997655
+    },
+    {
+     "name": "lvl_001",
+     "value": 0.9998766526,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.0998766526
+    },
+    {
+     "name": "lvl_002",
+     "value": 0.9999998492,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09999984919999994
+    },
+    {
+     "name": "lvl_003",
+     "value": 0.9999413026,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.0999413026
+    },
+    {
+     "name": "lvl_004",
+     "value": 1.000028184,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.10002818400000002
+    },
+    {
+     "name": "lvl_005",
+     "value": 0.9999613633,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09996136329999994
+    },
+    {
+     "name": "lvl_006",
+     "value": 0.9999998489,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09999984890000002
+    },
+    {
+     "name": "lvl_007",
+     "value": 0.9999992356,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09999923560000001
+    },
+    {
+     "name": "lvl_008",
+     "value": 6.044145767e-07,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09999939558542331
+    },
+    {
+     "name": "tpd_008",
+     "value": 1.310312348e-11,
+     "unit": "s",
+     "status": "pass",
+     "margin": 7.689687652e-11
+    },
+    {
+     "name": "lvl_009",
+     "value": 0.9999992355,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.0999992355
+    },
+    {
+     "name": "tpd_009",
+     "value": 1.650581048e-11,
+     "unit": "s",
+     "status": "pass",
+     "margin": 7.349418952e-11
+    },
+    {
+     "name": "lvl_010",
+     "value": 4.765679911e-05,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09995234320089001
+    },
+    {
+     "name": "tpd_010",
+     "value": 1.383429406e-11,
+     "unit": "s",
+     "status": "pass",
+     "margin": 7.616570594e-11
+    },
+    {
+     "name": "lvl_011",
+     "value": 2.371625762e-07,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.0999997628374238
+    },
+    {
+     "name": "lvl_012",
+     "value": 2.193707265e-05,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09997806292735001
+    },
+    {
+     "name": "lvl_013",
+     "value": 0.9999992355,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.0999992355
+    },
+    {
+     "name": "tpd_013",
+     "value": 1.696684825e-11,
+     "unit": "s",
+     "status": "pass",
+     "margin": 7.303315175e-11
+    },
+    {
+     "name": "lvl_014",
+     "value": 0.9999902851,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09999028509999996
+    },
+    {
+     "name": "lvl_015",
+     "value": 0.9999992319,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09999923189999993
+    },
+    {
+     "name": "lvl_016",
+     "value": 4.772421607e-05,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09995227578393001
+    },
+    {
+     "name": "tpd_016",
+     "value": 1.414267525e-11,
+     "unit": "s",
+     "status": "pass",
+     "margin": 7.585732475e-11
+    },
+    {
+     "name": "lvl_017",
+     "value": 0.9999992319,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09999923189999993
+    },
+    {
+     "name": "tpd_017",
+     "value": 1.674122046e-11,
+     "unit": "s",
+     "status": "pass",
+     "margin": 7.325877954e-11
+    },
+    {
+     "name": "lvl_018",
+     "value": 9.527306786e-05,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09990472693214
+    },
+    {
+     "name": "tpd_018",
+     "value": 1.487050885e-11,
+     "unit": "s",
+     "status": "pass",
+     "margin": 7.512949115e-11
+    },
+    {
+     "name": "lvl_019",
+     "value": 1.591268305e-05,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09998408731695001
+    },
+    {
+     "name": "lvl_020",
+     "value": 3.535490843e-05,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09996464509157
+    },
+    {
+     "name": "lvl_021",
+     "value": 0.9999992316,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09999923160000002
+    },
+    {
+     "name": "tpd_021",
+     "value": 1.720936741e-11,
+     "unit": "s",
+     "status": "pass",
+     "margin": 7.279063259e-11
+    },
+    {
+     "name": "lvl_022",
+     "value": 1.000027075,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.10002707499999997
+    },
+    {
+     "name": "lvl_023",
+     "value": 1.356313423e-05,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09998643686577001
+    },
+    {
+     "name": "tpd_023",
+     "value": 1.071966528e-11,
+     "unit": "s",
+     "status": "pass",
+     "margin": 7.928033472e-11
+    },
+    {
+     "name": "lvl_024",
+     "value": 1.000006326,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.10000632600000003
+    },
+    {
+     "name": "tpd_024",
+     "value": 1.639657814e-11,
+     "unit": "s",
+     "status": "pass",
+     "margin": 7.360342186e-11
+    },
+    {
+     "name": "lvl_025",
+     "value": 4.110839923e-05,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09995889160077001
+    },
+    {
+     "name": "tpd_025",
+     "value": 1.126700794e-11,
+     "unit": "s",
+     "status": "pass",
+     "margin": 7.873299206e-11
+    },
+    {
+     "name": "lvl_026",
+     "value": 3.293484253e-06,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.099996706515747
+    },
+    {
+     "name": "lvl_027",
+     "value": 4.199842065e-06,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09999580015793501
+    },
+    {
+     "name": "lvl_028",
+     "value": 1.622051264e-05,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09998377948736001
+    },
+    {
+     "name": "lvl_029",
+     "value": 4.334836871e-05,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09995665163129
+    },
+    {
+     "name": "lvl_030",
+     "value": 2.08284647e-05,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.0999791715353
+    },
+    {
+     "name": "lvl_031",
+     "value": 3.120085774e-05,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09996879914226
+    },
+    {
+     "name": "lvl_032",
+     "value": 6.883227892e-06,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09999311677210801
+    },
+    {
+     "name": "lvl_033",
+     "value": 7.0872662e-06,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09999291273380001
+    },
+    {
+     "name": "lvl_034",
+     "value": 6.044145756e-07,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09999939558542441
+    },
+    {
+     "name": "lvl_035",
+     "value": 2.14105694e-05,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.0999785894306
+    },
+    {
+     "name": "lvl_036",
+     "value": 0.999875462,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09987546199999997
+    },
+    {
+     "name": "tpd_036",
+     "value": 1.893038831e-11,
+     "unit": "s",
+     "status": "pass",
+     "margin": 7.106961169e-11
+    },
+    {
+     "name": "lvl_037",
+     "value": 0.9998781834,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09987818339999999
+    },
+    {
+     "name": "lvl_038",
+     "value": 6.04414577e-07,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.099999395585423
+    },
+    {
+     "name": "tpd_038",
+     "value": 1.362631193e-11,
+     "unit": "s",
+     "status": "pass",
+     "margin": 7.637368807e-11
+    },
+    {
+     "name": "lvl_039",
+     "value": 0.9998657127,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.0998657127
+    },
+    {
+     "name": "tpd_039",
+     "value": 1.801192073e-11,
+     "unit": "s",
+     "status": "pass",
+     "margin": 7.198807927e-11
+    },
+    {
+     "name": "lvl_040",
+     "value": 4.777033974e-05,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09995222966026
+    },
+    {
+     "name": "tpd_040",
+     "value": 1.434678656e-11,
+     "unit": "s",
+     "status": "pass",
+     "margin": 7.565321344e-11
+    },
+    {
+     "name": "lvl_041",
+     "value": 2.302950495e-07,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.0999997697049505
+    },
+    {
+     "name": "lvl_042",
+     "value": 6.044145757e-07,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09999939558542431
+    },
+    {
+     "name": "lvl_043",
+     "value": 2.134828884e-05,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09997865171116001
+    },
+    {
+     "name": "lvl_044",
+     "value": 4.458255597e-05,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09995541744403001
+    },
+    {
+     "name": "lvl_045",
+     "value": 0.9998654246,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09986542460000003
+    },
+    {
+     "name": "tpd_045",
+     "value": 1.843704484e-11,
+     "unit": "s",
+     "status": "pass",
+     "margin": 7.156295516e-11
+    },
+    {
+     "name": "lvl_046",
+     "value": 1.000026554,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.10002655399999993
+    },
+    {
+     "name": "lvl_047",
+     "value": 4.802237037e-05,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09995197762963001
+    },
+    {
+     "name": "tpd_047",
+     "value": 1.218635673e-11,
+     "unit": "s",
+     "status": "pass",
+     "margin": 7.781364327e-11
+    },
+    {
+     "name": "lvl_048",
+     "value": 0.999872555,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09987255500000003
+    },
+    {
+     "name": "tpd_048",
+     "value": 1.936249915e-11,
+     "unit": "s",
+     "status": "pass",
+     "margin": 7.063750085e-11
+    },
+    {
+     "name": "lvl_049",
+     "value": 6.702021088e-06,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.099993297978912
+    },
+    {
+     "name": "tpd_049",
+     "value": 1.140343167e-11,
+     "unit": "s",
+     "status": "pass",
+     "margin": 7.859656833e-11
+    },
+    {
+     "name": "lvl_050",
+     "value": 1.726763771e-05,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09998273236229001
+    },
+    {
+     "name": "lvl_051",
+     "value": 4.324947139e-05,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09995675052861
+    },
+    {
+     "name": "lvl_052",
+     "value": 6.480950554e-05,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09993519049446001
+    },
+    {
+     "name": "lvl_053",
+     "value": 1.001548638e-05,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09998998451362001
+    },
+    {
+     "name": "lvl_054",
+     "value": 1.023201056e-05,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09998976798944001
+    },
+    {
+     "name": "lvl_055",
+     "value": 0.9998642451,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09986424510000003
+    },
+    {
+     "name": "tpd_055",
+     "value": 1.828331845e-11,
+     "unit": "s",
+     "status": "pass",
+     "margin": 7.171668155e-11
+    },
+    {
+     "name": "lvl_056",
+     "value": 9.550980423e-05,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09990449019577001
+    },
+    {
+     "name": "tpd_056",
+     "value": 1.538004172e-11,
+     "unit": "s",
+     "status": "pass",
+     "margin": 7.461995828e-11
+    },
+    {
+     "name": "lvl_057",
+     "value": 0.9998639871,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.0998639871
+    },
+    {
+     "name": "tpd_057",
+     "value": 1.869386451e-11,
+     "unit": "s",
+     "status": "pass",
+     "margin": 7.130613549e-11
+    },
+    {
+     "name": "lvl_058",
+     "value": 4.785018215e-05,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09995214981785
+    },
+    {
+     "name": "tpd_058",
+     "value": 1.465861385e-11,
+     "unit": "s",
+     "status": "pass",
+     "margin": 7.534138615e-11
+    },
+    {
+     "name": "lvl_059",
+     "value": 3.698101128e-05,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09996301898872001
+    },
+    {
+     "name": "lvl_060",
+     "value": 1.00000886,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.10000886000000009
+    },
+    {
+     "name": "tpd_060",
+     "value": 1.686417419e-11,
+     "unit": "s",
+     "status": "pass",
+     "margin": 7.313582581e-11
+    },
+    {
+     "name": "lvl_061",
+     "value": 0.9999992358,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09999923580000003
+    },
+    {
+     "name": "lvl_062",
+     "value": 1.00002581,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.10002580999999988
+    },
+    {
+     "name": "lvl_063",
+     "value": 0.9999992315,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09999923150000001
+    },
+    {
+     "name": "lvl_064",
+     "value": 0.9999902851,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09999028509999996
+    }
+   ],
+   "diagnostics": [],
+   "artifacts": {
+    "log": null,
+    "raw": null,
+    "waveform": null,
+    "deck": null
+   },
+   "monte_carlo": null
+  },
+  {
+   "corner_id": "ff/0.770V/0C",
+   "process": "ff",
+   "supply_v": {
+    "vsup": 0.77
+   },
+   "temperature_c": 0,
+   "status": "pass",
+   "runtime_s": 1.018,
+   "peak_rss_bytes": 50450432,
+   "engine_exit_code": 0,
+   "engine_killed_by_signal": null,
+   "measurements": [
+    {
+     "name": "lvl_000",
+     "value": 0.9999998085,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09999980850000001
+    },
+    {
+     "name": "lvl_001",
+     "value": 0.9999244908,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09992449079999999
+    },
+    {
+     "name": "lvl_002",
+     "value": 0.9999998293,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09999982929999995
+    },
+    {
+     "name": "lvl_003",
+     "value": 0.9999637632,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.0999637632
+    },
+    {
+     "name": "lvl_004",
+     "value": 1.000016797,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.10001679699999999
+    },
+    {
+     "name": "lvl_005",
+     "value": 0.9999760489,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.0999760489
+    },
+    {
+     "name": "lvl_006",
+     "value": 0.9999998293,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09999982929999995
+    },
+    {
+     "name": "lvl_007",
+     "value": 0.9999995368,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09999953679999996
+    },
+    {
+     "name": "lvl_008",
+     "value": 1.36986611e-07,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.099999863013389
+    },
+    {
+     "name": "tpd_008",
+     "value": 9.716937428e-12,
+     "unit": "s",
+     "status": "pass",
+     "margin": 8.0283062572e-11
+    },
+    {
+     "name": "lvl_009",
+     "value": 0.9999995365,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09999953649999993
+    },
+    {
+     "name": "tpd_009",
+     "value": 1.158968814e-11,
+     "unit": "s",
+     "status": "pass",
+     "margin": 7.841031186e-11
+    },
+    {
+     "name": "lvl_010",
+     "value": 3.079340235e-05,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09996920659765
+    },
+    {
+     "name": "tpd_010",
+     "value": 1.036421622e-11,
+     "unit": "s",
+     "status": "pass",
+     "margin": 7.963578378e-11
+    },
+    {
+     "name": "lvl_011",
+     "value": 6.027452586e-08,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09999993972547415
+    },
+    {
+     "name": "lvl_012",
+     "value": 1.432851865e-05,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09998567148135
+    },
+    {
+     "name": "lvl_013",
+     "value": 0.9999995365,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09999953649999993
+    },
+    {
+     "name": "tpd_013",
+     "value": 1.180264719e-11,
+     "unit": "s",
+     "status": "pass",
+     "margin": 7.819735281e-11
+    },
+    {
+     "name": "lvl_014",
+     "value": 0.9999956731,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09999567310000002
+    },
+    {
+     "name": "lvl_015",
+     "value": 0.9999995332,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09999953319999999
+    },
+    {
+     "name": "lvl_016",
+     "value": 3.082700413e-05,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09996917299587
+    },
+    {
+     "name": "tpd_016",
+     "value": 1.062275631e-11,
+     "unit": "s",
+     "status": "pass",
+     "margin": 7.937724369e-11
+    },
+    {
+     "name": "lvl_017",
+     "value": 0.9999995333,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.0999995333
+    },
+    {
+     "name": "tpd_017",
+     "value": 1.178276344e-11,
+     "unit": "s",
+     "status": "pass",
+     "margin": 7.821723656e-11
+    },
+    {
+     "name": "lvl_018",
+     "value": 6.175784668e-05,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09993824215332
+    },
+    {
+     "name": "tpd_018",
+     "value": 1.12652792e-11,
+     "unit": "s",
+     "status": "pass",
+     "margin": 7.87347208e-11
+    },
+    {
+     "name": "lvl_019",
+     "value": 1.049888113e-05,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09998950111887
+    },
+    {
+     "name": "lvl_020",
+     "value": 2.333197e-05,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09997666803000001
+    },
+    {
+     "name": "lvl_021",
+     "value": 0.9999995333,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.0999995333
+    },
+    {
+     "name": "tpd_021",
+     "value": 1.200234508e-11,
+     "unit": "s",
+     "status": "pass",
+     "margin": 7.799765492e-11
+    },
+    {
+     "name": "lvl_022",
+     "value": 1.000016099,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.10001609899999997
+    },
+    {
+     "name": "lvl_023",
+     "value": 1.043023803e-05,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09998956976197
+    },
+    {
+     "name": "tpd_023",
+     "value": 8.087930955e-12,
+     "unit": "s",
+     "status": "pass",
+     "margin": 8.1912069045e-11
+    },
+    {
+     "name": "lvl_024",
+     "value": 1.000003472,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.10000347199999993
+    },
+    {
+     "name": "tpd_024",
+     "value": 1.14902906e-11,
+     "unit": "s",
+     "status": "pass",
+     "margin": 7.85097094e-11
+    },
+    {
+     "name": "lvl_025",
+     "value": 2.767568648e-05,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09997232431352
+    },
+    {
+     "name": "tpd_025",
+     "value": 8.569745706e-12,
+     "unit": "s",
+     "status": "pass",
+     "margin": 8.1430254294e-11
+    },
+    {
+     "name": "lvl_026",
+     "value": 2.518079466e-06,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09999748192053401
+    },
+    {
+     "name": "lvl_027",
+     "value": 3.051470467e-06,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.099996948529533
+    },
+    {
+     "name": "lvl_028",
+     "value": 1.155339113e-05,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09998844660887
+    },
+    {
+     "name": "lvl_029",
+     "value": 2.929974578e-05,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09997070025422
+    },
+    {
+     "name": "lvl_030",
+     "value": 1.372582342e-05,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09998627417658
+    },
+    {
+     "name": "lvl_031",
+     "value": 2.161103089e-05,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09997838896911
+    },
+    {
+     "name": "lvl_032",
+     "value": 4.924074013e-06,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09999507592598701
+    },
+    {
+     "name": "lvl_033",
+     "value": 4.973823503e-06,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09999502617649701
+    },
+    {
+     "name": "lvl_034",
+     "value": 1.369866109e-07,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.0999998630133891
+    },
+    {
+     "name": "lvl_035",
+     "value": 1.499019526e-05,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09998500980474001
+    },
+    {
+     "name": "lvl_036",
+     "value": 0.9999255472,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09992554720000002
+    },
+    {
+     "name": "tpd_036",
+     "value": 1.360967677e-11,
+     "unit": "s",
+     "status": "pass",
+     "margin": 7.639032322999999e-11
+    },
+    {
+     "name": "lvl_037",
+     "value": 0.9999251063,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09992510629999996
+    },
+    {
+     "name": "lvl_038",
+     "value": 1.369866107e-07,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09999986301338931
+    },
+    {
+     "name": "tpd_038",
+     "value": 9.952854619e-12,
+     "unit": "s",
+     "status": "pass",
+     "margin": 8.0047145381e-11
+    },
+    {
+     "name": "lvl_039",
+     "value": 0.9999202052,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.0999202052
+    },
+    {
+     "name": "tpd_039",
+     "value": 1.278611523e-11,
+     "unit": "s",
+     "status": "pass",
+     "margin": 7.721388477e-11
+    },
+    {
+     "name": "lvl_040",
+     "value": 3.082255223e-05,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09996917744777001
+    },
+    {
+     "name": "tpd_040",
+     "value": 1.059316657e-11,
+     "unit": "s",
+     "status": "pass",
+     "margin": 7.940683343e-11
+    },
+    {
+     "name": "lvl_041",
+     "value": 5.440357864e-08,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09999994559642136
+    },
+    {
+     "name": "lvl_042",
+     "value": 1.369866104e-07,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.0999998630133896
+    },
+    {
+     "name": "lvl_043",
+     "value": 1.494728533e-05,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09998505271467001
+    },
+    {
+     "name": "lvl_044",
+     "value": 2.939228183e-05,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09997060771817
+    },
+    {
+     "name": "lvl_045",
+     "value": 0.9999201336,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09992013359999996
+    },
+    {
+     "name": "tpd_045",
+     "value": 1.297920407e-11,
+     "unit": "s",
+     "status": "pass",
+     "margin": 7.702079593e-11
+    },
+    {
+     "name": "lvl_046",
+     "value": 1.000015187,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.100015187
+    },
+    {
+     "name": "lvl_047",
+     "value": 3.286178595e-05,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09996713821405001
+    },
+    {
+     "name": "tpd_047",
+     "value": 9.200645197e-12,
+     "unit": "s",
+     "status": "pass",
+     "margin": 8.0799354803e-11
+    },
+    {
+     "name": "lvl_048",
+     "value": 0.9999242717,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09992427169999996
+    },
+    {
+     "name": "tpd_048",
+     "value": 1.380784827e-11,
+     "unit": "s",
+     "status": "pass",
+     "margin": 7.619215173e-11
+    },
+    {
+     "name": "lvl_049",
+     "value": 5.065054483e-06,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.099994934945517
+    },
+    {
+     "name": "tpd_049",
+     "value": 8.525855363e-12,
+     "unit": "s",
+     "status": "pass",
+     "margin": 8.1474144637e-11
+    },
+    {
+     "name": "lvl_050",
+     "value": 1.23769981e-05,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.0999876230019
+    },
+    {
+     "name": "lvl_051",
+     "value": 2.923158974e-05,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09997076841026001
+    },
+    {
+     "name": "lvl_052",
+     "value": 4.298738203e-05,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09995701261797
+    },
+    {
+     "name": "lvl_053",
+     "value": 6.671756113e-06,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.099993328243887
+    },
+    {
+     "name": "lvl_054",
+     "value": 6.675869321e-06,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.099993324130679
+    },
+    {
+     "name": "lvl_055",
+     "value": 0.9999194942,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09991949420000001
+    },
+    {
+     "name": "tpd_055",
+     "value": 1.301068587e-11,
+     "unit": "s",
+     "status": "pass",
+     "margin": 7.698931413e-11
+    },
+    {
+     "name": "lvl_056",
+     "value": 6.181921461e-05,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09993818078539
+    },
+    {
+     "name": "tpd_056",
+     "value": 1.149013549e-11,
+     "unit": "s",
+     "status": "pass",
+     "margin": 7.850986451e-11
+    },
+    {
+     "name": "lvl_057",
+     "value": 0.9999194335,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09991943349999999
+    },
+    {
+     "name": "tpd_057",
+     "value": 1.319141807e-11,
+     "unit": "s",
+     "status": "pass",
+     "margin": 7.680858193e-11
+    },
+    {
+     "name": "lvl_058",
+     "value": 3.08628841e-05,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09996913711590001
+    },
+    {
+     "name": "tpd_058",
+     "value": 1.085408186e-11,
+     "unit": "s",
+     "status": "pass",
+     "margin": 7.914591814e-11
+    },
+    {
+     "name": "lvl_059",
+     "value": 2.53530087e-05,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.0999746469913
+    },
+    {
+     "name": "lvl_060",
+     "value": 1.000004595,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.10000459500000003
+    },
+    {
+     "name": "tpd_060",
+     "value": 1.171132508e-11,
+     "unit": "s",
+     "status": "pass",
+     "margin": 7.828867492e-11
+    },
+    {
+     "name": "lvl_061",
+     "value": 0.9999995365,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09999953649999993
+    },
+    {
+     "name": "lvl_062",
+     "value": 1.000014705,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.10001470499999987
+    },
+    {
+     "name": "lvl_063",
+     "value": 0.9999995331,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09999953309999998
+    },
+    {
+     "name": "lvl_064",
+     "value": 0.9999956735,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09999567349999994
+    }
+   ],
+   "diagnostics": [],
+   "artifacts": {
+    "log": null,
+    "raw": null,
+    "waveform": null,
+    "deck": null
+   },
+   "monte_carlo": null
+  },
+  {
+   "corner_id": "ss/0.630V/100C",
+   "process": "ss",
+   "supply_v": {
+    "vsup": 0.63
+   },
+   "temperature_c": 100,
+   "status": "pass",
+   "runtime_s": 1.018,
+   "peak_rss_bytes": 50450432,
+   "engine_exit_code": 0,
+   "engine_killed_by_signal": null,
+   "measurements": [
+    {
+     "name": "lvl_000",
+     "value": 0.9999975223,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09999752230000003
+    },
+    {
+     "name": "lvl_001",
+     "value": 0.9997248832,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09972488319999995
+    },
+    {
+     "name": "lvl_002",
+     "value": 0.9999998245,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.0999998245
+    },
+    {
+     "name": "lvl_003",
+     "value": 0.9998667871,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09986678709999997
+    },
+    {
+     "name": "lvl_004",
+     "value": 1.00006733,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.10006733000000001
+    },
+    {
+     "name": "lvl_005",
+     "value": 0.9999078334,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09990783339999998
+    },
+    {
+     "name": "lvl_006",
+     "value": 0.9999998253,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09999982529999996
+    },
+    {
+     "name": "lvl_007",
+     "value": 0.9999881432,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09998814319999993
+    },
+    {
+     "name": "lvl_008",
+     "value": 2.344585442e-05,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09997655414558
+    },
+    {
+     "name": "tpd_008",
+     "value": 1.919238189e-11,
+     "unit": "s",
+     "status": "pass",
+     "margin": 7.080761811e-11
+    },
+    {
+     "name": "lvl_009",
+     "value": 0.9999877321,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.0999877321
+    },
+    {
+     "name": "tpd_009",
+     "value": 2.54034435e-11,
+     "unit": "s",
+     "status": "pass",
+     "margin": 6.45965565e-11
+    },
+    {
+     "name": "lvl_010",
+     "value": 0.0001138749115,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.0998861250885
+    },
+    {
+     "name": "tpd_010",
+     "value": 2.012093303e-11,
+     "unit": "s",
+     "status": "pass",
+     "margin": 6.987906697e-11
+    },
+    {
+     "name": "lvl_011",
+     "value": 8.818613385e-06,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.099991181386615
+    },
+    {
+     "name": "lvl_012",
+     "value": 6.088978324e-05,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09993911021676001
+    },
+    {
+     "name": "lvl_013",
+     "value": 0.9999877077,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09998770769999998
+    },
+    {
+     "name": "tpd_013",
+     "value": 2.622664812e-11,
+     "unit": "s",
+     "status": "pass",
+     "margin": 6.377335188e-11
+    },
+    {
+     "name": "lvl_014",
+     "value": 0.9999503626,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09995036260000001
+    },
+    {
+     "name": "lvl_015",
+     "value": 0.9999881322,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09998813220000002
+    },
+    {
+     "name": "lvl_016",
+     "value": 0.0001141007563,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.0998858992437
+    },
+    {
+     "name": "tpd_016",
+     "value": 2.056074358e-11,
+     "unit": "s",
+     "status": "pass",
+     "margin": 6.943925642e-11
+    },
+    {
+     "name": "lvl_017",
+     "value": 0.9999865069,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.0999865069
+    },
+    {
+     "name": "tpd_017",
+     "value": 2.603337767e-11,
+     "unit": "s",
+     "status": "pass",
+     "margin": 6.396662233e-11
+    },
+    {
+     "name": "lvl_018",
+     "value": 0.0002061434321,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.0997938565679
+    },
+    {
+     "name": "tpd_018",
+     "value": 2.148881675e-11,
+     "unit": "s",
+     "status": "pass",
+     "margin": 6.851118325000001e-11
+    },
+    {
+     "name": "lvl_019",
+     "value": 3.452087613e-05,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09996547912387001
+    },
+    {
+     "name": "lvl_020",
+     "value": 8.003893935e-05,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09991996106065
+    },
+    {
+     "name": "lvl_021",
+     "value": 0.9999864117,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.0999864117
+    },
+    {
+     "name": "tpd_021",
+     "value": 2.689511859e-11,
+     "unit": "s",
+     "status": "pass",
+     "margin": 6.310488141e-11
+    },
+    {
+     "name": "lvl_022",
+     "value": 1.000049872,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.10004987199999993
+    },
+    {
+     "name": "lvl_023",
+     "value": 3.28331701e-05,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.0999671668299
+    },
+    {
+     "name": "tpd_023",
+     "value": 1.5360226e-11,
+     "unit": "s",
+     "status": "pass",
+     "margin": 7.4639774e-11
+    },
+    {
+     "name": "lvl_024",
+     "value": 0.9999988682,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09999886819999992
+    },
+    {
+     "name": "tpd_024",
+     "value": 2.526981569e-11,
+     "unit": "s",
+     "status": "pass",
+     "margin": 6.473018430999999e-11
+    },
+    {
+     "name": "lvl_025",
+     "value": 8.622143745e-05,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09991377856255
+    },
+    {
+     "name": "tpd_025",
+     "value": 1.605238708e-11,
+     "unit": "s",
+     "status": "pass",
+     "margin": 7.394761292e-11
+    },
+    {
+     "name": "lvl_026",
+     "value": 6.811713134e-06,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.099993188286866
+    },
+    {
+     "name": "lvl_027",
+     "value": 1.737030733e-05,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09998262969267001
+    },
+    {
+     "name": "lvl_028",
+     "value": 3.209979583e-05,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09996790020417
+    },
+    {
+     "name": "lvl_029",
+     "value": 8.758035337e-05,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09991241964663
+    },
+    {
+     "name": "lvl_030",
+     "value": 5.527438388e-05,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09994472561612
+    },
+    {
+     "name": "lvl_031",
+     "value": 6.345953375e-05,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09993654046625
+    },
+    {
+     "name": "lvl_032",
+     "value": 1.341933167e-05,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09998658066833001
+    },
+    {
+     "name": "lvl_033",
+     "value": 2.259381716e-05,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09997740618284001
+    },
+    {
+     "name": "lvl_034",
+     "value": 2.344572011e-05,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09997655427989001
+    },
+    {
+     "name": "lvl_035",
+     "value": 4.996872112e-05,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09995003127888001
+    },
+    {
+     "name": "lvl_036",
+     "value": 0.999696212,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.099696212
+    },
+    {
+     "name": "tpd_036",
+     "value": 2.861125324e-11,
+     "unit": "s",
+     "status": "pass",
+     "margin": 6.138874676e-11
+    },
+    {
+     "name": "lvl_037",
+     "value": 0.9997328933,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09973289330000001
+    },
+    {
+     "name": "lvl_038",
+     "value": 2.344586831e-05,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09997655413169
+    },
+    {
+     "name": "tpd_038",
+     "value": 2.014821494e-11,
+     "unit": "s",
+     "status": "pass",
+     "margin": 6.985178506e-11
+    },
+    {
+     "name": "lvl_039",
+     "value": 0.9996787004,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09967870039999993
+    },
+    {
+     "name": "tpd_039",
+     "value": 2.748539703e-11,
+     "unit": "s",
+     "status": "pass",
+     "margin": 6.251460297e-11
+    },
+    {
+     "name": "lvl_040",
+     "value": 0.0001143535914,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09988564640860001
+    },
+    {
+     "name": "tpd_040",
+     "value": 2.105377902e-11,
+     "unit": "s",
+     "status": "pass",
+     "margin": 6.894622098e-11
+    },
+    {
+     "name": "lvl_041",
+     "value": 8.805970526e-06,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09999119402947401
+    },
+    {
+     "name": "lvl_042",
+     "value": 2.344572088e-05,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09997655427912
+    },
+    {
+     "name": "lvl_043",
+     "value": 4.982317287e-05,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09995017682713
+    },
+    {
+     "name": "lvl_044",
+     "value": 0.0001026929417,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09989730705830001
+    },
+    {
+     "name": "lvl_045",
+     "value": 0.9996772842,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.0996772842
+    },
+    {
+     "name": "tpd_045",
+     "value": 2.826425257e-11,
+     "unit": "s",
+     "status": "pass",
+     "margin": 6.173574743e-11
+    },
+    {
+     "name": "lvl_046",
+     "value": 1.000063759,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.10006375900000009
+    },
+    {
+     "name": "lvl_047",
+     "value": 9.816256987e-05,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09990183743013001
+    },
+    {
+     "name": "tpd_047",
+     "value": 1.745394064e-11,
+     "unit": "s",
+     "status": "pass",
+     "margin": 7.254605935999999e-11
+    },
+    {
+     "name": "lvl_048",
+     "value": 0.9996868986,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09968689860000002
+    },
+    {
+     "name": "tpd_048",
+     "value": 2.939605233e-11,
+     "unit": "s",
+     "status": "pass",
+     "margin": 6.060394767e-11
+    },
+    {
+     "name": "lvl_049",
+     "value": 2.169535842e-05,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09997830464158
+    },
+    {
+     "name": "tpd_049",
+     "value": 1.645729736e-11,
+     "unit": "s",
+     "status": "pass",
+     "margin": 7.354270264e-11
+    },
+    {
+     "name": "lvl_050",
+     "value": 3.388891658e-05,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09996611108342
+    },
+    {
+     "name": "lvl_051",
+     "value": 8.73913945e-05,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09991260860550001
+    },
+    {
+     "name": "lvl_052",
+     "value": 0.0001344835038,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.0998655164962
+    },
+    {
+     "name": "lvl_053",
+     "value": 2.22856518e-05,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.0999777143482
+    },
+    {
+     "name": "lvl_054",
+     "value": 3.496105323e-05,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09996503894677
+    },
+    {
+     "name": "lvl_055",
+     "value": 0.999670697,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09967069699999997
+    },
+    {
+     "name": "tpd_055",
+     "value": 2.82204001e-11,
+     "unit": "s",
+     "status": "pass",
+     "margin": 6.17795999e-11
+    },
+    {
+     "name": "lvl_056",
+     "value": 0.0002071274044,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.0997928725956
+    },
+    {
+     "name": "tpd_056",
+     "value": 2.241768242e-11,
+     "unit": "s",
+     "status": "pass",
+     "margin": 6.758231758e-11
+    },
+    {
+     "name": "lvl_057",
+     "value": 0.9996693773,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09966937730000003
+    },
+    {
+     "name": "tpd_057",
+     "value": 2.893534098e-11,
+     "unit": "s",
+     "status": "pass",
+     "margin": 6.106465902e-11
+    },
+    {
+     "name": "lvl_058",
+     "value": 0.000114601592,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09988539840800001
+    },
+    {
+     "name": "tpd_058",
+     "value": 2.149653503e-11,
+     "unit": "s",
+     "status": "pass",
+     "margin": 6.850346497e-11
+    },
+    {
+     "name": "lvl_059",
+     "value": 7.537856702e-05,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09992462143298
+    },
+    {
+     "name": "lvl_060",
+     "value": 1.00000664,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.10000664000000004
+    },
+    {
+     "name": "tpd_060",
+     "value": 2.610151448e-11,
+     "unit": "s",
+     "status": "pass",
+     "margin": 6.389848552e-11
+    },
+    {
+     "name": "lvl_061",
+     "value": 0.9999881387,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.0999881387
+    },
+    {
+     "name": "lvl_062",
+     "value": 1.000048995,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.10004899499999997
+    },
+    {
+     "name": "lvl_063",
+     "value": 0.9999880929,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09998809289999999
+    },
+    {
+     "name": "lvl_064",
+     "value": 0.9999503664,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09995036639999999
+    }
+   ],
+   "diagnostics": [],
+   "artifacts": {
+    "log": null,
+    "raw": null,
+    "waveform": null,
+    "deck": null
+   },
+   "monte_carlo": null
+  }
+ ]
+}

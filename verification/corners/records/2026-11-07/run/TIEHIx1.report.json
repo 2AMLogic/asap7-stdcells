@@ -1,0 +1,324 @@
+{
+ "schema_version": 3,
+ "netlist": {
+  "path": null,
+  "scope": "external"
+ },
+ "status": "pass",
+ "corner_count": 3,
+ "passed": 3,
+ "failed": 0,
+ "errored": 0,
+ "inconclusive": 0,
+ "diagnostic_counts": {
+  "by_code": {},
+  "by_severity": {},
+  "corners_with_diagnostics": 0
+ },
+ "metrics": {
+  "sim__corner__count": 3,
+  "sim__corner__passed_count": 3,
+  "sim__corner__failed_count": 0,
+  "sim__corner__errored_count": 0,
+  "sim__corner__inconclusive_count": 0
+ },
+ "environment": {
+  "engine": "ngspice",
+  "engine_version": "46",
+  "ngspice_binary": "ngspice",
+  "engine_build": {
+   "version_banner": "******\n** ngspice-46 : Circuit level simulation program\n** Compiled with KLU Direct Linear Solver\n** The U. C. Berkeley CAD Group\n** Copyright 1985-1994, Regents of the University of California.\n** Copyright 2001-2025, The ngspice team.\n** Please get your ngspice manual from https://ngspice.sourceforge.io/docs.html\n** Please file your bug-reports at http://ngspice.sourceforge.net/bugrep.html\n** Creation Date: Thu Oct  1 23:51:59 UTC 2026\n******",
+   "binary_sha256": "dc859418bedd0478ff439a2d3e2e09f4386a7f4d5e3f17671953e101a000cc60",
+   "probe": "ok",
+   "reason": null
+  },
+  "models_lib": {
+   "path": null,
+   "scope": "external"
+  },
+  "models_lib_sha256": "ed21e96383c01c41e9b00a442c08d7bf9daebed057206788526c1115c1418d4f",
+  "models_lib_sha256_scope": "client",
+  "netlist_sha256": "030c5db0b38e84bcbfe33ea2615f2fdc356938ff8615e5b728d086e9b96486c4",
+  "netlist_closure": [
+   {
+    "path": null,
+    "scope": "external",
+    "sha256": "030c5db0b38e84bcbfe33ea2615f2fdc356938ff8615e5b728d086e9b96486c4"
+   },
+   {
+    "path": null,
+    "scope": "external",
+    "sha256": "0e479a21510fb25c626b80ac936925fda6e7cbd6cec2ba05e272b67b279610ea"
+   }
+  ],
+  "netlist_identity": "sha256:9b22d3c5350cca884a4c623a1f22cbf4bdbb45157eac0db19eabe1ee8850d248",
+  "osdi_preload": [
+   {
+    "name": "bsimcmg.osdi",
+    "path": null,
+    "scope": "external",
+    "sha256": "4e755d14e901a84600124be5cb73e36302117b6cfc694e52ffc17640945cd9e3"
+   }
+  ],
+  "staged_model_inputs": [
+   {
+    "name": "asap7_bsimcmg.lib",
+    "field": "models.lib",
+    "kind": "library",
+    "sha256": "ed21e96383c01c41e9b00a442c08d7bf9daebed057206788526c1115c1418d4f",
+    "rewritten": false,
+    "source_sha256": "ed21e96383c01c41e9b00a442c08d7bf9daebed057206788526c1115c1418d4f"
+   },
+   {
+    "name": "bsimcmg.osdi",
+    "field": "options.osdi_preload[0]",
+    "kind": "osdi",
+    "sha256": "4e755d14e901a84600124be5cb73e36302117b6cfc694e52ffc17640945cd9e3",
+    "rewritten": false,
+    "source_sha256": "4e755d14e901a84600124be5cb73e36302117b6cfc694e52ffc17640945cd9e3"
+   }
+  ],
+  "remote": {
+   "provider": "aws-batch-fleet",
+   "job_id": "klt-sim-1ada85a45d57",
+   "region": "us-east-1",
+   "instance_id": "i-01a137852d1166643",
+   "instance_type": "c7i.4xlarge",
+   "availability_zone": "us-east-1c",
+   "ami_id": "ami-095c25ae241a4d360",
+   "lifecycle": "spot",
+   "spot": true,
+   "state": "done",
+   "exit_code": "0",
+   "concurrency": "1",
+   "physical_cores": "8",
+   "elapsed_seconds": 7,
+   "client_submitted_at": "2026-11-07T22:41:25.922829Z",
+   "client_launched_at": "2026-11-07T22:41:45.151387Z",
+   "client_status_terminal_at": "2026-11-07T22:42:16.525671Z",
+   "client_collected_at": "2026-11-07T22:42:17.283982Z",
+   "runner_klt_version": "0.9.0",
+   "client_klt_version": "0.9.2.dev244+g92e2b15a66f2",
+   "runner_compatibility": "match",
+   "runner_request_features": {
+    "required": [
+     "options.ngspice_init",
+     "options.osdi_preload",
+     "options.stage_model_inputs"
+    ],
+    "missing": [],
+    "status": "supported"
+   },
+   "worker_environment": {
+    "capture": "ok",
+    "simulator": {
+     "requested_binary": "ngspice",
+     "binary_source": "PATH",
+     "selected_path": "ngspice",
+     "version_banner": "******\n** ngspice-46 : Circuit level simulation program\n** Compiled with KLU Direct Linear Solver\n** The U. C. Berkeley CAD Group\n** Copyright 1985-1994, Regents of the University of California.\n** Copyright 2001-2025, The ngspice team.\n** Please get your ngspice manual from https://ngspice.sourceforge.io/docs.html\n** Please file your bug-reports at http://ngspice.sourceforge.net/bugrep.html\n** Creation Date: Thu Oct  1 23:51:59 UTC 2026\n******\n",
+     "version_probe": "ok"
+    },
+    "pdk": {
+     "variant": null,
+     "root": "/opt/pdk",
+     "stamp_scheme": null,
+     "stamp_sha256": null,
+     "stamp_text": null,
+     "models_staged": true,
+     "stamp_scope": "image"
+    },
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8488C",
+    "omp_num_threads": null,
+    "image_manifest": null,
+    "model_inputs": [
+     {
+      "name": "asap7_bsimcmg.lib",
+      "sha256": "ed21e96383c01c41e9b00a442c08d7bf9daebed057206788526c1115c1418d4f"
+     },
+     {
+      "name": "bsimcmg.osdi",
+      "sha256": "4e755d14e901a84600124be5cb73e36302117b6cfc694e52ffc17640945cd9e3"
+     }
+    ],
+    "diagnostics": [
+     "pdk root or variant unknown on worker"
+    ],
+    "pdk_stamp_comparison": {
+     "basis": "staged_model_inputs",
+     "status": "match"
+    },
+    "engine_build_comparison": {
+     "status": "match"
+    }
+   },
+   "runner_model_inputs": [
+    {
+     "name": "asap7_bsimcmg.lib",
+     "sha256": "ed21e96383c01c41e9b00a442c08d7bf9daebed057206788526c1115c1418d4f"
+    },
+    {
+     "name": "bsimcmg.osdi",
+     "sha256": "4e755d14e901a84600124be5cb73e36302117b6cfc694e52ffc17640945cd9e3"
+    }
+   ],
+   "job_ceiling": {
+    "basis": "conservative_serial_bound",
+    "unit_count": 3,
+    "per_unit_timeout_s": 600,
+    "overhead_s": 120.0,
+    "job_bound_s": 1920.0,
+    "max_job_seconds": 3600.0,
+    "max_job_seconds_source": "fleet_config",
+    "exceeds_ceiling": false,
+    "check": "warn",
+    "max_units_per_job": 5,
+    "recommended_hosts": 1
+   }
+  },
+  "engine_host": "worker",
+  "client_ngspice_binary": "ngspice",
+  "backend": {
+   "resolved": "batch",
+   "source": "flag",
+   "requested": "batch"
+  }
+ },
+ "coverage": {
+  "corners_simulated": 3,
+  "measurements_declared": 1,
+  "measurements_with_limits": 1,
+  "unrecognized_limit_keys": [],
+  "schema_version": 1,
+  "known": true,
+  "checked": [
+   "limit:[0,\"tt/0.700V/25C\",\"lvl_000\",\"min\"]",
+   "limit:[1,\"ff/0.770V/0C\",\"lvl_000\",\"min\"]",
+   "limit:[2,\"ss/0.630V/100C\",\"lvl_000\",\"min\"]"
+  ],
+  "skipped": [],
+  "inapplicable": [],
+  "unknown": [],
+  "nothing_checked": false,
+  "nothing_checked_reasons": []
+ },
+ "provenance": {
+  "klt_version": "0.9.2.dev244+g92e2b15a66f2",
+  "klt_git_commit": "92e2b15a66f2b9d6ae69ed1b6cf6ec2e99a1e0e6",
+  "klt_reinstall_spec": "klayout-tools @ git+https://github.com/2AMLogic/klayout-tools@92e2b15a66f2b9d6ae69ed1b6cf6ec2e99a1e0e6",
+  "klayout_version": "0.30.13",
+  "pdk": null,
+  "deck": {
+   "name": "asap7_bsimcmg.lib",
+   "content_hash": "sha256:ed21e96383c01c41e9b00a442c08d7bf9daebed057206788526c1115c1418d4f",
+   "released": false
+  },
+  "input": {
+   "content_hash": "sha256:030c5db0b38e84bcbfe33ea2615f2fdc356938ff8615e5b728d086e9b96486c4",
+   "role": "netlist"
+  }
+ },
+ "measurements": [
+  {
+   "name": "lvl_000",
+   "unit": "VDD",
+   "limits": {
+    "min": 0.9
+   },
+   "status": "pass",
+   "worst_case": {
+    "corner_id": "ss/0.630V/100C",
+    "value": 0.999999996,
+    "margin": 0.09999999599999998
+   }
+  }
+ ],
+ "corners": [
+  {
+   "corner_id": "tt/0.700V/25C",
+   "process": "tt",
+   "supply_v": {
+    "vsup": 0.7
+   },
+   "temperature_c": 25,
+   "status": "pass",
+   "runtime_s": 0.118,
+   "engine_exit_code": 0,
+   "engine_killed_by_signal": null,
+   "measurements": [
+    {
+     "name": "lvl_000",
+     "value": 0.9999999991,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09999999910000001
+    }
+   ],
+   "diagnostics": [],
+   "artifacts": {
+    "log": null,
+    "raw": null,
+    "waveform": null,
+    "deck": null
+   },
+   "monte_carlo": null
+  },
+  {
+   "corner_id": "ff/0.770V/0C",
+   "process": "ff",
+   "supply_v": {
+    "vsup": 0.77
+   },
+   "temperature_c": 0,
+   "status": "pass",
+   "runtime_s": 0.116,
+   "engine_exit_code": 0,
+   "engine_killed_by_signal": null,
+   "measurements": [
+    {
+     "name": "lvl_000",
+     "value": 0.9999999997,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09999999969999995
+    }
+   ],
+   "diagnostics": [],
+   "artifacts": {
+    "log": null,
+    "raw": null,
+    "waveform": null,
+    "deck": null
+   },
+   "monte_carlo": null
+  },
+  {
+   "corner_id": "ss/0.630V/100C",
+   "process": "ss",
+   "supply_v": {
+    "vsup": 0.63
+   },
+   "temperature_c": 100,
+   "status": "pass",
+   "runtime_s": 0.116,
+   "engine_exit_code": 0,
+   "engine_killed_by_signal": null,
+   "measurements": [
+    {
+     "name": "lvl_000",
+     "value": 0.999999996,
+     "unit": "VDD",
+     "status": "pass",
+     "margin": 0.09999999599999998
+    }
+   ],
+   "diagnostics": [],
+   "artifacts": {
+    "log": null,
+    "raw": null,
+    "waveform": null,
+    "deck": null
+   },
+   "monte_carlo": null
+  }
+ ]
+}
