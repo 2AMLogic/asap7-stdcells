@@ -5,6 +5,8 @@ triage role. Newest first.
 
 ### 2026-11-07
 
+- **PR #87**: feat(verification): klt pex per drawn cell at TT, cited for T1 item 7
+- **Issue #84** (closed): T1 item 7 (post-layout): klt pex per drawn cell at TT with body-bias disclosure, bound into the manifest
 - **PR #79**: Bump Repo Skills 0.25.1 -> 0.25.10
 
 ### 2026-11-06
