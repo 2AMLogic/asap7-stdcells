@@ -27,10 +27,25 @@ the slowest analogue), so the margin is a pass/fail screen against a fixed
 number, not a speed claim. The delays are pre-layout (devices only, no wire
 capacitance), at one load (1.44 fF) and one input transition (10 ps).
 
-**Negative control** (`INVx1_negctl`: nmos gate cut from the input): `lvl_001`
-(A = 1, Y must be low) fails at all three corners (Y/VDD 0.26 at TT against a
-0.10 limit, as in the local pre-check), so the sweep does fail when it should. The
-control still meets the delay budget; it is the level check that flags it.
+**Negative controls.** There are two, one per kind of limit.
+
+- `INVx1_negctl` (nmos gate cut from the input) flags the level check: `lvl_001`
+  (A = 1, Y must be low) fails at all three corners (Y/VDD 0.26 at TT against a
+  0.10 limit, as in the local pre-check). The output does fall, slowly, through
+  leakage and gmin on the floating gate node, but not far enough by the end of the
+  250 ps step. This control still meets the delay budget (worst arc 48/24/78 ps at
+  TT/FF/SS), so it says nothing about the `tpd_*` limit.
+- `INVx1_slow` (`SLOW_STAGES` = 43 drawn INVx1 in series between A and Y) flags the
+  timing check: it is still an inverter, so every `lvl_*` passes at every corner,
+  while `tpd_*` fails the 90 ps limit at all three (worst arc 103/133/191 ps at
+  FF/TT/SS). It is a chain, not a slow edge, because a single-pole slow cell
+  cannot be over 90 ps and also settle inside one step (see `make_requests.py`).
+  Chain length was chosen with local single-corner probes before the fleet run;
+  the record is `records/2026-11-08/run/` (INVx1 family only, re-run with
+  `CELLS=INVx1 run.sh`; `records/2026-11-07/` is unchanged and has no timing
+  control). `summarize.py` reports it as `timing_control` / `timing_finding`:
+  flagged only when a `tpd_*` fails with every level intact, an unflagged finding
+  otherwise (no delay over budget, a level failed, or no control).
 
 ## Caveats
 

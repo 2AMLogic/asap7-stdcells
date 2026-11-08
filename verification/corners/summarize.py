@@ -14,7 +14,10 @@ The verdicts are klt's own (measurement limits in each request); this script
 only reduces them. Margin is `budget - worst tpd`, the budget being the
 `limits.max` the request put on every `tpd_*` measurement (decision 0011).
 `finding` is set when the negative control is not flagged: a sweep in which the
-control passes proves nothing.
+control passes proves nothing. The timing control (`INVx1_slow`, a chain of the
+drawn INVx1) is the same check for the `tpd_*` limit: it is flagged when at
+least one corner fails a `tpd_*` and no corner fails a `lvl_*`; otherwise
+`timing_finding` says why (no delay over budget, a level failed, or no control).
 
 usage: summarize.py <klt-sim-out-dir> <records-dir>
 """
@@ -25,6 +28,26 @@ from pathlib import Path
 SCHEMA = "asap7-stdcells.corners/1"
 NEGCTL = "INVx1_negctl"
 NEGCTL_EXPECTED_FAIL = "lvl_001"
+SLOW = "INVx1_slow"
+
+
+def timing_control(cells):
+    """Verdict on the timing control: a delay failure with the levels intact."""
+    sc = cells.get(SLOW)
+    if sc is None:
+        return {"cell": SLOW, "present": False, "flagged": False,
+                "corners_over_budget": [], "levels_intact": None,
+                "finding": "timing control missing: the tpd_* limit was never shown to fire"}
+    over = [r["corner"] for r in sc["corners"] if r["arcs_over_budget"]]
+    intact = all(not r["levels_failed"] for r in sc["corners"])
+    if not intact:
+        why = "timing control fails a level: it is broken, not slow"
+    elif not over:
+        why = "timing control meets the delay budget at every corner: the tpd_* limit never fired"
+    else:
+        why = None
+    return {"cell": SLOW, "present": True, "flagged": why is None,
+            "corners_over_budget": over, "levels_intact": intact, "finding": why}
 
 
 def cell_name(report_dir):
@@ -72,7 +95,8 @@ def main(argv):
     flagged = bool(nc) and all(
         NEGCTL_EXPECTED_FAIL in row["levels_failed"] for row in nc["corners"]
     )
-    real = {k: v for k, v in cells.items() if k != NEGCTL}
+    real = {k: v for k, v in cells.items() if k not in (NEGCTL, SLOW)}
+    tc = timing_control(cells)
     summary = {
         "schema": SCHEMA,
         "cells": cells,
@@ -80,6 +104,8 @@ def main(argv):
             "cell": NEGCTL, "expected_fail": NEGCTL_EXPECTED_FAIL,
             "present": nc is not None, "flagged_at_all_corners": flagged,
         },
+        "timing_control": {k: v for k, v in tc.items() if k != "finding"},
+        "timing_finding": tc["finding"],
         "all_cells_pass": bool(real) and all(
             row["status"] == "pass" for v in real.values() for row in v["corners"]
         ),
@@ -102,6 +128,8 @@ def main(argv):
     (rec / "summary.md").write_text("\n".join(lines) + "\n")
     print("\n".join(lines))
     print("negative control flagged at every corner:", flagged)
+    print("timing control flagged (tpd_* over budget, levels intact):", tc["flagged"],
+          f"-- over budget at {tc['corners_over_budget'] or 'no corner'}")
     return 0
 
 
