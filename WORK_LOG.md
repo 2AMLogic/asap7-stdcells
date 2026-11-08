@@ -3,6 +3,11 @@
 Chronological record of merged PRs and closed issues, maintained by the Guide
 triage role. Newest first.
 
+### 2026-11-08
+
+- **PR #88**: feat(verification): TT/FF/SS corner-matrix sweep of the combinational cells (decision 0011)
+- **Issue #83** (closed): T1 item 5 (corner verification): TT/FF/SS corner-matrix sim of the combinational cells with per-corner timing margin
+
 ### 2026-11-07
 
 - **PR #87**: feat(verification): klt pex per drawn cell at TT, cited for T1 item 7
