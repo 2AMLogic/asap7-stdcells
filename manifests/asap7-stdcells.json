@@ -132,7 +132,11 @@
           "timing-margin"
         ]
       }
-    ]
+    ],
+    "8": {
+      "file": "manifests/t1-item8.envelope.json",
+      "content_hash": "sha256:32526471cfce2b5cc6da6d8328531b3740d641b55c924884ea7ee9d3c6928285"
+    }
   },
   "spec_rows": {
     "5": [
