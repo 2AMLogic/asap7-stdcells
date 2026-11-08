@@ -1,0 +1,23 @@
+{
+ "schema_version": 1,
+ "kind": "generic",
+ "status": "pass",
+ "t1_item": 8,
+ "summary": "T1 item 8 characterization report: 18 cells x 3 corners, area, delay/margin, extracted delta, power (not measured) and an Fmax bound; all pinned records present, unchanged and passing. Predictive model, no silicon, no timing closure.",
+ "records_taken_at_commit": "541c141",
+ "report": {
+  "path": "verification/characterization/REPORT.md",
+  "content_hash": "sha256:8718f83711d745d546df4c51ce8d2ea829662378b0aa00cb3352a152eb2ee593"
+ },
+ "inputs": {
+  "path": "verification/characterization/inputs.json",
+  "pinned_records": 39
+ },
+ "provenance": {
+  "input": {
+   "path": "verification/characterization/inputs.json",
+   "content_hash": "sha256:32526471cfce2b5cc6da6d8328531b3740d641b55c924884ea7ee9d3c6928285"
+  }
+ },
+ "problems": []
+}
