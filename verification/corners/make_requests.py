@@ -36,6 +36,9 @@ import re
 import sys
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "design"))
+import a7s_logic  # noqa: E402
+
 # klayout_tools is imported in main() so the pure parts (euler_walk, build) can
 # be self-tested without the klt tool's Python.
 
@@ -53,26 +56,7 @@ LOW_FRAC, HIGH_FRAC = 0.10, 0.90  # logic levels, fraction of VDD
 BUDGET_S = 90e-12  # delay budget, see decision 0011 and reference_budget.py
 SUPPLY_KEY = "vsup"  # the supply source element (klt alters it per corner)
 
-CELLS = {  # name: (inputs, output, boolean function of the input dict)
-    "INVx1": (["A"], "Y", lambda v: not v["A"]),
-    "BUFx1": (["A"], "Y", lambda v: v["A"]),
-    "NAND2x1": (["A", "B"], "Y", lambda v: not (v["A"] and v["B"])),
-    "NAND3x1": (["A", "B", "C"], "Y", lambda v: not (v["A"] and v["B"] and v["C"])),
-    "NOR2x1": (["A", "B"], "Y", lambda v: not (v["A"] or v["B"])),
-    "NOR3x1": (["A", "B", "C"], "Y", lambda v: not (v["A"] or v["B"] or v["C"])),
-    "AND2x1": (["A", "B"], "Y", lambda v: v["A"] and v["B"]),
-    "OR2x1": (["A", "B"], "Y", lambda v: v["A"] or v["B"]),
-    "XOR2x1": (["A", "B"], "Y", lambda v: v["A"] != v["B"]),
-    "XNOR2x1": (["A", "B"], "Y", lambda v: v["A"] == v["B"]),
-    "AOI21x1": (["A1", "A2", "B"], "Y", lambda v: not ((v["A1"] and v["A2"]) or v["B"])),
-    "AOI22x1": (["A1", "A2", "B1", "B2"], "Y",
-                lambda v: not ((v["A1"] and v["A2"]) or (v["B1"] and v["B2"]))),
-    "OAI21x1": (["A1", "A2", "B"], "Y", lambda v: not ((v["A1"] or v["A2"]) and v["B"])),
-    "OAI22x1": (["A1", "A2", "B1", "B2"], "Y",
-                lambda v: not ((v["A1"] or v["A2"]) and (v["B1"] or v["B2"]))),
-    "TIEHIx1": ([], "H", lambda v: True),
-    "TIELOx1": ([], "L", lambda v: False),
-}
+CELLS = a7s_logic.CELLS  # name: (inputs, output, function of the input dict)
 NEGCTL_CELL = "INVx1"
 # Timing control: stages of the chain (odd, so the chain inverts). A chained
 # stage sees only the next stage's gate, so it is ~2.4 ps (FF) to ~4.4 ps (SS),
