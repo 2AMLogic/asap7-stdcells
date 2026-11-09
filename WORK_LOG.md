@@ -3,6 +3,11 @@
 Chronological record of merged PRs and closed issues, maintained by the Guide
 triage role. Newest first.
 
+### 2026-11-09
+
+- **PR #97**: refactor: share corner-sweep driver and Liberty budget scaffolding
+- **Issue #94** (closed): Dedup item-5 corner-sweep drivers and Liberty budget scripts
+
 ### 2026-11-08
 
 - **PR #95**: feat(verification): characterization report generator and item 8 envelope
