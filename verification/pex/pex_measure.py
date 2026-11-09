@@ -41,6 +41,9 @@ import sys
 import tempfile
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "design"))
+import a7s_logic as logic  # noqa: E402
+
 VDD = 0.7
 HALF = VDD / 2
 LOW_MAX, HIGH_MIN = 0.3 * VDD, 0.7 * VDD
@@ -50,33 +53,14 @@ LOAD_FF = 1
 CORNER_ID = "tt/0.700V/25C"
 SUFFIX = "_A7S_75t_R"
 
-# cell -> (input pins in declaration order, output pin, function of a pin dict)
-COMB = {
-    "INVx1": (["A"], "Y", lambda v: 1 - v["A"]),
-    "BUFx1": (["A"], "Y", lambda v: v["A"]),
-    "NAND2x1": (["A", "B"], "Y", lambda v: 1 - (v["A"] & v["B"])),
-    "NOR2x1": (["A", "B"], "Y", lambda v: 1 - (v["A"] | v["B"])),
-    "AND2x1": (["A", "B"], "Y", lambda v: v["A"] & v["B"]),
-    "OR2x1": (["A", "B"], "Y", lambda v: v["A"] | v["B"]),
-    "XOR2x1": (["A", "B"], "Y", lambda v: v["A"] ^ v["B"]),
-    "XNOR2x1": (["A", "B"], "Y", lambda v: 1 - (v["A"] ^ v["B"])),
-    "NAND3x1": (["A", "B", "C"], "Y", lambda v: 1 - (v["A"] & v["B"] & v["C"])),
-    "NOR3x1": (["A", "B", "C"], "Y", lambda v: 1 - (v["A"] | v["B"] | v["C"])),
-    "AOI21x1": (["A1", "A2", "B"], "Y", lambda v: 1 - ((v["A1"] & v["A2"]) | v["B"])),
-    "OAI21x1": (["A1", "A2", "B"], "Y", lambda v: 1 - ((v["A1"] | v["A2"]) & v["B"])),
-    "AOI22x1": (
-        ["A1", "A2", "B1", "B2"],
-        "Y",
-        lambda v: 1 - ((v["A1"] & v["A2"]) | (v["B1"] & v["B2"])),
-    ),
-    "OAI22x1": (
-        ["A1", "A2", "B1", "B2"],
-        "Y",
-        lambda v: 1 - ((v["A1"] | v["A2"]) & (v["B1"] | v["B2"])),
-    ),
-}
+# cell -> (input pins in declaration order, output pin, function of a pin dict);
+# the table is shared with make_requests.py (design/a7s_logic.py). The order
+# below is this script's own (--list order), not the shared table's.
+COMB_ORDER = ("INVx1", "BUFx1", "NAND2x1", "NOR2x1", "AND2x1", "OR2x1", "XOR2x1",
+              "XNOR2x1", "NAND3x1", "NOR3x1", "AOI21x1", "OAI21x1", "AOI22x1", "OAI22x1")
+COMB = {c: logic.CELLS[c] for c in COMB_ORDER}
 SEQ = ("DHLx1", "DFFHQNx1")
-TIES = {"TIEHIx1": ("H", 1), "TIELOx1": ("L", 0)}
+TIES = {c: (logic.CELLS[c][1], logic.CELLS[c][2]({})) for c in logic.TIES}
 CELLS = list(COMB) + list(TIES) + list(SEQ)
 
 
