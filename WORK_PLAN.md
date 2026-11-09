@@ -54,7 +54,7 @@ Issues carrying `loom:curated`.
 
 ## Proposed (Architect / Hermit)
 
-- **#94**: Dedup item-5 corner-sweep drivers and Liberty budget scripts *(hermit)*
+- **#98**: Consolidate duplicated cell boolean-function tables across 4 scripts *(hermit)*
 
 ## Epics
 
