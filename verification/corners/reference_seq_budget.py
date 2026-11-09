@@ -11,35 +11,22 @@ constraint values count (a negative setup or hold is slack, not a requirement).
 
 usage: reference_seq_budget.py <SS-nldm-dir>   (holds asap7sc7p5t_SEQ_RVT_SS_nldm.lib.gz)
 """
-import gzip
-import math
 import re
 import sys
 from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from liberty_budget import (  # noqa: E402
+    block, budget_ps, cell_body, read_lib, table_value,
+)
 
 SLEW_PS = 10.0
 ANALOGUE = {"DFFHQNx1": "DFFHQNx1", "DHLx1": "DHLx1"}  # ours -> shipped
 
 
-def block(text, start):
-    i = text.index("{", start)
-    depth = 0
-    for j in range(i, len(text)):
-        depth += text[j] == "{"
-        depth -= text[j] == "}"
-        if depth == 0:
-            return text[i : j + 1]
-    raise ValueError("unbalanced")
-
-
-def nums(s):
-    return [float(x) for x in re.findall(r"[-+0-9.eE]+", s)]
-
-
 def constraints_ps(text, cell):
     """{'setup': worst, 'hold': worst} (ps, positive values only) at 10 ps / 10 ps."""
-    m = re.search(r"cell\s*\(\s*\"?%s_ASAP7_75t_R\"?\s*\)" % re.escape(cell), text)
-    body = block(text, m.start())
+    body = cell_body(text, cell)
     out = {"setup": 0.0, "hold": 0.0}
     for t in re.finditer(r"\btiming\s*\(\s*\)", body):
         tg = block(body, t.start())
@@ -47,21 +34,14 @@ def constraints_ps(text, cell):
         if not kind:
             continue
         for name in ("rise_constraint", "fall_constraint"):
-            tm = re.search(r"\b%s\s*\(" % name, tg)
-            if not tm:
-                continue
-            tb = block(tg, tm.start())
-            i1 = nums(re.search(r'index_1\s*\(\s*"([^"]*)"', tb).group(1))
-            i2 = nums(re.search(r'index_2\s*\(\s*"([^"]*)"', tb).group(1))
-            vals = nums(re.search(r"values\s*\((.*?)\)\s*;", tb, re.S).group(1).replace('"', " "))
-            a = [abs(x - SLEW_PS) < 1e-6 for x in i1].index(True)
-            b = [abs(x - SLEW_PS) < 1e-6 for x in i2].index(True)
-            out[kind.group(1)] = max(out[kind.group(1)], vals[a * len(i2) + b])
+            v = table_value(tg, name, SLEW_PS, SLEW_PS)
+            if v is not None:
+                out[kind.group(1)] = max(out[kind.group(1)], v)
     return out
 
 
 def main(d):
-    text = gzip.open(Path(d) / "asap7sc7p5t_SEQ_RVT_SS_nldm.lib.gz", "rt").read().replace("\\\n", " ")
+    text = read_lib(Path(d) / "asap7sc7p5t_SEQ_RVT_SS_nldm.lib.gz")
     worst = {"setup": 0.0, "hold": 0.0}
     for ours, ref in ANALOGUE.items():
         c = constraints_ps(text, ref)
@@ -70,7 +50,7 @@ def main(d):
             worst[k] = max(worst[k], c[k])
     for k in ("setup", "hold"):
         print(f"{k}: worst over cells {worst[k]:.2f} ps; 2x rounded up to 5 ps = "
-              f"{math.ceil(2 * worst[k] / 5.0) * 5} ps")
+              f"{budget_ps(worst[k])} ps")
 
 
 if __name__ == "__main__":
