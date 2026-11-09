@@ -5,6 +5,10 @@ triage role. Newest first.
 
 ### 2026-11-09
 
+- **PR #102**: refactor(gds): share one GDSII boundary reader between Liberty and characterization
+- **Issue #101** (closed): Consolidate duplicated GDS boundary readers (liberty_common vs gds_bbox)
+- **PR #100**: refactor(verification): share one logic table between SPICE-request generators
+- **Issue #98** (closed): Consolidate duplicated cell boolean-function tables across 4 scripts
 - **PR #97**: refactor: share corner-sweep driver and Liberty budget scaffolding
 - **Issue #94** (closed): Dedup item-5 corner-sweep drivers and Liberty budget scripts
 
