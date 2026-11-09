@@ -14,14 +14,15 @@ def _real8(b):
     return sign * mant * (16.0 ** exp)
 
 
-def boundary_boxes(data, layer, datatype):
-    """Return ({structure: (x0, y0, x1, y1) in metres}, db_unit_in_m)."""
+def boundary_elements(data, layer, datatype):
+    """Return ([(structure, xy)], db_unit_in_m): one entry per BOUNDARY element on
+    layer/datatype, xy being the flat integer coordinate tuple in database units."""
     pos, n = 0, len(data)
     dbu_m = None
     cur = None
     lay = dt = None
     xy = None
-    out = {}
+    out = []
     in_bnd = False
     while pos + 4 <= n:
         ln, rt, _dt = struct.unpack(">HBB", data[pos:pos + 4])
@@ -43,12 +44,21 @@ def boundary_boxes(data, layer, datatype):
             xy = struct.unpack(">%di" % (len(body) // 4), body)
         elif rt == 0x11:  # ENDEL
             if in_bnd and lay == layer and dt == datatype and xy and cur:
-                xs, ys = xy[0::2], xy[1::2]
-                b = (min(xs), min(ys), max(xs), max(ys))
-                o = out.get(cur)
-                out[cur] = b if o is None else (
-                    min(o[0], b[0]), min(o[1], b[1]), max(o[2], b[2]), max(o[3], b[3]))
+                out.append((cur, xy))
             in_bnd = False
     if dbu_m is None:
         raise ValueError("no UNITS record")
+    return out, dbu_m
+
+
+def boundary_boxes(data, layer, datatype):
+    """Return ({structure: (x0, y0, x1, y1) in metres}, db_unit_in_m)."""
+    elems, dbu_m = boundary_elements(data, layer, datatype)
+    out = {}
+    for cur, xy in elems:
+        xs, ys = xy[0::2], xy[1::2]
+        b = (min(xs), min(ys), max(xs), max(ys))
+        o = out.get(cur)
+        out[cur] = b if o is None else (
+            min(o[0], b[0]), min(o[1], b[1]), max(o[2], b[2]), max(o[3], b[3]))
     return {k: tuple(v * dbu_m for v in b) for k, b in out.items()}, dbu_m

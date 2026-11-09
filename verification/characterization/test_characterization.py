@@ -93,5 +93,61 @@ class EnvelopeLogic(unittest.TestCase):
             self.assertIn(must, text)
 
 
+def _gds(boundaries):
+    """Tiny GDS stream: UNITS, one structure, one 100/0 BOUNDARY per xy list."""
+    import struct
+    rec = lambda t, d, b: struct.pack(">HBB", 4 + len(b), t, d) + b
+    out = rec(0x03, 5, bytes([0x3E, 0x41, 0x89, 0x37, 0x4B, 0xC6, 0xA7, 0xF0]) + bytes([0x39, 0x44, 0xB8, 0x2F, 0xA0, 0x9B, 0x5A, 0x54]))
+    out += rec(0x06, 6, b"C_A7S_75t_R\0")
+    for xy in boundaries:
+        out += rec(0x08, 0, b"") + rec(0x0D, 2, struct.pack(">h", 100)) + rec(0x0E, 2, struct.pack(">h", 0))
+        out += rec(0x10, 3, struct.pack(">%di" % len(xy), *xy)) + rec(0x11, 0, b"")
+    return out
+
+
+def _load_gds_bbox():
+    import importlib.util
+    spec = importlib.util.spec_from_file_location("gds_bbox_t", HERE / "gds_bbox.py")
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod
+
+
+class BoundaryGuardTest(unittest.TestCase):
+    """design/liberty_common.boundary_area_um2 shares this reader; its guards must hold."""
+
+    def area(self, boundaries):
+        import importlib.util
+        spec = importlib.util.spec_from_file_location("lc", REPO / "design" / "liberty_common.py")
+        lc = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(lc)
+        gb = _load_gds_bbox()
+        d = Path(tempfile.mkdtemp())
+        lc._gds_reader = lambda: gb  # the real reader; only the layout dir is redirected
+        lc.ROOT = d
+        (d / "layout").mkdir()
+        (d / "layout" / ("C" + lc.SUFFIX + ".gds")).write_bytes(_gds(boundaries))
+        return lc.boundary_area_um2("C")
+
+    RECT = (0, 0, 10, 0, 10, 5, 0, 5, 0, 0)
+
+    def test_single_rectangle_accepted(self):
+        self.assertGreater(self.area([self.RECT]), 0)
+
+    def test_two_boundaries_rejected(self):
+        with self.assertRaisesRegex(ValueError, "expected one BOUNDARY"):
+            self.area([self.RECT, self.RECT])
+
+    def test_non_rectangle_rejected(self):
+        with self.assertRaisesRegex(ValueError, "not a rectangle"):
+            self.area([(0, 0, 10, 0, 10, 5, 5, 8, 0, 5, 0, 0)])
+
+    def test_zero_length_record_rejected(self):
+        import struct
+        data = _gds([self.RECT]) + struct.pack(">HBB", 0, 0, 0)
+        with self.assertRaisesRegex(ValueError, "corrupt"):
+            _load_gds_bbox().boundary_elements(data, 100, 0)
+
+
 if __name__ == "__main__":
     unittest.main()
