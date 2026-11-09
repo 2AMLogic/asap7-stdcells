@@ -88,6 +88,9 @@ the requests (`make_requests.py`), then submits them with
 `klt sim --batch-set ... --wait-for-capacity 600` and reduces the reports
 (`summarize.py`). Nothing runs locally; a refused or failed submit is reported,
 not re-run. `run.sh <dir> --dry-run` stops after validating the requests.
+The steps both drivers share (pinned PDK fetch, OSDI build or `OSDI_PREBUILT`, scratch
+guard, batch-set submit, evidence copy) and the pin constants live in `common.sh`; the
+budget scripts share their Liberty helpers in `liberty_budget.py`.
 Regenerated requests and testbenches are byte-identical to the committed ones
 apart from the scratch path in `options.osdi_preload`.
 
