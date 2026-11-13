@@ -3,6 +3,10 @@
 Chronological record of merged PRs and closed issues, maintained by the Guide
 triage role. Newest first.
 
+### 2026-11-12
+
+- **PR #104**: Bump Repo Skills 0.25.10 -> 0.26.1
+
 ### 2026-11-09
 
 - **PR #102**: refactor(gds): share one GDSII boundary reader between Liberty and characterization
