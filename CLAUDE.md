@@ -11,9 +11,13 @@ DRC/LVS regression klayout-tools has for this PDK.
   predictive model.
 - **PDK and flows**: ASAP7 (predictive 7 nm FinFET; BSD-3-Clause, Arizona
   State University). Cell netlists in `design/`; Yosys and OpenROAD for the
-  integration design; xschem + ngspice for characterization only if the
-  BSIM-CMG models can be run in the open flow, which is an open question.
-  Layout, DRC and LVS through klayout-tools (`klt`).
+  integration design; ngspice for characterization — decision 0002
+  (`spec/decisions/0002-characterization-bsimcmg.md`) settled that the
+  BSIM-CMG models do run in the open flow, so timing work is reachable, with
+  timing Liberty in scope as stretch rather than target. That record does not
+  require xschem: characterization netlists come from `klt extract` of the
+  drawn layout, and schematic netlisting, if ever needed, goes through `klt
+  netlist`. Layout, DRC and LVS through klayout-tools (`klt`).
 - **ASAP7 bring-up comes first.** ASAP7 is not in the fleet's `open_pdks`
   store. If a sibling ASAP7 canary already has a pinned bring-up, adopt it
   and record the pin; otherwise do it here and record it. klt's ASAP7 deck is
