@@ -50,58 +50,6 @@ def parse_lib(text):
     return cells
 
 
-def evaluate(expr, env):
-    """Liberty boolean expression; precedence ! > ^ > & > |."""
-    toks = re.findall(r"[A-Za-z_]\w*|[01]|[()!&|^]", expr)
-    pos = [0]
-
-    def peek():
-        return toks[pos[0]] if pos[0] < len(toks) else None
-
-    def take():
-        pos[0] += 1
-        return toks[pos[0] - 1]
-
-    def or_():
-        v = and_()
-        while peek() == "|":
-            take()
-            v |= and_()
-        return v
-
-    def and_():
-        v = xor_()
-        while peek() == "&":
-            take()
-            v &= xor_()
-        return v
-
-    def xor_():
-        v = not_()
-        while peek() == "^":
-            take()
-            v ^= not_()
-        return v
-
-    def not_():
-        if peek() == "!":
-            take()
-            return 1 - not_()
-        if peek() == "(":
-            take()
-            v = or_()
-            if take() != ")":
-                raise ValueError("unbalanced " + expr)
-            return v
-        t = take()
-        return int(t) if t in "01" else env[t]
-
-    v = or_()
-    if pos[0] != len(toks):
-        raise ValueError("trailing tokens in " + expr)
-    return v
-
-
 def check(text):
     """List of problems; empty means the Liberty text passes."""
     bad = []
@@ -149,7 +97,7 @@ def check(text):
                 for bits in itertools.product((0, 1), repeat=len(ins)):
                     a = dict(zip(ins, bits))
                     try:
-                        if evaluate(f, a) != fn[cell][o](**a):
+                        if lc.evaluate(f, a) != fn[cell][o](**a):
                             bad.append("%s.%s: function %r wrong at %s" % (cell, o, f, a))
                             break
                     except (ValueError, KeyError) as e:
