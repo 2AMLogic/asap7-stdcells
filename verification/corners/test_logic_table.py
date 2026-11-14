@@ -4,12 +4,15 @@
 
 Runs without klt, ngspice or the PDK. For every cell and every input vector the
 shared table must equal `check_cdl_function.FN` (the spec table the switch-level
-check uses) and the Liberty `write_liberty.FUNC` string, evaluated here by a
-small parser written for this test. The negative control breaks NAND3 (drops one
-input) and the same comparison must flag it.
+check uses) and the Liberty `write_liberty.FUNC` string, evaluated by the one
+shared parser `liberty_common.evaluate` -- the same parser design/check_liberty.py
+grades the published .lib with, so the two cannot drift apart (#113).
+
+Negative controls: breaking NAND3 (dropping one input) must be flagged by the
+table comparison, and flipping the shared parser's &/^ precedence must be
+flagged by the precedence test.
 """
 import itertools
-import re
 import sys
 import unittest
 from pathlib import Path
@@ -18,49 +21,24 @@ DESIGN = Path(__file__).resolve().parents[2] / "design"
 sys.path.insert(0, str(DESIGN))
 import a7s_logic as logic  # noqa: E402
 import check_cdl_function as cdl  # noqa: E402
+import liberty_common as lc  # noqa: E402
 import write_liberty as wl  # noqa: E402
 
 
-def eval_liberty(expr, env):
-    """Evaluate a Liberty function string: ! > & > ^ > |, parentheses, 0/1 literals."""
-    toks = re.findall(r"[A-Za-z_][A-Za-z0-9_]*|[01]|[!&|^()]", expr)
-    assert "".join(toks) == expr.replace(" ", ""), expr
-    pos = 0
-
-    def peek():
-        return toks[pos] if pos < len(toks) else None
-
-    def take():
-        nonlocal pos
-        pos += 1
-        return toks[pos - 1]
-
-    def level(ops, nxt):
-        def parse():
-            val = nxt()
-            while peek() == ops:
-                take()
-                rhs = nxt()
-                val = {"|": val | rhs, "^": val ^ rhs, "&": val & rhs}[ops]
-            return val
-        return parse
-
-    def atom():
-        t = take()
-        if t == "!":
-            return 1 - atom()
-        if t == "(":
-            v = parse_or()
-            assert take() == ")"
-            return v
-        return int(t) if t in "01" else env[t]
-
-    parse_and = level("&", atom)
-    parse_xor = level("^", parse_and)
-    parse_or = level("|", parse_xor)
-    val = parse_or()
-    assert pos == len(toks), expr
-    return val
+# The expressions that distinguish Liberty's ! > ^ > & > | from the ! > & > ^ > |
+# ordering this test's own (now deleted) evaluator used to document (#113).
+# Liberty binds ^ tighter than &, so `A&B^C` is `A&(B^C)` -- see
+# liberty_common.PRECEDENCE for the reference citation. The shipped FUNC table is
+# fully parenthesized, so nothing in it can tell the two orderings apart; these
+# expressions are here precisely so the suite can.
+PRECEDENCE_CASES = {
+    "A&B^C": lambda A, B, C: A & (B ^ C),
+    "A^B&C": lambda A, B, C: (A ^ B) & C,
+    "!A&B^C": lambda A, B, C: (1 - A) & (B ^ C),
+}
+# & bound tighter than ^: the ordering Liberty does NOT use. Used only as the
+# negative control for the precedence rule.
+FLIPPED = ("|", "^", "&")
 
 
 def mismatches(table):
@@ -71,7 +49,7 @@ def mismatches(table):
             v = dict(zip(ins, bits))
             if (cdl.FN[cell][out](*bits) != fn(v)):
                 bad.append((cell, bits, "FN"))
-            if eval_liberty(wl.FUNC[cell], v) != fn(v):
+            if lc.evaluate(wl.FUNC[cell], v) != fn(v):
                 bad.append((cell, bits, "FUNC"))
     return bad
 
@@ -100,9 +78,45 @@ class LogicTable(unittest.TestCase):
         self.assertEqual({w for _, _, w in bad}, {"FN", "FUNC"})
 
     def test_liberty_evaluator_known_values(self):
-        self.assertEqual(eval_liberty("!((A1&A2)|B)", {"A1": 1, "A2": 1, "B": 0}), 0)
-        self.assertEqual(eval_liberty("!(A^B)", {"A": 1, "B": 1}), 1)
-        self.assertEqual(eval_liberty("1", {}), 1)
+        self.assertEqual(lc.evaluate("!((A1&A2)|B)", {"A1": 1, "A2": 1, "B": 0}), 0)
+        self.assertEqual(lc.evaluate("!(A^B)", {"A": 1, "B": 1}), 1)
+        self.assertEqual(lc.evaluate("1", {}), 1)
+
+    def test_liberty_precedence_xor_binds_tighter_than_and(self):
+        """The shared parser uses Liberty's ! > ^ > & > | on every vector."""
+        for expr, want in PRECEDENCE_CASES.items():
+            for bits in itertools.product((0, 1), repeat=3):
+                env = dict(zip("ABC", bits))
+                self.assertEqual(lc.evaluate(expr, env), want(*bits), (expr, env))
+
+    def test_negative_control_flipped_and_xor_precedence_is_flagged(self):
+        """Flip the shared parser's &/^ chain: the precedence rule must fire.
+
+        Guards against the rule being vacuous -- a precedence test that passed
+        under both orderings would be no test at all.
+        """
+        caught = set()
+        for expr, want in PRECEDENCE_CASES.items():
+            for bits in itertools.product((0, 1), repeat=3):
+                env = dict(zip("ABC", bits))
+                if lc.evaluate(expr, env, precedence=FLIPPED) != want(*bits):
+                    caught.add(expr)
+        self.assertEqual(caught, set(PRECEDENCE_CASES))
+
+    def test_shipped_liberty_functions_are_precedence_insensitive(self):
+        """Every shipped FUNC string parses the same under either ordering.
+
+        This is why the drift in #113 was latent: the table is fully
+        parenthesized. If a future cell mixes & and ^ unparenthesized, this
+        fails and the FUNC string must gain parentheses.
+        """
+        for cell, (ins, _out, _fn) in logic.CELLS.items():
+            for bits in itertools.product((0, 1), repeat=len(ins)):
+                env = dict(zip(ins, bits))
+                self.assertEqual(
+                    lc.evaluate(wl.FUNC[cell], env),
+                    lc.evaluate(wl.FUNC[cell], env, precedence=FLIPPED),
+                    (cell, wl.FUNC[cell], env))
 
 
 if __name__ == "__main__":
