@@ -7,10 +7,11 @@ Run under klt's interpreter (it is the one that has `klayout.db`):
 
 15 sites. Left block (sites 0..4): the two inverters, gates at 1 (B -> Bn) and 3 (A -> An)
 on one diffusion span, the VSS/VDD region between them. Right block (sites 6..14): the
-AOI22 of the AOI22x1 cell shifted six sites, gates at 7 (A), 9 (B), 11 (Bn), 13 (An), two
-spans and a cut dummy at 10. Between the blocks ACTIVE is 146 nm apart (dummies at 4 and 6,
-none at 5), so no net has to match across it (ACTIVE.S.2A). Inside the AOI block the nets
-either side of the break are equal (VSS and x_p1), as in AOI22x1.
+same AOI22 block AOI22x1 draws (a7s_common.aoi22_block, one definition for both cells)
+shifted six sites, gates at 7 (A), 9 (B), 11 (Bn), 13 (An), two spans and a cut dummy at 10.
+Between the blocks ACTIVE is 146 nm apart (dummies at 4 and 6, none at 5), so no net has to
+match across it (ACTIVE.S.2A). Inside the AOI block the nets either side of the break are
+equal (VSS and x_p1), as in AOI22x1.
 Links on M2: A (row 108), B (row 144), Bn (row 36), An (row 216) join the inverter block to
 the AOI gates; Y and x_p1 keep their AOI22x1 links on rows 72 and 180. Pins: B at gate 1,
 A at gate 3, Y on the M1 stripe at x 360.
@@ -65,32 +66,14 @@ def build(name=CELL):
     gate_link(d, 3, 108)                # A
     # AOI22 block (AOI22x1 shifted), gates A, B, Bn, An at local sites 1, 3, 5, 7
     a = Shifted(d, SHIFT)
-    contact54(a, "N", 54, 36)           # Y
-    m1(a, 36, 36, 54, 95)
-    contact54(a, "P", 54, 36)           # x_p1
-    m1(a, 36, 175, 54, 234)
-    contact(a, "P", 144, (144, 168))    # VDD
-    stub(a, "P", 144)
-    contact54(a, "N", 216, 216)         # VSS
-    stub(a, "N", 216)
-    contact54(a, "N", 270, 252)
-    stub(a, "N", 252)
-    contact54(a, "P", 216, 216)         # x_p1
-    contact54(a, "P", 270, 252)
-    m1(a, 216, 216, 270, 234)
-    m1(a, 216, 175, 234, 234)
-    contact(a, "P", 360, (360, 384))    # Y
-    m1(a, 360, 67, 378, 234)
-    contact54(a, "N", 432, 432)         # Y
-    m1(a, 432, 36, 450, 95)
-    contact54(a, "P", 432, 432)         # x_p1
-    m1(a, 432, 175, 450, 234)
-    gate_link(d, 7, 108)                # A
-    gate_link(d, 9, 144)                # B
-    gate_link(d, 11, 0, down=True)      # Bn
-    gate_link(d, 13, 0, up=True)        # An
-    link(a, 72, [36, 360, 432])         # Y
-    link(a, 180, [36, 216, 432])        # x_p1
+
+    def gates():
+        gate_link(d, 7, 108)            # A
+        gate_link(d, 9, 144)            # B
+        gate_link(d, 11, 0, down=True)  # Bn
+        gate_link(d, 13, 0, up=True)    # An
+
+    aoi22_block(a, gates)
     link(d, 108, [180, 396])            # A
     link(d, 144, [72, 504])             # B
     link(d, 36, [36, 612])              # Bn

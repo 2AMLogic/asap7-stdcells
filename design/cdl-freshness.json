@@ -9,7 +9,7 @@
   },
   "AOI22x1_A7S_75t_R": {
     "cdl_sha256": "00078a7f7e91045b748902202138adfc59c28c9c674ba186e910901a44aa66f4",
-    "script_sha256": "d312b35a75f8e017981306e742c4430b34fe359dd1c12efe0ed5468eb066b741"
+    "script_sha256": "4452fb358cda25ba8223635d8412de521a6602120832e4516fff21a02b34a0b0"
   },
   "BUFx1_A7S_75t_R": {
     "cdl_sha256": "44d6c5874ed69c18c1d1df77541ddd4abc2fc7068c3df3ad19a10c75c391e308",
@@ -49,7 +49,7 @@
   },
   "OAI22x1_A7S_75t_R": {
     "cdl_sha256": "ea77fb56ae7ccb1f334e72c0e3703f44d233f3d14536e4c5d1ba4b7fc20e38fb",
-    "script_sha256": "1c54fe400288d3714c115a5aa79141c9adf48e1183e83112ff3cdc35e1541e37"
+    "script_sha256": "4975287ce50bff1c1bb936becfdf5089cc6dc8ec90d5714c029e36d56500056e"
   },
   "OR2x1_A7S_75t_R": {
     "cdl_sha256": "e3ac2a19c3587288db6387ba04d8a191e42ecd9ecdfae2852f68599d5f40e056",
@@ -65,10 +65,10 @@
   },
   "XNOR2x1_A7S_75t_R": {
     "cdl_sha256": "8af9e840597cd051650f58035415414a875f1df35fe1cc4feed25c8b6b099218",
-    "script_sha256": "a9b0da28cd7fd999a8d1b7faa36394d2744932efea8b4967122a023bcfdad4b2"
+    "script_sha256": "842b8d3f5bb0b11af4796c80f6bb7dd9c474c56f1f972995abc6b2c7ffa57efa"
   },
   "XOR2x1_A7S_75t_R": {
     "cdl_sha256": "d8189dec20f0bf7baa0cbafacae2ce121d6ca1c721d6cf927660ae64745faa46",
-    "script_sha256": "744fd74a901b3e51d8532902c8b4da46e641b16565c587755a1306ce6369d7e2"
+    "script_sha256": "a2552bf31dbd95645e1cd1232f37e7167992f9d37a2ecc9063afb6f93d6aef84"
   }
 }

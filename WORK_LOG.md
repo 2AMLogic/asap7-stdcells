@@ -3,6 +3,10 @@
 Chronological record of merged PRs and closed issues, maintained by the Guide
 triage role. Newest first.
 
+### 2026-11-14
+
+- **PR #108**: docs: roadmap as of 2026-11-13
+
 ### 2026-11-13
 
 - **Issue #3** (closed): Track the gap to T1 (klayout-tools design-evidence-tiers.md)

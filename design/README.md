@@ -6,7 +6,7 @@ Source of truth for the drawn cells.
 |---|---|
 | `draw_<CELL>.py` | Draws the cell with `klayout.db` into `layout/<CELL>.gds`. Run it under klt's interpreter: `"$(head -1 "$(command -v klt)" | cut -c3-)" -I design/draw_<CELL>.py [out.gds]`. Output carries no timestamps, so a re-run reproduces the committed GDS byte for byte; the regression harness re-runs it and compares `sha256`. |
 | `<CELL>.cdl` | Hand-written CDL the cell is compared against by `klt lvs`; fin counts as in `spec/stdcells.md`. |
-| `a7s_common.py` | Shared geometry helpers (layer table, grid, frame, contact, link). Every draw script imports it; `draw_INVx1` uses only the layer table and the writer, so its GDS is unchanged by the refactor. |
+| `a7s_common.py` | Shared geometry helpers (layer table, grid, frame, contact, link) plus the composite blocks two cells each draw (`aoi22_block` for `AOI22x1`/`XOR2x1`, `oai22_block` for `OAI22x1`/`XNOR2x1`, both through a `Shifted` view in the XOR cells). Every draw script imports it; `draw_INVx1` uses only the layer table and the writer, so its GDS is unchanged by the refactor. |
 | `check_cdl_function.py` | Switch-level evaluation of every CDL against the function in the spec cell table (full truth table for combinational cells, clocked sequence for `DHLx1` and `DFFHQNx1`). Exit 0 only if all 18 pass. |
 | `write_liberty.py`, `check_liberty.py`, `liberty_common.py` | Write `layout/A7S_75t_R_structural.lib` (pins, directions, functions, areas; no timing) and check it: function against the `check_cdl_function.py` truth table, area against the GDS boundary, no timing content, byte-identical regeneration, three negative controls. Run with `python3 -I`. |
 | `check_cdl_fresh.py`, `cdl-freshness.json` | The freshness rule below. |
