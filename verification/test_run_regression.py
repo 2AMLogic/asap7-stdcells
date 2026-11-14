@@ -346,6 +346,28 @@ class RunRegressionTest(unittest.TestCase):
         self.assertEqual(m["family_coverage"]["families_without_control"], ["FIN"])
         self.assertIn("NO CONTROL FIRES", (rr.HERE / "records" / "r1" / "summary.md").read_text())
 
+    def test_recorded_observed_key_order_is_pinned_per_case_kind(self):
+        """`summary.md` renders `observed` with `q()`, which does not sort keys, so the order is recorded evidence."""
+        self.assertEqual(self.go(FakeKlt(), self.library_cfg()), 1)  # FIN has no control that fires it
+        summary = (rr.HERE / "records" / "r1" / "summary.md").read_text()
+        # one abutment case: status, rule_counts
+        self.assertIn('| case1-row | drc_abutment | PASS | {"status":"clean","rule_counts":{}} |', summary)
+        # a cell's library-wide cases add the rows the stream holds, after rule_counts
+        self.assertIn('| case2-pairs | drc_abutment | PASS | {"status":"clean","rule_counts":{},"rows":', summary)
+        # the merged stream carries the violation total between status and rule_counts
+        self.assertIn('- observed: `{"status":"clean","violation_count":null,"rule_counts":{},"coverage":', summary)
+
+    def test_only_a_multi_case_stream_attributes_a_fail_to_rows(self):
+        """A one-case stream is named by its case id; only the library-wide and merged streams need row labels."""
+        self.assertEqual(self.go(FakeKlt(bad_case="case1-row"), self.library_cfg()), 1)
+        abut = next(c for c in self.drawn_row()["cases"] if c["id"] == "case1-row")
+        self.assertEqual(abut["result"], "FAIL")
+        self.assertNotIn("violating_rows", abut["observed"])
+        self.assertEqual(self.go(FakeKlt(bad_case="case2-pairs"), self.library_cfg(), "r2"), 1)
+        pairs = next(c for c in self.drawn_row("r2")["cases"] if c["id"] == "case2-pairs")
+        self.assertEqual(pairs["result"], "FAIL")
+        self.assertIn("violating_rows", pairs["observed"])
+
     def test_failing_pair_case_fails_run_and_merged_stream(self):
         self.assertEqual(self.go(FakeKlt(bad_case="case2-pairs"), self.library_cfg()), 1)
         cases = {c["id"]: c["result"] for c in self.drawn_row()["cases"]}

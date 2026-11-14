@@ -614,6 +614,35 @@ def violating_rows(env, labels, row_h=1080):
     return sorted(hit)
 
 
+def drc_observed(env, **extra):
+    """The `observed` slice of a DRC case: the envelope's status and rule counts, then `extra`.
+
+    Key order is load-bearing: `summary.md` renders this dict with `q()`, which
+    does not sort keys, so reordering it rewrites recorded evidence.
+    """
+    return {"status": (env or {}).get("status"), "rule_counts": (env or {}).get("rule_counts"), **extra}
+
+
+def run_drc_case(klt, info, cgds, outdir, res, labels=None, observed=None):
+    """Run `klt drc` on an already-placed case stream and record the verdict in `res`.
+
+    The shared tail of every place-and-DRC case: `res["result"]` from the
+    envelope, `res["observed"]` from `observed(env)` (`drc_observed` by default),
+    and the tool error when there is no envelope. `labels` (one per stream row,
+    `None` for a gap row) attributes a FAIL's violations to rows; pass it only
+    for a stream carrying more than one case. Returns the envelope (`None` on a
+    tool error) so a caller can record it whole.
+    """
+    env, err = run_one(klt, "drc", drc_request(cgds, info), outdir, "drc")
+    res["result"] = verdict_drc(env)
+    res["observed"] = (observed or drc_observed)(env)
+    if env is None:
+        res["error"] = f"klt drc: {err}"
+    elif res["result"] == "FAIL" and labels is not None:
+        res["observed"]["violating_rows"] = violating_rows(env, labels)
+    return env
+
+
 def run_library_cases(klt, info, work, out, name, libs, names, neighbour, tap):
     """DRC acceptance cases 2 (ordered pairs) and 4 (row ends with TAP) for one drawn cell."""
     results = []
@@ -623,14 +652,9 @@ def run_library_cases(klt, info, work, out, name, libs, names, neighbour, tap):
         cgds = work / f"{name}.{cid}.gds"
         try:
             klt.place(libs, rows, cgds)
-            env, err = run_one(klt, "drc", drc_request(cgds, info), out / "cases" / cid, "drc")
-            res["result"] = verdict_drc(env)
-            res["observed"] = {"status": (env or {}).get("status"), "rule_counts": (env or {}).get("rule_counts"),
-                               "rows": [i for i in ids if i]}
-            if env is None:
-                res["error"] = f"klt drc: {err}"
-            elif res["result"] == "FAIL":
-                res["observed"]["violating_rows"] = violating_rows(env, ids)
+            # `ids`: one stream here holds many rows (one per pair, one per row end).
+            run_drc_case(klt, info, cgds, out / "cases" / cid, res, labels=ids,
+                         observed=lambda env: drc_observed(env, rows=[i for i in ids if i]))
         except SetupError as e:
             res["error"] = str(e)
     return results
@@ -643,7 +667,7 @@ def cell_files(cell, paths):
     return paths[cell["gds"]], (paths[cell["cdl"]] if cell["cdl"] else None)
 
 
-def run_abutment_cases(klt, info, work, out, name, gds, libs, neighbour, with_self_row=False):
+def run_abutment_cases(klt, info, work, out, name, libs, neighbour, with_self_row=False):
     """Run the abutment DRC cases of one cell; returns their result dicts.
 
     `libs` maps every cell name used in a case to its stream. With
@@ -659,11 +683,10 @@ def run_abutment_cases(klt, info, work, out, name, gds, libs, neighbour, with_se
         cgds = work / f"{name}.{cid}.gds"
         try:
             klt.place(libs, grid_rows, cgds)
-            env, err = run_one(klt, "drc", drc_request(cgds, info), out / "cases" / cid, "drc")
-            res["result"] = verdict_drc(env)
-            res["observed"] = {"status": (env or {}).get("status"), "rule_counts": (env or {}).get("rule_counts")}
-            if env is None:
-                res["error"] = f"klt drc: {err}"
+            # No `labels`, deliberately: one stream here is one case, already named by
+            # `cid`, and its one or two rows are the same cell between the same
+            # neighbours -- row attribution would repeat the case id and nothing more.
+            run_drc_case(klt, info, cgds, out / "cases" / cid, res)
         except SetupError as e:
             res["error"] = str(e)
     return results
@@ -675,6 +698,13 @@ def run_merged(klt, info, work, record, libs, names, neighbour, tap):
     This is the library's citable T1 item 3 envelope; `rows` maps each stream
     row to its case so a violation is attributable.
     """
+    def observed(env):
+        """The merged stream's `observed`, in its recorded key order (see `drc_observed`)."""
+        return {"status": (env or {}).get("status"), "violation_count": (env or {}).get("violation_count"),
+                "rule_counts": (env or {}).get("rule_counts"),
+                "coverage": {k: ((env or {}).get("coverage") or {}).get(k)
+                             for k in ("layers_in_stream_without_rules", "rules_skipped", "deck_scope")}}
+
     rows, labels = merged_rows(names, neighbour, tap)
     out = record / "merged"
     res = {"id": "merged-stream", "kind": "drc_merged", "result": "ERROR", "cases": len({l for l in labels if l}),
@@ -683,17 +713,7 @@ def run_merged(klt, info, work, record, libs, names, neighbour, tap):
     try:
         klt.place(libs, rows, mgds, top="LIBRARY_CASES")
         res["gds_sha256"] = sha256_file(mgds)
-        env, err = run_one(klt, "drc", drc_request(mgds, info), out, "drc")
-        res["result"] = verdict_drc(env)
-        res["envelope"] = env
-        res["observed"] = {"status": (env or {}).get("status"), "violation_count": (env or {}).get("violation_count"),
-                           "rule_counts": (env or {}).get("rule_counts"),
-                           "coverage": {k: ((env or {}).get("coverage") or {}).get(k)
-                                        for k in ("layers_in_stream_without_rules", "rules_skipped", "deck_scope")}}
-        if env is None:
-            res["error"] = f"klt drc: {err}"
-        elif res["result"] == "FAIL":
-            res["observed"]["violating_rows"] = violating_rows(env, labels)
+        res["envelope"] = run_drc_case(klt, info, mgds, out, res, labels=labels, observed=observed)
     except SetupError as e:
         res["error"] = str(e)
     return res
@@ -864,7 +884,7 @@ def run(args, klt=None):
             row["abutment_verdict"] = verdict["decision"]
             neighbour = verdict["neighbour"]
             libs = {name: gds, neighbour: cell_files(by_name[neighbour], paths)[0]}
-            row["cases"] = run_abutment_cases(klt, info, work, out, name, gds, libs, neighbour, with_self_row=True)
+            row["cases"] = run_abutment_cases(klt, info, work, out, name, libs, neighbour, with_self_row=True)
             passed = all(c["result"] == "PASS" for c in row["cases"])
             row["drc_standalone"] = row["drc"]
             row["drc"] = f"{row['drc_standalone']} standalone / {'PASS' if passed else 'FAIL'} abutted"
@@ -878,7 +898,7 @@ def run(args, klt=None):
                 row["cases"] = []
                 neighbour = cell.get("neighbour", name)
                 libs = {name: gds, neighbour: cell_files(by_name[neighbour], paths)[0]}
-                row["cases"] += run_abutment_cases(klt, info, work, out, name, gds, libs, neighbour)
+                row["cases"] += run_abutment_cases(klt, info, work, out, name, libs, neighbour)
                 ok &= all(c["result"] == "PASS" for c in row["cases"])
             if inv in drawn_libs and tap in drawn_libs:
                 lib_cases = run_library_cases(klt, info, work, out, name, drawn_libs, drawn_names, inv, tap)
