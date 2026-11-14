@@ -24,30 +24,12 @@ W = 486
 def build(name=CELL):
     d = CellDraw(name, W)
     frame(d, live=[1, 3, 5, 7], dummies=[0, 4, 8], spans=[(46, 224), (262, 440)])
-    contact54(d, "N", 54, 36)           # x_n1
-    m1(d, 36, 36, 54, 95)
-    contact54(d, "P", 54, 36)           # Y
-    m1(d, 36, 175, 54, 234)
-    contact(d, "N", 144, (144, 168))    # Y
-    m1(d, 144, 36, 162, 234)
-    contact54(d, "N", 216, 216)         # x_n1
-    contact54(d, "N", 270, 252)
-    m1(d, 216, 36, 270, 54)
-    m1(d, 216, 36, 234, 95)
-    contact54(d, "P", 216, 216)         # VDD
-    stub(d, "P", 216)
-    contact54(d, "P", 270, 252)
-    stub(d, "P", 252)
-    contact(d, "N", 360, (360, 384))    # VSS
-    stub(d, "N", 360)
-    contact54(d, "N", 432, 432)         # x_n1
-    m1(d, 432, 36, 450, 95)
-    contact54(d, "P", 432, 432)         # Y
-    m1(d, 432, 175, 450, 234)
-    for j in (1, 3, 5, 7):
-        gate_contact(d, j)
-    link(d, 72, [36, 216, 432])
-    link(d, 180, [36, 144, 432])
+
+    def gates():
+        for j in (1, 3, 5, 7):
+            gate_contact(d, j)
+
+    oai22_block(d, gates)
     for text, x, y in (("A1", 81, 135), ("A2", 189, 135), ("B2", 297, 135), ("B1", 405, 135), ("Y", 153, 100)):
         d.label(text, x, y)
     return d
