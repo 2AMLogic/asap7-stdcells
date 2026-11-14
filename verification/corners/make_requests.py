@@ -29,7 +29,13 @@ Negative controls: the same generation for INVx1, twice.
 
 Run with the klt tool's Python (it carries klayout_tools).
 
-usage: make_requests.py <layout-dir> <hspice-card-dir> <bsimcmg.osdi> <workdir> [cell ...]
+The request envelope itself is `sim_request()` below, shared with the
+sequential half (make_seq_requests.py, decision 0012) the way liberty_budget.py
+is shared by the two budget scripts; only `timeout_s` and the `exclude` key
+position differ between the halves.
+
+usage: make_requests.py <layout-dir> <hspice-card-dir> <bsimcmg.osdi> <workdir>
+           [--single-corner tt] [cell ...]
 """
 import json
 import re
@@ -55,6 +61,7 @@ SETTLE_S = 500e-12  # initial settle before the first transition
 LOW_FRAC, HIGH_FRAC = 0.10, 0.90  # logic levels, fraction of VDD
 BUDGET_S = 90e-12  # delay budget, see decision 0011 and reference_budget.py
 SUPPLY_KEY = "vsup"  # the supply source element (klt alters it per corner)
+TIMEOUT_S = 600  # per-corner sim timeout for the combinational cells
 
 CELLS = a7s_logic.CELLS  # name: (inputs, output, function of the input dict)
 NEGCTL_CELL = "INVx1"
@@ -207,10 +214,71 @@ def exclude_rules():
     return rules
 
 
+def pop_single_corner(argv):
+    """Pop `--single-corner <process>` out of `argv`; return the process or None.
+
+    A debug affordance of both halves of item 5: narrow the matrix to one PVT
+    point for a local probe. Neither run.sh nor run_seq.sh passes it, so no
+    recorded sweep is narrowed.
+    """
+    if "--single-corner" not in argv:
+        return None
+    i = argv.index("--single-corner")
+    if i + 1 >= len(argv):
+        raise SystemExit("--single-corner needs a process section")
+    single = argv[i + 1]
+    known = [p for p, _, _ in CORNERS]
+    if single not in known:
+        raise SystemExit(f"--single-corner {single}: not one of {known}")
+    del argv[i : i + 2]
+    return single
+
+
+def sim_request(tag, meas, stim, tstop, osdi, timeout_s, single=None, exclude_last=False):
+    """The item-5 `klt sim` corner-matrix request document, for either half.
+
+    One envelope for both halves of item 5: make_requests (combinational,
+    decision 0011, `timeout_s=600`) and make_seq_requests (sequential, decision
+    0012, `timeout_s=1800`). Every other value is fixed by decision 0011 and is
+    not tuned per cell or per class.
+
+    `stim` empty (a tie cell) drops `stimulus`. `single` narrows `corners` to
+    that one process section and drops `exclude`, since there is then nothing
+    to exclude. `exclude_last` puts `exclude` after `options` instead of
+    between `corners` and `analysis`: the two committed record families were
+    written with the two key orders, and both must keep reproducing.
+    """
+    corners = CORNERS if not single else [c for c in CORNERS if c[0] == single]
+    req = {
+        "netlist": f"{tag}.tb.spice",
+        "engine": "ngspice",
+        "models": {"lib": "asap7_bsimcmg.lib"},
+        "corners": {
+            "process": [p for p, _, _ in corners],
+            "supply_v": {SUPPLY_KEY: sorted({v for _, v, _ in corners})},
+            "temperature_c": sorted({t for _, _, t in corners}),
+        },
+        "exclude": None if single else exclude_rules(),
+        "analysis": {"kind": "tran", "args": f"1p {fmt(tstop)}"},
+        "stimulus": {"signals": stim} if stim else None,
+        "measurements": meas,
+        "options": {
+            "osdi_preload": [str(osdi)],
+            "stage_model_inputs": True,
+            "timeout_s": timeout_s,
+            "ngspice_init": ["set measureprec=9"],
+        },
+    }
+    if exclude_last and req["exclude"] is not None:
+        req["exclude"] = req.pop("exclude")  # re-insert at the end (dicts keep order)
+    return {k: v for k, v in req.items() if v is not None}
+
+
 def main(argv):
     from klayout_tools import asap7_bsimcmg
     from klayout_tools.extract import run_extract
 
+    single = pop_single_corner(argv)
     layout, cards, osdi, work = argv[:4]
     only = argv[4:]
     layout, cards, work = Path(layout), Path(cards), Path(work)
@@ -240,27 +308,7 @@ def main(argv):
             ports = re.search(r"^\.SUBCKT\s+\S+\s+(.*)$", text, flags=re.M | re.I).group(1).split()
             tb, stim, meas, tstop, arcs, exp = build(base, inputs, out, func, top, ports, suffix)
             (work / f"{tag}.tb.spice").write_text(tb)
-            req = {
-                "netlist": f"{tag}.tb.spice",
-                "engine": "ngspice",
-                "models": {"lib": "asap7_bsimcmg.lib"},
-                "corners": {
-                    "process": [p for p, _, _ in CORNERS],
-                    "supply_v": {SUPPLY_KEY: sorted({v for _, v, _ in CORNERS})},
-                    "temperature_c": sorted({t for _, _, t in CORNERS}),
-                },
-                "exclude": exclude_rules(),
-                "analysis": {"kind": "tran", "args": f"1p {fmt(tstop)}"},
-                "stimulus": {"signals": stim} if stim else None,
-                "measurements": meas,
-                "options": {
-                    "osdi_preload": [str(osdi)],
-                    "stage_model_inputs": True,
-                    "timeout_s": 600,
-                    "ngspice_init": ["set measureprec=9"],
-                },
-            }
-            req = {k: v for k, v in req.items() if v is not None}
+            req = sim_request(tag, meas, stim, tstop, osdi, TIMEOUT_S, single)
             (work / f"{tag}.request.json").write_text(json.dumps(req, indent=1) + "\n")
             print(f"wrote {work / (tag + '.request.json')} ({len(meas)} measurements)")
 

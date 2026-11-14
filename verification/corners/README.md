@@ -90,12 +90,22 @@ the requests (`make_requests.py`), then submits them with
 not re-run. `run.sh <dir> --dry-run` stops after validating the requests.
 The steps both drivers share (pinned PDK fetch, OSDI build or `OSDI_PREBUILT`, scratch
 guard, batch-set submit, evidence copy) and the pin constants live in `common.sh`; the
-budget scripts share their Liberty helpers in `liberty_budget.py`.
+budget scripts share their Liberty helpers in `liberty_budget.py`; both generators
+build the request envelope with `make_requests.sim_request`, which differs between
+the halves only in `options.timeout_s` (600 s combinational, 1800 s sequential) and
+in where `exclude` falls in key order.
 Regenerated requests and testbenches are byte-identical to the committed ones
 apart from the scratch path in `options.osdi_preload`.
 
+Both generators take `--single-corner <tt|ff|ss>`, which narrows the matrix to that
+one PVT point and drops `exclude`, for a local debug probe. Neither driver passes
+it, so no recorded sweep is narrowed.
+
 Self-test, no klt or PDK needed: `python3 verification/corners/test_corners.py`
 (generator, summariser, the negative-control finding, and every committed record).
+It re-runs both request generators against stand-ins for klt and byte-compares
+every request they write with the committed one, so the reproduction claim above
+is checked rather than asserted.
 
 Tool versions (`records/2026-11-07/run/versions.txt`): klt
 0.9.2.dev244+g92e2b15a66f2, ngspice-46, lambdapdk 0.2.17, OSDI module sha256
