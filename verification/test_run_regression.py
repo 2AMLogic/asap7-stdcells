@@ -8,6 +8,7 @@ import hashlib
 import json
 import sys
 import tempfile
+import types
 import unittest
 from pathlib import Path
 
@@ -31,6 +32,7 @@ class FakeKlt:
         self.grid_status = {"clean": grid, "control": control_grid}
         self.redrawn = redrawn
         self.placed = []
+        self.injects = []
 
     def info(self):
         return {"deck_path": "/deck/asap7.drc", "rule_count": 263, "klayout": "0.0",
@@ -55,6 +57,7 @@ class FakeKlt:
         return "0.0.test"
 
     def extract(self, src, cell, out, inject=None):
+        self.injects.append(inject)
         Path(out).write_bytes(b"gds")
 
     def extract_report(self, gds, cell, netlist=None):
@@ -153,6 +156,33 @@ class RunRegressionTest(unittest.TestCase):
 
     def test_missed_drc_control_fails_run(self):
         self.assertEqual(self.go(FakeKlt(control_drc="clean")), 1)
+
+    def multi_box_cfg(self):
+        """The base config with its one DRC control replaced by a `boxes_dbu` one."""
+        cfg = copy.deepcopy(self.cfg)
+        cfg["controls"] = [c for c in cfg["controls"] if c["kind"] != "drc_inject_box"] + [
+            {"id": "ctl-drc-multi", "kind": "drc_inject_box", "base_cell": "INVx1_X", "layer": [11, 0],
+             "boxes_dbu": [[0, 0, 1, 1], [2, 2, 3, 3]], "expect_rule": "M1.S.2"},
+        ]
+        return cfg
+
+    def test_multi_box_control_is_caught_and_passes_every_box(self):
+        klt = FakeKlt()
+        self.assertEqual(self.go(klt, self.multi_box_cfg()), 0)
+        ctl = next(c for c in self.manifest()["controls"] if c["id"] == "ctl-drc-multi")
+        self.assertEqual(ctl["result"], "CAUGHT")
+        self.assertFalse(ctl["fires_on_clean_cell"])
+        self.assertIn({"layer": [11, 0], "boxes": [[0, 0, 1, 1], [2, 2, 3, 3]]}, klt.injects)
+
+    def test_single_box_control_still_passes_one_box(self):
+        klt = FakeKlt()
+        self.assertEqual(self.go(klt), 0)
+        self.assertIn({"layer": [1, 0], "box": [0, 0, 1, 1]}, klt.injects)
+
+    def test_control_with_both_box_keys_fails_the_run(self):
+        cfg = self.multi_box_cfg()
+        cfg["controls"][-1]["box_dbu"] = [0, 0, 1, 1]
+        self.assertEqual(self.go(FakeKlt(), cfg), 1)
 
     def test_missed_lvs_control_fails_run(self):
         self.assertEqual(self.go(FakeKlt(control_lvs="match")), 1)
@@ -519,6 +549,102 @@ class RunRegressionTest(unittest.TestCase):
     def test_drawn_cell_with_missing_file_is_setup_error(self):
         (self.tmp / "design" / "draw_D.py").unlink()
         self.assertEqual(self.go(FakeKlt(), self.drawn_cfg()), 2)
+
+
+class InjectBoxTest(unittest.TestCase):
+    """`box_dbu` (one box) and `boxes_dbu` (several) on a drc_inject_box control."""
+
+    def test_inject_spec_single_box(self):
+        spec = rr.inject_spec({"id": "c", "layer": [11, 0], "box_dbu": [1, 2, 3, 4]})
+        self.assertEqual(spec, {"layer": [11, 0], "box": [1, 2, 3, 4]})
+
+    def test_inject_spec_multiple_boxes(self):
+        boxes = [[1, 2, 3, 4], [5, 6, 7, 8]]
+        spec = rr.inject_spec({"id": "c", "layer": [11, 0], "boxes_dbu": boxes})
+        self.assertEqual(spec, {"layer": [11, 0], "boxes": boxes})
+
+    def test_inject_spec_rejects_both_keys(self):
+        with self.assertRaises(rr.SetupError):
+            rr.inject_spec({"id": "c", "layer": [11, 0], "box_dbu": [1, 2, 3, 4], "boxes_dbu": [[1, 2, 3, 4]]})
+
+    def test_inject_spec_rejects_neither_key(self):
+        with self.assertRaises(rr.SetupError):
+            rr.inject_spec({"id": "c", "layer": [11, 0]})
+
+    def run_helper_extract(self, inject):
+        """Run HELPER's `extract` branch against a stub `klayout.db`.
+
+        The real branch only runs under klt's interpreter, so the module is
+        stubbed to record what it was asked to insert. This is the only place
+        the box-insertion loop itself is exercised.
+        """
+        inserted = []
+
+        class Shapes:
+            def insert(self, box):
+                inserted.append(box)
+
+        class Cell:
+            def copy_tree(self, other):
+                pass
+
+            def shapes(self, layer):
+                return Shapes()
+
+        class Layout:
+            dbu = 0.00025
+
+            def read(self, src):
+                pass
+
+            def cell(self, name):
+                return Cell()
+
+            def create_cell(self, name):
+                return Cell()
+
+            def layer(self, *lt):
+                return lt
+
+            def write(self, out):
+                Path(out).write_bytes(b"gds")
+
+        db = types.ModuleType("klayout.db")
+        db.Layout = Layout
+        db.Box = lambda *a: ("Box", *a)
+        pkg = types.ModuleType("klayout")
+        pkg.db = db
+        argv = ["extract", "in.gds", "CELL", str(self.out)]
+        if inject is not None:
+            argv.append(json.dumps(inject))
+        saved = sys.modules.copy()
+        sys.modules["klayout"], sys.modules["klayout.db"] = pkg, db
+        saved_argv = sys.argv
+        try:
+            sys.argv = ["helper", *argv]
+            exec(compile(rr.HELPER, "<helper>", "exec"), {"__name__": "__main__"})
+        finally:
+            sys.argv = saved_argv
+            sys.modules.clear()
+            sys.modules.update(saved)
+        return inserted
+
+    def setUp(self):
+        self.tmp = Path(tempfile.mkdtemp())
+        self.out = self.tmp / "out.gds"
+
+    def test_helper_inserts_the_single_box(self):
+        self.assertEqual(self.run_helper_extract({"layer": [11, 0], "box": [1, 2, 3, 4]}),
+                         [("Box", 1, 2, 3, 4)])
+
+    def test_helper_inserts_every_box(self):
+        boxes = [[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12]]
+        self.assertEqual(self.run_helper_extract({"layer": [11, 0], "boxes": boxes}),
+                         [("Box", *b) for b in boxes])
+
+    def test_helper_inserts_nothing_without_an_inject(self):
+        self.assertEqual(self.run_helper_extract(None), [])
+        self.assertTrue(self.out.is_file())
 
 
 if __name__ == "__main__":

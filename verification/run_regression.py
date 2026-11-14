@@ -62,7 +62,11 @@ elif a[0] == "extract":
     n = o.create_cell(cell)
     n.copy_tree(top)
     if inject:
-        n.shapes(o.layer(*inject["layer"])).insert(db.Box(*inject["box"]))
+        # One box ("box") or several on the same layer ("boxes"): a rule that
+        # needs a non-convex defect (an enclosed hole) cannot be reached by one.
+        sh = n.shapes(o.layer(*inject["layer"]))
+        for b in inject["boxes"] if "boxes" in inject else [inject["box"]]:
+            sh.insert(db.Box(*b))
     o.write(out)
 elif a[0] == "place":
     # Build a top cell of abutted rows: spec = {top, libs: {cell: gds}, rows: [[[cell, orient], ...], ...]}
@@ -469,6 +473,19 @@ def structural_check(klt, gds, cell, expect_layers, outdir):
     res["expected_layers"] = expect_layers
     res["result"] = "PASS" if env.get("status") == "extracted" and env.get("device_count") == 0 and layers == expect_layers else "FAIL"
     return res
+
+
+def inject_spec(ctl):
+    """The HELPER `extract` inject argument of a box-injecting control.
+
+    `box_dbu` is one box; `boxes_dbu` is several on the same layer, for a defect
+    no single convex box can make (ACTIVE.A.1B's enclosed hole needs a frame).
+    """
+    if ("box_dbu" in ctl) == ("boxes_dbu" in ctl):
+        raise SetupError(f"control {ctl['id']}: needs exactly one of `box_dbu`, `boxes_dbu`")
+    if "boxes_dbu" in ctl:
+        return {"layer": ctl["layer"], "boxes": ctl["boxes_dbu"]}
+    return {"layer": ctl["layer"], "box": ctl["box_dbu"]}
 
 
 def drc_request(gds, info):
@@ -908,7 +925,7 @@ def run(args, klt=None):
         gds = work / f"{ctl['base_cell']}.{ctl['id']}.gds"
         try:
             if ctl["kind"] == "drc_inject_box":
-                klt.extract(base_gds, ctl["base_cell"], gds, {"layer": ctl["layer"], "box": ctl["box_dbu"]})
+                klt.extract(base_gds, ctl["base_cell"], gds, inject_spec(ctl))
                 env, err = run_one(klt, "drc", drc_request(gds, info), out, "drc")
                 rules = (env or {}).get("rule_counts", {})
                 res["observed"] = {"status": (env or {}).get("status"), "rule_counts": rules}
@@ -921,7 +938,7 @@ def run(args, klt=None):
             elif ctl["kind"] == "drc_abutted":
                 # A broken copy of an abutment-verdict cell, placed in the 3x self row: the cell's
                 # own verdict path must be able to fail.
-                klt.extract(base_gds, ctl["base_cell"], gds, {"layer": ctl["layer"], "box": ctl["box_dbu"]})
+                klt.extract(base_gds, ctl["base_cell"], gds, inject_spec(ctl))
                 placed = work / f"{ctl['base_cell']}.{ctl['id']}.placed.gds"
                 klt.place({ctl["base_cell"]: gds}, [[(ctl["base_cell"], "R0")] * 3], placed)
                 env, err = run_one(klt, "drc", drc_request(placed, info), out, "drc")
