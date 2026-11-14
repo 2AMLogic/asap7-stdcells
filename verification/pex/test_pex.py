@@ -2,6 +2,9 @@
 
     python3 -I verification/pex/test_pex.py
 
+All six self-tests at once: python3 verification/run_selftests.py
+(pnpm run check:ci).
+
 pex_measure imports klayout_tools only inside main(), so no klt interpreter is
 needed. A mutated record that the checker accepts fails this test.
 """

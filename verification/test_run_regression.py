@@ -2,6 +2,9 @@
 
     python3 -m unittest verification.test_run_regression   (from the repo root)
     python3 verification/test_run_regression.py
+
+All six self-tests at once: python3 verification/run_selftests.py
+(pnpm run check:ci).
 """
 import copy
 import hashlib

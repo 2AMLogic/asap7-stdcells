@@ -97,6 +97,9 @@ python3 -I verification/pex/check_pex_records.py <records-dir>
 python3 -I verification/pex/test_pex.py
 ```
 
+All six self-tests at once (no klt or PDK needed for the offline suites):
+`python3 verification/run_selftests.py` (`pnpm run check:ci`).
+
 `run.sh` fetches the pinned lambdapdk 0.2.17 (sha256 checked) and builds the
 OSDI module into the scratch dir. Tool versions: `records/2026-11-07/versions.txt`
 (klt 0.9.2.dev247+g6c8de4e4f36a, ngspice-46, bsimcmg.osdi sha256 `4e755d14...`).
