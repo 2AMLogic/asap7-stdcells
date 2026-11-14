@@ -202,7 +202,7 @@ Item 11 cites `erc.json` with item 4's library `lvs.json`, which pairs `VDD` and
 - The substrate tie is declared with `well_complement_of`, so `klt` reports it
   under `checked_by_well_assertion`: the region is derived from the stream, not
   drawn.
-- `erc.json` was run with `klt 0.8.1.dev604`; CI grades with `klayout-tools==0.8.0`,
+- `erc.json` was run with `klt 0.8.1.dev604`; CI grades with `klayout-tools==0.9.0`,
   which also grades item 11 `met` on it. `klt erc --check --rerun` on 0.8.0 reports
   drift on `provenance.klt_git_commit`, `provenance.klt_reinstall_spec` and
   `erc_coverage.inapplicable` only (tool-version fields, filed as
