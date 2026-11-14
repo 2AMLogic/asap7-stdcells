@@ -34,13 +34,13 @@
         "command": null,
         "kind": "generic",
         "check_status": "pass",
-        "content_hash": "sha256:1aafd0380a9cfc0107c8f4f77f9793f0eb265220a93d1c7b1f33c9e689ef3242",
+        "content_hash": "sha256:92a94d3e3fd470f9e29c659ff1619c6f17525b3b4b66068f69131d6b8c3b55c6",
         "input_verified": true,
         "exit_status": 0,
         "artifact_binding": {
           "t1_item": 1,
           "path": null,
-          "content_hash": "sha256:1aafd0380a9cfc0107c8f4f77f9793f0eb265220a93d1c7b1f33c9e689ef3242",
+          "content_hash": "sha256:92a94d3e3fd470f9e29c659ff1619c6f17525b3b4b66068f69131d6b8c3b55c6",
           "input_verified": true,
           "members": [
             {
@@ -200,7 +200,7 @@
                 "path": "design/cdl-freshness.json",
                 "scope": "repo"
               },
-              "content_hash": "sha256:b4aad1e4970a9db3d0c783e522bdd1c5ca86d0763c1347c0675eb3b0fc173594",
+              "content_hash": "sha256:c37ff088eaab38a912253035c3d01a836bdd384824c665651c5ce9b7a193f4c2",
               "status": "verified"
             },
             {
@@ -208,7 +208,7 @@
                 "path": "design/check_cdl_fresh.py",
                 "scope": "repo"
               },
-              "content_hash": "sha256:abe125b048b71c4e6187fb16a24fb4fdbef6b2ebb53d9544736dc8d672f19b91",
+              "content_hash": "sha256:0830640a723b0f2f1a427526ca85c25c5f812fd7a64a6323a0bbffed71256a08",
               "status": "verified"
             },
             {

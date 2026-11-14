@@ -10,19 +10,28 @@ Source of truth for the drawn cells.
 | `check_cdl_function.py` | Switch-level evaluation of every CDL against the function in the spec cell table (full truth table for combinational cells, clocked sequence for `DHLx1` and `DFFHQNx1`). Exit 0 only if all 18 pass. |
 | `write_liberty.py`, `check_liberty.py`, `liberty_common.py` | Write `layout/A7S_75t_R_structural.lib` (pins, directions, functions, areas; no timing) and check it: function against the `check_cdl_function.py` truth table, area against the GDS boundary, no timing content, byte-identical regeneration, three negative controls. Run with `python3 -I`. |
 | `check_cdl_fresh.py`, `cdl-freshness.json` | The freshness rule below. |
+| `check_cdl_fresh_negctl.py` | Negative control for the freshness rule: runs `check_cdl_fresh.py --root` over broken scratch copies and requires one case per clause to be flagged, including the device-less allowance. A rule that never fires is a finding, not a pass. Run with `python3 -I`; needs no PDK. |
 
 Cells with a CDL: the 18 device-bearing cells of the spec cell table (1-18,
 `INVx1` through `TIELOx1`; `FILLER*` and `TAP` have no devices). The
 12-cell fallback set and `NAND3x1`, `NOR3x1`, `AOI22x1`, `OAI22x1` have draw
 scripts (see below); the other six are drawn under #36.
 
-**Freshness rule.** `cdl-freshness.json` records, per cell, the sha256 of the
-CDL and of its draw script as last reviewed together (`script: null` until the
-script exists). `python3 -I design/check_cdl_fresh.py` exits non-zero if either
-file differs, if a CDL has no entry, or if a draw script exists that the pair
-does not record. A layout PR that adds or edits a script must re-check the CDL
-against what it draws (LVS compares the CDL exactly), edit the CDL if the
-stack order changed, then re-pair with
+**Freshness rule.** `cdl-freshness.json` records, per drawn cell, the sha256 of
+the CDL and of its draw script as last reviewed together. A recorded null hash
+asserts that the file does not exist and is not expected to: `cdl_sha256` is
+null for the four device-less cells (`FILLER1`, `FILLER2`, `FILLER4`, `TAP` --
+no devices, so no CDL to compare against, `spec/stdcells.md:176` and
+`spec/decisions/0010-filler1-without-implants.md`), `script_sha256` is null for
+a cell whose CDL exists before its draw script. A null is an assertion, not a
+wildcard: the file appearing trips the check just as a changed file does.
+`python3 -I design/check_cdl_fresh.py` exits non-zero if either file differs,
+if a CDL has no entry, if a draw script exists that the pair does not record,
+or if an entry names a file that is gone. `.github/workflows/signoff.yml` runs
+the check and `check_cdl_fresh_negctl.py` beside the GDS pair. A layout PR that
+adds or edits a script must re-check the CDL against what it draws (LVS
+compares the CDL exactly), edit the CDL if the stack order changed, then
+re-pair with
 `python3 -I design/check_cdl_fresh.py --update <CELL>` and refresh the T1 item 1
 envelope (`klt signoff --attest 1 --inventory manifests/t1-item1-inventory.json
 -o manifests/t1-item1.envelope.json`, then the cited hash and
