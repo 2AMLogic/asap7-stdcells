@@ -49,7 +49,8 @@ library with no timing arcs is recorded as unverified in `sim/README.md`.
 
 ## Now
 
-No issue is open for any of these yet.
+Each is filed, on 2026-11-14: #109 (1), #110 (2), #111 (3) and #112 (4).
+#110 is held on an operator decision — see "Blocked and waiting".
 
 1. **Place and route the integration design** with OpenROAD: the mapped
    `counter8` netlist, the pinned tech LEF, `layout/A7S_75t_R.lef` and the
@@ -115,6 +116,12 @@ that carries the upstream fix):
   The spec's precondition, cells 1 to 22 DRC/LVS-clean, is met. First answer:
   which set exercises the most currently unexercised rules (the `LVT.*` and
   `SLVT.*` enclosure and extension rules are candidates)?
+- **A second track height** (spec stretch, the Architecture row of the
+  parameter table; same class and precondition as the stretch cells above, and
+  the precondition is met). First answer: which rules does a cell drawn at
+  another height reach that the 7.5-track set does not — weighed against the
+  spec's reason for one height, that sharing the `asap7sc7p5t` grid is what
+  makes the comparison and the deck gate meaningful.
 - **Move drawing to a `klt` ASAP7 generator** (spec stretch;
   klayout-tools#2762 is closed). First answer: do the upstream helpers
   reproduce the conventions of decisions 0006, 0008 and 0009, and does the
@@ -124,15 +131,20 @@ that carries the upstream fix):
 
 ## Blocked and waiting
 
-- **Nothing is dispatchable today.** The tracker has one open issue, #107, a
-  merge-hold digest with no work in it, and no open pull request. The Now items
-  need issues filed.
+- **Now 2 (#110) is held on an operator decision.** A regression record taken
+  from a pinned `klt 0.9.0` install fails CI's path-reproducibility lint,
+  because the envelopes name the install path `klt` writes for the ASAP7 deck —
+  the same dead end `spec/bringup.md` records for the 0.8.0 attempt, whose run
+  reproduced the deck hash and the overall PASS but "was not committed because
+  its envelopes name the venv path". The question and its ranked options are on
+  the issue. Now 1 (#109), 3 (#111) and 4 (#112) are not blocked by it.
+- **#107** is a Champion merge-hold digest with no work in it.
 - **Rule-category count in the spec.** `spec/stdcells.md` names 263 where the
   records since 2026-10-28 report 267; correcting it needs a decision record.
 - **BEOL via rules:** klayout-tools#3147 is open upstream.
 
 ## Not planned
 
-Fabrication or any measured result; a second track height, SRAM macros, I/O or
-pad cells (out of scope in the spec); replacing the shipped `asap7sc7p5t`
-library; a timing-closure claim while no timing Liberty exists.
+Fabrication or any measured result; SRAM macros, I/O or pad cells (out of scope
+in the spec); replacing the shipped `asap7sc7p5t` library; a timing-closure
+claim while no timing Liberty exists.
