@@ -27,25 +27,6 @@ W = 810
 SHIFT = 6  # sites between the inverter block and the AOI block
 
 
-def gate_link(d, j, row, down=False, up=False):
-    """Gate contact of gate j with a V1 on M2 row 108 or 144 (the stripe's own height),
-    or with the stripe stretched to row 36 (down) or row 216 (up)."""
-    x = gx(j)
-    gate_contact(d, j)
-    if row == 108:
-        d.box("M1", x - 9, 106, x + 9, 162)
-        d.box("V1", x - 9, 108, x + 9, 126)
-    elif row == 144:
-        d.box("M1", x - 9, 108, x + 9, 164)
-        d.box("V1", x - 9, 144, x + 9, 162)
-    elif down:
-        d.box("M1", x - 9, 34, x + 9, 162)
-        d.box("V1", x - 9, 36, x + 9, 54)
-    elif up:
-        d.box("M1", x - 9, 108, x + 9, 236)
-        d.box("V1", x - 9, 216, x + 9, 234)
-
-
 def build(name=CELL):
     d = CellDraw(name, W)
     frame(d, live=[1, 3, 7, 9, 11, 13], dummies=[0, 4, 6, 10, 14],

@@ -34,10 +34,6 @@ W = 1458
 M_DX, A_DX, S_DX, B_DX = 216, 540, 864, 1188  # first live gate at site 5, 11, 17, 23
 
 
-def v1(d, x, y0):
-    d.box("V1", x, y0, x + 18, y0 + 18)
-
-
 def wire(d, y0, x0, x1):
     d.box("M2", x0, y0, x1, y0 + 18)
 

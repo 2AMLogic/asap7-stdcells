@@ -27,10 +27,6 @@ W = 810
 DX = 540  # the transmission-gate span is the n1/n2 span moved ten sites right
 
 
-def v1(d, x, y0):
-    d.box("V1", x, y0, x + 18, y0 + 18)
-
-
 def build(name=CELL):
     d = CellDraw(name, W)
     frame(d, live=[1, 3, 7, 11, 13], dummies=[0, 4, 6, 8, 10, 14], spans=[(46, 224), (370, 440), (586, 764)])
