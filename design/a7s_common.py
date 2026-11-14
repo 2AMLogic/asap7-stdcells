@@ -199,3 +199,80 @@ class Shifted:
 
     def label(self, text, x, y):
         self.d.label(text, x + self.dx, y)
+
+
+# ---- composite blocks shared by two cells each ------------------------------
+# One definition of the AOI22/OAI22 source-drain geometry, called by the
+# standalone cell and by the XOR/XNOR cell that places the same block through a
+# `Shifted` view (decision 0009 item 2). The GDS is compared byte for byte by
+# design/check_gds_fresh.py, so shape insertion order is part of the stream:
+# both callers insert their four gate contacts *between* the source-drain
+# geometry and the two M2 links, and they use a different gate step (plain
+# `gate_contact` in the standalone cell, a gate-and-V1 stripe in the XOR cell).
+# The step is therefore passed in as `gates`, a callable invoked at that point.
+
+
+def aoi22_block(t, gates):
+    """AOI22 interior: source-drain geometry, the caller's gate contacts, the Y
+    and x_p1 M2 links. `t` is a CellDraw or a `Shifted` view of one, in the
+    block's own site numbering (gates at local sites 1, 3, 5, 7).
+
+    NMOS: Y-A1-x_n1-A2-VSS | VSS-B2-x_n2-B1-Y. PMOS: x_p1-A1-VDD-A2-x_p1 |
+    x_p1-B2-Y-B1-x_p1. Nets either side of the diffusion break are equal
+    (ACTIVE.S.2A): VSS by stubs, x_p1 by an M1 bar."""
+    contact54(t, "N", 54, 36)           # Y
+    m1(t, 36, 36, 54, 95)
+    contact54(t, "P", 54, 36)           # x_p1
+    m1(t, 36, 175, 54, 234)
+    contact(t, "P", 144, (144, 168))    # VDD
+    stub(t, "P", 144)
+    contact54(t, "N", 216, 216)         # VSS
+    stub(t, "N", 216)
+    contact54(t, "N", 270, 252)
+    stub(t, "N", 252)
+    contact54(t, "P", 216, 216)         # x_p1
+    contact54(t, "P", 270, 252)
+    m1(t, 216, 216, 270, 234)
+    m1(t, 216, 175, 234, 234)
+    contact(t, "P", 360, (360, 384))    # Y
+    m1(t, 360, 67, 378, 234)
+    contact54(t, "N", 432, 432)         # Y
+    m1(t, 432, 36, 450, 95)
+    contact54(t, "P", 432, 432)         # x_p1
+    m1(t, 432, 175, 450, 234)
+    gates()
+    link(t, 72, [36, 360, 432])         # Y
+    link(t, 180, [36, 216, 432])        # x_p1
+
+
+def oai22_block(t, gates):
+    """OAI22 interior: source-drain geometry, the caller's gate contacts, the
+    x_n1 and Y M2 links. `t` is a CellDraw or a `Shifted` view of one, in the
+    block's own site numbering (gates at local sites 1, 3, 5, 7).
+
+    NMOS: x_n1-A1-Y-A2-x_n1 | x_n1-B2-VSS-B1-x_n1. PMOS: Y-A1-x_p1-A2-VDD |
+    VDD-B2-x_p2-B1-Y. Nets either side of the diffusion break are equal
+    (ACTIVE.S.2A): x_n1 by an M1 bar, VDD by stubs."""
+    contact54(t, "N", 54, 36)           # x_n1
+    m1(t, 36, 36, 54, 95)
+    contact54(t, "P", 54, 36)           # Y
+    m1(t, 36, 175, 54, 234)
+    contact(t, "N", 144, (144, 168))    # Y
+    m1(t, 144, 36, 162, 234)
+    contact54(t, "N", 216, 216)         # x_n1
+    contact54(t, "N", 270, 252)
+    m1(t, 216, 36, 270, 54)
+    m1(t, 216, 36, 234, 95)
+    contact54(t, "P", 216, 216)         # VDD
+    stub(t, "P", 216)
+    contact54(t, "P", 270, 252)
+    stub(t, "P", 252)
+    contact(t, "N", 360, (360, 384))    # VSS
+    stub(t, "N", 360)
+    contact54(t, "N", 432, 432)         # x_n1
+    m1(t, 432, 36, 450, 95)
+    contact54(t, "P", 432, 432)         # Y
+    m1(t, 432, 175, 450, 234)
+    gates()
+    link(t, 72, [36, 216, 432])         # x_n1
+    link(t, 180, [36, 144, 432])        # Y
