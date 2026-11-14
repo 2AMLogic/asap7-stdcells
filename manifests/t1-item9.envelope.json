@@ -24,7 +24,7 @@
         "role": "testbench",
         "path": "verification/cells.json",
         "passed": true,
-        "content_hash": "sha256:e3e1fe1f79d37d301aa9b57da0eddea47f14d39fedda6f9a016931be2a5f2a93"
+        "content_hash": "sha256:b56fb6db4b2c0f910a5d395a9dc4b0b846ebd7ea146738ff3225473266ea3852"
       },
       {
         "check": "present",
@@ -38,14 +38,14 @@
         "role": "testbench",
         "path": "verification/run_regression.py",
         "passed": true,
-        "content_hash": "sha256:be0744497d2cb009755b9ec9d2352a523e01dca15e80a593f44da574b77f55ac"
+        "content_hash": "sha256:1ebbd2df009e156124f6e47aab3e12016f599d99c3b865ec206721d373bf852c"
       },
       {
         "check": "present",
         "role": "testbench",
         "path": "verification/test_run_regression.py",
         "passed": true,
-        "content_hash": "sha256:3f8fa2b9bc5e6f5a5f29cdab7b08f967e8c24f91904ce9f914871e4e286c7ede"
+        "content_hash": "sha256:ad3f2a3a8af5ee8dc2d7688008a4577d1c1b2296fd211192074a026d62f252cc"
       },
       {
         "check": "command",
