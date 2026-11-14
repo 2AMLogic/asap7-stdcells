@@ -82,6 +82,7 @@ spec/          ratified spec + decision records
 design/        cell netlists (CDL / SPICE)
 sim/           characterization, if the models run; otherwise timing notes
 verification/  DRC/LVS regression harness across the cell set
+integration/   OpenROAD place-and-route of the integration design + its record
 layout/        cell GDS, LEF views, DRC/LVS reports
 ```
 
