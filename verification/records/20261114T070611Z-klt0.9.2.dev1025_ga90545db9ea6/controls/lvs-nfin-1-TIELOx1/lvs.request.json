@@ -1,0 +1,17 @@
+{
+  "layout": {
+    "deck": "asap7",
+    "file": "layout/TIELOx1_A7S_75t_R.gds",
+    "top": "TIELOx1_A7S_75t_R"
+  },
+  "options": {
+    "finfet_bulk": {
+      "nmos": "VSS",
+      "pmos": "VDD"
+    }
+  },
+  "reference": {
+    "netlist": "verification/.work/lvs-nfin-1-TIELOx1.cdl",
+    "top": "TIELOx1_A7S_75t_R"
+  }
+}

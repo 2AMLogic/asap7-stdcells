@@ -1,0 +1,19 @@
+* extracted by klt extract --deck asap7
+
+* cell NOR2x1_A7S_75t_R
+* pin A
+* pin B
+* pin VDD
+* pin VSS
+* pin Y
+* pin vsubs
+.SUBCKT NOR2x1_A7S_75t_R A B VDD VSS Y vsubs
+* device instance $1 r0 *1 0,0.018 nmos_rvt
+M$1 Y A VSS vsubs nmos_rvt L=0.02U W=0.081U NFIN=3
+* device instance $2 r0 *1 0,0.018 nmos_rvt
+M$2 VSS B Y vsubs nmos_rvt L=0.02U W=0.081U NFIN=3
+* device instance $3 r0 *1 0,0.018 pmos_rvt
+M$3 \$11 A VDD \$6 pmos_rvt L=0.02U W=0.081U NFIN=3
+* device instance $4 r0 *1 0,0.018 pmos_rvt
+M$4 Y B \$11 \$6 pmos_rvt L=0.02U W=0.081U NFIN=3
+.ENDS NOR2x1_A7S_75t_R

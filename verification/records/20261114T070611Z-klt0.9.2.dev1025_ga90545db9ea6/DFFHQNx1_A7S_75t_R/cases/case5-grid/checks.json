@@ -1,0 +1,32 @@
+{
+  "cell": "DFFHQNx1_A7S_75t_R",
+  "checks": [
+    {
+      "findings": [],
+      "id": "BOUNDARY",
+      "status": "pass",
+      "what": "100/0 is one rectangle at the origin, 270 nm tall, width a multiple of 54 nm"
+    },
+    {
+      "findings": [],
+      "id": "FIN.Y",
+      "status": "pass",
+      "what": "every FIN is 7 nm tall with its centre on y = 13.5 + 27k nm"
+    },
+    {
+      "findings": [],
+      "id": "GATE.X",
+      "status": "pass",
+      "what": "every GATE is 20 nm wide with its centre on x = 27 + 54k nm"
+    },
+    {
+      "findings": [],
+      "id": "M1.PIN",
+      "status": "pass",
+      "what": "labelled M1 pins are 18 nm stripes on the 36 nm track grid; rails are 18 nm centred on the cell edges"
+    }
+  ],
+  "failed": [],
+  "schema": "asap7-stdcells.grid-check/1",
+  "status": "pass"
+}

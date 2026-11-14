@@ -1,0 +1,14 @@
+* extracted by klt extract --deck asap7
+
+* cell INVx1_A7S_75t_R
+* pin A
+* pin VDD
+* pin VSS
+* pin Y
+* pin vsubs
+.SUBCKT INVx1_A7S_75t_R A VDD VSS Y vsubs
+* device instance $1 r0 *1 0,0.018 nmos_rvt
+M$1 Y A VSS vsubs nmos_rvt L=0.02U W=0.081U NFIN=3
+* device instance $2 r0 *1 0,0.018 pmos_rvt
+M$2 Y A VDD \$5 pmos_rvt L=0.02U W=0.081U NFIN=3
+.ENDS INVx1_A7S_75t_R
