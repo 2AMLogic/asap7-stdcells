@@ -12,7 +12,8 @@ make_seq_requests.py) and writes, under <records-dir>:
                  metastable offsets, and the batch job id; plus the negative-
                  control verdicts
   summary.md     the same as a table
-  <cell>.report.json   klt's report (host paths normalised by normalize_paths.py)
+  <cell>.report.json   klt's report (host paths normalised by
+                       verification/normalize_paths.py)
 
 Verdicts are klt's own (measurement limits in each request). Setup and hold
 are reduced here from the unlimited sweep levels (decision 0012 item 7):
