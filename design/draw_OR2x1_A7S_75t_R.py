@@ -48,7 +48,7 @@ def build(name=CELL):
     m1(d, 324, 36, 342, 234)
     gate_contact(d, 1)
     gate_contact(d, 3)
-    gate_contact(d, 5, v1=True)
+    gate_contact(d, 5, with_v1=True)
     link(d, 108, [36, 108, 288])
     for text, x, y in (("A", 81, 135), ("B", 189, 135), ("Y", 333, 135)):
         d.label(text, x, y)
