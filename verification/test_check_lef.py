@@ -58,6 +58,19 @@ class Controls(unittest.TestCase):
         self.assertIn("track_grid", self.fails(t))
         self.assertIn("pin_geometry", self.fails(t))  # and it is no longer the drawn M1
 
+    def test_blocked_v1_crossing_rejected(self):
+        # A: 0.072..0.090 x 0.108..0.162 has its V1 crossings at (81, 117) and
+        # (81, 153); an M2 obstruction over both must fire access_point on A
+        # (and only A -- Y's crossing column starts at x 108).
+        t = macro_text(CELL).replace(
+            f"END {CELL}",
+            "  OBS\n      LAYER M2 ;\n        RECT 0.067 0.108 0.095 0.162 ;\n  END\n"
+            f"END {CELL}")
+        fails = self.fails(t)
+        self.assertIn("access_point", fails)
+        self.assertNotIn("track_grid", fails)
+        self.assertNotIn("pin_geometry", fails)
+
     def test_missing_rail_rejected(self):
         t = re.sub(r"  PIN VDD\n.*?  END VDD\n", "", macro_text(CELL), flags=re.S)
         self.assertIn("rails", self.fails(t))

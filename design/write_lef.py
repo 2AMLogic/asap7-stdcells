@@ -7,11 +7,16 @@ Run under klt's interpreter (it is the one that has `klayout.db`):
 
 One MACRO per `layout/*.gds`, in name order. Everything is derived from the
 GDS: SIZE from the boundary shape on 100/0, each PIN from the merged M1 shapes
-that touch the pin's net label on 19/251, OBS from every M1 shape no pin claims
-plus all M2. The SITE (name `asap7sc7p5t`, 54 nm x 270 nm) is defined here
-because the pinned tech LEF carries no SITE section; its values are the grid in
-spec/stdcells.md. No shipped-library LEF geometry is read or copied. The output
-carries no timestamps, so it is reproducible byte for byte.
+that touch the pin's net label on 19/251 plus the M2 shapes of the pin's own
+net (M2 reached from the claimed M1 through V1 cuts, grown to closure), OBS
+from every M1 shape no pin claims plus every M2 shape no pin's net claims. A
+pin's own M2 is port geometry, not obstruction: the router must see the metal
+it may land on (issue #122 -- with all of a net's M2 in OBS its M1 stripe can
+be left without a single via-able M2 row-track crossing). The SITE (name
+`asap7sc7p5t`, 54 nm x 270 nm) is defined here because the pinned tech LEF
+carries no SITE section; its values are the grid in spec/stdcells.md. No
+shipped-library LEF geometry is read or copied. The output carries no
+timestamps, so it is reproducible byte for byte.
 
 Pin direction is a property of the cell function, not of the GDS: the pins in
 OUTPUTS below are the outputs of the cells in spec/stdcells.md; every other
@@ -25,7 +30,7 @@ import klayout.db as db
 LAYOUT_DIR = Path(__file__).resolve().parent.parent / "layout"
 LEF_NAME = "A7S_75t_R.lef"
 NM = 4  # dbu per nm (GDS dbu 0.00025 um)
-LAYER_M1, LAYER_M1_LABEL, LAYER_M2, LAYER_BOUNDARY = (19, 0), (19, 251), (20, 0), (100, 0)
+LAYER_M1, LAYER_M1_LABEL, LAYER_M2, LAYER_V1, LAYER_BOUNDARY = (19, 0), (19, 251), (20, 0), (21, 0), (100, 0)
 OUTPUTS = {"Y", "QN", "Q", "H", "L"}
 POWER = {"VDD": "POWER", "VSS": "GROUND"}
 SITE_NAME, SITE_W_NM, SITE_H_NM = "asap7sc7p5t", 54, 270
@@ -66,14 +71,29 @@ def read_cell(path):
     if idx is not None:
         labels = [(s.text.string, s.text.x, s.text.y) for s in cell.shapes(idx).each() if s.is_text()]
     # regions iterate the layout lazily: hand it back so it outlives the caller's use
-    return cell.name, boundary, labels, region(LAYER_M1), region(LAYER_M2), lay
+    return cell.name, boundary, labels, region(LAYER_M1), region(LAYER_M2), region(LAYER_V1), lay
+
+
+def net_m2(m1_net, m1, m2, v1):
+    """The M2 shapes of the same net as the claimed M1 `m1_net`: the M2 over V1
+    cuts on the net's M1, grown through further cuts until nothing new touches.
+    A V1 lands on one net's M1 and one net's M2 only (a cut across two nets
+    would be a short), so the growth cannot cross into another net's metal."""
+    conn_m1, conn_m2 = m1_net.merged(), db.Region()
+    while True:
+        new_m2 = m2.interacting(v1.interacting(conn_m1)) - conn_m2
+        new_m1 = m1.interacting(v1.interacting(new_m2)) - conn_m1
+        if new_m2.is_empty() and new_m1.is_empty():
+            return conn_m2
+        conn_m2 += new_m2
+        conn_m1 += new_m1
 
 
 def macro(path):
-    name, boundary, labels, m1, m2, _lay = read_cell(path)
+    name, boundary, labels, m1, m2, v1, _lay = read_cell(path)
     if boundary.empty() or (boundary.left, boundary.bottom) != (0, 0):
         raise SystemExit(f"{name}: boundary on 100/0 is missing or not at the origin")
-    pins, claimed = [], db.Region()
+    pins, claimed, claimed_m2 = [], db.Region(), db.Region()
     for pin_name in sorted({t for t, _, _ in labels}, key=lambda t: (t not in POWER, t)):
         seeds = db.Region()
         for t, x, y in labels:
@@ -83,19 +103,24 @@ def macro(path):
         if net.is_empty():
             raise SystemExit(f"{name}: label {pin_name} touches no M1 shape")
         claimed += net
-        pins.append((pin_name, rects(net)))
+        net_m2_r = net_m2(net, m1, m2, v1)
+        claimed_m2 += net_m2_r
+        pins.append((pin_name, rects(net), rects(net_m2_r)))
     obs_m1 = rects(m1.merged() - claimed)
-    obs_m2 = rects(m2)
+    obs_m2 = rects(m2.merged() - claimed_m2)
 
     w, h = boundary.width(), boundary.height()
     out = [f"MACRO {name}", "  CLASS CORE ;", "  ORIGIN 0 0 ;", f"  FOREIGN {name} 0 0 ;",
            f"  SIZE {um(w)} BY {um(h)} ;", "  SYMMETRY X Y ;", f"  SITE {SITE_NAME} ;"]
-    for pin_name, shapes in pins:
+    for pin_name, shapes, shapes_m2 in pins:
         use = POWER.get(pin_name, "SIGNAL")
         direction = "INOUT" if pin_name in POWER else ("OUTPUT" if pin_name in OUTPUTS else "INPUT")
         out += [f"  PIN {pin_name}", f"    DIRECTION {direction} ;", f"    USE {use} ;",
                 "    PORT", "      LAYER M1 ;"]
         out += [f"        RECT {um(a)} {um(b)} {um(c)} {um(d)} ;" for a, b, c, d in shapes]
+        if shapes_m2:
+            out += ["      LAYER M2 ;"]
+            out += [f"        RECT {um(a)} {um(b)} {um(c)} {um(d)} ;" for a, b, c, d in shapes_m2]
         out += ["    END", f"  END {pin_name}"]
     if obs_m1 or obs_m2:
         out.append("  OBS")

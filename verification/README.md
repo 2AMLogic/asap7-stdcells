@@ -44,9 +44,10 @@ sha256 recorded in `verification/lef/openroad-read-lef.log`). The SITE
 `asap7sc7p5t` is defined in the LEF because the pinned tech LEF has none.
 `verification/check_lef.py` parses the LEF itself and checks, per cell, SIZE
 against the GDS boundary, the 54 nm width and 270 nm height, the pin set against
-the GDS labels, pin M1 against the drawn GDS M1, the 36 nm track grid, and the
-power rails; `verification/test_check_lef.py` holds one negative control per
-check. `run_regression.py` regenerates the LEF and runs the checker on every
+the GDS labels, pin M1 (and M2) against the drawn GDS, the 36 nm track grid, an
+M2-row-track V1 crossing per signal pin clear of the M2 obstruction (decision
+0013), and the power rails; `verification/test_check_lef.py` holds one negative
+control per check. `run_regression.py` regenerates the LEF and runs the checker on every
 full run, so a boundary change fails until the LEF is regenerated. OpenROAD read
 check: `verification/lef/read_lef.sh <asap7_tech.lef>` (tech LEF from the pinned
 lambdapdk v0.2.17, sha256 `830a0328...b021d2`); the committed log records the

@@ -129,6 +129,8 @@ MACRO AOI21x1_A7S_75t_R
     PORT
       LAYER M1 ;
         RECT 0.036 0.036 0.054 0.234 ;
+      LAYER M2 ;
+        RECT 0.031 0.072 0.347 0.090 ;
     END
   END Y
   OBS
@@ -138,7 +140,6 @@ MACRO AOI21x1_A7S_75t_R
         RECT 0.324 0.198 0.342 0.234 ;
         RECT 0.108 0.216 0.162 0.234 ;
       LAYER M2 ;
-        RECT 0.031 0.072 0.347 0.090 ;
         RECT 0.121 0.216 0.347 0.234 ;
   END
 END AOI21x1_A7S_75t_R
@@ -207,6 +208,8 @@ MACRO AOI22x1_A7S_75t_R
     PORT
       LAYER M1 ;
         RECT 0.036 0.036 0.054 0.095 ;
+      LAYER M2 ;
+        RECT 0.031 0.072 0.455 0.090 ;
     END
   END Y
   OBS
@@ -218,7 +221,6 @@ MACRO AOI22x1_A7S_75t_R
         RECT 0.432 0.175 0.450 0.234 ;
         RECT 0.216 0.216 0.270 0.234 ;
       LAYER M2 ;
-        RECT 0.031 0.072 0.455 0.090 ;
         RECT 0.031 0.180 0.455 0.198 ;
   END
 END AOI22x1_A7S_75t_R
@@ -308,6 +310,8 @@ MACRO DFFHQNx1_A7S_75t_R
     PORT
       LAYER M1 ;
         RECT 0.072 0.108 0.090 0.234 ;
+      LAYER M2 ;
+        RECT 0.067 0.216 1.062 0.234 ;
     END
   END CLK
   PIN D
@@ -316,6 +320,10 @@ MACRO DFFHQNx1_A7S_75t_R
     PORT
       LAYER M1 ;
         RECT 0.252 0.036 0.270 0.095 ;
+      LAYER M2 ;
+        RECT 0.198 0.072 0.275 0.090 ;
+        RECT 0.198 0.090 0.216 0.180 ;
+        RECT 0.198 0.180 0.455 0.198 ;
     END
   END D
   PIN QN
@@ -324,6 +332,9 @@ MACRO DFFHQNx1_A7S_75t_R
     PORT
       LAYER M1 ;
         RECT 1.404 0.034 1.422 0.236 ;
+      LAYER M2 ;
+        RECT 0.895 0.072 1.427 0.090 ;
+        RECT 1.075 0.180 1.427 0.198 ;
     END
   END QN
   OBS
@@ -351,20 +362,14 @@ MACRO DFFHQNx1_A7S_75t_R
         RECT 1.080 0.175 1.098 0.234 ;
       LAYER M2 ;
         RECT 0.031 0.036 0.959 0.054 ;
-        RECT 0.198 0.072 0.275 0.090 ;
         RECT 0.355 0.072 0.738 0.090 ;
-        RECT 0.895 0.072 1.427 0.090 ;
-        RECT 0.198 0.090 0.216 0.180 ;
         RECT 0.427 0.108 0.599 0.126 ;
         RECT 0.751 0.108 1.103 0.126 ;
         RECT 1.219 0.108 1.391 0.126 ;
         RECT 0.247 0.144 0.594 0.162 ;
         RECT 0.751 0.144 0.923 0.162 ;
         RECT 1.003 0.144 1.283 0.162 ;
-        RECT 0.198 0.180 0.455 0.198 ;
         RECT 0.607 0.180 0.779 0.198 ;
-        RECT 1.075 0.180 1.427 0.198 ;
-        RECT 0.067 0.216 1.062 0.234 ;
   END
 END DFFHQNx1_A7S_75t_R
 
@@ -401,6 +406,8 @@ MACRO DHLx1_A7S_75t_R
     PORT
       LAYER M1 ;
         RECT 0.396 0.108 0.414 0.162 ;
+      LAYER M2 ;
+        RECT 0.391 0.144 0.743 0.162 ;
     END
   END CLK
   PIN D
@@ -409,6 +416,10 @@ MACRO DHLx1_A7S_75t_R
     PORT
       LAYER M1 ;
         RECT 0.756 0.036 0.774 0.095 ;
+      LAYER M2 ;
+        RECT 0.751 0.072 0.801 0.090 ;
+        RECT 0.783 0.090 0.801 0.180 ;
+        RECT 0.571 0.180 0.801 0.198 ;
     END
   END D
   PIN Q
@@ -417,6 +428,9 @@ MACRO DHLx1_A7S_75t_R
     PORT
       LAYER M1 ;
         RECT 0.216 0.034 0.234 0.236 ;
+      LAYER M2 ;
+        RECT 0.211 0.036 0.599 0.054 ;
+        RECT 0.211 0.216 0.779 0.234 ;
     END
   END Q
   OBS
@@ -432,15 +446,9 @@ MACRO DHLx1_A7S_75t_R
         RECT 0.576 0.175 0.594 0.234 ;
         RECT 0.756 0.175 0.774 0.234 ;
       LAYER M2 ;
-        RECT 0.211 0.036 0.599 0.054 ;
         RECT 0.355 0.072 0.635 0.090 ;
-        RECT 0.751 0.072 0.801 0.090 ;
-        RECT 0.783 0.090 0.801 0.180 ;
         RECT 0.067 0.108 0.707 0.126 ;
         RECT 0.031 0.144 0.203 0.162 ;
-        RECT 0.391 0.144 0.743 0.162 ;
-        RECT 0.571 0.180 0.801 0.198 ;
-        RECT 0.211 0.216 0.779 0.234 ;
   END
 END DHLx1_A7S_75t_R
 
@@ -610,13 +618,13 @@ MACRO NAND2x1_A7S_75t_R
     PORT
       LAYER M1 ;
         RECT 0.216 0.036 0.234 0.095 ;
+      LAYER M2 ;
+        RECT 0.139 0.072 0.239 0.090 ;
     END
   END Y
   OBS
       LAYER M1 ;
         RECT 0.144 0.067 0.162 0.234 ;
-      LAYER M2 ;
-        RECT 0.139 0.072 0.239 0.090 ;
   END
 END NAND2x1_A7S_75t_R
 
@@ -677,6 +685,8 @@ MACRO NAND3x1_A7S_75t_R
     PORT
       LAYER M1 ;
         RECT 0.036 0.036 0.054 0.234 ;
+      LAYER M2 ;
+        RECT 0.031 0.180 0.239 0.198 ;
     END
   END Y
   OBS
@@ -685,8 +695,6 @@ MACRO NAND3x1_A7S_75t_R
         RECT 0.216 0.036 0.270 0.054 ;
         RECT 0.216 0.175 0.234 0.216 ;
         RECT 0.216 0.216 0.270 0.234 ;
-      LAYER M2 ;
-        RECT 0.031 0.180 0.239 0.198 ;
   END
 END NAND3x1_A7S_75t_R
 
@@ -738,13 +746,13 @@ MACRO NOR2x1_A7S_75t_R
     PORT
       LAYER M1 ;
         RECT 0.216 0.198 0.234 0.234 ;
+      LAYER M2 ;
+        RECT 0.139 0.216 0.239 0.234 ;
     END
   END Y
   OBS
       LAYER M1 ;
         RECT 0.144 0.036 0.162 0.234 ;
-      LAYER M2 ;
-        RECT 0.139 0.216 0.239 0.234 ;
   END
 END NOR2x1_A7S_75t_R
 
@@ -805,6 +813,8 @@ MACRO NOR3x1_A7S_75t_R
     PORT
       LAYER M1 ;
         RECT 0.036 0.036 0.054 0.234 ;
+      LAYER M2 ;
+        RECT 0.031 0.072 0.239 0.090 ;
     END
   END Y
   OBS
@@ -813,8 +823,6 @@ MACRO NOR3x1_A7S_75t_R
         RECT 0.216 0.054 0.234 0.095 ;
         RECT 0.108 0.216 0.162 0.234 ;
         RECT 0.216 0.216 0.270 0.234 ;
-      LAYER M2 ;
-        RECT 0.031 0.072 0.239 0.090 ;
   END
 END NOR3x1_A7S_75t_R
 
@@ -875,6 +883,8 @@ MACRO OAI21x1_A7S_75t_R
     PORT
       LAYER M1 ;
         RECT 0.036 0.036 0.054 0.131 ;
+      LAYER M2 ;
+        RECT 0.031 0.108 0.131 0.126 ;
     END
   END Y
   OBS
@@ -886,7 +896,6 @@ MACRO OAI21x1_A7S_75t_R
         RECT 0.216 0.216 0.270 0.234 ;
       LAYER M2 ;
         RECT 0.121 0.036 0.347 0.054 ;
-        RECT 0.031 0.108 0.131 0.126 ;
   END
 END OAI21x1_A7S_75t_R
 
@@ -954,6 +963,8 @@ MACRO OAI22x1_A7S_75t_R
     PORT
       LAYER M1 ;
         RECT 0.144 0.036 0.162 0.234 ;
+      LAYER M2 ;
+        RECT 0.031 0.180 0.455 0.198 ;
     END
   END Y
   OBS
@@ -966,7 +977,6 @@ MACRO OAI22x1_A7S_75t_R
         RECT 0.432 0.175 0.450 0.234 ;
       LAYER M2 ;
         RECT 0.031 0.072 0.455 0.090 ;
-        RECT 0.031 0.180 0.455 0.198 ;
   END
 END OAI22x1_A7S_75t_R
 
@@ -1165,6 +1175,8 @@ MACRO XNOR2x1_A7S_75t_R
     PORT
       LAYER M1 ;
         RECT 0.180 0.106 0.198 0.162 ;
+      LAYER M2 ;
+        RECT 0.175 0.108 0.419 0.126 ;
     END
   END A
   PIN B
@@ -1173,6 +1185,8 @@ MACRO XNOR2x1_A7S_75t_R
     PORT
       LAYER M1 ;
         RECT 0.072 0.108 0.090 0.164 ;
+      LAYER M2 ;
+        RECT 0.067 0.144 0.527 0.162 ;
     END
   END B
   PIN Y
@@ -1181,6 +1195,8 @@ MACRO XNOR2x1_A7S_75t_R
     PORT
       LAYER M1 ;
         RECT 0.468 0.036 0.486 0.234 ;
+      LAYER M2 ;
+        RECT 0.355 0.180 0.779 0.198 ;
     END
   END Y
   OBS
@@ -1200,9 +1216,6 @@ MACRO XNOR2x1_A7S_75t_R
       LAYER M2 ;
         RECT 0.211 0.036 0.743 0.054 ;
         RECT 0.355 0.072 0.779 0.090 ;
-        RECT 0.175 0.108 0.419 0.126 ;
-        RECT 0.067 0.144 0.527 0.162 ;
-        RECT 0.355 0.180 0.779 0.198 ;
         RECT 0.031 0.216 0.635 0.234 ;
   END
 END XNOR2x1_A7S_75t_R
@@ -1241,6 +1254,8 @@ MACRO XOR2x1_A7S_75t_R
     PORT
       LAYER M1 ;
         RECT 0.180 0.106 0.198 0.162 ;
+      LAYER M2 ;
+        RECT 0.175 0.108 0.419 0.126 ;
     END
   END A
   PIN B
@@ -1249,6 +1264,8 @@ MACRO XOR2x1_A7S_75t_R
     PORT
       LAYER M1 ;
         RECT 0.072 0.108 0.090 0.164 ;
+      LAYER M2 ;
+        RECT 0.067 0.144 0.527 0.162 ;
     END
   END B
   PIN Y
@@ -1257,6 +1274,8 @@ MACRO XOR2x1_A7S_75t_R
     PORT
       LAYER M1 ;
         RECT 0.360 0.036 0.378 0.095 ;
+      LAYER M2 ;
+        RECT 0.355 0.072 0.779 0.090 ;
     END
   END Y
   OBS
@@ -1275,9 +1294,6 @@ MACRO XOR2x1_A7S_75t_R
         RECT 0.540 0.216 0.594 0.234 ;
       LAYER M2 ;
         RECT 0.031 0.036 0.635 0.054 ;
-        RECT 0.355 0.072 0.779 0.090 ;
-        RECT 0.175 0.108 0.419 0.126 ;
-        RECT 0.067 0.144 0.527 0.162 ;
         RECT 0.355 0.180 0.779 0.198 ;
         RECT 0.211 0.216 0.743 0.234 ;
   END

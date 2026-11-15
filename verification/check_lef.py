@@ -9,10 +9,14 @@ use the writer's intermediate data. Per cell it asserts (check ids in brackets):
   [site_width]   width is a multiple of the 54 nm site
   [height]       height is 270 nm
   [pin_set]      the LEF pins are exactly the net labels on GDS 19/251
-  [pin_geometry] every pin rectangle is M1 drawn in the GDS, and the pin covers
-                 its net label point
+  [pin_geometry] every pin rectangle is M1 (or M2) drawn in the GDS, and the
+                 M1 pin covers its net label point
   [track_grid]   every signal-pin M1 stripe is 18 nm wide, vertical, centred on
                  the 36 nm M1 track grid (centre = 9 + 36 k nm); a signal pin has one
+  [access_point] every signal pin has an M1-track x M2-row-track point where an
+                 18 nm V1 cut fits clear of the cell's own M2 obstruction. A
+                 lower bound -- it models the bare crossing, no via enclosure
+                 or spacing -- so the router stays the authority.
   [rails]        VDD is POWER and VSS is GROUND, each with an M1 rail across the
                  full width, 18 nm tall, centred on the top / bottom cell edge
 
@@ -34,8 +38,9 @@ from pathlib import Path
 
 REPO = Path(__file__).resolve().parent.parent
 SITE_NM, HEIGHT_NM, TRACK_PITCH, TRACK_OFFSET, M1_WIDTH, RAIL_HALF = 54, 270, 36, 9, 18, 9
+ROW_TRACKS_NM = (45, 81, 117, 153, 189, 225, 270)  # M2 horizontal row tracks (spec/stdcells.md)
 POWER = {"VDD": "POWER", "VSS": "GROUND"}
-CHECKS = ("macro_set", "size", "site_width", "height", "pin_set", "pin_geometry", "track_grid", "rails")
+CHECKS = ("macro_set", "size", "site_width", "height", "pin_set", "pin_geometry", "track_grid", "access_point", "rails")
 
 
 def nm(text):
@@ -43,7 +48,8 @@ def nm(text):
 
 
 def parse_lef(text):
-    """{macro: {"size": (w, h) nm, "pins": {name: {"use", "rects": [(l, b, r, t)] nm on M1}}}}."""
+    """{macro: {"size": (w, h) nm, "pins": {name: {"use", "m1": [...], "m2": [...]}},
+    "obs_m2": [...]}, all rects (l, b, r, t) nm}."""
     macros, cur, pin, layer, in_obs = {}, None, None, None, False
     for raw in text.splitlines():
         t = raw.split("#")[0].strip().rstrip(";").strip()
@@ -51,21 +57,23 @@ def parse_lef(text):
         if not tok:
             continue
         if tok[0] == "MACRO":
-            cur = macros[tok[1]] = {"size": None, "pins": {}}
+            cur = macros[tok[1]] = {"size": None, "pins": {}, "obs_m2": []}
         elif cur is None:
             continue
         elif tok[0] == "SIZE":
             cur["size"] = (nm(tok[1]), nm(tok[3]))
         elif tok[0] == "PIN":
-            pin = cur["pins"][tok[1]] = {"use": None, "rects": []}
+            pin = cur["pins"][tok[1]] = {"use": None, "m1": [], "m2": []}
         elif tok[0] == "OBS":
             in_obs, pin = True, None
         elif tok[0] == "USE" and pin is not None:
             pin["use"] = tok[1]
         elif tok[0] == "LAYER":
             layer = tok[1]
-        elif tok[0] == "RECT" and pin is not None and layer == "M1" and not in_obs:
-            pin["rects"].append(tuple(nm(v) for v in tok[1:5]))
+        elif tok[0] == "RECT" and pin is not None and not in_obs and layer in ("M1", "M2"):
+            pin[layer.lower()].append(tuple(nm(v) for v in tok[1:5]))
+        elif tok[0] == "RECT" and in_obs and layer == "M2":
+            cur["obs_m2"].append(tuple(nm(v) for v in tok[1:5]))
         elif tok[0] == "END" and len(tok) > 1:
             if pin is not None and tok[1] in cur["pins"]:
                 pin = None
@@ -88,8 +96,26 @@ def covered(rect, rects):
     return True
 
 
+def via_crossings(pin_m1_rects, obs_m2):
+    """(x, y) points where an 18 nm V1 cut fits in a pin M1 rect, on an M1 vertical
+    track (centre = 9 + 36 k nm) and an M2 horizontal row track, with the bare cut
+    centre clear of the M2 obstruction rects. The bare-centre model is a lower
+    bound on routability (no via enclosure or spacing is modelled)."""
+    out = []
+    for l, b, r, t in pin_m1_rects:
+        for x in range(TRACK_OFFSET, r, TRACK_PITCH):
+            if not (l + M1_WIDTH // 2 <= x <= r - M1_WIDTH // 2):
+                continue
+            for y in ROW_TRACKS_NM:
+                if b + M1_WIDTH // 2 <= y <= t - M1_WIDTH // 2 and not any(
+                        q[0] <= x <= q[2] and q[1] <= y <= q[3] for q in obs_m2):
+                    out.append((x, y))
+    return out
+
+
 def check_cell(name, mac, gds):
-    """Failed check ids for one cell. `gds` = {"size": (w, h) nm, "labels": {net: [(x, y)]}, "m1": [rects] nm}."""
+    """Failed check ids for one cell. `gds` = {"size": (w, h) nm, "labels": {net: [(x, y)]},
+    "m1": [rects], "m2": [rects] nm}."""
     fails = {}
 
     def fail(cid, why):
@@ -107,20 +133,25 @@ def check_cell(name, mac, gds):
     if set(pins) != set(gds["labels"]):
         fail("pin_set", f"LEF pins {sorted(pins)} != GDS labels {sorted(gds['labels'])}")
     for pn, pin in sorted(pins.items()):
-        for rc in pin["rects"]:
+        for rc in pin["m1"]:
             if not covered(rc, gds["m1"]):
                 fail("pin_geometry", f"{pn}: rect {rc} is not drawn M1 in the GDS")
+        for rc in pin["m2"]:
+            if not covered(rc, gds.get("m2", [])):
+                fail("pin_geometry", f"{pn}: rect {rc} is not drawn M2 in the GDS")
         for x, y in gds["labels"].get(pn, []):
-            if not any(a <= x <= c and b <= y <= d for a, b, c, d in pin["rects"]):
+            if not any(a <= x <= c and b <= y <= d for a, b, c, d in pin["m1"]):
                 fail("pin_geometry", f"{pn}: pin does not cover its GDS label at ({x}, {y})")
         if pn in POWER:
             continue
-        stripes = [rc for rc in pin["rects"] if rc[3] - rc[1] > rc[2] - rc[0]]
+        stripes = [rc for rc in pin["m1"] if rc[3] - rc[1] > rc[2] - rc[0]]
         if not stripes:
             fail("track_grid", f"{pn}: no vertical M1 stripe")
         for l, b, r, t in stripes:
             if r - l != M1_WIDTH or (l + r - 2 * TRACK_OFFSET) % (2 * TRACK_PITCH):
                 fail("track_grid", f"{pn}: stripe x {l}..{r} is not an 18 nm stripe on the 36 nm track grid")
+        if not via_crossings(pin["m1"], mac.get("obs_m2", ())):
+            fail("access_point", f"{pn}: every M1-track x M2-row-track V1 crossing is covered by the M2 obstruction")
 
     for pn, use in POWER.items():
         pin = pins.get(pn)
@@ -131,13 +162,13 @@ def check_cell(name, mac, gds):
         if pin["use"] != use:
             fail("rails", f"{pn} USE {pin['use']} != {use}")
         if not any(l <= 0 and r >= (w or 1) and b == edge - RAIL_HALF and t == edge + RAIL_HALF
-                   for l, b, r, t in pin["rects"]):
+                   for l, b, r, t in pin["m1"]):
             fail("rails", f"{pn} has no full-width 18 nm M1 rail centred on y = {edge} nm")
     return fails
 
 
 def read_gds(path):
-    """{"name", "size", "labels", "m1"} for one GDS (needs klayout.db)."""
+    """{"name", "size", "labels", "m1", "m2"} for one GDS (needs klayout.db)."""
     import klayout.db as db
     lay = db.Layout()
     lay.read(str(path))
@@ -150,15 +181,20 @@ def read_gds(path):
         for s in cell.shapes(li).each():
             if s.is_text():
                 labels.setdefault(s.text.string, []).append((s.text.x // 4, s.text.y // 4))
-    m1 = []
-    li = lay.find_layer(19, 0)
-    if li is not None:
-        reg = db.Region(cell.begin_shapes_rec(li)).merged()
-        for poly in reg.each():
-            for trap in poly.decompose_trapezoids():
-                b = trap.bbox()
-                m1.append((b.left // 4, b.bottom // 4, b.right // 4, b.top // 4))
-    return {"name": cell.name, "size": (bb.width() // 4, bb.height() // 4), "labels": labels, "m1": m1}
+
+    def rects_of(layer):
+        out = []
+        li = lay.find_layer(*layer)
+        if li is not None:
+            reg = db.Region(cell.begin_shapes_rec(li)).merged()
+            for poly in reg.each():
+                for trap in poly.decompose_trapezoids():
+                    b = trap.bbox()
+                    out.append((b.left // 4, b.bottom // 4, b.right // 4, b.top // 4))
+        return out
+
+    return {"name": cell.name, "size": (bb.width() // 4, bb.height() // 4),
+            "labels": labels, "m1": rects_of((19, 0)), "m2": rects_of((20, 0))}
 
 
 def check_library(lef_text, gds_dir):
