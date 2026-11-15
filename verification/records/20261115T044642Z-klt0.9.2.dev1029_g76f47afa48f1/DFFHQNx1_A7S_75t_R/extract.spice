@@ -1,0 +1,47 @@
+* extracted by klt extract --deck asap7
+
+* cell DFFHQNx1_A7S_75t_R
+* pin CLK
+* pin D
+* pin QN
+* pin VDD
+* pin VSS
+* pin vsubs
+.SUBCKT DFFHQNx1_A7S_75t_R CLK D QN VDD VSS vsubs
+* device instance $1 r0 *1 0,0.018 nmos_rvt
+M$1 VSS CLK \$5 vsubs nmos_rvt L=0.02U W=0.081U NFIN=3
+* device instance $2 r0 *1 0,0.018 nmos_rvt
+M$2 \$8 \$5 D vsubs nmos_rvt L=0.02U W=0.081U NFIN=3
+* device instance $3 r0 *1 0,0.018 nmos_rvt
+M$3 \$2 CLK \$8 vsubs nmos_rvt L=0.02U W=0.081U NFIN=3
+* device instance $4 r0 *1 0,0.018 nmos_rvt
+M$4 VSS \$3 \$2 vsubs nmos_rvt L=0.02U W=0.081U NFIN=3
+* device instance $5 r0 *1 0,0.018 nmos_rvt
+M$5 \$3 \$8 VSS vsubs nmos_rvt L=0.02U W=0.081U NFIN=3
+* device instance $6 r0 *1 0,0.018 nmos_rvt
+M$6 \$4 \$5 QN vsubs nmos_rvt L=0.02U W=0.081U NFIN=3
+* device instance $7 r0 *1 0,0.018 nmos_rvt
+M$7 \$3 CLK \$4 vsubs nmos_rvt L=0.02U W=0.081U NFIN=3
+* device instance $8 r0 *1 0,0.018 nmos_rvt
+M$8 VSS \$4 \$10 vsubs nmos_rvt L=0.02U W=0.081U NFIN=3
+* device instance $9 r0 *1 0,0.018 nmos_rvt
+M$9 QN \$10 VSS vsubs nmos_rvt L=0.02U W=0.081U NFIN=3
+* device instance $10 r0 *1 0,0.018 pmos_rvt
+M$10 VDD CLK \$5 \$31 pmos_rvt L=0.02U W=0.081U NFIN=3
+* device instance $11 r0 *1 0,0.018 pmos_rvt
+M$11 \$8 \$5 \$2 \$31 pmos_rvt L=0.02U W=0.081U NFIN=3
+* device instance $12 r0 *1 0,0.018 pmos_rvt
+M$12 D CLK \$8 \$31 pmos_rvt L=0.02U W=0.081U NFIN=3
+* device instance $13 r0 *1 0,0.018 pmos_rvt
+M$13 VDD \$3 \$2 \$31 pmos_rvt L=0.02U W=0.081U NFIN=3
+* device instance $14 r0 *1 0,0.018 pmos_rvt
+M$14 \$3 \$8 VDD \$31 pmos_rvt L=0.02U W=0.081U NFIN=3
+* device instance $15 r0 *1 0,0.018 pmos_rvt
+M$15 \$4 \$5 \$3 \$31 pmos_rvt L=0.02U W=0.081U NFIN=3
+* device instance $16 r0 *1 0,0.018 pmos_rvt
+M$16 QN CLK \$4 \$31 pmos_rvt L=0.02U W=0.081U NFIN=3
+* device instance $17 r0 *1 0,0.018 pmos_rvt
+M$17 VDD \$4 \$10 \$31 pmos_rvt L=0.02U W=0.081U NFIN=3
+* device instance $18 r0 *1 0,0.018 pmos_rvt
+M$18 QN \$10 VDD \$31 pmos_rvt L=0.02U W=0.081U NFIN=3
+.ENDS DFFHQNx1_A7S_75t_R
