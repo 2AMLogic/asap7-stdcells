@@ -426,7 +426,25 @@ class RunRegressionTest(unittest.TestCase):
         # rules no control fires on the drawn cell are listed, not omitted
         self.assertEqual(m["drawn_rules_fired_by_controls"], ["M1.S.2"])
         self.assertEqual(m["drawn_rules_unexercised"], ["FIN.W.1", "M1.S.1"])
+        self.assertEqual(m["drawn_rules_exercised_incidentally"], [])
         self.assertIn("unexercised", (rr.HERE / "records" / "r1" / "summary.md").read_text())
+
+    class IncidentalFire(FakeKlt):
+        """Control DRCs fire an extra id the control's `expect_rule` does not pin."""
+
+        def run(self, cmd, request):
+            env, err = super().run(cmd, request)
+            if cmd == "drc" and env and env.get("rule_counts"):
+                env = dict(env, rule_counts={"M1.S.2": 1, "FIN.W.1": 2})
+            return env, err
+
+    def test_incidental_rule_counts_are_reported_not_pinned(self):
+        self.assertEqual(self.go(self.IncidentalFire(), self.drawn_cfg()), 0)
+        m = self.manifest()
+        self.assertEqual(m["drawn_rules_fired_by_controls"], ["FIN.W.1", "M1.S.2"])
+        # FIN.W.1 rode along in ctl-d-drc's rule_counts but pins no control: reported as incidental
+        self.assertEqual(m["drawn_rules_exercised_incidentally"], ["FIN.W.1"])
+        self.assertNotIn("FIN.W.1", [c.get("expect_rule") for c in m["controls"] if c["result"] == "CAUGHT"])
 
     def test_shipped_rows_unchanged_by_drawn_support(self):
         self.assertEqual(self.go(FakeKlt(), self.drawn_cfg()), 0)
