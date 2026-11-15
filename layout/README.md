@@ -46,7 +46,16 @@ All five acceptance cases of `spec/stdcells.md` run for every drawn cell:
   envelope. Item 2 is attested with `klt signoff --attest 2` on the committed library
   stream `verification/library/A7S_75t_R_LIBRARY.gds` (all 22 drawn cells), plus the
   inventory check `design/check_gds_fresh.py`, which redraws every `layout/<CELL>.gds`
-  from its script and compares bytes. `--attest 2` takes one stream, so it attests the
+  from its script and compares bytes. The check needs an interpreter that can
+  `import klayout.db` under `-I`: it resolves one before the redraw loop
+  (`sys.executable` when it qualifies, else the interpreter on klt's shebang)
+  and spawns each redraw with `-I`, so `PYTHONPATH` and the user site directory
+  never reach a redraw. If klayout is installed only with `pip install --user`,
+  bare `python3 -I` cannot see it and the klt fallback carries the redraws; if
+  no qualifying interpreter exists at all, the check prints one error naming
+  the remedy (run it from a venv that has klayout:
+  `python3 -m venv /tmp/v && /tmp/v/bin/pip install klayout && PATH=/tmp/v/bin:$PATH python3 -I design/check_gds_fresh.py`)
+  instead of a `DRAWFAIL` per cell. `--attest 2` takes one stream, so it attests the
   library stream, not each cell. The grader reports item 2 `met`.
 - Item 4 now cites the library `lvs.json` of the new record, whose layout stream
   is the regenerated library GDS.
