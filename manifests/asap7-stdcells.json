@@ -32,7 +32,7 @@
     },
     "10": {
       "file": "manifests/t1-item10.envelope.json",
-      "content_hash": "sha256:d953e71ba67c075b2ce57bec91e557564a908d5c66e14a2efb73f4ab0f28df05"
+      "content_hash": "sha256:a5c4baad9c320ffce1bb56e0f0aa36663ec38f2b6ff8b1e154e98cc640e3f2b4"
     },
     "4": {
       "file": "verification/records/20261029T012553Z-klt0.8.1.dev670_g680c6f4a7518/library/lvs.json",
