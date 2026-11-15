@@ -3,8 +3,19 @@
 Chronological record of merged PRs and closed issues, maintained by the Guide
 triage role. Newest first.
 
+### 2026-11-15
+
+- **PR #135**: refactor: share one place-and-DRC body across the regression's case runners
+- **PR #130**: feat: flag an unrecorded draw script in the CDL freshness check
+- **PR #126**: refactor: one shared klt sim request builder for both corner-sweep halves
+- **Issue #125** (closed): Hoist the duplicated klt sim corner-matrix request envelope into one shared builder
+- **Issue #116** (closed): check_cdl_fresh.py promises to flag an unrecorded draw script and does not: drop the clause or implement it
+- **Issue #115** (closed): Collapse the three duplicated place-and-DRC blocks in run_regression.py
+
 ### 2026-11-14
 
+- **PR #118**: docs: correct stale README, spec and CLAUDE.md claims against the committed records
+- **Issue #112** (closed): Docs: README, verification/README, spec/README and CLAUDE.md statements that no longer match the tree
 - **PR #131**: feat(verification): negative controls for eleven unexercised FEOL rule ids
 - **PR #128**: refactor: one Liberty expression parser, with a tested &/^ precedence
 - **PR #127**: refactor: one definition of the AOI22/OAI22 blocks the XOR cells redraw
