@@ -1,0 +1,31 @@
+* extracted by klt extract --deck asap7
+
+* cell DHLx1_A7S_75t_R
+* pin CLK
+* pin D
+* pin Q
+* pin VDD
+* pin VSS
+* pin vsubs
+.SUBCKT DHLx1_A7S_75t_R CLK D Q VDD VSS vsubs
+* device instance $1 r0 *1 0,0.018 nmos_rvt
+M$1 VSS \$5 \$2 vsubs nmos_rvt L=0.02U W=0.081U NFIN=3
+* device instance $2 r0 *1 0,0.018 nmos_rvt
+M$2 Q \$2 VSS vsubs nmos_rvt L=0.02U W=0.081U NFIN=3
+* device instance $3 r0 *1 0,0.018 nmos_rvt
+M$3 VSS CLK \$6 vsubs nmos_rvt L=0.02U W=0.081U NFIN=3
+* device instance $4 r0 *1 0,0.018 nmos_rvt
+M$4 \$5 \$6 Q vsubs nmos_rvt L=0.02U W=0.081U NFIN=3
+* device instance $5 r0 *1 0,0.018 nmos_rvt
+M$5 D CLK \$5 vsubs nmos_rvt L=0.02U W=0.081U NFIN=3
+* device instance $6 r0 *1 0,0.018 pmos_rvt
+M$6 VDD \$5 \$2 \$20 pmos_rvt L=0.02U W=0.081U NFIN=3
+* device instance $7 r0 *1 0,0.018 pmos_rvt
+M$7 Q \$2 VDD \$20 pmos_rvt L=0.02U W=0.081U NFIN=3
+* device instance $8 r0 *1 0,0.018 pmos_rvt
+M$8 VDD CLK \$6 \$20 pmos_rvt L=0.02U W=0.081U NFIN=3
+* device instance $9 r0 *1 0,0.018 pmos_rvt
+M$9 \$5 \$6 D \$20 pmos_rvt L=0.02U W=0.081U NFIN=3
+* device instance $10 r0 *1 0,0.018 pmos_rvt
+M$10 Q CLK \$5 \$20 pmos_rvt L=0.02U W=0.081U NFIN=3
+.ENDS DHLx1_A7S_75t_R
