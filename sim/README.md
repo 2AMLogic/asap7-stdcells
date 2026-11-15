@@ -36,7 +36,23 @@ and the counter does not use it.
 ## OpenSTA
 
 OpenROAD 26Q3-1510-g6cb3f2b704 (its bundled OpenSTA) reads the timing-free file
-with `read_liberty` without warning or error and lists all 22 cells. That is
-all that was run: no timing analysis, no `link_design`, nothing about whether
-OpenROAD's placement flow accepts a library with no timing arcs. The standalone
-`sta` binary is not on this host's `PATH`.
+with `read_liberty` without warning or error and lists all 22 cells. No timing
+analysis was run here. The standalone `sta` binary is not on this host's
+`PATH`.
+
+Whether OpenROAD's placement flow accepts a library with no timing arcs was
+recorded as unverified here; it has since been run, in `integration/`
+(issue #109). It does: `link_design`, `initialize_floorplan`, `place_pins`,
+`tapcell`, `pdngen`, `global_placement`, `detailed_placement`,
+`check_placement`, `global_route` and `filler_placement` all complete against
+this Liberty. The one stage that cannot is `clock_tree_synthesis`, which needs
+arcs to characterise its buffer (`[ERROR CTS-0111] No max capacitance found for
+cell BUFx1_A7S_75t_R`); the flow records that and routes the clock as an
+ordinary signal net. `repair_design`, `repair_timing` and every resizer step
+are deliberately never called.
+
+Detailed routing of the counter nevertheless does not complete, for an
+unrelated reason: several signal pins of this library offer the router no via
+access point (`[ERROR DRT-0073]`, tracked in #122). See
+`integration/README.md` for the recorded run, the root cause and the two
+controls. No timing claim follows from any of it.

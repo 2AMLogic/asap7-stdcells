@@ -83,6 +83,7 @@ design/        cell netlists (CDL / SPICE)
 sim/           structural-Liberty synthesis smoke for the integration design
 verification/  DRC/LVS regression harness across the cell set, plus
                characterization requests, probes and the evidence records
+integration/   OpenROAD place-and-route of the integration design + its record
 layout/        cell GDS, LEF views, DRC/LVS reports
 manifests/     block manifest, attestation envelopes, graded signoff record
 ```
