@@ -24,14 +24,14 @@
         "role": "source",
         "path": "design/cdl-freshness.json",
         "passed": true,
-        "content_hash": "sha256:ee8acbea19c7e3f13c778cdda9f4426b021ef4831a3d8515f5031430103e6d55"
+        "content_hash": "sha256:e3e4441d57b71bfa168287b725a23b0bb41574c2737e89dd3d7f301f8bac3327"
       },
       {
         "check": "present",
         "role": "source",
         "path": "design/check_cdl_fresh.py",
         "passed": true,
-        "content_hash": "sha256:abe125b048b71c4e6187fb16a24fb4fdbef6b2ebb53d9544736dc8d672f19b91"
+        "content_hash": "sha256:0830640a723b0f2f1a427526ca85c25c5f812fd7a64a6323a0bbffed71256a08"
       },
       {
         "check": "present",
@@ -726,14 +726,14 @@
             "path": "design/cdl-freshness.json",
             "scope": "repo"
           },
-          "content_hash": "sha256:ee8acbea19c7e3f13c778cdda9f4426b021ef4831a3d8515f5031430103e6d55"
+          "content_hash": "sha256:e3e4441d57b71bfa168287b725a23b0bb41574c2737e89dd3d7f301f8bac3327"
         },
         {
           "path": {
             "path": "design/check_cdl_fresh.py",
             "scope": "repo"
           },
-          "content_hash": "sha256:abe125b048b71c4e6187fb16a24fb4fdbef6b2ebb53d9544736dc8d672f19b91"
+          "content_hash": "sha256:0830640a723b0f2f1a427526ca85c25c5f812fd7a64a6323a0bbffed71256a08"
         },
         {
           "path": {
@@ -911,7 +911,7 @@
           "content_hash": "sha256:8ef648144d20620fe215ff61f016b18255164e673a8fa8aa0a15ce43565589fb"
         }
       ],
-      "content_hash": "sha256:246cf24020c633b96dd6c1ec82ea83ab294fcd03c1fe245eb836c7e2e426483d"
+      "content_hash": "sha256:9866b74d16f7da9cc5d52ed0b1bea7ef657e5acd57a1f65af21e6bf123041e67"
     }
   }
 }
