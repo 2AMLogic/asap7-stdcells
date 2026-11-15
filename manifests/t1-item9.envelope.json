@@ -45,7 +45,7 @@
         "role": "testbench",
         "path": "verification/klt_helper.py",
         "passed": true,
-        "content_hash": "sha256:bcdcfdc8778d3808e2bac3ea6ad3aae196e23026bb7dff8a05ce465606e21505"
+        "content_hash": "sha256:400236b368e78c42649a3b6fe96a68d44c6134b6c9f80b91e7041ed4d3879706"
       },
       {
         "check": "present",
