@@ -476,7 +476,7 @@ class RequestEnvelopeTest(unittest.TestCase):
     point: a wrong argument at either call site (this half's timeout, the key
     order its records were written with) has to show up. `osdi_preload` in the
     records is the scratch-relative path common.sh leaves behind
-    (verification/probes/characterize-tt/normalize_paths.py), so the
+    (verification/normalize_paths.py), so the
     comparison does not depend on the host that ran the sweep.
     """
     OSDI = "scratch/sim/osdi/bsimcmg.osdi"
