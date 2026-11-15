@@ -8,8 +8,15 @@ name: klt signoff
 #
 # Items 1, 2, 9 and 10 cite tool-produced attestation envelopes (klt signoff
 # --attest); item 4 cites the library `klt lvs` envelope of a verification
-# record, pinned by the layout stream's content hash; the remaining items have
-# no evidence yet and grade unmet, so the grader exits 3. That is the honest steady state, not a failure.
+# record, pinned by the layout stream's content hash. The steady state is
+# grader exit 0 with the block at T1 (tier T1, t1_met_count 10 as of
+# 2026-11-15), so the re-grade step accepts exit 0 only and exit 3 -- a T1
+# item unmet -- is a hard error. The tolerance is deliberately strict: the
+# pinned grader (klayout-tools==0.9.0) grades T1 items only, so a future
+# tier-2 item cannot make a legitimate PR exit 3 under this pin. A
+# klayout-tools repin must re-check the grader's exit semantics and the
+# tier-floor literals in verification/check_tier_floor.py (T1 / 10) in the
+# same PR that changes the pin.
 
 on:
   push:
@@ -115,6 +122,16 @@ jobs:
           # passes, the check could silently never fire.
           python3 -I design/check_cdl_fresh_negctl.py
 
+      - name: Tier floor negative control
+        run: |
+          set -uo pipefail
+          # The tier floor (asserted after the re-grade below) must flag the
+          # tier=null / t1_met_count=8 shapes measured on PR #153, a wrong
+          # tier, a missing key, unparseable JSON and a missing record; and
+          # must stay quiet on an unmodified record. If any broken copy
+          # passes, the floor could silently never fire.
+          python3 -I verification/check_tier_floor_negctl.py
+
       - name: Re-attest T1 item 2 against the committed envelope
         run: |
           set -uo pipefail
@@ -153,10 +170,12 @@ jobs:
           klt signoff --manifest manifests/asap7-stdcells.json \
                       --tiers-doc manifests/design-evidence-tiers.md \
                       --format json > "$RUNNER_TEMP/fresh-signoff.json" || rc=$?
-          # 0 = every T1 item met; 3 = grader ran, some item unmet. Both are
-          # valid runs. Anything else is a hard error.
-          if [ "$rc" -ne 0 ] && [ "$rc" -ne 3 ]; then
-            echo "::error::klt signoff exited $rc (expected 0 or 3): manifest, vendored tier doc, or cited evidence is broken"
+          # 0 = every T1 item met. Anything else is a hard error: exit 3
+          # means a T1 item is unmet. The pinned grader grades T1 items
+          # only, so exit 3 is never a legitimate tier-2 state (see the
+          # file header).
+          if [ "$rc" -ne 0 ]; then
+            echo "::error::klt signoff exited $rc (expected 0): a T1 item is unmet, or the manifest, vendored tier doc, or cited evidence is broken"
             exit 1
           fi
           if ! cmp -s "$RUNNER_TEMP/fresh-signoff.json" manifests/asap7-stdcells.signoff.json; then
@@ -171,3 +190,13 @@ jobs:
             exit 1
           fi
           echo "Committed signoff record is fresh."
+
+      - name: Tier floor on the committed record
+        run: |
+          set -uo pipefail
+          # PAIR with the step above: this floor covers the fresh render only
+          # because that step's cmp proved fresh == committed. Do not remove
+          # the cmp and keep this step -- doing so silently narrows the floor
+          # to whatever was last committed.
+          python3 -I verification/check_tier_floor.py \
+              manifests/asap7-stdcells.signoff.json
