@@ -3,14 +3,14 @@
   "kind": "generic",
   "status": "pass",
   "t1_item": 1,
-  "summary": "T1 item 1 (Design sources): 63/63 attestation checks passed (klt signoff --attest)",
+  "summary": "T1 item 1 (Design sources): 64/64 attestation checks passed (klt signoff --attest)",
   "source": "manifests/t1-item1-inventory.json",
   "attestation": {
     "producer": "klt signoff --attest",
     "inventory_schema_version": 1,
     "hash_algorithm": "sha256-raw-bytes",
-    "check_count": 63,
-    "passed_count": 63,
+    "check_count": 64,
+    "passed_count": 64,
     "checks": [
       {
         "check": "present",
@@ -18,6 +18,13 @@
         "path": "design/a7s_common.py",
         "passed": true,
         "content_hash": "sha256:e4fef792b32081be3d60a3dbd779097a36de3ea90f698522d95a258ee2d93416"
+      },
+      {
+        "check": "present",
+        "role": "source",
+        "path": "design/a7s_logic.py",
+        "passed": true,
+        "content_hash": "sha256:0201a2636c45a4ca52a02a812dd3611617ea6fd438eb782bd571ed9991c22497"
       },
       {
         "check": "present",
@@ -199,7 +206,7 @@
         "role": "source",
         "path": "spec/stdcells.md",
         "passed": true,
-        "content_hash": "sha256:7f1373ed1ecd4dfd0161c04482de3ae05761c72a4a44abba25f082cab2df4947"
+        "content_hash": "sha256:227462783dd8129e4ae998c12a6925bf0f630a36d81889dd28486a5ebc83a623"
       },
       {
         "check": "present",
@@ -582,7 +589,7 @@
     ]
   },
   "provenance": {
-    "klt_version": "0.9.3.dev3+gd5d57daf9a14",
+    "klt_version": "0.9.0",
     "klayout_version": null,
     "pdk": null,
     "deck": null,
@@ -720,6 +727,13 @@
             "scope": "repo"
           },
           "content_hash": "sha256:e4fef792b32081be3d60a3dbd779097a36de3ea90f698522d95a258ee2d93416"
+        },
+        {
+          "path": {
+            "path": "design/a7s_logic.py",
+            "scope": "repo"
+          },
+          "content_hash": "sha256:0201a2636c45a4ca52a02a812dd3611617ea6fd438eb782bd571ed9991c22497"
         },
         {
           "path": {
@@ -901,17 +915,17 @@
             "path": "manifests/t1-item1-inventory.json",
             "scope": "repo"
           },
-          "content_hash": "sha256:a1a88b74552fed5fd9862719dbe61c5c2fbd8049485415c9ce4907df7bab9359"
+          "content_hash": "sha256:05d2d172bb093471052c19f0f168c09abd94c496b34362908834d175c58fb3d8"
         },
         {
           "path": {
             "path": "spec/stdcells.md",
             "scope": "repo"
           },
-          "content_hash": "sha256:7f1373ed1ecd4dfd0161c04482de3ae05761c72a4a44abba25f082cab2df4947"
+          "content_hash": "sha256:227462783dd8129e4ae998c12a6925bf0f630a36d81889dd28486a5ebc83a623"
         }
       ],
-      "content_hash": "sha256:a45e2905569acbc0bede37c52a66e7f7fe5f76abf88e098ebf1520ffe10cc83b"
+      "content_hash": "sha256:98c7692db6ac51c360b041ce172ea9c60c6be9c7a186fdc72509aa2e39735375"
     }
   }
 }
