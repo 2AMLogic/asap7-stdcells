@@ -104,6 +104,17 @@ jobs:
           # copy passes, the check could silently never fire.
           python3 -I design/check_gds_fresh_negctl.py
 
+      - name: CDL freshness negative control
+        run: |
+          set -uo pipefail
+          # The CDL/draw-script pairing (attested under item 1) must flag a
+          # changed CDL, a changed script, a CDL with no entry, an entry whose
+          # file is gone and a draw script the pair does not record; and must
+          # stay quiet on the device-less cells recorded with a null CDL hash
+          # without treating that null as a wildcard. If any broken copy
+          # passes, the check could silently never fire.
+          python3 -I design/check_cdl_fresh_negctl.py
+
       - name: Re-attest T1 item 2 against the committed envelope
         run: |
           set -uo pipefail
