@@ -73,7 +73,7 @@
         "role": "tools",
         "passed": true,
         "value": {
-          "klayout-tools": "0.8.0"
+          "klayout-tools": "0.9.0"
         }
       }
     ]
@@ -88,7 +88,7 @@
         "path": "manifests/t1-item9-inventory.json",
         "scope": "repo"
       },
-      "content_hash": "sha256:58d2dca220f742e923dcde0a3e7addc47a43e11fcb46603b66287b94badcdeab"
+      "content_hash": "sha256:006439dd1b4560a090e697fd1bd2b4bc5d19d0e003edc58cc7893a3145f9e535"
     }
   }
 }

@@ -10,7 +10,7 @@ result against a predictive model. No row describes a manufactured part, and
 none will.
 
 Evidence behind the numbers: `spec/bringup.md` (PDK pin, tool runs, deck
-coverage). Decisions: `spec/decisions/0001`–`0004`.
+coverage). Decisions: `spec/decisions/0001`–`0012`.
 
 **Block kind: `digital`**, full-custom sub-case: the deliverable is a library
 of hand-scripted cells whose own layout, not a synthesised netlist, is what
