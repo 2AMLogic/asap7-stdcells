@@ -4,10 +4,11 @@
     python3 verification/corners/test_corners.py
 
 Checks the generator's pure parts (the Eulerian walk, the testbench and the
-measurement cards), the summariser's verdict logic including the
-negative-control finding, and every committed record directory (schema, three
-corners per cell, the negative control flagged, margin = budget - worst delay,
-no host paths).
+measurement cards), the shared `klt sim` request envelope (regenerated
+byte-for-byte against every committed request record), the summariser's verdict
+logic including the negative-control finding, and every committed record
+directory (schema, three corners per cell, the negative control flagged,
+margin = budget - worst delay, no host paths).
 """
 import json
 import re
@@ -382,6 +383,187 @@ class SeqRecordsTest(unittest.TestCase):
         self.assertEqual(names, set(mr.CELLS) | set(ss.CELLS))
         self.assertTrue(env5.sha(root / "verification/corners/item5-sources.json")
                         == e["provenance"]["input"]["content_hash"])
+
+
+class FakeKlt:
+    """Stand-ins for the two klayout_tools entry points the generators import.
+
+    Both `main()`s are the code under test here, so they must actually run —
+    but neither klt, the PDK nor a drawn GDS is available to this self-check.
+    The adapters are replaced with identity functions and `run_extract` writes
+    a fixed netlist, which is sound for this comparison: the extracted netlist
+    reaches only the testbench text (`Xdut`'s node list), never the request
+    envelope. It still has to carry a `.SUBCKT` port list and one nmos and one
+    pmos instance, because the negative-control rewrites are applied to it
+    (`comb_netlist` / `seq_netlist` below).
+    """
+
+    def __init__(self, netlist_for):
+        self.netlist_for = netlist_for
+
+    def install(self, test):
+        import types
+        pkg = types.ModuleType("klayout_tools")
+        pkg.asap7_bsimcmg = types.ModuleType("klayout_tools.asap7_bsimcmg")
+        pkg.asap7_bsimcmg.adapt_model_cards = lambda text: text
+        pkg.asap7_bsimcmg.corner_library = lambda sections: "* corner library\n"
+        pkg.asap7_bsimcmg.adapt_extracted_netlist = lambda text: text
+        pkg.extract = types.ModuleType("klayout_tools.extract")
+        pkg.extract.run_extract = self.run_extract
+        for name, mod in (("klayout_tools", pkg),
+                          ("klayout_tools.extract", pkg.extract),
+                          ("klayout_tools.asap7_bsimcmg", pkg.asap7_bsimcmg)):
+            saved = sys.modules.get(name)
+            sys.modules[name] = mod
+            test.addCleanup(lambda n=name, s=saved: sys.modules.__setitem__(n, s)
+                            if s is not None else sys.modules.pop(n, None))
+
+    def run_extract(self, gds, deck, output=None, top=None):
+        Path(output).write_text(self.netlist_for(Path(gds).stem.replace("_A7S_75t_R", ""), top))
+
+    def cards(self, tmp):
+        """The three hspice model-card files main() reads, one per corner."""
+        d = Path(tmp) / "cards"
+        d.mkdir()
+        for proc, _, _ in mr.CORNERS:
+            (d / f"7nm_{proc.upper()}_160803.pm").write_text(f"* {proc} cards\n")
+        return d
+
+
+def comb_netlist(base, top):
+    """One nmos and one pmos between the first input and the output.
+
+    `tie_pmos_well` must find a floating pmos body (`_3`) to tie to VDD, and
+    the INVx1 level control's `disconnect_nmos_gate` must find an nmos gate to
+    cut; the tie cells have no inputs, so their devices are gated by VDD.
+    """
+    inputs, out, _func = mr.CELLS[base]
+    gate = inputs[0] if inputs else "VDD"
+    ports = list(inputs) + ["VDD", "VSS", out, "vsubs"]
+    return (f".SUBCKT {top} {' '.join(ports)}\n"
+            f"N_1 {out} {gate} VSS vsubs nmos_rvt L=0.02U NFIN=3\n"
+            f"N_2 {out} {gate} VDD _3 pmos_rvt L=0.02U NFIN=3\n"
+            ".ENDS\n")
+
+
+def seq_netlist(base, top):
+    """An input transmission gate on D, which `tie_off_input_tg` must find."""
+    ports = ["CLK", "D", msq.CELLS[base][0], "VDD", "VSS", "vsubs"]
+    return (f".SUBCKT {top} {' '.join(ports)}\n"
+            "N_1 D CLK _5 vsubs nmos_rvt L=0.02U NFIN=3\n"
+            "N_2 _5 CLK D VDD pmos_rvt L=0.02U NFIN=3\n"
+            ".ENDS\n")
+
+
+COMB_KLT, SEQ_KLT = FakeKlt(comb_netlist), FakeKlt(seq_netlist)
+
+
+class RequestEnvelopeTest(unittest.TestCase):
+    """The one `klt sim` request envelope both halves of item 5 build.
+
+    `mr.sim_request` is shared by make_requests (combinational, decision 0011,
+    `timeout_s=600`) and make_seq_requests (sequential, decision 0012,
+    `timeout_s=1800`). The committed `*.request.json` files are append-only
+    evidence, so the check that matters is byte-level: run each generator's own
+    `main()` and compare every request it writes against the committed one. A
+    diff here means a generator change has made the recorded sweeps
+    irreproducible — a finding, not a test to relax.
+
+    Running `main()` rather than re-deriving the envelope in the test is the
+    point: a wrong argument at either call site (this half's timeout, the key
+    order its records were written with) has to show up. `osdi_preload` in the
+    records is the scratch-relative path common.sh leaves behind
+    (verification/probes/characterize-tt/normalize_paths.py), so the
+    comparison does not depend on the host that ran the sweep.
+    """
+    OSDI = "scratch/sim/osdi/bsimcmg.osdi"
+
+    def generate(self, half, klt, *extra):
+        """Run `half.main()` under the klt stand-ins; return {tag: request text}."""
+        import contextlib
+        import io
+        import shutil
+        import tempfile
+        klt.install(self)
+        tmp = tempfile.mkdtemp()
+        self.addCleanup(shutil.rmtree, tmp, True)
+        work = Path(tmp) / "run"
+        argv = [str(Path(tmp) / "layout"), str(klt.cards(tmp)), self.OSDI, str(work),
+                *extra]
+        with contextlib.redirect_stdout(io.StringIO()):
+            half.main(argv)
+        return {p.name.removesuffix(".request.json"): p.read_text()
+                for p in work.glob("*.request.json")}
+
+    def test_regenerates_every_committed_request_byte_for_byte(self):
+        got = {"comb": self.generate(mr, COMB_KLT), "seq": self.generate(msq, SEQ_KLT)}
+        n = 0
+        for half, recs in (("comb", RECORDS), ("seq", SEQ_RECORDS)):
+            for rec in recs:
+                for path in sorted(rec.glob("*.request.json")):
+                    tag = path.name.removesuffix(".request.json")
+                    with self.subTest(request=str(path)):
+                        self.assertIn(tag, got[half], "generator no longer writes it")
+                        self.assertEqual(got[half][tag], path.read_text())
+                    n += 1
+        self.assertGreater(n, 0, "no committed *.request.json to compare against")
+
+    def test_each_half_keeps_its_own_timeout_and_key_order(self):
+        comb = {k: json.loads(v) for k, v in self.generate(mr, COMB_KLT, "INVx1").items()}
+        seq = {k: json.loads(v) for k, v in self.generate(msq, SEQ_KLT, "DHLx1").items()}
+        for req in comb.values():  # decision 0011's key order
+            self.assertEqual(req["options"]["timeout_s"], 600)
+            self.assertEqual(list(req), ["netlist", "engine", "models", "corners", "exclude",
+                                         "analysis", "stimulus", "measurements", "options"])
+        for req in seq.values():  # decision 0012's: exclude after options
+            self.assertEqual(req["options"]["timeout_s"], 1800)
+            self.assertEqual(list(req), ["netlist", "engine", "models", "corners", "analysis",
+                                         "stimulus", "measurements", "options", "exclude"])
+        for req in list(comb.values()) + list(seq.values()):
+            self.assertEqual(req["engine"], "ngspice")
+            self.assertEqual(req["models"], {"lib": "asap7_bsimcmg.lib"})
+            self.assertEqual(req["corners"]["process"], [p for p, _, _ in mr.CORNERS])
+            self.assertEqual(len(req["exclude"]), 27 - len(mr.CORNERS))
+            self.assertEqual(req["options"]["osdi_preload"], [self.OSDI])
+            self.assertIs(req["options"]["stage_model_inputs"], True)
+            self.assertEqual(req["options"]["ngspice_init"], ["set measureprec=9"])
+
+    def test_envelope_is_one_document_for_both_halves(self):
+        args = ("X", [{"name": "m"}], [{"source": "v"}], 1e-9, self.OSDI)
+        comb = mr.sim_request(*args, mr.TIMEOUT_S)
+        seq = mr.sim_request(*args, msq.TIMEOUT_S, exclude_last=True)
+        self.assertEqual(set(comb), set(seq))  # same nine keys
+        self.assertEqual({k: v for k, v in comb.items() if k != "options"},
+                         {k: v for k, v in seq.items() if k != "options"})
+        self.assertEqual(comb["options"].pop("timeout_s"), 600)
+        self.assertEqual(seq["options"].pop("timeout_s"), 1800)
+        self.assertEqual(comb["options"], seq["options"])  # only the timeout differs
+
+    def test_tie_cell_request_has_no_stimulus(self):
+        comb = self.generate(mr, COMB_KLT, "TIEHIx1", "INVx1")
+        self.assertNotIn("stimulus", json.loads(comb["TIEHIx1"]))  # no inputs to drive
+        self.assertIn("stimulus", json.loads(comb["INVx1"]))
+
+    def test_single_corner_narrows_both_halves_and_drops_exclude(self):
+        one = {"process": ["ss"], "supply_v": {mr.SUPPLY_KEY: [0.63]}, "temperature_c": [100]}
+        for half, klt, cell in ((mr, COMB_KLT, "INVx1"), (msq, SEQ_KLT, "DHLx1")):
+            for text in self.generate(half, klt, "--single-corner", "ss", cell).values():
+                req = json.loads(text)
+                self.assertEqual(req["corners"], one)
+                # a one-point matrix has no crossed axes, so nothing to exclude
+                self.assertNotIn("exclude", req)
+
+    def test_single_corner_flag_is_parsed_the_same_way_by_both_halves(self):
+        argv = ["lay", "cards", "osdi", "work", "--single-corner", "ff", "INVx1"]
+        self.assertEqual(mr.pop_single_corner(argv), "ff")
+        self.assertEqual(argv, ["lay", "cards", "osdi", "work", "INVx1"])  # flag consumed
+        self.assertIsNone(mr.pop_single_corner(["lay", "cards", "osdi", "work"]))
+        with self.assertRaises(SystemExit):  # not a process section of decision 0011
+            mr.pop_single_corner(["lay", "cards", "osdi", "work", "--single-corner", "xx"])
+        with self.assertRaises(SystemExit):
+            mr.pop_single_corner(["lay", "cards", "osdi", "work", "--single-corner"])
+        self.assertIn("--single-corner", mr.__doc__)
+        self.assertIn("--single-corner", msq.__doc__)
 
 
 if __name__ == "__main__":
