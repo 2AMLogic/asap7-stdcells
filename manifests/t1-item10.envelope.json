@@ -3,14 +3,14 @@
   "kind": "generic",
   "status": "pass",
   "t1_item": 10,
-  "summary": "T1 item 10 (Repo hygiene): 8/8 attestation checks passed (klt signoff --attest)",
+  "summary": "T1 item 10 (Repo hygiene): 13/13 attestation checks passed (klt signoff --attest)",
   "source": "manifests/t1-item10-inventory.json",
   "attestation": {
     "producer": "klt signoff --attest",
     "inventory_schema_version": 1,
     "hash_algorithm": "sha256-raw-bytes",
-    "check_count": 8,
-    "passed_count": 8,
+    "check_count": 13,
+    "passed_count": 13,
     "checks": [
       {
         "check": "present",
@@ -32,6 +32,41 @@
         "path": "README.md",
         "passed": true,
         "content_hash": "sha256:4966bd1e94b29a0e3ef6a4a5a5827c835b7b2ab69474f3eef4d1527917f48e31"
+      },
+      {
+        "check": "present",
+        "role": "hygiene",
+        "path": "design/check_gds_fresh.py",
+        "passed": true,
+        "content_hash": "sha256:21bda68f8d7eaeb2885c9e1dc56214b7491e32d84b91f656cc1a848f90590ab1"
+      },
+      {
+        "check": "present",
+        "role": "hygiene",
+        "path": "design/check_gds_fresh_negctl.py",
+        "passed": true,
+        "content_hash": "sha256:6d62c355ff49ad1e5e02d6e077841c719d84d06e6a29d3fd443568ceb6c5024a"
+      },
+      {
+        "check": "present",
+        "role": "hygiene",
+        "path": "design/check_liberty.py",
+        "passed": true,
+        "content_hash": "sha256:b8552fd23e8e6c369a1db39f54ed13a51e7cd2335f600e5c7e0fa9ea9c5e0766"
+      },
+      {
+        "check": "present",
+        "role": "hygiene",
+        "path": "design/liberty_common.py",
+        "passed": true,
+        "content_hash": "sha256:256495833f82a096bd6be7574b3213e92cbc28436fe512e668ea1f01feaf4d55"
+      },
+      {
+        "check": "present",
+        "role": "hygiene",
+        "path": "design/write_liberty.py",
+        "passed": true,
+        "content_hash": "sha256:747f2294f932fc9c6f10fb93ff97958a6ce2a8cc794408ac660e8fc22164bc79"
       },
       {
         "check": "present",
@@ -85,7 +120,7 @@
         "path": "manifests/t1-item10-inventory.json",
         "scope": "repo"
       },
-      "content_hash": "sha256:4a0d8ca1ea90bf38483450577e0d627a4258b76806c308ea6f475abc2e3bf0d7"
+      "content_hash": "sha256:d953e71ba67c075b2ce57bec91e557564a908d5c66e14a2efb73f4ab0f28df05"
     }
   }
 }
