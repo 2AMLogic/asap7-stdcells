@@ -34,13 +34,13 @@
         "command": null,
         "kind": "generic",
         "check_status": "pass",
-        "content_hash": "sha256:6b7789e8db1b4ebaae7697b0f6b18641d044d8f9dd76a7fc81d4856b060e4a5a",
+        "content_hash": "sha256:98c7692db6ac51c360b041ce172ea9c60c6be9c7a186fdc72509aa2e39735375",
         "input_verified": true,
         "exit_status": 0,
         "artifact_binding": {
           "t1_item": 1,
           "path": null,
-          "content_hash": "sha256:6b7789e8db1b4ebaae7697b0f6b18641d044d8f9dd76a7fc81d4856b060e4a5a",
+          "content_hash": "sha256:98c7692db6ac51c360b041ce172ea9c60c6be9c7a186fdc72509aa2e39735375",
           "input_verified": true,
           "members": [
             {
@@ -216,7 +216,7 @@
                 "path": "design/check_cdl_fresh.py",
                 "scope": "repo"
               },
-              "content_hash": "sha256:0830640a723b0f2f1a427526ca85c25c5f812fd7a64a6323a0bbffed71256a08",
+              "content_hash": "sha256:76ad4edcaa0de0c1a793a3cb16c3679161c153f3ebdb49a16b8220a6ecebc94b",
               "status": "verified"
             },
             {
