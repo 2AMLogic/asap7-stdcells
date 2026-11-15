@@ -612,7 +612,7 @@ class InjectBoxTest(unittest.TestCase):
             rr.inject_spec({"id": "c", "layer": [11, 0]})
 
     def run_helper_extract(self, inject):
-        """Run HELPER's `extract` branch against a stub `klayout.db`.
+        """Run klt_helper.py's `extract` branch against a stub `klayout.db`.
 
         The real branch only runs under klt's interpreter, so the module is
         stubbed to record what it was asked to insert. This is the only place
@@ -662,7 +662,8 @@ class InjectBoxTest(unittest.TestCase):
         saved_argv = sys.argv
         try:
             sys.argv = ["helper", *argv]
-            exec(compile(rr.HELPER, "<helper>", "exec"), {"__name__": "__main__"})
+            helper_src = (rr.HERE / "klt_helper.py").read_text()
+            exec(compile(helper_src, "<klt_helper.py>", "exec"), {"__name__": "__main__"})
         finally:
             sys.argv = saved_argv
             sys.modules.clear()
