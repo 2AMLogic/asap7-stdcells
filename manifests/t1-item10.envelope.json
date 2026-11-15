@@ -59,7 +59,7 @@
         "role": "hygiene",
         "path": "spec/stdcells.md",
         "passed": true,
-        "content_hash": "sha256:227462783dd8129e4ae998c12a6925bf0f630a36d81889dd28486a5ebc83a623"
+        "content_hash": "sha256:8ef648144d20620fe215ff61f016b18255164e673a8fa8aa0a15ce43565589fb"
       },
       {
         "check": "command",

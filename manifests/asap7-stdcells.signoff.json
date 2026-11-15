@@ -34,13 +34,13 @@
         "command": null,
         "kind": "generic",
         "check_status": "pass",
-        "content_hash": "sha256:5f986de8686f121882667c6cbe6c6bf88c0265a65a343bfed2c5375c451dfa2b",
+        "content_hash": "sha256:246cf24020c633b96dd6c1ec82ea83ab294fcd03c1fe245eb836c7e2e426483d",
         "input_verified": true,
         "exit_status": 0,
         "artifact_binding": {
           "t1_item": 1,
           "path": null,
-          "content_hash": "sha256:5f986de8686f121882667c6cbe6c6bf88c0265a65a343bfed2c5375c451dfa2b",
+          "content_hash": "sha256:246cf24020c633b96dd6c1ec82ea83ab294fcd03c1fe245eb836c7e2e426483d",
           "input_verified": true,
           "members": [
             {
@@ -408,7 +408,7 @@
                 "path": "spec/stdcells.md",
                 "scope": "repo"
               },
-              "content_hash": "sha256:227462783dd8129e4ae998c12a6925bf0f630a36d81889dd28486a5ebc83a623",
+              "content_hash": "sha256:8ef648144d20620fe215ff61f016b18255164e673a8fa8aa0a15ce43565589fb",
               "status": "verified"
             }
           ],
@@ -1240,7 +1240,7 @@
         "command": null,
         "kind": "generic",
         "check_status": "pass",
-        "content_hash": "sha256:58d2dca220f742e923dcde0a3e7addc47a43e11fcb46603b66287b94badcdeab",
+        "content_hash": "sha256:006439dd1b4560a090e697fd1bd2b4bc5d19d0e003edc58cc7893a3145f9e535",
         "input_verified": true,
         "exit_status": 0,
         "artifact_binding": {
@@ -1249,7 +1249,7 @@
             "path": "manifests/t1-item9-inventory.json",
             "scope": "repo"
           },
-          "content_hash": "sha256:58d2dca220f742e923dcde0a3e7addc47a43e11fcb46603b66287b94badcdeab",
+          "content_hash": "sha256:006439dd1b4560a090e697fd1bd2b4bc5d19d0e003edc58cc7893a3145f9e535",
           "input_verified": true,
           "summary": "T1 item 9 (Testbenches shipped): 8/8 attestation checks passed (klt signoff --attest)",
           "source": "manifests/t1-item9-inventory.json",

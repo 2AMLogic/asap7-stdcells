@@ -4,7 +4,7 @@
   "evidence": {
     "1": {
       "file": "manifests/t1-item1.envelope.json",
-      "content_hash": "sha256:5f986de8686f121882667c6cbe6c6bf88c0265a65a343bfed2c5375c451dfa2b"
+      "content_hash": "sha256:246cf24020c633b96dd6c1ec82ea83ab294fcd03c1fe245eb836c7e2e426483d"
     },
     "6": {
       "not_applicable": {
@@ -28,7 +28,7 @@
     },
     "9": {
       "file": "manifests/t1-item9.envelope.json",
-      "content_hash": "sha256:58d2dca220f742e923dcde0a3e7addc47a43e11fcb46603b66287b94badcdeab"
+      "content_hash": "sha256:006439dd1b4560a090e697fd1bd2b4bc5d19d0e003edc58cc7893a3145f9e535"
     },
     "10": {
       "file": "manifests/t1-item10.envelope.json",

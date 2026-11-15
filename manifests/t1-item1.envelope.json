@@ -199,7 +199,7 @@
         "role": "source",
         "path": "spec/stdcells.md",
         "passed": true,
-        "content_hash": "sha256:227462783dd8129e4ae998c12a6925bf0f630a36d81889dd28486a5ebc83a623"
+        "content_hash": "sha256:8ef648144d20620fe215ff61f016b18255164e673a8fa8aa0a15ce43565589fb"
       },
       {
         "check": "present",
@@ -908,10 +908,10 @@
             "path": "spec/stdcells.md",
             "scope": "repo"
           },
-          "content_hash": "sha256:227462783dd8129e4ae998c12a6925bf0f630a36d81889dd28486a5ebc83a623"
+          "content_hash": "sha256:8ef648144d20620fe215ff61f016b18255164e673a8fa8aa0a15ce43565589fb"
         }
       ],
-      "content_hash": "sha256:5f986de8686f121882667c6cbe6c6bf88c0265a65a343bfed2c5375c451dfa2b"
+      "content_hash": "sha256:246cf24020c633b96dd6c1ec82ea83ab294fcd03c1fe245eb836c7e2e426483d"
     }
   }
 }
