@@ -31,8 +31,9 @@ integration/flowctl_par.sh <same tech LEF>  | tee integration/flowctl_par.txt
 ```
 
 Tools: OpenROAD 26Q3-1510-g6cb3f2b704, Yosys 0.67+post (git b8e7da6f),
-klt 0.9.2.dev1022+g2a9c52b27ce7. Recorded 2026-11-14. Single local runs;
-nothing is submitted to a batch fleet.
+klt 0.9.2.dev1022+g2a9c52b27ce7. Recorded 2026-11-14; `negctl_par.txt`
+re-recorded 2026-11-15 after the setup-failure / refusal split (#149). Single
+local runs; nothing is submitted to a batch fleet.
 
 ## Result: routing did not complete, and no result is claimed
 
@@ -42,6 +43,15 @@ routing-DRC violations" — is **not** met, and the maturity-ladder rung in the
 top-level `README.md` is deliberately left where it was. No routed DEF and no
 merged GDS are committed, because there is no clean route to commit; the
 `routed-clean` branch of `run_par.sh` writes them, and it did not run.
+
+The exit contract: a stage that ran and refused — any stage after
+`read_inputs`, this run's `detailed_route` included — is terminal
+`PAR_VERDICT refused:<stage>`, exit **3**: the refusal is the result. Only
+`read_inputs` itself, or a flow input that is missing or cannot be linked, is
+`PAR_VERDICT setup-failed:...`, exit **1** — `run_par.sh`'s "never a result"
+status. `routed-dirty` also exits **3**: routing completed, but no
+clean-routing claim is made. Every branch ends with exactly one `PAR_VERDICT`
+line, and `negctl_par.sh` asserts that on every control's captured output.
 
 What did complete, from `counter8_par.txt`:
 
@@ -131,13 +141,19 @@ and the caveat that the check is a lower bound rather than an oracle.
 A refusal only says something about the library if the thing that produced it
 is known to work. Both halves are checked, and both records are committed.
 
-**`negctl_par.sh` — the driver can fail.** Five controls, each requiring the
-driver to refuse rather than report a result: an unmodified copy reproduces the
+**`negctl_par.sh` — the driver can fail.** Seven controls, each requiring the
+driver to refuse rather than report a result, and each requiring exactly one
+`PAR_VERDICT` line in its captured output: an unmodified copy reproduces the
 recorded verdict (so the harness is not always-fail); a Liberty cell renamed
-off this library's naming is caught by the cell-name assertion (so spec item 1's
-check is live, not decorative); a library LEF with `DFFHQNx1` deleted stops the
-flow in setup; a missing tech LEF never reaches the tool; and a flow that ends
-before its verdict sentinel is a failure, not a pass. All five pass.
+off this library's naming is caught by the cell-name assertion (so spec item
+1's check is live, not decorative); a library LEF with `DFFHQNx1` deleted
+stops the flow in `read_inputs` — a setup failure, exit 1, one verdict line
+naming the stage; a missing tech LEF never reaches the tool; a flow that ends
+before its verdict sentinel is a failure, not a pass; a garbage `tracks.tcl`
+makes the real flow refuse at `floorplan`, which is terminal
+`refused:floorplan`, exit 3 — a stage that ran and refused is a recorded
+refusal, not invalid input; and a stub flow refusing at `read_inputs` pins
+the setup branch to exit 1 with a single verdict line. All seven pass.
 
 **`flowctl_par.sh` — the flow can route.** The same committed Tcl, through the
 same driver, on `comb8.v` (an 8-bit ripple-carry adder, no flop) synthesised

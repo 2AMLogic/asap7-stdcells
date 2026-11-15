@@ -14,11 +14,20 @@
 #   (b) Liberty cell renamed off   -> exit 1, "non-library cell", i.e. the
 #       the library's naming           spec item 1 / AC item 4 name assertion
 #                                      is live and not decorative
-#   (c) a macro deleted from the   -> exit 1, setup-failed: OpenROAD cannot
-#       library LEF                    resolve the master
+#   (c) a macro deleted from the   -> exit 1, PAR_VERDICT
+#       library LEF                    setup-failed:read_inputs: bad input
+#                                      stops the flow before any stage runs
 #   (d) tech LEF path missing      -> exit 1, invalid-input
 #   (e) a flow that ends without   -> exit 1, no A7S_FLOW_DONE sentinel, i.e. a
 #       its verdict sentinel           crashed flow does not read as a pass
+#   (f) a garbage tracks.tcl       -> exit 3, refused:floorplan: a stage that
+#       (the real flow)                ran and refused after read_inputs is a
+#                                      recorded refusal, not invalid input
+#   (g) a stub flow refusing at    -> exit 1, setup-failed:read_inputs, with
+#       read_inputs                   one verdict line
+#
+# Every control additionally requires exactly one PAR_VERDICT line in the
+# captured run output: a run ends with one verdict, whatever the branch.
 #
 # Exits 0 only if every control behaves as required; 1 if any control is
 # missed; 2 on a usage error. No claim about the library is made here: this
@@ -46,11 +55,18 @@ build() {  # build <name> -> echoes the scratch tree root
   echo "$t"
 }
 
-# check <name> <expect-exit> <expect-grep-ERE> <tech> -- <description>
+# check <name> <expect-exit> <expect-grep-ERE> <tech> <description>
+#       [expect-count] [tracks.tcl]
+#   expect-count: when set, the pattern must match exactly that many lines of
+#     the captured output -- a presence test cannot tell one verdict line
+#     from two.
+#   tracks.tcl:   passed through to run_par.sh (default: the one this harness
+#     was given).
 check() {
   local name="$1" want="$2" pat="$3" tech="$4" desc="$5"
-  local t="$W/$name" out rc
-  out="$("$t/integration/run_par.sh" "$tech" "$TRACKS" 2>&1)"; rc=$?
+  local count="${6:-}" tracks="${7:-$TRACKS}"
+  local t="$W/$name" out rc n m
+  out="$("$t/integration/run_par.sh" "$tech" "$tracks" 2>&1)"; rc=$?
   if [ "$rc" != "$want" ]; then
     echo "FAIL ($name): $desc -- expected exit $want, got $rc"
     echo "$out" | tail -5 | sed 's/^/     /'
@@ -62,6 +78,22 @@ check() {
     echo "$out" | tail -5 | sed 's/^/     /'
     FAILED=1
     return
+  fi
+  n="$(echo "$out" | grep -cE '^PAR_VERDICT ')"
+  if [ "$n" != 1 ]; then
+    echo "FAIL ($name): $desc -- exit $rc as expected but $n PAR_VERDICT lines, exactly 1 required"
+    echo "$out" | grep '^PAR_VERDICT ' | sed 's/^/     /'
+    FAILED=1
+    return
+  fi
+  if [ -n "$count" ]; then
+    m="$(echo "$out" | grep -cE "$pat")"
+    if [ "$m" != "$count" ]; then
+      echo "FAIL ($name): $desc -- exit $rc as expected but /$pat/ matched $m lines, wanted $count"
+      echo "$out" | tail -5 | sed 's/^/     /'
+      FAILED=1
+      return
+    fi
   fi
   echo "PASS ($name): $desc -- exit $rc, matched /$pat/"
 }
@@ -81,7 +113,8 @@ sed -i 's/\bINVx1_A7S_75t_R\b/INVx1_NOT_IN_LIBRARY/g' "$T/layout/A7S_75t_R_struc
 check b 1 'non-library cell INVx1_NOT_IN_LIBRARY' "$TECH" \
   "Liberty cell renamed off the library naming is caught by the name assertion"
 
-# (c) a macro missing from the library LEF must stop the flow in setup.
+# (c) a macro missing from the library LEF must stop the flow in setup, in
+#     read_inputs, with the one verdict line naming it.
 T="$(build c)"
 python3 -I -c '
 import re,sys
@@ -89,8 +122,8 @@ p=sys.argv[1]; s=open(p).read()
 s2=re.sub(r"^MACRO DFFHQNx1_A7S_75t_R\n.*?^END DFFHQNx1_A7S_75t_R\n","",s,flags=re.S|re.M)
 assert s2!=s, "negative control did not remove the macro"
 open(p,"w").write(s2)' "$T/layout/A7S_75t_R.lef"
-check c 1 '^PAR_VERDICT (invalid-input|setup-failed:)' "$TECH" \
-  "library LEF with DFFHQNx1 deleted stops the flow in setup"
+check c 1 '^PAR_VERDICT setup-failed:read_inputs$' "$TECH" \
+  "library LEF with DFFHQNx1 deleted stops the flow in read_inputs" 1
 
 # (d) an unreadable input must never reach the tool.
 build d >/dev/null
@@ -103,6 +136,27 @@ printf 'puts "A7S_STAGE_BEGIN pretend"\nputs "A7S_STAGE_OK pretend"\nexit 0\n' \
   > "$T/integration/par_counter8.tcl"
 check e 1 'no A7S_FLOW_DONE sentinel' "$TECH" \
   "a flow that stops before its verdict sentinel is a failure, not a pass"
+
+# (f) a stage that ran and refused must be the exit-3 recorded refusal, not
+#     invalid input. The real flow is used, with a garbage tracks.tcl: that
+#     file is only sourced inside the floorplan stage, so read_inputs succeeds
+#     and floorplan refuses -- a deterministic post-read_inputs refusal
+#     engineered by input corruption, like (b)-(d), not by breaking placement.
+build f >/dev/null
+printf 'this is not tcl\n' > "$W/f-bad-tracks.tcl"
+check f 3 '^PAR_VERDICT refused:floorplan$' "$TECH" \
+  "a floorplan refusal (garbage tracks.tcl) is the recorded refusal, exit 3" \
+  1 "$W/f-bad-tracks.tcl"
+
+# (g) the setup branch itself must stay exit 1 and name the stage, with one
+#     verdict line. Stub flow, control (e)'s technique: a missing-input-guard
+#     trip has no stage sentinels.
+T="$(build g)"
+printf 'puts "A7S_FLOW_VERDICT setup-failed:read_inputs"\nputs "A7S_FLOW_DONE"\n' \
+  > "$T/integration/par_counter8.tcl"
+check g 1 '^PAR_VERDICT setup-failed:read_inputs$' "$TECH" \
+  "a flow refusing at read_inputs is a setup failure: exit 1, one verdict line" \
+  1
 
 echo "== result =="
 if [ "$FAILED" = 0 ]; then
