@@ -8,7 +8,8 @@ Reads `<out>/<cell>.request/report.json` for every request of the sweep (the
                  arc delay, the timing margin (budget - worst delay) and the
                  batch job id; plus the negative-control verdict
   summary.md     the same as a table
-  <cell>.report.json   klt's report, host paths normalised (see normalize_paths.py)
+  <cell>.report.json   klt's report, host paths normalised
+                       (see verification/normalize_paths.py)
 
 The verdicts are klt's own (measurement limits in each request); this script
 only reduces them. Margin is `budget - worst tpd`, the budget being the

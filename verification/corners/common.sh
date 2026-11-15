@@ -93,7 +93,7 @@ corners_evidence() {
   cp "$SCRATCH"/run/*.request.json ${extra[@]+"${extra[@]}"} "$SCRATCH"/run/batch-set.json \
      "$SCRATCH"/run/batch-set.rc "$SCRATCH"/run/versions.txt \
      "$SCRATCH/run/$budget" "$SCRATCH/run/records/"
-  python3 -I "$HERE/../probes/characterize-tt/normalize_paths.py" "$SCRATCH" \
+  python3 -I "$HERE/../normalize_paths.py" "$SCRATCH" \
     "$SCRATCH"/run/records/*.json
   echo "done: $SCRATCH/run (records under run/records)"
 }

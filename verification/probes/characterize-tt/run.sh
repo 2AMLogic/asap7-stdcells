@@ -67,7 +67,7 @@ cp "$SCRATCH"/run/INVx1.request.json "$SCRATCH"/run/INVx1.report.json \
    "$SCRATCH"/run/INVx1.sim-report.json "$SCRATCH"/run/NAND2x1.request.json \
    "$SCRATCH"/run/NAND2x1.report.json "$SCRATCH"/run/NAND2x1.sim-report.json \
    "$SCRATCH/records/"
-python3 -I "$HERE/normalize_paths.py" "$SCRATCH" "$SCRATCH"/records/*.json
+python3 -I "$HERE/../../normalize_paths.py" "$SCRATCH" "$SCRATCH"/records/*.json
 
 # 6. Tool versions.
 {

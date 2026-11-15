@@ -11,11 +11,11 @@ against the intact CDL; the comparison must not come back `pass`.
 
 Run with the klt tool's Python, from the repo root (done by run.sh):
   run_pex.py <scratch> <lib> <osdi> <records-dir>
-Paths in the committed JSON are normalised: <scratch> -> scratch, the repo
-root -> ., the interpreter -> python, ngspice -> ngspice. Nothing else is rewritten.
+Paths in the committed JSON are normalised by verification/normalize_paths.py:
+<scratch> -> scratch, the repo root -> ., the interpreter -> python,
+ngspice -> ngspice. Nothing else is rewritten.
 """
 import json
-import re
 import shlex
 import subprocess
 import sys
@@ -25,8 +25,9 @@ import klayout.db as db
 
 HERE = Path(__file__).resolve().parent
 REPO = HERE.parent.parent
+sys.path.insert(0, str(REPO / "verification"))
+import normalize_paths as norm  # noqa: E402
 SUFFIX = "_A7S_75t_R"
-NGSPICE_ABS = re.compile(r'(?<=")/[^"]*/ngspice(?=")')
 V0 = (18, 0)
 # (id, deleted V0 shape index, what it opens) -- index into the layer's shapes in
 # stream order; asserted below to change the extracted netlist.
@@ -64,9 +65,8 @@ def klt_pex(scratch, lib, osdi, base, gds, cdl, outdir, tie_nets, extract_only):
 
 def save(path, doc, scratch):
     text = json.dumps(doc, indent=1) + "\n"
-    text = text.replace(str(scratch), "scratch").replace(str(REPO), ".")
-    text = text.replace(sys.executable, "python")
-    text = NGSPICE_ABS.sub("ngspice", text)
+    text = norm.normalize_json_text(text, scratch=str(scratch), repo=str(REPO),
+                                    interpreter=sys.executable)
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(text)
 

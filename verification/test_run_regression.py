@@ -426,7 +426,25 @@ class RunRegressionTest(unittest.TestCase):
         # rules no control fires on the drawn cell are listed, not omitted
         self.assertEqual(m["drawn_rules_fired_by_controls"], ["M1.S.2"])
         self.assertEqual(m["drawn_rules_unexercised"], ["FIN.W.1", "M1.S.1"])
+        self.assertEqual(m["drawn_rules_exercised_incidentally"], [])
         self.assertIn("unexercised", (rr.HERE / "records" / "r1" / "summary.md").read_text())
+
+    class IncidentalFire(FakeKlt):
+        """Control DRCs fire an extra id the control's `expect_rule` does not pin."""
+
+        def run(self, cmd, request):
+            env, err = super().run(cmd, request)
+            if cmd == "drc" and env and env.get("rule_counts"):
+                env = dict(env, rule_counts={"M1.S.2": 1, "FIN.W.1": 2})
+            return env, err
+
+    def test_incidental_rule_counts_are_reported_not_pinned(self):
+        self.assertEqual(self.go(self.IncidentalFire(), self.drawn_cfg()), 0)
+        m = self.manifest()
+        self.assertEqual(m["drawn_rules_fired_by_controls"], ["FIN.W.1", "M1.S.2"])
+        # FIN.W.1 rode along in ctl-d-drc's rule_counts but pins no control: reported as incidental
+        self.assertEqual(m["drawn_rules_exercised_incidentally"], ["FIN.W.1"])
+        self.assertNotIn("FIN.W.1", [c.get("expect_rule") for c in m["controls"] if c["result"] == "CAUGHT"])
 
     def test_shipped_rows_unchanged_by_drawn_support(self):
         self.assertEqual(self.go(FakeKlt(), self.drawn_cfg()), 0)
@@ -594,7 +612,7 @@ class InjectBoxTest(unittest.TestCase):
             rr.inject_spec({"id": "c", "layer": [11, 0]})
 
     def run_helper_extract(self, inject):
-        """Run HELPER's `extract` branch against a stub `klayout.db`.
+        """Run klt_helper.py's `extract` branch against a stub `klayout.db`.
 
         The real branch only runs under klt's interpreter, so the module is
         stubbed to record what it was asked to insert. This is the only place
@@ -644,7 +662,8 @@ class InjectBoxTest(unittest.TestCase):
         saved_argv = sys.argv
         try:
             sys.argv = ["helper", *argv]
-            exec(compile(rr.HELPER, "<helper>", "exec"), {"__name__": "__main__"})
+            helper_src = (rr.HERE / "klt_helper.py").read_text()
+            exec(compile(helper_src, "<klt_helper.py>", "exec"), {"__name__": "__main__"})
         finally:
             sys.argv = saved_argv
             sys.modules.clear()
