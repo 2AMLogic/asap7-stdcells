@@ -5,6 +5,12 @@ triage role. Newest first.
 
 ### 2026-11-14
 
+- **PR #131**: feat(verification): negative controls for eleven unexercised FEOL rule ids
+- **PR #128**: refactor: one Liberty expression parser, with a tested &/^ precedence
+- **PR #127**: refactor: one definition of the AOI22/OAI22 blocks the XOR cells redraw
+- **Issue #121** (closed): Remove the duplicated AOI22/OAI22 geometry blocks pasted into the XOR2x1 and XNOR2x1 draw scripts
+- **Issue #113** (closed): Consolidate the two Liberty expression evaluators: they document different & / ^ precedence
+- **Issue #111** (closed): Negative controls for the eleven unexercised ACTIVE, FIN, GATE and GCUT rule ids
 - **PR #108**: docs: roadmap as of 2026-11-13
 
 ### 2026-11-13

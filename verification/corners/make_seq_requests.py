@@ -16,6 +16,11 @@ Negative control: the same generation with the cell's input transmission gate
 tied off (nmos gate to VSS, pmos gate to VDD), found by connectivity to the D pin,
 so data never enters (`<cell>_negctl`).
 
+The request envelope is make_requests.sim_request(), shared with the
+combinational half; this half passes timeout_s=1800 and the key order that
+places `exclude` last, which is what the committed seq records were written
+with.
+
 usage: make_seq_requests.py <layout-dir> <hspice-card-dir> <bsimcmg.osdi> <workdir>
            [--single-corner tt] [cell ...]
 """
@@ -36,6 +41,7 @@ HOLD_BUDGET_PS = 35
 OFFSETS_PS = [x / 10 for x in range(-500, 501, 25)]  # -50 .. +50 in 2.5 ps
 EARLY_PS = 100  # prologue data lead
 BUDGET_S = mr.BUDGET_S  # 90 ps clock-to-output / D-to-output (decision 0011)
+TIMEOUT_S = 1800  # per-corner sim timeout; the sequential testbenches are long
 
 CELLS = {  # name: (output pin, inverting, active edge, read delay after it (ps))
     "DFFHQNx1": ("QN", True, "rise", 200),
@@ -154,37 +160,11 @@ def build(base, out_pin, inverting, active, read_ps, ours, subckt_ports, negctl)
     return "\n".join(tb) + "\n", stim, meas, tstop_ps * 1e-12, trials
 
 
-def request(tag_, meas, stim, tstop, osdi, single):
-    corners = mr.CORNERS if not single else [c for c in mr.CORNERS if c[0] == single]
-    req = {
-        "netlist": f"{tag_}.tb.spice",
-        "engine": "ngspice",
-        "models": {"lib": "asap7_bsimcmg.lib"},
-        "corners": {
-            "process": [p for p, _, _ in corners],
-            "supply_v": {mr.SUPPLY_KEY: sorted({v for _, v, _ in corners})},
-            "temperature_c": sorted({t for _, _, t in corners}),
-        },
-        "analysis": {"kind": "tran", "args": f"1p {mr.fmt(tstop)}"},
-        "stimulus": {"signals": stim},
-        "measurements": meas,
-        "options": {"osdi_preload": [str(osdi)], "stage_model_inputs": True,
-                    "timeout_s": 1800, "ngspice_init": ["set measureprec=9"]},
-    }
-    if not single:
-        req["exclude"] = mr.exclude_rules()
-    return req
-
-
 def main(argv):
     from klayout_tools import asap7_bsimcmg
     from klayout_tools.extract import run_extract
 
-    single = None
-    if "--single-corner" in argv:
-        i = argv.index("--single-corner")
-        single = argv[i + 1]
-        del argv[i : i + 2]
+    single = mr.pop_single_corner(argv)
     layout, cards, osdi, work = argv[:4]
     only = argv[4:]
     layout, cards, work = Path(layout), Path(cards), Path(work)
@@ -205,8 +185,9 @@ def main(argv):
             tb, stim, meas, tstop, trials = build(base, out_pin, inverting, active, read_ps,
                                                   ours, ports, negctl)
             (work / f"{name}.tb.spice").write_text(tb)
-            (work / f"{name}.request.json").write_text(
-                json.dumps(request(name, meas, stim, tstop, osdi, single), indent=1) + "\n")
+            req = mr.sim_request(name, meas, stim, tstop, osdi, TIMEOUT_S, single,
+                                 exclude_last=True)
+            (work / f"{name}.request.json").write_text(json.dumps(req, indent=1) + "\n")
             (work / f"{name}.trials.json").write_text(json.dumps(
                 {"inverting": inverting, "setup_budget_ps": SETUP_BUDGET_PS,
                  "hold_budget_ps": HOLD_BUDGET_PS, "trials": trials}, indent=1) + "\n")

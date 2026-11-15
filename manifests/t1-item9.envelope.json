@@ -17,7 +17,7 @@
         "role": "testbench",
         "path": "verification/README.md",
         "passed": true,
-        "content_hash": "sha256:d945d8ef2e5699fd44449bf59d617aa5ab35c0cc9eb21c10623f11cfa71ad6ba"
+        "content_hash": "sha256:a25cb35b41f8e97b6dc08e2f6b9a6ada3f9d887f27fb8d7c965cd95f65fec513"
       },
       {
         "check": "present",
@@ -38,14 +38,14 @@
         "role": "testbench",
         "path": "verification/run_regression.py",
         "passed": true,
-        "content_hash": "sha256:c3a33767513e76fd9a510714b5dd66d534582ce1a824255293d3a9fbc2290341"
+        "content_hash": "sha256:14e60c27de9a6b81e5ad930c548ae91976bce69790cb9f97f4b32df1c9fb588a"
       },
       {
         "check": "present",
         "role": "testbench",
         "path": "verification/test_run_regression.py",
         "passed": true,
-        "content_hash": "sha256:bd293a67ff466f801d59b35dd16bf3e956105ec5085254829391d050999267e8"
+        "content_hash": "sha256:fd782dc1c70059935d46b6f0f2aa462779b3be70765f483583aec5ebef322b99"
       },
       {
         "check": "command",
