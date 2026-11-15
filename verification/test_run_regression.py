@@ -14,6 +14,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import run_regression as rr  # noqa: E402
+import klt_helper  # noqa: E402  # AC: imports with no klayout installed and no stub
 
 CDL = ".SUBCKT INVx1_X A VDD VSS Y\nMM0 Y A VSS VSS nmos_rvt w=81.0n l=20n nfin=3\nMM1 Y A VDD VDD pmos_rvt w=81.0n l=20n nfin=3\n.ENDS\n"
 
@@ -686,6 +687,228 @@ class InjectBoxTest(unittest.TestCase):
     def test_helper_inserts_nothing_without_an_inject(self):
         self.assertEqual(self.run_helper_extract(None), [])
         self.assertTrue(self.out.is_file())
+
+
+class PlaceResult:
+    """What the `place` stub recorded: resolved placements, rail texts, create_cell order."""
+
+    def __init__(self):
+        self.placements = []  # [(cell name, (code, x, y)), ...] in insert order
+        self.texts = []       # [(layer, string, x, y), ...]
+        self.created = []     # names passed to create_cell, in order
+
+
+def place_db(cells, *, dbu=0.00025, origin=(0, 0), missing=()):
+    """Build a stdlib-only `klayout.db` stub sufficient for klt_helper's `place` branch.
+
+    `cells` maps name -> (w, h) dbu dims of the cell's 100/0 boundary box;
+    `origin` is the (left, bottom) of that box (non-(0, 0) trips the
+    boundary-at-origin guard); `missing` names sit in spec["libs"] but are
+    absent from their stream (`Layout.cell()` -> None, the only way to reach
+    the cell-not-found guard); `dbu` is the stream dbu (mismatching 0.00025
+    trips the dbu guard). Returns (pkg, db, PlaceResult).
+    """
+    result = PlaceResult()
+    raw_installs = []  # (cell_index, (code, x, y)) until `write` resolves names
+
+    class Box:
+        def __init__(self, left, bottom, right, top):
+            self.left, self.bottom, self.right, self.top = left, bottom, right, top
+
+        def width(self):
+            return self.right - self.left
+
+        def height(self):
+            return self.top - self.bottom
+
+    class Point:
+        def __init__(self, x, y):
+            self.x, self.y = x, y
+
+    class Trans:
+        R0, M0, M90, R180 = "R0", "M0", "M90", "R180"
+
+        def __init__(self, *a):
+            if len(a) == 1:  # displacement-only form: Trans(Point)
+                self.code, self.x, self.y = None, a[0].x, a[0].y
+            else:
+                self.code, self.x, self.y = a
+
+    class CellInstArray:
+        def __init__(self, cell_index, trans):
+            self.cell_index, self.trans = cell_index, trans
+
+    class Text:
+        def __init__(self, string, trans):
+            self.string, self.x, self.y = string, trans.x, trans.y
+
+    class Region:
+        def __init__(self, shapes):
+            boxes = list(shapes)
+            self._bbox = Box(min(b.left for b in boxes), min(b.bottom for b in boxes),
+                             max(b.right for b in boxes), max(b.top for b in boxes))
+
+        def bbox(self):
+            return self._bbox
+
+    class Shapes:
+        def __init__(self, layer):
+            self.layer = layer
+
+        def insert(self, item):
+            result.texts.append((self.layer, item.string, item.x, item.y))
+
+    class Cell:
+        def __init__(self, name, index, boxes):
+            self.name, self.index, self.boxes = name, index, boxes
+
+        def cell_index(self):
+            return self.index
+
+        def copy_tree(self, other):
+            pass
+
+        def begin_shapes_rec(self, layer):
+            return [Box(l + origin[0], b + origin[1], r + origin[0], t + origin[1])
+                    for l, b, r, t in self.boxes]
+
+        def shapes(self, layer):
+            return Shapes(layer)
+
+        def insert(self, inst):
+            raw_installs.append((inst.cell_index, (inst.trans.code, inst.trans.x, inst.trans.y)))
+
+    class Layout:
+        def __init__(self):
+            self.dbu = 0.00025  # per-instance: streams get `dbu` on read, the output stays 0.00025
+            self.cells = {}
+            self._next = 0
+
+        def read(self, path):
+            self.dbu = dbu
+            name = Path(path).stem  # one cell per stream, named by its file
+            if name in cells and name not in missing:
+                w, h = cells[name]
+                self._next += 1
+                self.cells[name] = Cell(name, ("stream", path, self._next), [(0, 0, w, h)])
+
+        def cell(self, name):
+            return self.cells.get(name)
+
+        def create_cell(self, name):
+            result.created.append(name)
+            self._next += 1
+            c = Cell(name, ("out", self._next), [])
+            self.cells[name] = c
+            return c
+
+        def layer(self, l, dt=0):
+            return (l, dt)
+
+        def write(self, out):
+            Path(out).write_bytes(b"gds")
+            names = {c.index: nm for nm, c in self.cells.items()}
+            result.placements = [(names[i], t) for i, t in raw_installs]
+
+    db = types.ModuleType("klayout.db")
+    db.Layout, db.Box = Layout, lambda *a: ("Box", *a)
+    db.Point, db.Trans = Point, Trans
+    db.CellInstArray, db.Text, db.Region = CellInstArray, Text, Region
+    pkg = types.ModuleType("klayout")
+    pkg.db = db
+    return pkg, db, result
+
+
+class HelperPlaceTest(unittest.TestCase):
+    """klt_helper's `place` branch against a stub klayout.db, via main(argv).
+
+    Expected values are the Curator's measured table (issue #151): cells
+    A = 100x200, B = 40x200 dbu. The spec's MX/MY orient codes map to
+    KLayout's M0/M90 — assertions use the KLayout codes the stub records.
+    """
+
+    def run_place(self, stub, rows, rail_labels=False):
+        spec = {"top": "TOP", "libs": {"A": "A.gds", "B": "B.gds"}, "rows": rows}
+        if rail_labels:
+            spec["rail_labels"] = True
+        saved = sys.modules.copy()
+        sys.modules["klayout"], sys.modules["klayout.db"] = stub[0], stub[1]
+        out = self.tmp / "out.gds"
+        try:
+            klt_helper.main(["place", json.dumps(spec), str(out)])
+        finally:
+            sys.modules.clear()
+            sys.modules.update(saved)
+        return out, stub[2]
+
+    def setUp(self):
+        self.tmp = Path(tempfile.mkdtemp())
+
+    def test_row_advances_x_by_cell_width(self):
+        _, res = self.run_place(place_db({"A": (100, 200), "B": (40, 200)}),
+                                [[["A", "R0"], ["B", "R0"]]])
+        self.assertEqual(res.placements, [("A", ("R0", 0, 0)), ("B", ("R0", 100, 0))])
+
+    def test_orientations_map_to_klayout_codes_and_rows_stack(self):
+        _, res = self.run_place(place_db({"A": (100, 200)}),
+                                [[["A", "MX"]], [["A", "MY"]]])
+        self.assertEqual(res.placements, [("A", ("M0", 0, 200)), ("A", ("M90", 100, 200))])
+
+    def test_mixed_orientation_row(self):
+        _, res = self.run_place(place_db({"A": (100, 200), "B": (40, 200)}),
+                                [[["A", "MX"], ["B", "R180"]]])
+        self.assertEqual(res.placements, [("A", ("M0", 0, 200)), ("B", ("R180", 140, 200))])
+
+    def test_r180_applies_both_offsets(self):
+        _, res = self.run_place(place_db({"A": (100, 200)}), [[["A", "R180"]]])
+        self.assertEqual(res.placements, [("A", ("R180", 100, 200))])
+
+    def test_empty_row_is_a_spacer(self):
+        # run_regression.py passes [] rows as spacers: y advances, nothing placed.
+        _, res = self.run_place(place_db({"A": (100, 200)}),
+                                [[["A", "R0"]], [], [["A", "R0"]]])
+        self.assertEqual(res.placements, [("A", ("R0", 0, 0)), ("A", ("R0", 0, 400))])
+
+    def test_rail_labels_center_on_last_row_midpoint(self):
+        out, res = self.run_place(place_db({"A": (100, 200), "B": (40, 200)}),
+                                  [[["A", "R0"], ["B", "R0"]]], rail_labels=True)
+        self.assertEqual(res.texts, [((19, 251), "VSS", 70, 0), ((19, 251), "VDD", 70, 200)])
+        self.assertTrue(out.is_file())
+
+    def test_no_rail_labels_without_the_flag(self):
+        _, res = self.run_place(place_db({"A": (100, 200)}), [[["A", "R0"]]])
+        self.assertEqual(res.texts, [])
+
+    def test_same_cell_twice_in_a_row_shares_one_copy(self):
+        _, res = self.run_place(place_db({"A": (100, 200)}), [[["A", "R0"], ["A", "R0"]]])
+        self.assertEqual(res.placements, [("A", ("R0", 0, 0)), ("A", ("R0", 100, 0))])
+        self.assertEqual(res.created, ["TOP", "A"])  # memoized: one copy serves both placements
+
+    def test_cell_absent_from_its_stream_exits(self):
+        # The guard is reachable only with the cell in spec["libs"] but missing
+        # from the stream; omitting it from libs would KeyError first.
+        stub = place_db({"A": (100, 200)}, missing={"A"})
+        with self.assertRaises(SystemExit) as cm:
+            self.run_place(stub, [[["A", "R0"]]])
+        self.assertIn("cell not found in stream: A", str(cm.exception))
+
+    def test_stream_dbu_mismatch_exits(self):
+        stub = place_db({"A": (100, 200)}, dbu=0.001)
+        with self.assertRaises(SystemExit) as cm:
+            self.run_place(stub, [[["A", "R0"]]])
+        self.assertIn("stream dbu is not 0.00025 um: A.gds", str(cm.exception))
+
+    def test_boundary_off_origin_exits(self):
+        stub = place_db({"A": (100, 200)}, origin=(50, 10))
+        with self.assertRaises(SystemExit) as cm:
+            self.run_place(stub, [[["A", "R0"]]])
+        self.assertIn("cell boundary (100/0) does not start at the origin: A", str(cm.exception))
+
+    def test_mixed_row_heights_exit(self):
+        stub = place_db({"A": (100, 200), "B": (40, 400)})
+        with self.assertRaises(SystemExit) as cm:
+            self.run_place(stub, [[["A", "R0"]], [["B", "R0"]]])
+        self.assertIn("cells in a stack must share one height: B", str(cm.exception))
 
 
 if __name__ == "__main__":

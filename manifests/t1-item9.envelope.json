@@ -45,7 +45,7 @@
         "role": "testbench",
         "path": "verification/test_run_regression.py",
         "passed": true,
-        "content_hash": "sha256:caad3ca9a7ef44d3197f733010a673080ac3b3308b2783119a3c11bb9ed463c9"
+        "content_hash": "sha256:9a998a8d9ba3fb32551329d5e3a2c611e50bbad20b4217120835bfb4c61f574a"
       },
       {
         "check": "command",
@@ -79,7 +79,7 @@
     ]
   },
   "provenance": {
-    "klt_version": "0.9.0",
+    "klt_version": "0.9.3.dev16+gdcf18e2e0c03",
     "klayout_version": null,
     "pdk": null,
     "deck": null,
