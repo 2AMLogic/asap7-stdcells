@@ -97,7 +97,7 @@ python3 -I verification/pex/check_pex_records.py <records-dir>
 python3 -I verification/pex/test_pex.py
 ```
 
-All six self-tests at once (no klt or PDK needed for the offline suites):
+All self-tests at once (no klt or PDK needed for the offline suites):
 `python3 verification/run_selftests.py` (`pnpm run check:ci`).
 
 `run.sh` fetches the pinned lambdapdk 0.2.17 (sha256 checked) and builds the

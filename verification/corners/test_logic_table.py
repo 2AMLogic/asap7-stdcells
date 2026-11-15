@@ -2,7 +2,7 @@
 
     python3 -I verification/corners/test_logic_table.py
 
-All six self-tests at once: python3 verification/run_selftests.py
+All self-tests at once: python3 verification/run_selftests.py
 (pnpm run check:ci).
 
 Runs without klt, ngspice or the PDK. For every cell and every input vector the

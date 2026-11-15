@@ -34,7 +34,7 @@ Each run writes a new `verification/records/<record-id>/` and never overwrites
 one. Re-check a committed record's input hashes with
 `python3 verification/run_regression.py --verify verification/records/<record-id>`
 (`klt drc|lvs --check`). Self-check of the harness itself, no `klt` or PDK
-needed: `python3 verification/test_run_regression.py`. All six self-tests
+needed: `python3 verification/test_run_regression.py`. All self-tests
 (`verification/**/test_*.py`) run as one gate: `python3
 verification/run_selftests.py` (`pnpm run check:ci`) — it uses klt's
 interpreter for the GDS-reading suites and stays red if `klt` is absent.
@@ -165,7 +165,13 @@ copy with the NMOS fin count changed), `grid_offset` (every shape of one layer
 moved; the named scripted check must fail). `cells.json` `spec_rule_families`
 lists the rule-id families `spec/stdcells.md` requires a control for; a family
 in which no CAUGHT control fires any rule fails the run, and the summary table
-"Negative-control coverage per rule family" names it. The summary lists every deck rule id
+"Negative-control coverage per rule family" names it. `expect_rule` is the only
+rule id a control pins; any other id in a CAUGHT control's `rule_counts` still
+counts as exercised but is reported separately as incidentally exercised
+(`drawn_rules_exercised_incidentally`: fired by a CAUGHT control on a drawn
+cell but pinned by no CAUGHT control's `expect_rule` on any cell), since
+nothing keeps such a rule covered.
+The summary lists every deck rule id
 no control on a drawn cell fires as **unexercised**: a clean result says nothing
 about those.
 

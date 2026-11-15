@@ -1,0 +1,491 @@
+== flow control: route a design that avoids the unreachable pins ==
+design:   integration/comb8.v (8-bit ripple-carry adder, no flop)
+kept off: DFFHQNx1_A7S_75t_R XOR2x1_A7S_75t_R XNOR2x1_A7S_75t_R NOR2x1_A7S_75t_R DHLx1_A7S_75t_R
+
+== tools ==
+openroad: 26Q3-1510-g6cb3f2b704 
+yosys:    Yosys 0.67+post (git sha1 b8e7da6f40ae8f552c116bf6c359b07c6533e159, Release, GNU /usr/bin/c++ 13.3.0)
+== inputs (sha256) ==
+asap7_tech.lef [pinned lambdapdk v0.2.17]                      830a032810b054d0dc24601c3f57c86073469e6c9cfb0314b2c82eb335b021d2
+tracks.tcl [pinned lambdapdk v0.2.17]                          efa53ebb9b009d917c2b6dd1c8422fc982c39f1473b0a1adc8868f7c9c3115c5
+layout/A7S_75t_R.lef                                           0652f7a4837acccb9ba451de1d55e55c4fb7976d0ed8fadf979cdc776e97e8b1
+layout/A7S_75t_R_structural.lib                                e50e150e548dfc391bc5314e756d14c9a503e658a39f149c206b9fc20596f6e7
+integration/comb8.v                                            3ccae83939f50ce430f73688fe907637b6b1ce16840707df6e19730fa6769311
+integration/par_counter8.tcl                                   a67200325835c7bef2cf7658bb6a1c64740f6ff11ce4176da0be3ebd8cfea47a
+== yosys mapping (scratch; re-run of the sim/ mapping, not a committed artifact) ==
+design:   integration/comb8.v (top comb8)
+dont_use: -dont_use DFFHQNx1_A7S_75t_R -dont_use XOR2x1_A7S_75t_R -dont_use XNOR2x1_A7S_75t_R -dont_use NOR2x1_A7S_75t_R -dont_use DHLx1_A7S_75t_R
+mapped netlist (scratch)                                       38e8c8279d81274de913f5ccea9df301085f093680f0524679d1e8eb941a66b5
+== cell-name assertion (spec item 1) ==
+     12 AND2x1_A7S_75t_R
+      5 AOI21x1_A7S_75t_R
+      4 INVx1_A7S_75t_R
+     20 NAND2x1_A7S_75t_R
+      1 NAND3x1_A7S_75t_R
+      3 OAI21x1_A7S_75t_R
+     15 OR2x1_A7S_75t_R
+PASS: 60 instances, all *_A7S_75t_R cells of the 18-cell set
+== openroad place and route (utilisation 40%) ==
+A7S_INPUT tech     /tmp/a7s109-pdk/x/lambdapdk/asap7/base/apr/asap7_tech.lef
+A7S_INPUT tracks   /tmp/a7s109-pdk/x/lambdapdk/asap7/base/apr/../../libs/asap7sc7p5t_rvt/apr/openroad/tracks.tcl
+A7S_INPUT lib_lef  /home/ubuntu/GitHub/asap7-stdcells/.loom/worktrees/issue-109/layout/A7S_75t_R.lef
+A7S_INPUT liberty  /home/ubuntu/GitHub/asap7-stdcells/.loom/worktrees/issue-109/layout/A7S_75t_R_structural.lib
+A7S_INPUT netlist  /tmp/tmp.QI6xuunWFo/mapped.v
+A7S_INPUT top      comb8_mapped
+A7S_INPUT util     40
+A7S_STAGE_BEGIN read_inputs
+[INFO ODB-0227] LEF file: /tmp/a7s109-pdk/x/lambdapdk/asap7/base/apr/asap7_tech.lef, created 24 layers, 9 vias
+[INFO ODB-0227] LEF file: /home/ubuntu/GitHub/asap7-stdcells/.loom/worktrees/issue-109/layout/A7S_75t_R.lef, created 22 library cells
+A7S_STAGE_OK read_inputs
+A7S_INFO instances_linked 60
+A7S_INFO nets_linked 77
+A7S_STAGE_BEGIN floorplan
+[INFO IFP-0107] Defining die area using utilization: 40.00% and aspect ratio: 1.
+[INFO IFP-0001] Added 13 rows of 67 site asap7sc7p5t.
+[INFO IFP-0100] Die BBox:  (  0.000  0.000 ) (  4.182  4.182 ) um
+[INFO IFP-0101] Core BBox: (  0.270  0.270 ) (  3.888  3.780 ) um
+[INFO IFP-0102] Core area:                           12.699 um^2
+[INFO IFP-0103] Total instances area:                 5.307 um^2
+[INFO IFP-0104] Effective utilization:                0.418
+[INFO IFP-0105] Number of instances:                     60
+A7S_STAGE_OK floorplan
+A7S_STAGE_BEGIN place_pins
+Found 0 macro blocks.
+Using 2 tracks default min distance between IO pins.
+[INFO PPL-0001] Number of available slots 140
+[INFO PPL-0002] Number of I/O             26
+[INFO PPL-0003] Number of I/O w/sink      26
+[INFO PPL-0004] Number of I/O w/o sink    0
+[INFO PPL-0005] Slots per section         200
+[INFO PPL-0008] Successfully assigned pins to sections.
+[INFO PPL-0012] I/O nets HPWL: 66.53 um.
+A7S_STAGE_OK place_pins
+A7S_STAGE_BEGIN tapcell
+[INFO TAP-0004] Inserted 26 endcaps.
+[INFO TAP-0005] Inserted 0 tapcells.
+A7S_STAGE_OK tapcell
+A7S_INFO tap_instances 26
+A7S_STAGE_BEGIN pdn
+[INFO PDN-0001] Inserting grid: stdcells
+[INFO PDN-0500] Runtime: 0.00s
+A7S_STAGE_OK pdn
+A7S_STAGE_BEGIN global_placement
+[INFO GPL-0001] ---- Initialize GPL Main Data Structures
+[INFO GPL-0002] DBU: 1000
+[INFO GPL-0003] SiteSize: (  0.054  0.270 ) um
+[INFO GPL-0004] CoreBBox: (  0.270  0.270 ) (  3.888  3.780 ) um
+[INFO GPL-0016] Core area:                      12.699 um^2
+[INFO GPL-0036] Movable instances area:          5.307 um^2
+[INFO GPL-0037] Total instances area:            6.065 um^2
+[INFO GPL-0035] Pin density area adjust:         0.077 um^2
+[INFO GPL-0032] ---- Initialize Region: Top-level
+[INFO GPL-0006] Number of instances:                86
+[INFO GPL-0007] Movable instances:                  60
+[INFO GPL-0008] Fixed instances:                    26
+[INFO GPL-0009] Dummy instances:                     0
+[INFO GPL-0010] Number of nets:                     77
+[INFO GPL-0011] Number of pins:                    211
+[INFO GPL-0012] Die BBox:       (  0.000  0.000 ) (  4.182  4.182 ) um
+[INFO GPL-0013] Placement BBox: (  0.270  0.270 ) (  3.888  3.780 ) um
+[INFO GPL-0014] Region name: top-level.
+[INFO GPL-0015] Region area:                    12.699 um^2
+[INFO GPL-0017] Fixed instances area:            0.758 um^2
+[INFO GPL-0018] Movable instances area:          5.384 um^2
+[INFO GPL-0019] Utilization:                    45.091 %
+[INFO GPL-0020] Standard cells area:             5.384 um^2
+[INFO GPL-0021] Large instances area:            0.000 um^2
+[INFO GPL-0005] ---- Execute Conjugate Gradient Initial Placement.
+[INFO GPL-0051] Source of initial instance position counters:
+	Odb location = 0	Core center = 60	Region center = 0
+[InitialPlace]  Iter: 1 conjugate gradient residual: 0.00000008 HPWL: 195492
+[InitialPlace]  Iter: 2 conjugate gradient residual: 0.00000009 HPWL: 69111
+[InitialPlace]  Iter: 3 conjugate gradient residual: 0.00000008 HPWL: 69119
+[InitialPlace]  Iter: 4 conjugate gradient residual: 0.00000011 HPWL: 69126
+[InitialPlace]  Iter: 5 conjugate gradient residual: 0.00000008 HPWL: 69119
+[INFO GPL-0033] ---- Initialize Nesterov Region: Top-level
+[INFO GPL-0023] Placement target density:       0.6000
+[INFO GPL-0024] Movable insts average area:      0.090 um^2
+[INFO GPL-0025] Ideal bin area:                  0.150 um^2
+[INFO GPL-0026] Ideal bin count:                    84
+[INFO GPL-0027] Total bin area:                 12.699 um^2
+[INFO GPL-0028] Bin count (X, Y):           8 ,      8
+[INFO GPL-0029] Bin size (W * H):       0.452 *  0.439 um
+[INFO GPL-0030] Number of bins:                     64
+[INFO GPL-0084] ---- Execute Nesterov Global Placement.
+[INFO GPL-0031] HPWL: Half-Perimeter Wirelength
+Iteration | Overflow |     HPWL (um) |  HPWL(%) |   Penalty | Group
+---------------------------------------------------------------
+        0 |   0.8241 |  3.415400e+01 |   +0.00% |  8.31e-12 |      
+       10 |   0.8242 |  3.411700e+01 |   -0.11% |  1.35e-11 |      
+       20 |   0.8244 |  3.412600e+01 |   +0.03% |  2.20e-11 |      
+       30 |   0.8243 |  3.412100e+01 |   -0.01% |  3.59e-11 |      
+       40 |   0.8243 |  3.412500e+01 |   +0.01% |  5.85e-11 |      
+       50 |   0.8243 |  3.412200e+01 |   -0.01% |  9.53e-11 |      
+       60 |   0.8243 |  3.413100e+01 |   +0.03% |  1.55e-10 |      
+       70 |   0.8242 |  3.413900e+01 |   +0.02% |  2.53e-10 |      
+       80 |   0.8241 |  3.413700e+01 |   -0.01% |  4.12e-10 |      
+       90 |   0.8239 |  3.416200e+01 |   +0.07% |  6.71e-10 |      
+      100 |   0.8236 |  3.417400e+01 |   +0.04% |  1.09e-09 |      
+      110 |   0.8231 |  3.421900e+01 |   +0.13% |  1.78e-09 |      
+      120 |   0.8223 |  3.430300e+01 |   +0.25% |  2.90e-09 |      
+      130 |   0.8208 |  3.447600e+01 |   +0.50% |  4.72e-09 |      
+      140 |   0.8178 |  3.459700e+01 |   +0.35% |  7.69e-09 |      
+      150 |   0.8150 |  3.481500e+01 |   +0.63% |  1.25e-08 |      
+      160 |   0.8109 |  3.537000e+01 |   +1.59% |  2.04e-08 |      
+      170 |   0.8043 |  3.662800e+01 |   +3.56% |  3.32e-08 |      
+      180 |   0.7902 |  3.878900e+01 |   +5.90% |  5.41e-08 |      
+      190 |   0.7616 |  4.131400e+01 |   +6.51% |  8.82e-08 |      
+      200 |   0.7283 |  4.417400e+01 |   +6.92% |  1.44e-07 |      
+      210 |   0.6928 |  4.800700e+01 |   +8.68% |  2.34e-07 |      
+      220 |   0.6392 |  5.087400e+01 |   +5.97% |  3.81e-07 |      
+      230 |   0.5928 |  5.482400e+01 |   +7.76% |  6.21e-07 |      
+      240 |   0.5426 |  5.801200e+01 |   +5.81% |  1.01e-06 |      
+      250 |   0.4893 |  6.171300e+01 |   +6.38% |  1.65e-06 |      
+      260 |   0.4402 |  6.521100e+01 |   +5.67% |  2.68e-06 |      
+      270 |   0.3645 |  6.760200e+01 |   +3.67% |  4.37e-06 |      
+      280 |   0.3064 |  6.868700e+01 |   +1.60% |  6.77e-06 |      
+      290 |   0.2642 |  6.976600e+01 |   +1.57% |  9.98e-06 |      
+      300 |   0.2298 |  7.167600e+01 |   +2.74% |  1.47e-05 |      
+      310 |   0.2115 |  7.363700e+01 |   +2.74% |  2.16e-05 |      
+      320 |   0.1935 |  7.506500e+01 |   +1.94% |  3.19e-05 |      
+      330 |   0.1653 |  7.615000e+01 |   +1.45% |  4.70e-05 |      
+      340 |   0.1450 |  7.706600e+01 |   +1.20% |  6.92e-05 |      
+      350 |   0.1233 |  7.769300e+01 |   +0.81% |  1.02e-04 |      
+      359 |   0.0981 |  7.827000e+01 |          |  1.50e-04 |      
+---------------------------------------------------------------
+[INFO GPL-1001] Global placement finished at iteration 359
+[INFO GPL-1002] Placed Cell Area                5.3843
+[INFO GPL-1003] Available Free Area            11.9410
+[INFO GPL-1004] Minimum Feasible Density        0.4600 (cell_area / free_area)
+[INFO GPL-1006]   Suggested Target Densities:
+[INFO GPL-1007]     - For 90% usage of free space: 0.5010
+[INFO GPL-1008]     - For 80% usage of free space: 0.5636
+[INFO GPL-1009]     - For 50% usage of free space: 0.9018
+[INFO GPL-1014] Final placement area: 5.38 (+0.00%)
+A7S_STAGE_OK global_placement
+A7S_STAGE_BEGIN detailed_placement
+[INFO DPL-0006] Core area: 12.70 um^2
+[INFO DPL-0007] Movable instances area: 5.31 um^2
+[INFO DPL-0008] Fixed instances area within core: 0.76 um^2
+[INFO DPL-0009] Utilization: 47.8%
+[INFO DPL-0005] Diamond search max displacement: +/- 500 sites horizontally, +/- 100 rows vertically.
+[INFO DPL-1102] Legalizing using negotiation legalizer.
+[INFO DPL-1103] Negotiation base search window: +/-20 sites horizontally, +/-5 rows vertically 
+	Automatic search window extension enabled.
+	Search window extendable up to the max displacement cap of +/-500 sites, +/-100 rows near walls.
+[INFO DPL-1104] NegotiationLegalizer DRC penalty: 5.
+[INFO DPL-0392] Negotiation cell height distribution (1 unique row-count(s)):
+[INFO DPL-0393]   height 1 row(s): 86 cells
+          |      Total |  Illegal |  Illegal
+Iteration | Violations |    Cells |    Sites
+---------------------------------------------
+        0 |          0 |         0 |         0
+Negotiation phase 1 converged at iteration 0.
+[INFO DPL-0500] Runtime: 0.00s
+Placement Analysis
+---------------------------------
+total displacement         16.5 u
+average displacement        0.2 u
+max displacement            0.7 u
+original HPWL              78.5 u
+legalized HPWL             97.0 u
+delta HPWL                   24 %
+
+A7S_STAGE_OK detailed_placement
+A7S_STAGE_BEGIN check_placement_preroute
+A7S_STAGE_OK check_placement_preroute
+A7S_STAGE_BEGIN clock_tree_synthesis
+[WARNING CTS-0104] Clock wire resistance/capacitance values are zero.
+Use set_wire_rc to set them.
+[INFO CTS-0050] Root buffer is BUFx1_A7S_75t_R.
+[INFO CTS-0051] Sink buffer is BUFx1_A7S_75t_R.
+[INFO CTS-0052] The following clock buffers will be used for CTS:
+                    BUFx1_A7S_75t_R
+[ERROR CTS-0111] No max capacitance found for cell BUFx1_A7S_75t_R.
+A7S_STAGE_REFUSED clock_tree_synthesis :: CTS-0111
+A7S_CLOCK_AS_SIGNAL yes
+A7S_STAGE_BEGIN filler_placement
+[INFO DPL-0001] Placed 154 filler instances.
+A7S_STAGE_OK filler_placement
+A7S_INFO filler_instances 154
+A7S_STAGE_BEGIN check_placement_postfill
+A7S_STAGE_OK check_placement_postfill
+A7S_STAGE_BEGIN set_routing_layers
+A7S_STAGE_OK set_routing_layers
+A7S_STAGE_BEGIN global_route
+A7S_STAGE_OK global_route
+A7S_STAGE_BEGIN detailed_route
+[INFO DRT-0149] Reading tech and libs.
+
+Units:                1000
+Number of layers:     21
+Number of macros:     22
+Number of vias:       9
+Number of viarulegen: 11
+
+[INFO DRT-0150] Reading design.
+
+Design:                   comb8_mapped
+Die area:                 ( 0 0 ) ( 4182 4182 )
+Number of track patterns: 32
+Number of DEF vias:       0
+Number of components:     240
+Number of terminals:      26
+Number of snets:          2
+Number of nets:           77
+
+[INFO DRT-0167] List of default vias:
+  Layer V2
+    default via: VIA23
+  Layer V3
+    default via: VIA34
+  Layer V4
+    default via: VIA45
+  Layer V5
+    default via: VIA56
+  Layer V6
+    default via: VIA67
+  Layer V7
+    default via: VIA78
+  Layer V8
+    default via: VIA89
+  Layer V9
+    default via: VIA9Pad
+[INFO DRT-0162] Library cell analysis.
+[INFO DRT-0163] Instance analysis.
+[INFO DRT-0164] Number of unique instances = 35.
+[INFO DRT-0168] Init region query.
+[INFO DRT-0024]   Complete Active.
+[INFO DRT-0024]   Complete V0.
+[INFO DRT-0024]   Complete M1.
+[INFO DRT-0024]   Complete V1.
+[INFO DRT-0024]   Complete M2.
+[INFO DRT-0024]   Complete V2.
+[INFO DRT-0024]   Complete M3.
+[INFO DRT-0024]   Complete V3.
+[INFO DRT-0024]   Complete M4.
+[INFO DRT-0024]   Complete V4.
+[INFO DRT-0024]   Complete M5.
+[INFO DRT-0024]   Complete V5.
+[INFO DRT-0024]   Complete M6.
+[INFO DRT-0024]   Complete V6.
+[INFO DRT-0024]   Complete M7.
+[INFO DRT-0024]   Complete V7.
+[INFO DRT-0024]   Complete M8.
+[INFO DRT-0024]   Complete V8.
+[INFO DRT-0024]   Complete M9.
+[INFO DRT-0024]   Complete V9.
+[INFO DRT-0024]   Complete Pad.
+[INFO DRT-0033] Active shape region query size = 0.
+[INFO DRT-0033] V0 shape region query size = 0.
+[INFO DRT-0033] M1 shape region query size = 1164.
+[INFO DRT-0033] V1 shape region query size = 0.
+[INFO DRT-0033] M2 shape region query size = 64.
+[INFO DRT-0033] V2 shape region query size = 0.
+[INFO DRT-0033] M3 shape region query size = 26.
+[INFO DRT-0033] V3 shape region query size = 0.
+[INFO DRT-0033] M4 shape region query size = 0.
+[INFO DRT-0033] V4 shape region query size = 0.
+[INFO DRT-0033] M5 shape region query size = 0.
+[INFO DRT-0033] V5 shape region query size = 0.
+[INFO DRT-0033] M6 shape region query size = 0.
+[INFO DRT-0033] V6 shape region query size = 0.
+[INFO DRT-0033] M7 shape region query size = 0.
+[INFO DRT-0033] V7 shape region query size = 0.
+[INFO DRT-0033] M8 shape region query size = 0.
+[INFO DRT-0033] V8 shape region query size = 0.
+[INFO DRT-0033] M9 shape region query size = 0.
+[INFO DRT-0033] V9 shape region query size = 0.
+[INFO DRT-0033] Pad shape region query size = 0.
+[INFO DRT-0165] Start pin access.
+[INFO DRT-0078]   Complete 122 pins.
+[INFO DRT-0081]   Complete 30 unique inst patterns.
+[INFO DRT-0084]   Complete 41 groups.
+#scanned instances     = 240
+#unique  instances     = 30
+#stdCellGenAp          = 182
+#stdCellValidPlanarAp  = 0
+#stdCellValidViaAp     = 147
+#stdCellPinNoAp        = 0
+#stdCellPinCnt         = 185
+#instTermValidViaApCnt = 0
+#macroGenAp            = 0
+#macroValidPlanarAp    = 0
+#macroValidViaAp       = 0
+#macroNoAp             = 0
+[INFO DRT-0166] Complete pin access.
+[INFO DRT-0267] cpu time = 00:00:00, elapsed time = 00:00:00, memory = 183.22 (MB), peak = 183.19 (MB)
+
+[INFO DRT-0157] Number of guides:     415
+
+[INFO DRT-0169] Post process guides.
+[INFO DRT-0176] GCELLGRID X 0 DO 7 STEP 570 ;
+[INFO DRT-0177] GCELLGRID Y 0 DO 7 STEP 570 ;
+[INFO DRT-0028]   Complete Active.
+[INFO DRT-0028]   Complete V0.
+[INFO DRT-0028]   Complete M1.
+[INFO DRT-0028]   Complete V1.
+[INFO DRT-0028]   Complete M2.
+[INFO DRT-0028]   Complete V2.
+[INFO DRT-0028]   Complete M3.
+[INFO DRT-0028]   Complete V3.
+[INFO DRT-0028]   Complete M4.
+[INFO DRT-0028]   Complete V4.
+[INFO DRT-0028]   Complete M5.
+[INFO DRT-0028]   Complete V5.
+[INFO DRT-0028]   Complete M6.
+[INFO DRT-0028]   Complete V6.
+[INFO DRT-0028]   Complete M7.
+[INFO DRT-0028]   Complete V7.
+[INFO DRT-0028]   Complete M8.
+[INFO DRT-0028]   Complete V8.
+[INFO DRT-0028]   Complete M9.
+[INFO DRT-0028]   Complete V9.
+[INFO DRT-0028]   Complete Pad.
+[INFO DRT-0178] Init guide query.
+[INFO DRT-0035]   Complete Active (guide).
+[INFO DRT-0035]   Complete V0 (guide).
+[INFO DRT-0035]   Complete M1 (guide).
+[INFO DRT-0035]   Complete V1 (guide).
+[INFO DRT-0035]   Complete M2 (guide).
+[INFO DRT-0035]   Complete V2 (guide).
+[INFO DRT-0035]   Complete M3 (guide).
+[INFO DRT-0035]   Complete V3 (guide).
+[INFO DRT-0035]   Complete M4 (guide).
+[INFO DRT-0035]   Complete V4 (guide).
+[INFO DRT-0035]   Complete M5 (guide).
+[INFO DRT-0035]   Complete V5 (guide).
+[INFO DRT-0035]   Complete M6 (guide).
+[INFO DRT-0035]   Complete V6 (guide).
+[INFO DRT-0035]   Complete M7 (guide).
+[INFO DRT-0035]   Complete V7 (guide).
+[INFO DRT-0035]   Complete M8 (guide).
+[INFO DRT-0035]   Complete V8 (guide).
+[INFO DRT-0035]   Complete M9 (guide).
+[INFO DRT-0035]   Complete V9 (guide).
+[INFO DRT-0035]   Complete Pad (guide).
+[INFO DRT-0036] Active guide region query size = 0.
+[INFO DRT-0036] V0 guide region query size = 0.
+[INFO DRT-0036] M1 guide region query size = 141.
+[INFO DRT-0036] V1 guide region query size = 0.
+[INFO DRT-0036] M2 guide region query size = 126.
+[INFO DRT-0036] V2 guide region query size = 0.
+[INFO DRT-0036] M3 guide region query size = 79.
+[INFO DRT-0036] V3 guide region query size = 0.
+[INFO DRT-0036] M4 guide region query size = 0.
+[INFO DRT-0036] V4 guide region query size = 0.
+[INFO DRT-0036] M5 guide region query size = 0.
+[INFO DRT-0036] V5 guide region query size = 0.
+[INFO DRT-0036] M6 guide region query size = 0.
+[INFO DRT-0036] V6 guide region query size = 0.
+[INFO DRT-0036] M7 guide region query size = 0.
+[INFO DRT-0036] V7 guide region query size = 0.
+[INFO DRT-0036] M8 guide region query size = 0.
+[INFO DRT-0036] V8 guide region query size = 0.
+[INFO DRT-0036] M9 guide region query size = 0.
+[INFO DRT-0036] V9 guide region query size = 0.
+[INFO DRT-0036] Pad guide region query size = 0.
+[INFO DRT-0179] Init gr pin query.
+[INFO DRT-0267] cpu time = 00:00:00, elapsed time = 00:00:00, memory = 183.34 (MB), peak = 183.19 (MB)
+[INFO DRT-0245] skipped writing guide updates to database.
+[INFO DRT-0181] Start track assignment.
+[INFO DRT-0184] Done with 220 vertical wires in 1 frboxes and 126 horizontal wires in 1 frboxes.
+[INFO DRT-0186] Done with 17 vertical wires in 1 frboxes and 18 horizontal wires in 1 frboxes.
+[INFO DRT-0182] Complete track assignment.
+[INFO DRT-0267] cpu time = 00:00:00, elapsed time = 00:00:00, memory = 183.94 (MB), peak = 183.86 (MB)
+[INFO DRT-0187] Start routing data preparation.
+[INFO DRT-0267] cpu time = 00:00:00, elapsed time = 00:00:00, memory = 183.94 (MB), peak = 183.86 (MB)
+[INFO DRT-0194] Start detail routing.
+[INFO DRT-0195] Start 0th optimization iteration.
+    Completing 100% with 0 violations.
+    elapsed time = 00:00:00, memory = 189.02 (MB).
+[INFO DRT-0199]   Number of violations = 0.
+[INFO DRT-0267] cpu time = 00:00:00, elapsed time = 00:00:00, memory = 723.83 (MB), peak = 723.62 (MB)
+Total wire length = 100 um.
+Total wire length on LAYER M1 = 0 um.
+Total wire length on LAYER M2 = 29 um.
+Total wire length on LAYER M3 = 69 um.
+Total wire length on LAYER M4 = 0 um.
+Total wire length on LAYER M5 = 0 um.
+Total wire length on LAYER M6 = 0 um.
+Total wire length on LAYER M7 = 0 um.
+Total wire length on LAYER M8 = 0 um.
+Total wire length on LAYER M9 = 0 um.
+Total wire length on LAYER Pad = 0 um.
+Total number of vias = 474.
+Up-via summary (total 474):
+
+--------------
+ Active      0
+     M1    185
+     M2    287
+     M3      2
+     M4      0
+     M5      0
+     M6      0
+     M7      0
+     M8      0
+     M9      0
+--------------
+       474
+
+
+[INFO DRT-0198] Complete detail routing.
+Total wire length = 100 um.
+Total wire length on LAYER M1 = 0 um.
+Total wire length on LAYER M2 = 29 um.
+Total wire length on LAYER M3 = 69 um.
+Total wire length on LAYER M4 = 0 um.
+Total wire length on LAYER M5 = 0 um.
+Total wire length on LAYER M6 = 0 um.
+Total wire length on LAYER M7 = 0 um.
+Total wire length on LAYER M8 = 0 um.
+Total wire length on LAYER M9 = 0 um.
+Total wire length on LAYER Pad = 0 um.
+Total number of vias = 474.
+Up-via summary (total 474):
+
+--------------
+ Active      0
+     M1    185
+     M2    287
+     M3      2
+     M4      0
+     M5      0
+     M6      0
+     M7      0
+     M8      0
+     M9      0
+--------------
+       474
+
+
+[INFO DRT-0267] cpu time = 00:00:00, elapsed time = 00:00:00, memory = 723.89 (MB), peak = 723.62 (MB)
+
+[INFO DRT-0180] Post processing.
+[INFO DRT-0501] Runtime: 0.98s
+A7S_STAGE_OK detailed_route
+A7S_RESULT unrouted_nets 0
+A7S_RESULT routing_drc_violations 0
+A7S_RESULT def_written /tmp/tmp.QI6xuunWFo/comb8_routed.def
+A7S_FLOW_VERDICT routed-clean
+A7S_FLOW_DONE
+== verdict ==
+stages: 14 began, 14 reported
+info:   instances_linked 60
+info:   nets_linked 77
+info:   tap_instances 26
+clock routed as an ordinary signal net: yes
+info:   filler_instances 154
+result: unrouted_nets 0
+result: routing_drc_violations 0
+result: def_written /tmp/tmp.QI6xuunWFo/comb8_routed.def
+refused: clock_tree_synthesis
+  [ERROR CTS-0111] No max capacitance found for cell BUFx1_A7S_75t_R.
+PAR_VERDICT routed-clean
+run_par.sh: PASS (routing complete, zero unrouted nets, zero routing-DRC violations)
+PAR_EXIT 0
+
+== result ==
+flowctl_par.sh: PASS -- the flow routes a design that avoids those pins,
+  so the counter8 refusal is about the cells it instantiates, not the flow.

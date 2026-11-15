@@ -3,7 +3,7 @@
     python3 -m unittest verification.corners.test_corners   (from the repo root)
     python3 verification/corners/test_corners.py
 
-All six self-tests at once: python3 verification/run_selftests.py
+All self-tests at once: python3 verification/run_selftests.py
 (pnpm run check:ci).
 
 Checks the generator's pure parts (the Eulerian walk, the testbench and the

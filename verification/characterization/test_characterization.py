@@ -2,7 +2,7 @@
 
     python3 verification/characterization/test_characterization.py
 
-All six self-tests at once: python3 verification/run_selftests.py
+All self-tests at once: python3 verification/run_selftests.py
 (pnpm run check:ci).
 
 Covers the envelope pass/fail logic, including the negative controls: a removed

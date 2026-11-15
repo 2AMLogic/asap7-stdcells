@@ -851,6 +851,8 @@ def run(args, klt=None):
     drawn = {c["name"] for c in cfg["cells"] if c["source"] == "drawn"}
     fired = sorted({r for c in controls if c["base_cell"] in drawn and c["result"] == "CAUGHT"
                     for r in (c.get("observed") or {}).get("rule_counts", {})})
+    pinned = sorted({c["expect_rule"] for c in controls if c["result"] == "CAUGHT" and c.get("expect_rule")})
+    incidental = sorted(set(fired) - set(pinned))
     families = family_coverage(cfg, fired) if drawn and not args.only else None
     if families is not None:
         ok &= not families["families_without_control"]
@@ -871,6 +873,7 @@ def run(args, klt=None):
         "library": library,
         "lef": lef,
         "drawn_rules_fired_by_controls": fired,
+        "drawn_rules_exercised_incidentally": incidental,
         "drawn_rules_unexercised": sorted(set(info.get("rules", [])) - set(fired)) if drawn else [],
     }
     if merged:
@@ -976,6 +979,10 @@ def summary(m, rows):
     if drawn:
         lines += ["", f"Rules fired by a control on a drawn cell ({len(m['drawn_rules_fired_by_controls'])}): "
                   + ", ".join(f"`{r}`" for r in m["drawn_rules_fired_by_controls"]) + ".", "",
+                  f"Rules counted as exercised only as an incidental fire inside another control's rule_counts, "
+                  f"pinned by no control's expect_rule (**incidentally exercised**, "
+                  f"{len(m['drawn_rules_exercised_incidentally'])}): "
+                  + (", ".join(f"`{r}`" for r in m["drawn_rules_exercised_incidentally"]) or "none") + ".", "",
                   f"Rules with no control that fires them on a drawn cell, **unexercised** ({len(m['drawn_rules_unexercised'])} of "
                   f"{m['deck']['rule_categories']}); a clean result says nothing about these until a control makes them fire:", ""]
         fam = {}
