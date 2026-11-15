@@ -80,6 +80,9 @@ def main(argv):
     names = []
     i = 0
     while i < len(argv):
+        if argv[i] in ("--repo", "--interpreter") and i + 1 >= len(argv):
+            print(__doc__, file=sys.stderr)
+            return 2
         if argv[i] == "--repo":
             repo = argv[i + 1]
             i += 2
