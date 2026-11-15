@@ -5,6 +5,12 @@ triage role. Newest first.
 
 ### 2026-11-15
 
+- **PR #152**: refactor: promote the klt record path-normalizer to a shared verification module
+- **PR #141**: refactor(verification): extract the klt helper string into klt_helper.py
+- **PR #132**: refactor: hoist gate_link and v1 into a7s_common, re-pair T1 item 1 evidence
+- **Issue #119** (closed): Two copies of the klt record path-normalizer, one of them inside a concluded probe directory
+- **Issue #117** (closed): Extract the 156-line HELPER string in run_regression.py into a sibling script file
+- **Issue #114** (closed): Hoist the duplicated draw-script geometry helpers (gate_link, v1) into a7s_common.py
 - **PR #135**: refactor: share one place-and-DRC body across the regression's case runners
 - **PR #130**: feat: flag an unrecorded draw script in the CDL freshness check
 - **PR #126**: refactor: one shared klt sim request builder for both corner-sweep halves
