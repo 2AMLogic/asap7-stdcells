@@ -15,6 +15,11 @@ Exit codes: 0 every discovered suite ran and passed; 1 a suite failed; 3 a
 suite could not run because its interpreter is missing. A suite that cannot
 run is not a pass: the gate stays non-zero and the summary names how many
 checks did not run.
+
+A discovered suite must actually report its tests (a unittest "Ran N tests"
+line, normally via `unittest.main()` under `if __name__ == "__main__"`):
+a file that exits 0 without a test report is skipped as NOT RUN, exit 3,
+never counted as a pass.
 """
 
 import re
@@ -55,10 +60,22 @@ def declared_checks(path):
 
 
 def run_suite(rel, cmd, label):
-    """Run one suite; quiet when it passes, full output when it fails."""
+    """Run one suite; quiet when it passes, full output when it fails.
+
+    Returns the subprocess exit code, or None when the suite exited 0
+    without a test report -- reporting zero tests is not a pass.
+    """
     proc = subprocess.run(cmd, cwd=REPO, capture_output=True, text=True)
     out = proc.stdout + proc.stderr
     m = re.search(r"^Ran (\d+) tests? in", out, re.M)
+    if proc.returncode == 0 and (m is None or int(m.group(1)) == 0):
+        print(f"== SKIP  {rel}  (no test report -- NOT RUN, not a pass)")
+        print('   Exited 0 but reported zero tests: usually a missing'
+              ' `if __name__ == "__main__": unittest.main()` block, or a'
+              " pytest-style module.")
+        print(f"   ~{declared_checks(REPO / rel)} check definitions did not"
+              " run; give the suite a unittest main.")
+        return None
     n = f"{m.group(1)} tests" if m else "count unknown"
     if proc.returncode != 0:
         sys.stdout.write(out)
@@ -93,7 +110,9 @@ def main():
         else:
             rc = run_suite(rel, [sys.executable, *EXTRA_FLAGS.get(rel, []),
                                  str(path)], "python3")
-        if rc != 0:
+        if rc is None:
+            skipped.append(rel)
+        elif rc != 0:
             failures.append(rel)
     print("== summary")
     print(f"   {len(suites) - len(skipped)}/{len(suites)} suites ran,"
