@@ -38,7 +38,9 @@ match; see "Re-checking a record"). Self-check of the harness itself, no `klt`
 or PDK needed: `python3 verification/test_run_regression.py`. All self-tests
 (`verification/**/test_*.py`) run as one gate: `python3
 verification/run_selftests.py` (`pnpm run check:ci`) — it uses klt's
-interpreter for the GDS-reading suites and stays red if `klt` is absent.
+interpreter for the GDS-reading suites, stays red if `klt` is absent, reports
+every unittest-skipped check in its summary, and goes red when a suite's
+checks all skip (a skipped check is not a run one).
 
 ## LEF view
 
