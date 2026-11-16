@@ -2,7 +2,7 @@
   "schema_version": 1,
   "kind": "t1-attestation-inventory",
   "t1_item": 10,
-  "description": "Repo hygiene: README, license, the ratified spec and decision records, the signoff workflow, the design/ harness and Liberty scripts, and the verification/ tier-floor check with its negative control, with the harness self-check as the audit command.",
+  "description": "Repo hygiene: README, license, the ratified spec and decision records, the signoff workflow, the design/ harness and Liberty scripts, and the verification/ tier-floor and family-gate checks with their negative controls, with the harness self-check as the audit command.",
   "hygiene": [
     "README.md",
     "LICENSE",
@@ -17,7 +17,8 @@
     "design/liberty_common.py",
     "design/write_liberty.py",
     "verification/check_tier_floor.py",
-    "verification/check_tier_floor_negctl.py"
+    "verification/check_tier_floor_negctl.py",
+    "verification/check_family_gate_negctl.py"
   ],
   "checks": [
     {

@@ -233,8 +233,10 @@ jobs:
           set -uo pipefail
           # A pass with every V3 control removed must exit 1 and name V3 as the
           # family without a control; if it passes, the gate could silently
-          # never fire.
-          python3 -I verification/check_family_gate_negctl.py
+          # never fire. --fetch-pdk: on a fresh runner verification/.pdk does
+          # not exist, and this step runs before the full-library step that
+          # also fetches the PDK.
+          python3 -I verification/check_family_gate_negctl.py --fetch-pdk
 
       - name: Full-library regression (merged stream, library LVS, family coverage, LEF)
         run: |

@@ -11,8 +11,10 @@ exactly ['V3'] as the family without a control. The library stream the pass
 regenerates under verification/library/ is restored afterwards. If it exits 0, or names
 another family, the gate could silently never fire.
 
-Usage: python3 -I verification/check_family_gate_negctl.py [--klt klt]
-Exit 0: the gate fired as expected. Exit 1: it did not.
+Usage: python3 -I verification/check_family_gate_negctl.py [--fetch-pdk] [--klt klt]
+Exit 0: the gate fired as expected. Exit 1: it did not (or the pass failed in
+setup, e.g. the pinned PDK files are missing, which is reported as its own
+case and not as a gate verdict).
 """
 import argparse
 import json
@@ -40,6 +42,9 @@ def broken_config(cfg):
 def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
     ap.add_argument("--klt", default="klt")
+    ap.add_argument("--fetch-pdk", action="store_true",
+                    help="forward --fetch-pdk to the pass (fetch and verify the pinned PDK first, "
+                         "needed where verification/.pdk is not already populated)")
     args = ap.parse_args(argv)
     cfg = json.loads((HERE / "cells.json").read_text())
     if DROPPED_FAMILY not in cfg["spec_rule_families"]:
@@ -53,7 +58,15 @@ def main(argv=None):
             path = Path(tmp) / "cells.json"
             path.write_text(json.dumps(broken_config(cfg), indent=1))
             proc = subprocess.run([sys.executable, "-I", str(HERE / "run_regression.py"), "--cells", str(path),
-                                   "--klt", args.klt, "--record-id", RECORD_ID])
+                                   "--klt", args.klt, "--record-id", RECORD_ID]
+                                  + (["--fetch-pdk"] if args.fetch_pdk else []))
+        if proc.returncode == 2:
+            # run_regression.py exits 2 on a SetupError and writes no manifest
+            # (e.g. the pinned PDK files are missing): a setup problem, which
+            # must not be read as the gate verdict.
+            print("FAIL: the broken-config pass failed in setup ('setup error:' above; "
+                  "is the pinned PDK fetched? see run_regression.py --fetch-pdk)")
+            return 1
         manifest = json.loads((record / "manifest.json").read_text())
     except (OSError, ValueError) as e:
         print(f"FAIL: no usable manifest from the broken-config pass: {e}")
