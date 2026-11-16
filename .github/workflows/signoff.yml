@@ -200,3 +200,62 @@ jobs:
           # to whatever was last committed.
           python3 -I verification/check_tier_floor.py \
               manifests/asap7-stdcells.signoff.json
+
+  # The signoff job above runs run_regression.py with --only (a single-cell
+  # cold start), and run_regression.py skips run_merged, run_library and the
+  # family_coverage assertion under --only. This job runs the full-library pass
+  # so a red result in any of them fails the check. Separate job: the full pass
+  # measured 25 min 15 s locally (klt 0.9.0, 28 cells), over the 15 min budget
+  # of the job above. The checkout is its own, so the library stream the pass
+  # regenerates cannot touch what T1 item 2 attests in the job above.
+  full-regression:
+    runs-on: ubuntu-latest
+    timeout-minutes: 75
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+
+      - name: Install pinned klt
+        run: pip install klayout-tools==0.9.0
+
+      - name: Install KLayout (klt DRC runs the system klayout binary)
+        run: |
+          set -uo pipefail
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq klayout
+          klayout -v
+
+      - name: Families-without-control gate negative control
+        run: |
+          set -uo pipefail
+          # A pass with every V3 control removed must exit 1 and name V3 as the
+          # family without a control; if it passes, the gate could silently
+          # never fire. --fetch-pdk: on a fresh runner verification/.pdk does
+          # not exist, and this step runs before the full-library step that
+          # also fetches the PDK.
+          python3 -I verification/check_family_gate_negctl.py --fetch-pdk
+
+      - name: Full-library regression (merged stream, library LVS, family coverage, LEF)
+        run: |
+          set -uo pipefail
+          # No --only: run_merged, run_library and family_coverage execute.
+          rm -rf verification/records/.ci-fullpass
+          python3 verification/run_regression.py --fetch-pdk --record-id .ci-fullpass
+          rc=$?
+          if [ "$rc" -ne 0 ]; then
+            echo "::error::full-library run_regression.py exited $rc"
+            exit 1
+          fi
+
+      - name: Regenerated library stream matches the committed copy
+        run: |
+          set -uo pipefail
+          # run_library rewrites verification/library/*.{gds,cdl}; they must be
+          # byte-identical to the committed files (what T1 item 2 attests).
+          if ! git diff --exit-code --stat -- verification/library; then
+            echo "::error::the full pass regenerated verification/library differently from the committed copy; a cell changed without the library being refreshed"
+            exit 1
+          fi
