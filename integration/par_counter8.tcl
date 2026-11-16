@@ -86,6 +86,17 @@ proc fatal {name} {
     exit 0
 }
 
+# A stage after read_inputs that runs and refuses is a result, not bad input:
+# the inputs read and linked cleanly, so the refusal says something about the
+# design or the library. The driver records it as refused:<stage>, exit 3.
+proc refuse {name} {
+    puts "A7S_FLOW_VERDICT refused:$name"
+    puts "A7S_FLOW_REFUSAL $::A7S_REFUSED_MSG"
+    puts "A7S_FLOW_DONE"
+    flush stdout
+    exit 0
+}
+
 # Count signal/clock nets with no routing wire. This is the "zero unrouted
 # nets" half of spec item 2, read out of the database rather than inferred from
 # the absence of a complaint.
@@ -127,13 +138,13 @@ if {![stage floorplan {
     initialize_floorplan -site asap7sc7p5t -utilization $UTIL -aspect_ratio 1 \
         -core_space 0.27
     source $TRACKS
-}]} { fatal floorplan }
+}]} { refuse floorplan }
 
 if {![stage place_pins {
     # Signal routing starts at M2 (M1 carries the row rails), so pins go on
     # M2 (horizontal) and M3 (vertical).
     place_pins -hor_layers M2 -ver_layers M3
-}]} { fatal place_pins }
+}]} { refuse place_pins }
 
 # --------------------------------------------------------- 3. taps and endcaps
 # -distance 25 is spec/stdcells.md's "Tap rule" row, taken from the shipped
@@ -142,7 +153,7 @@ if {![stage place_pins {
 if {![stage tapcell {
     tapcell -distance 25 -tapcell_master TAP_A7S_75t_R \
         -endcap_master TAP_A7S_75t_R
-}]} { fatal tapcell }
+}]} { refuse tapcell }
 
 puts "A7S_INFO tap_instances [count_master TAP_A7S_75t_R]"
 
@@ -161,21 +172,21 @@ if {![stage pdn {
     add_pdn_stripe -grid stdcells -layer M1 -width 0.018 -pitch 0.54 \
         -offset 0 -followpins
     pdngen
-}]} { fatal pdn }
+}]} { refuse pdn }
 
 # --------------------------------------------------------------- 5. placement
 # Not timing driven, by construction: there are no arcs to drive it with.
 if {![stage global_placement {
     global_placement -density 0.6
-}]} { fatal global_placement }
+}]} { refuse global_placement }
 
 if {![stage detailed_placement {
     detailed_placement
-}]} { fatal detailed_placement }
+}]} { refuse detailed_placement }
 
 if {![stage check_placement_preroute {
     check_placement -verbose
-}]} { fatal check_placement_preroute }
+}]} { refuse check_placement_preroute }
 
 # --------------------------------------------------------------------- 6. CTS
 # Expected to refuse: the structural Liberty is pins, directions, functions and
@@ -204,20 +215,20 @@ if {!$cts_ok} {
 # record even on a branch where routing refuses. Widest first.
 if {![stage filler_placement {
     filler_placement {FILLER4_A7S_75t_R FILLER2_A7S_75t_R FILLER1_A7S_75t_R}
-}]} { fatal filler_placement }
+}]} { refuse filler_placement }
 
 puts "A7S_INFO filler_instances [count_master FILLER*_A7S_75t_R]"
 
 if {![stage check_placement_postfill {
     check_placement -verbose
-}]} { fatal check_placement_postfill }
+}]} { refuse check_placement_postfill }
 
 # ------------------------------------------------------------------ 8. routing
 # M1 carries the row rails, so signal routing is M2-M4. repair_antennas is not
 # called: this library ships no antenna-diode cell.
 if {![stage set_routing_layers {
     set_routing_layers -signal M2-M4
-}]} { fatal set_routing_layers }
+}]} { refuse set_routing_layers }
 
 set gr_ok [stage global_route { global_route }]
 set dr_ok 0
@@ -227,13 +238,7 @@ if {$gr_ok} {
     }]
 }
 
-if {!$dr_ok} {
-    puts "A7S_FLOW_VERDICT refused:$::A7S_REFUSED_STAGE"
-    puts "A7S_FLOW_REFUSAL $::A7S_REFUSED_MSG"
-    puts "A7S_FLOW_DONE"
-    flush stdout
-    exit 0
-}
+if {!$dr_ok} { refuse $::A7S_REFUSED_STAGE }
 
 # ------------------------------------------------------- 9. read out the result
 # Both numbers spec item 2 names, quoted from the tool, not inferred.
