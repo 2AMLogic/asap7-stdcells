@@ -5,6 +5,10 @@ triage role. Newest first.
 
 ### 2026-11-16
 
+- **PR #197**: fix: check_gds_fresh klt_python() returns None on non-UTF-8 klt shebang
+- **PR #143**: build: run all six self-tests as one package.json gate
+- **Issue #179** (closed): check_gds_fresh.py: klt_python() crashes with UnicodeDecodeError instead of returning None when klt's first line is not UTF-8
+- **Issue #129** (closed): Collapse the package.json test/check alias chain onto one gate that runs all six self-test files
 - **PR #193**: docs: keep the openroad mount check deliberately duplicated in both drivers
 - **PR #191**: verify: regenerate derived inputs so --verify re-checks every envelope
 - **PR #185**: refactor: route a7s_common's five literal V1 boxes through the v1 helper
