@@ -170,7 +170,7 @@ def gate_contact(d, j, with_v1=False):
     d.box("V0", x - 9, 126, x + 9, 144)
     d.box("M1", x - 9, 103 if with_v1 else 108, x + 9, 162)
     if with_v1:
-        d.box("V1", x - 9, 108, x + 9, 126)
+        v1(d, x - 9, 108)
 
 
 def gate_link(d, j, row, down=False, up=False):
@@ -180,16 +180,16 @@ def gate_link(d, j, row, down=False, up=False):
     gate_contact(d, j)
     if row == 108:
         d.box("M1", x - 9, 106, x + 9, 162)
-        d.box("V1", x - 9, 108, x + 9, 126)
+        v1(d, x - 9, 108)
     elif row == 144:
         d.box("M1", x - 9, 108, x + 9, 164)
-        d.box("V1", x - 9, 144, x + 9, 162)
+        v1(d, x - 9, 144)
     elif down:
         d.box("M1", x - 9, 34, x + 9, 162)
-        d.box("V1", x - 9, 36, x + 9, 54)
+        v1(d, x - 9, 36)
     elif up:
         d.box("M1", x - 9, 108, x + 9, 236)
-        d.box("V1", x - 9, 216, x + 9, 234)
+        v1(d, x - 9, 216)
 
 
 def m1(d, x0, y0, x1, y1):
