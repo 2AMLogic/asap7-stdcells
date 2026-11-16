@@ -3,6 +3,9 @@
     python3 -m unittest verification.corners.test_corners   (from the repo root)
     python3 verification/corners/test_corners.py
 
+All self-tests at once: python3 verification/run_selftests.py
+(pnpm run check:ci).
+
 Checks the generator's pure parts (the Eulerian walk, the testbench and the
 measurement cards), the shared `klt sim` request envelope (regenerated
 byte-for-byte against every committed request record), the summariser's verdict

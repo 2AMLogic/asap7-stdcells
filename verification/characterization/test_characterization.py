@@ -2,6 +2,9 @@
 
     python3 verification/characterization/test_characterization.py
 
+All self-tests at once: python3 verification/run_selftests.py
+(pnpm run check:ci).
+
 Covers the envelope pass/fail logic, including the negative controls: a removed
 record, an edited record (hash drift), a record present with failing rows, and a
 disabled pin check, each of which must turn the envelope to `fail`.

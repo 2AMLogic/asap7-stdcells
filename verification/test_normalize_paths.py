@@ -2,6 +2,9 @@
 
     python3 verification/test_normalize_paths.py
 
+All self-tests at once: python3 verification/run_selftests.py
+(pnpm run check:ci).
+
 Covers both entry points -- the CLI the shell flows call and the module API
 run_pex.py calls -- and the json.loads validity guard: a normalization that
 would leave the file unparsable must fail loudly, not get committed.

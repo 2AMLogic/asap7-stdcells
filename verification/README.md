@@ -35,7 +35,10 @@ one. Re-check a committed record with
 `python3 verification/run_regression.py --verify verification/records/<record-id>`:
 it re-checks every `drc`/`lvs` envelope with `klt --check` (exit 0 only when all
 match; see "Re-checking a record"). Self-check of the harness itself, no `klt`
-or PDK needed: `python3 verification/test_run_regression.py`.
+or PDK needed: `python3 verification/test_run_regression.py`. All self-tests
+(`verification/**/test_*.py`) run as one gate: `python3
+verification/run_selftests.py` (`pnpm run check:ci`) — it uses klt's
+interpreter for the GDS-reading suites and stays red if `klt` is absent.
 
 ## LEF view
 
