@@ -12,6 +12,34 @@ TECH="${1:?usage: read_lef.sh <asap7_tech.lef> [log]}"
 HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 LEF="$HERE/../../layout/A7S_75t_R.lef"
 LOG="${2:-/dev/stdout}"
+
+# The fleet's openroad is a docker wrapper that mounts exactly the cwd,
+# $PDK_ROOT (or `klt pdk find`'s root when $PDK_ROOT is unset, mirroring the
+# wrapper's own fallback) and ${TMPDIR:-/tmp}. An input outside all three
+# reaches the tool only as an opaque "[ERROR STA-0340] cannot open", so name
+# the path and the reason here instead. Facts as measured 2026-11-16,
+# OpenROAD 26Q3-1510-g6cb3f2b704; see integration/README.md "Environment".
+OR_MOUNTS=("$(pwd -P)")
+if [ -n "${PDK_ROOT:-}" ]; then
+  OR_MOUNTS+=("${PDK_ROOT%/}")
+elif command -v klt >/dev/null && command -v jq >/dev/null; then
+  OR_PDK="$(klt pdk find --format json 2>/dev/null | jq -r '.root // empty' 2>/dev/null)"
+  [ -n "$OR_PDK" ] && OR_MOUNTS+=("${OR_PDK%/}")
+fi
+OR_MOUNTS+=("${TMPDIR:-/tmp}")
+for f in "$TECH" "$LEF"; do
+  [ -r "$f" ] || { echo "read_lef.sh: cannot read $f" >&2; exit 1; }
+  f_abs="$(cd -P "$(dirname "$f")" && pwd -P)/$(basename "$f")"
+  f_mounted=0
+  for m in "${OR_MOUNTS[@]}"; do
+    case "$f_abs" in "$m"|"$m"/*) f_mounted=1; break;; esac
+  done
+  if [ "$f_mounted" != 1 ]; then
+    echo "read_lef.sh: $f_abs is not under the cwd, \$PDK_ROOT (or klt pdk find's root) or \${TMPDIR:-/tmp}; the openroad docker wrapper does not mount it, so the tool would fail with [ERROR STA-0340] cannot open. Move the input under one of those paths (or export PDK_ROOT)." >&2
+    exit 1
+  fi
+done
+
 TCL="$(mktemp)"; trap 'rm -f "$TCL"' EXIT
 printf 'read_lef %s\nread_lef %s\nputs "LEF_READ_DONE"\nexit\n' "$TECH" "$LEF" > "$TCL"
 {

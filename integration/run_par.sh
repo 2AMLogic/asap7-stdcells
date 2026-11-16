@@ -70,8 +70,28 @@ OUT_DIR="${A7S_OUT_DIR:-$HERE}"
 DONT_USE=""
 for c in ${A7S_DONT_USE:-}; do DONT_USE="$DONT_USE -dont_use $c"; done
 
+# The fleet's openroad is a docker wrapper that mounts exactly the cwd,
+# $PDK_ROOT (or `klt pdk find`'s root when $PDK_ROOT is unset, mirroring the
+# wrapper's own fallback) and ${TMPDIR:-/tmp}. An input outside all three
+# reaches the tool only as an opaque "[ERROR STA-0340] cannot open", so name
+# the path and the reason here instead. Facts as measured 2026-11-16,
+# OpenROAD 26Q3-1510-g6cb3f2b704; see integration/README.md "Environment".
+OR_MOUNTS=("$(pwd -P)")
+if [ -n "${PDK_ROOT:-}" ]; then
+  OR_MOUNTS+=("${PDK_ROOT%/}")
+elif command -v klt >/dev/null && command -v jq >/dev/null; then
+  OR_PDK="$(klt pdk find --format json 2>/dev/null | jq -r '.root // empty' 2>/dev/null)"
+  [ -n "$OR_PDK" ] && OR_MOUNTS+=("${OR_PDK%/}")
+fi
+OR_MOUNTS+=("${TMPDIR:-/tmp}")
 for f in "$TECH" "$TRACKS" "$LIB_LEF" "$LIBERTY" "$RTL" "$TCL"; do
   [ -r "$f" ] || bad "cannot read $f"
+  f_abs="$(cd -P "$(dirname "$f")" 2>/dev/null && pwd -P)/$(basename "$f")"
+  f_mounted=0
+  for m in "${OR_MOUNTS[@]}"; do
+    case "$f_abs" in "$m"|"$m"/*) f_mounted=1; break;; esac
+  done
+  [ "$f_mounted" = 1 ] || bad "$f_abs is not under the cwd, \$PDK_ROOT (or klt pdk find's root) or \${TMPDIR:-/tmp}; the openroad docker wrapper does not mount it, so the tool would fail with [ERROR STA-0340] cannot open. Move the input under one of those paths (or export PDK_ROOT)."
 done
 for t in openroad yosys sha256sum; do
   command -v "$t" >/dev/null || bad "$t not on PATH"
@@ -99,7 +119,12 @@ printf '%-62s %s\n' "integration/par_counter8.tcl" "$(sha256sum "$TCL" | cut -d'
 echo "== yosys mapping (scratch; re-run of the sim/ mapping, not a committed artifact) =="
 echo "design:   ${RTL#$ROOT/} (top $RTL_TOP)"
 echo "dont_use:${DONT_USE:- (none)}"
-if ! yosys -q -l "$W/yosys.log" -p "
+# COLUMNS=1000: abc's readline echo of "source <abc.script>" must stay on one
+# line, or yosys's abc handshake deadlocks -- under a long $TMPDIR (the daemon
+# sets one) the echoed prompt exceeds the 80-column dumb-term width and yosys
+# waits forever for a prompt line that never arrives. Measured cliff at 79
+# printable columns, 2026-11-16; see integration/README.md "Environment".
+if ! COLUMNS=1000 yosys -q -l "$W/yosys.log" -p "
 read_verilog $RTL
 synth -top $RTL_TOP -flatten
 dfflibmap -liberty $LIBERTY
