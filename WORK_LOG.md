@@ -3,8 +3,44 @@
 Chronological record of merged PRs and closed issues, maintained by the Guide
 triage role. Newest first.
 
+### 2026-11-16
+
+- **PR #193**: docs: keep the openroad mount check deliberately duplicated in both drivers
+- **PR #191**: verify: regenerate derived inputs so --verify re-checks every envelope
+- **PR #185**: refactor: route a7s_common's five literal V1 boxes through the v1 helper
+- **PR #184**: fix(lef): run the library-wide LEF gate under --only
+- **PR #183**: fix: widen COLUMNS for yosys children and fail fast on OpenROAD-unmountable input paths
+- **PR #181**: test(par): prove the unrouted-net readout can fire; fix the M1 power-port count
+- **PR #180**: chore: ignore pnpm entry-point artifacts (node_modules/, pnpm-lock.yaml)
+- **PR #178**: fix: resolve a klayout-capable interpreter for the GDS-freshness redraws
+- **PR #176**: fix: record post-read_inputs OpenROAD stage refusals as refused:<stage>, not invalid input
+- **PR #173**: refactor: make klt_helper importable and unit-test place's geometry
+- **PR #172**: docs: link ROADMAP.md from the README maturity ladder
+- **PR #168**: fix: guard valueless --repo/--interpreter in normalize_paths CLI; exercise the relative-prefix guard in its test
+- **Issue #187** (closed): The OpenROAD mount-set rule is duplicated in two scripts (and a third is coming) — decide its home before it drifts
+- **Issue #182** (closed): integration/ and sim/: the yosys callers deadlock under the worker TMPDIR, and the OpenROAD mount rule is undocumented
+- **Issue #175** (closed): check_gds_fresh.py hard-codes -I in the per-cell redraw subprocess, so the documented local command cannot run where klayout is user-site-only
+- **Issue #174** (closed): a7s_common: route the five literal 18x18 V1 boxes through the v1() helper (gate_contact:173 + gate_link's four)
+- **Issue #170** (closed): Running the documented gate (pnpm run check:ci) drops untracked node_modules/ and pnpm-lock.yaml into the tree; neither is gitignored
+- **Issue #163** (closed): CI never runs the LEF gate: run_regression.py's lef_check is skipped under --only
+- **Issue #156** (closed): `--verify` cannot re-check any committed record: 541 of 581 envelopes drift on nondeterministic and uncommitted derived inputs
+- **Issue #154** (closed): normalize_paths CLI: the relative-prefix test is vacuous, and a trailing flag crashes instead of printing usage
+- **Issue #151** (closed): klt_helper.py is not importable: module-level sys.argv indexing blocks unit-testing its pure parts
+- **Issue #150** (closed): integration/: the zero-unrouted-nets readout has no negative control, and the write-up miscounts the M1 power rects
+- **Issue #149** (closed): integration/run_par.sh records an early-stage OpenROAD refusal as invalid-input (exit 1), not as a recorded refusal (exit 3)
+- **Issue #139** (closed): Docs: ROADMAP.md is on main but nothing links it
+
 ### 2026-11-15
 
+- **PR #171**: ci: floor the signoff tier at T1/met>=10 and accept grader exit 0 only
+- **PR #165**: fix: rename gate_contact's v1 parameter to with_v1
+- **PR #159**: manifests: content-hash harness helpers in T1 item 9 attestation
+- **PR #153**: evidence: pin six unpinned harness/design scripts into T1 item 1 and 10
+- **Issue #160** (closed): item 10 inventory description no longer enumerates its own hygiene list (five design/ harness scripts)
+- **Issue #155** (closed): signoff CI cannot catch a tier regression: exit 0-or-3 plus a record cmp passes a T1 -> null drop
+- **Issue #144** (closed): Four harness/evidence scripts outside item 9 are unpinned, incl. item 2's own check command
+- **Issue #142** (closed): Item 9 inventory does not content-hash klt_helper.py (nor check_lef.py / write_lef.py)
+- **Issue #137** (closed): a7s_common: gate_contact's v1= parameter now shadows the module-level v1() helper
 - **PR #158**: fix: cdl freshness --update no longer mints a null CDL hash; null recording is opt-in --device-less
 - **PR #148**: feat(verification): report incidentally-exercised rule ids, pin four select/WELL ids
 - **PR #123**: integration: record OpenROAD P&R of counter8 refusing at detailed_route
