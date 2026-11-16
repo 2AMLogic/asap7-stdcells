@@ -20,6 +20,39 @@ same way `verification/lef/` is scoped to one tool question.
 | `negctl_par.sh`, `negctl_par.txt` | Negative control for the driver, and its recorded run. |
 | `flowctl_par.sh`, `comb8.v`, `flowctl_par.txt` | Positive control for the flow — a design that routes clean — and its recorded run. |
 
+## Environment facts a reproducer needs
+
+Two properties of the tool install this record was produced on — a Loom
+worker's `~/.local/bin` — change how a re-run must be invoked. Both measured
+**2026-11-16**, against OpenROAD **26Q3-1510-g6cb3f2b704** and Yosys
+**0.67+post (git b8e7da6f)** as provisioned there.
+
+- **`openroad` is a docker wrapper, and the container sees only three host
+  paths.** The generated `~/.local/bin/openroad` mounts exactly the working
+  directory, `$PDK_ROOT` (falling back to `klt pdk find`'s resolved root when
+  `$PDK_ROOT` is unset) and `${TMPDIR:-/tmp}`. An input outside all three
+  fails as `[ERROR STA-0340] cannot open '<path>'` — for a file the caller
+  can `cat` — because the mount is missing, not the file. Note that setting
+  `TMPDIR` to anything other than `/tmp` stops `/tmp` being mounted wholesale,
+  so a scratch directory that worked under `TMPDIR=/tmp` stops working. For
+  `verification/bringup/reproduce.sh`, whose scratch directory is an
+  argument: point it under one of the three paths (any directory, while
+  `TMPDIR` is unset), or `export PDK_ROOT` at the extracted PDK tree.
+  `run_par.sh` and `verification/lef/read_lef.sh` now check the inputs they
+  hand OpenROAD against this same three-mount rule before invoking the tool,
+  and name the path and the reason instead of letting STA-0340 surface.
+- **The `yosys` callers here set `COLUMNS` themselves.** With `TERM=dumb`
+  (a worker's default), abc's readline echo of its `source <abc.script>`
+  command wraps once the line reaches 79 printable columns (readline reserves
+  the last column of a nominal 80; the echoed width is 43 + `$TMPDIR`'s
+  length), and yosys's abc handshake then waits forever for a prompt line
+  that never arrives — a silent, unbounded hang, since the script path sits
+  under `$TMPDIR`. Both `sim/yosys_map_smoke.sh` and `run_par.sh` now run
+  yosys with `COLUMNS=1000`, which keeps the echo on one line at any
+  `$TMPDIR` length. `COLUMNS` changes only the terminal echo width, not the
+  optimizer work (verified: byte-identical liberty input passes both with and
+  without), so no committed record is affected.
+
 Re-run, from a clean checkout, with the pinned tech LEF (`spec/bringup.md`;
 `verification/bringup/reproduce.sh` fetches the archive):
 
