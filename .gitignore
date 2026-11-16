@@ -5,6 +5,11 @@
 __pycache__/
 .DS_Store
 
+# pnpm entry point (package.json) artifacts; the project declares no Node
+# dependencies, so the lockfile carries no information worth committing.
+node_modules/
+pnpm-lock.yaml
+
 # sim/ harness: per-corner ngspice logs under corners/ are committed evidence
 # (append-only record trail), so they escape the *.log rule.
 !sim/*/corners/**/*.log
