@@ -31,14 +31,14 @@
         "role": "hygiene",
         "path": "README.md",
         "passed": true,
-        "content_hash": "sha256:ce57e98b1b1abb55cb252bd39778c3c09f284f363ec988887ac935969a28d024"
+        "content_hash": "sha256:d4ad991619b62b99144044aba7c0476234a339562dbb43bf79a780c567878852"
       },
       {
         "check": "present",
         "role": "hygiene",
         "path": "design/check_gds_fresh.py",
         "passed": true,
-        "content_hash": "sha256:21bda68f8d7eaeb2885c9e1dc56214b7491e32d84b91f656cc1a848f90590ab1"
+        "content_hash": "sha256:2893f645c568987a933562c2782f6f47980d6e1be8ecb5ee5d603adf83e3ea41"
       },
       {
         "check": "present",

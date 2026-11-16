@@ -74,6 +74,8 @@ graded record in
 [`manifests/asap7-stdcells.signoff.json`](manifests/asap7-stdcells.signoff.json)
 for which T1 items are met, unmet or lack evidence; this ladder is not
 re-graded by hand here. There is no silicon rung.
+[`ROADMAP.md`](ROADMAP.md) narrates where the block stands as of a stated
+date, against that record.
 
 ## Repo layout
 

@@ -33,10 +33,15 @@
 # Exit status is the verdict:
 #   0  routing completed with zero unrouted nets and zero routing-DRC
 #      violations of OpenROAD's own checker; DEF written.
-#   3  the flow ran and a named stage refused. The refusal is the result; no
-#      clean-routing claim is made. See integration/README.md.
-#   1  invalid input, a missing tool, a failed cell-name assertion, or a flow
-#      that produced no verdict at all. Never a result.
+#   3  the flow ran and a named stage refused, or routing completed but was
+#      not clean. The refusal (or the dirty route) is the result; no
+#      clean-routing claim is made. Every stage after read_inputs -- floorplan
+#      through set_routing_layers, plus global_route and detailed_route --
+#      refuses here. See integration/README.md.
+#   1  invalid input, a missing tool, a failed cell-name assertion, a setup
+#      failure (read_inputs could not read or link the inputs, or the
+#      missing-input guard tripped), or a flow that produced no verdict at
+#      all. Never a result.
 #   2  usage error.
 #
 # The log ends with a PAR_VERDICT line and a PAR_EXIT line carrying that exit
@@ -189,7 +194,9 @@ case "$VERDICT" in
     ;;
   setup-failed:*)
     echo "PAR_VERDICT $VERDICT"
-    bad "the flow could not set up (${VERDICT#setup-failed:})"
+    echo "run_par.sh: the flow could not set up (${VERDICT#setup-failed:}); no result claimed" >&2
+    echo "PAR_EXIT 1"
+    exit 1
     ;;
   *)
     bad "unrecognised verdict '$VERDICT'"
