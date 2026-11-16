@@ -80,7 +80,7 @@ OR_MOUNTS=("$(pwd -P)")
 if [ -n "${PDK_ROOT:-}" ]; then
   OR_MOUNTS+=("${PDK_ROOT%/}")
 elif command -v klt >/dev/null && command -v jq >/dev/null; then
-  OR_PDK="$(klt pdk find --format json 2>/dev/null | jq -r '.root // empty' 2>/dev/null)"
+  OR_PDK="$(klt pdk find --format json 2>/dev/null | jq -r '.root // empty' 2>/dev/null || true)"
   [ -n "$OR_PDK" ] && OR_MOUNTS+=("${OR_PDK%/}")
 fi
 OR_MOUNTS+=("${TMPDIR:-/tmp}")
