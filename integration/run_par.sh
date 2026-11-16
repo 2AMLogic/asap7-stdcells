@@ -81,6 +81,14 @@ for c in ${A7S_DONT_USE:-}; do DONT_USE="$DONT_USE -dont_use $c"; done
 # reaches the tool only as an opaque "[ERROR STA-0340] cannot open", so name
 # the path and the reason here instead. Facts as measured 2026-11-16,
 # OpenROAD 26Q3-1510-g6cb3f2b704; see integration/README.md "Environment".
+#
+# Deliberately duplicated, not factored into a sourced helper: the only
+# sourced-helper precedent (verification/corners/common.sh) is within one
+# directory, no neutral home spans integration/ and verification/lef/, and
+# negctl_par.sh's scratch harness copies this script as one self-contained
+# file. The same block sits in verification/lef/read_lef.sh -- keep the two
+# byte-identical (OR_MOUNTS build and per-input test): fix both or neither.
+# Decision recorded on issue #187.
 OR_MOUNTS=("$(pwd -P)")
 if [ -n "${PDK_ROOT:-}" ]; then
   OR_MOUNTS+=("${PDK_ROOT%/}")
