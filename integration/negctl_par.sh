@@ -19,6 +19,10 @@
 #   (d) tech LEF path missing      -> exit 1, invalid-input
 #   (e) a flow that ends without   -> exit 1, no A7S_FLOW_DONE sentinel, i.e. a
 #       its verdict sentinel           crashed flow does not read as a pass
+#   (f) the unrouted-net readout   -> exit 3, A7S_UNROUTED_PROBE names nets, i.e.
+#       queried on a linked,           spec item 2's "zero unrouted nets" is a
+#       unrouted design                measured zero, not a predicate that never
+#                                      fires on this build
 #
 # Exits 0 only if every control behaves as required; 1 if any control is
 # missed; 2 on a usage error. No claim about the library is made here: this
@@ -103,6 +107,81 @@ printf 'puts "A7S_STAGE_BEGIN pretend"\nputs "A7S_STAGE_OK pretend"\nexit 0\n' \
   > "$T/integration/par_counter8.tcl"
 check e 1 'no A7S_FLOW_DONE sentinel' "$TECH" \
   "a flow that stops before its verdict sentinel is a failure, not a pass"
+
+# (f) the unrouted-net readout must be able to fire. A linked but unrouted
+#     design has no routing wires at all, so the committed flow's
+#     unrouted_signal_nets must return a non-empty list naming nets; if it
+#     never matched on this OpenROAD build, the committed "zero unrouted
+#     nets" records would be unreadable as evidence. The proc is spliced in
+#     verbatim from the committed flow, so the control measures the readout
+#     as shipped. The committed flow never produces a CLOCK net (its CTS
+#     stage is a documented refusal), so the scratch flow marks the clock
+#     input CLOCK itself, to exercise both sigType branches of the filter.
+T="$(build f)"
+python3 -I -c '
+import re, sys
+flow, dst = open(sys.argv[1]).read(), sys.argv[2]
+m = re.search(r"^proc unrouted_signal_nets \{\} \{.*?^\}$", flow, re.S | re.M)
+assert m, "negative control did not find unrouted_signal_nets in the committed flow"
+scaffold = r"""# Control (f) scratch flow: query the committed readout on a linked,
+# unrouted design. Written by negctl_par.sh; ends in a refusal verdict
+# because nothing here was routed and no result is claimed.
+set TECH    $::A7S(tech)
+set LIB_LEF $::A7S(lib_lef)
+set LIBERTY $::A7S(liberty)
+set NETLIST $::A7S(netlist)
+set TOP     $::A7S(top)
+
+# verbatim from the committed par_counter8.tcl:
+@@PROC@@
+
+puts "A7S_STAGE_BEGIN read_inputs"
+if {[catch {
+    read_lef $TECH
+    read_lef $LIB_LEF
+    read_liberty $LIBERTY
+    read_verilog $NETLIST
+    link_design $TOP
+} msg]} {
+    set one [string map {"\n" " | "} $msg]
+    puts "A7S_STAGE_REFUSED read_inputs :: $one"
+    puts "A7S_FLOW_VERDICT setup-failed:read_inputs"
+    puts "A7S_FLOW_DONE"
+    flush stdout
+    exit 0
+}
+puts "A7S_STAGE_OK read_inputs"
+
+# The committed flow never produces a CLOCK net (its CTS stage is a
+# documented refusal), so mark the clock input CLOCK here to exercise the
+# readout CLOCK branch of the filter on this control only.
+set blk [ord::get_db_block]
+foreach net [$blk getNets] {
+    if {[$net getName] eq "clk"} { $net setSigType "CLOCK" }
+}
+
+set unrouted [unrouted_signal_nets]
+set n_sig 0
+set n_clk 0
+set first_net ""
+foreach name $unrouted {
+    if {$first_net eq ""} { set first_net $name }
+    set sig [[[ord::get_db_block] findNet $name] getSigType]
+    if {$sig eq "CLOCK"} { incr n_clk } else { incr n_sig }
+}
+puts "A7S_UNROUTED_PROBE signal=$n_sig clock=$n_clk first_net=$first_net"
+puts "A7S_UNROUTED_PROBE_NAMES $unrouted"
+puts "A7S_FLOW_VERDICT refused:unrouted-readout-probe"
+puts "A7S_FLOW_DONE"
+flush stdout
+exit 0
+"""
+scaffold = scaffold.replace("@@PROC@@", m.group(0))
+assert "@@PROC@@" not in scaffold
+open(dst, "w").write(scaffold)
+' "$HERE/par_counter8.tcl" "$T/integration/par_counter8.tcl"
+check f 3 '^A7S_UNROUTED_PROBE signal=[1-9][0-9]* clock=[1-9][0-9]* first_net=.' "$TECH" \
+  "the unrouted-net readout returns a non-empty list on a linked, unrouted design"
 
 echo "== result =="
 if [ "$FAILED" = 0 ]; then

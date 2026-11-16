@@ -5,5 +5,6 @@ PASS (b): Liberty cell renamed off the library naming is caught by the name asse
 PASS (c): library LEF with DFFHQNx1 deleted stops the flow in setup -- exit 1, matched /^PAR_VERDICT (invalid-input|setup-failed:)/
 PASS (d): missing tech LEF is refused before OpenROAD runs -- exit 1, matched /^PAR_VERDICT invalid-input$/
 PASS (e): a flow that stops before its verdict sentinel is a failure, not a pass -- exit 1, matched /no A7S_FLOW_DONE sentinel/
+PASS (f): the unrouted-net readout returns a non-empty list on a linked, unrouted design -- exit 3, matched /^A7S_UNROUTED_PROBE signal=[1-9][0-9]* clock=[1-9][0-9]* first_net=./
 == result ==
 negctl_par.sh: PASS (every control was caught)

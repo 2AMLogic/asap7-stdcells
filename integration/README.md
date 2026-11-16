@@ -131,13 +131,18 @@ and the caveat that the check is a lower bound rather than an oracle.
 A refusal only says something about the library if the thing that produced it
 is known to work. Both halves are checked, and both records are committed.
 
-**`negctl_par.sh` — the driver can fail.** Five controls, each requiring the
+**`negctl_par.sh` — the driver can fail.** Six controls, each requiring the
 driver to refuse rather than report a result: an unmodified copy reproduces the
 recorded verdict (so the harness is not always-fail); a Liberty cell renamed
 off this library's naming is caught by the cell-name assertion (so spec item 1's
 check is live, not decorative); a library LEF with `DFFHQNx1` deleted stops the
-flow in setup; a missing tech LEF never reaches the tool; and a flow that ends
-before its verdict sentinel is a failure, not a pass. All five pass.
+flow in setup; a missing tech LEF never reaches the tool; a flow that ends
+before its verdict sentinel is a failure, not a pass; and the unrouted-net
+readout returns a non-empty list on a linked, unrouted design — its proc
+spliced in verbatim from the committed flow, the clock input marked CLOCK so
+both sigType branches of its filter are exercised — so spec item 2's "zero
+unrouted nets" is a measured zero, not a predicate that never fires on this
+build. All six pass.
 
 **`flowctl_par.sh` — the flow can route.** The same committed Tcl, through the
 same driver, on `comb8.v` (an 8-bit ripple-carry adder, no flop) synthesised
@@ -183,9 +188,9 @@ Two things the controls do **not** establish, stated rather than glossed:
   `TAP_A7S_75t_R`. `TAP` cells are placed, as item 1 of the issue's criteria
   asks, but not because the 25 um rule fired.
 - **The PDN is M1-only.** The shipped `pdngen.tcl` lays `followpins` on M1 *and*
-  M2, but this library's `VDD`/`VSS` pins are drawn on M1 alone — 44 `LAYER M1`
-  port rects across the library and no M2 power geometry — so an M2 stripe would
-  have nothing to follow. Width 0.018 um and pitch 0.54 um are the shipped
+  M2, but this library's `VDD`/`VSS` pins are drawn on M1 alone — 44 M1 VDD/VSS
+  ports (112 rects) across the library and no M2 power geometry — so an M2 stripe
+  would have nothing to follow. Width 0.018 um and pitch 0.54 um are the shipped
   values, and they match `spec/stdcells.md`'s "Power rails" row. Stripes above
   M2 are not needed for item 2 and every extra one is new DRC surface for the
   item 3/4 follow-up.
