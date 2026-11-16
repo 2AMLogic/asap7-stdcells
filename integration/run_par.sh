@@ -83,7 +83,8 @@ elif command -v klt >/dev/null && command -v jq >/dev/null; then
   OR_PDK="$(klt pdk find --format json 2>/dev/null | jq -r '.root // empty' 2>/dev/null || true)"
   [ -n "$OR_PDK" ] && OR_MOUNTS+=("${OR_PDK%/}")
 fi
-OR_MOUNTS+=("${TMPDIR:-/tmp}")
+OR_TMP="${TMPDIR:-/tmp}"
+OR_MOUNTS+=("${OR_TMP%/}")
 for f in "$TECH" "$TRACKS" "$LIB_LEF" "$LIBERTY" "$RTL" "$TCL"; do
   [ -r "$f" ] || bad "cannot read $f"
   f_abs="$(cd -P "$(dirname "$f")" 2>/dev/null && pwd -P)/$(basename "$f")"
