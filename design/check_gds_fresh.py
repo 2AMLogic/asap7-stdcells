@@ -33,7 +33,7 @@ def klt_python():
     try:
         with open(klt, encoding="utf-8") as f:
             first = f.readline().strip()
-    except OSError:
+    except (OSError, UnicodeDecodeError):
         return None
     if not first.startswith("#!"):
         return None
