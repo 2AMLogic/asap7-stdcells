@@ -446,7 +446,7 @@
         "command": null,
         "kind": "generic",
         "check_status": "pass",
-        "content_hash": "sha256:bf619dcce132b568d08c94951199f6f08720d842ef11c1a09404ff0357c9cba4",
+        "content_hash": "sha256:1892ba42190105f194d98fe3dbaa04b110886c06f78a75f53524fe958cbc130a",
         "input_verified": true,
         "exit_status": 0,
         "artifact_binding": {
@@ -455,7 +455,7 @@
             "path": "verification/library/A7S_75t_R_LIBRARY.gds",
             "scope": "repo"
           },
-          "content_hash": "sha256:bf619dcce132b568d08c94951199f6f08720d842ef11c1a09404ff0357c9cba4",
+          "content_hash": "sha256:1892ba42190105f194d98fe3dbaa04b110886c06f78a75f53524fe958cbc130a",
           "input_verified": true,
           "summary": "T1 item 2 (Layout): 4/4 attestation checks passed (klt signoff --attest)",
           "source": "verification/library/A7S_75t_R_LIBRARY.gds",
@@ -504,11 +504,11 @@
       "reason": null,
       "graded_by_build": true,
       "citation": {
-        "file": "verification/records/20261029T012553Z-klt0.8.1.dev670_g680c6f4a7518/library/lvs.json",
+        "file": "verification/records/20261116T064348Z-klt0.9.3.dev27_g37fcbce0e52c/library/lvs.json",
         "command": null,
         "kind": "lvs",
         "check_status": "match",
-        "content_hash": "sha256:bf619dcce132b568d08c94951199f6f08720d842ef11c1a09404ff0357c9cba4",
+        "content_hash": "sha256:1892ba42190105f194d98fe3dbaa04b110886c06f78a75f53524fe958cbc130a",
         "input_verified": true,
         "exit_status": 0
       }
@@ -1344,7 +1344,7 @@
             "kind": "lvs",
             "check_status": "match",
             "content_hash": "sha256:bf619dcce132b568d08c94951199f6f08720d842ef11c1a09404ff0357c9cba4",
-            "input_verified": true,
+            "input_verified": false,
             "exit_status": 0
           }
         ],

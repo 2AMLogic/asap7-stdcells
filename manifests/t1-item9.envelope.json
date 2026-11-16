@@ -24,7 +24,7 @@
         "role": "testbench",
         "path": "verification/README.md",
         "passed": true,
-        "content_hash": "sha256:c52c0c08ce2b0c76feb81a923a651b95fca1e63f52b7b9473516a39184deb018"
+        "content_hash": "sha256:641be63430e4149b3cfd843877aa05663d22c9a750851c7f10f4a536966c2918"
       },
       {
         "check": "present",
@@ -45,7 +45,7 @@
         "role": "testbench",
         "path": "verification/klt_helper.py",
         "passed": true,
-        "content_hash": "sha256:400236b368e78c42649a3b6fe96a68d44c6134b6c9f80b91e7041ed4d3879706"
+        "content_hash": "sha256:3fee4f3886f1778a0eff426c661c8df381f28185581bbb56c07c30b75ce46158"
       },
       {
         "check": "present",
@@ -59,14 +59,14 @@
         "role": "testbench",
         "path": "verification/run_regression.py",
         "passed": true,
-        "content_hash": "sha256:f92934bacdf26e92cc9ef333b51d35ba6880c32ea9442da3c6f07438c0bee570"
+        "content_hash": "sha256:d8c8294c1515e038cb374251f053d960c8d04cdd46a41e0f360adaa7147bbb43"
       },
       {
         "check": "present",
         "role": "testbench",
         "path": "verification/test_run_regression.py",
         "passed": true,
-        "content_hash": "sha256:b2ecc11a026177e919f01e5b2c57da99a917e4f46ea4ac30d258ab8a9cec22a3"
+        "content_hash": "sha256:ac7d6559ebecd34ae9e7e41c91803067c19f13706b821e805e7b424c5ac07c94"
       },
       {
         "check": "command",

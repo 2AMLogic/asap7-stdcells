@@ -1,6 +1,23 @@
 #!/usr/bin/env python3
-"""Subprocess helper for run_regression.py: runs under klt's own interpreter (the only place klayout + the packaged deck are importable). The stdlib-only harness executes it as a file; the dispatch lives in main(argv=None), so the module itself imports with no klayout installed and its geometry logic is unit-testable with a stubbed klayout.db."""
+"""Subprocess helper for run_regression.py: runs under klt's own interpreter (the only place klayout + the packaged deck are importable). The stdlib-only harness executes it as a file; the dispatch lives in main(argv=None), so the module itself imports with no klayout installed and its geometry logic is unit-testable with a stubbed klayout.db. Derived streams are written through save_opts() (timestamps suppressed), so identical specs produce identical bytes."""
 import json, sys
+
+
+def save_opts():
+    """GDS2 write options with timestamps suppressed, mirroring design/a7s_common.py.
+
+    Without this KLayout stamps BGNLIB/BGNSTR with the wall-clock time, so two
+    runs of the same spec differ in bytes and a derived stream can never be
+    re-hashed against a record (issue #156). Plain module-level function:
+    run_regression.py documents it and #151's tests import it; the klayout.db
+    import is lazy because the module must stay importable with no klayout
+    installed (and `db` is otherwise a local of main()).
+    """
+    import klayout.db as db
+    o = db.SaveLayoutOptions()
+    o.format = "GDS2"
+    o.gds2_write_timestamps = False
+    return o
 
 
 def main(argv=None):
@@ -28,7 +45,7 @@ def main(argv=None):
             sh = n.shapes(o.layer(*inject["layer"]))
             for b in inject["boxes"] if "boxes" in inject else [inject["box"]]:
                 sh.insert(db.Box(*b))
-        o.write(out)
+        o.write(out, save_opts())
     elif a[0] == "place":
         # Build a top cell of abutted rows: spec = {top, libs: {cell: gds}, rows: [[[cell, orient], ...], ...]}
         spec, out = json.loads(a[1]), a[2]
@@ -77,7 +94,7 @@ def main(argv=None):
             lab = o.layer(19, 251)
             top.shapes(lab).insert(db.Text("VSS", db.Trans(db.Point(x // 2, 0))))
             top.shapes(lab).insert(db.Text("VDD", db.Trans(db.Point(x // 2, row_h))))
-        o.write(out)
+        o.write(out, save_opts())
     elif a[0] == "layers":
         # Layer/datatype pairs with geometry under the stream's single top cell.
         lay = db.Layout()

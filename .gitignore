@@ -13,6 +13,10 @@ pnpm-lock.yaml
 # sim/ harness: per-corner ngspice logs under corners/ are committed evidence
 # (append-only record trail), so they escape the *.log rule.
 !sim/*/corners/**/*.log
+# verification/ records: --verify transcripts (positive + negative controls) are
+# committed evidence the record's verify-transcript.md cites by name; they escape
+# the *.log rule too (issue #156).
+!verification/records/**/*.log
 sim/build/
 # synthesis / P&R scratch
 flow/build/
