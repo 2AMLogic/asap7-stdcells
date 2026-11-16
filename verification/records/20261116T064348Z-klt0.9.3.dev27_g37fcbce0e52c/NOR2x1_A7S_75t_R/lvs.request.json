@@ -1,0 +1,17 @@
+{
+  "layout": {
+    "deck": "asap7",
+    "file": "layout/NOR2x1_A7S_75t_R.gds",
+    "top": "NOR2x1_A7S_75t_R"
+  },
+  "options": {
+    "finfet_bulk": {
+      "nmos": "VSS",
+      "pmos": "VDD"
+    }
+  },
+  "reference": {
+    "netlist": "design/NOR2x1_A7S_75t_R.cdl",
+    "top": "NOR2x1_A7S_75t_R"
+  }
+}

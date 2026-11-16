@@ -3,6 +3,23 @@
 import json, sys
 a = sys.argv[1:]
 import klayout.db as db
+
+
+def save_opts():
+    """GDS2 write options with timestamps suppressed, mirroring design/a7s_common.py.
+
+    Without this KLayout stamps BGNLIB/BGNSTR with the wall-clock time, so two
+    runs of the same spec differ in bytes and a derived stream can never be
+    re-hashed against a record (issue #156). Keep it a plain module-level
+    function: run_regression.py documents it, and #151 imports it once this
+    file is importable.
+    """
+    o = db.SaveLayoutOptions()
+    o.format = "GDS2"
+    o.gds2_write_timestamps = False
+    return o
+
+
 if a[0] == "info":
     from klayout_tools.decks import asap7_rules as r
     print(json.dumps({"deck_path": str(r.DECK_PATH), "rule_count": len(r.RULES),
@@ -25,7 +42,7 @@ elif a[0] == "extract":
         sh = n.shapes(o.layer(*inject["layer"]))
         for b in inject["boxes"] if "boxes" in inject else [inject["box"]]:
             sh.insert(db.Box(*b))
-    o.write(out)
+    o.write(out, save_opts())
 elif a[0] == "place":
     # Build a top cell of abutted rows: spec = {top, libs: {cell: gds}, rows: [[[cell, orient], ...], ...]}
     spec, out = json.loads(a[1]), a[2]
@@ -74,7 +91,7 @@ elif a[0] == "place":
         lab = o.layer(19, 251)
         top.shapes(lab).insert(db.Text("VSS", db.Trans(db.Point(x // 2, 0))))
         top.shapes(lab).insert(db.Text("VDD", db.Trans(db.Point(x // 2, row_h))))
-    o.write(out)
+    o.write(out, save_opts())
 elif a[0] == "layers":
     # Layer/datatype pairs with geometry under the stream's single top cell.
     lay = db.Layout()

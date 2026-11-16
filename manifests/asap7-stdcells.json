@@ -20,7 +20,7 @@
     },
     "2": {
       "file": "manifests/t1-item2.envelope.json",
-      "content_hash": "sha256:bf619dcce132b568d08c94951199f6f08720d842ef11c1a09404ff0357c9cba4"
+      "content_hash": "sha256:1892ba42190105f194d98fe3dbaa04b110886c06f78a75f53524fe958cbc130a"
     },
     "3": {
       "file": "verification/records/20261029T012553Z-klt0.8.1.dev670_g680c6f4a7518/merged/drc.json",
@@ -35,8 +35,8 @@
       "content_hash": "sha256:a5c4baad9c320ffce1bb56e0f0aa36663ec38f2b6ff8b1e154e98cc640e3f2b4"
     },
     "4": {
-      "file": "verification/records/20261029T012553Z-klt0.8.1.dev670_g680c6f4a7518/library/lvs.json",
-      "content_hash": "sha256:bf619dcce132b568d08c94951199f6f08720d842ef11c1a09404ff0357c9cba4"
+      "file": "verification/records/20261116T064348Z-klt0.9.3.dev27_g37fcbce0e52c/library/lvs.json",
+      "content_hash": "sha256:1892ba42190105f194d98fe3dbaa04b110886c06f78a75f53524fe958cbc130a"
     },
     "11": [
       {
