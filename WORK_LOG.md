@@ -5,6 +5,12 @@ triage role. Newest first.
 
 ### 2026-11-15
 
+- **PR #158**: fix: cdl freshness --update no longer mints a null CDL hash; null recording is opt-in --device-less
+- **PR #148**: feat(verification): report incidentally-exercised rule ids, pin four select/WELL ids
+- **PR #123**: integration: record OpenROAD P&R of counter8 refusing at detailed_route
+- **Issue #136** (closed): check_cdl_fresh.py --update can silently record a device-bearing cell as device-less
+- **Issue #134** (closed): Four rule ids left the unexercised list as incidental fires, with no targeted control to keep them there
+- **Issue #109** (closed): Integration design: place and route counter8 with OpenROAD and record the run
 - **PR #152**: refactor: promote the klt record path-normalizer to a shared verification module
 - **PR #141**: refactor(verification): extract the klt helper string into klt_helper.py
 - **PR #132**: refactor: hoist gate_link and v1 into a7s_common, re-pair T1 item 1 evidence

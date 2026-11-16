@@ -59,14 +59,14 @@
         "role": "testbench",
         "path": "verification/run_regression.py",
         "passed": true,
-        "content_hash": "sha256:3d45cd1c2191cddd2dc5e28fb243905daf6deae0178c4599703bc6db969b040e"
+        "content_hash": "sha256:f92934bacdf26e92cc9ef333b51d35ba6880c32ea9442da3c6f07438c0bee570"
       },
       {
         "check": "present",
         "role": "testbench",
         "path": "verification/test_run_regression.py",
         "passed": true,
-        "content_hash": "sha256:9a998a8d9ba3fb32551329d5e3a2c611e50bbad20b4217120835bfb4c61f574a"
+        "content_hash": "sha256:547a890b3b5dfd3795e65b121ba42a1ce623dc5ea197933fa6aae7f78600f5df"
       },
       {
         "check": "command",
