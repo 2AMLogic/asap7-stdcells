@@ -844,7 +844,7 @@ def run(args, klt=None):
         ok &= library["result"] == "PASS"
 
     lef = None
-    if not args.only and any(c["source"] == "drawn" for c in cfg["cells"]):
+    if any(c["source"] == "drawn" for c in cfg["cells"]):
         lef = klt.lef_check(work)  # a boundary redraw fails here until the LEF is regenerated
         ok &= lef["result"] == "PASS"
 
