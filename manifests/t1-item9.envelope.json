@@ -45,7 +45,7 @@
         "role": "testbench",
         "path": "verification/klt_helper.py",
         "passed": true,
-        "content_hash": "sha256:4233e5368cce47211b72875f7c47ee55ea0f1e3b93e64150b205d08fd8b0a0df"
+        "content_hash": "sha256:3fee4f3886f1778a0eff426c661c8df381f28185581bbb56c07c30b75ce46158"
       },
       {
         "check": "present",
@@ -66,7 +66,7 @@
         "role": "testbench",
         "path": "verification/test_run_regression.py",
         "passed": true,
-        "content_hash": "sha256:eee2233eb132dcdcbe08c6bb7608068db79a556b4e933af8de238d49b496a5b3"
+        "content_hash": "sha256:74492cb3710be059069995055ecf123307f8c3b32ed7fa88a49994f00583b3d4"
       },
       {
         "check": "command",
