@@ -41,6 +41,15 @@ worker's `~/.local/bin` — change how a re-run must be invoked. Both measured
   `run_par.sh` and `verification/lef/read_lef.sh` now check the inputs they
   hand OpenROAD against this same three-mount rule before invoking the tool,
   and name the path and the reason instead of letting STA-0340 surface.
+  That check is deliberately duplicated in the two drivers, not factored
+  into a sourced helper: the only sourced-helper precedent
+  (`verification/corners/common.sh`) is within one directory, no neutral
+  home spans `integration/` and `verification/lef/`, and `negctl_par.sh`'s
+  scratch harness copies `run_par.sh` as one self-contained file (issue
+  #187). The two blocks are byte-identical in their `OR_MOUNTS`
+  construction — fix both or neither. `negctl_par.sh` and `flowctl_par.sh`
+  inherit the check by running `run_par.sh`; a future script that hands
+  `openroad` file inputs directly gets its own copy of the block.
 - **The `yosys` callers here set `COLUMNS` themselves.** With `TERM=dumb`
   (a worker's default), abc's readline echo of its `source <abc.script>`
   command wraps once the line reaches 79 printable columns (readline reserves
