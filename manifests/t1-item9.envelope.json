@@ -45,7 +45,7 @@
         "role": "testbench",
         "path": "verification/klt_helper.py",
         "passed": true,
-        "content_hash": "sha256:bcdcfdc8778d3808e2bac3ea6ad3aae196e23026bb7dff8a05ce465606e21505"
+        "content_hash": "sha256:400236b368e78c42649a3b6fe96a68d44c6134b6c9f80b91e7041ed4d3879706"
       },
       {
         "check": "present",
@@ -66,7 +66,7 @@
         "role": "testbench",
         "path": "verification/test_run_regression.py",
         "passed": true,
-        "content_hash": "sha256:7e64a3f3611b1ec43d6f9ea6c07f0d7983d996db83c0e5eb339bf3bb490562f8"
+        "content_hash": "sha256:547a890b3b5dfd3795e65b121ba42a1ce623dc5ea197933fa6aae7f78600f5df"
       },
       {
         "check": "command",
@@ -100,7 +100,7 @@
     ]
   },
   "provenance": {
-    "klt_version": "0.9.0",
+    "klt_version": "0.9.3.dev16+gdcf18e2e0c03",
     "klayout_version": null,
     "pdk": null,
     "deck": null,
