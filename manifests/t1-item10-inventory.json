@@ -2,7 +2,7 @@
   "schema_version": 1,
   "kind": "t1-attestation-inventory",
   "t1_item": 10,
-  "description": "Repo hygiene: README, license, the ratified spec and decision records, and the signoff workflow, with the harness self-check as the audit command.",
+  "description": "Repo hygiene: README, license, the ratified spec and decision records, the signoff workflow, the design/ harness and Liberty scripts, and the verification/ tier-floor check with its negative control, with the harness self-check as the audit command.",
   "hygiene": [
     "README.md",
     "LICENSE",
@@ -10,7 +10,14 @@
     "spec/stdcells.md",
     "spec/bringup.md",
     "spec/decisions/0001-pdk-pin.md",
-    ".github/workflows/signoff.yml"
+    ".github/workflows/signoff.yml",
+    "design/check_gds_fresh.py",
+    "design/check_gds_fresh_negctl.py",
+    "design/check_liberty.py",
+    "design/liberty_common.py",
+    "design/write_liberty.py",
+    "verification/check_tier_floor.py",
+    "verification/check_tier_floor_negctl.py"
   ],
   "checks": [
     {

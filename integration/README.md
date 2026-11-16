@@ -20,6 +20,39 @@ same way `verification/lef/` is scoped to one tool question.
 | `negctl_par.sh`, `negctl_par.txt` | Negative control for the driver, and its recorded run. |
 | `flowctl_par.sh`, `comb8.v`, `flowctl_par.txt` | Positive control for the flow — a design that routes clean — and its recorded run. |
 
+## Environment facts a reproducer needs
+
+Two properties of the tool install this record was produced on — a Loom
+worker's `~/.local/bin` — change how a re-run must be invoked. Both measured
+**2026-11-16**, against OpenROAD **26Q3-1510-g6cb3f2b704** and Yosys
+**0.67+post (git b8e7da6f)** as provisioned there.
+
+- **`openroad` is a docker wrapper, and the container sees only three host
+  paths.** The generated `~/.local/bin/openroad` mounts exactly the working
+  directory, `$PDK_ROOT` (falling back to `klt pdk find`'s resolved root when
+  `$PDK_ROOT` is unset) and `${TMPDIR:-/tmp}`. An input outside all three
+  fails as `[ERROR STA-0340] cannot open '<path>'` — for a file the caller
+  can `cat` — because the mount is missing, not the file. Note that setting
+  `TMPDIR` to anything other than `/tmp` stops `/tmp` being mounted wholesale,
+  so a scratch directory that worked under `TMPDIR=/tmp` stops working. For
+  `verification/bringup/reproduce.sh`, whose scratch directory is an
+  argument: point it under one of the three paths (any directory, while
+  `TMPDIR` is unset), or `export PDK_ROOT` at the extracted PDK tree.
+  `run_par.sh` and `verification/lef/read_lef.sh` now check the inputs they
+  hand OpenROAD against this same three-mount rule before invoking the tool,
+  and name the path and the reason instead of letting STA-0340 surface.
+- **The `yosys` callers here set `COLUMNS` themselves.** With `TERM=dumb`
+  (a worker's default), abc's readline echo of its `source <abc.script>`
+  command wraps once the line reaches 79 printable columns (readline reserves
+  the last column of a nominal 80; the echoed width is 43 + `$TMPDIR`'s
+  length), and yosys's abc handshake then waits forever for a prompt line
+  that never arrives — a silent, unbounded hang, since the script path sits
+  under `$TMPDIR`. Both `sim/yosys_map_smoke.sh` and `run_par.sh` now run
+  yosys with `COLUMNS=1000`, which keeps the echo on one line at any
+  `$TMPDIR` length. `COLUMNS` changes only the terminal echo width, not the
+  optimizer work (verified: byte-identical liberty input passes both with and
+  without), so no committed record is affected.
+
 Re-run, from a clean checkout, with the pinned tech LEF (`spec/bringup.md`;
 `verification/bringup/reproduce.sh` fetches the archive):
 
@@ -31,8 +64,9 @@ integration/flowctl_par.sh <same tech LEF>  | tee integration/flowctl_par.txt
 ```
 
 Tools: OpenROAD 26Q3-1510-g6cb3f2b704, Yosys 0.67+post (git b8e7da6f),
-klt 0.9.2.dev1022+g2a9c52b27ce7. Recorded 2026-11-14. Single local runs;
-nothing is submitted to a batch fleet.
+klt 0.9.2.dev1022+g2a9c52b27ce7. Recorded 2026-11-14; `negctl_par.txt`
+re-recorded 2026-11-15 after the setup-failure / refusal split (#149). Single
+local runs; nothing is submitted to a batch fleet.
 
 ## Result: routing did not complete, and no result is claimed
 
@@ -42,6 +76,15 @@ routing-DRC violations" — is **not** met, and the maturity-ladder rung in the
 top-level `README.md` is deliberately left where it was. No routed DEF and no
 merged GDS are committed, because there is no clean route to commit; the
 `routed-clean` branch of `run_par.sh` writes them, and it did not run.
+
+The exit contract: a stage that ran and refused — any stage after
+`read_inputs`, this run's `detailed_route` included — is terminal
+`PAR_VERDICT refused:<stage>`, exit **3**: the refusal is the result. Only
+`read_inputs` itself, or a flow input that is missing or cannot be linked, is
+`PAR_VERDICT setup-failed:...`, exit **1** — `run_par.sh`'s "never a result"
+status. `routed-dirty` also exits **3**: routing completed, but no
+clean-routing claim is made. Every branch ends with exactly one `PAR_VERDICT`
+line, and `negctl_par.sh` asserts that on every control's captured output.
 
 What did complete, from `counter8_par.txt`:
 
@@ -131,13 +174,24 @@ and the caveat that the check is a lower bound rather than an oracle.
 A refusal only says something about the library if the thing that produced it
 is known to work. Both halves are checked, and both records are committed.
 
-**`negctl_par.sh` — the driver can fail.** Five controls, each requiring the
-driver to refuse rather than report a result: an unmodified copy reproduces the
+**`negctl_par.sh` — the driver can fail.** Eight controls, each requiring the
+driver to refuse rather than report a result, and each requiring exactly one
+`PAR_VERDICT` line in its captured output: an unmodified copy reproduces the
 recorded verdict (so the harness is not always-fail); a Liberty cell renamed
-off this library's naming is caught by the cell-name assertion (so spec item 1's
-check is live, not decorative); a library LEF with `DFFHQNx1` deleted stops the
-flow in setup; a missing tech LEF never reaches the tool; and a flow that ends
-before its verdict sentinel is a failure, not a pass. All five pass.
+off this library's naming is caught by the cell-name assertion (so spec item
+1's check is live, not decorative); a library LEF with `DFFHQNx1` deleted
+stops the flow in `read_inputs` — a setup failure, exit 1, one verdict line
+naming the stage; a missing tech LEF never reaches the tool; a flow that ends
+before its verdict sentinel is a failure, not a pass; a garbage `tracks.tcl`
+makes the real flow refuse at `floorplan`, which is terminal
+`refused:floorplan`, exit 3 — a stage that ran and refused is a recorded
+refusal, not invalid input; a stub flow refusing at `read_inputs` pins
+the setup branch to exit 1 with a single verdict line; and the unrouted-net
+readout returns a non-empty list on a linked, unrouted design — its proc
+spliced in verbatim from the committed flow, the clock input marked CLOCK so
+both sigType branches of its filter are exercised — so spec item 2's "zero
+unrouted nets" is a measured zero, not a predicate that never fires on this
+build. All eight pass.
 
 **`flowctl_par.sh` — the flow can route.** The same committed Tcl, through the
 same driver, on `comb8.v` (an 8-bit ripple-carry adder, no flop) synthesised
@@ -183,9 +237,9 @@ Two things the controls do **not** establish, stated rather than glossed:
   `TAP_A7S_75t_R`. `TAP` cells are placed, as item 1 of the issue's criteria
   asks, but not because the 25 um rule fired.
 - **The PDN is M1-only.** The shipped `pdngen.tcl` lays `followpins` on M1 *and*
-  M2, but this library's `VDD`/`VSS` pins are drawn on M1 alone — 44 `LAYER M1`
-  port rects across the library and no M2 power geometry — so an M2 stripe would
-  have nothing to follow. Width 0.018 um and pitch 0.54 um are the shipped
+  M2, but this library's `VDD`/`VSS` pins are drawn on M1 alone — 44 M1 VDD/VSS
+  ports (112 rects) across the library and no M2 power geometry — so an M2 stripe
+  would have nothing to follow. Width 0.018 um and pitch 0.54 um are the shipped
   values, and they match `spec/stdcells.md`'s "Power rails" row. Stripes above
   M2 are not needed for item 2 and every extra one is new DRC surface for the
   item 3/4 follow-up.

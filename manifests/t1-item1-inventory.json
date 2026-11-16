@@ -5,6 +5,7 @@
   "description": "Design sources for a hand-captured full-custom cell library: the hand-written CDL of every device-bearing cell (the netlist), the scripted draw sources, and the spec they implement. Each CDL is hash-bound to its draw script (design/cdl-freshness.json) and checked switch-level against the spec function. Cells without a draw script yet are recorded as such; their layouts are tracked separately.",
   "sources": [
     "design/a7s_common.py",
+    "design/a7s_logic.py",
     "design/cdl-freshness.json",
     "design/check_cdl_fresh.py",
     "design/check_cdl_function.py",

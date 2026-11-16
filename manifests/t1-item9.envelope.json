@@ -3,15 +3,22 @@
   "kind": "generic",
   "status": "pass",
   "t1_item": 9,
-  "summary": "T1 item 9 (Testbenches shipped): 8/8 attestation checks passed (klt signoff --attest)",
+  "summary": "T1 item 9 (Testbenches shipped): 11/11 attestation checks passed (klt signoff --attest)",
   "source": "manifests/t1-item9-inventory.json",
   "attestation": {
     "producer": "klt signoff --attest",
     "inventory_schema_version": 1,
     "hash_algorithm": "sha256-raw-bytes",
-    "check_count": 8,
-    "passed_count": 8,
+    "check_count": 11,
+    "passed_count": 11,
     "checks": [
+      {
+        "check": "present",
+        "role": "testbench",
+        "path": "design/write_lef.py",
+        "passed": true,
+        "content_hash": "sha256:b1d36cd910dbf20f0f28fd53c1ad1a0bf0e7bcf2a96ad9ccc1328f36fa6a5791"
+      },
       {
         "check": "present",
         "role": "testbench",
@@ -29,6 +36,20 @@
       {
         "check": "present",
         "role": "testbench",
+        "path": "verification/check_lef.py",
+        "passed": true,
+        "content_hash": "sha256:9b3928807e9b01e0fa5e294a70d54e5053bed5b8d500cd2f016b1d769f2ce8b2"
+      },
+      {
+        "check": "present",
+        "role": "testbench",
+        "path": "verification/klt_helper.py",
+        "passed": true,
+        "content_hash": "sha256:bcdcfdc8778d3808e2bac3ea6ad3aae196e23026bb7dff8a05ce465606e21505"
+      },
+      {
+        "check": "present",
+        "role": "testbench",
         "path": "verification/records/SUPERSEDED.txt",
         "passed": true,
         "content_hash": "sha256:fc4f14c8aaa677d8f3d513c4508cff7859eaa5dbdfb9ee30c24d567305ffefdd"
@@ -38,14 +59,14 @@
         "role": "testbench",
         "path": "verification/run_regression.py",
         "passed": true,
-        "content_hash": "sha256:3d45cd1c2191cddd2dc5e28fb243905daf6deae0178c4599703bc6db969b040e"
+        "content_hash": "sha256:f92934bacdf26e92cc9ef333b51d35ba6880c32ea9442da3c6f07438c0bee570"
       },
       {
         "check": "present",
         "role": "testbench",
         "path": "verification/test_run_regression.py",
         "passed": true,
-        "content_hash": "sha256:bdba96c497df94621c3919e2c90f16743101afb31e049b9dd862112130b9519a"
+        "content_hash": "sha256:329435bcd085e95da7471199ef922b02436fd8ef55904a4828d3077304ab89a2"
       },
       {
         "check": "command",
@@ -88,7 +109,7 @@
         "path": "manifests/t1-item9-inventory.json",
         "scope": "repo"
       },
-      "content_hash": "sha256:58d2dca220f742e923dcde0a3e7addc47a43e11fcb46603b66287b94badcdeab"
+      "content_hash": "sha256:45c35e4fd520c3a0cec51d6b29d1c27bc2a9b428a7c3777b2d50e84ee67d9357"
     }
   }
 }

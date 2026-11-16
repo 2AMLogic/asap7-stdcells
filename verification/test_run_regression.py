@@ -554,6 +554,10 @@ class RunRegressionTest(unittest.TestCase):
         self.assertEqual(self.go(FakeKlt(), self.drawn_cfg()), 0)
         self.assertEqual(self.manifest()["lef"]["result"], "PASS")
 
+    def test_lef_gate_runs_under_only(self):
+        self.assertEqual(self.go(FakeKlt(lef="FAIL"), self.drawn_cfg(), extra=("--only", "INVx1_D")), 1)
+        self.assertEqual(self.manifest()["lef"]["result"], "FAIL")
+
     def fill_cfg(self, verdict=False):
         """A drawn device-free cell (no CDL, lvs_na) next to a drawn INVx1 neighbour."""
         cfg = self.drawn_cfg()

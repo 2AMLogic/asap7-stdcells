@@ -4,7 +4,7 @@
   "evidence": {
     "1": {
       "file": "manifests/t1-item1.envelope.json",
-      "content_hash": "sha256:751502eec64138d31ee3338ffa66e8b4ccea74a8a9a8d0279191d78c88bd9be8"
+      "content_hash": "sha256:a6a12602ce9ad8a39828e4973eaee87a535f1160760145c8728fd65fdd5ca83c"
     },
     "6": {
       "not_applicable": {
@@ -28,11 +28,11 @@
     },
     "9": {
       "file": "manifests/t1-item9.envelope.json",
-      "content_hash": "sha256:58d2dca220f742e923dcde0a3e7addc47a43e11fcb46603b66287b94badcdeab"
+      "content_hash": "sha256:45c35e4fd520c3a0cec51d6b29d1c27bc2a9b428a7c3777b2d50e84ee67d9357"
     },
     "10": {
       "file": "manifests/t1-item10.envelope.json",
-      "content_hash": "sha256:4a0d8ca1ea90bf38483450577e0d627a4258b76806c308ea6f475abc2e3bf0d7"
+      "content_hash": "sha256:a5c4baad9c320ffce1bb56e0f0aa36663ec38f2b6ff8b1e154e98cc640e3f2b4"
     },
     "4": {
       "file": "verification/records/20261029T012553Z-klt0.8.1.dev670_g680c6f4a7518/library/lvs.json",
