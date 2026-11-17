@@ -14,7 +14,9 @@ parse is an error, not a silent plain run. Pins the #207 contract too:
 the skipped count comes from unittest's OK/FAILED tail only -- a stray
 `skipped=` token elsewhere in the output cannot impersonate it -- and a
 suite whose checks never ran is counted out of the summary's
-`N/M suites ran` numerator.
+`N/M suites ran` numerator -- and since #213 that includes a FAIL that
+executed zero checks (an import crash, or an interpreter that never
+started).
 """
 import contextlib
 import io
@@ -240,6 +242,40 @@ class GateSummary(unittest.TestCase):
         '"""Run me as: python3 -I verification/test_baddoc.py with'
         ' cwd=repo"""\n'
     )
+    SUITE_IMPORTCRASH = (
+        '"""    python3 verification/test_crash.py\n'
+        '"""\n'
+        "raise RuntimeError('crashed before any test ran')\n"
+    )
+    SUITE_FAILS = (
+        '"""    python3 verification/test_fails.py\n'
+        '"""\n'
+        "import unittest\n"
+        "\n"
+        "\n"
+        "class T(unittest.TestCase):\n"
+        "    def test_x(self):\n"
+        "        self.fail('genuine failure after running')\n"
+        "\n"
+        "\n"
+        'if __name__ == "__main__":\n'
+        "    unittest.main()\n"
+    )
+    SUITE_ALLSKIP_FAIL = (
+        '"""    python3 verification/test_allskip.py\n'
+        '"""\n'
+        "import unittest\n"
+        "\n"
+        "\n"
+        "class T(unittest.TestCase):\n"
+        "    def test_x(self):\n"
+        "        self.skipTest('skipped')\n"
+        "\n"
+        "\n"
+        'if __name__ == "__main__":\n'
+        "    unittest.main(exit=False)\n"
+        "    raise SystemExit(1)\n"
+    )
 
     def run_gate(self, suites):
         """Write `suites` ({rel: body}) into a temp tree, run rs.main().
@@ -275,6 +311,60 @@ class GateSummary(unittest.TestCase):
         )
         self.assertIn("1/3 suites ran, 1 failed, 2 could not run", out)
         self.assertEqual(rc, 1)  # docstring-FAIL keeps exit 1, not 3
+
+    def test_zero_check_fail_is_counted_out_of_the_numerator(self):
+        # #213: a suite that crashes at import (exit 1, no `Ran N tests`)
+        # executed zero checks; the numerator must not count it as ran.
+        rc, out = self.run_gate(
+            {
+                "verification/test_ok.py": self.SUITE_OK,
+                "verification/test_crash.py": self.SUITE_IMPORTCRASH,
+            }
+        )
+        self.assertIn("1/2 suites ran, 1 failed, 1 could not run", out)
+        self.assertEqual(rc, 1)
+
+    def test_unrunnable_interpreter_is_counted_out_of_the_numerator(self):
+        # #211 + #213: an interpreter that never starts (OSError) executed
+        # zero checks; run_suite returns (1, 0, 0) and the tally counts the
+        # suite out the same as an import crash.
+        old = rs.klt_python
+        rs.klt_python = lambda: "/nonexistent/python"
+        try:
+            rc, out = self.run_gate(
+                {
+                    "verification/test_ok.py": self.SUITE_OK,
+                    "verification/test_check_lef.py": self.SUITE_OK,
+                }
+            )
+        finally:
+            rs.klt_python = old
+        self.assertIn("1/2 suites ran, 1 failed, 1 could not run", out)
+        self.assertEqual(rc, 1)
+
+    def test_genuine_fail_after_running_checks_still_counts_as_ran(self):
+        # #213 edge: a suite that fails AFTER executing checks (ran > 0)
+        # stays in the numerator -- only zero-check FAILs are counted out.
+        rc, out = self.run_gate(
+            {
+                "verification/test_ok.py": self.SUITE_OK,
+                "verification/test_fails.py": self.SUITE_FAILS,
+            }
+        )
+        self.assertIn("2/2 suites ran, 1 failed, 0 could not run", out)
+        self.assertEqual(rc, 1)
+
+    def test_all_skipped_fail_executed_nothing_and_is_counted_out(self):
+        # #213 edge: a FAIL with ran == 0 and skipped > 0 executed nothing
+        # either -- counted out by the same rule, with the skips surfaced.
+        rc, out = self.run_gate(
+            {
+                "verification/test_ok.py": self.SUITE_OK,
+                "verification/test_allskip.py": self.SUITE_ALLSKIP_FAIL,
+            }
+        )
+        self.assertIn("1/2 suites ran, 1 failed, 1 could not run", out)
+        self.assertEqual(rc, 1)
 
     def test_not_run_suite_keeps_exit_3_and_the_numerator_honest(self):
         rc, out = self.run_gate(
