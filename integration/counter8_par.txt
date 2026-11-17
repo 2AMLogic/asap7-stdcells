@@ -7,7 +7,7 @@ tracks.tcl [pinned lambdapdk v0.2.17]                          efa53ebb9b009d917
 layout/A7S_75t_R.lef                                           e8fb72df9c88d8b32d89837d23da162b93aa01c8dfc11447977bef6ea5dcb834
 layout/A7S_75t_R_structural.lib                                e50e150e548dfc391bc5314e756d14c9a503e658a39f149c206b9fc20596f6e7
 sim/counter8.v                                                 da2e682d49146ad1c8ac1b6ab034b31d244cc849d79a7b31897c9a31a380fe36
-integration/par_counter8.tcl                                   a67200325835c7bef2cf7658bb6a1c64740f6ff11ce4176da0be3ebd8cfea47a
+integration/par_counter8.tcl                                   ff72a2ce9f9fc36e7cd144d3ce82132fb748e1fcd5b8fb7a02f1c273cc2e0399
 == yosys mapping (scratch; re-run of the sim/ mapping, not a committed artifact) ==
 design:   sim/counter8.v (top counter8)
 dont_use: (none)
@@ -21,15 +21,15 @@ mapped netlist (scratch)                                       f4f29cfdce96a4d03
       5 OAI21x1_A7S_75t_R
 PASS: 41 instances, all *_A7S_75t_R cells of the 18-cell set
 == openroad place and route (utilisation 40%) ==
-A7S_INPUT tech     /tmp/c122/pdk/lambdapdk/asap7/base/apr/asap7_tech.lef
-A7S_INPUT tracks   /tmp/c122/pdk/lambdapdk/asap7/base/apr/../../libs/asap7sc7p5t_rvt/apr/openroad/tracks.tcl
+A7S_INPUT tech     /tmp/lambdapdk-r14b/x/lambdapdk-0.2.17/lambdapdk/asap7/base/apr/asap7_tech.lef
+A7S_INPUT tracks   /tmp/lambdapdk-r14b/x/lambdapdk-0.2.17/lambdapdk/asap7/base/apr/../../libs/asap7sc7p5t_rvt/apr/openroad/tracks.tcl
 A7S_INPUT lib_lef  /home/ubuntu/GitHub/asap7-stdcells/.loom/worktrees/issue-122/layout/A7S_75t_R.lef
 A7S_INPUT liberty  /home/ubuntu/GitHub/asap7-stdcells/.loom/worktrees/issue-122/layout/A7S_75t_R_structural.lib
-A7S_INPUT netlist  /tmp/c122/tmp.jIcrXaTNA3/mapped.v
+A7S_INPUT netlist  /tmp/loom-nt/11332d3c-4e96-45a5-8ad5-9d479ec557b6/tmp.kn1JTB5lxo/mapped.v
 A7S_INPUT top      counter8_mapped
 A7S_INPUT util     40
 A7S_STAGE_BEGIN read_inputs
-[INFO ODB-0227] LEF file: /tmp/c122/pdk/lambdapdk/asap7/base/apr/asap7_tech.lef, created 24 layers, 9 vias
+[INFO ODB-0227] LEF file: /tmp/lambdapdk-r14b/x/lambdapdk-0.2.17/lambdapdk/asap7/base/apr/asap7_tech.lef, created 24 layers, 9 vias
 [INFO ODB-0227] LEF file: /home/ubuntu/GitHub/asap7-stdcells/.loom/worktrees/issue-122/layout/A7S_75t_R.lef, created 22 library cells
 A7S_STAGE_OK read_inputs
 A7S_INFO instances_linked 41
@@ -62,7 +62,7 @@ A7S_STAGE_OK tapcell
 A7S_INFO tap_instances 28
 A7S_STAGE_BEGIN pdn
 [INFO PDN-0001] Inserting grid: stdcells
-[INFO PDN-0500] Runtime: 0.00s
+[INFO PDN-0500] Runtime: 0.01s
 A7S_STAGE_OK pdn
 A7S_STAGE_BEGIN global_placement
 [INFO GPL-0001] ---- Initialize GPL Main Data Structures
@@ -304,7 +304,7 @@ Number of nets:           44
 #macroValidViaAp       = 0
 #macroNoAp             = 0
 [INFO DRT-0166] Complete pin access.
-[INFO DRT-0267] cpu time = 00:00:13, elapsed time = 00:00:13, memory = 182.06 (MB), peak = 181.28 (MB)
+[INFO DRT-0267] cpu time = 00:00:13, elapsed time = 00:00:13, memory = 184.50 (MB), peak = 183.07 (MB)
 
 [INFO DRT-0157] Number of guides:     292
 
@@ -376,21 +376,21 @@ Number of nets:           44
 [INFO DRT-0036] V9 guide region query size = 0.
 [INFO DRT-0036] Pad guide region query size = 0.
 [INFO DRT-0179] Init gr pin query.
-[INFO DRT-0267] cpu time = 00:00:00, elapsed time = 00:00:00, memory = 182.16 (MB), peak = 181.41 (MB)
+[INFO DRT-0267] cpu time = 00:00:00, elapsed time = 00:00:00, memory = 184.56 (MB), peak = 183.07 (MB)
 [INFO DRT-0245] skipped writing guide updates to database.
 [INFO DRT-0181] Start track assignment.
 [INFO DRT-0184] Done with 126 vertical wires in 1 frboxes and 114 horizontal wires in 1 frboxes.
 [INFO DRT-0186] Done with 15 vertical wires in 1 frboxes and 32 horizontal wires in 1 frboxes.
 [INFO DRT-0182] Complete track assignment.
-[INFO DRT-0267] cpu time = 00:00:00, elapsed time = 00:00:00, memory = 182.28 (MB), peak = 181.41 (MB)
+[INFO DRT-0267] cpu time = 00:00:00, elapsed time = 00:00:00, memory = 184.75 (MB), peak = 183.32 (MB)
 [INFO DRT-0187] Start routing data preparation.
-[INFO DRT-0267] cpu time = 00:00:00, elapsed time = 00:00:00, memory = 182.28 (MB), peak = 181.41 (MB)
+[INFO DRT-0267] cpu time = 00:00:00, elapsed time = 00:00:00, memory = 184.75 (MB), peak = 183.32 (MB)
 [INFO DRT-0194] Start detail routing.
 [INFO DRT-0195] Start 0th optimization iteration.
     Completing 100% with 0 violations.
-    elapsed time = 00:00:00, memory = 182.70 (MB).
+    elapsed time = 00:00:00, memory = 185.06 (MB).
 [INFO DRT-0199]   Number of violations = 0.
-[INFO DRT-0267] cpu time = 00:00:00, elapsed time = 00:00:00, memory = 723.92 (MB), peak = 723.12 (MB)
+[INFO DRT-0267] cpu time = 00:00:00, elapsed time = 00:00:00, memory = 726.27 (MB), peak = 724.75 (MB)
 Total wire length = 87 um.
 Total wire length on LAYER M1 = 0 um.
 Total wire length on LAYER M2 = 35 um.
@@ -450,14 +450,14 @@ Up-via summary (total 335):
        335
 
 
-[INFO DRT-0267] cpu time = 00:00:00, elapsed time = 00:00:00, memory = 724.08 (MB), peak = 723.27 (MB)
+[INFO DRT-0267] cpu time = 00:00:00, elapsed time = 00:00:00, memory = 726.39 (MB), peak = 724.88 (MB)
 
 [INFO DRT-0180] Post processing.
-[INFO DRT-0501] Runtime: 14.43s
+[INFO DRT-0501] Runtime: 14.01s
 A7S_STAGE_OK detailed_route
 A7S_RESULT unrouted_nets 0
 A7S_RESULT routing_drc_violations 0
-A7S_RESULT def_written /tmp/c122/tmp.jIcrXaTNA3/counter8_routed.def
+A7S_RESULT def_written /tmp/loom-nt/11332d3c-4e96-45a5-8ad5-9d479ec557b6/tmp.kn1JTB5lxo/counter8_routed.def
 A7S_FLOW_VERDICT routed-clean
 A7S_FLOW_DONE
 == verdict ==
@@ -469,9 +469,8 @@ clock routed as an ordinary signal net: yes
 info:   filler_instances 166
 result: unrouted_nets 0
 result: routing_drc_violations 0
-result: def_written /tmp/c122/tmp.jIcrXaTNA3/counter8_routed.def
+result: def_written /tmp/loom-nt/11332d3c-4e96-45a5-8ad5-9d479ec557b6/tmp.kn1JTB5lxo/counter8_routed.def
 refused: clock_tree_synthesis
   [ERROR CTS-0111] No max capacitance found for cell BUFx1_A7S_75t_R.
 PAR_VERDICT routed-clean
-run_par.sh: PASS (routing complete, zero unrouted nets, zero routing-DRC violations)
 PAR_EXIT 0
