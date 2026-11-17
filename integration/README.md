@@ -74,7 +74,9 @@ integration/flowctl_par.sh <same tech LEF>  | tee integration/flowctl_par.txt
 
 Tools: OpenROAD 26Q3-1510-g6cb3f2b704, Yosys 0.67+post (git b8e7da6f),
 klt 0.9.2.dev1022+g2a9c52b27ce7. Recorded 2026-11-14; `negctl_par.txt`
-re-recorded 2026-11-15 after the setup-failure / refusal split (#149). Single
+re-recorded 2026-11-15 after the setup-failure / refusal split (#149), and
+2026-11-16 after the PASS lines began quoting the matched output line,
+capped at 200 chars (#188). Single
 local runs; nothing is submitted to a batch fleet.
 
 ## Result: routing did not complete, and no result is claimed
