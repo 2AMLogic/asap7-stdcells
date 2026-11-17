@@ -14,7 +14,10 @@ subprocess with the interpreter its docstring requires:
 Exit codes: 0 every discovered suite ran and passed; 1 a suite failed; 3 a
 suite could not run -- interpreter missing, no test report, or every check
 skipped. A suite that cannot run is not a pass: the gate stays non-zero and
-the summary names how many checks did not run.
+the summary names how many checks did not run. The summary's `N/M suites
+ran` numerator counts only suites whose checks executed -- a suite that
+never ran (NOT RUN, or a docstring the flag derivation cannot parse) is
+counted out (#207).
 
 A discovered suite must actually report its tests (a unittest "Ran N tests"
 line, normally via `unittest.main()` under `if __name__ == "__main__"`):
@@ -52,7 +55,10 @@ KLT_INTERPRETER = {
 }
 
 RAN_RE = re.compile(r"^Ran (\d+) tests? in", re.M)
-SKIPPED_RE = re.compile(r"\bskipped=(\d+)\b")
+# The skipped count lives only in unittest's OK/FAILED summary tail: a
+# stray `skipped=<n>` token elsewhere in the suite's output must not
+# impersonate it (#207) -- an all-skipped suite must not read as PASS.
+SKIPPED_RE = re.compile(r"^(?:OK|FAILED) \(.*\bskipped=(\d+)\b", re.M)
 
 
 def classify(returncode, out):
@@ -63,7 +69,9 @@ def classify(returncode, out):
     counts the output reports, with ran the checks that actually executed
     (reported total minus skipped). NOT RUN covers the cannot-run cases: no
     "Ran N tests" report, or every reported check skipped -- a suite whose
-    checks all skipped must not read as one that passed (#169).
+    checks all skipped must not read as one that passed (#169). The skipped
+    count is read from the OK/FAILED tail only: a `skipped=` token printed
+    anywhere else in the output is not the summary (#207).
     """
     m = RAN_RE.search(out)
     total = int(m.group(1)) if m else 0
@@ -180,6 +188,7 @@ def main():
         print("no self-tests found under verification/ -- gate miswired")
         return 1
     failures, skipped, partial = [], [], []
+    could_not_run = []  # checks never executed: NOT RUN and docstring-FAIL alike (#207)
     total_ran = total_skipped = 0
     for path in suites:
         rel = path.relative_to(REPO).as_posix()
@@ -187,6 +196,7 @@ def main():
             interp = klt_interpreter()
             if interp is None:
                 skipped.append(rel)
+                could_not_run.append(rel)
                 print(f"== SKIP  {rel}  (klt not found -- NOT RUN, not a pass)")
                 print('   Needs klt\'s interpreter: "$(head -1 "$(command -v klt)"'
                       f' | cut -c3-)" -I {rel}')
@@ -202,6 +212,7 @@ def main():
                 print(f"== FAIL  {rel}  (docstring flags unparseable)")
                 print(f"   {exc}")
                 failures.append(rel)
+                could_not_run.append(rel)
                 continue
             rc, nran, nskip = run_suite(rel, [sys.executable, *flags, str(path)],
                                         "python3")
@@ -209,13 +220,14 @@ def main():
         total_skipped += nskip
         if rc is None:
             skipped.append(rel)
+            could_not_run.append(rel)
         elif rc != 0:
             failures.append(rel)
         elif nskip:
             partial.append((rel, nran, nskip))
     print("== summary")
-    print(f"   {len(suites) - len(skipped)}/{len(suites)} suites ran,"
-          f" {len(failures)} failed, {len(skipped)} could not run")
+    print(f"   {len(suites) - len(could_not_run)}/{len(suites)} suites ran,"
+          f" {len(failures)} failed, {len(could_not_run)} could not run")
     print(f"   {total_ran} checks ran, {total_skipped} skipped")
     for rel, nran, nskip in partial:
         print(f"   {rel}: {nskip} skipped ({nran} ran)")
