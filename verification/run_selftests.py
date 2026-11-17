@@ -16,8 +16,9 @@ suite could not run -- interpreter missing, no test report, or every check
 skipped. A suite that cannot run is not a pass: the gate stays non-zero and
 the summary names how many checks did not run. The summary's `N/M suites
 ran` numerator counts only suites whose checks executed -- a suite that
-never ran (NOT RUN, or a docstring the flag derivation cannot parse) is
-counted out (#207).
+never ran (NOT RUN, or a docstring the flag derivation cannot parse, or a
+FAIL that executed zero checks -- an import crash, or an interpreter that
+never started) is counted out (#207, #213).
 
 A discovered suite must actually report its tests (a unittest "Ran N tests"
 line, normally via `unittest.main()` under `if __name__ == "__main__"`):
@@ -184,7 +185,7 @@ def main():
         print("no self-tests found under verification/ -- gate miswired")
         return 1
     failures, skipped, partial = [], [], []
-    could_not_run = []  # checks never executed: NOT RUN and docstring-FAIL alike (#207)
+    could_not_run = []  # checks never executed: NOT RUN, docstring-FAIL, zero-check FAIL (#207, #213)
     total_ran = total_skipped = 0
     for path in suites:
         rel = path.relative_to(REPO).as_posix()
@@ -219,6 +220,12 @@ def main():
             could_not_run.append(rel)
         elif rc != 0:
             failures.append(rel)
+            if nran == 0:
+                # Zero-check FAIL -- an import crash, or #211's OSError path
+                # returning (1, 0, 0): it executed nothing, so like the
+                # NOT RUN and docstring-FAIL cases it is counted out of the
+                # numerator while still keeping the gate red (#213).
+                could_not_run.append(rel)
         elif nskip:
             partial.append((rel, nran, nskip))
     print("== summary")
