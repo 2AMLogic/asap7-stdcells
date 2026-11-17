@@ -92,6 +92,21 @@ class Classify(unittest.TestCase):
         self.assertEqual(rs.classify(1, out), ("FAIL", 3, 2))
 
 
+class RunSuiteOSError(unittest.TestCase):
+    def test_unrunnable_interpreter_returns_a_3_tuple(self):
+        # #210: the OSError path returned a bare 1 while both call sites
+        # unpack a 3-tuple -- an unrunnable interpreter raised TypeError
+        # instead of tallying the suite under failures.
+        buf = io.StringIO()
+        with contextlib.redirect_stdout(buf):
+            result = rs.run_suite(
+                "verification/test_ok.py", ["/nonexistent/python", "x"], "probe"
+            )
+        rc, ran, skipped = result  # TypeError here before the #210 fix
+        self.assertEqual((rc, ran, skipped), (1, 0, 0))
+        self.assertIn("== FAIL", buf.getvalue())
+
+
 class DocstringFlags(unittest.TestCase):
     def test_real_suites_match_their_documented_invocations(self):
         # Asserted against the real docstrings in the tree, so this fails
