@@ -888,6 +888,25 @@ class KltHelperDeterminismTest(unittest.TestCase):
         self.assertEqual(outs[0], outs[1])
 
 
+class HelperCwdTest(unittest.TestCase):
+    """`Klt._helper` pins the subprocess cwd to REPO (issue #192).
+
+    The derived plan's verdict branch hands `_helper` a repo-relative stream
+    (`verification/.work/<name>.gds`), so a `--verify` run from any cwd must
+    resolve it the way `Klt.run`/`Klt.check` already do; stdlib-only, no klt.
+    """
+
+    def test_helper_runs_with_repo_cwd(self):
+        klt = rr.Klt.__new__(rr.Klt)
+        klt.python = sys.executable
+        fake = unittest.mock.Mock(returncode=0, stdout="{}", stderr="")
+        with unittest.mock.patch.object(rr.subprocess, "run", return_value=fake) as run:
+            self.assertEqual(klt._helper("info"), "{}")
+        args, kwargs = run.call_args
+        self.assertEqual(args[0], [sys.executable, "-I", str(rr.HERE / "klt_helper.py"), "info"])
+        self.assertEqual(kwargs["cwd"], rr.REPO)
+
+
 class InjectBoxTest(unittest.TestCase):
     """`box_dbu` (one box) and `boxes_dbu` (several) on a drc_inject_box control."""
 
