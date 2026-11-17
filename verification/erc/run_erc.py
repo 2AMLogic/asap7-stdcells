@@ -35,9 +35,8 @@ def run(args, **kw):
     return subprocess.run(args, cwd=ROOT, capture_output=True, text=True, **kw)
 
 
-def klt_python():
-    shebang = Path(subprocess.run(["which", "klt"], capture_output=True, text=True).stdout.strip())
-    return shebang.read_text().splitlines()[0][2:]
+sys.path.insert(0, str(HERE.parent))
+from klt_interp import klt_python  # noqa: E402  (shared with design/; -I does not add the script dir)
 
 
 def check_all():
@@ -51,7 +50,10 @@ def check_all():
 
 def erc(variant, stem):
     gds = REL / f"{stem}.gds"
-    b = run([klt_python(), "-I", str(REL / "build_erc_structure.py"), str(gds), "--variant", variant])
+    interp = klt_python()
+    if interp is None:
+        sys.exit("cannot resolve klt's interpreter (klt on PATH?); install klayout-tools or set KLT_PYTHON")
+    b = run([interp, "-I", str(REL / "build_erc_structure.py"), str(gds), "--variant", variant])
     if b.returncode:
         sys.exit(f"build {variant} failed: {b.stderr}")
     r = run(["klt", "erc", str(gds), str(SPEC), "--top", "ERC_STRUCTURE", "--format", "json"])

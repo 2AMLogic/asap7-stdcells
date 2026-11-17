@@ -11,6 +11,7 @@ import copy
 import hashlib
 import io
 import json
+import os
 import shutil
 import sys
 import tempfile
@@ -221,6 +222,18 @@ class RunRegressionTest(unittest.TestCase):
 
     def test_klt_not_on_path_is_setup_error(self):
         self.assertEqual(self.go(None, extra=["--klt", "klt-does-not-exist-xyz"]), 2)
+
+    def test_shebangless_klt_is_setup_error(self):
+        # the shebang resolver's SetupError failure mode stays at this call site
+        saved = os.environ.pop("KLT_PYTHON", None)
+        klt = self.tmp / "klt-no-shebang"
+        klt.write_text("print('not a script')\n")
+        klt.chmod(0o755)
+        try:
+            self.assertEqual(self.go(None, extra=["--klt", str(klt)]), 2)
+        finally:
+            if saved is not None:
+                os.environ["KLT_PYTHON"] = saved
 
     def test_known_gap_does_not_fail_but_unexpected_pass_does(self):
         cfg = copy.deepcopy(self.cfg)
