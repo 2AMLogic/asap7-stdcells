@@ -3,6 +3,28 @@
 Chronological record of merged PRs and closed issues, maintained by the Guide
 triage role. Newest first.
 
+### 2026-11-17
+
+- **PR #216**: chore(loom): resync installed Loom to v0.19.1306
+- **PR #212**: fix: pin Klt._helper subprocess cwd to the repo root
+- **PR #215**: test: pin the selftest expect dict's coverage to every discovered non-klt suite
+- **PR #214**: fix: count zero-check FAILs out of the selftest gate's suites-ran numerator
+- **PR #211**: fix: return a 3-tuple from run_suite's OSError path so callers can unpack it
+- **PR #208**: fix: anchor selftest-gate skip parse to the summary tail and count never-ran suites out of the numerator
+- **PR #206**: fix: run_selftests resolves klt's interpreter via klt_interp.klt_python
+- **PR #205**: fix: selftest gate reddens all-skipped suites and derives flags from docstrings
+- **PR #204**: Consolidate three klt shebang resolvers into one shared module
+- **PR #199**: ci: run the self-test gate in the signoff workflow
+- **Issue #192** (closed): verify(): derived_plan passes one repo-relative lib path, so --verify only resolves it from the repo root
+- **Issue #209** (closed): run_selftests self-test: assert the expect dict covers every discovered non-klt suite
+- **Issue #213** (closed): run_selftests gate: a FAIL that executed zero checks still counts into the `N/M suites ran` numerator
+- **Issue #210** (closed): run_selftests: run_suite()'s OSError path returns a bare 1 where callers unpack a 3-tuple
+- **Issue #207** (closed): run_selftests gate: skip-count parse is unanchored and the suites-ran numerator counts a suite that never ran
+- **Issue #203** (closed): Consolidate the fourth shebang resolver: run_selftests.py klt_interpreter()
+- **Issue #169** (closed): run_selftests.py: a suite whose tests all unittest-skip is reported PASS, so a skipped negative control looks like a passing one
+- **Issue #190** (closed): Consolidate three copies of the klt-interpreter shebang resolver into one
+- **Issue #146** (closed): Wire the collapsed self-test gate into CI: signoff.yml invokes no test_*.py
+
 ### 2026-11-16
 
 - **PR #196**: ci: run the full-library regression pass in a separate job
