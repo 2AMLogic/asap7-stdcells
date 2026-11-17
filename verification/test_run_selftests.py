@@ -14,7 +14,9 @@ parse is an error, not a silent plain run. Pins the #207 contract too:
 the skipped count comes from unittest's OK/FAILED tail only -- a stray
 `skipped=` token elsewhere in the output cannot impersonate it -- and a
 suite whose checks never ran is counted out of the summary's
-`N/M suites ran` numerator.
+`N/M suites ran` numerator. And pins the #209 contract: the hand-maintained
+invocation dict must cover every suite the gate discovers, so a newly
+landed suite cannot silently go unasserted.
 """
 import contextlib
 import io
@@ -108,36 +110,61 @@ class RunSuiteOSError(unittest.TestCase):
 
 
 class DocstringFlags(unittest.TestCase):
+    # The hand-maintained pin on each suite's documented invocation. Shared
+    # between the two tests below so the coverage assertion checks the same
+    # dict the flag-agreement test iterates, never a copy.
+    EXPECT = {
+        "verification/test_normalize_paths.py": [],
+        "verification/test_run_regression.py": [],
+        "verification/test_klt_interp.py": [],
+        "verification/characterization/test_characterization.py": [],
+        "verification/corners/test_corners.py": [],
+        "verification/corners/test_logic_table.py": ["-I"],
+        "verification/pex/test_pex.py": ["-I"],
+        "verification/test_run_selftests.py": [],
+    }
+
+    @staticmethod
+    def discovered_non_klt_suites():
+        """Rel paths of every suite the gate discovers, klt ones excluded."""
+        rels = []
+        for path in rs.REPO.glob("verification/**/test_*.py"):
+            rel = path.relative_to(rs.REPO).as_posix()
+            if rel in rs.KLT_INTERPRETER:
+                continue
+            rels.append(rel)
+        return sorted(rels)
+
     def test_real_suites_match_their_documented_invocations(self):
         # Asserted against the real docstrings in the tree, so this fails
         # the moment a suite's documented invocation and its actual
         # invocation diverge.
-        expect = {
-            "verification/test_normalize_paths.py": [],
-            "verification/test_run_regression.py": [],
-            "verification/test_klt_interp.py": [],
-            "verification/characterization/test_characterization.py": [],
-            "verification/corners/test_corners.py": [],
-            "verification/corners/test_logic_table.py": ["-I"],
-            "verification/pex/test_pex.py": ["-I"],
-            "verification/test_run_selftests.py": [],
-        }
-        for rel, flags in expect.items():
+        for rel, flags in self.EXPECT.items():
             self.assertEqual(rs.suite_flags(rel), flags, rel)
 
+    def test_expect_dict_covers_every_discovered_non_klt_suite(self):
+        # #209: the dict is the only assertion pinning documented-vs-actual
+        # flag agreement, so a newly landed suite with no dict entry stays
+        # unasserted. Coverage is self-enforcing: the key set must equal the
+        # gate's discovered non-klt suite set, with the drift named both ways.
+        discovered = set(self.discovered_non_klt_suites())
+        missing = sorted(discovered - set(self.EXPECT))
+        stale = sorted(set(self.EXPECT) - discovered)
+        self.assertEqual(
+            sorted(self.EXPECT),
+            sorted(discovered),
+            "EXPECT dict out of sync with the gate's discovery glob: "
+            f"missing entries {missing}; stale entries {stale}",
+        )
+
     def test_every_discovered_non_klt_suite_has_derivable_flags(self):
-        # #207: the expect dict above is hand-maintained -- a newly landed
-        # suite gets no entry until someone edits it, and test_klt_interp.py
-        # (landed after the dict was written) is exactly that drift. Walk the
-        # gate's own discovery glob so every discovered non-klt suite, today's
-        # and any future one, must at least have derivable docstring flags.
-        for path in sorted(
-            rs.REPO.glob("verification/**/test_*.py"),
-            key=lambda p: p.relative_to(rs.REPO).as_posix(),
-        ):
-            rel = path.relative_to(rs.REPO).as_posix()
-            if rel in rs.KLT_INTERPRETER:
-                continue
+        # #207: a newly landed suite gets no EXPECT entry until someone
+        # edits it, and test_klt_interp.py (landed after the dict was
+        # written) is exactly that drift. Walk the gate's own discovery
+        # glob so every discovered non-klt suite, today's and any future
+        # one, must at least have derivable docstring flags; #209 makes a
+        # missing entry fail the coverage test above too.
+        for rel in self.discovered_non_klt_suites():
             rs.suite_flags(rel)  # a ValueError here fails the test
 
     def test_plain_invocation(self):
