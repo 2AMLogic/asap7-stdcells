@@ -23,10 +23,11 @@ never counted as a pass.
 """
 
 import re
-import shutil
 import subprocess
 import sys
 from pathlib import Path
+
+from klt_interp import klt_python
 
 REPO = Path(__file__).resolve().parent.parent
 
@@ -43,17 +44,6 @@ EXTRA_FLAGS = {
 }
 
 
-def klt_interpreter():
-    """The python that runs klt (its shebang), or None if klt is absent."""
-    klt = shutil.which("klt")
-    if klt is None:
-        return None
-    with open(klt, "rb") as fh:
-        shebang = fh.readline().decode()
-    interp = shebang.removeprefix("#!").strip()
-    return interp or None
-
-
 def declared_checks(path):
     """Approximate number of checks in a suite that could not run."""
     return len(re.findall(r"(?m)^\s*def test_", path.read_text()))
@@ -65,7 +55,11 @@ def run_suite(rel, cmd, label):
     Returns the subprocess exit code, or None when the suite exited 0
     without a test report -- reporting zero tests is not a pass.
     """
-    proc = subprocess.run(cmd, cwd=REPO, capture_output=True, text=True)
+    try:
+        proc = subprocess.run(cmd, cwd=REPO, capture_output=True, text=True)
+    except OSError as e:
+        print(f"== FAIL  {rel}  (interpreter {cmd[0]!r} did not run: {e})")
+        return 1
     out = proc.stdout + proc.stderr
     m = re.search(r"^Ran (\d+) tests? in", out, re.M)
     if proc.returncode == 0 and (m is None or int(m.group(1)) == 0):
@@ -97,7 +91,7 @@ def main():
     for path in suites:
         rel = path.relative_to(REPO).as_posix()
         if rel in KLT_INTERPRETER:
-            interp = klt_interpreter()
+            interp = klt_python()
             if interp is None:
                 skipped.append(rel)
                 print(f"== SKIP  {rel}  (klt not found -- NOT RUN, not a pass)")
