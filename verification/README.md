@@ -31,10 +31,16 @@ The run exits 0 only if every cell passes (or is a documented known gap) and
 every negative control is caught. Exit 1 is a cell or control failure; exit 2 is
 a setup problem (no `klt`, PDK missing or off its pin, record dir exists).
 Each run writes a new `verification/records/<record-id>/` and never overwrites
-one. Re-check a committed record's input hashes with
-`python3 verification/run_regression.py --verify verification/records/<record-id>`
-(`klt drc|lvs --check`). Self-check of the harness itself, no `klt` or PDK
-needed: `python3 verification/test_run_regression.py`.
+one. Re-check a committed record with
+`python3 verification/run_regression.py --verify verification/records/<record-id>`:
+it re-checks every `drc`/`lvs` envelope with `klt --check` (exit 0 only when all
+match; see "Re-checking a record"). Self-check of the harness itself, no `klt`
+or PDK needed: `python3 verification/test_run_regression.py`. All self-tests
+(`verification/**/test_*.py`) run as one gate: `python3
+verification/run_selftests.py` (`pnpm run check:ci`) — it uses klt's
+interpreter for the GDS-reading suites, stays red if `klt` is absent, reports
+every unittest-skipped check in its summary, and goes red when a suite's
+checks all skip (a skipped check is not a run one).
 
 ## LEF view
 
@@ -154,8 +160,41 @@ flattened (`flatten_layout`, `flatten_reference`; klt reports
 `topology.flattened`), because klt names sub-cell nets only inside the sub-cell
 and `finfet_bulk` needs the rails on the top circuit
 (2AMLogic/klayout-tools#4514). That envelope is the evidence cited for item 4.
-The two files are derived and regenerated on every full run; a diff there means a
-cell changed.
+The two files are derived and regenerated on every full run; a diff there means
+a cell changed. The GDS is written with `gds2_write_timestamps = False`
+(the same deterministic options as the cell draw scripts), so its bytes are
+stable across runs and KLayout's write timestamp cannot manufacture a diff:
+the file is committed, and `--verify` re-checks it like any committed input.
+
+## Re-checking a record
+
+`--verify` walks a committed record's `drc.json`/`lvs.json` envelopes and runs
+`klt drc|lvs --check` on each: klt re-hashes the input files each envelope
+names and compares them with what was recorded. Every derived input an
+envelope names is regenerated first, from the committed sources, with the same
+constructors that produced the record — the `.work/` streams (`place`, cell
+extraction, control injections, the fault-CDL copies) and the library GDS and
+CDL — so their bytes reproduce exactly and the recorded hashes match again.
+The pinned `.pdk/` members are re-fetched from the tarball pin when missing or
+off their sha256. A committed input (a `layout/*.gds`, a `design/*.cdl`) is
+never rewritten: its drift is the signal the re-check exists to catch. Each
+output line names the envelopes whose inputs were regenerated
+(`[regen ...]`), so a pass is never silent about what was rebuilt.
+
+Exit 0 means every envelope in the record re-checked `ok`. Exit 1 means at
+least one drifted — a changed cell, a moved deck, a mutated reference — and is
+the expected result on records committed before the deterministic library GDS
+(their recorded hashes embed KLayout write timestamps); records are
+append-only, so they are stated drifted rather than rewritten. Exit 2 is a
+setup problem (an envelope names a derived path this harness cannot
+regenerate). Regenerating the derived inputs roughly doubles the runtime of
+the check loop: a full record is ~10-15 minutes sequential, and that is the
+documented cost of a re-check that covers every envelope rather than 7% of
+one. The negative controls for the re-check itself are in
+`verification/test_run_regression.py` (a mutated committed GDS and a
+re-derived-from-changed-source reference must both fail it) and were run
+against a real record; the transcript is committed beside it
+(`verify-transcript.md`).
 
 Control kinds: `drc_inject_box` (a box added on a layer; the named
 `expect_rule` must fire and must not fire on the clean cell), `lvs_nfin` (CDL

@@ -2,6 +2,9 @@
 
     python3 verification/test_normalize_paths.py
 
+All self-tests at once: python3 verification/run_selftests.py
+(pnpm run check:ci).
+
 Covers both entry points -- the CLI the shell flows call and the module API
 run_pex.py calls -- and the json.loads validity guard: a normalization that
 would leave the file unparsable must fail loudly, not get committed.
@@ -88,10 +91,22 @@ class FileAndCli(unittest.TestCase):
                          "scratch/sim/osdi/bsimcmg.osdi")
 
     def test_cli_rejects_a_relative_scratch_prefix(self):
+        f = self.tmp / "r.json"
+        f.write_text(SAMPLE)
         rc = subprocess.run([sys.executable, "-I", str(HERE / "normalize_paths.py"),
-                             "relative/prefix"], capture_output=True, text=True)
+                             "relative/prefix", str(f)], capture_output=True,
+                            text=True)
         self.assertEqual(rc.returncode, 2)
-        self.assertIn("absolute", rc.stderr)
+        self.assertIn("scratch prefix must be absolute", rc.stderr)
+
+    def test_cli_rejects_a_valueless_flag(self):
+        for argv in (["/tmp/p76r3", "x.json", "--repo"],
+                     ["/tmp/p76r3", "x.json", "--interpreter"],
+                     ["--repo"]):
+            rc = subprocess.run([sys.executable, "-I", str(HERE / "normalize_paths.py")]
+                                + argv, capture_output=True, text=True)
+            self.assertEqual(rc.returncode, 2, rc.stderr)
+            self.assertEqual(rc.stderr, npts.__doc__ + "\n")
 
     def test_cli_takes_the_wider_substitutions(self):
         f = self.tmp / "r.json"

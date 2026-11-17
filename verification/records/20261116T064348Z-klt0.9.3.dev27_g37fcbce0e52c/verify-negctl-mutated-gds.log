@@ -1,0 +1,3 @@
+regen verification/.work/INVx1_A7S_75t_R.case1-row.gds
+DRIFT ../../../../../../../tmp/issue156-nc1/INVx1_A7S_75t_R/cases/case1-row/drc.json [regen verification/.work/INVx1_A7S_75t_R.case1-row.gds]
+DRIFT ../../../../../../../tmp/issue156-nc1/INVx1_A7S_75t_R/drc.json

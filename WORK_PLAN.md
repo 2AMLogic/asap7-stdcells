@@ -9,6 +9,8 @@ region between the markers is machine-generated.
 Judge-approved PRs under a hold (`loom:blocked` or `loom:operator`) — only a human merge decision is missing.
 
 - **#145**: fix: correct drifted decision-record enumeration and item-9 klt pin in attested evidence
+- **#161**: fix(lef): emit a pin's own net M2 as port geometry, not obstruction
+- **#189**: chore(loom): resync installed Loom to v0.19.1302
 
 ## Very Important
 
@@ -26,49 +28,46 @@ Judge-approved PRs under a hold (`loom:blocked` or `loom:operator`) — only a h
 
 Human-approved issues ready for implementation (`loom:issue`).
 
-- **#139**: Docs: ROADMAP.md is on main but nothing links it
-- **#142**: Item 9 inventory does not content-hash klt_helper.py (nor check_lef.py / write_lef.py)
+- **#179**: check_gds_fresh.py: klt_python() crashes with UnicodeDecodeError instead of returning None when klt's first line is not UTF-8
+- **#186**: CI never runs run_merged, run_library or family_coverage either: three sibling gates still behind not args.only
+- **#188**: integration/negctl_par.txt records which pattern matched, not the line that matched
+- **#192**: verify(): derived_plan passes one repo-relative lib path, so --verify only resolves it from the repo root
 
 ## In Progress
 
 Issues currently being built (`loom:building`).
 
-- **#109**: Integration design: place and route counter8 with OpenROAD and record the run
-- **#120**: Docs: stale decision-record enumeration in spec/stdcells.md, and the declared 0.8.0 pin in t1-item9-inventory.json
 - **#129**: Collapse the package.json test/check alias chain onto one gate that runs all six self-test files
-- **#134**: Four rule ids left the unexercised list as incidental fires, with no targeted control to keep them there
-- **#136**: check_cdl_fresh.py --update can silently record a device-bearing cell as device-less
-- **#144**: Four harness/evidence scripts outside item 9 are unpinned, incl. item 2's own check command
 
 ## PRs Awaiting Review
 
 PRs waiting on Judge (`loom:review-requested`).
 
-- **#143**: build: run all six self-tests as one package.json gate
+_None._
 
 ## Approved (Awaiting Merge)
 
 PRs that passed review and are queued for Champion auto-merge (`loom:pr`).
 
-- **#123**: integration: record OpenROAD P&R of counter8 refusing at detailed_route
 - **#145**: fix: correct drifted decision-record enumeration and item-9 klt pin in attested evidence
-- **#148**: feat(verification): report incidentally-exercised rule ids, pin four select/WELL ids
+- **#161**: fix(lef): emit a pin's own net M2 as port geometry, not obstruction
+- **#189**: chore(loom): resync installed Loom to v0.19.1302
 
 ## Proposed
 
 Issues carrying `loom:curated`.
 
-- **#109**: Integration design: place and route counter8 with OpenROAD and record the run *(curated)*
 - **#120**: Docs: stale decision-record enumeration in spec/stdcells.md, and the declared 0.8.0 pin in t1-item9-inventory.json *(curated)*
-- **#134**: Four rule ids left the unexercised list as incidental fires, with no targeted control to keep them there *(curated)*
-- **#136**: check_cdl_fresh.py --update can silently record a device-bearing cell as device-less *(curated)*
-- **#139**: Docs: ROADMAP.md is on main but nothing links it *(curated)*
-- **#142**: Item 9 inventory does not content-hash klt_helper.py (nor check_lef.py / write_lef.py) *(curated)*
-- **#144**: Four harness/evidence scripts outside item 9 are unpinned, incl. item 2's own check command *(curated)*
+- **#122**: Library: several signal pins have no routable access point, so OpenROAD detailed routing cannot complete (DRT-0073) *(curated)*
+- **#179**: check_gds_fresh.py: klt_python() crashes with UnicodeDecodeError instead of returning None when klt's first line is not UTF-8 *(curated)*
+- **#186**: CI never runs run_merged, run_library or family_coverage either: three sibling gates still behind not args.only *(curated)*
+- **#188**: integration/negctl_par.txt records which pattern matched, not the line that matched *(curated)*
+- **#192**: verify(): derived_plan passes one repo-relative lib path, so --verify only resolves it from the repo root *(curated)*
 
 ## Proposed (Architect / Hermit)
 
 - **#133**: Drop the vendored design-evidence-tiers.md: a second, already-stale pin to klayout-tools that the pinned wheel already ships *(hermit)*
+- **#190**: Consolidate three copies of the klt-interpreter shebang resolver into one *(hermit)*
 
 ## Epics
 
@@ -78,14 +77,14 @@ _None._
 
 | Bucket | Count |
 |------|-------|
-| Operator merge-risk holds | 1 |
+| Operator merge-risk holds | 3 |
 | Very important | 1 |
 | Important | 1 |
-| Ready (`loom:issue`) | 2 |
-| In Progress (`loom:building`) | 6 |
-| PRs awaiting review | 1 |
+| Ready (`loom:issue`) | 4 |
+| In Progress (`loom:building`) | 1 |
+| PRs awaiting review | 0 |
 | Approved PRs awaiting merge | 3 |
-| Curated | 7 |
-| Architect / Hermit proposals | 1 |
+| Curated | 6 |
+| Architect / Hermit proposals | 2 |
 | Active epics | 0 |
 <!-- guide:plan-body:end -->

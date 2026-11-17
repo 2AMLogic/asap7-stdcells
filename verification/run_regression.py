@@ -39,6 +39,9 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 REPO = HERE.parent
 
+sys.path.insert(0, str(HERE))  # -I does not add the script dir
+from klt_interp import klt_python  # noqa: E402  (shared with design/)
+
 
 class SetupError(Exception):
     """Problem with the environment or inputs, not a cell verdict (exit 2)."""
@@ -64,20 +67,14 @@ class Klt:
         if exe is None:
             raise SetupError(f"`{klt}` not found on PATH (install klayout-tools, or pass --klt)")
         self.exe = exe
-        self.python = python or os.environ.get("KLT_PYTHON") or self._shebang(exe)
-
-    @staticmethod
-    def _shebang(exe):
-        with open(exe, "rb") as f:
-            first = f.readline().decode(errors="replace").strip()
-        if not first.startswith("#!"):
+        self.python = python or klt_python(exe)
+        if self.python is None:
             raise SetupError(f"cannot find klt's interpreter from {exe}; set KLT_PYTHON")
-        return first[2:].split()[0]
 
     def _helper(self, *args):
         # klt_helper.py runs under klt's own interpreter (the only place klayout
         # + the packaged deck are importable); the harness itself stays stdlib-only.
-        r = subprocess.run([self.python, "-I", str(HERE / "klt_helper.py"), *args], capture_output=True, text=True)
+        r = subprocess.run([self.python, "-I", str(HERE / "klt_helper.py"), *args], capture_output=True, text=True, cwd=REPO)
         if r.returncode != 0:
             raise SetupError(f"klt helper {args[0]} failed: {r.stderr.strip()}")
         return r.stdout
@@ -163,6 +160,12 @@ class Klt:
             return json.loads(r.stdout), r.stderr.strip()
         except ValueError:
             return None, (r.stderr.strip() or r.stdout.strip() or f"exit {r.returncode}")
+
+    def check(self, cmd, envelope):
+        """`klt <cmd> --check <envelope>`: 0 when the envelope's recorded hashes
+        match the files it names now, 3 (or nonzero) on drift."""
+        r = subprocess.run([self.exe, cmd, "--check", str(envelope)], capture_output=True, text=True, cwd=REPO)
+        return r.returncode
 
 
 def load_cells(path: Path):
@@ -603,13 +606,13 @@ def library_cdl(cells):
     return "\n".join(blocks) + f"\n.SUBCKT {LIBRARY_TOP} VDD VSS\n" + "\n".join(insts) + "\n.ENDS\n"
 
 
-def run_library(klt, cfg, out):
-    """Item-4 envelope form: one stream with every drawn cell in a row against the library CDL.
+def write_library_streams(klt, cfg):
+    """Write the derived library stream and CDL from the committed cells.
 
-    The stream and CDL are written to verification/library/ (derived, regenerated each run;
-    a diff there means a cell changed). Both sides are flattened (`flatten_layout`,
-    `flatten_reference`, disclosed by klt as `topology.flattened`), because klt names sub-cell
-    nets only inside the sub-cell and finfet_bulk needs VDD/VSS on the top circuit.
+    The stream and CDL are written to verification/library/ (derived, regenerated
+    each run; a diff there means a cell changed). Both are deterministic:
+    klt_helper.py writes the GDS with timestamps suppressed, so the bytes are
+    stable across runs and the files can be committed and re-hashed (issue #156).
     """
     cells = [c for c in cfg["cells"] if c["source"] == "drawn"]
     libdir = HERE / "library"
@@ -618,6 +621,18 @@ def run_library(klt, cfg, out):
     klt.place({c["name"]: REPO / c["gds"] for c in cells}, [[(c["name"], "R0") for c in cells]], gds,
               top=LIBRARY_TOP, rail_labels=True)
     cdl.write_text(library_cdl([c for c in cells if c.get("cdl")]))
+    return gds, cdl
+
+
+def run_library(klt, cfg, out):
+    """Item-4 envelope form: one stream with every drawn cell in a row against the library CDL.
+
+    Both sides are flattened (`flatten_layout`,
+    `flatten_reference`, disclosed by klt as `topology.flattened`), because klt names sub-cell
+    nets only inside the sub-cell and finfet_bulk needs VDD/VSS on the top circuit.
+    """
+    cells = [c for c in cfg["cells"] if c["source"] == "drawn"]
+    gds, cdl = write_library_streams(klt, cfg)
     request = lvs_request(gds, cdl, LIBRARY_TOP, {**cfg["lvs_options"], **LIBRARY_OPTIONS})
     env, err = run_one(klt, "lvs", request, out, "lvs")
     res = {"id": "library-lvs", "kind": "library_lvs", "result": verdict_lvs(env), "cells": [c["name"] for c in cells],
@@ -844,7 +859,7 @@ def run(args, klt=None):
         ok &= library["result"] == "PASS"
 
     lef = None
-    if not args.only and any(c["source"] == "drawn" for c in cfg["cells"]):
+    if any(c["source"] == "drawn" for c in cfg["cells"]):
         lef = klt.lef_check(work)  # a boundary redraw fails here until the LEF is regenerated
         ok &= lef["result"] == "PASS"
 
@@ -998,17 +1013,178 @@ def summary(m, rows):
     return "\n".join(lines) + "\n"
 
 
+def env_input_paths(env):
+    """The repo-relative input paths an envelope names: its layout stream and, for LVS, its reference netlist.
+
+    klt echoes these as `{path, scope}` objects (schema 4+); older envelopes
+    carry a plain string. This is the same set `klt --check` re-hashes, read
+    from the envelope so the re-check never depends on the request files.
+    """
+    out = []
+    for field in ("file", "layout", "reference"):
+        f = env.get(field)
+        if isinstance(f, dict) and f.get("path"):
+            out.append(f["path"])
+        elif isinstance(f, str) and f:
+            out.append(f)
+    return out
+
+
+def is_derived_input(path):
+    """True for a harness-written stream: never committed, always regenerable."""
+    return path.startswith(("verification/.work/", "verification/library/"))
+
+
+def derived_plan(klt, cfg, paths):
+    """Every derived stream the harness can write, keyed by repo-relative path.
+
+    Each value is a zero-arg callable that (re)writes that path from the
+    committed sources `cells.json` names, with the same row/case/control
+    constructors `run()` uses, so a regenerated stream is byte-for-byte the
+    stream that produced the record. `verify()` builds only the paths a
+    record's envelopes actually name; a path with no builder means the record
+    names something this harness cannot re-derive, which is a setup error,
+    never a silent skip.
+    """
+    plan = {}
+    by_name = {c["name"]: c for c in cfg["cells"]}
+    drawn_names = [c["name"] for c in cfg["cells"] if c["source"] == "drawn"]
+    drawn_libs = {n: REPO / by_name[n]["gds"] for n in drawn_names}
+    inv, tap = cfg.get("library_neighbour"), cfg.get("library_tap")
+    work = "verification/.work"
+
+    def place_into(out, libs, rows, top="CASE_TOP"):
+        return lambda: klt.place(libs, rows, REPO / out, top=top)
+
+    for cell in cfg["cells"]:
+        name = cell["name"]
+        extract = None
+        if cell["source"] != "drawn":
+            src, out = paths[cell["gds"]], f"{work}/{name}.gds"
+            extract = (lambda src=src, name=name, out=out: klt.extract(src, name, REPO / out))
+            plan[out] = extract
+        verdict = cell.get("abutment_verdict")
+        if verdict:  # decision 0007: the verdict path runs the cases once, with the 3x self row
+            nb = verdict["neighbour"]
+            gds = REPO / cell["gds"] if cell["source"] == "drawn" else f"{work}/{name}.gds"
+            libs = {name: gds, nb: cell_files(by_name[nb], paths)[0]}
+            cases = abutment_cases(name, nb)
+            cases = cases[:1] + [("case1-self-row", [[(name, "R0")] * 3])] + cases[1:]
+            for cid, rows in cases:
+                out = f"{work}/{name}.{cid}.gds"
+                if extract is None:
+                    plan[out] = place_into(out, libs, rows)
+                else:  # the placed stream abuts the cell's extracted stream: build that first
+                    plan[out] = (lambda out=out, rows=rows, libs=libs, extract=extract:
+                                 (extract(), klt.place(libs, rows, REPO / out)))
+        elif cell["source"] == "drawn":
+            nb = cell.get("neighbour", name)
+            libs = {name: REPO / cell["gds"], nb: cell_files(by_name[nb], paths)[0]}
+            for cid, rows in abutment_cases(name, nb):
+                out = f"{work}/{name}.{cid}.gds"
+                plan[out] = place_into(out, libs, rows)
+    if inv in drawn_libs and tap in drawn_libs:
+        for name in drawn_names:
+            for cid, (rows, _ids) in (("case2-pairs", pair_rows(name, drawn_names, inv)),
+                                      ("case4-ends", end_rows(name, tap))):
+                out = f"{work}/{name}.{cid}.gds"
+                plan[out] = place_into(out, drawn_libs, rows)
+        rows, _labels = merged_rows(drawn_names, inv, tap)
+        plan[f"{work}/LIBRARY_CASES.gds"] = place_into(f"{work}/LIBRARY_CASES.gds", drawn_libs, rows, top="LIBRARY_CASES")
+        for member in (f"verification/library/{LIBRARY_TOP}.gds", f"verification/library/{LIBRARY_TOP}.cdl"):
+            plan[member] = (lambda: write_library_streams(klt, cfg))
+    for ctl in expand_controls(cfg):
+        base = by_name[ctl["base_cell"]]
+        base_gds, base_cdl = cell_files(base, paths)
+        kind, cid, cell = ctl["kind"], ctl["id"], ctl["base_cell"]
+        if kind == "drc_inject_box":
+            out = f"{work}/{cell}.{cid}.gds"
+            plan[out] = (lambda out=out, base_gds=base_gds, cell=cell, ctl=ctl:
+                         klt.extract(base_gds, cell, REPO / out, inject_spec(ctl)))
+        elif kind == "drc_abutted":
+            out, placed = f"{work}/{cell}.{cid}.gds", f"{work}/{cell}.{cid}.placed.gds"
+
+            def build_abutted(out=out, placed=placed, base_gds=base_gds, cell=cell, ctl=ctl):
+                klt.extract(base_gds, cell, REPO / out, inject_spec(ctl))
+                klt.place({cell: REPO / out}, [[(cell, "R0")] * 3], REPO / placed)
+
+            plan[placed] = plan[out] = build_abutted
+        elif kind == "grid_offset":
+            pass  # writes checks.json only: no drc/lvs envelope names a stream of it
+        elif kind == "lvs_fault":
+            out = f"{work}/{cid}.cdl"
+            plan[out] = (lambda out=out, base_cdl=base_cdl, cell=cell, ctl=ctl:
+                         (REPO / out).write_text(fault_cdl(base_cdl, cell, ctl["variant"])))
+        else:  # lvs_nfin and any other extract + wrong-nfin CDL control (run()'s else branch)
+            out, cdl = f"{work}/{cell}.{cid}.gds", f"{work}/{cid}.cdl"
+
+            def build_nfin(out=out, cdl=cdl, base_gds=base_gds, base_cdl=base_cdl, cell=cell, ctl=ctl):
+                klt.extract(base_gds, cell, REPO / out)
+                (REPO / cdl).write_text(wrong_nfin_cdl(base_cdl, cell, ctl["nfin_delta"]))
+
+            plan[out] = plan[cdl] = build_nfin
+    return plan
+
+
 def verify(args, klt=None):
-    """Re-check a committed record with `klt drc|lvs --check` (hash drift only)."""
+    """Re-check a committed record with `klt drc|lvs --check` (hash drift only).
+
+    Every derived input an envelope names -- a stream under verification/.work/
+    or the library GDS/CDL -- is first regenerated from the committed sources
+    the record cites, with the same constructors that produced it (they write
+    deterministic bytes; see klt_helper.py's `save_opts`), and the pinned
+    .pdk/ members are re-fetched when missing or off their sha256 pin. A
+    committed input is never rewritten: its drift is the signal this re-check
+    exists to catch (issue #156). Regeneration roughly doubles the runtime of
+    the check loop itself; each envelope names what was regenerated for it.
+    """
     klt = klt or Klt(args.klt)
-    bad = 0
-    for env in sorted(Path(args.verify).rglob("*.json")):
+    record = Path(args.verify)
+    envs = []
+    for env in sorted(record.rglob("*.json")):
         cmd = env.name.split(".")[0]
         if cmd not in ("drc", "lvs") or env.name.endswith(".request.json"):
             continue
-        r = subprocess.run([klt.exe, cmd, "--check", str(env)], capture_output=True, text=True, cwd=REPO)
-        print(f"{'ok   ' if r.returncode == 0 else 'DRIFT'} {rel(env)}")
-        bad += r.returncode != 0
+        try:
+            obj = json.loads(env.read_text())
+        except (OSError, ValueError) as e:
+            raise SetupError(f"cannot read envelope {rel(env)}: {e}")
+        envs.append((cmd, env, obj))
+    if not envs:
+        print(f"no drc/lvs envelopes under {rel(record)}; nothing re-checked")
+        return 0
+    needed = {}
+    for _cmd, _env, obj in envs:
+        for p in env_input_paths(obj):
+            needed.setdefault(p, []).append(_env)
+    regen = {}
+    if any(p.startswith("verification/.pdk/") for p in needed):
+        cfg = load_cells(Path(args.cells))
+        pdk = HERE / ".pdk"
+        pin = pdk_paths(cfg, pdk)
+        if any(not pin[k].is_file() or sha256_file(pin[k]) != spec["sha256"]
+               for k, spec in cfg["pdk"]["files"].items()):
+            fetch_pdk(cfg, pdk)
+    derived = sorted(p for p in needed if is_derived_input(p))
+    if derived:
+        cfg = load_cells(Path(args.cells))
+        plan = derived_plan(klt, cfg, pdk_paths(cfg, HERE / ".pdk"))
+        (HERE / ".work").mkdir(exist_ok=True)
+        for p in derived:
+            build = plan.get(p)
+            if build is None:
+                raise SetupError(f"{p} is derived but this harness cannot regenerate it "
+                                 f"(named by {rel(needed[p][0])}); refusing to check against a stale copy")
+            build()
+            regen[p] = True
+            print(f"regen {p}")
+    bad = 0
+    for cmd, env, obj in envs:
+        rc = klt.check(cmd, env)
+        hit = sorted(p for p in env_input_paths(obj) if p in regen)
+        note = f" [regen {', '.join(hit)}]" if hit else ""
+        print(f"{'ok   ' if rc == 0 else 'DRIFT'} {rel(env)}{note}")
+        bad += rc != 0
     return 1 if bad else 0
 
 

@@ -15,7 +15,7 @@
         "check": "stream_readable",
         "role": "layout",
         "passed": true,
-        "content_hash": "sha256:bf619dcce132b568d08c94951199f6f08720d842ef11c1a09404ff0357c9cba4"
+        "content_hash": "sha256:1892ba42190105f194d98fe3dbaa04b110886c06f78a75f53524fe958cbc130a"
       },
       {
         "check": "top_cell_non_empty",
@@ -56,7 +56,7 @@
   },
   "provenance": {
     "klt_version": "0.9.0",
-    "klayout_version": "0.30.12",
+    "klayout_version": "0.30.13",
     "pdk": null,
     "deck": null,
     "input": {
@@ -64,7 +64,7 @@
         "path": "verification/library/A7S_75t_R_LIBRARY.gds",
         "scope": "repo"
       },
-      "content_hash": "sha256:bf619dcce132b568d08c94951199f6f08720d842ef11c1a09404ff0357c9cba4"
+      "content_hash": "sha256:1892ba42190105f194d98fe3dbaa04b110886c06f78a75f53524fe958cbc130a"
     }
   }
 }

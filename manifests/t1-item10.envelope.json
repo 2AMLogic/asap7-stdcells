@@ -3,21 +3,21 @@
   "kind": "generic",
   "status": "pass",
   "t1_item": 10,
-  "summary": "T1 item 10 (Repo hygiene): 13/13 attestation checks passed (klt signoff --attest)",
+  "summary": "T1 item 10 (Repo hygiene): 16/16 attestation checks passed (klt signoff --attest)",
   "source": "manifests/t1-item10-inventory.json",
   "attestation": {
     "producer": "klt signoff --attest",
     "inventory_schema_version": 1,
     "hash_algorithm": "sha256-raw-bytes",
-    "check_count": 13,
-    "passed_count": 13,
+    "check_count": 16,
+    "passed_count": 16,
     "checks": [
       {
         "check": "present",
         "role": "hygiene",
         "path": ".github/workflows/signoff.yml",
         "passed": true,
-        "content_hash": "sha256:f54622e0d5cfcd119ae68285ae09b1f5b3f0a94b320725bf88d08561ae3be1ee"
+        "content_hash": "sha256:eb98db22382b22d04fc30b8d59584d2d8d6d09e6a9f2d900a32b007196cbb1c0"
       },
       {
         "check": "present",
@@ -31,14 +31,14 @@
         "role": "hygiene",
         "path": "README.md",
         "passed": true,
-        "content_hash": "sha256:ce57e98b1b1abb55cb252bd39778c3c09f284f363ec988887ac935969a28d024"
+        "content_hash": "sha256:d4ad991619b62b99144044aba7c0476234a339562dbb43bf79a780c567878852"
       },
       {
         "check": "present",
         "role": "hygiene",
         "path": "design/check_gds_fresh.py",
         "passed": true,
-        "content_hash": "sha256:21bda68f8d7eaeb2885c9e1dc56214b7491e32d84b91f656cc1a848f90590ab1"
+        "content_hash": "sha256:c01dc69730d77cff8a55b4fbc10822ed53cc180c88a4038510da75773ab7a58f"
       },
       {
         "check": "present",
@@ -97,6 +97,27 @@
         "content_hash": "sha256:7f1373ed1ecd4dfd0161c04482de3ae05761c72a4a44abba25f082cab2df4947"
       },
       {
+        "check": "present",
+        "role": "hygiene",
+        "path": "verification/check_family_gate_negctl.py",
+        "passed": true,
+        "content_hash": "sha256:b4ee3edb9a1b93115e578a615d632c3268fffa972124a831f829e7374f0bb950"
+      },
+      {
+        "check": "present",
+        "role": "hygiene",
+        "path": "verification/check_tier_floor.py",
+        "passed": true,
+        "content_hash": "sha256:d94194a8227bd2237a2079e21556ce4dc5c4104e42b316e75f1b2f5ba0132aa2"
+      },
+      {
+        "check": "present",
+        "role": "hygiene",
+        "path": "verification/check_tier_floor_negctl.py",
+        "passed": true,
+        "content_hash": "sha256:0c1111d9ad617f9081f2c6169b106253bda31a73aa511149c81fdcbb0b9775c0"
+      },
+      {
         "check": "command",
         "role": "audit",
         "name": "harness-self-check",
@@ -120,7 +141,7 @@
         "path": "manifests/t1-item10-inventory.json",
         "scope": "repo"
       },
-      "content_hash": "sha256:d953e71ba67c075b2ce57bec91e557564a908d5c66e14a2efb73f4ab0f28df05"
+      "content_hash": "sha256:90b5f26c0c6130e807da4b5301de6b5ef5f40cc64b33d7014177001293373dfe"
     }
   }
 }
