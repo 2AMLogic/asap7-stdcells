@@ -45,12 +45,12 @@ jobs:
         run: |
           set -uo pipefail
           # Exit 0 = every discovered suite ran and passed; 1 = a suite failed;
-          # 3 = a suite could not run because its interpreter is missing. klt is
-          # installed in the step above, so 3 means CI itself is broken, not
-          # that the suites are fine -- a check that cannot run must not look
-          # like one that passed (.loom/docs/ci-principles.md). A bare run:
-          # fails the job on both, which is the intended behaviour: do not
-          # special-case 3.
+          # 3 = a suite could not run -- interpreter missing, no test report,
+          # or every check skipped (#205). klt is installed in the step above,
+          # so 3 means CI itself is broken, not that the suites are fine -- a
+          # check that cannot run must not look like one that passed
+          # (.loom/docs/ci-principles.md). A bare run: fails the job on both,
+          # which is the intended behaviour: do not special-case 3.
           python3 verification/run_selftests.py
 
       - name: Install KLayout (klt DRC runs the system klayout binary)

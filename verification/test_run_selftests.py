@@ -5,13 +5,22 @@
 All self-tests at once: python3 verification/run_selftests.py
 (pnpm run check:ci).
 
-Runs offline under plain python3: every case is a string fixture fed to the
-pure classifier or the pure flag derivation -- no subprocess, no klt. Pins
-the #169 contract: a suite whose checks all skip is NOT RUN (never PASS), a
-partial skip stays green but is counted, and a docstring that pins flags in
-a form the derivation cannot parse is an error, not a silent plain run.
+Runs offline under plain python3: the classifier and flag-derivation cases
+are string fixtures, and the gate-summary cases run throwaway one-file
+suites in a temp tree -- never klt. Pins the #169 contract: a suite whose
+checks all skip is NOT RUN (never PASS), a partial skip stays green but is
+counted, and a docstring that pins flags in a form the derivation cannot
+parse is an error, not a silent plain run. Pins the #207 contract too:
+the skipped count comes from unittest's OK/FAILED tail only -- a stray
+`skipped=` token elsewhere in the output cannot impersonate it -- and a
+suite whose checks never ran is counted out of the summary's
+`N/M suites ran` numerator.
 """
+import contextlib
+import io
+import shutil
 import sys
+import tempfile
 import unittest
 from pathlib import Path
 
@@ -67,6 +76,21 @@ class Classify(unittest.TestCase):
     def test_skip_count_without_a_report_is_not_run(self):
         self.assertEqual(rs.classify(0, "OK (skipped=3)"), ("NOT RUN", 0, 3))
 
+    def test_stray_skipped_token_before_the_tail_does_not_win(self):
+        # #207: a future suite that prints `skipped=<n>` in its own output
+        # (a diagnostic line, a captured fixture) must not be parsed as the
+        # summary count -- an all-skipped suite must not read as PASS.
+        out = "diag: cache skipped=0 entries\n" + report(2, skipped=2)
+        self.assertEqual(rs.classify(0, out), ("NOT RUN", 0, 2))
+
+    def test_stray_skipped_token_with_a_clean_tail_is_ignored(self):
+        out = "diag: cache skipped=9 entries\n" + report(3)
+        self.assertEqual(rs.classify(0, out), ("PASS", 3, 0))
+
+    def test_stray_skipped_token_with_a_failing_tail_counts_only_the_tail(self):
+        out = "diag: cache skipped=9 entries\n" + report(5, skipped=2, failures=1)
+        self.assertEqual(rs.classify(1, out), ("FAIL", 3, 2))
+
 
 class DocstringFlags(unittest.TestCase):
     def test_real_suites_match_their_documented_invocations(self):
@@ -76,6 +100,7 @@ class DocstringFlags(unittest.TestCase):
         expect = {
             "verification/test_normalize_paths.py": [],
             "verification/test_run_regression.py": [],
+            "verification/test_klt_interp.py": [],
             "verification/characterization/test_characterization.py": [],
             "verification/corners/test_corners.py": [],
             "verification/corners/test_logic_table.py": ["-I"],
@@ -84,6 +109,21 @@ class DocstringFlags(unittest.TestCase):
         }
         for rel, flags in expect.items():
             self.assertEqual(rs.suite_flags(rel), flags, rel)
+
+    def test_every_discovered_non_klt_suite_has_derivable_flags(self):
+        # #207: the expect dict above is hand-maintained -- a newly landed
+        # suite gets no entry until someone edits it, and test_klt_interp.py
+        # (landed after the dict was written) is exactly that drift. Walk the
+        # gate's own discovery glob so every discovered non-klt suite, today's
+        # and any future one, must at least have derivable docstring flags.
+        for path in sorted(
+            rs.REPO.glob("verification/**/test_*.py"),
+            key=lambda p: p.relative_to(rs.REPO).as_posix(),
+        ):
+            rel = path.relative_to(rs.REPO).as_posix()
+            if rel in rs.KLT_INTERPRETER:
+                continue
+            rs.suite_flags(rel)  # a ValueError here fails the test
 
     def test_plain_invocation(self):
         doc = "\n".join(
@@ -152,6 +192,89 @@ class DocstringFlags(unittest.TestCase):
         self.assertEqual(
             rs.docstring_flags("verification/test_x.py", "No invocation here."), []
         )
+
+
+class GateSummary(unittest.TestCase):
+    """main() end-to-end on a throwaway temp tree (no klt).
+
+    The #207 numerator bug lives in main()'s tally, not in a pure helper,
+    so these run the real gate over fake one-file suites and read the
+    summary it prints.
+    """
+
+    SUITE_OK = (
+        '"""    python3 verification/test_ok.py\n'
+        '"""\n'
+        "import unittest\n"
+        "\n"
+        "\n"
+        "class T(unittest.TestCase):\n"
+        "    def test_x(self):\n"
+        "        self.assertTrue(True)\n"
+        "\n"
+        "\n"
+        'if __name__ == "__main__":\n'
+        "    unittest.main()\n"
+    )
+    SUITE_NORUN = (
+        '"""    python3 verification/test_norun.py\n'
+        '"""\n'
+        'print("exits 0 with no unittest report")\n'
+    )
+    SUITE_BADDOC = (
+        '"""Run me as: python3 -I verification/test_baddoc.py with'
+        ' cwd=repo"""\n'
+    )
+
+    def run_gate(self, suites):
+        """Write `suites` ({rel: body}) into a temp tree, run rs.main().
+
+        Returns (exit_code, captured stdout); rs.REPO is patched for the
+        duration and restored afterwards.
+        """
+        with tempfile.TemporaryDirectory() as tmp:
+            for rel, body in suites.items():
+                path = Path(tmp) / rel
+                path.parent.mkdir(parents=True, exist_ok=True)
+                path.write_text(body)
+            old = rs.REPO
+            rs.REPO = Path(tmp)
+            try:
+                buf = io.StringIO()
+                with contextlib.redirect_stdout(buf):
+                    rc = rs.main()
+            finally:
+                rs.REPO = old
+            shutil.rmtree(tmp, ignore_errors=True)
+            return rc, buf.getvalue()
+
+    def test_suite_that_never_ran_is_counted_out_of_the_numerator(self):
+        # #207: a docstring-FAIL suite and a no-report suite both executed
+        # zero checks; the summary must not print `N/N suites ran` for them.
+        rc, out = self.run_gate(
+            {
+                "verification/test_ok.py": self.SUITE_OK,
+                "verification/test_norun.py": self.SUITE_NORUN,
+                "verification/test_baddoc.py": self.SUITE_BADDOC,
+            }
+        )
+        self.assertIn("1/3 suites ran, 1 failed, 2 could not run", out)
+        self.assertEqual(rc, 1)  # docstring-FAIL keeps exit 1, not 3
+
+    def test_not_run_suite_keeps_exit_3_and_the_numerator_honest(self):
+        rc, out = self.run_gate(
+            {
+                "verification/test_ok.py": self.SUITE_OK,
+                "verification/test_norun.py": self.SUITE_NORUN,
+            }
+        )
+        self.assertIn("1/2 suites ran, 0 failed, 1 could not run", out)
+        self.assertEqual(rc, 3)
+
+    def test_all_passing_tree_counts_cleanly(self):
+        rc, out = self.run_gate({"verification/test_ok.py": self.SUITE_OK})
+        self.assertIn("1/1 suites ran, 0 failed, 0 could not run", out)
+        self.assertEqual(rc, 0)
 
 
 if __name__ == "__main__":
