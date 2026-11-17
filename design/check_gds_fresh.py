@@ -17,32 +17,14 @@ design/check_gds_fresh_negctl.py uses it to run the checker on broken copies.
 """
 import argparse
 import pathlib
-import shutil
 import subprocess
 import sys
 import tempfile
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 
-
-def klt_python():
-    """The interpreter klt runs under, from its shebang (None if unresolvable)."""
-    klt = shutil.which("klt")
-    if not klt:
-        return None
-    try:
-        with open(klt, encoding="utf-8") as f:
-            first = f.readline().strip()
-    except (OSError, UnicodeDecodeError):
-        return None
-    if not first.startswith("#!"):
-        return None
-    parts = first[2:].strip().split()
-    if not parts:
-        return None
-    if pathlib.Path(parts[0]).name == "env" and len(parts) > 1:
-        return shutil.which(parts[1])
-    return parts[0]
+sys.path.insert(0, str(ROOT / "verification"))
+from klt_interp import klt_python  # noqa: E402  (shared with verification/; -I does not add the script dir)
 
 
 def redraw_interpreter():

@@ -38,7 +38,7 @@
         "role": "hygiene",
         "path": "design/check_gds_fresh.py",
         "passed": true,
-        "content_hash": "sha256:6d4d00564c02759d92fbe18e11112f5900b530001e5d1648c9d5a523dbfbd57b"
+        "content_hash": "sha256:c01dc69730d77cff8a55b4fbc10822ed53cc180c88a4038510da75773ab7a58f"
       },
       {
         "check": "present",

@@ -28,7 +28,7 @@
     },
     "9": {
       "file": "manifests/t1-item9.envelope.json",
-      "content_hash": "sha256:45c35e4fd520c3a0cec51d6b29d1c27bc2a9b428a7c3777b2d50e84ee67d9357"
+      "content_hash": "sha256:de0121c36763a122fe5651738ba6740d184b10f1c600da258c3f56be0880a337"
     },
     "10": {
       "file": "manifests/t1-item10.envelope.json",

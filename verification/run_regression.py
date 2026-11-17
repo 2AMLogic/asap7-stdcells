@@ -39,6 +39,9 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 REPO = HERE.parent
 
+sys.path.insert(0, str(HERE))  # -I does not add the script dir
+from klt_interp import klt_python  # noqa: E402  (shared with design/)
+
 
 class SetupError(Exception):
     """Problem with the environment or inputs, not a cell verdict (exit 2)."""
@@ -64,15 +67,9 @@ class Klt:
         if exe is None:
             raise SetupError(f"`{klt}` not found on PATH (install klayout-tools, or pass --klt)")
         self.exe = exe
-        self.python = python or os.environ.get("KLT_PYTHON") or self._shebang(exe)
-
-    @staticmethod
-    def _shebang(exe):
-        with open(exe, "rb") as f:
-            first = f.readline().decode(errors="replace").strip()
-        if not first.startswith("#!"):
+        self.python = python or klt_python(exe)
+        if self.python is None:
             raise SetupError(f"cannot find klt's interpreter from {exe}; set KLT_PYTHON")
-        return first[2:].split()[0]
 
     def _helper(self, *args):
         # klt_helper.py runs under klt's own interpreter (the only place klayout
