@@ -74,7 +74,7 @@ class Klt:
     def _helper(self, *args):
         # klt_helper.py runs under klt's own interpreter (the only place klayout
         # + the packaged deck are importable); the harness itself stays stdlib-only.
-        r = subprocess.run([self.python, "-I", str(HERE / "klt_helper.py"), *args], capture_output=True, text=True)
+        r = subprocess.run([self.python, "-I", str(HERE / "klt_helper.py"), *args], capture_output=True, text=True, cwd=REPO)
         if r.returncode != 0:
             raise SetupError(f"klt helper {args[0]} failed: {r.stderr.strip()}")
         return r.stdout
