@@ -5,6 +5,8 @@ triage role. Newest first.
 
 ### 2026-11-17
 
+- **PR #218**: test(par): quote the first matched output line in negative-control PASS records
+- **Issue #188** (closed): integration/negctl_par.txt records which pattern matched, not the line that matched
 - **PR #216**: chore(loom): resync installed Loom to v0.19.1306
 - **PR #212**: fix: pin Klt._helper subprocess cwd to the repo root
 - **PR #215**: test: pin the selftest expect dict's coverage to every discovered non-klt suite
