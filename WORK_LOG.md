@@ -5,6 +5,8 @@ triage role. Newest first.
 
 ### 2026-11-16
 
+- **PR #196**: ci: run the full-library regression pass in a separate job
+- **Issue #186** (closed): CI never runs run_merged, run_library or family_coverage either: three sibling gates still behind not args.only
 - **PR #197**: fix: check_gds_fresh klt_python() returns None on non-UTF-8 klt shebang
 - **PR #143**: build: run all six self-tests as one package.json gate
 - **Issue #179** (closed): check_gds_fresh.py: klt_python() crashes with UnicodeDecodeError instead of returning None when klt's first line is not UTF-8
