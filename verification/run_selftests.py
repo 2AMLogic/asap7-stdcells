@@ -39,10 +39,11 @@ Its own self-test: verification/test_run_selftests.py (offline, no klt).
 
 import ast
 import re
-import shutil
 import subprocess
 import sys
 from pathlib import Path
+
+from klt_interp import klt_python
 
 REPO = Path(__file__).resolve().parent.parent
 
@@ -119,17 +120,6 @@ def suite_flags(rel):
     return docstring_flags(rel, ast.get_docstring(tree) or "")
 
 
-def klt_interpreter():
-    """The python that runs klt (its shebang), or None if klt is absent."""
-    klt = shutil.which("klt")
-    if klt is None:
-        return None
-    with open(klt, "rb") as fh:
-        shebang = fh.readline().decode()
-    interp = shebang.removeprefix("#!").strip()
-    return interp or None
-
-
 def declared_checks(path):
     """Approximate number of checks in a suite that could not run."""
     return len(re.findall(r"(?m)^\s*def test_", path.read_text()))
@@ -142,7 +132,11 @@ def run_suite(rel, cmd, label):
     None when the suite could not run -- no test report, or every check
     skipped. Either way it is not a pass and the gate stays red.
     """
-    proc = subprocess.run(cmd, cwd=REPO, capture_output=True, text=True)
+    try:
+        proc = subprocess.run(cmd, cwd=REPO, capture_output=True, text=True)
+    except OSError as e:
+        print(f"== FAIL  {rel}  (interpreter {cmd[0]!r} did not run: {e})")
+        return 1
     out = proc.stdout + proc.stderr
     verdict, ran, n_skipped = classify(proc.returncode, out)
     if verdict == "NOT RUN":
@@ -184,7 +178,7 @@ def main():
     for path in suites:
         rel = path.relative_to(REPO).as_posix()
         if rel in KLT_INTERPRETER:
-            interp = klt_interpreter()
+            interp = klt_python()
             if interp is None:
                 skipped.append(rel)
                 print(f"== SKIP  {rel}  (klt not found -- NOT RUN, not a pass)")
