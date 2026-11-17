@@ -136,15 +136,17 @@ def declared_checks(path):
 def run_suite(rel, cmd, label):
     """Run one suite; quiet when it passes, full output when it fails.
 
-    Returns (exit_code, ran, skipped): exit_code is the subprocess's, or
-    None when the suite could not run -- no test report, or every check
-    skipped. Either way it is not a pass and the gate stays red.
+    Returns (exit_code, ran, skipped) from every path: exit_code is the
+    subprocess's, or None when the suite could not run -- no test report,
+    or every check skipped. An interpreter that fails to start (OSError)
+    returns (1, 0, 0): it executed zero checks and the suite is filed
+    under failures. Either way it is not a pass and the gate stays red.
     """
     try:
         proc = subprocess.run(cmd, cwd=REPO, capture_output=True, text=True)
     except OSError as e:
         print(f"== FAIL  {rel}  (interpreter {cmd[0]!r} did not run: {e})")
-        return 1
+        return 1, 0, 0
     out = proc.stdout + proc.stderr
     verdict, ran, n_skipped = classify(proc.returncode, out)
     if verdict == "NOT RUN":
