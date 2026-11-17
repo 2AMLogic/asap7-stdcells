@@ -7,6 +7,8 @@
     "verification/run_regression.py",
     "verification/test_run_regression.py",
     "verification/klt_helper.py",
+    "verification/klt_interp.py",
+    "verification/test_klt_interp.py",
     "verification/check_lef.py",
     "design/write_lef.py",
     "verification/cells.json",
