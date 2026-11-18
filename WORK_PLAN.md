@@ -33,13 +33,13 @@ _None._
 
 Issues currently being built (`loom:building`).
 
-- **#200**: full-regression is not in the required-status-checks ruleset, so the forge does not enforce it
+- **#222**: full-regression is skipped, not run, when its path-gate job itself fails
 
 ## PRs Awaiting Review
 
 PRs waiting on Judge (`loom:review-requested`).
 
-- **#220**: ci: path-gate full-regression on PRs to its actual inputs
+- **#225**: ci: run full-regression when its gate job fails, not skip it
 
 ## Approved (Awaiting Merge)
 
@@ -54,7 +54,7 @@ Issues carrying `loom:curated`.
 
 - **#120**: Docs: stale decision-record enumeration in spec/stdcells.md, and the declared 0.8.0 pin in t1-item9-inventory.json *(curated)*
 - **#122**: Library: several signal pins have no routable access point, so OpenROAD detailed routing cannot complete (DRT-0073) *(curated)*
-- **#200**: full-regression is not in the required-status-checks ruleset, so the forge does not enforce it *(curated)*
+- **#222**: full-regression is skipped, not run, when its path-gate job itself fails *(curated)*
 
 ## Proposed (Architect / Hermit)
 
