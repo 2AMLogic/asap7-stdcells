@@ -5,6 +5,8 @@ triage role. Newest first.
 
 ### 2026-11-18
 
+- **PR #230**: ci: run the signoff workflow on merge_group
+- **Issue #228** (closed): Merge queue: add the merge_group trigger and adapt the PR-metadata gates
 - **PR #225**: ci: run full-regression when its gate job fails, not skip it
 - **Issue #222** (closed): full-regression is skipped, not run, when its path-gate job itself fails
 - **PR #224**: docs: list docs/ in README repo layout, refresh t1-item10 envelope
