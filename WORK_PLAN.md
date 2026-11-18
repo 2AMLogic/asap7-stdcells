@@ -33,20 +33,20 @@ _None._
 
 Issues currently being built (`loom:building`).
 
-- **#222**: full-regression is skipped, not run, when its path-gate job itself fails
+- **#228**: Merge queue: add the merge_group trigger and adapt the PR-metadata gates
 
 ## PRs Awaiting Review
 
 PRs waiting on Judge (`loom:review-requested`).
 
-- **#225**: ci: run full-regression when its gate job fails, not skip it
+_None._
 
 ## Approved (Awaiting Merge)
 
 PRs that passed review and are queued for Champion auto-merge (`loom:pr`).
 
-- **#145**: fix: correct drifted decision-record enumeration and item-9 klt pin in attested evidence
-- **#161**: fix(lef): emit a pin's own net M2 as port geometry, not obstruction
+- **#145**: fix: correct drifted decision-record enumeration and item-9 klt pin in attested evidence — closes #120
+- **#161**: fix(lef): emit a pin's own net M2 as port geometry, not obstruction — closes #122
 
 ## Proposed
 
@@ -54,7 +54,7 @@ Issues carrying `loom:curated`.
 
 - **#120**: Docs: stale decision-record enumeration in spec/stdcells.md, and the declared 0.8.0 pin in t1-item9-inventory.json *(curated)*
 - **#122**: Library: several signal pins have no routable access point, so OpenROAD detailed routing cannot complete (DRT-0073) *(curated)*
-- **#222**: full-regression is skipped, not run, when its path-gate job itself fails *(curated)*
+- **#228**: Merge queue: add the merge_group trigger and adapt the PR-metadata gates *(curated)*
 
 ## Proposed (Architect / Hermit)
 
@@ -73,7 +73,7 @@ _None._
 | Important | 1 |
 | Ready (`loom:issue`) | 0 |
 | In Progress (`loom:building`) | 1 |
-| PRs awaiting review | 1 |
+| PRs awaiting review | 0 |
 | Approved PRs awaiting merge | 2 |
 | Curated | 3 |
 | Architect / Hermit proposals | 1 |
