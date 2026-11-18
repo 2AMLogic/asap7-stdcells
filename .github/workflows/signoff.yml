@@ -213,6 +213,68 @@ jobs:
           python3 -I verification/check_tier_floor.py \
               manifests/asap7-stdcells.signoff.json
 
+  # Gate for the full-regression job below: on a pull_request, the ~30 min
+  # full-library pass runs only when the diff touches an input it actually
+  # reads. Operator ruling (2026-11-17, round 20261116-r15, q101): the job
+  # stays advisory (not enrolled in the required-status-checks ruleset), so a
+  # PR-side filter cannot suppress a required check -- `signoff` above stays
+  # unconditional -- while push to main and workflow_dispatch always run
+  # full-regression unfiltered. The gate fails open (any failure computing
+  # the diff runs the job) and a skip is loud, never a silent pass
+  # (docs/ci.md, "full-regression is advisory by design").
+  full-regression-inputs:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      run: ${{ steps.filter.outputs.run }}
+    steps:
+      - uses: actions/checkout@v4
+        if: github.event_name == 'pull_request'
+        with:
+          # The three-dot diff against the PR base needs full history.
+          fetch-depth: 0
+
+      - id: filter
+        env:
+          EVENT: ${{ github.event_name }}
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        run: |
+          set -uo pipefail
+          # push to main and workflow_dispatch are never filtered: the tip is
+          # always fully verified (ci-principles.md rule 3).
+          if [ "$EVENT" != "pull_request" ]; then
+            echo "run=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          # Fail open: a diff that cannot be computed runs the job.
+          if [ -z "$BASE_SHA" ] || \
+             ! changed="$(git diff --name-only "$BASE_SHA...$GITHUB_SHA")"; then
+            echo "::warning::full-regression path gate: could not compute the PR diff; running full-regression unfiltered (fail-open)"
+            echo "run=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          echo "Changed files:"
+          printf '%s\n' "$changed"
+          # Inputs the full-library pass reads at run time, traced against the
+          # harness: run_regression.py and its helpers under verification/
+          # (minus its records/ output tree and prose), the drawn cells'
+          # layout stream and their CDL / draw-script sources (layout/,
+          # design/), and this workflow. It reads no manifests/ or spec/ file:
+          # those back the signoff job above; spec/stdcells.md is cited in the
+          # report text but never opened. Docs-only PRs skip.
+          matched="$(printf '%s\n' "$changed" \
+            | grep -E -e '^\.github/workflows/signoff\.yml$' \
+                      -e '^design/' -e '^layout/' -e '^verification/' \
+            | grep -v -e '\.md$' -e '^verification/records/' || true)"
+          if [ -n "$matched" ]; then
+            echo "Regression inputs changed:"
+            printf '%s\n' "$matched"
+            echo "run=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "::notice::skipped by path filter: no regression inputs changed"
+            echo "run=false" >> "$GITHUB_OUTPUT"
+          fi
+
   # The signoff job above runs run_regression.py with --only (a single-cell
   # cold start), and run_regression.py skips run_merged, run_library and the
   # family_coverage assertion under --only. This job runs the full-library pass
@@ -220,7 +282,11 @@ jobs:
   # measured 25 min 15 s locally (klt 0.9.0, 28 cells), over the 15 min budget
   # of the job above. The checkout is its own, so the library stream the pass
   # regenerates cannot touch what T1 item 2 attests in the job above.
+  # PR-only path gate: needs full-regression-inputs above; push to main and
+  # workflow_dispatch bypass it (first clause of the if).
   full-regression:
+    needs: full-regression-inputs
+    if: ${{ github.event_name != 'pull_request' || needs.full-regression-inputs.outputs.run == 'true' }}
     runs-on: ubuntu-latest
     timeout-minutes: 75
     steps:
