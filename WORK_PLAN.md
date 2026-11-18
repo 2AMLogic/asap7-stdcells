@@ -4,6 +4,7 @@ Roadmap generated from GitHub label state by the Guide triage role. Only the
 region between the markers is machine-generated.
 
 <!-- guide:plan-body:start -->
+_Generated: 2026-11-18T17:07:42Z (snapshot; compare against live labels)_
 ## Operator Attention: Merge-Risk-Hold Pileup
 
 Judge-approved PRs under a hold (`loom:blocked` or `loom:operator`) — only a human merge decision is missing.
@@ -33,7 +34,7 @@ _None._
 
 Issues currently being built (`loom:building`).
 
-- **#228**: Merge queue: add the merge_group trigger and adapt the PR-metadata gates
+_None._
 
 ## PRs Awaiting Review
 
@@ -54,7 +55,6 @@ Issues carrying `loom:curated`.
 
 - **#120**: Docs: stale decision-record enumeration in spec/stdcells.md, and the declared 0.8.0 pin in t1-item9-inventory.json *(curated)*
 - **#122**: Library: several signal pins have no routable access point, so OpenROAD detailed routing cannot complete (DRT-0073) *(curated)*
-- **#228**: Merge queue: add the merge_group trigger and adapt the PR-metadata gates *(curated)*
 
 ## Proposed (Architect / Hermit)
 
@@ -72,10 +72,10 @@ _None._
 | Very important | 1 |
 | Important | 1 |
 | Ready (`loom:issue`) | 0 |
-| In Progress (`loom:building`) | 1 |
+| In Progress (`loom:building`) | 0 |
 | PRs awaiting review | 0 |
 | Approved PRs awaiting merge | 2 |
-| Curated | 3 |
+| Curated | 2 |
 | Architect / Hermit proposals | 1 |
 | Active epics | 0 |
 <!-- guide:plan-body:end -->
