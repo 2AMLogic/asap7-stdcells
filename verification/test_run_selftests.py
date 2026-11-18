@@ -118,6 +118,7 @@ class DocstringFlags(unittest.TestCase):
     EXPECT = {
         "verification/test_normalize_paths.py": [],
         "verification/test_run_regression.py": [],
+        "verification/test_signoff_merge_group.py": [],
         "verification/test_klt_interp.py": [],
         "verification/characterization/test_characterization.py": [],
         "verification/corners/test_corners.py": [],

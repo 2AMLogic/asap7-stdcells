@@ -23,6 +23,11 @@ on:
     branches: [main]
   pull_request:
   workflow_dispatch:
+  # Merge queue (ci-principles.md rule 11): a merge_group run grades the
+  # combined tree about to land and is held to the same rules as a `main`
+  # run, so the required signoff context must report on it. Deliberately
+  # bare -- no paths/branches filters (rule 3).
+  merge_group:
 
 permissions:
   contents: read
@@ -218,8 +223,12 @@ jobs:
   # reads. Operator ruling (2026-11-17, round 20261116-r15, q101): the job
   # stays advisory (not enrolled in the required-status-checks ruleset), so a
   # PR-side filter cannot suppress a required check -- `signoff` above stays
-  # unconditional -- while push to main and workflow_dispatch always run
-  # full-regression unfiltered. The gate fails open (any failure computing
+  # unconditional -- while push to main, workflow_dispatch and merge_group
+  # always run full-regression unfiltered. merge_group is deliberately
+  # unfiltered like the other non-PR events: a queue entry is the combined
+  # tree about to land, held to the same rules as a `main` run
+  # (ci-principles.md rule 11), so neither the filter gate below nor a
+  # diff-skip may suppress it. The gate fails open (any failure computing
   # the diff runs the job) and a skip is loud, never a silent pass
   # (docs/ci.md, "full-regression is advisory by design").
   full-regression-inputs:
@@ -228,8 +237,13 @@ jobs:
     outputs:
       run: ${{ steps.filter.outputs.run }}
     steps:
+      # Full history on every event, not only pull_request: the merge-group
+      # audit (merge-queue-ci.md PR_ONLY_STEP) rejects a step that runs on
+      # PRs but is skipped on merge_group, and this gate job must be
+      # provably clean there. On non-PR events the filter early-exits below
+      # before any diff is computed, so the extra history is unused, not
+      # load-bearing.
       - uses: actions/checkout@v4
-        if: github.event_name == 'pull_request'
         with:
           # The three-dot diff against the PR base needs full history.
           fetch-depth: 0
@@ -240,8 +254,9 @@ jobs:
           BASE_SHA: ${{ github.event.pull_request.base.sha }}
         run: |
           set -uo pipefail
-          # push to main and workflow_dispatch are never filtered: the tip is
-          # always fully verified (ci-principles.md rule 3).
+          # push to main, workflow_dispatch and merge_group are never
+          # filtered: the tip is always fully verified (ci-principles.md
+          # rule 3; a merge_group run is rule 11).
           if [ "$EVENT" != "pull_request" ]; then
             echo "run=true" >> "$GITHUB_OUTPUT"
             exit 0
@@ -282,8 +297,9 @@ jobs:
   # measured 25 min 15 s locally (klt 0.9.0, 28 cells), over the 15 min budget
   # of the job above. The checkout is its own, so the library stream the pass
   # regenerates cannot touch what T1 item 2 attests in the job above.
-  # PR-only path gate: needs full-regression-inputs above; push to main and
-  # workflow_dispatch bypass it (first clause of the if). The gate JOB's own
+  # PR-only path gate: needs full-regression-inputs above; push to main,
+  # workflow_dispatch and merge_group bypass it (first clause of the if --
+  # merge_group per rule 11). The gate JOB's own
   # failure is fail-open too (issue #222, measured on the forge before this
   # shipped): !cancelled() lets this job evaluate even when the gate did not
   # succeed (checkout failure, runner outage, its 5-minute timeout), and the
