@@ -43,3 +43,18 @@ job is not required: no filter can suppress a required check, `signoff`
 stays unconditional, push to `main` and `workflow_dispatch` run the job
 unfiltered (the tip is always fully verified), and the gate fails open —
 an incomputable diff runs the job.
+
+Follow-up (issue #222, 2026-11-18): the gate **job's** own failure is
+fail-open too. A job whose `needs` dependency did not succeed is skipped
+regardless of its `if`, so a gate job lost to a checkout failure, a
+runner outage or its 5-minute timeout would previously have suppressed
+`full-regression` as well — on a `push` to `main` the tip would carry a
+red gate check and a skipped pass. `full-regression` therefore runs under
+`!cancelled() && (... || needs.full-regression-inputs.result != 'success'
+|| ... run == 'true')`: a non-success gate runs the pass, mirroring the
+filter step's fail-open. `!cancelled()` rather than `always()` — a
+cancelled run stays cancelled instead of starting a fresh ~31 min pass on
+a dead run. Both behaviours are forge-measured (workflow_dispatch runs on
+a throwaway probe branch: 44254634107 — run cancelled mid-gate,
+`full-regression` never started, 0 steps; 44254946556 — gate job forced
+to fail, `full-regression` started and completed).

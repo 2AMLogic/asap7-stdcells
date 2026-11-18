@@ -283,10 +283,19 @@ jobs:
   # of the job above. The checkout is its own, so the library stream the pass
   # regenerates cannot touch what T1 item 2 attests in the job above.
   # PR-only path gate: needs full-regression-inputs above; push to main and
-  # workflow_dispatch bypass it (first clause of the if).
+  # workflow_dispatch bypass it (first clause of the if). The gate JOB's own
+  # failure is fail-open too (issue #222, measured on the forge before this
+  # shipped): !cancelled() lets this job evaluate even when the gate did not
+  # succeed (checkout failure, runner outage, its 5-minute timeout), and the
+  # result != 'success' clause runs the pass instead of suppressing it --
+  # including on push to main, where the tip would otherwise carry a red
+  # gate check and a skipped pass. !cancelled() rather than always(): a
+  # cancelled run stays cancelled, never starting a fresh pass on a dead
+  # run. Measured: gate failure -> pass runs; run cancellation mid-gate ->
+  # pass never starts (issue #222, 2026-11-18).
   full-regression:
     needs: full-regression-inputs
-    if: ${{ github.event_name != 'pull_request' || needs.full-regression-inputs.outputs.run == 'true' }}
+    if: ${{ !cancelled() && (github.event_name != 'pull_request' || needs.full-regression-inputs.result != 'success' || needs.full-regression-inputs.outputs.run == 'true') }}
     runs-on: ubuntu-latest
     timeout-minutes: 75
     steps:
