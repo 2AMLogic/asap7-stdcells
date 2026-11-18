@@ -3,6 +3,13 @@
 Chronological record of merged PRs and closed issues, maintained by the Guide
 triage role. Newest first.
 
+### 2026-11-18
+
+- **PR #224**: docs: list docs/ in README repo layout, refresh t1-item10 envelope
+- **PR #220**: ci: path-gate full-regression on PRs to its actual inputs
+- **Issue #223** (closed): README 'Repo layout' index omits the new top-level docs/ directory
+- **Issue #200** (closed): full-regression is not in the required-status-checks ruleset, so the forge does not enforce it
+
 ### 2026-11-17
 
 - **PR #218**: test(par): quote the first matched output line in negative-control PASS records
