@@ -5,6 +5,8 @@ triage role. Newest first.
 
 ### 2026-11-18
 
+- **PR #225**: ci: run full-regression when its gate job fails, not skip it
+- **Issue #222** (closed): full-regression is skipped, not run, when its path-gate job itself fails
 - **PR #224**: docs: list docs/ in README repo layout, refresh t1-item10 envelope
 - **PR #220**: ci: path-gate full-regression on PRs to its actual inputs
 - **Issue #223** (closed): README 'Repo layout' index omits the new top-level docs/ directory
