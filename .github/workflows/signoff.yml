@@ -221,7 +221,7 @@ jobs:
   # unconditional -- while push to main and workflow_dispatch always run
   # full-regression unfiltered. The gate fails open (any failure computing
   # the diff runs the job) and a skip is loud, never a silent pass
-  # (.loom/docs/ci-principles.md, "full-regression is advisory by design").
+  # (docs/ci.md, "full-regression is advisory by design").
   full-regression-inputs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
