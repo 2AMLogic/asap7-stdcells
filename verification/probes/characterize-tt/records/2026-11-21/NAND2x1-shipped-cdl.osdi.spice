@@ -1,0 +1,7 @@
+* from pinned lambdapdk asap7sc7p5t_28_R.cdl (see run.sh step 1)
+.SUBCKT NAND2x1_ASAP7_75t_R A B VDD VSS Y
+NM3 net16 A VSS VSS nmos_rvt L=20n NFIN=6
+NM2 Y B net16 VSS nmos_rvt L=20n NFIN=6
+NM1 Y B VDD VDD pmos_rvt L=20n NFIN=3
+NM0 Y A VDD VDD pmos_rvt L=20n NFIN=3
+.ENDS

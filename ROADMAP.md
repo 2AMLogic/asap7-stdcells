@@ -108,10 +108,17 @@ that carries the upstream fix):
 ## Later
 
 - **Timing Liberty** (spec stretch). The `characterize-tt` probe produced NLDM
-  tables for INVx1 and NAND2x1. First answer: why NAND2x1 `cell_fall` sits at
-  1.11 to 1.82 times the shipped value when INVx1 is within about 10 percent,
-  and (decision 0002 point 4) whether `klt characterize` can produce
-  clock-to-Q, setup and hold arcs at all.
+  tables for INVx1 and NAND2x1. The NAND2x1 `cell_fall` question is answered
+  (2026-11-21, `verification/probes/characterize-tt/records/2026-11-21/`):
+  the drawn series nMOS stack is half the shipped cell's drive (NFIN=3 per
+  device against the shipped 6), and with the fin count matched the flow
+  reads the shipped cell back to within the residual; the sizing decision is
+  issue #234. Next open questions: the light-load residual (probe still reads
+  the sized cell 0.76 to 1.03 times the shipped Liberty, fastest at the
+  lightest load — stimulus shape and decision-0002 model adaptation are the
+  unseparated candidates), the transition tables that reconcile under no
+  single slew convention, and (decision 0002 point 4) whether
+  `klt characterize` can produce clock-to-Q, setup and hold arcs at all.
 - **Stretch cells** (`x2`/`x4` drives, LVT and SLVT variants, scan flip-flop).
   The spec's precondition, cells 1 to 22 DRC/LVS-clean, is met. First answer:
   which set exercises the most currently unexercised rules (the `LVT.*` and
