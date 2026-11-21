@@ -1,0 +1,20 @@
+* extracted by klt extract --deck asap7
+
+* cell NAND2x1_ASAP7_75t_R
+* pin A
+* pin B
+* pin VDD
+* pin VDD
+* pin VSS
+* pin Y
+* pin vsubs
+.SUBCKT NAND2x1_ASAP7_75t_R A B VDD VSS Y vsubs
+* device instance $1 r0 *1 0,0.022 nmos_rvt
+N_1 VSS A _2 vsubs nmos_rvt L=0.02U NFIN=6
+* device instance $2 r0 *1 0,0.022 nmos_rvt
+N_2 Y B _2 vsubs nmos_rvt L=0.02U NFIN=6
+* device instance $3 r0 *1 0,0.022 pmos_rvt
+N_3 VDD A Y VDD pmos_rvt L=0.02U NFIN=3
+* device instance $4 r0 *1 0,0.022 pmos_rvt
+N_4 Y B VDD VDD pmos_rvt L=0.02U NFIN=3
+.ENDS NAND2x1_ASAP7_75t_R

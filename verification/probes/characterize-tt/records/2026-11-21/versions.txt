@@ -1,0 +1,4 @@
+klt: klt 0.9.3.dev2575+g6bd18bbc8637
+ngspice: ** ngspice-47 : Circuit level simulation program
+lambdapdk: 0.2.17 sha256 ac7e950c4d0394a829658b6e219fea4a4b0c61a998183d5520f8b9e38c6efff2
+bsimcmg.osdi sha256: 5d7425d56df0d1e14d6b95ce7ba9d5c71c309d603cf6ce4348bddaf72c294318
