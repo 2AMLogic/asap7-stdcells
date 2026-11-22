@@ -69,7 +69,7 @@ build() {  # build <name> -> echoes the scratch tree root
 check() {
   local name="$1" want="$2" pat="$3" tech="$4" desc="$5"
   local count="${6:-}" tracks="${7:-$TRACKS}"
-  local t="$W/$name" out rc n m
+  local t="$W/$name" out rc n m line
   out="$("$t/integration/run_par.sh" "$tech" "$tracks" 2>&1)"; rc=$?
   if [ "$rc" != "$want" ]; then
     echo "FAIL ($name): $desc -- expected exit $want, got $rc"
@@ -99,7 +99,14 @@ check() {
       return
     fi
   fi
-  echo "PASS ($name): $desc -- exit $rc, matched /$pat/"
+  # Record the measured line, not just the pattern: quote the first matching
+  # output line (capped, with a visible marker when cut) so the transcript is
+  # evidence of values, e.g. signal=43 clock=1 first_net=_00_.
+  line="$(echo "$out" | grep -m1 -E "$pat")"
+  if [ "${#line}" -gt 200 ]; then
+    line="${line:0:200} [...truncated]"
+  fi
+  echo "PASS ($name): $desc -- exit $rc, matched /$pat/: $line"
 }
 
 echo "== negative control for integration/run_par.sh =="

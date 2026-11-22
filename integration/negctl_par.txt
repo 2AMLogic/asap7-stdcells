@@ -1,12 +1,12 @@
 == negative control for integration/run_par.sh ==
 openroad: 26Q3-1510-g6cb3f2b704 
-PASS (a): unmodified copy reproduces the recorded refusal -- exit 3, matched /^PAR_VERDICT refused:detailed_route$/
-PASS (b): Liberty cell renamed off the library naming is caught by the name assertion -- exit 1, matched /non-library cell INVx1_NOT_IN_LIBRARY/
-PASS (c): library LEF with DFFHQNx1 deleted stops the flow in read_inputs -- exit 1, matched /^PAR_VERDICT setup-failed:read_inputs$/
-PASS (d): missing tech LEF is refused before OpenROAD runs -- exit 1, matched /^PAR_VERDICT invalid-input$/
-PASS (e): a flow that stops before its verdict sentinel is a failure, not a pass -- exit 1, matched /no A7S_FLOW_DONE sentinel/
-PASS (f): a floorplan refusal (garbage tracks.tcl) is the recorded refusal, exit 3 -- exit 3, matched /^PAR_VERDICT refused:floorplan$/
-PASS (g): a flow refusing at read_inputs is a setup failure: exit 1, one verdict line -- exit 1, matched /^PAR_VERDICT setup-failed:read_inputs$/
-PASS (h): the unrouted-net readout returns a non-empty list on a linked, unrouted design -- exit 3, matched /^A7S_UNROUTED_PROBE signal=[1-9][0-9]* clock=[1-9][0-9]* first_net=./
+PASS (a): unmodified copy reproduces the recorded refusal -- exit 3, matched /^PAR_VERDICT refused:detailed_route$/: PAR_VERDICT refused:detailed_route
+PASS (b): Liberty cell renamed off the library naming is caught by the name assertion -- exit 1, matched /non-library cell INVx1_NOT_IN_LIBRARY/: run_par.sh: instance of non-library cell INVx1_NOT_IN_LIBRARY in the mapped netlist
+PASS (c): library LEF with DFFHQNx1 deleted stops the flow in read_inputs -- exit 1, matched /^PAR_VERDICT setup-failed:read_inputs$/: PAR_VERDICT setup-failed:read_inputs
+PASS (d): missing tech LEF is refused before OpenROAD runs -- exit 1, matched /^PAR_VERDICT invalid-input$/: PAR_VERDICT invalid-input
+PASS (e): a flow that stops before its verdict sentinel is a failure, not a pass -- exit 1, matched /no A7S_FLOW_DONE sentinel/: run_par.sh: openroad produced no A7S_FLOW_DONE sentinel
+PASS (f): a floorplan refusal (garbage tracks.tcl) is the recorded refusal, exit 3 -- exit 3, matched /^PAR_VERDICT refused:floorplan$/: PAR_VERDICT refused:floorplan
+PASS (g): a flow refusing at read_inputs is a setup failure: exit 1, one verdict line -- exit 1, matched /^PAR_VERDICT setup-failed:read_inputs$/: PAR_VERDICT setup-failed:read_inputs
+PASS (h): the unrouted-net readout returns a non-empty list on a linked, unrouted design -- exit 3, matched /^A7S_UNROUTED_PROBE signal=[1-9][0-9]* clock=[1-9][0-9]* first_net=./: A7S_UNROUTED_PROBE signal=43 clock=1 first_net=_00_
 == result ==
 negctl_par.sh: PASS (every control was caught)

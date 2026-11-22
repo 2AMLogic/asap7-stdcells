@@ -88,6 +88,7 @@ verification/  DRC/LVS regression harness across the cell set, plus
 integration/   OpenROAD place-and-route of the integration design + its record
 layout/        cell GDS, LEF views, DRC/LVS reports
 manifests/     block manifest, attestation envelopes, graded signoff record
+docs/          repo-owned CI and process notes
 ```
 
 ## How to reproduce
