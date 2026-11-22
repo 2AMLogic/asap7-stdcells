@@ -74,6 +74,8 @@ graded record in
 [`manifests/asap7-stdcells.signoff.json`](manifests/asap7-stdcells.signoff.json)
 for which T1 items are met, unmet or lack evidence; this ladder is not
 re-graded by hand here. There is no silicon rung.
+[`ROADMAP.md`](ROADMAP.md) narrates where the block stands as of a stated
+date, against that record.
 
 ## Repo layout
 
@@ -83,8 +85,10 @@ design/        cell netlists (CDL / SPICE)
 sim/           structural-Liberty synthesis smoke for the integration design
 verification/  DRC/LVS regression harness across the cell set, plus
                characterization requests, probes and the evidence records
+integration/   OpenROAD place-and-route of the integration design + its record
 layout/        cell GDS, LEF views, DRC/LVS reports
 manifests/     block manifest, attestation envelopes, graded signoff record
+docs/          repo-owned CI and process notes
 ```
 
 ## How to reproduce

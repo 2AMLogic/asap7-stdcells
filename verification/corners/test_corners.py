@@ -3,6 +3,9 @@
     python3 -m unittest verification.corners.test_corners   (from the repo root)
     python3 verification/corners/test_corners.py
 
+All self-tests at once: python3 verification/run_selftests.py
+(pnpm run check:ci).
+
 Checks the generator's pure parts (the Eulerian walk, the testbench and the
 measurement cards), the shared `klt sim` request envelope (regenerated
 byte-for-byte against every committed request record), the summariser's verdict
@@ -473,7 +476,7 @@ class RequestEnvelopeTest(unittest.TestCase):
     point: a wrong argument at either call site (this half's timeout, the key
     order its records were written with) has to show up. `osdi_preload` in the
     records is the scratch-relative path common.sh leaves behind
-    (verification/probes/characterize-tt/normalize_paths.py), so the
+    (verification/normalize_paths.py), so the
     comparison does not depend on the host that ran the sweep.
     """
     OSDI = "scratch/sim/osdi/bsimcmg.osdi"

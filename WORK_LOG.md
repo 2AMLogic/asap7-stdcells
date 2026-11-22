@@ -3,8 +3,108 @@
 Chronological record of merged PRs and closed issues, maintained by the Guide
 triage role. Newest first.
 
+### 2026-11-18
+
+- **PR #230**: ci: run the signoff workflow on merge_group
+- **Issue #228** (closed): Merge queue: add the merge_group trigger and adapt the PR-metadata gates
+- **PR #225**: ci: run full-regression when its gate job fails, not skip it
+- **Issue #222** (closed): full-regression is skipped, not run, when its path-gate job itself fails
+- **PR #224**: docs: list docs/ in README repo layout, refresh t1-item10 envelope
+- **PR #220**: ci: path-gate full-regression on PRs to its actual inputs
+- **Issue #223** (closed): README 'Repo layout' index omits the new top-level docs/ directory
+- **Issue #200** (closed): full-regression is not in the required-status-checks ruleset, so the forge does not enforce it
+
+### 2026-11-17
+
+- **PR #218**: test(par): quote the first matched output line in negative-control PASS records
+- **Issue #188** (closed): integration/negctl_par.txt records which pattern matched, not the line that matched
+- **PR #216**: chore(loom): resync installed Loom to v0.19.1306
+- **PR #212**: fix: pin Klt._helper subprocess cwd to the repo root
+- **PR #215**: test: pin the selftest expect dict's coverage to every discovered non-klt suite
+- **PR #214**: fix: count zero-check FAILs out of the selftest gate's suites-ran numerator
+- **PR #211**: fix: return a 3-tuple from run_suite's OSError path so callers can unpack it
+- **PR #208**: fix: anchor selftest-gate skip parse to the summary tail and count never-ran suites out of the numerator
+- **PR #206**: fix: run_selftests resolves klt's interpreter via klt_interp.klt_python
+- **PR #205**: fix: selftest gate reddens all-skipped suites and derives flags from docstrings
+- **PR #204**: Consolidate three klt shebang resolvers into one shared module
+- **PR #199**: ci: run the self-test gate in the signoff workflow
+- **Issue #192** (closed): verify(): derived_plan passes one repo-relative lib path, so --verify only resolves it from the repo root
+- **Issue #209** (closed): run_selftests self-test: assert the expect dict covers every discovered non-klt suite
+- **Issue #213** (closed): run_selftests gate: a FAIL that executed zero checks still counts into the `N/M suites ran` numerator
+- **Issue #210** (closed): run_selftests: run_suite()'s OSError path returns a bare 1 where callers unpack a 3-tuple
+- **Issue #207** (closed): run_selftests gate: skip-count parse is unanchored and the suites-ran numerator counts a suite that never ran
+- **Issue #203** (closed): Consolidate the fourth shebang resolver: run_selftests.py klt_interpreter()
+- **Issue #169** (closed): run_selftests.py: a suite whose tests all unittest-skip is reported PASS, so a skipped negative control looks like a passing one
+- **Issue #190** (closed): Consolidate three copies of the klt-interpreter shebang resolver into one
+- **Issue #146** (closed): Wire the collapsed self-test gate into CI: signoff.yml invokes no test_*.py
+
+### 2026-11-16
+
+- **PR #196**: ci: run the full-library regression pass in a separate job
+- **Issue #186** (closed): CI never runs run_merged, run_library or family_coverage either: three sibling gates still behind not args.only
+- **PR #197**: fix: check_gds_fresh klt_python() returns None on non-UTF-8 klt shebang
+- **PR #143**: build: run all six self-tests as one package.json gate
+- **Issue #179** (closed): check_gds_fresh.py: klt_python() crashes with UnicodeDecodeError instead of returning None when klt's first line is not UTF-8
+- **Issue #129** (closed): Collapse the package.json test/check alias chain onto one gate that runs all six self-test files
+- **PR #193**: docs: keep the openroad mount check deliberately duplicated in both drivers
+- **PR #191**: verify: regenerate derived inputs so --verify re-checks every envelope
+- **PR #185**: refactor: route a7s_common's five literal V1 boxes through the v1 helper
+- **PR #184**: fix(lef): run the library-wide LEF gate under --only
+- **PR #183**: fix: widen COLUMNS for yosys children and fail fast on OpenROAD-unmountable input paths
+- **PR #181**: test(par): prove the unrouted-net readout can fire; fix the M1 power-port count
+- **PR #180**: chore: ignore pnpm entry-point artifacts (node_modules/, pnpm-lock.yaml)
+- **PR #178**: fix: resolve a klayout-capable interpreter for the GDS-freshness redraws
+- **PR #176**: fix: record post-read_inputs OpenROAD stage refusals as refused:<stage>, not invalid input
+- **PR #173**: refactor: make klt_helper importable and unit-test place's geometry
+- **PR #172**: docs: link ROADMAP.md from the README maturity ladder
+- **PR #168**: fix: guard valueless --repo/--interpreter in normalize_paths CLI; exercise the relative-prefix guard in its test
+- **Issue #187** (closed): The OpenROAD mount-set rule is duplicated in two scripts (and a third is coming) — decide its home before it drifts
+- **Issue #182** (closed): integration/ and sim/: the yosys callers deadlock under the worker TMPDIR, and the OpenROAD mount rule is undocumented
+- **Issue #175** (closed): check_gds_fresh.py hard-codes -I in the per-cell redraw subprocess, so the documented local command cannot run where klayout is user-site-only
+- **Issue #174** (closed): a7s_common: route the five literal 18x18 V1 boxes through the v1() helper (gate_contact:173 + gate_link's four)
+- **Issue #170** (closed): Running the documented gate (pnpm run check:ci) drops untracked node_modules/ and pnpm-lock.yaml into the tree; neither is gitignored
+- **Issue #163** (closed): CI never runs the LEF gate: run_regression.py's lef_check is skipped under --only
+- **Issue #156** (closed): `--verify` cannot re-check any committed record: 541 of 581 envelopes drift on nondeterministic and uncommitted derived inputs
+- **Issue #154** (closed): normalize_paths CLI: the relative-prefix test is vacuous, and a trailing flag crashes instead of printing usage
+- **Issue #151** (closed): klt_helper.py is not importable: module-level sys.argv indexing blocks unit-testing its pure parts
+- **Issue #150** (closed): integration/: the zero-unrouted-nets readout has no negative control, and the write-up miscounts the M1 power rects
+- **Issue #149** (closed): integration/run_par.sh records an early-stage OpenROAD refusal as invalid-input (exit 1), not as a recorded refusal (exit 3)
+- **Issue #139** (closed): Docs: ROADMAP.md is on main but nothing links it
+
+### 2026-11-15
+
+- **PR #171**: ci: floor the signoff tier at T1/met>=10 and accept grader exit 0 only
+- **PR #165**: fix: rename gate_contact's v1 parameter to with_v1
+- **PR #159**: manifests: content-hash harness helpers in T1 item 9 attestation
+- **PR #153**: evidence: pin six unpinned harness/design scripts into T1 item 1 and 10
+- **Issue #160** (closed): item 10 inventory description no longer enumerates its own hygiene list (five design/ harness scripts)
+- **Issue #155** (closed): signoff CI cannot catch a tier regression: exit 0-or-3 plus a record cmp passes a T1 -> null drop
+- **Issue #144** (closed): Four harness/evidence scripts outside item 9 are unpinned, incl. item 2's own check command
+- **Issue #142** (closed): Item 9 inventory does not content-hash klt_helper.py (nor check_lef.py / write_lef.py)
+- **Issue #137** (closed): a7s_common: gate_contact's v1= parameter now shadows the module-level v1() helper
+- **PR #158**: fix: cdl freshness --update no longer mints a null CDL hash; null recording is opt-in --device-less
+- **PR #148**: feat(verification): report incidentally-exercised rule ids, pin four select/WELL ids
+- **PR #123**: integration: record OpenROAD P&R of counter8 refusing at detailed_route
+- **Issue #136** (closed): check_cdl_fresh.py --update can silently record a device-bearing cell as device-less
+- **Issue #134** (closed): Four rule ids left the unexercised list as incidental fires, with no targeted control to keep them there
+- **Issue #109** (closed): Integration design: place and route counter8 with OpenROAD and record the run
+- **PR #152**: refactor: promote the klt record path-normalizer to a shared verification module
+- **PR #141**: refactor(verification): extract the klt helper string into klt_helper.py
+- **PR #132**: refactor: hoist gate_link and v1 into a7s_common, re-pair T1 item 1 evidence
+- **Issue #119** (closed): Two copies of the klt record path-normalizer, one of them inside a concluded probe directory
+- **Issue #117** (closed): Extract the 156-line HELPER string in run_regression.py into a sibling script file
+- **Issue #114** (closed): Hoist the duplicated draw-script geometry helpers (gate_link, v1) into a7s_common.py
+- **PR #135**: refactor: share one place-and-DRC body across the regression's case runners
+- **PR #130**: feat: flag an unrecorded draw script in the CDL freshness check
+- **PR #126**: refactor: one shared klt sim request builder for both corner-sweep halves
+- **Issue #125** (closed): Hoist the duplicated klt sim corner-matrix request envelope into one shared builder
+- **Issue #116** (closed): check_cdl_fresh.py promises to flag an unrecorded draw script and does not: drop the clause or implement it
+- **Issue #115** (closed): Collapse the three duplicated place-and-DRC blocks in run_regression.py
+
 ### 2026-11-14
 
+- **PR #118**: docs: correct stale README, spec and CLAUDE.md claims against the committed records
+- **Issue #112** (closed): Docs: README, verification/README, spec/README and CLAUDE.md statements that no longer match the tree
 - **PR #131**: feat(verification): negative controls for eleven unexercised FEOL rule ids
 - **PR #128**: refactor: one Liberty expression parser, with a tested &/^ precedence
 - **PR #127**: refactor: one definition of the AOI22/OAI22 blocks the XOR cells redraw

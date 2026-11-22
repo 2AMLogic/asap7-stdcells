@@ -3,28 +3,56 @@
   "kind": "generic",
   "status": "pass",
   "t1_item": 9,
-  "summary": "T1 item 9 (Testbenches shipped): 8/8 attestation checks passed (klt signoff --attest)",
+  "summary": "T1 item 9 (Testbenches shipped): 13/13 attestation checks passed (klt signoff --attest)",
   "source": "manifests/t1-item9-inventory.json",
   "attestation": {
     "producer": "klt signoff --attest",
     "inventory_schema_version": 1,
     "hash_algorithm": "sha256-raw-bytes",
-    "check_count": 8,
-    "passed_count": 8,
+    "check_count": 13,
+    "passed_count": 13,
     "checks": [
+      {
+        "check": "present",
+        "role": "testbench",
+        "path": "design/write_lef.py",
+        "passed": true,
+        "content_hash": "sha256:b1d36cd910dbf20f0f28fd53c1ad1a0bf0e7bcf2a96ad9ccc1328f36fa6a5791"
+      },
       {
         "check": "present",
         "role": "testbench",
         "path": "verification/README.md",
         "passed": true,
-        "content_hash": "sha256:a25cb35b41f8e97b6dc08e2f6b9a6ada3f9d887f27fb8d7c965cd95f65fec513"
+        "content_hash": "sha256:9dfab0e67c9d6f1c0d04785b5f7ce188bbebca9576065c14030f9e785a19b385"
       },
       {
         "check": "present",
         "role": "testbench",
         "path": "verification/cells.json",
         "passed": true,
-        "content_hash": "sha256:b56fb6db4b2c0f910a5d395a9dc4b0b846ebd7ea146738ff3225473266ea3852"
+        "content_hash": "sha256:b7b2f59af877edc4877e1446ed26b3cedf489aeef5c8541eef2db84c5e967526"
+      },
+      {
+        "check": "present",
+        "role": "testbench",
+        "path": "verification/check_lef.py",
+        "passed": true,
+        "content_hash": "sha256:9b3928807e9b01e0fa5e294a70d54e5053bed5b8d500cd2f016b1d769f2ce8b2"
+      },
+      {
+        "check": "present",
+        "role": "testbench",
+        "path": "verification/klt_helper.py",
+        "passed": true,
+        "content_hash": "sha256:3fee4f3886f1778a0eff426c661c8df381f28185581bbb56c07c30b75ce46158"
+      },
+      {
+        "check": "present",
+        "role": "testbench",
+        "path": "verification/klt_interp.py",
+        "passed": true,
+        "content_hash": "sha256:9d13875e548c7fba18b04cbb88fbba40931ffd2c2b23d1c948bcedb9e9c306b4"
       },
       {
         "check": "present",
@@ -38,14 +66,21 @@
         "role": "testbench",
         "path": "verification/run_regression.py",
         "passed": true,
-        "content_hash": "sha256:1ebbd2df009e156124f6e47aab3e12016f599d99c3b865ec206721d373bf852c"
+        "content_hash": "sha256:067a6546e26e687cfe91424309bd706106db2696c66efda3351c17b451c336dc"
+      },
+      {
+        "check": "present",
+        "role": "testbench",
+        "path": "verification/test_klt_interp.py",
+        "passed": true,
+        "content_hash": "sha256:afb434e6c10f1c8fa26c939254a45ad4c0768a6abce1523ef8cd1d469d3d03d1"
       },
       {
         "check": "present",
         "role": "testbench",
         "path": "verification/test_run_regression.py",
         "passed": true,
-        "content_hash": "sha256:ad3f2a3a8af5ee8dc2d7688008a4577d1c1b2296fd211192074a026d62f252cc"
+        "content_hash": "sha256:2520754fba3a5fea084531af95f6dd9f92f3476f47c27045d98d7202bbab2d7e"
       },
       {
         "check": "command",
@@ -88,7 +123,7 @@
         "path": "manifests/t1-item9-inventory.json",
         "scope": "repo"
       },
-      "content_hash": "sha256:006439dd1b4560a090e697fd1bd2b4bc5d19d0e003edc58cc7893a3145f9e535"
+      "content_hash": "sha256:fb1993b74cd1936c1a59490b1405696397a36574e99fd0892a0c216d43ce524f"
     }
   }
 }

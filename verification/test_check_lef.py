@@ -4,6 +4,10 @@ Reads the committed layout/ GDS and LEF, so it needs klt's interpreter:
 
     "$(head -1 "$(command -v klt)" | cut -c3-)" -I verification/test_check_lef.py
 
+All self-tests at once: python3 verification/run_selftests.py
+(pnpm run check:ci) -- it runs this suite under klt's interpreter and the
+gate stays red if klt is absent; a suite that cannot run is not a pass.
+
 A control that does not fail the check it targets fails this test.
 """
 import copy

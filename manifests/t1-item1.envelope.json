@@ -3,35 +3,42 @@
   "kind": "generic",
   "status": "pass",
   "t1_item": 1,
-  "summary": "T1 item 1 (Design sources): 63/63 attestation checks passed (klt signoff --attest)",
+  "summary": "T1 item 1 (Design sources): 64/64 attestation checks passed (klt signoff --attest)",
   "source": "manifests/t1-item1-inventory.json",
   "attestation": {
     "producer": "klt signoff --attest",
     "inventory_schema_version": 1,
     "hash_algorithm": "sha256-raw-bytes",
-    "check_count": 63,
-    "passed_count": 63,
+    "check_count": 64,
+    "passed_count": 64,
     "checks": [
       {
         "check": "present",
         "role": "source",
         "path": "design/a7s_common.py",
         "passed": true,
-        "content_hash": "sha256:040b7de932fbe0742b0553042e5d212e0e5498182d5d55ef58020f9d0b2d7a69"
+        "content_hash": "sha256:6e1040e0f45ec6445e09db5c707966ac9582f983524104ac3d76b9e8f73054dc"
+      },
+      {
+        "check": "present",
+        "role": "source",
+        "path": "design/a7s_logic.py",
+        "passed": true,
+        "content_hash": "sha256:0201a2636c45a4ca52a02a812dd3611617ea6fd438eb782bd571ed9991c22497"
       },
       {
         "check": "present",
         "role": "source",
         "path": "design/cdl-freshness.json",
         "passed": true,
-        "content_hash": "sha256:e3e4441d57b71bfa168287b725a23b0bb41574c2737e89dd3d7f301f8bac3327"
+        "content_hash": "sha256:2f4a24d069a2b591e8e85a6a925fa77b82e244a9849d717e6a91565a39009464"
       },
       {
         "check": "present",
         "role": "source",
         "path": "design/check_cdl_fresh.py",
         "passed": true,
-        "content_hash": "sha256:0830640a723b0f2f1a427526ca85c25c5f812fd7a64a6323a0bbffed71256a08"
+        "content_hash": "sha256:76ad4edcaa0de0c1a793a3cb16c3679161c153f3ebdb49a16b8220a6ecebc94b"
       },
       {
         "check": "present",
@@ -45,7 +52,7 @@
         "role": "source",
         "path": "design/draw_AND2x1_A7S_75t_R.py",
         "passed": true,
-        "content_hash": "sha256:5dec57d3cbf53f7af42c298f42988e30b0eadac1bf60fda2be4804da4a35ab3d"
+        "content_hash": "sha256:1889b9474f057c793b51d8467acacc5b2ecfe200b6f15d79d568dfabc58a6737"
       },
       {
         "check": "present",
@@ -66,21 +73,21 @@
         "role": "source",
         "path": "design/draw_BUFx1_A7S_75t_R.py",
         "passed": true,
-        "content_hash": "sha256:67f7e95f9157e925207b2fa6098a53a30e169876fa715136808b608b43dcb0ae"
+        "content_hash": "sha256:06f124f48377428c542be07ca981634dc912e088bcd8009b6978ce4759a641c6"
       },
       {
         "check": "present",
         "role": "source",
         "path": "design/draw_DFFHQNx1_A7S_75t_R.py",
         "passed": true,
-        "content_hash": "sha256:2118ff146ac329b65bd1405e289f7d628216f5011d5128ed756a89eb38f52097"
+        "content_hash": "sha256:9a7ee919489e18b9c65209d3c5559520ebf162238f21524c57c5b98864b9bbf5"
       },
       {
         "check": "present",
         "role": "source",
         "path": "design/draw_DHLx1_A7S_75t_R.py",
         "passed": true,
-        "content_hash": "sha256:75663842a00974eb0d83897360006a8d7bb905ee51b55d73d6dc6fc584a984bf"
+        "content_hash": "sha256:5f661399cb1892c482468080a63e61c57a22cedd82bf5264d28924a3bde14254"
       },
       {
         "check": "present",
@@ -157,7 +164,7 @@
         "role": "source",
         "path": "design/draw_OR2x1_A7S_75t_R.py",
         "passed": true,
-        "content_hash": "sha256:f3160f3e89a67798ecd1b3baa833b055d1ca61e5a8f0ce883718621d4236e1f9"
+        "content_hash": "sha256:5081be052220c7ed5a26e60e59b9fc5cb10627bbce0efd8f28618e55095eccb7"
       },
       {
         "check": "present",
@@ -185,14 +192,14 @@
         "role": "source",
         "path": "design/draw_XNOR2x1_A7S_75t_R.py",
         "passed": true,
-        "content_hash": "sha256:842b8d3f5bb0b11af4796c80f6bb7dd9c474c56f1f972995abc6b2c7ffa57efa"
+        "content_hash": "sha256:98c4a92252330149e0b90f618e894260b3d84100a532527c76a558aa324e74d5"
       },
       {
         "check": "present",
         "role": "source",
         "path": "design/draw_XOR2x1_A7S_75t_R.py",
         "passed": true,
-        "content_hash": "sha256:a2552bf31dbd95645e1cd1232f37e7167992f9d37a2ecc9063afb6f93d6aef84"
+        "content_hash": "sha256:9ad28b409879b24e9d07e97d8eb3d7a174e84ad85a99f8d2bdaf496ac3dd9366"
       },
       {
         "check": "present",
@@ -719,21 +726,28 @@
             "path": "design/a7s_common.py",
             "scope": "repo"
           },
-          "content_hash": "sha256:040b7de932fbe0742b0553042e5d212e0e5498182d5d55ef58020f9d0b2d7a69"
+          "content_hash": "sha256:6e1040e0f45ec6445e09db5c707966ac9582f983524104ac3d76b9e8f73054dc"
+        },
+        {
+          "path": {
+            "path": "design/a7s_logic.py",
+            "scope": "repo"
+          },
+          "content_hash": "sha256:0201a2636c45a4ca52a02a812dd3611617ea6fd438eb782bd571ed9991c22497"
         },
         {
           "path": {
             "path": "design/cdl-freshness.json",
             "scope": "repo"
           },
-          "content_hash": "sha256:e3e4441d57b71bfa168287b725a23b0bb41574c2737e89dd3d7f301f8bac3327"
+          "content_hash": "sha256:2f4a24d069a2b591e8e85a6a925fa77b82e244a9849d717e6a91565a39009464"
         },
         {
           "path": {
             "path": "design/check_cdl_fresh.py",
             "scope": "repo"
           },
-          "content_hash": "sha256:0830640a723b0f2f1a427526ca85c25c5f812fd7a64a6323a0bbffed71256a08"
+          "content_hash": "sha256:76ad4edcaa0de0c1a793a3cb16c3679161c153f3ebdb49a16b8220a6ecebc94b"
         },
         {
           "path": {
@@ -747,7 +761,7 @@
             "path": "design/draw_AND2x1_A7S_75t_R.py",
             "scope": "repo"
           },
-          "content_hash": "sha256:5dec57d3cbf53f7af42c298f42988e30b0eadac1bf60fda2be4804da4a35ab3d"
+          "content_hash": "sha256:1889b9474f057c793b51d8467acacc5b2ecfe200b6f15d79d568dfabc58a6737"
         },
         {
           "path": {
@@ -768,21 +782,21 @@
             "path": "design/draw_BUFx1_A7S_75t_R.py",
             "scope": "repo"
           },
-          "content_hash": "sha256:67f7e95f9157e925207b2fa6098a53a30e169876fa715136808b608b43dcb0ae"
+          "content_hash": "sha256:06f124f48377428c542be07ca981634dc912e088bcd8009b6978ce4759a641c6"
         },
         {
           "path": {
             "path": "design/draw_DFFHQNx1_A7S_75t_R.py",
             "scope": "repo"
           },
-          "content_hash": "sha256:2118ff146ac329b65bd1405e289f7d628216f5011d5128ed756a89eb38f52097"
+          "content_hash": "sha256:9a7ee919489e18b9c65209d3c5559520ebf162238f21524c57c5b98864b9bbf5"
         },
         {
           "path": {
             "path": "design/draw_DHLx1_A7S_75t_R.py",
             "scope": "repo"
           },
-          "content_hash": "sha256:75663842a00974eb0d83897360006a8d7bb905ee51b55d73d6dc6fc584a984bf"
+          "content_hash": "sha256:5f661399cb1892c482468080a63e61c57a22cedd82bf5264d28924a3bde14254"
         },
         {
           "path": {
@@ -859,7 +873,7 @@
             "path": "design/draw_OR2x1_A7S_75t_R.py",
             "scope": "repo"
           },
-          "content_hash": "sha256:f3160f3e89a67798ecd1b3baa833b055d1ca61e5a8f0ce883718621d4236e1f9"
+          "content_hash": "sha256:5081be052220c7ed5a26e60e59b9fc5cb10627bbce0efd8f28618e55095eccb7"
         },
         {
           "path": {
@@ -887,21 +901,21 @@
             "path": "design/draw_XNOR2x1_A7S_75t_R.py",
             "scope": "repo"
           },
-          "content_hash": "sha256:842b8d3f5bb0b11af4796c80f6bb7dd9c474c56f1f972995abc6b2c7ffa57efa"
+          "content_hash": "sha256:98c4a92252330149e0b90f618e894260b3d84100a532527c76a558aa324e74d5"
         },
         {
           "path": {
             "path": "design/draw_XOR2x1_A7S_75t_R.py",
             "scope": "repo"
           },
-          "content_hash": "sha256:a2552bf31dbd95645e1cd1232f37e7167992f9d37a2ecc9063afb6f93d6aef84"
+          "content_hash": "sha256:9ad28b409879b24e9d07e97d8eb3d7a174e84ad85a99f8d2bdaf496ac3dd9366"
         },
         {
           "path": {
             "path": "manifests/t1-item1-inventory.json",
             "scope": "repo"
           },
-          "content_hash": "sha256:a1a88b74552fed5fd9862719dbe61c5c2fbd8049485415c9ce4907df7bab9359"
+          "content_hash": "sha256:05d2d172bb093471052c19f0f168c09abd94c496b34362908834d175c58fb3d8"
         },
         {
           "path": {
@@ -911,7 +925,7 @@
           "content_hash": "sha256:8ef648144d20620fe215ff61f016b18255164e673a8fa8aa0a15ce43565589fb"
         }
       ],
-      "content_hash": "sha256:9866b74d16f7da9cc5d52ed0b1bea7ef657e5acd57a1f65af21e6bf123041e67"
+      "content_hash": "sha256:f5f57d15ea97a22ab38e613828985cc15956b9bfccd827a3f6b4383131f4f7ba"
     }
   }
 }

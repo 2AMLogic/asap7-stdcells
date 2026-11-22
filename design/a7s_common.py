@@ -161,20 +161,43 @@ def stub(d, row, x0):
     d.box("M1", x0, STUB_Y[row][0], x0 + 18, STUB_Y[row][1])
 
 
-def gate_contact(d, j, v1=False):
+def gate_contact(d, j, with_v1=False):
     """LIG over the gate in the N/P gap (1 nm past it each side), V0, and the M1 pin
     stripe on the tech-LEF track (x = gx - 9 is a multiple of 36 for odd j). With
-    v1 the stripe reaches down 5 nm past a V1 at y 108..126."""
+    with_v1 the stripe reaches down 5 nm past a V1 at y 108..126."""
     x = gx(j)
     d.box("LIG", x - 11, 126, x + 11, 144)
     d.box("V0", x - 9, 126, x + 9, 144)
-    d.box("M1", x - 9, 103 if v1 else 108, x + 9, 162)
-    if v1:
-        d.box("V1", x - 9, 108, x + 9, 126)
+    d.box("M1", x - 9, 103 if with_v1 else 108, x + 9, 162)
+    if with_v1:
+        v1(d, x - 9, 108)
+
+
+def gate_link(d, j, row, down=False, up=False):
+    """Gate contact of gate j with a V1 on M2 row 108 or 144 (the stripe's own height),
+    or with the stripe stretched to row 36 (down) or row 216 (up)."""
+    x = gx(j)
+    gate_contact(d, j)
+    if row == 108:
+        d.box("M1", x - 9, 106, x + 9, 162)
+        v1(d, x - 9, 108)
+    elif row == 144:
+        d.box("M1", x - 9, 108, x + 9, 164)
+        v1(d, x - 9, 144)
+    elif down:
+        d.box("M1", x - 9, 34, x + 9, 162)
+        v1(d, x - 9, 36)
+    elif up:
+        d.box("M1", x - 9, 108, x + 9, 236)
+        v1(d, x - 9, 216)
 
 
 def m1(d, x0, y0, x1, y1):
     d.box("M1", x0, y0, x1, y1)
+
+
+def v1(d, x, y0):
+    d.box("V1", x, y0, x + 18, y0 + 18)
 
 
 def link(d, y0, vias):
@@ -182,7 +205,7 @@ def link(d, y0, vias):
     past the outer vias."""
     d.box("M2", min(vias) - 5, y0, max(vias) + 23, y0 + 18)
     for x in vias:
-        d.box("V1", x, y0, x + 18, y0 + 18)
+        v1(d, x, y0)
 
 
 class Shifted:

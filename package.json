@@ -4,8 +4,7 @@
   "private": true,
   "scripts": {
     "worktree:return": "./.loom/scripts/worktree-return.sh",
-    "check:ci": "python3 verification/test_run_regression.py",
-    "check:all": "pnpm run check:ci",
-    "test": "python3 verification/test_run_regression.py"
+    "check:ci": "python3 verification/run_selftests.py",
+    "test": "pnpm run check:ci"
   }
 }

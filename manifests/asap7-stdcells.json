@@ -4,7 +4,7 @@
   "evidence": {
     "1": {
       "file": "manifests/t1-item1.envelope.json",
-      "content_hash": "sha256:9866b74d16f7da9cc5d52ed0b1bea7ef657e5acd57a1f65af21e6bf123041e67"
+      "content_hash": "sha256:f5f57d15ea97a22ab38e613828985cc15956b9bfccd827a3f6b4383131f4f7ba"
     },
     "6": {
       "not_applicable": {
@@ -20,7 +20,7 @@
     },
     "2": {
       "file": "manifests/t1-item2.envelope.json",
-      "content_hash": "sha256:bf619dcce132b568d08c94951199f6f08720d842ef11c1a09404ff0357c9cba4"
+      "content_hash": "sha256:1892ba42190105f194d98fe3dbaa04b110886c06f78a75f53524fe958cbc130a"
     },
     "3": {
       "file": "verification/records/20261029T012553Z-klt0.8.1.dev670_g680c6f4a7518/merged/drc.json",
@@ -28,15 +28,15 @@
     },
     "9": {
       "file": "manifests/t1-item9.envelope.json",
-      "content_hash": "sha256:006439dd1b4560a090e697fd1bd2b4bc5d19d0e003edc58cc7893a3145f9e535"
+      "content_hash": "sha256:fb1993b74cd1936c1a59490b1405696397a36574e99fd0892a0c216d43ce524f"
     },
     "10": {
       "file": "manifests/t1-item10.envelope.json",
-      "content_hash": "sha256:4a0d8ca1ea90bf38483450577e0d627a4258b76806c308ea6f475abc2e3bf0d7"
+      "content_hash": "sha256:90b5f26c0c6130e807da4b5301de6b5ef5f40cc64b33d7014177001293373dfe"
     },
     "4": {
-      "file": "verification/records/20261029T012553Z-klt0.8.1.dev670_g680c6f4a7518/library/lvs.json",
-      "content_hash": "sha256:bf619dcce132b568d08c94951199f6f08720d842ef11c1a09404ff0357c9cba4"
+      "file": "verification/records/20261116T064348Z-klt0.9.3.dev27_g37fcbce0e52c/library/lvs.json",
+      "content_hash": "sha256:1892ba42190105f194d98fe3dbaa04b110886c06f78a75f53524fe958cbc130a"
     },
     "11": [
       {

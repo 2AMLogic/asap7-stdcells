@@ -14,7 +14,12 @@ echo "yosys: $(yosys -V)"
 echo "iverilog: $(iverilog -V 2>&1 | head -1)"
 echo "liberty: layout/A7S_75t_R_structural.lib sha256 $(sha256sum "$LIB" | cut -d' ' -f1)"
 
-yosys -q -l "$W/yosys.log" -p "
+# COLUMNS=1000: abc's readline echo of "source <abc.script>" must stay on one
+# line, or yosys's abc handshake deadlocks -- under a long $TMPDIR (the daemon
+# sets one) the echoed prompt exceeds the 80-column dumb-term width and yosys
+# waits forever for a prompt line that never arrives. Measured cliff at 79
+# printable columns, 2026-11-16; see integration/README.md "Environment".
+COLUMNS=1000 yosys -q -l "$W/yosys.log" -p "
 read_verilog $HERE/counter8.v
 synth -top counter8 -flatten
 dfflibmap -liberty $LIB

@@ -16,6 +16,13 @@ without re-reviewing the CDL (or the reverse) therefore trips it.
 Re-pairing is an explicit step, never automatic:
     python3 -I design/check_cdl_fresh.py --update CELL [CELL ...]
 
+--update mints no null: a named cell that has a draw script but no CDL is
+refused with "no such CDL" and nothing is written, because a null cdl_sha256
+is the device-less assertion described above. Record such a cell only
+deliberately, with --update CELL --device-less; that flag refuses in turn if
+the CDL does exist, since the record would then assert an absence the tree
+contradicts.
+
 `--root DIR` checks a tree other than this repo (default: this repo's root);
 design/check_cdl_fresh_negctl.py uses it to run the checker on broken copies.
 """
@@ -45,6 +52,10 @@ def main(argv):
                     help="tree to check (default: this repo)")
     ap.add_argument("--update", nargs="+", metavar="CELL", default=None,
                     help="re-pair the named cells from their files on disk")
+    ap.add_argument("--device-less", action="store_true", default=False,
+                    help="with --update: record a null CDL hash for a cell that "
+                         "has a draw script but no CDL (the device-less "
+                         "allowance); refuses if the CDL exists")
     args = ap.parse_args(argv)
     design = args.root.resolve() / "design"
     pairs_file = design / "cdl-freshness.json"
@@ -54,6 +65,13 @@ def main(argv):
             cur = current(design, cell)
             if cur["cdl_sha256"] is None and cur["script_sha256"] is None:
                 print("no such cell: neither %s.cdl nor draw_%s.py" % (cell, cell))
+                return 2
+            if args.device_less:
+                if cur["cdl_sha256"] is not None:
+                    print("refusing --device-less: %s.cdl exists" % cell)
+                    return 2
+            elif cur["cdl_sha256"] is None:
+                print("no such CDL: %s.cdl" % cell)
                 return 2
             pairs[cell] = cur
         pairs_file.write_text(json.dumps(dict(sorted(pairs.items())), indent=2) + "\n")
