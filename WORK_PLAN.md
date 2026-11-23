@@ -4,7 +4,7 @@ Roadmap generated from GitHub label state by the Guide triage role. Only the
 region between the markers is machine-generated.
 
 <!-- guide:plan-body:start -->
-_Generated: 2026-11-23T04:24:00Z (snapshot; compare against live labels)_
+_Generated: 2026-11-23T10:38:48Z (snapshot; compare against live labels)_
 ## Operator Attention: Merge-Risk-Hold Pileup
 
 Judge-approved PRs under a hold (`loom:blocked` or `loom:operator`) — only a human merge decision is missing.
@@ -33,15 +33,13 @@ _None._
 
 Issues currently being built (`loom:building`).
 
-- **#232**: characterize-tt probe: find why NAND2x1 cell_fall is 1.11 to 1.82 times the shipped value while INVx1 is within about 10 percent
-- **#240**: Consolidate duplicated PDK-fetch and OSDI shell scaffolding across verification drivers
+- **#245**: Adopt verification/sim_env.sh in verification/probes/characterize-tt/run.sh
 
 ## PRs Awaiting Review
 
 PRs waiting on Judge (`loom:review-requested`).
 
-- **#235**: test(probe): attribute the NAND2x1 cell_fall gap to the drawn n-stack sizing
-- **#241**: refactor: promote shared sim-driver scaffolding into verification/sim_env.sh
+- **#247**: refactor: source sim_env.sh in the characterize-tt probe driver
 
 ## Approved (Awaiting Merge)
 
@@ -56,11 +54,10 @@ Issues carrying `loom:curated`.
 
 - **#120**: Docs: stale decision-record enumeration in spec/stdcells.md, and the declared 0.8.0 pin in t1-item9-inventory.json *(curated)*
 - **#122**: Library: several signal pins have no routable access point, so OpenROAD detailed routing cannot complete (DRT-0073) *(curated)*
-- **#232**: characterize-tt probe: find why NAND2x1 cell_fall is 1.11 to 1.82 times the shipped value while INVx1 is within about 10 percent *(curated)*
 
 ## Proposed (Architect / Hermit)
 
-- **#133**: Drop the vendored design-evidence-tiers.md: a second, already-stale pin to klayout-tools that the pinned wheel already ships *(hermit)* *(held)*
+- **#245**: Adopt verification/sim_env.sh in verification/probes/characterize-tt/run.sh *(hermit)*
 
 ## Epics
 
@@ -74,10 +71,10 @@ _None._
 | Very important | 1 |
 | Important | 1 |
 | Ready (`loom:issue`) | 0 |
-| In Progress (`loom:building`) | 2 |
-| PRs awaiting review | 2 |
+| In Progress (`loom:building`) | 1 |
+| PRs awaiting review | 1 |
 | Approved PRs awaiting merge | 2 |
-| Curated | 3 |
+| Curated | 2 |
 | Architect / Hermit proposals | 1 |
 | Active epics | 0 |
 <!-- guide:plan-body:end -->
