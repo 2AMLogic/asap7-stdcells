@@ -7,12 +7,12 @@ ps/fF). For the shipped cell only the unconditioned `combinational` timing group
 per related pin is used (the `when`-qualified groups are state-dependent splits).
 This is a comparison table, not a pass/fail check.
 
-usage: compare.py <cell> <probe.lib> <shipped.lib> <out.md>
+usage: compare.py <cell> <input-label> <probe.lib> <shipped.lib> <out.md>
 """
 import re
 import sys
 
-cell, ours_path, ref_path, out_path = sys.argv[1:5]
+cell, label, ours_path, ref_path, out_path = sys.argv[1:6]
 FULL = f"{cell}_ASAP7_75t_R"
 TABLES = ["cell_rise", "cell_fall", "rise_transition", "fall_transition"]
 
@@ -72,9 +72,11 @@ ref = parse(ref_path, 1.0, 1.0)  # shipped lib is already ps / fF
 lines = [
     f"# {FULL}: probe vs shipped asap7sc7p5t RVT TT (ps; slew in ps, load in fF)",
     "",
-    "Probe = `klt characterize` on this repo's drawn cell, TT 0.70 V 25 C, BSIM-CMG",
-    "OSDI. Shipped = asap7sc7p5t RVT TT NLDM Liberty, same grid points. A probe,",
-    "not a characterization of record.",
+    f"Input: {label}.",
+    "",
+    "Probe = `klt characterize` on the input named above, TT 0.70 V 25 C,",
+    "BSIM-CMG OSDI. Shipped = asap7sc7p5t RVT TT NLDM Liberty, same grid",
+    "points. A probe, not a characterization of record.",
     "",
 ]
 for (rp, name), tab in sorted(ours.items()):
