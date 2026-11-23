@@ -33,7 +33,7 @@ _None._
 
 Issues currently being built (`loom:building`).
 
-- **#246**: decision 0013's Consequences overstates the signoff-record diff (omits item 6 notes)
+_None._
 
 ## PRs Awaiting Review
 
@@ -47,7 +47,6 @@ PRs that passed review and are queued for Champion auto-merge (`loom:pr`).
 
 - **#161**: fix(lef): emit a pin's own net M2 as port geometry, not obstruction — closes #122
 - **#145**: fix: correct drifted decision-record enumeration and item-9 klt pin in attested evidence — closes #120
-- **#250**: docs: name item 6's added notes in decision 0013's signoff-diff account
 
 ## Proposed
 
@@ -55,7 +54,6 @@ Issues carrying `loom:curated`.
 
 - **#120**: Docs: stale decision-record enumeration in spec/stdcells.md, and the declared 0.8.0 pin in t1-item9-inventory.json *(curated)*
 - **#122**: Library: several signal pins have no routable access point, so OpenROAD detailed routing cannot complete (DRT-0073) *(curated)*
-- **#246**: decision 0013's Consequences overstates the signoff-record diff (omits item 6 notes) *(curated)*
 
 ## Proposed (Architect / Hermit)
 
@@ -73,10 +71,10 @@ _None._
 | Very important | 1 |
 | Important | 1 |
 | Ready (`loom:issue`) | 0 |
-| In Progress (`loom:building`) | 1 |
+| In Progress (`loom:building`) | 0 |
 | PRs awaiting review | 0 |
-| Approved PRs awaiting merge | 3 |
-| Curated | 3 |
+| Approved PRs awaiting merge | 2 |
+| Curated | 2 |
 | Architect / Hermit proposals | 0 |
 | Active epics | 0 |
 <!-- guide:plan-body:end -->

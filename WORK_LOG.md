@@ -5,6 +5,8 @@ triage role. Newest first.
 
 ### 2026-11-23
 
+- **PR #250**: docs: name item 6's added notes in decision 0013's signoff-diff account
+- **Issue #246** (closed): decision 0013's Consequences overstates the signoff-record diff (omits item 6 notes)
 - **PR #247**: refactor: source sim_env.sh in the characterize-tt probe driver
 - **PR #244**: chore: drop vendored design-evidence tiers checklist; grade from the pinned wheel
 - **PR #241**: refactor: promote shared sim-driver scaffolding into verification/sim_env.sh
