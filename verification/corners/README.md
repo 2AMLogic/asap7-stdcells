@@ -88,8 +88,12 @@ the requests (`make_requests.py`), then submits them with
 `klt sim --batch-set ... --wait-for-capacity 600` and reduces the reports
 (`summarize.py`). Nothing runs locally; a refused or failed submit is reported,
 not re-run. `run.sh <dir> --dry-run` stops after validating the requests.
-The steps both drivers share (pinned PDK fetch, OSDI build or `OSDI_PREBUILT`, scratch
-guard, batch-set submit, evidence copy) and the pin constants live in `common.sh`; the
+The setup steps every simulation driver shares (pinned PDK fetch, OSDI build or
+`OSDI_PREBUILT`, scratch guard, `versions.txt`) live in `verification/sim_env.sh`,
+sourced through `common.sh` (also sourced by `verification/pex/run.sh` and
+`verification/bringup/reproduce.sh`), and the PDK pin itself is read from
+`verification/cells.json`; the corners-specific steps (batch-set submit, evidence
+copy) stay in `common.sh`; the
 budget scripts share their Liberty helpers in `liberty_budget.py`; both generators
 build the request envelope with `make_requests.sim_request`, which differs between
 the halves only in `options.timeout_s` (600 s combinational, 1800 s sequential) and

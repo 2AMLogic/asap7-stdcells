@@ -120,6 +120,7 @@ class DocstringFlags(unittest.TestCase):
         "verification/test_run_regression.py": [],
         "verification/test_signoff_merge_group.py": [],
         "verification/test_klt_interp.py": [],
+        "verification/test_sim_env.py": ["-I"],
         "verification/characterization/test_characterization.py": [],
         "verification/corners/test_corners.py": [],
         "verification/corners/test_logic_table.py": ["-I"],
