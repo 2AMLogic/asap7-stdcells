@@ -10,41 +10,34 @@
 #                                   outside it)
 # Needs: klt, ngspice >= 44 with OSDI, curl, sha256sum, and the klt tool's
 # Python. KLT_SRC must point at a klayout-tools checkout (for
-# scripts/fetch-asap7-sim-toolchain.sh). One corner per variant, local
-# backend; nothing is submitted to a batch fleet.
+# scripts/fetch-asap7-sim-toolchain.sh), or OSDI_PREBUILT at a prebuilt
+# bsimcmg.osdi whose sha256 is checked. One corner per variant, local
+# backend; nothing is submitted to a batch fleet. The PDK pin and the
+# shared setup steps live in verification/sim_env.sh.
 set -euo pipefail
 
 SCRATCH="${1:?usage: run.sh <scratch-dir>}"
 HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO="$(cd "$HERE/../../.." && pwd)"
-KLT_PY="${KLT_PY:-$(head -1 "$(command -v klt)" | sed 's/^#!//')}"
-KLT_SRC="${KLT_SRC:?set KLT_SRC to a klayout-tools checkout}"
-PIN_VERSION=0.2.17
-PIN_SHA256=ac7e950c4d0394a829658b6e219fea4a4b0c61a998183d5520f8b9e38c6efff2
+KLT_SRC="${KLT_SRC:-}"
+source "$HERE/../../sim_env.sh"
 VARIANTS="drawn nfin6 shipped-gds shipped-cdl slew1090"
 
-mkdir -p "$SCRATCH"
-[ -z "$(ls -A "$SCRATCH")" ] || { echo "scratch dir must be empty" >&2; exit 2; }
-SCRATCH="$(cd "$SCRATCH" && pwd)"
+sim_env_klt_py
+sim_env_require_osdi_source
+sim_env_init_scratch "$SCRATCH"
 
 # 1. Fetch and verify the pinned PDK archive; take the NAND2x1 views from it.
-curl -fsSL -o "$SCRATCH/lambdapdk.tar.gz" \
-  "https://github.com/siliconcompiler/lambdapdk/archive/refs/tags/v${PIN_VERSION}.tar.gz"
-echo "$PIN_SHA256  $SCRATCH/lambdapdk.tar.gz" | sha256sum -c -
-mkdir "$SCRATCH/pdk"
-tar -xzf "$SCRATCH/lambdapdk.tar.gz" -C "$SCRATCH/pdk" --strip-components=1 \
-  --wildcards "lambdapdk-${PIN_VERSION}/lambdapdk/asap7/*"
-PDKROOT="$SCRATCH/pdk/lambdapdk"
+sim_env_fetch_pdk
 RVT="$PDKROOT/asap7/libs/asap7sc7p5t_rvt"
-mkdir "$SCRATCH/run" "$SCRATCH/ref"
+mkdir "$SCRATCH/ref"
 gunzip -c "$RVT/nldm/asap7sc7p5t_SIMPLE_RVT_TT_nldm.lib.gz" > "$SCRATCH/ref/SIMPLE_TT.lib"
 gunzip -c "$RVT/gds/asap7sc7p5t_28_R.gds.gz" > "$SCRATCH/lib.gds"
 klt clip "$SCRATCH/lib.gds" --cell NAND2x1_ASAP7_75t_R -o "$SCRATCH/shipped-NAND2x1.gds"
 
-# 2. Build the OSDI module (BSIM-CMG) under the scratch dir.
-KLT_ASAP7_SIM_STORE="$SCRATCH/sim" OPENVAF_R_INSTALL_PREFIX="$SCRATCH/openvaf-r" \
-  bash "$KLT_SRC/scripts/fetch-asap7-sim-toolchain.sh" > "$SCRATCH/run/sim-toolchain.log"
-OSDI="$SCRATCH/sim/osdi/bsimcmg.osdi"
+# 2. The OSDI module (BSIM-CMG): prebuilt (sha256 checked) or built under the
+#    scratch dir from the pinned source.
+sim_env_osdi
 
 # 3. Build the five variant requests (one directory per input, so the
 #    identically named NAND2x1 outputs survive).
@@ -131,10 +124,5 @@ cp "$SCRATCH/run/vsubs-bias.md" "$SCRATCH/records/"
 python3 -I "$HERE/../../normalize_paths.py" "$SCRATCH" "$SCRATCH"/records/*.json
 
 # 8. Tool versions.
-{
-  echo "klt: $(klt --version)"
-  echo "ngspice: $(ngspice --version | grep -m1 -i 'ngspice-')"
-  echo "lambdapdk: ${PIN_VERSION} sha256 ${PIN_SHA256}"
-  echo "bsimcmg.osdi sha256: $(sha256sum "$OSDI" | cut -d' ' -f1)"
-} > "$SCRATCH/records/versions.txt"
+sim_env_write_versions "$SCRATCH/records/versions.txt"
 echo "done: records under $SCRATCH/records"

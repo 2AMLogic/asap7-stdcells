@@ -90,7 +90,8 @@ the requests (`make_requests.py`), then submits them with
 not re-run. `run.sh <dir> --dry-run` stops after validating the requests.
 The setup steps every simulation driver shares (pinned PDK fetch, OSDI build or
 `OSDI_PREBUILT`, scratch guard, `versions.txt`) live in `verification/sim_env.sh`,
-sourced through `common.sh` (also sourced by `verification/pex/run.sh` and
+sourced through `common.sh` (also sourced by `verification/pex/run.sh`,
+`verification/probes/characterize-tt/run.sh` and
 `verification/bringup/reproduce.sh`), and the PDK pin itself is read from
 `verification/cells.json`; the corners-specific steps (batch-set submit, evidence
 copy) stay in `common.sh`; the
