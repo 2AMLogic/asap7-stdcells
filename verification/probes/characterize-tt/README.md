@@ -1,4 +1,4 @@
-# characterize-tt: `klt characterize` probe on the drawn INVx1 and NAND2x1
+# TT timing probes with `klt characterize`
 
 A one-corner probe, not a characterization of record. It asks whether
 `klt characterize` can run on this repo's own drawn cells with the open
@@ -7,13 +7,14 @@ that this had not been tried). It informs whether timing Liberty is reachable
 with the current tool. It makes no claim for T1 items 5 or 8, and nothing here
 is a measured result: every number is a tool result against a predictive model.
 
-## Result
+## 2026-11-06 — Drawn INVx1 and NAND2x1
 
 `klt characterize` ran on both cells at TT, 0.70 V, 25 C (local backend, single
 corner, 4x4 grid of slew 5/10/20/40 ps by load 0.72/1.44/2.88/5.76 fF) and
 emitted NLDM tables (delay, transition, power, leakage, pin capacitance) for
 INVx1 `A->Y` and NAND2x1 `A->Y`, `B->Y`. Both sweeps report status `pass`.
-Re-running `run.sh` from a cold start reproduced byte-identical `.lib` files.
+Two cold starts of the two-cell probe produced byte-identical `.lib` files
+for both cells. Commit `12884a5` contains the original two-cell probe.
 
 Ratio of probe to shipped asap7sc7p5t RVT TT value at the same grid points
 (full tables in `records/2026-11-06/run/compare-*.md`):
@@ -83,9 +84,8 @@ What remains unexplained (recorded, not chased further here):
 
 Disposition: the drawn sizing is a deliberate spec choice, so the layout
 change (or the recorded decision to keep it) is filed as its own issue,
-#234. No klayout-tools gap surfaced: the shipped GDS and CDL through this
-flow reproduce each other; the `--compare-to` unit-conversion gap stays the
-already-filed klayout-tools#5063.
+#234. The shipped GDS and CDL through this flow reproduce each other. These
+five runs exposed no new klayout-tools gap.
 
 Reproducibility: `run.sh` from a cold start twice produced byte-identical
 `.lib` files for all five variants, and the drawn variant reproduces the
@@ -106,16 +106,16 @@ behaviour). Tool versions: `records/2026-11-21/versions.txt`.
   the NAND2x1 transient is singular and `klt characterize` fails; that first
   attempt is kept in `records/2026-11-06/attempt1-floating-well/` (request,
   netlist, error report). This is a netlist edit made by the probe, not by klt.
-- **Units**: `klt characterize --compare-to` compares ns/pF values against the
-  shipped ps/fF library without conversion (gap filed generically as
-  2AMLogic/klayout-tools#5063). The 2026-11-06 reports carry these blocks and
-  they are not meaningful; the 2026-11-21 runs drop the flag and
-  `compare.py` does the unit-normalised tabulation instead.
+- **Units** — On 2026-11-06, `klt characterize --compare-to` in klt
+  0.9.2.dev103 compared ns/pF values against the shipped ps/fF library
+  without conversion. Use the unit-normalised `compare.py` tables for those
+  runs. The 2026-11-21 probe omits `--compare-to` and uses the same unit
+  conversion in `compare.py`. [Upstream issue #5063](https://github.com/2AMLogic/klayout-tools/issues/5063)
 - Combinational arcs only; the Liberty round-trip check was `skipped` by klt
   (native reader not installed), so the emitted files were not parse-checked.
 - **Path normalisation**: the committed request, report and sim-report JSON
   are klt's output with one change, made by `verification/normalize_paths.py`
-  (called from `run.sh`, step 5b): the scratch-dir prefix is replaced by
+  during evidence collection: the scratch-dir prefix is replaced by
   `scratch` and the absolute `ngspice` binary path by `ngspice`, as plain
   text substitution, so
   the records carry no host paths (the evidence lint rejects them). No key or
@@ -125,22 +125,42 @@ behaviour). Tool versions: `records/2026-11-21/versions.txt`.
 
 ## Reproduce
 
-```
-KLT_SRC=<klayout-tools checkout> verification/probes/characterize-tt/run.sh <empty-dir>
+Run the commands from the repository root. For each date, put the recorded
+versions of `klt` and `ngspice` on `PATH` and export `KLT_SRC` as the absolute
+path of the matching klayout-tools checkout. Both scripts fetch the
+checksum-pinned lambdapdk 0.2.17 archive and build the OSDI module in scratch.
+
+### Re-run the 2026-11-06 two-cell probe
+
+Use klt `0.9.2.dev103+g9f4cec35997a` and ngspice-46. Check out the two-cell
+probe in a separate worktree so `run.sh` uses the matching request generator,
+comparison script and layouts. [Recorded tool versions](records/2026-11-06/run/versions.txt)
+
+```sh
+git worktree add --detach ../asap7-probe-2026-11-06 12884a5
+scratch=$(mktemp -d)
+../asap7-probe-2026-11-06/verification/probes/characterize-tt/run.sh "$scratch"
 ```
 
-Fetches the pinned lambdapdk 0.2.17 (sha256 checked) and builds the OSDI module
-into the scratch directory, then clips the shipped NAND2x1 out of the pinned
-GDS and characterizes five inputs in separate directories under the scratch
-dir: the drawn GDS, the drawn netlist with the two nMOS fin counts raised to
-six, the shipped GDS, the shipped CDL and the drawn cell under 10/90 slew
-thresholds. Each variant's request, netlist, report, sim report, `.lib` and
-comparison table are collected under `<scratch>/records/` with host paths
-stripped; commit them under a dated `records/` directory. Tool versions for
-2026-11-06: `records/2026-11-06/run/versions.txt` (klt
-0.9.2.dev103+g9f4cec35997a, ngspice-46, OSDI module sha256 `4e755d14...`);
-for 2026-11-21: `records/2026-11-21/versions.txt` (klt
-0.9.3.dev2575+g6bd18bbc8637, ngspice-47, OSDI module sha256 `5d7425d5...`).
+The script writes the two Liberty files to `$scratch/run/out/` and the
+tables behind the published ratios to `$scratch/run/compare-INVx1.md` and
+`$scratch/run/compare-NAND2x1.md`.
+
+### Re-run the 2026-11-21 NAND2x1 variants
+
+Use klt `0.9.3.dev2575+g6bd18bbc8637` and ngspice-47 with the `run.sh` in
+the current tree. [Recorded tool versions](records/2026-11-21/versions.txt)
+
+```sh
+scratch=$(mktemp -d)
+verification/probes/characterize-tt/run.sh "$scratch"
+```
+
+The script clips the shipped NAND2x1 from the pinned GDS and characterizes
+the drawn GDS, the drawn netlist with six fins on each series nMOS, the
+shipped GDS, the shipped CDL and the drawn cell with 10/90 slew thresholds.
+It collects each variant's request, netlist, report, simulation report,
+`.lib` and comparison table under `$scratch/records/` with host paths stripped.
 
 `layout/A7S_75t_R_structural.lib`, the manifest and the signoff record are
 untouched.

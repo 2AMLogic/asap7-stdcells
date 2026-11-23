@@ -53,9 +53,9 @@ OSDI="$SCRATCH/sim/osdi/bsimcmg.osdi"
   "$PDKROOT/asap7/base/spice/hspice/7nm_TT_160803.pm" "$OSDI" "$SCRATCH/run"
 
 # 4. One klt characterize per variant (single corner, local backend). The
-#    in-klt --compare-to block is dropped: it compares ns/pF values against
-#    the shipped ps/fF library without conversion (klayout-tools#5063);
-#    compare.py does the unit-normalised tabulation instead.
+#    2026-11-06 run used --compare-to on klt 0.9.2.dev103, which compared
+#    ns/pF with ps/fF without conversion (klayout-tools#5063). This probe
+#    uses compare.py for its unit-normalised tables.
 for V in $VARIANTS; do
   klt characterize "$SCRATCH/run/$V/NAND2x1.request.json" -o "$SCRATCH/run/$V/out" \
     --lib "$SCRATCH/run/$V/out/NAND2x1.lib" --backend local --keep-artifacts \
