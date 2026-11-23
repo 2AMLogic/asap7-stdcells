@@ -5,9 +5,11 @@ triage role. Newest first.
 
 ### 2026-11-23
 
+- **PR #247**: refactor: source sim_env.sh in the characterize-tt probe driver
 - **PR #244**: chore: drop vendored design-evidence tiers checklist; grade from the pinned wheel
 - **PR #241**: refactor: promote shared sim-driver scaffolding into verification/sim_env.sh
 - **PR #235**: test(probe): attribute the NAND2x1 cell_fall gap to the drawn n-stack sizing
+- **Issue #245** (closed): Adopt verification/sim_env.sh in verification/probes/characterize-tt/run.sh
 - **Issue #133** (closed): Drop the vendored design-evidence-tiers.md: a second, already-stale pin to klayout-tools that the pinned wheel already ships
 - **Issue #240** (closed): Consolidate duplicated PDK-fetch and OSDI shell scaffolding across verification drivers
 - **Issue #232** (closed): characterize-tt probe: find why NAND2x1 cell_fall is 1.11 to 1.82 times the shipped value while INVx1 is within about 10 percent
