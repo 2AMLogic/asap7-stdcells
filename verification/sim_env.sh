@@ -1,7 +1,8 @@
 # Shared simulation-environment scaffolding for the verification/ drivers:
-# corners/run.sh and run_seq.sh (via common.sh), pex/run.sh and
-# bringup/reproduce.sh. Sourced, never executed; the caller owns
-# `set -euo pipefail` and sources this file before calling any function.
+# corners/run.sh and run_seq.sh (via common.sh), pex/run.sh,
+# probes/characterize-tt/run.sh and bringup/reproduce.sh. Sourced, never
+# executed; the caller owns `set -euo pipefail` and sources this file
+# before calling any function.
 #
 # The lambdapdk pin is read from verification/cells.json -- the canonical pin
 # the evidence cites -- so a bump is made there only. The klt interpreter

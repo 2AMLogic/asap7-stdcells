@@ -1,13 +1,15 @@
 """Self-check for verification/sim_env.sh (stdlib only; no klt run, no network).
 
-Covers the shared scaffolding the three simulation drivers source: `bash -n`
+Covers the shared scaffolding the simulation drivers source: `bash -n`
 on the helper and every driver that sources it, the cells.json pin read at
 source time, `sim_env_init_scratch`'s empty/non-empty gate, `sim_env_klt_py`'s
 resolution (an explicit `KLT_PY`, `KLT_PYTHON`, a stub `klt` shebang -- direct
 and `#!/usr/bin/env`) and its refusal when `klt` is absent (negative control),
 `sim_env_osdi`'s `OSDI_PREBUILT` verification (match accepted, tampered copy
 refused -- negative control), and the four-line `versions.txt` writer under
-stub `klt`/`ngspice` binaries.
+stub `klt`/`ngspice` binaries -- plus a guard that no shell driver under
+verification/ but sim_env.sh itself hardcodes the lambdapdk pin or scrapes
+klt's shebang.
 
     python3 -I verification/test_sim_env.py
     All self-tests at once: python3 verification/run_selftests.py
@@ -33,6 +35,7 @@ SOURCING_DRIVERS = [
     "verification/corners/run_seq.sh",
     "verification/pex/run.sh",
     "verification/bringup/reproduce.sh",
+    "verification/probes/characterize-tt/run.sh",
 ]
 
 
@@ -62,6 +65,24 @@ class SimEnvSyntaxTest(unittest.TestCase):
                 p = subprocess.run([BASH, "-n", str(REPO / rel)],
                                    capture_output=True, text=True)
                 self.assertEqual(p.returncode, 0, p.stderr)
+
+
+class SimEnvNoDuplicationTest(unittest.TestCase):
+    """sim_env.sh is the only shell home of the lambdapdk pin and the klt
+    shebang scrape (#245): every other shell driver under verification/ must
+    stay free of both, so a new driver sources the helper instead of
+    copying the scaffolding out of it.
+    """
+
+    def test_no_other_driver_pins_lambdapdk_or_scrapes_the_shebang(self):
+        for sh in sorted(VERIFICATION.rglob("*.sh")):
+            if sh == VERIFICATION / "sim_env.sh":
+                continue
+            text = sh.read_text(encoding="utf-8")
+            with self.subTest(sh=sh.relative_to(REPO).as_posix()):
+                self.assertNotIn("PIN_VERSION=", text)
+                self.assertNotIn("PIN_SHA256=", text)
+                self.assertNotIn('head -1 "$(command -v klt)"', text)
 
 
 class SimEnvPinTest(unittest.TestCase):

@@ -129,6 +129,8 @@ Run the commands from the repository root. For each date, put the recorded
 versions of `klt` and `ngspice` on `PATH` and export `KLT_SRC` as the absolute
 path of the matching klayout-tools checkout. Both scripts fetch the
 checksum-pinned lambdapdk 0.2.17 archive and build the OSDI module in scratch.
+The current tree's `run.sh` takes the PDK pin and the shared setup steps from
+`verification/sim_env.sh`; the checked-out 2026-11-06 copy predates it.
 
 ### Re-run the 2026-11-06 two-cell probe
 
