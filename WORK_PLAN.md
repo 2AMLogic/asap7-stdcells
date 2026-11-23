@@ -4,7 +4,7 @@ Roadmap generated from GitHub label state by the Guide triage role. Only the
 region between the markers is machine-generated.
 
 <!-- guide:plan-body:start -->
-_Generated: 2026-11-22T21:35:00Z (snapshot; compare against live labels)_
+_Generated: 2026-11-23T01:10:00Z (snapshot; compare against live labels)_
 ## Operator Attention: Merge-Risk-Hold Pileup
 
 Judge-approved PRs under a hold (`loom:blocked` or `loom:operator`) — only a human merge decision is missing.
@@ -27,7 +27,7 @@ Judge-approved PRs under a hold (`loom:blocked` or `loom:operator`) — only a h
 
 Human-approved issues ready for implementation (`loom:issue`).
 
-- **#122**: Library: several signal pins have no routable access point, so OpenROAD detailed routing cannot complete (DRT-0073)
+_None._
 
 ## In Progress
 
@@ -40,12 +40,12 @@ Issues currently being built (`loom:building`).
 PRs waiting on Judge (`loom:review-requested`).
 
 - **#235**: test(probe): attribute the NAND2x1 cell_fall gap to the drawn n-stack sizing
-- **#161**: fix(lef): emit a pin's own net M2 as port geometry, not obstruction
 
 ## Approved (Awaiting Merge)
 
 PRs that passed review and are queued for Champion auto-merge (`loom:pr`).
 
+- **#161**: fix(lef): emit a pin's own net M2 as port geometry, not obstruction — closes #122
 - **#145**: fix: correct drifted decision-record enumeration and item-9 klt pin in attested evidence — closes #120
 
 ## Proposed
@@ -71,10 +71,10 @@ _None._
 | Operator merge-risk holds | 1 |
 | Very important | 1 |
 | Important | 1 |
-| Ready (`loom:issue`) | 1 |
+| Ready (`loom:issue`) | 0 |
 | In Progress (`loom:building`) | 1 |
-| PRs awaiting review | 2 |
-| Approved PRs awaiting merge | 1 |
+| PRs awaiting review | 1 |
+| Approved PRs awaiting merge | 2 |
 | Curated | 3 |
 | Architect / Hermit proposals | 1 |
 | Active epics | 0 |
