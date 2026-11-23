@@ -4,7 +4,7 @@ name: klt signoff
 # report from the committed block manifest (manifests/asap7-stdcells.json) and
 # byte-compare it against the committed verdict of record
 # (manifests/asap7-stdcells.signoff.json). Whoever changes cited evidence, the
-# manifest or the vendored checklist must regenerate the record in the same PR.
+# manifest must regenerate the record in the same PR.
 #
 # Items 1, 2, 9 and 10 cite tool-produced attestation envelopes (klt signoff
 # --attest); item 4 cites the library `klt lvs` envelope of a verification
@@ -185,21 +185,19 @@ jobs:
           set -uo pipefail
           rc=0
           klt signoff --manifest manifests/asap7-stdcells.json \
-                      --tiers-doc manifests/design-evidence-tiers.md \
                       --format json > "$RUNNER_TEMP/fresh-signoff.json" || rc=$?
           # 0 = every T1 item met. Anything else is a hard error: exit 3
           # means a T1 item is unmet. The pinned grader grades T1 items
           # only, so exit 3 is never a legitimate tier-2 state (see the
           # file header).
           if [ "$rc" -ne 0 ]; then
-            echo "::error::klt signoff exited $rc (expected 0): a T1 item is unmet, or the manifest, vendored tier doc, or cited evidence is broken"
+            echo "::error::klt signoff exited $rc (expected 0): a T1 item is unmet, or the manifest or cited evidence is broken"
             exit 1
           fi
           if ! cmp -s "$RUNNER_TEMP/fresh-signoff.json" manifests/asap7-stdcells.signoff.json; then
             echo "::error::Fresh klt signoff output differs from the committed record manifests/asap7-stdcells.signoff.json."
             echo "Regenerate and commit the record in this same PR:"
             echo "  klt signoff --manifest manifests/asap7-stdcells.json \\"
-            echo "      --tiers-doc manifests/design-evidence-tiers.md \\"
             echo "      --format json > manifests/asap7-stdcells.signoff.json"
             echo "---- diff (fresh vs committed), pretty-printed ----"
             diff <(python3 -m json.tool "$RUNNER_TEMP/fresh-signoff.json") \

@@ -99,7 +99,6 @@ recorded as `build.version` in the record itself. Regenerate it with:
 
 ```
 klt signoff --manifest manifests/asap7-stdcells.json \
-    --tiers-doc manifests/design-evidence-tiers.md \
     --format json > manifests/asap7-stdcells.signoff.json
 ```
 
@@ -124,9 +123,12 @@ pinned PDK, so it needs network. If an inventory itself changes, update the
 `content_hash` the manifest pins for that item. These are tool results against
 the predictive ASAP7 model. The block kind is `digital`, fixed by the ratified
 [`spec/stdcells.md`](spec/stdcells.md) and carried in the signoff record's
-`kind`. The checklist in
-`manifests/design-evidence-tiers.md` is vendored byte-identical from the
-`klayout-tools` commit named in `manifests/design-evidence-tiers.UPSTREAM`.
+`kind`. The design-evidence tiers checklist is not vendored here: it comes
+from the pinned `klayout-tools` wheel itself
+([`docs/design-evidence-tiers.md` in klayout-tools at
+`v0.9.0`](https://github.com/2AMLogic/klayout-tools/blob/v0.9.0/docs/design-evidence-tiers.md)),
+so the klt pin alone selects the checklist and the CI byte-compare above is
+what surfaces a checklist change at a pin bump.
 
 ## License
 

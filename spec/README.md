@@ -20,6 +20,7 @@
   | [`0010`](decisions/0010-filler1-without-implants.md) | FILLER1 is drawn without NSELECT and PSELECT |
   | [`0011`](decisions/0011-pvt-corner-set-and-margin-budget.md) | PVT corner set and the item-5 timing-margin budget |
   | [`0012`](decisions/0012-sequential-corner-sweep-and-setup-hold-budget.md) | sequential corner sweep and the setup/hold margin budget |
+  | [`0013`](decisions/0013-drop-vendored-design-evidence-tiers.md) | drop the vendored design-evidence tiers checklist (operator ruling 2026-11-23) |
 
 Spec changes go through a new decision record; nothing here is relaxed to make
 a result pass.
