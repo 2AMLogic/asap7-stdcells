@@ -5,30 +5,21 @@
 #                                         written outside it)
 # Needs: klt, ngspice >= 44 with OSDI, curl, sha256sum, and the klt tool's
 # Python (for klayout.db and klayout_tools). Single-unit runs only; nothing
-# is submitted to a batch fleet.
+# is submitted to a batch fleet. The PDK pin and the shared setup steps live
+# in verification/sim_env.sh.
 set -euo pipefail
 
 SCRATCH="${1:?usage: reproduce.sh <scratch-dir>}"
 HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-KLT_PY="${KLT_PY:-$(head -1 "$(command -v klt)" | sed 's/^#!//')}"
-PIN_VERSION=0.2.17
-PIN_SHA256=ac7e950c4d0394a829658b6e219fea4a4b0c61a998183d5520f8b9e38c6efff2
+source "$HERE/../sim_env.sh"
 CELL_SUFFIX=_ASAP7_75t_R
 
-mkdir -p "$SCRATCH"
-[ -z "$(ls -A "$SCRATCH")" ] || { echo "scratch dir must be empty" >&2; exit 2; }
-SCRATCH="$(cd "$SCRATCH" && pwd)"
+sim_env_klt_py
+sim_env_init_scratch "$SCRATCH"
 
 # 1. Fetch and verify the pinned PDK archive.
-curl -fsSL -o "$SCRATCH/lambdapdk.tar.gz" \
-  "https://github.com/siliconcompiler/lambdapdk/archive/refs/tags/v${PIN_VERSION}.tar.gz"
-echo "$PIN_SHA256  $SCRATCH/lambdapdk.tar.gz" | sha256sum -c -
-mkdir "$SCRATCH/pdk"
-tar -xzf "$SCRATCH/lambdapdk.tar.gz" -C "$SCRATCH/pdk" --strip-components=1 \
-  --wildcards "lambdapdk-${PIN_VERSION}/lambdapdk/asap7/*"
-PDKROOT="$SCRATCH/pdk/lambdapdk"
+sim_env_fetch_pdk
 LIB="$PDKROOT/asap7/libs/asap7sc7p5t_rvt"
-mkdir "$SCRATCH/run"
 gunzip -c "$LIB/gds/asap7sc7p5t_28_R.gds.gz" > "$SCRATCH/run/lib.gds"
 
 # 2. Resolve the PDK through klt.
@@ -51,12 +42,12 @@ cat > "$SCRATCH/run/lvs.json" <<REQ
 REQ
 klt lvs "$SCRATCH/run/lvs.json" --format json > "$SCRATCH/run/lvs-report.json"
 
-# 5. BSIM-CMG: build the OSDI module under the scratch dir, then one TT run.
-KLT_SRC="${KLT_SRC:?set KLT_SRC to a klayout-tools checkout (for scripts/fetch-asap7-sim-toolchain.sh)}"
-KLT_ASAP7_SIM_STORE="$SCRATCH/sim" OPENVAF_R_INSTALL_PREFIX="$SCRATCH/openvaf-r" \
-  bash "$KLT_SRC/scripts/fetch-asap7-sim-toolchain.sh" > "$SCRATCH/run/sim-toolchain.log"
+# 5. BSIM-CMG: the OSDI module -- OSDI_PREBUILT (sha256 checked) or built
+#    under the scratch dir from the pinned source -- then one TT run.
+sim_env_require_osdi_source
+sim_env_osdi
 "$KLT_PY" "$HERE/bsimcmg_smoke.py" "$SCRATCH/run/inv.gds" \
   "$PDKROOT/asap7/base/spice/hspice/7nm_TT_160803.pm" \
-  "$SCRATCH/sim/osdi/bsimcmg.osdi" "$SCRATCH/simrun"
+  "$OSDI" "$SCRATCH/simrun"
 klt sim "$SCRATCH/simrun/req.json" --backend local --format json > "$SCRATCH/run/sim-report.json"
 echo "done: reports under $SCRATCH/run"

@@ -9,7 +9,8 @@
 # sha256sum, the klt tool's Python, and fleet access (KLT_SIM_BACKEND=batch).
 # KLT_SRC must point at a klayout-tools checkout (scripts/fetch-asap7-sim-
 # toolchain.sh), or OSDI_PREBUILT at a prebuilt bsimcmg.osdi whose sha256 is
-# checked. Shared steps and the pins live in common.sh. The grid is NOT run
+# checked. Shared steps live in common.sh and verification/sim_env.sh (which
+# reads the PDK pin from verification/cells.json). The grid is NOT run
 # locally: the requests go through
 # `klt sim --batch-set --wait-for-capacity 600`; a failed submit is reported,
 # never re-run here. `--dry-run` as a second argument stops after validation.
@@ -17,8 +18,8 @@ set -euo pipefail
 
 source "$(dirname "${BASH_SOURCE[0]}")/common.sh"
 corners_init run_seq.sh "${1:-}" "${2:-}"
-corners_fetch_pdk
-corners_osdi
+sim_env_fetch_pdk
+sim_env_osdi
 
 # 3. The budget of decision 0012, re-derived from the shipped SS Liberty.
 python3 -I "$HERE/reference_seq_budget.py" \
