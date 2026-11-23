@@ -43,5 +43,8 @@ the vendored path is history and stays as written).
   repin PR must re-check the grader's exit semantics and the tier-floor
   literals as the signoff workflow header already requires.
 - The signoff record of record was regenerated once without `--tiers-doc`
-  (tier T1 and every item status unchanged; only `source_doc`,
-  `source_doc_content_hash` and item `text` changed).
+  (tier T1 and every item status unchanged; the changed fields are
+  `source_doc`, `source_doc_content_hash`, item `text`, and item 6's
+  `notes`, which went from empty to the two not-applicable guidance
+  bullets the grader echoes from the packaged 0.9.0 checklist — checklist
+  prose, the same class of change as `text`).
