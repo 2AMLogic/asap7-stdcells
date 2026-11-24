@@ -4,7 +4,7 @@ Roadmap generated from GitHub label state by the Guide triage role. Only the
 region between the markers is machine-generated.
 
 <!-- guide:plan-body:start -->
-_Generated: 2026-11-23T20:13:00Z (snapshot; compare against live labels)_
+_Generated: 2026-11-24T14:40:00Z (snapshot; compare against live labels)_
 ## Operator Attention: Merge-Risk-Hold Pileup
 
 Judge-approved PRs under a hold (`loom:blocked` or `loom:operator`) — only a human merge decision is missing.
@@ -21,19 +21,19 @@ Judge-approved PRs under a hold (`loom:blocked` or `loom:operator`) — only a h
 
 `loom:important`; taken before unlabelled work.
 
-- **#110**: Re-take the full DRC/LVS regression record under the CI-pinned klt 0.9.0 *(held)*
+- **#110**: Re-take the full DRC/LVS regression record under the CI-pinned klt 0.9.0
 
 ## Ready
 
 Human-approved issues ready for implementation (`loom:issue`).
 
-_None._
+- **#234**: Widen the NAND2x1 series nMOS stack to the shipped x1 fall drive, or record the divergence
 
 ## In Progress
 
 Issues currently being built (`loom:building`).
 
-- **#234**: Widen the NAND2x1 series nMOS stack to the shipped x1 fall drive, or record the divergence
+_None._
 
 ## PRs Awaiting Review
 
@@ -71,8 +71,8 @@ _None._
 | Operator merge-risk holds | 1 |
 | Very important | 1 |
 | Important | 1 |
-| Ready (`loom:issue`) | 0 |
-| In Progress (`loom:building`) | 1 |
+| Ready (`loom:issue`) | 1 |
+| In Progress (`loom:building`) | 0 |
 | PRs awaiting review | 1 |
 | Approved PRs awaiting merge | 2 |
 | Curated | 3 |
