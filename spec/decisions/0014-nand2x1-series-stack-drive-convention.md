@@ -12,19 +12,23 @@ both series nMOS devices and three on the two pMOS devices; the pinned CDL and
 the pinned GDS agree. The drawn `NAND2x1_A7S_75t_R` carries `NFIN=3` on all
 four devices.
 
-Issue #232 measured the consequence with the TT probe
-(`verification/probes/characterize-tt/records/2026-11-21/`, TT 0.70 V 25 C,
-BSIM-CMG OSDI, 4x4 slew/load grid, both inputs):
+The [2026-11-21 probe records](../../verification/probes/characterize-tt/records/2026-11-21/)
+cover both NAND2x1 inputs on a 4×4 slew/load grid at TT, 0.70 V and 25 °C
+using BSIM-CMG OSDI (issue #232). Each falling-delay ratio divides the probe
+`cell_fall` by the published asap7sc7p5t RVT TT NLDM Liberty value for the
+same input, slew and load.
 
-- Drawn NAND2x1 `cell_fall` is 1.11 to 1.82 times the shipped asap7sc7p5t RVT
-  TT NLDM value (`compare-NAND2x1-drawn.md`), while `INVx1` stays within
-  about 10 percent.
-- The same extracted netlist with only the two nMOS `NFIN` values raised from
-  3 to 6 gives 0.76 to 1.05 times shipped (`compare-NAND2x1-nfin6.md`). This
-  is a netlist experiment; no layout was drawn at six fins.
-- The shipped GDS and the shipped CDL through the same flow reproduce the
-  shipped tables to under 0.001 ps, so the extraction, adaptation and
-  measurement flow adds no measurable distortion to the comparison.
+| NAND2x1 probe | A→Y falling-delay ratio | B→Y falling-delay ratio |
+|---|---:|---:|
+| [Drawn, three fins per device](../../verification/probes/characterize-tt/records/2026-11-21/compare-NAND2x1-drawn.md) | 1.11–1.76 | 1.20–1.82 |
+| [Same netlist, only the two series nMOS widened to six fins](../../verification/probes/characterize-tt/records/2026-11-21/compare-NAND2x1-nfin6.md) | 0.76–1.03 | 0.81–1.05 |
+
+The six-fin netlist experiment and the probes of the
+[shipped GDS](../../verification/probes/characterize-tt/records/2026-11-21/compare-NAND2x1-shipped-gds.md)
+and [shipped CDL](../../verification/probes/characterize-tt/records/2026-11-21/compare-NAND2x1-shipped-cdl.md)
+agree to within 0.0001 ps across all 128 delay and transition entries.
+For example, at 5 ps input slew and 0.72 fF load, all three probes give
+5.66 ps for A→Y falling delay. The published Liberty gives 7.48 ps.
 
 The probe is a predictive-model probe, not a characterization of record
 (decision 0002); these ratios are tool results against a predictive PDK and
@@ -40,22 +44,16 @@ six fins is not adopted.
 1. `NAND2x1_A7S_75t_R` keeps `NFIN=3` on all four devices. Decision 0008's
    unit-drive rule is confirmed for this cell, not relaxed; this record
    amends 0008 only by naming the divergence from the shipped library.
-2. The `x1` multi-input cells of this library are intentionally weaker on the
-   stacking edge than the shipped `x1` cells, because the shipped library
-   sizes the series stack up to hold fall drive near its `x1` inverter and
-   this library does not. Any future timing Liberty derived from the drawn
-   cells will show that gap.
-3. `NAND3x1`, the AOI cells and the OAI cells have **not been measured**. They
-   follow the same unit-drive rule by default. This record makes no claim
-   about their timing or about how their shipped counterparts are sized.
+2. `NAND3x1`, AOI and OAI stacks follow the same three-fin unit-drive rule
+   by default. Their timing is **unmeasured**.
 
 ## Consequences
 
 - No layout, CDL or `design/` change; the existing DRC, LVS and abutment
   records for `NAND2x1_A7S_75t_R` stand untouched.
-- A reader comparing drawn against shipped NAND2x1 timing should expect the
-  falling edge to be slower on the drawn cell by the ranges above, on that
-  probe grid, and should not treat it as an extraction error.
+- Across both inputs on the tested TT grid, the drawn NAND2x1 falling delay
+  was 1.11 to 1.82 times the published Liberty value. The six-fin netlist
+  experiment gave 0.76 to 1.05 times that value.
 - If a later issue chooses to widen the series stacks, it needs a layout that
   fits, an updated CDL, a new decision record, and fresh DRC, LVS and
   abutment results.

@@ -34,13 +34,13 @@
         "command": null,
         "kind": "generic",
         "check_status": "pass",
-        "content_hash": "sha256:1ed72e8d7390e04af86c5a3909b8cb2395606709bbcd8e3e915942d428a00345",
+        "content_hash": "sha256:b99555065fcef75ec87cfcd621512a0f1f601b07a857a4b5e48f1255ad7d970e",
         "input_verified": true,
         "exit_status": 0,
         "artifact_binding": {
           "t1_item": 1,
           "path": null,
-          "content_hash": "sha256:1ed72e8d7390e04af86c5a3909b8cb2395606709bbcd8e3e915942d428a00345",
+          "content_hash": "sha256:b99555065fcef75ec87cfcd621512a0f1f601b07a857a4b5e48f1255ad7d970e",
           "input_verified": true,
           "members": [
             {
@@ -416,7 +416,7 @@
                 "path": "spec/stdcells.md",
                 "scope": "repo"
               },
-              "content_hash": "sha256:4b0aba472f059783ff117fb71e23d366e187231b508a74bfb02fad3487253442",
+              "content_hash": "sha256:e94262fb261bdc4728de3060906606604808e329cfbecd8d058e59c8e1725779",
               "status": "verified"
             }
           ],
