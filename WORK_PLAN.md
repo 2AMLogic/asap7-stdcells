@@ -4,7 +4,7 @@ Roadmap generated from GitHub label state by the Guide triage role. Only the
 region between the markers is machine-generated.
 
 <!-- guide:plan-body:start -->
-_Generated: 2026-11-23T13:45:00Z (snapshot; compare against live labels)_
+_Generated: 2026-11-24T14:40:00Z (snapshot; compare against live labels)_
 ## Operator Attention: Merge-Risk-Hold Pileup
 
 Judge-approved PRs under a hold (`loom:blocked` or `loom:operator`) — only a human merge decision is missing.
@@ -21,13 +21,13 @@ Judge-approved PRs under a hold (`loom:blocked` or `loom:operator`) — only a h
 
 `loom:important`; taken before unlabelled work.
 
-- **#110**: Re-take the full DRC/LVS regression record under the CI-pinned klt 0.9.0 *(held)*
+- **#110**: Re-take the full DRC/LVS regression record under the CI-pinned klt 0.9.0
 
 ## Ready
 
 Human-approved issues ready for implementation (`loom:issue`).
 
-_None._
+- **#234**: Widen the NAND2x1 series nMOS stack to the shipped x1 fall drive, or record the divergence
 
 ## In Progress
 
@@ -39,7 +39,7 @@ _None._
 
 PRs waiting on Judge (`loom:review-requested`).
 
-_None._
+- **#253**: docs: record NAND2x1 three-fin series-stack convention (decision 0014)
 
 ## Approved (Awaiting Merge)
 
@@ -52,6 +52,7 @@ PRs that passed review and are queued for Champion auto-merge (`loom:pr`).
 
 Issues carrying `loom:curated`.
 
+- **#234**: Widen the NAND2x1 series nMOS stack to the shipped x1 fall drive, or record the divergence *(curated)*
 - **#120**: Docs: stale decision-record enumeration in spec/stdcells.md, and the declared 0.8.0 pin in t1-item9-inventory.json *(curated)*
 - **#122**: Library: several signal pins have no routable access point, so OpenROAD detailed routing cannot complete (DRT-0073) *(curated)*
 
@@ -70,11 +71,11 @@ _None._
 | Operator merge-risk holds | 1 |
 | Very important | 1 |
 | Important | 1 |
-| Ready (`loom:issue`) | 0 |
+| Ready (`loom:issue`) | 1 |
 | In Progress (`loom:building`) | 0 |
-| PRs awaiting review | 0 |
+| PRs awaiting review | 1 |
 | Approved PRs awaiting merge | 2 |
-| Curated | 2 |
+| Curated | 3 |
 | Architect / Hermit proposals | 0 |
 | Active epics | 0 |
 <!-- guide:plan-body:end -->
