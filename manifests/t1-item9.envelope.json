@@ -80,7 +80,7 @@
         "role": "testbench",
         "path": "verification/test_run_regression.py",
         "passed": true,
-        "content_hash": "sha256:2520754fba3a5fea084531af95f6dd9f92f3476f47c27045d98d7202bbab2d7e"
+        "content_hash": "sha256:05ac21d175eb1a44a411556708dce931cdba856ece6d995e85e20e112c8a38ef"
       },
       {
         "check": "command",

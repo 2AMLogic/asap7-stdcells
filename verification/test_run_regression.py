@@ -874,16 +874,10 @@ class KltHelperDeterminismTest(unittest.TestCase):
         lay.write(str(src), opt)
         spec = {"top": "TOP", "libs": {"INV": str(src)}, "rows": [[["INV", "R0"], ["INV", "MX"]]]}
         outs = []
-        saved_argv = sys.argv
-        helper_src = (rr.HERE / "klt_helper.py").read_text()
-        try:
-            for i in range(2):
-                out = tmp / f"out{i}.gds"
-                sys.argv = ["helper", "place", json.dumps(spec), str(out)]
-                exec(compile(helper_src, "<klt_helper.py>", "exec"), {"__name__": "__main__"})
-                outs.append(out.read_bytes())
-        finally:
-            sys.argv = saved_argv
+        for i in range(2):
+            out = tmp / f"out{i}.gds"
+            klt_helper.main(["place", json.dumps(spec), str(out)])
+            outs.append(out.read_bytes())
         self.assertTrue(outs[0])
         self.assertEqual(outs[0], outs[1])
 
@@ -934,63 +928,10 @@ class InjectBoxTest(unittest.TestCase):
         stubbed to record what it was asked to insert. This is the only place
         the box-insertion loop itself is exercised.
         """
-        inserted = []
-
-        class Shapes:
-            def insert(self, box):
-                inserted.append(box)
-
-        class Cell:
-            def copy_tree(self, other):
-                pass
-
-            def shapes(self, layer):
-                return Shapes()
-
-        class Layout:
-            dbu = 0.00025
-
-            def read(self, src):
-                pass
-
-            def cell(self, name):
-                return Cell()
-
-            def create_cell(self, name):
-                return Cell()
-
-            def layer(self, *lt):
-                return lt
-
-            def write(self, out, opts=None):
-                assert opts is not None and opts.gds2_write_timestamps is False
-                Path(out).write_bytes(b"gds")
-
-        class SaveLayoutOptions:
-            format = None
-            gds2_write_timestamps = True
-
-        db = types.ModuleType("klayout.db")
-        db.Layout = Layout
-        db.SaveLayoutOptions = SaveLayoutOptions
-        db.Box = lambda *a: ("Box", *a)
-        pkg = types.ModuleType("klayout")
-        pkg.db = db
-        argv = ["extract", "in.gds", "CELL", str(self.out)]
+        argv = ["extract", "CELL.gds", "CELL", str(self.out)]
         if inject is not None:
             argv.append(json.dumps(inject))
-        saved = sys.modules.copy()
-        sys.modules["klayout"], sys.modules["klayout.db"] = pkg, db
-        saved_argv = sys.argv
-        try:
-            sys.argv = ["helper", *argv]
-            helper_src = (rr.HERE / "klt_helper.py").read_text()
-            exec(compile(helper_src, "<klt_helper.py>", "exec"), {"__name__": "__main__"})
-        finally:
-            sys.argv = saved_argv
-            sys.modules.clear()
-            sys.modules.update(saved)
-        return inserted
+        return run_klt_helper(place_db({"CELL": (100, 200)}), argv).boxes
 
     def setUp(self):
         self.tmp = Path(tempfile.mkdtemp())
@@ -1017,6 +958,7 @@ class PlaceResult:
         self.placements = []  # [(cell name, (code, x, y)), ...] in insert order
         self.texts = []       # [(layer, string, x, y), ...]
         self.created = []     # names passed to create_cell, in order
+        self.boxes = []       # non-Text items inserted into a Shapes, in insert order
 
 
 def place_db(cells, *, dbu=0.00025, origin=(0, 0), missing=()):
@@ -1077,7 +1019,10 @@ def place_db(cells, *, dbu=0.00025, origin=(0, 0), missing=()):
             self.layer = layer
 
         def insert(self, item):
-            result.texts.append((self.layer, item.string, item.x, item.y))
+            if isinstance(item, Text):
+                result.texts.append((self.layer, item.string, item.x, item.y))
+            else:
+                result.boxes.append(item)
 
     class Cell:
         def __init__(self, name, index, boxes):
@@ -1146,6 +1091,21 @@ def place_db(cells, *, dbu=0.00025, origin=(0, 0), missing=()):
     return pkg, db, result
 
 
+def run_klt_helper(stub, argv):
+    """Run klt_helper.main(argv) with `stub` (from place_db) installed as klayout.db.
+
+    sys.modules is restored afterwards. Returns the stub's PlaceResult.
+    """
+    saved = sys.modules.copy()
+    sys.modules["klayout"], sys.modules["klayout.db"] = stub[0], stub[1]
+    try:
+        klt_helper.main(argv)
+    finally:
+        sys.modules.clear()
+        sys.modules.update(saved)
+    return stub[2]
+
+
 class HelperPlaceTest(unittest.TestCase):
     """klt_helper's `place` branch against a stub klayout.db, via main(argv).
 
@@ -1158,15 +1118,8 @@ class HelperPlaceTest(unittest.TestCase):
         spec = {"top": "TOP", "libs": {"A": "A.gds", "B": "B.gds"}, "rows": rows}
         if rail_labels:
             spec["rail_labels"] = True
-        saved = sys.modules.copy()
-        sys.modules["klayout"], sys.modules["klayout.db"] = stub[0], stub[1]
         out = self.tmp / "out.gds"
-        try:
-            klt_helper.main(["place", json.dumps(spec), str(out)])
-        finally:
-            sys.modules.clear()
-            sys.modules.update(saved)
-        return out, stub[2]
+        return out, run_klt_helper(stub, ["place", json.dumps(spec), str(out)])
 
     def setUp(self):
         self.tmp = Path(tempfile.mkdtemp())
