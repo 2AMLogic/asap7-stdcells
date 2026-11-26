@@ -8,6 +8,7 @@ views only; nothing here is a measured part, and no timing number appears.
 | `counter8.v` | RTL of the integration design: 8-bit synchronous up-counter, enable, synchronous clear (clear wins). |
 | `counter8_tb.v` | Lock-step testbench: RTL against the mapped netlist, 1500 cycles of fixed pseudo-random stimulus including a wrap 255 -> 0 and rare clears. |
 | `yosys_map_smoke.sh` | `synth`, `dfflibmap`, `abc -liberty` against `layout/A7S_75t_R_structural.lib` only, `hilomap` to the tie cells; asserts every instance is one of the 18 cells by name; simulates with Icarus Verilog using models Yosys reads from the same Liberty; then a negative control (a corrupted AOI21x1 model must make the simulation fail). |
+| `yosys_map_lib.sh` | Sourced, not run: the Yosys mapping recipe (including the ABC terminal-width workaround) and the explicit 18-cell name assertion, shared by `yosys_map_smoke.sh` and `integration/run_par.sh` so the two flows cannot drift. |
 | `yosys_map_smoke.txt` | Recorded run of the script (tool versions, Liberty sha256, cell histogram, simulation result). |
 | `check_liberty.txt` | Recorded run of `design/check_liberty.py` (function/area/no-timing checks and its negative controls). |
 

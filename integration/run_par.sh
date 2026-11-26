@@ -116,9 +116,12 @@ done
 W="$(mktemp -d)"
 trap 'rm -rf "$W"' EXIT
 
-# The 18 cells of the target set, by name. Same list and same assertion shape as
-# sim/yosys_map_smoke.sh: the P&R flow must not quietly widen it.
-CELLS="INVx1 BUFx1 NAND2x1 NAND3x1 NOR2x1 NOR3x1 AND2x1 OR2x1 AOI21x1 OAI21x1 AOI22x1 OAI22x1 XOR2x1 XNOR2x1 DHLx1 DFFHQNx1 TIEHIx1 TIELOx1"
+# The 18-cell list, the Yosys mapping and the cell-name assertion are shared with
+# sim/yosys_map_smoke.sh (sim/yosys_map_lib.sh): the P&R flow must not quietly
+# widen the set or map differently from the simulation flow.
+[ -r "$ROOT/sim/yosys_map_lib.sh" ] || bad "cannot read $ROOT/sim/yosys_map_lib.sh"
+# shellcheck source=sim/yosys_map_lib.sh
+. "$ROOT/sim/yosys_map_lib.sh"
 
 echo "== tools =="
 echo "openroad: $(openroad -version 2>&1 | head -1)"
@@ -135,21 +138,7 @@ printf '%-62s %s\n' "integration/par_counter8.tcl" "$(sha256sum "$TCL" | cut -d'
 echo "== yosys mapping (scratch; re-run of the sim/ mapping, not a committed artifact) =="
 echo "design:   ${RTL#$ROOT/} (top $RTL_TOP)"
 echo "dont_use:${DONT_USE:- (none)}"
-# COLUMNS=1000: abc's readline echo of "source <abc.script>" must stay on one
-# line, or yosys's abc handshake deadlocks -- under a long $TMPDIR (the daemon
-# sets one) the echoed prompt exceeds the 80-column dumb-term width and yosys
-# waits forever for a prompt line that never arrives. Measured cliff at 79
-# printable columns, 2026-11-16; see integration/README.md "Environment".
-if ! COLUMNS=1000 yosys -q -l "$W/yosys.log" -p "
-read_verilog $RTL
-synth -top $RTL_TOP -flatten
-dfflibmap -liberty $LIBERTY
-abc -liberty $LIBERTY$DONT_USE
-hilomap -hicell TIEHIx1_A7S_75t_R H -locell TIELOx1_A7S_75t_R L
-opt_clean -purge
-rename $RTL_TOP $TOP
-write_verilog -noattr $W/mapped.v
-" >/dev/null 2>&1; then
+if ! a7s_yosys_map "$RTL" "$RTL_TOP" "$LIBERTY" "$W" "$TOP" "$DONT_USE" >/dev/null 2>&1; then
   sed -n '$p' "$W/yosys.log" >&2
   bad "yosys mapping failed (see the tail above)"
 fi
@@ -157,19 +146,7 @@ fi
 printf '%-62s %s\n' "mapped netlist (scratch)" "$(sha256sum "$W/mapped.v" | cut -d' ' -f1)"
 
 echo "== cell-name assertion (spec item 1) =="
-grep -oE '^\s+[A-Za-z0-9_]+ ' "$W/mapped.v" | awk '{print $1}' \
-  | grep -vxE 'input|output|wire|reg|assign|module|endmodule' \
-  | sort | uniq -c > "$W/hist.txt" || true
-cat "$W/hist.txt"
-n=0
-while read -r cnt name; do
-  ok=0
-  for c in $CELLS; do [ "$name" = "${c}_A7S_75t_R" ] && ok=1; done
-  [ $ok = 1 ] || bad "instance of non-library cell $name in the mapped netlist"
-  n=$((n + cnt))
-done < "$W/hist.txt"
-[ "$n" -gt 0 ] || bad "no cells mapped"
-echo "PASS: $n instances, all *_A7S_75t_R cells of the 18-cell set"
+a7s_check_cells "$W/mapped.v" "$W/hist.txt" || bad "$A7S_CHECK_ERR in the mapped netlist"
 
 echo "== openroad place and route (utilisation ${UTIL}%) =="
 # This OpenROAD build clears its environment before Tcl starts, so the inputs
