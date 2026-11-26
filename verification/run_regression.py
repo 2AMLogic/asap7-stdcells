@@ -1140,7 +1140,8 @@ def verify(args, klt=None):
     """
     klt = klt or Klt(args.klt)
     record = Path(args.verify)
-    envs = []
+    envs = []  # (cmd, envelope, input paths): the decoded JSON is dropped here
+    needed = {}  # input path -> first referring envelope, in read order
     for env in sorted(record.rglob("*.json")):
         cmd = env.name.split(".")[0]
         if cmd not in ("drc", "lvs") or env.name.endswith(".request.json"):
@@ -1149,14 +1150,14 @@ def verify(args, klt=None):
             obj = json.loads(env.read_text())
         except (OSError, ValueError) as e:
             raise SetupError(f"cannot read envelope {rel(env)}: {e}")
-        envs.append((cmd, env, obj))
+        paths = env_input_paths(obj)
+        del obj  # release the decoded envelope before the next decode
+        envs.append((cmd, env, paths))
+        for p in paths:
+            needed.setdefault(p, env)
     if not envs:
         print(f"no drc/lvs envelopes under {rel(record)}; nothing re-checked")
         return 0
-    needed = {}
-    for _cmd, _env, obj in envs:
-        for p in env_input_paths(obj):
-            needed.setdefault(p, []).append(_env)
     regen = {}
     if any(p.startswith("verification/.pdk/") for p in needed):
         cfg = load_cells(Path(args.cells))
@@ -1174,14 +1175,14 @@ def verify(args, klt=None):
             build = plan.get(p)
             if build is None:
                 raise SetupError(f"{p} is derived but this harness cannot regenerate it "
-                                 f"(named by {rel(needed[p][0])}); refusing to check against a stale copy")
+                                 f"(named by {rel(needed[p])}); refusing to check against a stale copy")
             build()
             regen[p] = True
             print(f"regen {p}")
     bad = 0
-    for cmd, env, obj in envs:
+    for cmd, env, paths in envs:
         rc = klt.check(cmd, env)
-        hit = sorted(p for p in env_input_paths(obj) if p in regen)
+        hit = sorted(p for p in paths if p in regen)
         note = f" [regen {', '.join(hit)}]" if hit else ""
         print(f"{'ok   ' if rc == 0 else 'DRIFT'} {rel(env)}{note}")
         bad += rc != 0
