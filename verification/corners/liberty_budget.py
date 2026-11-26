@@ -1,8 +1,5 @@
-"""Shared Liberty helpers for the item-5 budget scripts.
+"""Liberty helpers for the item-5 budget scripts and the TT characterization probe."""
 
-Used by reference_budget.py (decision 0011) and reference_seq_budget.py
-(decision 0012), the way make_seq_requests.py reuses make_requests.py.
-"""
 import gzip
 import math
 import re
@@ -10,6 +7,7 @@ from pathlib import Path
 
 
 def block(text, start):
+    """Return the brace-delimited group starting at or after start."""
     i = text.index("{", start)
     depth = 0
     for j in range(i, len(text)):
@@ -25,25 +23,37 @@ def nums(s):
 
 
 def cell_body(text, cell):
-    """Body of the shipped `<cell>_ASAP7_75t_R` group."""
-    m = re.search(r"cell\s*\(\s*\"?%s_ASAP7_75t_R\"?\s*\)" % re.escape(cell), text)
+    """Body of the `<cell>_ASAP7_75t_R` group."""
+    m = re.search(rf'cell\s*\(\s*"?{re.escape(cell)}_ASAP7_75t_R"?\s*\)', text)
     return block(text, m.start())
+
+
+def decode_table(tg, name):
+    """Return (index_1, index_2, rows) in native units, or None if absent."""
+    tm = re.search(rf"\b{name}\s*\(", tg)
+    if not tm:
+        return None
+    tb = block(tg, tm.start())
+    i1 = nums(re.search(r'index_1\s*\(\s*"([^"]*)"', tb).group(1))
+    i2 = nums(re.search(r'index_2\s*\(\s*"([^"]*)"', tb).group(1))
+    values_text = re.search(r"values\s*\((.*?)\)\s*;", tb, re.DOTALL).group(1)
+    vals = nums(values_text)
+    width = len(i2)
+    rows = [vals[i * width : (i + 1) * width] for i in range(len(i1))]
+    return i1, i2, rows
 
 
 def table_value(tg, name, slew_ps, other_value):
     """Value of table `name` in timing group `tg` at index_1 == slew_ps and
     index_2 == other_value (both must be shipped grid points).
     Returns None when the group has no such table."""
-    tm = re.search(r"\b%s\s*\(" % name, tg)
-    if not tm:
+    table = decode_table(tg, name)
+    if table is None:
         return None
-    tb = block(tg, tm.start())
-    i1 = nums(re.search(r'index_1\s*\(\s*"([^"]*)"', tb).group(1))
-    i2 = nums(re.search(r'index_2\s*\(\s*"([^"]*)"', tb).group(1))
-    vals = nums(re.search(r"values\s*\((.*?)\)\s*;", tb, re.S).group(1).replace('"', " "))
+    i1, i2, rows = table
     a = [abs(x - slew_ps) < 1e-6 for x in i1].index(True)
     b = [abs(x - other_value) < 1e-6 for x in i2].index(True)
-    return vals[a * len(i2) + b]
+    return rows[a][b]
 
 
 def read_lib(path):
