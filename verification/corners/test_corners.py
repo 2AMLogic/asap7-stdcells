@@ -26,11 +26,45 @@ import make_requests as mr  # noqa: E402
 import make_seq_requests as msq  # noqa: E402
 import summarize as sm  # noqa: E402
 import summarize_seq as ss  # noqa: E402
+from liberty_budget import decode_table, table_value  # noqa: E402
 
 RECORDS = sorted((HERE / "records").glob("*/run"))
 SEQ_RECORDS = sorted((HERE / "records").glob("seq-*"))
 DECISION12 = HERE.parent.parent / "spec" / "decisions" / "0012-sequential-corner-sweep-and-setup-hold-budget.md"
 DECISION = HERE.parent.parent / "spec" / "decisions" / "0011-pvt-corner-set-and-margin-budget.md"
+
+
+class LibertyTableTest(unittest.TestCase):
+    timing = r"""
+    timing () {
+        cell_rise (delay_template) {
+            index_1 ("10, 20");
+            index_2 ("0.5, 1, 2");
+            values ("-1.5, 2e-3, 3", \
+                    "4, -5E+1, 6.25");
+        }
+    }
+    """
+
+    def test_decode_non_square_table(self):
+        slew, load, rows = decode_table(self.timing, "cell_rise")
+        self.assertEqual(slew, [10, 20])
+        self.assertEqual(load, [0.5, 1, 2])
+        self.assertEqual(rows, [[-1.5, 0.002, 3], [4, -50, 6.25]])
+
+    def test_lookup_within_tolerance(self):
+        self.assertEqual(
+            table_value(self.timing, "cell_rise", 20 + 1e-7, 2 - 1e-7), 6.25
+        )
+
+    def test_off_grid_lookup(self):
+        for slew, load in [(15, 2), (20, 1.5)]:
+            with self.subTest(slew=slew, load=load), self.assertRaises(ValueError):
+                table_value(self.timing, "cell_rise", slew, load)
+
+    def test_absent_table(self):
+        self.assertIsNone(decode_table(self.timing, "cell_fall"))
+        self.assertIsNone(table_value(self.timing, "cell_fall", 20, 2))
 
 
 class GeneratorTest(unittest.TestCase):
