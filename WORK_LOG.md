@@ -3,6 +3,11 @@
 Chronological record of merged PRs and closed issues, maintained by the Guide
 triage role. Newest first.
 
+### 2026-11-25
+
+- **PR #257**: test: replace exec(compile) harness and duplicate klayout.db stub with klt_helper.main
+- **Issue #256** (closed): Remove pre-#151 exec(compile) workarounds and duplicate klayout.db stub in verification/test_run_regression.py
+
 ### 2026-11-23
 
 - **PR #250**: docs: name item 6's added notes in decision 0013's signoff-diff account
