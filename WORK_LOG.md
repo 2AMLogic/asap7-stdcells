@@ -3,6 +3,11 @@
 Chronological record of merged PRs and closed issues, maintained by the Guide
 triage role. Newest first.
 
+### 2026-11-26
+
+- **PR #260**: refactor: retain only envelope input paths when indexing a record for --verify
+- **Issue #259** (closed): Retain only input paths when indexing DRC/LVS envelopes for --verify
+
 ### 2026-11-25
 
 - **PR #257**: test: replace exec(compile) harness and duplicate klayout.db stub with klt_helper.main
