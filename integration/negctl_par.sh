@@ -53,7 +53,7 @@ build() {  # build <name> -> echoes the scratch tree root
   local t="$W/$1"
   mkdir -p "$t/layout" "$t/sim" "$t/integration"
   cp "$ROOT/layout/A7S_75t_R.lef" "$ROOT/layout/A7S_75t_R_structural.lib" "$t/layout/"
-  cp "$ROOT/sim/counter8.v" "$t/sim/"
+  cp "$ROOT/sim/counter8.v" "$ROOT/sim/yosys_map_lib.sh" "$t/sim/"
   cp "$HERE/run_par.sh" "$HERE/par_counter8.tcl" "$t/integration/"
   chmod +x "$t/integration/run_par.sh"
   echo "$t"

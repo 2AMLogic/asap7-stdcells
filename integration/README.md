@@ -237,7 +237,7 @@ Two things the controls do **not** establish, stated rather than glossed:
 ## Flow decisions worth knowing
 
 - **The mapped netlist is not committed.** `run_par.sh` re-runs the same Yosys
-  mapping `sim/yosys_map_smoke.sh` does, into its own scratch directory, and
+  mapping `sim/yosys_map_smoke.sh` does (both source `sim/yosys_map_lib.sh`; `negctl_par.sh` copies it into its scratch trees), into its own scratch directory, and
   hashes the result into the log. One command reproduces the chain from
   `sim/counter8.v`, and no derived netlist can drift from the Liberty that
   produced it.
