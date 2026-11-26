@@ -189,7 +189,7 @@ suppressed.
 |---|---|---|
 | GDS | target | the DRC/LVS-checked file, with the hash of the generating script recorded |
 | CDL | target | the file LVS compares against; `design/` |
-| LEF | target | macro size equals the boundary, pins on the M1 track grid, rails present, OpenROAD reads it with the tech LEF without error; checked against the GDS |
+| LEF | target | macro size equals the boundary, pins on the M1 track grid, every signal pin keeps at least one M1-track × M2-row-track point where a V1 cut fits clear of the cell's M2 obstruction (decision 0013), rails present, OpenROAD reads it with the tech LEF without error; checked against the GDS |
 | Liberty, structural | target (needed by Yosys) | pins, directions, functions and areas only. Carries **no timing numbers**. Whether OpenROAD/OpenSTA accept it without timing tables is unverified; if not, the integration fallback applies |
 | Liberty, timing | stretch | only from a reproducible characterization run per decision 0002; sequential arcs not assumed possible |
 

@@ -17,6 +17,7 @@ same way `verification/lef/` is scoped to one tool question.
 | `par_counter8.tcl` | The OpenROAD flow: read → floorplan → tracks → pins → taps → PDN → placement → CTS → fillers → routing → read-out. Stage by stage, each stage reporting one `A7S_STAGE_OK` or `A7S_STAGE_REFUSED` sentinel. |
 | `run_par.sh` | The recording driver. Re-runs the Yosys mapping into scratch, asserts the mapped netlist holds only cells of this library, prints `openroad -version` and the sha256 of every input, runs the flow, asserts on its sentinels, and exits with the verdict. |
 | `counter8_par.txt` | The recorded run on `sim/counter8.v`. |
+| `counter8_routed.def`, `counter8_route_drc.rpt` | The clean run's routed DEF and routing-DRC report (written by the `routed-clean` branch of `run_par.sh`; the DRC report is empty because zero violations is the passing state). |
 | `negctl_par.sh`, `negctl_par.txt` | Negative control for the driver, and its recorded run. |
 | `flowctl_par.sh`, `comb8.v`, `flowctl_par.txt` | Positive control for the flow — a design that routes clean — and its recorded run. |
 
@@ -76,17 +77,23 @@ Tools: OpenROAD 26Q3-1510-g6cb3f2b704, Yosys 0.67+post (git b8e7da6f),
 klt 0.9.2.dev1022+g2a9c52b27ce7. Recorded 2026-11-14; `negctl_par.txt`
 re-recorded 2026-11-15 after the setup-failure / refusal split (#149), and
 2026-11-16 after the PASS lines began quoting the matched output line,
-capped at 200 chars (#188). Single
+capped at 200 chars (#188);
+`counter8_par.txt` and its DEF re-recorded 2026-11-17 onto #149's split
+verdict driver (issue #122; the routed DEF is byte-identical). Single
 local runs; nothing is submitted to a batch fleet.
 
-## Result: routing did not complete, and no result is claimed
+## Result: routing completed clean (2026-11-15, issue #122)
 
-`run_par.sh` exits **3**: the flow ran and a stage refused. `spec/stdcells.md`
-item 2 — "placement and detailed routing with zero unrouted nets and zero
-routing-DRC violations" — is **not** met, and the maturity-ladder rung in the
-top-level `README.md` is deliberately left where it was. No routed DEF and no
-merged GDS are committed, because there is no clean route to commit; the
-`routed-clean` branch of `run_par.sh` writes them, and it did not run.
+`run_par.sh` exits **0** with `PAR_VERDICT routed-clean` (recorded in
+`counter8_par.txt`): zero unrouted nets, zero routing-DRC violations of
+OpenROAD's own checker, DEF written (`counter8_routed.def`,
+`counter8_route_drc.rpt`). Spec item 2 is met. The `DRT-0073` refusal below is
+gone: the six pins the `access_point` check flags had their own net's M2 emitted
+as obstruction instead of port (decision 0013), and with the writer fixed the
+router reaches every pin — including all eight `DFFHQNx1` instances of the
+counter. `clock_tree_synthesis` still refuses, exactly as before and still
+expected: the timing-free Liberty has no arcs (see 1 below, which remains the
+current behaviour).
 
 The exit contract: a stage that ran and refused — any stage after
 `read_inputs`, this run's `detailed_route` included — is terminal
@@ -97,7 +104,15 @@ status. `routed-dirty` also exits **3**: routing completed, but no
 clean-routing claim is made. Every branch ends with exactly one `PAR_VERDICT`
 line, and `negctl_par.sh` asserts that on every control's captured output.
 
-What did complete, from `counter8_par.txt`:
+## The 2026-11-14 refusal recorded by #109 (superseded by the result above)
+
+`run_par.sh` exited **3**: the flow ran and a stage refused. At the time,
+`spec/stdcells.md` item 2 — "placement and detailed routing with zero unrouted
+nets and zero routing-DRC violations" — was **not** met, no routed DEF and no
+merged GDS were committed, because there was no clean route to commit.
+
+What did complete, from the 2026-11-14 `counter8_par.txt` (since replaced by the
+clean run above):
 
 | Stage | Result |
 |---|---|
@@ -179,6 +194,10 @@ no pin with every crossing blocked. The difference is pin reach, not internal M2
 Fixing it means changing drawn geometry and regenerating `layout/`, which is
 outside this issue. **Tracked in #122**, with the pins a geometric check flags
 and the caveat that the check is a lower bound rather than an oracle.
+*(Resolved 2026-11-15: the obstruction was not honest after all for these six
+pins — the M2 over each blocked crossing was the pin's own net, which
+`design/write_lef.py:88` had emitted as `OBS`. Decision 0013 records the
+pin-port rule; the clean run above is the evidence.)*
 
 ## Why these refusals are evidence: the two controls
 
