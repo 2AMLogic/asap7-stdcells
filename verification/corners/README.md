@@ -94,9 +94,11 @@ sourced through `common.sh` (also sourced by `verification/pex/run.sh`,
 `verification/probes/characterize-tt/run.sh` and
 `verification/bringup/reproduce.sh`), and the PDK pin itself is read from
 `verification/cells.json`; the corners-specific steps (batch-set submit, evidence
-copy) stay in `common.sh`; the
-budget scripts share their Liberty helpers in `liberty_budget.py`; both generators
-build the request envelope with `make_requests.sim_request`, which differs between
+copy) stay in `common.sh`. Both budget scripts (`reference_budget.py` and
+`reference_seq_budget.py`) and the TT characterization probe
+(`verification/probes/characterize-tt/compare.py`) use `liberty_budget.py` to
+decode Liberty tables. Both generators build the request envelope with
+`make_requests.sim_request`, which differs between
 the halves only in `options.timeout_s` (600 s combinational, 1800 s sequential) and
 in where `exclude` falls in key order.
 Regenerated requests and testbenches are byte-identical to the committed ones
