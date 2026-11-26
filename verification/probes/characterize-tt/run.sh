@@ -67,7 +67,7 @@ label() {
   esac
 }
 for V in $VARIANTS; do
-  python3 -I "$HERE/compare.py" NAND2x1 "$(label "$V")" \
+  python3 -I -B "$HERE/compare.py" NAND2x1 "$(label "$V")" \
     "$SCRATCH/run/$V/out/NAND2x1.lib" "$SCRATCH/ref/SIMPLE_TT.lib" \
     "$SCRATCH/run/$V/compare-NAND2x1.md"
 done
