@@ -34,13 +34,13 @@ _None._
 
 Issues currently being built (`loom:building`).
 
-- **#268**: Commit a regression test for the shared Liberty decode_table() and record the probe as a consumer
+_None._
 
 ## PRs Awaiting Review
 
 PRs waiting on Judge (`loom:review-requested`).
 
-- **#269**: test: cover non-square Liberty table decoding and lookup
+_None._
 
 ## Approved (Awaiting Merge)
 
@@ -57,7 +57,6 @@ Issues carrying `loom:curated`.
 - **#120**: Docs: stale decision-record enumeration in spec/stdcells.md, and the declared 0.8.0 pin in t1-item9-inventory.json *(curated)*
 - **#122**: Library: several signal pins have no routable access point, so OpenROAD detailed routing cannot complete (DRT-0073) *(curated)*
 - **#234**: Widen the NAND2x1 series nMOS stack to the shipped x1 fall drive, or record the divergence *(curated)*
-- **#268**: Commit a regression test for the shared Liberty decode_table() and record the probe as a consumer *(curated)*
 
 ## Proposed (Architect / Hermit)
 
@@ -75,10 +74,10 @@ _None._
 | Very important | 1 |
 | Important | 1 |
 | Ready (`loom:issue`) | 0 |
-| In Progress (`loom:building`) | 1 |
-| PRs awaiting review | 1 |
+| In Progress (`loom:building`) | 0 |
+| PRs awaiting review | 0 |
 | Approved PRs awaiting merge | 3 |
-| Curated | 4 |
+| Curated | 3 |
 | Architect / Hermit proposals | 0 |
 | Active epics | 0 |
 <!-- guide:plan-body:end -->
