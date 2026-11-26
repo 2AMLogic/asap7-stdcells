@@ -5,6 +5,8 @@ triage role. Newest first.
 
 ### 2026-11-26
 
+- **PR #266**: refactor: share Liberty timing-table decoding across the TT probe and budgets
+- **Issue #264** (closed): Share Liberty timing-table decoding between the TT probe and corner budgets
 - **PR #265**: refactor: share Yosys mapping and 18-cell check between sim smoke and PAR driver
 - **Issue #262** (closed): Share the Yosys mapping and 18-cell check between simulation and place-and-route
 - **PR #260**: refactor: retain only envelope input paths when indexing a record for --verify
