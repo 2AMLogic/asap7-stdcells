@@ -28,7 +28,7 @@
       "revision": "v0.2.17"
     },
     "tools": {
-      "klayout-tools": "0.8.0"
+      "klayout-tools": "0.9.0"
     }
   }
 }

@@ -34,13 +34,13 @@
         "command": null,
         "kind": "generic",
         "check_status": "pass",
-        "content_hash": "sha256:a6a12602ce9ad8a39828e4973eaee87a535f1160760145c8728fd65fdd5ca83c",
+        "content_hash": "sha256:f5f57d15ea97a22ab38e613828985cc15956b9bfccd827a3f6b4383131f4f7ba",
         "input_verified": true,
         "exit_status": 0,
         "artifact_binding": {
           "t1_item": 1,
           "path": null,
-          "content_hash": "sha256:a6a12602ce9ad8a39828e4973eaee87a535f1160760145c8728fd65fdd5ca83c",
+          "content_hash": "sha256:f5f57d15ea97a22ab38e613828985cc15956b9bfccd827a3f6b4383131f4f7ba",
           "input_verified": true,
           "members": [
             {
@@ -416,7 +416,7 @@
                 "path": "spec/stdcells.md",
                 "scope": "repo"
               },
-              "content_hash": "sha256:227462783dd8129e4ae998c12a6925bf0f630a36d81889dd28486a5ebc83a623",
+              "content_hash": "sha256:8ef648144d20620fe215ff61f016b18255164e673a8fa8aa0a15ce43565589fb",
               "status": "verified"
             }
           ],
@@ -1251,7 +1251,7 @@
         "command": null,
         "kind": "generic",
         "check_status": "pass",
-        "content_hash": "sha256:de0121c36763a122fe5651738ba6740d184b10f1c600da258c3f56be0880a337",
+        "content_hash": "sha256:fb1993b74cd1936c1a59490b1405696397a36574e99fd0892a0c216d43ce524f",
         "input_verified": true,
         "exit_status": 0,
         "artifact_binding": {
@@ -1260,7 +1260,7 @@
             "path": "manifests/t1-item9-inventory.json",
             "scope": "repo"
           },
-          "content_hash": "sha256:de0121c36763a122fe5651738ba6740d184b10f1c600da258c3f56be0880a337",
+          "content_hash": "sha256:fb1993b74cd1936c1a59490b1405696397a36574e99fd0892a0c216d43ce524f",
           "input_verified": true,
           "summary": "T1 item 9 (Testbenches shipped): 13/13 attestation checks passed (klt signoff --attest)",
           "source": "manifests/t1-item9-inventory.json",
