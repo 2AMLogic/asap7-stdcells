@@ -1151,6 +1151,7 @@ def verify(args, klt=None):
         except (OSError, ValueError) as e:
             raise SetupError(f"cannot read envelope {rel(env)}: {e}")
         paths = env_input_paths(obj)
+        del obj  # release the decoded envelope before the next decode
         envs.append((cmd, env, paths))
         for p in paths:
             needed.setdefault(p, env)

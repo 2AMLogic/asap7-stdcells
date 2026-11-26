@@ -66,7 +66,7 @@
         "role": "testbench",
         "path": "verification/run_regression.py",
         "passed": true,
-        "content_hash": "sha256:d88d16c1cadd7da1589ef1e7cb80c61eb1e51d06648aa6a6b8a3c160c6c4f3ab"
+        "content_hash": "sha256:298f339376962c661b80011150e25b793ab816e0b75534f48a3165e7ef812a4d"
       },
       {
         "check": "present",
