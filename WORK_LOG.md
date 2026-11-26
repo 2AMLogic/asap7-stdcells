@@ -5,6 +5,8 @@ triage role. Newest first.
 
 ### 2026-11-26
 
+- **PR #265**: refactor: share Yosys mapping and 18-cell check between sim smoke and PAR driver
+- **Issue #262** (closed): Share the Yosys mapping and 18-cell check between simulation and place-and-route
 - **PR #260**: refactor: retain only envelope input paths when indexing a record for --verify
 - **Issue #259** (closed): Retain only input paths when indexing DRC/LVS envelopes for --verify
 
