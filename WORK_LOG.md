@@ -5,6 +5,8 @@ triage role. Newest first.
 
 ### 2026-11-26
 
+- **PR #269**: test: cover non-square Liberty table decoding and lookup
+- **Issue #268** (closed): Commit a regression test for the shared Liberty decode_table() and record the probe as a consumer
 - **PR #266**: refactor: share Liberty timing-table decoding across the TT probe and budgets
 - **Issue #264** (closed): Share Liberty timing-table decoding between the TT probe and corner budgets
 - **PR #265**: refactor: share Yosys mapping and 18-cell check between sim smoke and PAR driver
