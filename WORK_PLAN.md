@@ -33,13 +33,13 @@ _None._
 
 Issues currently being built (`loom:building`).
 
-_None._
+- **#259**: Retain only input paths when indexing DRC/LVS envelopes for --verify
 
 ## PRs Awaiting Review
 
 PRs waiting on Judge (`loom:review-requested`).
 
-_None._
+- **#260**: refactor: retain only envelope input paths when indexing a record for --verify
 
 ## Approved (Awaiting Merge)
 
@@ -73,8 +73,8 @@ _None._
 | Very important | 1 |
 | Important | 1 |
 | Ready (`loom:issue`) | 0 |
-| In Progress (`loom:building`) | 0 |
-| PRs awaiting review | 0 |
+| In Progress (`loom:building`) | 1 |
+| PRs awaiting review | 1 |
 | Approved PRs awaiting merge | 3 |
 | Curated | 3 |
 | Architect / Hermit proposals | 0 |
