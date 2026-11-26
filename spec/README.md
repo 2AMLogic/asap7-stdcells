@@ -21,6 +21,7 @@
   | [`0011`](decisions/0011-pvt-corner-set-and-margin-budget.md) | PVT corner set and the item-5 timing-margin budget |
   | [`0012`](decisions/0012-sequential-corner-sweep-and-setup-hold-budget.md) | sequential corner sweep and the setup/hold margin budget |
   | [`0013`](decisions/0013-drop-vendored-design-evidence-tiers.md) | drop the vendored design-evidence tiers checklist (operator ruling 2026-11-23) |
+  | [`0014`](decisions/0014-nand2x1-series-stack-drive-convention.md) | NAND2x1 keeps three fins on the series stack; drive difference from shipped recorded (operator ruling 2026-11-23) |
 
 Spec changes go through a new decision record; nothing here is relaxed to make
 a result pass.

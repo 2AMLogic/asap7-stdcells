@@ -73,7 +73,7 @@
         "role": "hygiene",
         "path": "spec/README.md",
         "passed": true,
-        "content_hash": "sha256:c880b44b508ca764269a400e465932a7abc018f7622e386babc753f01218a636"
+        "content_hash": "sha256:fdefaf46b685c73ad533d85dd5817eef41fe27598a3db58fe5bf19ae169803f9"
       },
       {
         "check": "present",
@@ -94,7 +94,7 @@
         "role": "hygiene",
         "path": "spec/stdcells.md",
         "passed": true,
-        "content_hash": "sha256:227462783dd8129e4ae998c12a6925bf0f630a36d81889dd28486a5ebc83a623"
+        "content_hash": "sha256:e94262fb261bdc4728de3060906606604808e329cfbecd8d058e59c8e1725779"
       },
       {
         "check": "present",

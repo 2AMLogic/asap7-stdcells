@@ -74,6 +74,11 @@ drive: output-stage devices at the fin count of the shipped unit inverter
 only as far as the cell fits; per-cell fin counts are fixed in the cell's CDL
 under `design/` and are what LVS compares. Gates are listed with their
 function so the CDL and Liberty are unambiguous.
+With the three fins per series nMOS retained by
+[decision 0014](decisions/0014-nand2x1-series-stack-drive-convention.md),
+the drawn `NAND2x1` falling delay was 1.11 to 1.82 times the published
+Liberty value on the tested TT grid. The `NAND3x1`, AOI and OAI stacks
+use three fins per device by default and their timing is unmeasured.
 
 | # | Cell | Function | Fallback set |
 |---|---|---|---|
